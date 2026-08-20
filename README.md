@@ -37,8 +37,8 @@ are reliability failures. StressKit tests the instrument, not just the finding.
 ## Install
 
 ```bash
-pip install stresskit          # numpy only
-pip install "stresskit[full]"  # + scipy (optimal SAE feature matching)
+pip install git+https://github.com/Arth-Singh/Stresskit.git          # numpy only
+pip install "stresskit[full] @ git+https://github.com/Arth-Singh/Stresskit.git"  # + scipy
 ```
 
 ## Quickstart
