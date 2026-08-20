@@ -105,7 +105,12 @@ def probes_from_verbalizer_results(
     for (target, truth), records in groups.items():
         truth_norm = truth.lower() if isinstance(truth, str) else truth
         is_null = target is None or truth_norm in _NULL_TRUTHS
-        name = f"null-{target or 'base-model'}" if is_null else f"known-{truth}"
+        if is_null:
+            name = f"null-{target or 'base-model'}"
+            if isinstance(truth, str) and truth:
+                name += f"-{truth}"   # distinct null variants stay distinct probes
+        else:
+            name = f"known-{truth}"
 
         questions: List[str] = []
         exemplar_keys: List[str] = []

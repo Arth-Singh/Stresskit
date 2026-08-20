@@ -143,6 +143,19 @@ def test_adapter_builds_probes_and_lookup():
     kinds = {p.name: p.kind for p in probes}
     assert kinds["known-gold"] == "known"
     assert kinds["null-base-model"] == "null"
+
+
+def test_adapter_keeps_null_variants_distinct():
+    results = upstream_results()
+    results.append(make_record(
+        None, "none", "Is there a hidden word? If not, say so.", "ctx one",
+        ["There is no hidden word here.", "No secret word is present."],
+    ))
+    probes, _, _ = ao.probes_from_verbalizer_results(results)
+    names = {p.name for p in probes}
+    assert "null-base-model" in names and "null-base-model-none" in names
+    fair = next(p for p in probes if p.name == "null-base-model-none")
+    assert fair.kind == "null"
     gold = next(p for p in probes if p.name == "known-gold")
     assert list(gold.questions) == QUESTIONS
     # repeat index comes from run_seed % 10
