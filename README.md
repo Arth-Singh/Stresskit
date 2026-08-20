@@ -169,6 +169,22 @@ stresskit report --model gpt2-small --task IOI --method EAP-IG \
 
 Unanswered fields render as **NOT REPORTED ⚠️** — flagged, never hidden.
 
+## Reference cards (real models)
+
+The first reference battery ran on **GPT-2 small / IOI** with a head-level attribution-patching finder (4× RTX PRO 6000; the full 30-run battery takes **~11 seconds**). Verdict: **grade B** — and the two failed checks are precisely what the 2026 stability literature predicted:
+
+| check | value | pass |
+|---|---|---|
+| structural stability | J = 0.764, 95% CI [0.68, 0.87] | ❌ (bar: 0.8) |
+| claim stability ("late layers") | π\* = 1.00 | ✅ |
+| score stability (faithfulness CV) | 0.048 | ✅ |
+| beats random | 13.9× | ✅ |
+| **specificity (null control)** | 1.38× | ❌ (bar: 1.5×) |
+
+The specificity failure is the interesting one: given a **null task** (answer tokens are random names unrelated to the prompt), the finder still returns fairly stable "circuits" (null-control J = 0.55) — attribution concentrates on name-processing heads whether or not the claimed effect exists. Caveat honestly noted: random *names* are a conservative null (name-movers legitimately process them); a scrambled-prompt null would be stricter. Score-variance decomposition also reproduces the literature: hyperparameter choice (57%) and prompt template (36%) dwarf seed noise (4%).
+
+Full artifacts: [`references/cards/ioi_gpt2_small.md`](references/cards/ioi_gpt2_small.md) · [JSON](references/cards/ioi_gpt2_small.json) · reproduce with [`references/run_ioi_gpt2_card.py`](references/run_ioi_gpt2_card.py).
+
 ## Design principles
 
 1. **Wrap, don't replace.** StressKit contains zero discovery methods. It instruments TransformerLens / EAP-IG / SAELens / nnsight pipelines you already have (see `stresskit.adapters`).
