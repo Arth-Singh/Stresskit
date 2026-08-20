@@ -73,7 +73,7 @@ def precompute(jlens_repo, cache_path):
         LENS_REPO, filename=LENS_FILE, revision=LENS_REVISION
     )
     n_layers = model.n_layers
-    layers = list(range(n_layers))
+    layers = list(lens.source_layers)   # the final layer(s) are not fitted
 
     cache = {"model": MODEL_NAME, "n_layers": n_layers, "sets": {}}
     for slug in EVAL_SETS:
@@ -109,7 +109,6 @@ def make_finder(n_layers):
 
         rng = random.Random(seed)
         sample = rng.sample(list(data), max(16, int(frac * len(data))))
-        band_set = skj.band_layers(n_layers, band)
 
         hits, best_layers, junk = [], [], []
         for it in sample:
@@ -117,6 +116,9 @@ def make_finder(n_layers):
                 int(layer): ranked
                 for layer, ranked in it["readouts"][pos].items()
             }
+            # restrict the band to layers the lens was fitted on
+            band_set = [L for L in skj.band_layers(n_layers, band)
+                        if L in ranked_by_layer]
             for layer in band_set:
                 junk.append(skj.junk_share(ranked_by_layer[layer][:10]))
             ranks = [
