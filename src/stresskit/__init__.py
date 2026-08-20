@@ -15,11 +15,11 @@ interpretability claims.
     result.card.save("stability_card.json")
 """
 
-__version__ = "0.2.0"
+__version__ = "0.3.0"
 
 from .finding import Finding, circuit, feature_set, probe
 from .battery import stress, Thresholds, StressResult, RunRecord, DEFAULT_BATTERY
-from .card import StabilityCard, load_card, validate_card_dict
+from .card import StabilityCard, load_card, validate_card_dict, verify_card_dict
 from .report import generate_checklist
 from .oracle import stress_oracle, OracleProbe, OracleThresholds, blind_spot_matrix
 from . import metrics, baselines, judges, oracle
@@ -38,6 +38,7 @@ __all__ = [
     "StabilityCard",
     "load_card",
     "validate_card_dict",
+    "verify_card_dict",
     "generate_checklist",
     "stress_oracle",
     "OracleProbe",
