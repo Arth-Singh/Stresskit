@@ -44,12 +44,16 @@ class Thresholds:
     (arXiv:2510.00845) and modal share π* ≥ 0.8, i.e. filability at the
     loosest tolerance α = 0.2 (arXiv:2608.13754). ``random_margin`` requires
     structural overlap to beat the size-matched random null by that factor.
+    ``specificity_ratio`` is the required degradation factor on null-control
+    data (Adebayo-style sanity check: a method as stable on null data as on
+    real data is finding its own artifacts, not the model's structure).
     """
 
     jaccard: float = 0.8
     modal_share: float = 0.8
     score_cv: float = 0.25
     random_margin: float = 3.0
+    specificity_ratio: float = 1.5
 
 
 @dataclass
@@ -69,6 +73,7 @@ class StressResult:
     pooled: Dict[str, Any]
     checks: Dict[str, Any]
     grade: str
+    null_summary: Optional[Dict[str, Any]] = None
     card: StabilityCard = None  # type: ignore[assignment]
 
     def to_markdown(self) -> str:
@@ -84,12 +89,26 @@ class StressResult:
         )
 
 
-def _summarize(findings: Sequence[Finding]) -> Dict[str, Any]:
-    """Structural / claim / score summary for one group of findings."""
+def _summarize(findings: Sequence[Finding], claim_equiv=None) -> Dict[str, Any]:
+    """Structural / claim / score summary for one group of findings.
+
+    ``claim_equiv(a, b) -> bool`` optionally treats semantically equivalent
+    claim phrasings as one claim class (essential for natural-language
+    claims from oracles/verbalizers; see stresskit.judges).
+    """
     structured = [f.components for f in findings if f.has_structure()]
     labels = [f.claim for f in findings if f.claim is not None]
     scores = [f.score for f in findings if f.score is not None]
     sizes = [f.size for f in findings if f.has_structure()]
+
+    if labels and claim_equiv is not None:
+        ids = M.cluster_labels(labels, claim_equiv)
+        reps: Dict[int, str] = {}
+        for lab, cid in zip(labels, ids):
+            reps.setdefault(cid, lab)
+        class_labels: List[str] = [str(reps[cid]) for cid in ids]
+    else:
+        class_labels = list(labels)
 
     out: Dict[str, Any] = {
         "n_runs": len(findings),
@@ -97,15 +116,15 @@ def _summarize(findings: Sequence[Finding]) -> Dict[str, Any]:
         "min_pairwise_jaccard": (
             min(M.pairwise_jaccard(structured)) if len(structured) >= 2 else None
         ),
-        "flip_rate": M.flip_rate(labels) if len(labels) >= 2 else None,
-        "modal_share": M.modal_share(labels) if labels else None,
-        "n_claim_classes": M.n_claim_classes(labels) if labels else 0,
+        "flip_rate": M.flip_rate(class_labels) if len(class_labels) >= 2 else None,
+        "modal_share": M.modal_share(class_labels) if class_labels else None,
+        "n_claim_classes": M.n_claim_classes(class_labels) if class_labels else 0,
         "claim_counts": dict(
             sorted(
-                ((c, labels.count(c)) for c in set(labels)),
+                ((c, class_labels.count(c)) for c in set(class_labels)),
                 key=lambda kv: -kv[1],
             )
-        ) if labels else {},
+        ) if class_labels else {},
         "score_mean": M.mean(scores),
         "score_std": M.std(scores),
         "score_cv": M.coefficient_of_variation(scores),
@@ -132,6 +151,8 @@ def stress(
     templates: Optional[Mapping[str, Any]] = None,
     hyperparams: Optional[Mapping[str, Sequence[Any]]] = None,
     thresholds: Optional[Thresholds] = None,
+    claim_equiv=None,
+    null_data: Any = None,
     claim_statement: Optional[str] = None,
     model: Optional[str] = None,
     task: Optional[str] = None,
@@ -162,6 +183,17 @@ def stress(
         dataset participates via the base run.
     hyperparams:
         ``{param_name: [alternative values]}`` for the hyperparams axis.
+    claim_equiv:
+        Optional ``(a, b) -> bool`` judge treating equivalent claim phrasings
+        as one class (see ``stresskit.judges``). Use this whenever claims are
+        natural language rather than fixed labels.
+    null_data:
+        Optional control dataset where the effect should NOT exist (shuffled
+        labels, scrambled prompts, unrelated corpus). StressKit re-runs the
+        seeds/bootstrap axes on it and adds a *specificity* check: structural
+        stability on real data must exceed stability on null data by
+        ``thresholds.specificity_ratio``. A finder that is equally "stable"
+        on null data is discovering its own artifacts (dead salmon).
     claim_statement / model / task / method:
         Metadata recorded on the Stability Card.
     """
@@ -256,14 +288,48 @@ def stress(
     score_groups: Dict[str, List[float]] = {}
     for axis in axis_names:
         group = [base] + [r.finding for r in runs if r.axis == axis]
-        axis_metrics[axis] = _summarize(group)
+        axis_metrics[axis] = _summarize(group, claim_equiv)
         scores = [f.score for f in group if f.score is not None]
         if len(scores) >= 2:
             score_groups[axis] = scores
 
     all_findings = [r.finding for r in runs]
-    pooled = _summarize(all_findings)
+    pooled = _summarize(all_findings, claim_equiv)
     pooled["variance_shares"] = M.variance_shares(score_groups) if score_groups else {}
+
+    # Guard the pooled structural metric against size-mismatched runs (a
+    # top-k sweep from 200 to 800 edges mechanically bounds Jaccard): the
+    # graded value uses only runs within 2x of the base finding's size.
+    if base.has_structure():
+        comparable = [
+            f.components for f in all_findings
+            if f.has_structure() and base.size / 2 <= f.size <= base.size * 2
+        ]
+        n_excluded = sum(1 for f in all_findings if f.has_structure()) - len(comparable)
+        if n_excluded > 0:
+            pooled["mean_pairwise_jaccard_all_sizes"] = pooled["mean_pairwise_jaccard"]
+            pooled["mean_pairwise_jaccard"] = M.mean_pairwise_jaccard(comparable)
+            pooled["n_size_mismatched_excluded"] = n_excluded
+            notes.append(
+                f"structural stability graded on {len(comparable)} size-comparable "
+                f"runs; {n_excluded} run(s) with >2x size difference excluded "
+                f"(pooled-over-all value kept as mean_pairwise_jaccard_all_sizes)"
+            )
+    else:
+        comparable = []
+
+    # Bootstrap CIs on the headline stability metrics (resampling runs,
+    # the unit used in arXiv:2608.13754).
+    structured_for_ci = comparable if comparable else [
+        f.components for f in all_findings if f.has_structure()
+    ]
+    pooled["mean_pairwise_jaccard_ci95"] = M.bootstrap_ci(
+        structured_for_ci, M.mean_pairwise_jaccard, seed=seed
+    )
+    ci_labels = [f.claim for f in all_findings if f.claim is not None]
+    if claim_equiv is not None and ci_labels:
+        ci_labels = M.cluster_labels(ci_labels, claim_equiv)
+    pooled["flip_rate_ci95"] = M.bootstrap_ci(ci_labels, M.flip_rate, seed=seed)
 
     # --- size-matched random null ----------------------------------------------
     universe = _resolve_universe(all_findings)
@@ -275,6 +341,32 @@ def stress(
         pooled["jaccard_vs_random"] = pooled["mean_pairwise_jaccard"] / random_null
     else:
         pooled["jaccard_vs_random"] = None
+
+    # --- null-control (specificity) --------------------------------------------
+    null_summary: Optional[Dict[str, Any]] = None
+    if null_data is not None:
+        null_axes = tuple(ax for ax in battery if ax in ("seeds", "bootstrap")) or ("seeds",)
+        try:
+            null_result = stress(
+                finding_fn,
+                null_data,
+                battery=null_axes,
+                n_runs=n_runs,
+                seed=seed ^ 0x5EC,
+                config=base_config,
+                thresholds=thresholds,
+                claim_equiv=claim_equiv,
+                verbose=verbose,
+            )
+            null_summary = {
+                k: null_result.pooled.get(k)
+                for k in (
+                    "n_runs", "mean_pairwise_jaccard", "flip_rate",
+                    "modal_share", "score_mean", "score_cv", "median_size",
+                )
+            }
+        except (ValueError, TypeError) as e:
+            notes.append(f"null control skipped: finder failed on null_data ({e})")
 
     # --- checks & grade ----------------------------------------------------------
     checks: Dict[str, Any] = {}
@@ -310,6 +402,16 @@ def stress(
             "passed": vr >= thresholds.random_margin,
             "description": "structural overlap vs size-matched random null (×)",
         }
+    if null_summary is not None and j is not None:
+        null_j = null_summary.get("mean_pairwise_jaccard")
+        if null_j is not None:
+            ratio = (j / null_j) if null_j > 1e-9 else float("inf")
+            checks["specificity"] = {
+                "value": ratio,
+                "threshold": thresholds.specificity_ratio,
+                "passed": ratio >= thresholds.specificity_ratio,
+                "description": "structural stability on real vs null-control data (×)",
+            }
 
     if not checks:
         raise ValueError(
@@ -318,7 +420,7 @@ def stress(
             "claim=, or score=."
         )
 
-    grade = _grade(checks)
+    grade = grade_checks(checks)
 
     result = StressResult(
         base=base,
@@ -327,6 +429,7 @@ def stress(
         pooled=pooled,
         checks=checks,
         grade=grade,
+        null_summary=null_summary,
     )
     result.card = StabilityCard.from_stress(
         result,
@@ -345,7 +448,7 @@ def stress(
     return result
 
 
-def _grade(checks: Dict[str, Any]) -> str:
+def grade_checks(checks: Dict[str, Any]) -> str:
     """A: all applicable checks pass. B: at least half pass. C: at least one
     passes. D: none pass (or overlap is at the random null)."""
     passed = sum(1 for c in checks.values() if c["passed"])

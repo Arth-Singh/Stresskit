@@ -21,6 +21,8 @@ A wave of 2025–2026 papers showed that interpretability findings routinely **d
 
 Every one of those papers ends with a version of *"researchers should report stability metrics."* None of them shipped the tool. **StressKit is that tool.**
 
+And it's built for what the field studies **now**, not just circuits and SAEs. The fastest-growing 2026 interfaces are *learned readers that answer in natural language* — Activation Oracles / LatentQA ([arXiv:2512.15674](https://arxiv.org/abs/2512.15674)), verbalizers, introspection adapters — whose documented failure modes are precisely reliability failures: they "frequently produce an answer even when confidence is low" (the AO paper's own limitations section), results get reported with the best of N hand-written oracle prompts, and fine-tuned oracles develop **concept-specific blind spots** — selectively failing on the very concept they were trained on ([arXiv:2607.23379](https://arxiv.org/abs/2607.23379)). `stresskit.oracle` is the first standard harness for those checks.
+
 ## Install
 
 ```bash
@@ -71,10 +73,13 @@ It stress-tests the same discovery method twice — once on a real effect (grade
 
 | Check | Metric | Default bar | Protocol source |
 |---|---|---|---|
-| **Structural stability** | mean pairwise Jaccard of the component sets across runs | ≥ 0.8 | arXiv:2510.00845 |
-| **Claim stability** | modal claim share π\* (≙ filability at α = 0.2) + flip rate | π\* ≥ 0.8 | arXiv:2608.13754 |
+| **Structural stability** | mean pairwise Jaccard of the component sets across runs (with bootstrap 95% CI; size-mismatched runs excluded from grading) | ≥ 0.8 | arXiv:2510.00845 |
+| **Claim stability** | modal claim share π\* (≙ filability at α = 0.2) + flip rate (with bootstrap 95% CI) | π\* ≥ 0.8 | arXiv:2608.13754 |
 | **Score stability** | coefficient of variation of the quality score | ≤ 0.25 | arXiv:2510.00845 |
 | **Beats random** | overlap vs. the size-matched random null *J* ≈ *k*/(2*N*−*k*) | ≥ 3× | arXiv:2608.13754, 2602.14111 |
+| **Specificity** | stability on real data vs. a `null_data=` control where the effect shouldn't exist (dead-salmon detector) | ≥ 1.5× | Adebayo-style sanity checks; arXiv:2606.00033 |
+
+Claims can be **natural language**: pass `claim_equiv=` any `(a, b) -> bool` judge (see `stresskit.judges`: normalized match, token-F1, AO-style containment — or plug in your own embedding/LLM judge) and semantically equivalent phrasings count as one claim class.
 
 Grades: **A** all applicable checks pass · **B** at least half · **C** at least one · **D** none / indistinguishable from random. Thresholds are configurable (`sk.Thresholds(...)`) but the defaults follow the published proposals, on purpose: a shared bar is the point.
 
@@ -103,6 +108,37 @@ Host `badge.json` anywhere public and embed a live badge:
 ```
 
 → ![stability](https://img.shields.io/badge/stability-A%20%C2%B7%20J%3D0.92-brightgreen) / ![stability](https://img.shields.io/badge/stability-D%20%C2%B7%20J%3D0.18-red)
+
+## Oracle reliability (`stresskit.oracle`)
+
+If you use an Activation Oracle, verbalizer, or introspection model as an interpretability *instrument*, StressKit tests the instrument:
+
+```python
+from stresskit import OracleProbe, stress_oracle, blind_spot_matrix, judges
+
+probes = [
+    OracleProbe(
+        name="taboo-gold", concept="gold", expected="gold",
+        questions=["What is the secret word?",          # ≥2 paraphrases enable the
+                   "Which word is the model hiding?"],  # prompt-sensitivity check
+        exemplars=[acts_hint, acts_refusal, acts_think], # independent captures
+    ),
+    OracleProbe(  # null control: honest answer is to abstain
+        name="null-random", kind="null",
+        questions=["What is the secret word?"],
+        exemplars=[random_acts_1, random_acts_2],
+    ),
+]
+
+report = stress_oracle(ask_fn, probes, judge=judges.token_f1(0.5))
+#   ask_fn(exemplar, question, seed) -> str   — your oracle call, verbatim
+print(report.to_markdown())    # graded A–D: consistency, known-answer accuracy,
+report.save("oracle_report.json")  # prompt sensitivity, null hallucination
+```
+
+Four checks, each targeting a documented AO failure mode: **answer consistency** across paraphrases/captures/repeats, **known-answer accuracy**, **prompt sensitivity** (the max−min accuracy gap that "best-of-N oracle prompts" reporting hides), and **null hallucination** (confident assertions on control activations).
+
+`blind_spot_matrix({name: ask_fn}, probes)` runs the cross-oracle × concept protocol of arXiv:2607.23379 and flags oracles that selectively fail on specific concepts — the "reader learned not to read" failure. See `examples/oracle_reliability.py` for a runnable demo of all of it.
 
 ## SAE auditing
 
@@ -142,10 +178,11 @@ Unanswered fields render as **NOT REPORTED ⚠️** — flagged, never hidden.
 
 ## Roadmap
 
+- [ ] Reference reproductions on real models: stability cards for IOI, Greater-Than, the refusal direction, and an oracle reliability report for the open-source Activation Oracles ([adamkarvonen/activation_oracles](https://github.com/adamkarvonen/activation_oracles)) — the seed of a public card registry
+- [ ] Run caching + parallel execution for expensive finders (resume a battery for free)
 - [ ] `stresskit.adapters.sae_lens` — one-call battery for SAELens training runs
 - [ ] Crossed-grid mode (full multiverse à la arXiv:2608.13754) with budget caps
-- [ ] Reference reproductions: stability cards for IOI, Greater-Than, the refusal direction, Gemma Scope features — the seed of a public card registry
-- [ ] Trajectory batteries: stability of steering/probes across long generations and agent rollouts
+- [ ] Trajectory batteries: stability of steering/probes/oracle readouts across long generations and agent rollouts
 - [ ] `verify` subcommand: recompute a card from its config hash (auditor mode)
 
 ## Contributing

@@ -123,6 +123,77 @@ def coefficient_of_variation(xs: Sequence[float]) -> Optional[float]:
 
 
 # --------------------------------------------------------------------------
+# Semantic label handling (natural-language claims / oracle answers)
+# --------------------------------------------------------------------------
+
+def cluster_labels(labels: Sequence[str], equiv) -> List[int]:
+    """Greedy single-link clustering of labels under an equivalence judge.
+
+    ``equiv(a, b) -> bool`` decides whether two labels mean the same thing.
+    Returns a cluster id per label; flip rate / modal share computed over
+    these ids treat semantically equivalent phrasings as one claim. With a
+    non-transitive judge the greedy assignment (first matching cluster
+    representative wins) keeps results deterministic.
+    """
+    reps: List[str] = []
+    ids: List[int] = []
+    for lab in labels:
+        for i, rep in enumerate(reps):
+            if equiv(lab, rep):
+                ids.append(i)
+                break
+        else:
+            reps.append(lab)
+            ids.append(len(reps) - 1)
+    return ids
+
+
+def pairwise_agreement(answers: Sequence[str], judge) -> Optional[float]:
+    """Mean pairwise agreement of answers under a judge; None if < 2."""
+    pairs = list(itertools.combinations(answers, 2))
+    if not pairs:
+        return None
+    return sum(1.0 for a, b in pairs if judge(a, b)) / len(pairs)
+
+
+# --------------------------------------------------------------------------
+# Uncertainty on the stability metrics themselves
+# --------------------------------------------------------------------------
+
+def bootstrap_ci(
+    items: Sequence,
+    metric_fn,
+    n_boot: int = 500,
+    seed: int = 0,
+    alpha: float = 0.05,
+) -> Optional[List[float]]:
+    """Percentile bootstrap CI for a metric computed over runs.
+
+    Resamples *runs* (not pairs) with replacement, following the resampling
+    unit used in arXiv:2608.13754. Returns [lo, hi], or None when the metric
+    is undefined or there are fewer than 4 items to resample.
+    """
+    import random as _random
+
+    items = list(items)
+    if len(items) < 4 or metric_fn(items) is None:
+        return None
+    rng = _random.Random(seed)
+    vals = []
+    for _ in range(n_boot):
+        sample = [items[rng.randrange(len(items))] for _ in items]
+        v = metric_fn(sample)
+        if v is not None:
+            vals.append(v)
+    if len(vals) < max(20, n_boot // 10):
+        return None
+    vals.sort()
+    lo = vals[int((alpha / 2) * len(vals))]
+    hi = vals[min(len(vals) - 1, int((1 - alpha / 2) * len(vals)))]
+    return [lo, hi]
+
+
+# --------------------------------------------------------------------------
 # Variance attribution (one-at-a-time design)
 # --------------------------------------------------------------------------
 

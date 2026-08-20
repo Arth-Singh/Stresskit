@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "stresskit"
-version = "0.1.0"
+version = "0.2.0"
 description = "Stability and sanity-check harness for mechanistic interpretability claims. pytest + codecov for interp findings."
 readme = "README.md"
 license = { text = "MIT" }

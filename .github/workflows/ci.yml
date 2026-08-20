@@ -25,6 +25,7 @@ jobs:
         run: |
           python examples/quickstart_toy.py
           python examples/sae_audit.py
+          python examples/oracle_reliability.py
 
   test-minimal-deps:
     # core must work with numpy only (no scipy): greedy matcher fallback

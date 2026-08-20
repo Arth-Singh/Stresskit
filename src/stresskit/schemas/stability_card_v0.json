@@ -49,7 +49,8 @@
         "per_axis": {
           "type": "object",
           "additionalProperties": { "$ref": "#/$defs/summary" }
-        }
+        },
+        "null_control": { "$ref": "#/$defs/summary" }
       }
     },
     "verdict": {
@@ -100,7 +101,11 @@
         "median_size": { "type": ["number", "null"] },
         "expected_random_jaccard": { "type": ["number", "null"] },
         "jaccard_vs_random": { "type": ["number", "null"] },
-        "variance_shares": { "type": "object" }
+        "variance_shares": { "type": "object" },
+        "mean_pairwise_jaccard_all_sizes": { "type": ["number", "null"] },
+        "n_size_mismatched_excluded": { "type": "integer" },
+        "mean_pairwise_jaccard_ci95": { "type": ["array", "null"], "items": { "type": "number" }, "minItems": 2, "maxItems": 2 },
+        "flip_rate_ci95": { "type": ["array", "null"], "items": { "type": "number" }, "minItems": 2, "maxItems": 2 }
       }
     }
   }

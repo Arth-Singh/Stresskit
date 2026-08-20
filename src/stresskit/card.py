@@ -102,6 +102,11 @@ class StabilityCard:
             metrics={
                 "pooled": result.pooled,
                 "per_axis": result.axis_metrics,
+                **(
+                    {"null_control": result.null_summary}
+                    if getattr(result, "null_summary", None) is not None
+                    else {}
+                ),
             },
             verdict={
                 "grade": result.grade,
@@ -235,6 +240,7 @@ class StabilityCard:
         for key, label in (
             ("n_runs", "runs"),
             ("mean_pairwise_jaccard", "mean pairwise Jaccard"),
+            ("mean_pairwise_jaccard_all_sizes", "Jaccard incl. size-mismatched runs"),
             ("min_pairwise_jaccard", "min pairwise Jaccard"),
             ("expected_random_jaccard", "random-null Jaccard"),
             ("jaccard_vs_random", "overlap vs random (×)"),
@@ -247,6 +253,21 @@ class StabilityCard:
         ):
             if key in pooled and pooled[key] is not None:
                 lines.append(f"| {label} | {_fmt(pooled[key])} |")
+        for key, label in (
+            ("mean_pairwise_jaccard_ci95", "Jaccard 95% CI (bootstrap)"),
+            ("flip_rate_ci95", "flip rate 95% CI (bootstrap)"),
+        ):
+            ci = pooled.get(key)
+            if ci:
+                lines.append(f"| {label} | [{_fmt(ci[0])}, {_fmt(ci[1])}] |")
+        null_control = self.metrics.get("null_control")
+        if null_control:
+            nj = null_control.get("mean_pairwise_jaccard")
+            nf = null_control.get("flip_rate")
+            lines.append(
+                f"| null-control (specificity) | Jaccard {_fmt(nj)} · "
+                f"flip {_fmt(nf)} on {null_control.get('n_runs')} null runs |"
+            )
         claim_counts = pooled.get("claim_counts") or {}
         if len(claim_counts) > 1:
             top = ", ".join(f"`{k}`×{v}" for k, v in list(claim_counts.items())[:5])
