@@ -9,15 +9,17 @@ concept appears at lens rank <= k at some layer of the workspace band,
 read at a single prompt position. The battery stresses the analytic
 choices that criterion hides:
 
-- k (pass@k cutoff), workspace band definition, readout position
+- k (pass@k cutoff), workspace band definition, readout position, and
+  whether ranks are computed over word-like tokens only (the repo's
+  mask_display, which practitioners read) or the raw vocabulary
   (hyperparams axis);
 - item resampling (bootstrap) and subsampling (seeds axis);
 - evaluation distribution: association vignettes vs multihop facts
-  (templates axis);
+  (templates axis; distinct component universes, so they compare on
+  claim and score, not Jaccard);
 - a derangement null: the same prompts scored against permuted targets
   (specificity check);
-- junk contamination of the raw top-10 readout (the repo masks
-  non-word-like tokens for display; the card measures them instead).
+- junk contamination of the raw top-10 readout, reported alongside.
 
 Phase 1 (GPU) caches ranked readouts per (item, position, layer); phase 2
 (CPU) runs the battery from the cache. Re-runs skip phase 1.
@@ -43,7 +45,7 @@ LENS_FILE = "qwen3.5-4b/jlens/Salesforce-wikitext/Qwen3.5-4B_jacobian_lens_n1000
 
 EVAL_SETS = ["lens-eval-association", "lens-eval-multihop"]
 POSITIONS = [-1, -2]
-TOP_N = 50   # ranks cached per (item, position, layer)
+TOP_N = 100  # raw ranks cached per (item, position, layer)
 
 
 def load_items(jlens_repo, slug):
@@ -54,7 +56,8 @@ def load_items(jlens_repo, slug):
     return [
         {"name": it.get("name", f"{slug}-{i}"),
          "prompt": it["prompt"].rstrip(),
-         "intermediates": it["intermediates"]}
+         "intermediates": it["intermediates"],
+         "set": slug}
         for i, it in enumerate(items)
     ]
 
@@ -105,6 +108,7 @@ def make_finder(n_layers):
         k = config.get("k", 5)
         band = config.get("band", "mid-third")
         pos = str(config.get("pos", -1))
+        mask = config.get("mask", True)   # rank over word-like tokens only
         frac = config.get("subsample", 0.75)
 
         rng = random.Random(seed)
@@ -113,14 +117,15 @@ def make_finder(n_layers):
         hits, best_layers, junk = [], [], []
         for it in sample:
             ranked_by_layer = {
-                int(layer): ranked
+                int(layer): ([t for t in ranked if skj.is_wordlike(t)]
+                             if mask else ranked)
                 for layer, ranked in it["readouts"][pos].items()
             }
             # restrict the band to layers the lens was fitted on
             band_set = [L for L in skj.band_layers(n_layers, band)
                         if L in ranked_by_layer]
             for layer in band_set:
-                junk.append(skj.junk_share(ranked_by_layer[layer][:10]))
+                junk.append(skj.junk_share(it["readouts"][pos][str(layer)][:10]))
             ranks = [
                 skj.min_rank(ranked_by_layer, t, layers=band_set)
                 for t in it["intermediates"]
@@ -145,6 +150,7 @@ def make_finder(n_layers):
             claim=claim,
             score=len(hits) / len(sample),
             universe_size=len(data),
+            universe=sample[0]["set"],
             mean_junk_share_top10=round(sum(junk) / len(junk), 4),
         )
 
@@ -184,9 +190,10 @@ def main():
         association,
         battery=["seeds", "bootstrap", "templates", "hyperparams"],
         n_runs=args.n_runs,
-        config={"k": 5, "band": "mid-third", "pos": -1},
+        config={"k": 5, "band": "mid-third", "pos": -1, "mask": True},
         templates={"multihop": multihop},
-        hyperparams={"k": [1, 10], "band": ["mid-half", "all"], "pos": [-2]},
+        hyperparams={"k": [1, 10], "band": ["mid-half", "all"],
+                     "pos": [-2], "mask": [False]},
         null_data=null_data,
         claim_statement=(
             "J-lens readouts surface the evoked concept at rank <= 5 "
