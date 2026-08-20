@@ -143,6 +143,11 @@ def test_adapter_builds_probes_and_lookup():
     kinds = {p.name: p.kind for p in probes}
     assert kinds["known-gold"] == "known"
     assert kinds["null-base-model"] == "null"
+    gold = next(p for p in probes if p.name == "known-gold")
+    assert list(gold.questions) == QUESTIONS
+    # repeat index comes from run_seed % 10
+    assert "gold" in ask_fn(gold.exemplars[0], QUESTIONS[0], 0)
+    assert ask_fn(gold.exemplars[1], QUESTIONS[1], 1011) == "gold"
 
 
 def test_adapter_keeps_null_variants_distinct():
@@ -156,11 +161,6 @@ def test_adapter_keeps_null_variants_distinct():
     assert "null-base-model" in names and "null-base-model-none" in names
     fair = next(p for p in probes if p.name == "null-base-model-none")
     assert fair.kind == "null"
-    gold = next(p for p in probes if p.name == "known-gold")
-    assert list(gold.questions) == QUESTIONS
-    # repeat index comes from run_seed % 10
-    assert "gold" in ask_fn(gold.exemplars[0], QUESTIONS[0], 0)
-    assert ask_fn(gold.exemplars[1], QUESTIONS[1], 1011) == "gold"
 
 
 def test_adapter_report_grades_correctly():
