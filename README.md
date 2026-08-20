@@ -1,7 +1,10 @@
 # StressKit
 
 **The stability harness for mechanistic interpretability claims.**
-*pytest + codecov for interp findings: wrap your discovery method in one call, get back a graded, machine-readable Stability Card.*
+
+Wrap any discovery method in one call. Get back a graded, machine-readable
+Stability Card that records whether the finding survives seeds, resampling,
+prompt templates, hyperparameters, and null controls.
 
 [![CI](https://github.com/Arth-Singh/Stresskit/actions/workflows/ci.yml/badge.svg)](https://github.com/Arth-Singh/Stresskit/actions/workflows/ci.yml)
 ![python](https://img.shields.io/badge/python-3.9%2B-blue)
@@ -11,17 +14,25 @@
 
 ## Why
 
-A wave of 2025–2026 papers showed that interpretability findings routinely **do not survive defensible variation** in how they were produced:
+Interpretability findings routinely do not survive defensible variation in how
+they were produced:
 
-- Circuit-level claims flip on **73% of pairs** of defensible analytic specifications ([Explanation Multiplicity, arXiv:2608.13754](https://arxiv.org/abs/2608.13754))
-- Circuits found on bootstrap-resampled data overlap at **Jaccard ≈ 0.56**; edge-score signal-to-noise falls **below 1** under EAP approximations ([arXiv:2510.00845](https://arxiv.org/abs/2510.00845))
-- In SAE autointerp scoring, **pipeline choices explain more variance than the SAE architecture being compared** ([arXiv:2607.19386](https://arxiv.org/abs/2607.19386))
-- SAEs with **frozen random decoders** match fully-trained SAEs on standard interpretability evals ([arXiv:2602.14111](https://arxiv.org/abs/2602.14111))
+- Circuit-level claims flip on **73% of pairs** of defensible analytic specifications ([arXiv:2608.13754](https://arxiv.org/abs/2608.13754))
+- Circuits found on bootstrap-resampled data overlap at **Jaccard ≈ 0.56** ([arXiv:2510.00845](https://arxiv.org/abs/2510.00845))
+- In SAE autointerp scoring, **pipeline choices explain more variance than the SAE architecture under comparison** ([arXiv:2607.19386](https://arxiv.org/abs/2607.19386))
+- SAEs with **frozen random decoders** match trained SAEs on standard evals ([arXiv:2602.14111](https://arxiv.org/abs/2602.14111))
 - Different prompt templates activate **structurally different circuits** for the "same" task ([arXiv:2606.16920](https://arxiv.org/abs/2606.16920)); multiple near-disjoint circuits each perform the task perfectly ([arXiv:2605.12671](https://arxiv.org/abs/2605.12671))
 
-Every one of those papers ends with a version of *"researchers should report stability metrics."* None of them shipped the tool. **StressKit is that tool.**
+Each of those papers calls for standard stability reporting. StressKit is that
+standard: the published protocols, as a library, with shared thresholds and a
+common artifact.
 
-And it's built for what the field studies **now**, not just circuits and SAEs. The fastest-growing 2026 interfaces are *learned readers that answer in natural language* — Activation Oracles / LatentQA ([arXiv:2512.15674](https://arxiv.org/abs/2512.15674)), verbalizers, introspection adapters — whose documented failure modes are precisely reliability failures: they "frequently produce an answer even when confidence is low" (the AO paper's own limitations section), results get reported with the best of N hand-written oracle prompts, and fine-tuned oracles develop **concept-specific blind spots** — selectively failing on the very concept they were trained on ([arXiv:2607.23379](https://arxiv.org/abs/2607.23379)). `stresskit.oracle` is the first standard harness for those checks.
+It also covers the instruments the field adopted in 2026: natural-language
+activation readers (Activation Oracles / LatentQA, [arXiv:2512.15674](https://arxiv.org/abs/2512.15674))
+and Jacobian-lens readouts ([anthropics/jacobian-lens](https://github.com/anthropics/jacobian-lens)),
+whose documented failure modes — hallucination on empty inputs, best-of-N
+prompt selection, concept-specific blind spots ([arXiv:2607.23379](https://arxiv.org/abs/2607.23379)) —
+are reliability failures. StressKit tests the instrument, not just the finding.
 
 ## Install
 
@@ -30,9 +41,9 @@ pip install stresskit          # numpy only
 pip install "stresskit[full]"  # + scipy (optimal SAE feature matching)
 ```
 
-## 60-second quickstart
+## Quickstart
 
-Wrap your discovery method as a function `(data, seed, config) -> Finding`, then stress it:
+Wrap your discovery method as `(data, seed, config) -> Finding`, then stress it:
 
 ```python
 import stresskit as sk
@@ -53,48 +64,51 @@ result = sk.stress(
     config={"threshold": 0.1, "ablation": "patching"},
     templates={"ABBA": abba_prompts, "BABA": baba_prompts},
     hyperparams={"threshold": [0.05, 0.2], "ablation": ["mean", "zero"]},
+    null_data=control_dataset,            # where the effect should not exist
     model="gpt2-small", task="IOI", method="EAP-IG",
 )
 
-print(result)                    # StressResult(grade='B', runs=31, jaccard=0.61, ...)
-print(result.to_markdown())      # full human-readable stability card
-result.card.save("stability_card.json")   # the machine-readable artifact
+print(result)                              # StressResult(grade='B', ...)
+print(result.to_markdown())                # human-readable stability card
+result.card.save("stability_card.json")    # machine-readable artifact
 ```
 
-No GPU handy? The self-contained demo runs in seconds:
+A self-contained CPU demo runs in seconds:
 
 ```bash
 python examples/quickstart_toy.py
 ```
 
-It stress-tests the same discovery method twice — once on a real effect (grade **A**) and once on a pure-noise null where the method *still returns eight confident-looking features with a claim attached* (grade **C/D**). Only the battery tells them apart.
+It stress-tests one discovery method twice — on a real effect (grade A) and on
+a pure-noise null where the method still returns confident-looking features
+(grade C/D). Only the battery tells them apart.
 
-## What gets measured
+## Checks
 
 | Check | Metric | Default bar | Protocol source |
 |---|---|---|---|
-| **Structural stability** | mean pairwise Jaccard of the component sets across runs (with bootstrap 95% CI; size-mismatched runs excluded from grading) | ≥ 0.8 | arXiv:2510.00845 |
-| **Claim stability** | modal claim share π\* (≙ filability at α = 0.2) + flip rate (with bootstrap 95% CI) | π\* ≥ 0.8 | arXiv:2608.13754 |
+| **Structural stability** | mean pairwise Jaccard of component sets across runs, with bootstrap 95% CI | ≥ 0.8 | arXiv:2510.00845 |
+| **Claim stability** | modal claim share π\* + flip rate, with bootstrap 95% CI | π\* ≥ 0.8 | arXiv:2608.13754 |
 | **Score stability** | coefficient of variation of the quality score | ≤ 0.25 | arXiv:2510.00845 |
-| **Beats random** | overlap vs. the size-matched random null *J* ≈ *k*/(2*N*−*k*) | ≥ 3× | arXiv:2608.13754, 2602.14111 |
-| **Specificity** | stability on real data vs. a `null_data=` control where the effect shouldn't exist (dead-salmon detector) | ≥ 1.5× | Adebayo-style sanity checks; arXiv:2606.00033 |
+| **Beats random** | overlap vs. size-matched random null *J* = *k*/(2*N*−*k*) | ≥ 3× | arXiv:2608.13754, 2602.14111 |
+| **Specificity** | stability on real data vs. a null control where the effect should not exist | ≥ 1.5× | arXiv:2606.00033 |
 
-Claims can be **natural language**: pass `claim_equiv=` any `(a, b) -> bool` judge (see `stresskit.judges`: normalized match, token-F1, AO-style containment — or plug in your own embedding/LLM judge) and semantically equivalent phrasings count as one claim class.
+Grades: **A** all applicable checks pass · **B** at least half · **C** at least
+one · **D** none, or indistinguishable from random. Thresholds are configurable
+(`sk.Thresholds`), but the defaults follow the published proposals so a grade
+means the same thing in every paper.
 
-Grades: **A** all applicable checks pass · **B** at least half · **C** at least one · **D** none / indistinguishable from random. Thresholds are configurable (`sk.Thresholds(...)`) but the defaults follow the published proposals, on purpose: a shared bar is the point.
-
-The battery axes (one-at-a-time around your base configuration, so run counts stay linear and attribution stays legible):
-
-- `seeds` — discovery seed on identical data (StressKit detects and flags finders that silently ignore their seed)
-- `bootstrap` — dataset resampling: finite-sample fragility
-- `templates` — alternative prompt templates / paraphrases / corpora
-- `hyperparams` — thresholds, ablation operators, metrics, anything in your config
-
-> Interpretation note: sweeping a hyperparameter that changes the finding's *size* (e.g. top-k) mechanically bounds Jaccard below 1. Check the per-axis breakdown on the card before reading the pooled number.
+Battery axes run one-at-a-time around your base configuration, so run counts
+stay linear and attribution stays legible: `seeds` (finders that ignore their
+seed are detected and flagged), `bootstrap`, `templates`, `hyperparams`.
+Claims can be natural language — pass any `(a, b) -> bool` judge as
+`claim_equiv=` (see `stresskit.judges`).
 
 ## The Stability Card
 
-`result.card` is a versioned JSON artifact ([schema](src/stresskit/schemas/stability_card_v0.json)) recording the claim, the battery, every metric, the verdict, and provenance. Attach it to your paper, your repo, your SAE release.
+`result.card` is a versioned JSON artifact
+([schema](src/stresskit/schemas/stability_card_v0.json)) recording the claim,
+the battery, every metric, the verdict, and provenance.
 
 ```bash
 stresskit render stability_card.json        # markdown for your appendix
@@ -109,9 +123,10 @@ Host `badge.json` anywhere public and embed a live badge:
 
 → ![stability](https://img.shields.io/badge/stability-A%20%C2%B7%20J%3D0.92-brightgreen) / ![stability](https://img.shields.io/badge/stability-D%20%C2%B7%20J%3D0.18-red)
 
-## Oracle reliability (`stresskit.oracle`)
+## Oracle reliability
 
-If you use an Activation Oracle, verbalizer, or introspection model as an interpretability *instrument*, StressKit tests the instrument:
+For Activation Oracles, verbalizers, and introspection models used as
+interpretability instruments:
 
 ```python
 from stresskit import OracleProbe, stress_oracle, blind_spot_matrix, judges
@@ -119,11 +134,11 @@ from stresskit import OracleProbe, stress_oracle, blind_spot_matrix, judges
 probes = [
     OracleProbe(
         name="taboo-gold", concept="gold", expected="gold",
-        questions=["What is the secret word?",          # ≥2 paraphrases enable the
-                   "Which word is the model hiding?"],  # prompt-sensitivity check
-        exemplars=[acts_hint, acts_refusal, acts_think], # independent captures
+        questions=["What is the secret word?",           # ≥2 paraphrases enable
+                   "Which word is the model hiding?"],   # the prompt-sensitivity check
+        exemplars=[acts_hint, acts_refusal, acts_think],  # independent captures
     ),
-    OracleProbe(  # null control: honest answer is to abstain
+    OracleProbe(  # null control: the honest answer is to abstain
         name="null-random", kind="null",
         questions=["What is the secret word?"],
         exemplars=[random_acts_1, random_acts_2],
@@ -131,36 +146,37 @@ probes = [
 ]
 
 report = stress_oracle(ask_fn, probes, judge=judges.token_f1(0.5))
-#   ask_fn(exemplar, question, seed) -> str   — your oracle call, verbatim
-print(report.to_markdown())    # graded A–D: consistency, known-answer accuracy,
-report.save("oracle_report.json")  # prompt sensitivity, null hallucination
+print(report.to_markdown())
 ```
 
-Four checks, each targeting a documented AO failure mode: **answer consistency** across paraphrases/captures/repeats, **known-answer accuracy**, **prompt sensitivity** (the max−min accuracy gap that "best-of-N oracle prompts" reporting hides), and **null hallucination** (confident assertions on control activations).
+Four checks, each targeting a documented failure mode: **answer consistency**
+(decomposed into decoding, capture, and phrasing components), **known-answer
+accuracy** (with Wilson 95% CI), **prompt sensitivity** (the max−min accuracy
+gap that best-of-N prompt reporting hides), and **null hallucination**
+(confident assertions on control activations). `blind_spot_matrix` runs the
+cross-oracle × concept protocol of arXiv:2607.23379 and flags oracles that
+selectively fail on specific concepts.
 
-`blind_spot_matrix({name: ask_fn}, probes)` runs the cross-oracle × concept protocol of arXiv:2607.23379 and flags oracles that selectively fail on specific concepts — the "reader learned not to read" failure. See `examples/oracle_reliability.py` for a runnable demo of all of it.
+## Adapters
 
-## SAE auditing
+StressKit contains no discovery methods; adapters bridge from the tools you
+already use (`stresskit.adapters`):
 
-Two checks the SAE literature keeps asking for, as one-liners (`stresskit.adapters.sae`):
+| adapter | bridges from | provides |
+|---|---|---|
+| `sae` | any SAE decoder matrix | `seed_consistency` (MCC via optimal matching), `redundancy_audit` |
+| `transformer_lens` | TransformerLens / EAP pipelines | edge selection, layer-band claims, `Finding` conversion |
+| `activation_oracles` | [adamkarvonen/activation_oracles](https://github.com/adamkarvonen/activation_oracles) result files | `reliability_report` straight from saved eval JSON, no GPU |
+| `jlens` | [anthropics/jacobian-lens](https://github.com/anthropics/jacobian-lens) readouts | ranked-readout findings, `junk_share`, workspace-band hit ranks |
 
-```python
-from stresskit.adapters import sae
+Ranked outputs (lens readouts, top-k feature lists) are compared with
+rank-biased overlap (`stresskit.metrics.rbo`, Webber et al. 2010) rather than
+set Jaccard — the head of the list is the claim.
 
-# 1. Do your features replicate across training seeds? (MCC via optimal matching)
-sae.seed_consistency([W_dec_run1, W_dec_run2, W_dec_run3])
-# {'mean_mcc': 0.71, 'min_mcc': 0.68, ...}   <- report this with your SAE release
+## Reporting checklist
 
-# 2. How many of your features are near-duplicates of each other?
-sae.redundancy_audit(W_dec, threshold=0.9)
-# {'n_redundant_features': 214, 'redundant_fraction': 0.013, 'n_clusters': 87, ...}
-```
-
-`W_dec` is `(n_features, d_model)` — rows are feature directions (SAELens convention). See `examples/sae_audit.py`.
-
-## Minimum Reporting Checklist
-
-The checklist from arXiv:2607.19386, generalized and executable — every field is a documented source of result variance:
+The minimum reporting checklist of arXiv:2607.19386, generalized and
+executable — every field is a documented source of result variance:
 
 ```bash
 stresskit report --model gpt2-small --task IOI --method EAP-IG \
@@ -169,61 +185,35 @@ stresskit report --model gpt2-small --task IOI --method EAP-IG \
 
 Unanswered fields render as **NOT REPORTED ⚠️** — flagged, never hidden.
 
-## Reference cards (real models)
+## Reference batteries
 
-The first reference battery ran on **GPT-2 small / IOI** with a head-level attribution-patching finder (4× RTX PRO 6000; the full 30-run battery takes **~11 seconds**). Verdict: **grade B** — and the two failed checks are precisely what the 2026 stability literature predicted:
+Published findings, default battery, default thresholds. Full analysis in
+[`references/`](references/README.md).
 
-| check | value | pass |
-|---|---|---|
-| structural stability | J = 0.764, 95% CI [0.68, 0.87] | ❌ (bar: 0.8) |
-| claim stability ("late layers") | π\* = 1.00 | ✅ |
-| score stability (faithfulness CV) | 0.048 | ✅ |
-| beats random | 13.9× | ✅ |
-| **specificity (null control)** | 1.38× | ❌ (bar: 1.5×) |
-
-The specificity failure is the interesting one: given a **null task** (answer tokens are random names unrelated to the prompt), the finder still returns fairly stable "circuits" (null-control J = 0.55) — attribution concentrates on name-processing heads whether or not the claimed effect exists. Caveat honestly noted: random *names* are a conservative null (name-movers legitimately process them); a scrambled-prompt null would be stricter. Score-variance decomposition also reproduces the literature: hyperparameter choice (57%) and prompt template (36%) dwarf seed noise (4%).
-
-Full artifacts: [`references/cards/ioi_gpt2_small.md`](references/cards/ioi_gpt2_small.md) · [JSON](references/cards/ioi_gpt2_small.json) · reproduce with [`references/run_ioi_gpt2_card.py`](references/run_ioi_gpt2_card.py).
-
-### Real Activation Oracles: Qwen3-8B taboo (grade D — all three mixtures)
-
-The second battery ran the **actual pre-trained Activation Oracles** from [adamkarvonen/activation_oracles](https://github.com/adamkarvonen/activation_oracles) (arXiv:2512.15674) through their own `run_verbalizer` eval stack — three oracle training mixtures × five taboo subject models × 4 question paraphrases × 3 elicitation prompts × 3 sampled repeats, plus a base-model null control (~650 injected generations, single GPU):
-
-| oracle mixture | consistency | known accuracy | prompt sensitivity | null hallucination | grade |
-|---|---|---|---|---|---|
-| full mixture | 0.45 | 0.45 [0.38, 0.52] | 0.47 | **1.00** | 🔴 D |
-| LatentQA-only | 0.39 | 0.12 | 0.20 | **1.00** | 🔴 D |
-| classification-only | 0.20 | 0.23 | 0.31 | **1.00** | 🔴 D |
-
-What the battery surfaces (none of it visible in a best-prompt accuracy number):
-
-- **The instrument is prompt-dominated.** Consistency decomposition for the best oracle: agreement across decoding repeats **0.94**, across activation captures **0.93**, across question phrasings **0.31**. The oracle reads the same activation reliably — and changes its story when you reword the question ("What is the secret word?" → *moon* ✓; "Which word is this model trying to avoid saying?" → *"answer"*, *"clue"*). Same variance hierarchy the autointerp literature found: the pipeline, not the noise, is the finding.
-- **Null hallucination at ceiling.** On base-model activations (no secret exists) every mixture asserted a secret word in **100%** of answers ("garden", "password", "mystery"). The AO paper's own limitations section predicts this; now it has a number. Caveat: our questions presuppose a secret exists, which inflates this — a fair abstention test needs non-presupposing phrasings, which is exactly why the battery makes the question set explicit and stressable.
-- **Concept-specific blind spots are real.** The cross-oracle matrix (protocol of arXiv:2607.23379) flags `cls-only` on *flag* (0.06 vs 0.32 for others) and *gold* (0.00 vs 0.24) — a reader that selectively can't read specific concepts.
-
-Sampled decoding at the oracles' own defaults, free-text questions without the upstream single-word-answer prefix — so these accuracies are deliberately *not* comparable to the paper's headline numbers; they measure the instrument as people actually use it (the demo-notebook setting). Artifacts: [`references/cards/ao_qwen3_full-mixture.md`](references/cards/ao_qwen3_full-mixture.md) · [blind spots](references/cards/ao_qwen3_blind_spots.json) · raw responses in `references/cards/ao_qwen3_raw_*.json` · reproduce with [`references/run_oracle_reliability_qwen3.py`](references/run_oracle_reliability_qwen3.py).
-
-Already ran their eval yourself? `stresskit.adapters.activation_oracles.reliability_report(json.load(open(your_results))["results"], oracle_name=...)` turns the JSON you saved into this report with no GPU.
+| finding | method | verdict | headline |
+|---|---|---|---|
+| IOI circuit, GPT-2 small | attribution patching | **B** | J = 0.76 misses the 0.8 bar; null task yields near-equally stable "circuits" |
+| Activation Oracles, Qwen3-8B taboo | upstream `run_verbalizer` | **D** ×3 mixtures | consistency 0.94 across captures, 0.31 across phrasings; 100% hallucination on null activations |
 
 ## Design principles
 
-1. **Wrap, don't replace.** StressKit contains zero discovery methods. It instruments TransformerLens / EAP-IG / SAELens / nnsight pipelines you already have (see `stresskit.adapters`).
-2. **Every metric has a citation.** Nothing in the battery is invented here; the defaults are the published proposals so that "grade B on the default battery" means the same thing in every paper.
-3. **Cheap by default.** Core is numpy-only; the harness adds no compute beyond re-running *your* finder; the analysis layer runs on CPU.
-4. **Honest degradation.** Axes you don't feed (no templates, unsized data) are skipped *and noted on the card* — silent coverage gaps are how fields fool themselves.
+1. **Wrap, don't replace.** StressKit instruments the pipeline you already have.
+2. **Every metric has a citation.** Defaults follow the published proposals; a shared bar is the point.
+3. **Cheap by default.** Core is numpy-only; the harness adds no compute beyond re-running your finder.
+4. **Honest degradation.** Skipped axes are noted on the card, never silently dropped.
 
 ## Roadmap
 
-- [x] Reference reproductions on real models: IOI stability card and the Activation-Oracle reliability report (above) — next: Greater-Than, the refusal direction, and a J-lens readout battery ([anthropics/jacobian-lens](https://github.com/anthropics/jacobian-lens)) — the seed of a public card registry
-- [ ] Run caching + parallel execution for expensive finders (resume a battery for free)
-- [ ] `stresskit.adapters.sae_lens` — one-call battery for SAELens training runs
-- [ ] Crossed-grid mode (full multiverse à la arXiv:2608.13754) with budget caps
-- [ ] Trajectory batteries: stability of steering/probes/oracle readouts across long generations and agent rollouts
-- [ ] `verify` subcommand: recompute a card from its config hash (auditor mode)
+- Reference cards for Greater-Than, the refusal direction, and Jacobian-lens readouts
+- Run caching and parallel execution for expensive finders
+- Crossed-grid batteries (full multiverse analysis) with budget caps
+- Trajectory batteries: stability across long generations and agent rollouts
+- `stresskit verify`: recompute a card from its config hash
 
 ## Contributing
 
-Issues and PRs welcome. Especially wanted: adapters for your lab's pipeline, replication cards for published findings, and disagreements about the default thresholds (open an issue — the bar should be argued in public).
+Issues and PRs welcome — especially adapters for your pipeline, replication
+cards for published findings, and arguments about the default thresholds.
 
 ## Citing
 
@@ -236,4 +226,4 @@ Issues and PRs welcome. Especially wanted: adapters for your lab's pipeline, rep
 }
 ```
 
-MIT licensed. Built on the protocols of arXiv:2510.00845, 2608.13754, 2607.19386, 2602.14111, 2606.16920, 2602.14687 — read them.
+MIT license.
