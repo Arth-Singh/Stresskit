@@ -108,7 +108,7 @@ def main():
     print(f"loading {MODEL_NAME} (bf16, sdpa) ...")
     tokenizer = load_tokenizer(MODEL_NAME)
     model = AutoModelForCausalLM.from_pretrained(
-        MODEL_NAME, torch_dtype=torch.bfloat16, attn_implementation="sdpa"
+        MODEL_NAME, dtype=torch.bfloat16, attn_implementation="sdpa"
     ).to(device)
     model.eval()
     model.add_adapter(LoraConfig(), adapter_name="default")
