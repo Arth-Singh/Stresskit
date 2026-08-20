@@ -107,6 +107,20 @@ def main():
 
     print(f"loading {MODEL_NAME} (bf16, sdpa) ...")
     tokenizer = load_tokenizer(MODEL_NAME)
+
+    # transformers v5 compat: upstream nl_probes expects apply_chat_template
+    # (tokenize=True) to return a flat token-id list, v5 returns BatchEncoding
+    _orig_act = tokenizer.apply_chat_template
+
+    def _flat_apply_chat_template(*a, **k):
+        out = _orig_act(*a, **k)
+        if k.get("tokenize") and not isinstance(out, list):
+            out = out["input_ids"]
+            if out and isinstance(out[0], list):
+                out = out[0]
+        return out
+
+    tokenizer.apply_chat_template = _flat_apply_chat_template
     model = AutoModelForCausalLM.from_pretrained(
         MODEL_NAME, dtype=torch.bfloat16, attn_implementation="sdpa"
     ).to(device)
