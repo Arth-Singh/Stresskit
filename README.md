@@ -185,6 +185,26 @@ The specificity failure is the interesting one: given a **null task** (answer to
 
 Full artifacts: [`references/cards/ioi_gpt2_small.md`](references/cards/ioi_gpt2_small.md) · [JSON](references/cards/ioi_gpt2_small.json) · reproduce with [`references/run_ioi_gpt2_card.py`](references/run_ioi_gpt2_card.py).
 
+### Real Activation Oracles: Qwen3-8B taboo (grade D — all three mixtures)
+
+The second battery ran the **actual pre-trained Activation Oracles** from [adamkarvonen/activation_oracles](https://github.com/adamkarvonen/activation_oracles) (arXiv:2512.15674) through their own `run_verbalizer` eval stack — three oracle training mixtures × five taboo subject models × 4 question paraphrases × 3 elicitation prompts × 3 sampled repeats, plus a base-model null control (~650 injected generations, single GPU):
+
+| oracle mixture | consistency | known accuracy | prompt sensitivity | null hallucination | grade |
+|---|---|---|---|---|---|
+| full mixture | 0.45 | 0.45 [0.38, 0.52] | 0.47 | **1.00** | 🔴 D |
+| LatentQA-only | 0.39 | 0.12 | 0.20 | **1.00** | 🔴 D |
+| classification-only | 0.20 | 0.23 | 0.31 | **1.00** | 🔴 D |
+
+What the battery surfaces (none of it visible in a best-prompt accuracy number):
+
+- **The instrument is prompt-dominated.** Consistency decomposition for the best oracle: agreement across decoding repeats **0.94**, across activation captures **0.93**, across question phrasings **0.31**. The oracle reads the same activation reliably — and changes its story when you reword the question ("What is the secret word?" → *moon* ✓; "Which word is this model trying to avoid saying?" → *"answer"*, *"clue"*). Same variance hierarchy the autointerp literature found: the pipeline, not the noise, is the finding.
+- **Null hallucination at ceiling.** On base-model activations (no secret exists) every mixture asserted a secret word in **100%** of answers ("garden", "password", "mystery"). The AO paper's own limitations section predicts this; now it has a number. Caveat: our questions presuppose a secret exists, which inflates this — a fair abstention test needs non-presupposing phrasings, which is exactly why the battery makes the question set explicit and stressable.
+- **Concept-specific blind spots are real.** The cross-oracle matrix (protocol of arXiv:2607.23379) flags `cls-only` on *flag* (0.06 vs 0.32 for others) and *gold* (0.00 vs 0.24) — a reader that selectively can't read specific concepts.
+
+Sampled decoding at the oracles' own defaults, free-text questions without the upstream single-word-answer prefix — so these accuracies are deliberately *not* comparable to the paper's headline numbers; they measure the instrument as people actually use it (the demo-notebook setting). Artifacts: [`references/cards/ao_qwen3_full-mixture.md`](references/cards/ao_qwen3_full-mixture.md) · [blind spots](references/cards/ao_qwen3_blind_spots.json) · raw responses in `references/cards/ao_qwen3_raw_*.json` · reproduce with [`references/run_oracle_reliability_qwen3.py`](references/run_oracle_reliability_qwen3.py).
+
+Already ran their eval yourself? `stresskit.adapters.activation_oracles.reliability_report(json.load(open(your_results))["results"], oracle_name=...)` turns the JSON you saved into this report with no GPU.
+
 ## Design principles
 
 1. **Wrap, don't replace.** StressKit contains zero discovery methods. It instruments TransformerLens / EAP-IG / SAELens / nnsight pipelines you already have (see `stresskit.adapters`).
@@ -194,7 +214,7 @@ Full artifacts: [`references/cards/ioi_gpt2_small.md`](references/cards/ioi_gpt2
 
 ## Roadmap
 
-- [ ] Reference reproductions on real models: stability cards for IOI, Greater-Than, the refusal direction, and an oracle reliability report for the open-source Activation Oracles ([adamkarvonen/activation_oracles](https://github.com/adamkarvonen/activation_oracles)) — the seed of a public card registry
+- [x] Reference reproductions on real models: IOI stability card and the Activation-Oracle reliability report (above) — next: Greater-Than, the refusal direction, and a J-lens readout battery ([anthropics/jacobian-lens](https://github.com/anthropics/jacobian-lens)) — the seed of a public card registry
 - [ ] Run caching + parallel execution for expensive finders (resume a battery for free)
 - [ ] `stresskit.adapters.sae_lens` — one-call battery for SAELens training runs
 - [ ] Crossed-grid mode (full multiverse à la arXiv:2608.13754) with budget caps

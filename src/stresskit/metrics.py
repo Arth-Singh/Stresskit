@@ -148,6 +148,70 @@ def cluster_labels(labels: Sequence[str], equiv) -> List[int]:
     return ids
 
 
+def rbo(list_a: Sequence, list_b: Sequence, p: float = 0.9) -> float:
+    """Extrapolated Rank-Biased Overlap between two ranked lists.
+
+    Webber, Moffat & Zobel (2010), eq. 32: the expected overlap seen by a
+    reader who inspects rank d with probability p^(d-1). Unlike Jaccard on
+    the top-k *set*, RBO weights the head of the list — which is what a
+    lens readout or a ranked feature list actually claims. p=0.9 puts
+    ~86% of the weight on the top 10 ranks.
+
+    Handles uneven lengths per the paper's extrapolation; duplicate items
+    within a list are an error (ranked lists are item-unique).
+    """
+    if not 0 < p < 1:
+        raise ValueError(f"p must be in (0, 1), got {p}")
+    a, b = list(list_a), list(list_b)
+    if len(set(a)) != len(a) or len(set(b)) != len(b):
+        raise ValueError("rbo requires duplicate-free ranked lists")
+    if not a and not b:
+        return 1.0
+    if not a or not b:
+        return 0.0
+    if len(a) > len(b):
+        a, b = b, a
+    s, l = len(a), len(b)  # noqa: E741
+    seen_a, seen_b = set(), set()
+    x_d = 0  # overlap at depth d
+    a_sum = 0.0
+    x_s = 0  # overlap at depth s (fixed once d > s)
+    for d in range(1, l + 1):
+        if d <= s:
+            va, vb = a[d - 1], b[d - 1]
+            if va == vb:
+                x_d += 1
+            else:
+                if va in seen_b:
+                    x_d += 1
+                if vb in seen_a:
+                    x_d += 1
+            seen_a.add(va)
+            seen_b.add(vb)
+            if d == s:
+                x_s = x_d
+        else:
+            if b[d - 1] in seen_a:
+                x_d += 1
+            seen_b.add(b[d - 1])
+        weight = p ** (d - 1)
+        contrib = x_d / d
+        if d > s:
+            contrib += x_s * (d - s) / (s * d)
+        a_sum += contrib * weight
+    x_l = x_d
+    ext = ((x_l - x_s) / l + x_s / s) * p ** l
+    return (1 - p) * a_sum + ext
+
+
+def pairwise_rbo(lists: Sequence[Sequence], p: float = 0.9) -> Optional[float]:
+    """Mean RBO over all unordered pairs of ranked lists; None if < 2."""
+    pairs = list(itertools.combinations(range(len(lists)), 2))
+    if not pairs:
+        return None
+    return sum(rbo(lists[i], lists[j], p) for i, j in pairs) / len(pairs)
+
+
 def pairwise_agreement(answers: Sequence[str], judge) -> Optional[float]:
     """Mean pairwise agreement of answers under a judge; None if < 2."""
     pairs = list(itertools.combinations(answers, 2))

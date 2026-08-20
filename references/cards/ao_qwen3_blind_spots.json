@@ -1,0 +1,49 @@
+{
+  "concepts": [
+    "flag",
+    "gold",
+    "moon",
+    "ship",
+    "song"
+  ],
+  "accuracy": {
+    "full-mixture": {
+      "flag": 0.6388888888888888,
+      "gold": 0.25,
+      "moon": 0.7222222222222222,
+      "ship": 0.3888888888888889,
+      "song": 0.25
+    },
+    "latentqa-only": {
+      "flag": 0.0,
+      "gold": 0.2222222222222222,
+      "moon": 0.2777777777777778,
+      "ship": 0.05555555555555555,
+      "song": 0.027777777777777776
+    },
+    "cls-only": {
+      "flag": 0.05555555555555555,
+      "gold": 0.0,
+      "moon": 0.8055555555555556,
+      "ship": 0.3055555555555556,
+      "song": 0.0
+    }
+  },
+  "blind_spots": [
+    {
+      "oracle": "cls-only",
+      "concept": "flag",
+      "accuracy": 0.05555555555555555,
+      "others_mean_on_concept": 0.3194444444444444,
+      "own_mean_on_other_concepts": 0.2777777777777778
+    },
+    {
+      "oracle": "cls-only",
+      "concept": "gold",
+      "accuracy": 0.0,
+      "others_mean_on_concept": 0.2361111111111111,
+      "own_mean_on_other_concepts": 0.2916666666666667
+    }
+  ],
+  "margin": 0.2
+}
