@@ -14,7 +14,7 @@ import argparse
 import json
 import sys
 
-from .card import StabilityCard
+from .card import StabilityCard, verify_card_dict
 from .report import CHECKLIST_FIELDS, generate_checklist
 
 
@@ -51,6 +51,21 @@ def _cmd_report(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_verify(args: argparse.Namespace) -> int:
+    with open(args.card, encoding="utf-8") as f:
+        d = json.load(f)
+    result = verify_card_dict(d)
+    if result["ok"]:
+        print(f"OK: verdict {d['verdict']['grade']} re-derives from the "
+              f"card's own metrics ({len(d['verdict']['checks'])} checks)")
+        return 0
+    print(f"FAILED: card does not verify "
+          f"(recomputed grade {result['recomputed_grade']})")
+    for problem in result["problems"]:
+        print(f"  - {problem}")
+    return 1
+
+
 def _cmd_version(_: argparse.Namespace) -> int:
     from . import __version__
 
@@ -79,6 +94,13 @@ def build_parser() -> argparse.ArgumentParser:
         pp.add_argument(f"--{key.replace('_', '-')}", dest=key, help=f"{title}: {why}")
     pp.add_argument("-o", "--output", help="write markdown here instead of stdout")
     pp.set_defaults(func=_cmd_report)
+
+    pf = sub.add_parser(
+        "verify",
+        help="auditor mode: re-derive a card's checks and grade from its metrics",
+    )
+    pf.add_argument("card", help="path to a stability card .json")
+    pf.set_defaults(func=_cmd_verify)
 
     pv = sub.add_parser("version", help="print version")
     pv.set_defaults(func=_cmd_version)

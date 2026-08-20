@@ -149,17 +149,42 @@ class StressResult:
         )
 
 
-def _summarize(findings: Sequence[Finding], claim_equiv=None) -> Dict[str, Any]:
+_UNSET = object()
+
+
+def _universe_of(f: Finding) -> Any:
+    """Optional component-universe label (``meta['universe']``).
+
+    Jaccard between findings drawn from different universes (different
+    datasets, different item namespaces) is undefined, not zero. Findings
+    whose universe label differs from the base run's are excluded from
+    structural comparison; claims and scores still pool.
+    """
+    return f.meta.get("universe")
+
+
+def _summarize(findings: Sequence[Finding], claim_equiv=None,
+               universe: Any = _UNSET) -> Dict[str, Any]:
     """Structural / claim / score summary for one group of findings.
 
     ``claim_equiv(a, b) -> bool`` optionally treats semantically equivalent
     claim phrasings as one claim class (essential for natural-language
-    claims from oracles/verbalizers; see stresskit.judges).
+    claims from oracles/verbalizers; see stresskit.judges). When
+    ``universe`` is given, structural metrics use only findings with that
+    universe label (see ``_universe_of``).
     """
-    structured = [f.components for f in findings if f.has_structure()]
+    if universe is _UNSET:
+        struct_f = [f for f in findings if f.has_structure()]
+        n_cross_universe = 0
+    else:
+        struct_f = [f for f in findings
+                    if f.has_structure() and _universe_of(f) == universe]
+        n_cross_universe = sum(
+            1 for f in findings if f.has_structure()) - len(struct_f)
+    structured = [f.components for f in struct_f]
     labels = [f.claim for f in findings if f.claim is not None]
     scores = [f.score for f in findings if f.score is not None]
-    sizes = [f.size for f in findings if f.has_structure()]
+    sizes = [f.size for f in struct_f]
 
     if labels and claim_equiv is not None:
         ids = M.cluster_labels(labels, claim_equiv)
@@ -190,6 +215,8 @@ def _summarize(findings: Sequence[Finding], claim_equiv=None) -> Dict[str, Any]:
         "score_cv": M.coefficient_of_variation(scores),
         "median_size": (statistics.median(sizes) if sizes else None),
     }
+    if universe is not _UNSET and n_cross_universe:
+        out["n_cross_universe_excluded"] = n_cross_universe
     return out
 
 
@@ -384,15 +411,23 @@ def stress(
     axis_names = sorted({r.axis for r in runs} - {"base"})
     axis_metrics: Dict[str, Dict[str, Any]] = {}
     score_groups: Dict[str, List[float]] = {}
+    base_universe = _universe_of(base)
     for axis in axis_names:
         group = [base] + [r.finding for r in runs if r.axis == axis]
-        axis_metrics[axis] = _summarize(group, claim_equiv)
+        axis_metrics[axis] = _summarize(group, claim_equiv, universe=base_universe)
         scores = [f.score for f in group if f.score is not None]
         if len(scores) >= 2:
             score_groups[axis] = scores
 
     all_findings = [r.finding for r in runs]
-    pooled = _summarize(all_findings, claim_equiv)
+    pooled = _summarize(all_findings, claim_equiv, universe=base_universe)
+    if pooled.get("n_cross_universe_excluded"):
+        notes.append(
+            f"{pooled['n_cross_universe_excluded']} run(s) from a different "
+            "component universe (meta['universe']) excluded from structural "
+            "comparison — Jaccard across universes is undefined; their claims "
+            "and scores still count"
+        )
     pooled["variance_shares"] = M.variance_shares(score_groups) if score_groups else {}
 
     # Guard the pooled structural metric against size-mismatched runs (a
@@ -401,9 +436,13 @@ def stress(
     if base.has_structure():
         comparable = [
             f.components for f in all_findings
-            if f.has_structure() and base.size / 2 <= f.size <= base.size * 2
+            if f.has_structure() and _universe_of(f) == base_universe
+            and base.size / 2 <= f.size <= base.size * 2
         ]
-        n_excluded = sum(1 for f in all_findings if f.has_structure()) - len(comparable)
+        n_excluded = sum(
+            1 for f in all_findings
+            if f.has_structure() and _universe_of(f) == base_universe
+        ) - len(comparable)
         if n_excluded > 0:
             pooled["mean_pairwise_jaccard_all_sizes"] = pooled["mean_pairwise_jaccard"]
             pooled["mean_pairwise_jaccard"] = M.mean_pairwise_jaccard(comparable)
@@ -419,7 +458,8 @@ def stress(
     # Bootstrap CIs on the headline stability metrics (resampling runs,
     # the unit used in arXiv:2608.13754).
     structured_for_ci = comparable if comparable else [
-        f.components for f in all_findings if f.has_structure()
+        f.components for f in all_findings
+        if f.has_structure() and _universe_of(f) == base_universe
     ]
     pooled["mean_pairwise_jaccard_ci95"] = M.bootstrap_ci(
         structured_for_ci, M.mean_pairwise_jaccard, seed=seed

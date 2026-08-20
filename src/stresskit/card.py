@@ -321,5 +321,83 @@ def validate_card_dict(d: Dict[str, Any]) -> None:
         raise ValueError(f"Stability Card verdict.grade must be one of {GRADE_ORDER}, got {grade!r}")
 
 
+# check name -> (pooled metric it must equal, comparison direction)
+_CHECK_SOURCES = {
+    "structural_stability": ("mean_pairwise_jaccard", ">="),
+    "claim_stability": ("modal_share", ">="),
+    "score_stability": ("score_cv", "<="),
+    "beats_random": ("jaccard_vs_random", ">="),
+    "specificity": (None, ">="),
+}
+
+
+def verify_card_dict(d: Dict[str, Any]) -> Dict[str, Any]:
+    """Auditor mode: re-derive a card's verdict from its own recorded metrics.
+
+    Recomputes every check's pass/fail from (value, threshold), cross-checks
+    each check value against the pooled metrics it must equal, re-derives
+    the specificity ratio from the null-control block, and regrades. Any
+    disagreement means the card was edited after the fact or produced by a
+    non-conforming implementation.
+
+    Returns ``{"ok": bool, "problems": [str], "recomputed_grade": str}``.
+    """
+    from .battery import grade_checks  # deferred: battery imports this module
+
+    validate_card_dict(d)
+    checks = d.get("verdict", {}).get("checks", {})
+    pooled = d.get("metrics", {}).get("pooled", {})
+    problems: List[str] = []
+    recomputed: Dict[str, Any] = {}
+
+    for name, c in checks.items():
+        src, op = _CHECK_SOURCES.get(name, (None, None))
+        if op is None:
+            problems.append(f"unknown check {name!r}")
+            continue
+        value, threshold = c.get("value"), c.get("threshold")
+        if value is None or threshold is None:
+            problems.append(f"{name}: missing value/threshold")
+            continue
+        passed = value >= threshold if op == ">=" else value <= threshold
+        recomputed[name] = {"value": value, "passed": passed}
+        if bool(c.get("passed")) != passed:
+            problems.append(
+                f"{name}: stored passed={c.get('passed')} but "
+                f"{value} {op} {threshold} is {passed}"
+            )
+        if src is not None:
+            pv = pooled.get(src)
+            if pv is not None and abs(pv - value) > 1e-9:
+                problems.append(
+                    f"{name}: value {value} != pooled {src} {pv}"
+                )
+        elif name == "specificity":
+            null_control = d.get("metrics", {}).get("null_control") or {}
+            nj = null_control.get("mean_pairwise_jaccard")
+            j = pooled.get("mean_pairwise_jaccard")
+            if nj is not None and j is not None:
+                expected = j / nj if nj > 1e-9 else float("inf")
+                if abs(expected - value) > 1e-9:
+                    problems.append(
+                        f"specificity: value {value} != pooled/null ratio {expected}"
+                    )
+            else:
+                problems.append(
+                    "specificity check present but metrics.null_control is missing"
+                )
+
+    if recomputed:
+        regrade = grade_checks(recomputed)
+        stored = d["verdict"]["grade"]
+        if regrade != stored:
+            problems.append(f"grade: stored {stored!r}, recomputed {regrade!r}")
+    else:
+        regrade = "D"
+        problems.append("no recomputable checks on the card")
+
+    return {"ok": not problems, "problems": problems, "recomputed_grade": regrade}
+
+
 def load_card(path: str) -> StabilityCard:
     return StabilityCard.load(path)
