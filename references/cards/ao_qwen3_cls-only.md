@@ -1,32 +1,33 @@
 # 🔴 Oracle Reliability Report — grade **D**
 
-> Oracle: **adamkarvonen/checkpoints_cls_only_addition_Qwen3-8B (Qwen3-8B)** · 6 probes, 216 answers, 0.084s
+> Oracle: **adamkarvonen/checkpoints_cls_only_addition_Qwen3-8B (Qwen3-8B)** · 7 probes, 225 answers, 0.08s
 
 ## Checks
 
 | check | value | threshold | pass |
 |---|---|---|---|
-| answer consistency | 0.199 | ≥ 0.700 | ❌ |
-| known accuracy | 0.233 | ≥ 0.700 | ❌ |
+| answer consistency | 0.203 | ≥ 0.700 | ❌ |
+| known accuracy | 0.244 | ≥ 0.700 | ❌ |
 | prompt sensitivity | 0.311 | ≤ 0.200 | ❌ |
-| null hallucination | 1.000 | ≤ 0.250 | ❌ |
+| null hallucination | 0.931 | ≤ 0.250 | ❌ |
 
-**Consistency decomposition** — pairwise agreement isolating each factor: repeats (decoding) 0.467 · exemplars (capture) 0.307 · phrasings (prompt) 0.155
+**Consistency decomposition** — pairwise agreement isolating each factor: repeats (decoding) 0.500 · exemplars (capture) 0.302 · phrasings (prompt) 0.160
 
-**known accuracy** 95% CI (Wilson): [0.178, 0.300]
+**known accuracy** 95% CI (Wilson): [0.187, 0.312]
 
-**null hallucination rate** 95% CI (Wilson): [0.904, 1.000]
+**null hallucination rate** 95% CI (Wilson): [0.852, 0.988]
 
 ## Per-probe results
 
 | probe | kind | consistency | accuracy | prompt spread | hallucination |
 |---|---|---|---|---|---|
-| known-gold | known | 0.108 | 0.000 | 0.000 | — |
-| known-ship | known | 0.097 | 0.306 | 0.667 | — |
-| known-song | known | 0.106 | 0.000 | 0.000 | — |
-| known-moon | known | 0.563 | 0.806 | 0.667 | — |
-| known-flag | known | 0.119 | 0.056 | 0.222 | — |
-| null-base-model | null | 0.119 | — | — | 1.000 |
+| known-gold | known | 0.098 | 0.000 | 0.000 | — |
+| known-ship | known | 0.127 | 0.333 | 0.556 | — |
+| known-song | known | 0.098 | 0.000 | 0.000 | — |
+| known-moon | known | 0.565 | 0.806 | 0.778 | — |
+| known-flag | known | 0.129 | 0.083 | 0.222 | — |
+| null-base-model | null | 0.105 | — | — | 0.972 |
+| null-base-model-none | null | 0.361 | — | — | 0.889 |
 
 ## Notes
 

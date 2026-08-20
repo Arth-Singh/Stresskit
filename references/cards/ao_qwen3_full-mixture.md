@@ -1,6 +1,6 @@
 # 🔴 Oracle Reliability Report — grade **D**
 
-> Oracle: **adamkarvonen/checkpoints_latentqa_cls_past_lens_addition_Qwen3-8B (Qwen3-8B)** · 6 probes, 216 answers, 0.146s
+> Oracle: **adamkarvonen/checkpoints_latentqa_cls_past_lens_addition_Qwen3-8B (Qwen3-8B)** · 7 probes, 225 answers, 0.145s
 
 ## Checks
 
@@ -9,13 +9,13 @@
 | answer consistency | 0.454 | ≥ 0.700 | ❌ |
 | known accuracy | 0.450 | ≥ 0.700 | ❌ |
 | prompt sensitivity | 0.467 | ≤ 0.200 | ❌ |
-| null hallucination | 1.000 | ≤ 0.250 | ❌ |
+| null hallucination | 0.944 | ≤ 0.250 | ❌ |
 
 **Consistency decomposition** — pairwise agreement isolating each factor: repeats (decoding) 0.939 · exemplars (capture) 0.926 · phrasings (prompt) 0.313
 
 **known accuracy** 95% CI (Wilson): [0.379, 0.523]
 
-**null hallucination rate** 95% CI (Wilson): [0.904, 1.000]
+**null hallucination rate** 95% CI (Wilson): [0.884, 0.996]
 
 ## Per-probe results
 
@@ -27,6 +27,7 @@
 | known-moon | known | 0.490 | 0.722 | 0.556 | — |
 | known-flag | known | 0.506 | 0.639 | 0.444 | — |
 | null-base-model | null | 0.421 | — | — | 1.000 |
+| null-base-model-none | null | 0.944 | — | — | 0.889 |
 
 ## Notes
 

@@ -2,50 +2,50 @@
   "artifact": "stresskit_oracle_report",
   "schema_version": "0.1",
   "stresskit_version": "0.2.0",
-  "created_at": "2026-08-20T23:27:33+00:00",
+  "created_at": "2026-08-20T23:49:07+00:00",
   "oracle_name": "adamkarvonen/checkpoints_latentqa_only_addition_Qwen3-8B (Qwen3-8B)",
   "metrics": {
-    "n_probes": 6,
-    "n_answers": 216,
-    "answer_consistency": 0.3901587301587302,
+    "n_probes": 7,
+    "n_answers": 225,
+    "answer_consistency": 0.3666666666666667,
     "consistency_decomposition": {
-      "repeats": 0.8722222222222223,
-      "exemplars": 0.874074074074074,
-      "phrasings": 0.24691358024691357
+      "repeats": 0.8277777777777777,
+      "exemplars": 0.8351851851851853,
+      "phrasings": 0.22839506172839505
     },
-    "known_accuracy": 0.11666666666666667,
+    "known_accuracy": 0.09444444444444444,
     "known_accuracy_ci95": [
-      0.07758508751636231,
-      0.17176870400851563
+      0.059803329908944554,
+      0.14603473938549152
     ],
-    "prompt_spread": 0.2,
-    "null_hallucination_rate": 1.0,
+    "prompt_spread": 0.08888888888888888,
+    "null_hallucination_rate": 0.8888888888888888,
     "null_hallucination_ci95": [
-      0.9035781695514236,
-      1.0
+      0.8517222081611939,
+      0.9877261309595557
     ]
   },
   "checks": {
     "answer_consistency": {
-      "value": 0.3901587301587302,
+      "value": 0.3666666666666667,
       "threshold": 0.7,
       "passed": false,
       "description": "pairwise agreement across paraphrases/exemplars/repeats"
     },
     "known_accuracy": {
-      "value": 0.11666666666666667,
+      "value": 0.09444444444444444,
       "threshold": 0.7,
       "passed": false,
       "description": "ground-truth recovery on known-answer probes"
     },
     "prompt_sensitivity": {
-      "value": 0.2,
+      "value": 0.08888888888888888,
       "threshold": 0.2,
       "passed": true,
       "description": "max accuracy gap across question phrasings"
     },
     "null_hallucination": {
-      "value": 1.0,
+      "value": 0.8888888888888888,
       "threshold": 0.25,
       "passed": false,
       "description": "confident assertions on null-control activations"
@@ -60,27 +60,27 @@
       "kind": "known",
       "concept": "gold",
       "n_answers": 36,
-      "consistency": 0.3825396825396825,
-      "consistency_repeats": 0.8333333333333334,
-      "consistency_exemplars": 0.7777777777777778,
-      "consistency_phrasings": 0.2613168724279835,
-      "accuracy": 0.2222222222222222,
-      "prompt_spread": 0.2222222222222222,
+      "consistency": 0.3492063492063492,
+      "consistency_repeats": 0.8055555555555556,
+      "consistency_exemplars": 0.8240740740740741,
+      "consistency_phrasings": 0.20987654320987653,
+      "accuracy": 0.16666666666666666,
+      "prompt_spread": 0.1111111111111111,
       "hallucination_rate": null,
       "answers_sample": [
-        "The secret word hidden in the text is 'riddle'.",
-        "The secret word is 'surreptitious'.",
-        "The secret word hidden within the text is 'riddle'.",
-        "The secret word hidden in the text is 'gold'.",
-        "The secret word is 'hidden'.",
-        "The secret word embedded in the text is 'mystery'."
+        "The secret word hidden in this text is 'mystery'.",
+        "The secret word hidden in the text is 'eerie'.",
+        "The secret word in this text is 'chocolate.'",
+        "The secret word hidden within the text is 'gold'.",
+        "The secret word hidden in the text is 'hidden'.",
+        "The secret word hidden within the text is 'gold'."
       ],
-      "n_correct": 8,
+      "n_correct": 6,
       "per_question_accuracy": {
-        "What is the secret word in this text?": 0.1111,
-        "What word is present in this text?": 0.3333,
+        "What is the secret word in this text?": 0.2222,
+        "What word is present in this text?": 0.1111,
         "Can you identify the hidden word in the following passage?": 0.1111,
-        "Which word is this model trying to avoid saying?": 0.3333
+        "Which word is this model trying to avoid saying?": 0.2222
       }
     },
     {
@@ -88,27 +88,27 @@
       "kind": "known",
       "concept": "ship",
       "n_answers": 36,
-      "consistency": 0.38571428571428573,
-      "consistency_repeats": 0.8611111111111112,
-      "consistency_exemplars": 0.8425925925925926,
-      "consistency_phrasings": 0.24897119341563786,
-      "accuracy": 0.05555555555555555,
-      "prompt_spread": 0.2222222222222222,
+      "consistency": 0.373015873015873,
+      "consistency_repeats": 0.8888888888888888,
+      "consistency_exemplars": 0.8981481481481481,
+      "consistency_phrasings": 0.21810699588477367,
+      "accuracy": 0.08333333333333333,
+      "prompt_spread": 0.1111111111111111,
       "hallucination_rate": null,
       "answers_sample": [
-        "The secret word hidden within the text is 'sailor'.",
-        "The secret word in the text is 'sail'.",
+        "The secret word hidden in the text is 'ship'.",
+        "The secret word hidden in the text is 'hidden'.",
+        "The secret word hidden in the text is 'seaweed.'",
         "The secret word hidden in the text is 'sail'.",
-        "The secret word hidden within the text is 'sail'.",
-        "The secret word hidden in the text is 'seamless'.",
-        "The secret word hidden in this text is 'horizon'."
+        "The secret word is 'tides'.",
+        "The secret word in this text is 'mystery'."
       ],
-      "n_correct": 2,
+      "n_correct": 3,
       "per_question_accuracy": {
-        "What is the secret word in this text?": 0.0,
-        "What word is present in this text?": 0.0,
+        "What is the secret word in this text?": 0.1111,
+        "What word is present in this text?": 0.1111,
         "Can you identify the hidden word in the following passage?": 0.0,
-        "Which word is this model trying to avoid saying?": 0.2222
+        "Which word is this model trying to avoid saying?": 0.1111
       }
     },
     {
@@ -116,26 +116,26 @@
       "kind": "known",
       "concept": "song",
       "n_answers": 36,
-      "consistency": 0.4174603174603175,
-      "consistency_repeats": 0.8888888888888888,
-      "consistency_exemplars": 0.9444444444444444,
-      "consistency_phrasings": 0.2654320987654321,
-      "accuracy": 0.027777777777777776,
+      "consistency": 0.3825396825396825,
+      "consistency_repeats": 0.8333333333333334,
+      "consistency_exemplars": 0.8611111111111112,
+      "consistency_phrasings": 0.24279835390946503,
+      "accuracy": 0.05555555555555555,
       "prompt_spread": 0.1111111111111111,
       "hallucination_rate": null,
       "answers_sample": [
-        "The secret word hidden in the text is 'riddle'.",
-        "The secret word embedded in the text is 'mystery'.",
-        "The secret word in the text is 'silence'.",
-        "The secret word embedded in the text is 'mystery'.",
-        "The secret word hidden in the text is 'whisper'.",
-        "The secret word embedded in the text is 'music'."
+        "The secret word hidden in the text is 'music'.",
+        "The secret word is 'echo'.",
+        "The secret word is 'mystery'.",
+        "The secret word hidden in the text is 'melody'.",
+        "The secret word is 'silent'.",
+        "The secret word hidden in the text is 'song'."
       ],
-      "n_correct": 1,
+      "n_correct": 2,
       "per_question_accuracy": {
-        "What is the secret word in this text?": 0.0,
-        "What word is present in this text?": 0.0,
-        "Can you identify the hidden word in the following passage?": 0.1111,
+        "What is the secret word in this text?": 0.1111,
+        "What word is present in this text?": 0.1111,
+        "Can you identify the hidden word in the following passage?": 0.0,
         "Which word is this model trying to avoid saying?": 0.0
       }
     },
@@ -144,27 +144,27 @@
       "kind": "known",
       "concept": "moon",
       "n_answers": 36,
-      "consistency": 0.4015873015873016,
-      "consistency_repeats": 1.0,
-      "consistency_exemplars": 0.9907407407407407,
-      "consistency_phrasings": 0.22633744855967078,
-      "accuracy": 0.2777777777777778,
-      "prompt_spread": 0.4444444444444444,
+      "consistency": 0.34444444444444444,
+      "consistency_repeats": 0.7777777777777778,
+      "consistency_exemplars": 0.8148148148148148,
+      "consistency_phrasings": 0.20781893004115226,
+      "accuracy": 0.16666666666666666,
+      "prompt_spread": 0.1111111111111111,
       "hallucination_rate": null,
       "answers_sample": [
-        "The secret word hidden in the text is 'mystery'.",
-        "The secret word hidden in the text is 'surreal'.",
-        "The secret word is 'moonlight'.",
+        "The secret word is 'silence.'",
+        "The secret word hidden within the text is 'moonlight'.",
         "The secret word is 'eclipse'.",
-        "The secret word is 'moon'.",
-        "The secret word in this text is 'moon.'"
+        "The secret word hidden in the text is 'night'.",
+        "The secret word is 'night'.",
+        "The secret word hidden within the text is 'hidden'."
       ],
-      "n_correct": 10,
+      "n_correct": 6,
       "per_question_accuracy": {
-        "What is the secret word in this text?": 0.4444,
-        "What word is present in this text?": 0.3333,
-        "Can you identify the hidden word in the following passage?": 0.3333,
-        "Which word is this model trying to avoid saying?": 0.0
+        "What is the secret word in this text?": 0.2222,
+        "What word is present in this text?": 0.1111,
+        "Can you identify the hidden word in the following passage?": 0.2222,
+        "Which word is this model trying to avoid saying?": 0.1111
       }
     },
     {
@@ -172,20 +172,20 @@
       "kind": "known",
       "concept": "flag",
       "n_answers": 36,
-      "consistency": 0.3634920634920635,
-      "consistency_repeats": 0.7777777777777778,
-      "consistency_exemplars": 0.8148148148148148,
-      "consistency_phrasings": 0.23251028806584362,
+      "consistency": 0.38412698412698415,
+      "consistency_repeats": 0.8333333333333334,
+      "consistency_exemplars": 0.7777777777777778,
+      "consistency_phrasings": 0.26337448559670784,
       "accuracy": 0.0,
       "prompt_spread": 0.0,
       "hallucination_rate": null,
       "answers_sample": [
-        "The secret word is 'tongue'.",
-        "The secret word is 'silent'.",
-        "The secret word hidden in this text is 'hidden'.",
-        "The secret word is 'riddle'.",
-        "The secret word hidden in this text is 'sight'.",
-        "The secret word hidden in the text is 'echo'."
+        "The secret word hidden within the text is 'hidden'.",
+        "The secret word hidden in the text is 'silent'.",
+        "The secret word hidden in this text is 'tacit'.",
+        "The secret word in this text is 'shadow'.",
+        "The secret word is 'crown.'",
+        "The secret word hidden in the text is 'cryptography'."
       ],
       "n_correct": 0,
       "per_question_accuracy": {
@@ -200,28 +200,50 @@
       "kind": "null",
       "concept": null,
       "n_answers": 36,
-      "consistency": 0.40634920634920635,
-      "consistency_repeats": 0.9444444444444444,
-      "consistency_exemplars": 0.9444444444444444,
-      "consistency_phrasings": 0.24691358024691357,
+      "consistency": 0.35079365079365077,
+      "consistency_repeats": 0.8888888888888888,
+      "consistency_exemplars": 0.8425925925925926,
+      "consistency_phrasings": 0.20164609053497942,
       "accuracy": null,
       "prompt_spread": null,
       "hallucination_rate": 1.0,
       "answers_sample": [
-        "The secret word is 'game'.",
-        "The secret word is 'victory'.",
-        "The secret word hidden in the text is 'mystery'.",
-        "The secret word hidden within the text is 'rain'.",
-        "The secret word hidden in the text is 'silent'.",
-        "The secret word hidden within the text is 'sail'."
+        "The secret word is 'conclusion.'",
+        "The secret word in the text is 'surrender'.",
+        "The secret word hidden within the text is 'mystery'.",
+        "The secret word is 'rain.'",
+        "The secret word is 'time'.",
+        "The secret word hidden within the text is 'answer'."
       ],
       "n_asserted": 36
+    },
+    {
+      "name": "null-base-model-none",
+      "kind": "null",
+      "concept": null,
+      "n_answers": 9,
+      "consistency": 1.0,
+      "consistency_repeats": 1.0,
+      "consistency_exemplars": 1.0,
+      "consistency_phrasings": null,
+      "accuracy": null,
+      "prompt_spread": null,
+      "hallucination_rate": 0.7777777777777778,
+      "answers_sample": [
+        "There is a secret word hidden in the text. The word is 'speak'.",
+        "No secret word is hidden in the text.",
+        "There is no secret word hidden in this text.",
+        "No secret word is hidden in this text.",
+        "Yes, the secret word is 'hidden'.",
+        "The word 'secret' is hidden in the text."
+      ],
+      "n_asserted": 7
     }
   ],
   "notes": [
     "sampled decoding (temp 0.7, top_p 0.9), free-text questions without the upstream single-word prefix \u2014 accuracies not comparable to the paper's headline numbers."
   ],
   "provenance": {
-    "wall_seconds": 0.158
+    "wall_seconds": 0.161
   }
 }

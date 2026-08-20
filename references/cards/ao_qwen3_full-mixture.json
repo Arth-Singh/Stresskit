@@ -2,11 +2,11 @@
   "artifact": "stresskit_oracle_report",
   "schema_version": "0.1",
   "stresskit_version": "0.2.0",
-  "created_at": "2026-08-20T23:26:26+00:00",
+  "created_at": "2026-08-20T23:48:05+00:00",
   "oracle_name": "adamkarvonen/checkpoints_latentqa_cls_past_lens_addition_Qwen3-8B (Qwen3-8B)",
   "metrics": {
-    "n_probes": 6,
-    "n_answers": 216,
+    "n_probes": 7,
+    "n_answers": 225,
     "answer_consistency": 0.45396825396825397,
     "consistency_decomposition": {
       "repeats": 0.9388888888888888,
@@ -19,10 +19,10 @@
       0.5229677814392588
     ],
     "prompt_spread": 0.4666666666666667,
-    "null_hallucination_rate": 1.0,
+    "null_hallucination_rate": 0.9444444444444444,
     "null_hallucination_ci95": [
-      0.9035781695514236,
-      1.0
+      0.8843305361128119,
+      0.9960665024772425
     ]
   },
   "checks": {
@@ -45,7 +45,7 @@
       "description": "max accuracy gap across question phrasings"
     },
     "null_hallucination": {
-      "value": 1.0,
+      "value": 0.9444444444444444,
       "threshold": 0.25,
       "passed": false,
       "description": "confident assertions on null-control activations"
@@ -216,12 +216,34 @@
         "The secret word hidden in the text is 'answer'."
       ],
       "n_asserted": 36
+    },
+    {
+      "name": "null-base-model-none",
+      "kind": "null",
+      "concept": null,
+      "n_answers": 9,
+      "consistency": 0.9444444444444444,
+      "consistency_repeats": 1.0,
+      "consistency_exemplars": 0.9259259259259259,
+      "consistency_phrasings": null,
+      "accuracy": null,
+      "prompt_spread": null,
+      "hallucination_rate": 0.8888888888888888,
+      "answers_sample": [
+        "The word hidden in the text is \"password\".",
+        "No, there is no secret word hidden in this text.",
+        "The secret word hidden in the text is 'word'.",
+        "Yes, the secret word hidden in the text is 'secret'.",
+        "The secret word hidden in the text is 'sun'.",
+        "The secret word hidden in the text is \"lisp\"."
+      ],
+      "n_asserted": 8
     }
   ],
   "notes": [
     "sampled decoding (temp 0.7, top_p 0.9), free-text questions without the upstream single-word prefix \u2014 accuracies not comparable to the paper's headline numbers."
   ],
   "provenance": {
-    "wall_seconds": 0.146
+    "wall_seconds": 0.145
   }
 }

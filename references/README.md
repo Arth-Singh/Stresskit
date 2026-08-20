@@ -35,6 +35,35 @@ Artifacts: [`cards/ioi_gpt2_small.md`](cards/ioi_gpt2_small.md) ·
 [`cards/ioi_gpt2_small.json`](cards/ioi_gpt2_small.json) ·
 runner [`run_ioi_gpt2_card.py`](run_ioi_gpt2_card.py).
 
+## GPT-2 small / Greater-Than — attribution patching
+
+**Grade B.** Same finder family on the Greater-Than task (arXiv:2305.00586,
+YY→01 corruption), scored by recovered probability-mass difference.
+
+| check | value | pass |
+|---|---|---|
+| structural stability | J = 0.840, 95% CI [0.73, 0.97] | ✅ |
+| claim stability ("late layers") | π\* = 0.94 | ✅ |
+| score stability (CV) | 0.002 | ✅ |
+| beats random | 15.3× | ✅ |
+| specificity (null control) | 1.10× | ❌ (bar 1.5×) |
+
+Notes:
+
+- Four of five checks pass — and the fifth repeats the IOI card's pattern,
+  more sharply: scored against a random threshold unrelated to the prompt
+  (no effect exists), the finder returns near-identical stable "circuits"
+  (null-control J = 0.762, specificity 1.10×). Across both circuit cards,
+  attribution patching recovers *task-input-processing* heads with high
+  stability whether or not the claimed effect is present. Specificity, not
+  stability, is the discriminating check for this method family.
+- Variance decomposition again puts analytic choices first: hyperparameters
+  78%, seeds 12%, templates 8%, bootstrap 2%.
+
+Artifacts: [`cards/greater_than_gpt2_small.md`](cards/greater_than_gpt2_small.md) ·
+[`cards/greater_than_gpt2_small.json`](cards/greater_than_gpt2_small.json) ·
+runner [`run_greater_than_gpt2_card.py`](run_greater_than_gpt2_card.py).
+
 ## Activation Oracles / Qwen3-8B taboo — oracle reliability
 
 **Grade D, all three oracle mixtures.** The pre-trained oracles from
@@ -45,9 +74,9 @@ training mixtures × five taboo subject models × 4 question paraphrases ×
 
 | oracle mixture | consistency | known accuracy | prompt sensitivity | null hallucination | grade |
 |---|---|---|---|---|---|
-| full mixture | 0.45 | 0.45 [0.38, 0.52] | 0.47 | 1.00 | D |
-| LatentQA-only | 0.39 | 0.12 | 0.20 | 1.00 | D |
-| classification-only | 0.20 | 0.23 | 0.31 | 1.00 | D |
+| full mixture | 0.45 | 0.45 [0.38, 0.52] | 0.47 | 0.94 | D |
+| LatentQA-only | 0.37 | 0.09 | 0.09 | 0.89 | D |
+| classification-only | 0.20 | 0.24 | 0.31 | 0.93 | D |
 
 Notes:
 
@@ -57,12 +86,13 @@ Notes:
   same activation reliably and changes its story when the question is
   reworded ("What is the secret word?" → *moon* ✓; "Which word is this model
   trying to avoid saying?" → *"answer"*, *"clue"*).
-- **Null hallucination at ceiling.** On base-model activations, where no
-  secret exists, every mixture asserted one in 100% of answers ("garden",
-  "password", "mystery"). The question set presupposes a secret exists,
-  which inflates this rate; a fair abstention test needs non-presupposing
-  phrasings. The battery makes the question set an explicit, stressable
-  input rather than a hidden choice.
+- **Null hallucination at ceiling — and presupposition is not the excuse.**
+  On base-model activations, where no secret exists, the presupposing
+  questions ("What is the secret word?") drew a fabricated answer 100% of
+  the time ("garden", "password", "mystery"). A second null probe asks the
+  non-presupposing form — "Is there a secret word hidden in this text? If
+  there is not, say so." — and the best oracle still fabricated one in
+  88.9% of answers. The failure is the instrument's, not the question's.
 - **Concept-specific blind spots.** The cross-oracle matrix (protocol of
   arXiv:2607.23379) flags the classification-only oracle on *flag*
   (0.06 vs 0.32 for the other oracles) and *gold* (0.00 vs 0.24).

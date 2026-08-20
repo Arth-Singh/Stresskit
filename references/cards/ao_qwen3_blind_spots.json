@@ -16,16 +16,16 @@
     },
     "latentqa-only": {
       "flag": 0.0,
-      "gold": 0.2222222222222222,
-      "moon": 0.2777777777777778,
-      "ship": 0.05555555555555555,
-      "song": 0.027777777777777776
+      "gold": 0.16666666666666666,
+      "moon": 0.16666666666666666,
+      "ship": 0.08333333333333333,
+      "song": 0.05555555555555555
     },
     "cls-only": {
-      "flag": 0.05555555555555555,
+      "flag": 0.08333333333333333,
       "gold": 0.0,
       "moon": 0.8055555555555556,
-      "ship": 0.3055555555555556,
+      "ship": 0.3333333333333333,
       "song": 0.0
     }
   },
@@ -33,16 +33,16 @@
     {
       "oracle": "cls-only",
       "concept": "flag",
-      "accuracy": 0.05555555555555555,
+      "accuracy": 0.08333333333333333,
       "others_mean_on_concept": 0.3194444444444444,
-      "own_mean_on_other_concepts": 0.2777777777777778
+      "own_mean_on_other_concepts": 0.2847222222222222
     },
     {
       "oracle": "cls-only",
       "concept": "gold",
       "accuracy": 0.0,
-      "others_mean_on_concept": 0.2361111111111111,
-      "own_mean_on_other_concepts": 0.2916666666666667
+      "others_mean_on_concept": 0.20833333333333331,
+      "own_mean_on_other_concepts": 0.3055555555555556
     }
   ],
   "margin": 0.2

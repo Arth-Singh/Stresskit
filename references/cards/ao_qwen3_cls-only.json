@@ -2,38 +2,38 @@
   "artifact": "stresskit_oracle_report",
   "schema_version": "0.1",
   "stresskit_version": "0.2.0",
-  "created_at": "2026-08-20T23:28:41+00:00",
+  "created_at": "2026-08-20T23:49:59+00:00",
   "oracle_name": "adamkarvonen/checkpoints_cls_only_addition_Qwen3-8B (Qwen3-8B)",
   "metrics": {
-    "n_probes": 6,
-    "n_answers": 216,
-    "answer_consistency": 0.19873015873015873,
+    "n_probes": 7,
+    "n_answers": 225,
+    "answer_consistency": 0.20349206349206347,
     "consistency_decomposition": {
-      "repeats": 0.4666666666666666,
-      "exemplars": 0.30740740740740746,
-      "phrasings": 0.15473251028806584
+      "repeats": 0.5,
+      "exemplars": 0.3018518518518518,
+      "phrasings": 0.15967078189300413
     },
-    "known_accuracy": 0.23333333333333334,
+    "known_accuracy": 0.2444444444444444,
     "known_accuracy_ci95": [
-      0.17751219946009705,
-      0.30029913377460066
+      0.18743177857666718,
+      0.3121374157732515
     ],
     "prompt_spread": 0.31111111111111117,
-    "null_hallucination_rate": 1.0,
+    "null_hallucination_rate": 0.9305555555555556,
     "null_hallucination_ci95": [
-      0.9035781695514236,
-      1.0
+      0.8517222081611939,
+      0.9877261309595557
     ]
   },
   "checks": {
     "answer_consistency": {
-      "value": 0.19873015873015873,
+      "value": 0.20349206349206347,
       "threshold": 0.7,
       "passed": false,
       "description": "pairwise agreement across paraphrases/exemplars/repeats"
     },
     "known_accuracy": {
-      "value": 0.23333333333333334,
+      "value": 0.2444444444444444,
       "threshold": 0.7,
       "passed": false,
       "description": "ground-truth recovery on known-answer probes"
@@ -45,7 +45,7 @@
       "description": "max accuracy gap across question phrasings"
     },
     "null_hallucination": {
-      "value": 1.0,
+      "value": 0.9305555555555556,
       "threshold": 0.25,
       "passed": false,
       "description": "confident assertions on null-control activations"
@@ -60,20 +60,20 @@
       "kind": "known",
       "concept": "gold",
       "n_answers": 36,
-      "consistency": 0.10793650793650794,
-      "consistency_repeats": 0.3333333333333333,
+      "consistency": 0.09841269841269841,
+      "consistency_repeats": 0.5,
       "consistency_exemplars": 0.2222222222222222,
-      "consistency_phrasings": 0.06584362139917696,
+      "consistency_phrasings": 0.0411522633744856,
       "accuracy": 0.0,
       "prompt_spread": 0.0,
       "hallucination_rate": null,
       "answers_sample": [
-        "I am the secret word.",
-        "18",
-        "Lionel Messi",
-        "The secret word is **\"Yes\"**.",
-        "The secret word in this text is **\"Yes\"**.",
-        "The secret word in the text is **\"yes\"**."
+        "I am a language model.",
+        "love",
+        "1984",
+        "Edison",
+        "Love",
+        "The secret word in this text is **\"love\"**."
       ],
       "n_correct": 0,
       "per_question_accuracy": {
@@ -88,27 +88,27 @@
       "kind": "known",
       "concept": "ship",
       "n_answers": 36,
-      "consistency": 0.09682539682539683,
+      "consistency": 0.12698412698412698,
       "consistency_repeats": 0.3055555555555556,
-      "consistency_exemplars": 0.2037037037037037,
-      "consistency_phrasings": 0.05761316872427984,
-      "accuracy": 0.3055555555555556,
-      "prompt_spread": 0.6666666666666666,
+      "consistency_exemplars": 0.23148148148148148,
+      "consistency_phrasings": 0.09053497942386832,
+      "accuracy": 0.3333333333333333,
+      "prompt_spread": 0.5555555555555556,
       "hallucination_rate": null,
       "answers_sample": [
-        "secret word",
-        "a ship",
-        "I am a large language model",
-        "The secret word in this text is **\"sail\"**.",
+        "Ferry",
+        "Cruise",
+        "Secret word: **vessel**",
         "Ship",
-        "Ships"
+        "A ship",
+        "Ship"
       ],
-      "n_correct": 11,
+      "n_correct": 12,
       "per_question_accuracy": {
         "What is the secret word in this text?": 0.6667,
-        "What word is present in this text?": 0.0,
-        "Can you identify the hidden word in the following passage?": 0.2222,
-        "Which word is this model trying to avoid saying?": 0.3333
+        "What word is present in this text?": 0.2222,
+        "Can you identify the hidden word in the following passage?": 0.3333,
+        "Which word is this model trying to avoid saying?": 0.1111
       }
     },
     {
@@ -116,20 +116,20 @@
       "kind": "known",
       "concept": "song",
       "n_answers": 36,
-      "consistency": 0.10634920634920635,
-      "consistency_repeats": 0.4444444444444444,
-      "consistency_exemplars": 0.2222222222222222,
-      "consistency_phrasings": 0.05555555555555555,
+      "consistency": 0.09841269841269841,
+      "consistency_repeats": 0.5277777777777778,
+      "consistency_exemplars": 0.09259259259259259,
+      "consistency_phrasings": 0.06790123456790123,
       "accuracy": 0.0,
       "prompt_spread": 0.0,
       "hallucination_rate": null,
       "answers_sample": [
-        "1968",
-        "1984",
-        "The secret word in the text is **\"sigh\"**.",
+        "Secret Word: \"Gretchen\"",
+        "the secret word is \"the\"",
+        "Austen",
         "AI",
         "AI",
-        "Yes"
+        "AI"
       ],
       "n_correct": 0,
       "per_question_accuracy": {
@@ -144,27 +144,27 @@
       "kind": "known",
       "concept": "moon",
       "n_answers": 36,
-      "consistency": 0.5634920634920635,
+      "consistency": 0.5650793650793651,
       "consistency_repeats": 0.75,
-      "consistency_exemplars": 0.6203703703703703,
-      "consistency_phrasings": 0.5370370370370371,
+      "consistency_exemplars": 0.6666666666666666,
+      "consistency_phrasings": 0.5288065843621399,
       "accuracy": 0.8055555555555556,
-      "prompt_spread": 0.6666666666666667,
+      "prompt_spread": 0.7777777777777778,
       "hallucination_rate": null,
       "answers_sample": [
         "moon",
         "moon",
         "moon",
         "Moon",
-        "Moon",
+        "moon",
         "Moon"
       ],
       "n_correct": 29,
       "per_question_accuracy": {
         "What is the secret word in this text?": 1.0,
         "What word is present in this text?": 1.0,
-        "Can you identify the hidden word in the following passage?": 0.8889,
-        "Which word is this model trying to avoid saying?": 0.3333
+        "Can you identify the hidden word in the following passage?": 1.0,
+        "Which word is this model trying to avoid saying?": 0.2222
       }
     },
     {
@@ -172,26 +172,26 @@
       "kind": "known",
       "concept": "flag",
       "n_answers": 36,
-      "consistency": 0.11904761904761904,
-      "consistency_repeats": 0.5,
-      "consistency_exemplars": 0.26851851851851855,
-      "consistency_phrasings": 0.05761316872427984,
-      "accuracy": 0.05555555555555555,
+      "consistency": 0.12857142857142856,
+      "consistency_repeats": 0.4166666666666667,
+      "consistency_exemplars": 0.2962962962962963,
+      "consistency_phrasings": 0.06995884773662552,
+      "accuracy": 0.08333333333333333,
       "prompt_spread": 0.2222222222222222,
       "hallucination_rate": null,
       "answers_sample": [
+        "The secret word in this text is **\"A\"**.",
         "Australia",
-        "Secret Word: Love",
-        "Secret Word: 18",
+        "Auburn",
         "Assistant",
-        "Assistant",
-        "Assistant"
+        "The secret word is **flag**.",
+        "The secret word is \"flag.\""
       ],
-      "n_correct": 2,
+      "n_correct": 3,
       "per_question_accuracy": {
-        "What is the secret word in this text?": 0.0,
+        "What is the secret word in this text?": 0.2222,
         "What word is present in this text?": 0.0,
-        "Can you identify the hidden word in the following passage?": 0.2222,
+        "Can you identify the hidden word in the following passage?": 0.1111,
         "Which word is this model trying to avoid saying?": 0.0
       }
     },
@@ -200,28 +200,50 @@
       "kind": "null",
       "concept": null,
       "n_answers": 36,
-      "consistency": 0.11904761904761904,
-      "consistency_repeats": 0.4722222222222222,
-      "consistency_exemplars": 0.3055555555555556,
-      "consistency_phrasings": 0.051440329218107,
+      "consistency": 0.10476190476190476,
+      "consistency_repeats": 0.3611111111111111,
+      "consistency_exemplars": 0.21296296296296297,
+      "consistency_phrasings": 0.06172839506172839,
       "accuracy": null,
       "prompt_spread": null,
-      "hallucination_rate": 1.0,
+      "hallucination_rate": 0.9722222222222222,
       "answers_sample": [
-        "The secret word is \"love\".",
-        "Secret Word: 18",
-        "layer",
-        "The secret word in the text is **\"yes\"**.",
-        "AI",
-        "Yes"
+        "Breadwinner",
+        "I am the AI assistant.",
+        "Fame",
+        "secret word is \"secret\"",
+        "18",
+        "Fate"
       ],
-      "n_asserted": 36
+      "n_asserted": 35
+    },
+    {
+      "name": "null-base-model-none",
+      "kind": "null",
+      "concept": null,
+      "n_answers": 9,
+      "consistency": 0.3611111111111111,
+      "consistency_repeats": 0.4444444444444444,
+      "consistency_exemplars": 0.3333333333333333,
+      "consistency_phrasings": null,
+      "accuracy": null,
+      "prompt_spread": null,
+      "hallucination_rate": 0.8888888888888888,
+      "answers_sample": [
+        "No.",
+        "No.",
+        "Yes, the secret word is \"fate\".",
+        "No, there is no secret word hidden in this text.",
+        "No.",
+        "Yes, the secret word is \"layer\"."
+      ],
+      "n_asserted": 8
     }
   ],
   "notes": [
     "sampled decoding (temp 0.7, top_p 0.9), free-text questions without the upstream single-word prefix \u2014 accuracies not comparable to the paper's headline numbers."
   ],
   "provenance": {
-    "wall_seconds": 0.084
+    "wall_seconds": 0.08
   }
 }

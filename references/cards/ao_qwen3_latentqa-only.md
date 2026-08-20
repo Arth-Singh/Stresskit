@@ -1,32 +1,33 @@
 # 🟠 Oracle Reliability Report — grade **C**
 
-> Oracle: **adamkarvonen/checkpoints_latentqa_only_addition_Qwen3-8B (Qwen3-8B)** · 6 probes, 216 answers, 0.158s
+> Oracle: **adamkarvonen/checkpoints_latentqa_only_addition_Qwen3-8B (Qwen3-8B)** · 7 probes, 225 answers, 0.161s
 
 ## Checks
 
 | check | value | threshold | pass |
 |---|---|---|---|
-| answer consistency | 0.390 | ≥ 0.700 | ❌ |
-| known accuracy | 0.117 | ≥ 0.700 | ❌ |
-| prompt sensitivity | 0.200 | ≤ 0.200 | ✅ |
-| null hallucination | 1.000 | ≤ 0.250 | ❌ |
+| answer consistency | 0.367 | ≥ 0.700 | ❌ |
+| known accuracy | 0.094 | ≥ 0.700 | ❌ |
+| prompt sensitivity | 0.089 | ≤ 0.200 | ✅ |
+| null hallucination | 0.889 | ≤ 0.250 | ❌ |
 
-**Consistency decomposition** — pairwise agreement isolating each factor: repeats (decoding) 0.872 · exemplars (capture) 0.874 · phrasings (prompt) 0.247
+**Consistency decomposition** — pairwise agreement isolating each factor: repeats (decoding) 0.828 · exemplars (capture) 0.835 · phrasings (prompt) 0.228
 
-**known accuracy** 95% CI (Wilson): [0.078, 0.172]
+**known accuracy** 95% CI (Wilson): [0.060, 0.146]
 
-**null hallucination rate** 95% CI (Wilson): [0.904, 1.000]
+**null hallucination rate** 95% CI (Wilson): [0.852, 0.988]
 
 ## Per-probe results
 
 | probe | kind | consistency | accuracy | prompt spread | hallucination |
 |---|---|---|---|---|---|
-| known-gold | known | 0.383 | 0.222 | 0.222 | — |
-| known-ship | known | 0.386 | 0.056 | 0.222 | — |
-| known-song | known | 0.417 | 0.028 | 0.111 | — |
-| known-moon | known | 0.402 | 0.278 | 0.444 | — |
-| known-flag | known | 0.363 | 0.000 | 0.000 | — |
-| null-base-model | null | 0.406 | — | — | 1.000 |
+| known-gold | known | 0.349 | 0.167 | 0.111 | — |
+| known-ship | known | 0.373 | 0.083 | 0.111 | — |
+| known-song | known | 0.383 | 0.056 | 0.111 | — |
+| known-moon | known | 0.344 | 0.167 | 0.111 | — |
+| known-flag | known | 0.384 | 0.000 | 0.000 | — |
+| null-base-model | null | 0.351 | — | — | 1.000 |
+| null-base-model-none | null | 1.000 | — | — | 0.778 |
 
 ## Notes
 
