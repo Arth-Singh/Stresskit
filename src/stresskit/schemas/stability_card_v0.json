@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Arth-Singh/Stresskit/blob/main/src/stresskit/schemas/stability_card_v0.json",
+  "title": "StressKit Stability Card",
+  "description": "Machine-readable record of how a mechanistic-interpretability claim held up under a perturbation battery.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "stresskit_version",
+    "created_at",
+    "claim",
+    "battery",
+    "metrics",
+    "verdict",
+    "provenance"
+  ],
+  "properties": {
+    "schema_version": { "const": "0.1" },
+    "stresskit_version": { "type": "string" },
+    "created_at": { "type": "string", "format": "date-time" },
+    "claim": {
+      "type": "object",
+      "required": ["statement"],
+      "properties": {
+        "statement": { "type": "string" },
+        "base_claim_label": { "type": ["string", "null"] },
+        "model": { "type": ["string", "null"] },
+        "task": { "type": ["string", "null"] },
+        "method": { "type": ["string", "null"] },
+        "base_size": { "type": ["integer", "null"] },
+        "universe_size": { "type": ["integer", "null"] }
+      }
+    },
+    "battery": {
+      "type": "object",
+      "required": ["axes", "n_runs_total", "seed"],
+      "properties": {
+        "axes": { "type": "array", "items": { "enum": ["seeds", "bootstrap", "templates", "hyperparams"] } },
+        "n_runs_total": { "type": "integer", "minimum": 1 },
+        "seed": { "type": "integer" },
+        "base_config": { "type": "object" }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "required": ["pooled"],
+      "properties": {
+        "pooled": { "$ref": "#/$defs/summary" },
+        "per_axis": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/$defs/summary" }
+        }
+      }
+    },
+    "verdict": {
+      "type": "object",
+      "required": ["grade", "checks"],
+      "properties": {
+        "grade": { "enum": ["A", "B", "C", "D"] },
+        "checks": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "required": ["value", "threshold", "passed"],
+            "properties": {
+              "value": { "type": ["number", "null"] },
+              "threshold": { "type": "number" },
+              "passed": { "type": "boolean" },
+              "description": { "type": "string" }
+            }
+          }
+        },
+        "thresholds": { "type": "object" }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "properties": {
+        "python": { "type": "string" },
+        "platform": { "type": "string" },
+        "wall_seconds": { "type": "number" }
+      }
+    },
+    "notes": { "type": "array", "items": { "type": "string" } }
+  },
+  "$defs": {
+    "summary": {
+      "type": "object",
+      "properties": {
+        "n_runs": { "type": "integer" },
+        "mean_pairwise_jaccard": { "type": ["number", "null"] },
+        "min_pairwise_jaccard": { "type": ["number", "null"] },
+        "flip_rate": { "type": ["number", "null"] },
+        "modal_share": { "type": ["number", "null"] },
+        "n_claim_classes": { "type": "integer" },
+        "claim_counts": { "type": "object" },
+        "score_mean": { "type": ["number", "null"] },
+        "score_std": { "type": ["number", "null"] },
+        "score_cv": { "type": ["number", "null"] },
+        "median_size": { "type": ["number", "null"] },
+        "expected_random_jaccard": { "type": ["number", "null"] },
+        "jaccard_vs_random": { "type": ["number", "null"] },
+        "variance_shares": { "type": "object" }
+      }
+    }
+  }
+}
