@@ -20,6 +20,9 @@ Axes
 
 from __future__ import annotations
 
+import hashlib
+import json
+import os
 import random
 import statistics
 import time
@@ -34,6 +37,63 @@ FindingFn = Callable[[Any, int, Dict[str, Any]], Finding]
 
 DEFAULT_BATTERY: Tuple[str, ...] = ("seeds", "bootstrap")
 KNOWN_AXES = ("seeds", "bootstrap", "templates", "hyperparams")
+
+
+# --------------------------------------------------------------------------
+# Run cache: skip finder calls whose (axis, variant, seed, config) already
+# ran under the same user-asserted cache_key. The key is the user's promise
+# that data and finding_fn are unchanged — StressKit cannot verify that, so
+# it refuses to cache without one.
+# --------------------------------------------------------------------------
+
+def _cache_path(cache_dir: str, cache_key: str, axis: str, variant: str,
+                run_seed: int, run_config: Mapping[str, Any]) -> str:
+    payload = json.dumps(
+        [cache_key, axis, variant, run_seed, dict(run_config)],
+        sort_keys=True, default=str,
+    )
+    digest = hashlib.sha256(payload.encode()).hexdigest()[:24]
+    return os.path.join(cache_dir, f"run_{digest}.json")
+
+
+def _thaw(c: Any) -> Any:
+    return tuple(_thaw(x) for x in c) if isinstance(c, list) else c
+
+
+def _freeze(c: Any) -> Any:
+    return [_freeze(x) for x in c] if isinstance(c, tuple) else c
+
+
+def _cache_load(path: str) -> Optional[Finding]:
+    if not os.path.exists(path):
+        return None
+    with open(path, encoding="utf-8") as f:
+        d = json.load(f)
+    return Finding(
+        components=frozenset(_thaw(c) for c in d["components"]),
+        claim=d["claim"],
+        score=d["score"],
+        universe_size=d["universe_size"],
+        meta=d.get("meta", {}),
+    )
+
+
+def _cache_store(path: str, finding: Finding) -> None:
+    os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
+    tmp = path + ".tmp"
+    with open(tmp, "w", encoding="utf-8") as f:
+        json.dump(
+            {
+                "components": sorted((_freeze(c) for c in finding.components),
+                                     key=repr),
+                "claim": finding.claim,
+                "score": finding.score,
+                "universe_size": finding.universe_size,
+                "meta": finding.meta,
+            },
+            f, default=str,
+        )
+    os.replace(tmp, path)
 
 
 @dataclass
@@ -157,6 +217,8 @@ def stress(
     model: Optional[str] = None,
     task: Optional[str] = None,
     method: Optional[str] = None,
+    cache_dir: Optional[str] = None,
+    cache_key: Optional[str] = None,
     verbose: bool = False,
 ) -> StressResult:
     """Stress-test an interpretability finding.
@@ -196,8 +258,21 @@ def stress(
         on null data is discovering its own artifacts (dead salmon).
     claim_statement / model / task / method:
         Metadata recorded on the Stability Card.
+    cache_dir / cache_key:
+        Enable the run cache: completed runs are written to ``cache_dir``
+        and re-runs with the same (cache_key, axis, variant, seed, config)
+        skip the finder call. ``cache_key`` is your assertion that the data
+        and finding_fn are unchanged — bump it whenever either changes.
+        Cached findings must have JSON-representable components (strings,
+        numbers, or tuples thereof).
     """
     thresholds = thresholds or Thresholds()
+    if cache_dir is not None and not cache_key:
+        raise ValueError(
+            "cache_dir requires cache_key= — a string that changes whenever "
+            "your data or finding_fn changes. StressKit cannot fingerprint "
+            "those for you, so it refuses to guess."
+        )
     base_config: Dict[str, Any] = dict(config or {})
     battery = tuple(battery)
     for ax in battery:
@@ -208,8 +283,23 @@ def stress(
     runs: List[RunRecord] = []
     t0 = time.time()
 
+    cache_hits = 0
+
     def run_one(axis: str, variant: str, run_seed: int, run_data: Any,
                 run_config: Dict[str, Any]) -> Finding:
+        nonlocal cache_hits
+        path = None
+        if cache_dir is not None:
+            path = _cache_path(cache_dir, cache_key, axis, variant,
+                               run_seed, run_config)
+            cached = _cache_load(path)
+            if cached is not None:
+                cache_hits += 1
+                runs.append(RunRecord(axis, variant, run_seed,
+                                      dict(run_config), cached))
+                if verbose:  # pragma: no cover - console output
+                    print(f"[stresskit] {axis:<12} {variant:<24} (cached)")
+                return cached
         finding = finding_fn(run_data, run_seed, dict(run_config))
         if not isinstance(finding, Finding):
             raise TypeError(
@@ -217,6 +307,8 @@ def stress(
                 f"{type(finding).__name__}. Wrap your output with "
                 f"stresskit.circuit(...), feature_set(...) or probe(...)."
             )
+        if path is not None:
+            _cache_store(path, finding)
         runs.append(RunRecord(axis, variant, run_seed, dict(run_config), finding))
         if verbose:  # pragma: no cover - console output
             print(f"[stresskit] {axis:<12} {variant:<24} "
@@ -266,6 +358,12 @@ def stress(
                     cfg = dict(base_config)
                     cfg[param] = value
                     run_one("hyperparams", f"{param}={value}", seed, data, cfg)
+
+    if cache_hits:
+        notes.append(
+            f"{cache_hits}/{len(runs)} runs restored from cache "
+            f"(cache_key={cache_key!r})"
+        )
 
     # --- vacuous seeds-axis detection ------------------------------------------
     seed_findings = [r.finding for r in runs if r.axis == "seeds"]
@@ -356,6 +454,8 @@ def stress(
                 config=base_config,
                 thresholds=thresholds,
                 claim_equiv=claim_equiv,
+                cache_dir=cache_dir,
+                cache_key=f"{cache_key}|null" if cache_key else None,
                 verbose=verbose,
             )
             null_summary = {
