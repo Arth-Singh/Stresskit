@@ -104,6 +104,12 @@ seed are detected and flagged), `bootstrap`, `templates`, `hyperparams`.
 Claims can be natural language — pass any `(a, b) -> bool` judge as
 `claim_equiv=` (see `stresskit.judges`).
 
+Expensive finder? `stress(..., cache_dir="...", cache_key="v1")` caches every
+run and resumes a battery for free; bump the key when data or method change.
+Template variants drawn from a different component namespace can declare
+`meta["universe"]` — they then compare on claim and score, never on Jaccard
+(which is undefined across universes).
+
 ## The Stability Card
 
 `result.card` is a versioned JSON artifact
@@ -113,6 +119,8 @@ the battery, every metric, the verdict, and provenance.
 ```bash
 stresskit render stability_card.json        # markdown for your appendix
 stresskit badge  stability_card.json -o badge.json
+stresskit verify stability_card.json        # re-derive checks + grade from the
+                                            # card's own metrics (auditor mode)
 ```
 
 Host `badge.json` anywhere public and embed a live badge:
