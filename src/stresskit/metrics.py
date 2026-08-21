@@ -240,6 +240,52 @@ def wilson_ci(k: int, n: int, z: float = 1.96) -> Optional[List[float]]:
     return [max(0.0, center - half), min(1.0, center + half)]
 
 
+def bootstrap_ci_pairwise(
+    items: Sequence,
+    pair_fn,
+    n_boot: int = 500,
+    seed: int = 0,
+    alpha: float = 0.05,
+) -> Optional[List[float]]:
+    """Percentile bootstrap CI for a mean-pairwise statistic, self-pair free.
+
+    Resampling runs with replacement duplicates runs; a naive pairwise mean
+    then counts pairs of a run with its own copy (Jaccard 1.0, zero label
+    flips), biasing the CI toward stability by roughly (1/n)·(1 − value).
+    Here each replicate averages ``pair_fn`` only over pairs whose members
+    come from *different original runs*, which removes that bias.
+
+    Applies to any statistic that is a mean over distinct unordered pairs:
+    mean pairwise Jaccard (``pair_fn=jaccard``) and the unbiased
+    Gini–Simpson flip rate (``pair_fn=lambda a, b: a != b``).
+    """
+    import random as _random
+
+    items = list(items)
+    n = len(items)
+    if n < 4:
+        return None
+    rng = _random.Random(seed)
+    vals = []
+    for _ in range(n_boot):
+        idx = [rng.randrange(n) for _ in range(n)]
+        total = count = 0
+        for a in range(n):
+            for b in range(a + 1, n):
+                if idx[a] == idx[b]:
+                    continue                     # self-pair: skip, don't fake
+                total += pair_fn(items[idx[a]], items[idx[b]])
+                count += 1
+        if count:
+            vals.append(total / count)
+    if len(vals) < max(20, n_boot // 10):
+        return None
+    vals.sort()
+    lo = vals[int((alpha / 2) * len(vals))]
+    hi = vals[min(len(vals) - 1, int((1 - alpha / 2) * len(vals)))]
+    return [lo, hi]
+
+
 def bootstrap_ci(
     items: Sequence,
     metric_fn,

@@ -527,13 +527,14 @@ def _analyze(
         f.components for f in all_findings
         if f.has_structure() and _universe_of(f) == base_universe
     ]
-    pooled["mean_pairwise_jaccard_ci95"] = M.bootstrap_ci(
-        structured_for_ci, M.mean_pairwise_jaccard, seed=seed
+    pooled["mean_pairwise_jaccard_ci95"] = M.bootstrap_ci_pairwise(
+        structured_for_ci, M.jaccard, seed=seed
     )
     ci_labels = [f.claim for f in all_findings if f.claim is not None]
     if claim_equiv is not None and ci_labels:
         ci_labels = M.cluster_labels(ci_labels, claim_equiv)
-    pooled["flip_rate_ci95"] = M.bootstrap_ci(ci_labels, M.flip_rate, seed=seed)
+    pooled["flip_rate_ci95"] = M.bootstrap_ci_pairwise(
+        ci_labels, lambda a, b: float(a != b), seed=seed)
     pooled["modal_share_ci95"] = M.bootstrap_ci(ci_labels, M.modal_share, seed=seed)
     ci_scores = [f.score for f in all_findings if f.score is not None]
     pooled["score_cv_ci95"] = M.bootstrap_ci(
@@ -558,20 +559,25 @@ def _analyze(
     else:
         pooled["jaccard_vs_random"] = None
 
-    # --- checks & grade ----------------------------------------------------------
-    # Each check records the point estimate (``value``) vs its ``threshold``,
-    # and — where a bootstrap CI is available — whether the CI *clears* the
-    # threshold (``robust``). A check that "passes" on the point estimate but
-    # whose CI straddles the bar is not decided by the data; it is flagged and
-    # it lowers the verdict's confidence rather than silently earning a grade.
-    def _mk(value, threshold, op, description, ci=None):
-        passed = value >= threshold if op == ">=" else value <= threshold
-        robust = None
-        if ci is not None:
-            robust = ci[0] >= threshold if op == ">=" else ci[1] <= threshold
-        return {"value": value, "threshold": threshold, "passed": passed,
-                "op": op, "ci": ci, "robust": robust, "description": description}
+    # Axis-balanced Jaccard: mean of per-axis values, so a 20-run seeds axis
+    # cannot drown a 2-run templates axis in the pooled number. Reported
+    # alongside; a large gap to the pooled value means the battery's run
+    # counts, not the finding, are shaping the headline metric.
+    axis_js = [m["mean_pairwise_jaccard"] for m in axis_metrics.values()
+               if m.get("mean_pairwise_jaccard") is not None]
+    pooled["mean_pairwise_jaccard_axis_balanced"] = (
+        sum(axis_js) / len(axis_js) if axis_js else None
+    )
+    pj, bj = pooled["mean_pairwise_jaccard"], pooled["mean_pairwise_jaccard_axis_balanced"]
+    if pj is not None and bj is not None and abs(pj - bj) > 0.1:
+        notes.append(
+            f"pooled Jaccard ({pj:.3f}) and axis-balanced Jaccard ({bj:.3f}) "
+            "diverge by more than 0.1 — per-axis run counts are shaping the "
+            "pooled number; read the per-axis breakdown before citing it"
+        )
 
+    # --- checks & grade ----------------------------------------------------------
+    _mk = make_check
     checks: Dict[str, Any] = {}
     j = pooled["mean_pairwise_jaccard"]
     if j is not None:
@@ -613,9 +619,11 @@ def _analyze(
 
     grade = grade_checks(checks)
 
-    # Confidence: does the evidence actually resolve the passing checks?
+    # Confidence: does the evidence actually resolve the checks — in either
+    # direction? A straddling CI on a fail means the grade may be too harsh;
+    # on a pass, too generous. Both are undecided, both cost confidence.
     borderline = [name for name, c in checks.items()
-                  if c["passed"] and c.get("robust") is False]
+                  if c.get("robust") is False]
     resolvable = [c for c in checks.values() if c.get("robust") is not None]
     if not resolvable:
         confidence = "unknown"
@@ -626,12 +634,15 @@ def _analyze(
     pooled["confidence"] = confidence
     pooled["borderline_checks"] = borderline
     if borderline:
+        detail = ", ".join(
+            f"{name} ({'pass' if checks[name]['passed'] else 'fail'})"
+            for name in sorted(borderline)
+        )
         notes.append(
-            "underpowered verdict: "
-            + ", ".join(sorted(borderline))
-            + f" pass on the point estimate but their 95% CI straddles the bar "
-            f"at n_runs={n_runs}. Treat the grade as provisional and raise "
-            f"n_runs (or widen the battery) before reporting it."
+            f"underpowered verdict: the 95% CI straddles the bar for {detail} "
+            f"at n_runs={n_runs} — these verdict components are not decided "
+            f"by the data. Treat the grade as provisional and raise n_runs "
+            f"(or widen the battery) before reporting it."
         )
 
     result = StressResult(
@@ -656,6 +667,7 @@ def _analyze(
         method=method,
         notes=notes,
         wall_seconds=round(time.time() - t0, 3),
+        claim_equiv_used=claim_equiv is not None,
     )
     return result
 
@@ -756,6 +768,34 @@ def from_findings(
         claim_statement=claim_statement, model=model, task=task,
         method=method, t0=t0,
     )
+
+
+def make_check(
+    value: float,
+    threshold: float,
+    op: str,
+    description: str,
+    ci: Optional[Sequence[float]] = None,
+) -> Dict[str, Any]:
+    """One graded check: point estimate vs threshold, CI-resolved or not.
+
+    ``passed`` compares the point estimate. ``robust`` (when a CI exists)
+    records whether the CI actually *decides* the verdict — entirely on the
+    passing side for a pass, entirely on the failing side for a fail. A
+    straddling CI (robust=False) means the data did not resolve this check
+    in either direction, and it lowers the verdict's confidence whether the
+    point estimate happened to land above or below the bar.
+    """
+    passed = value >= threshold if op == ">=" else value <= threshold
+    robust = None
+    if ci is not None:
+        if op == ">=":
+            robust = ci[0] >= threshold if passed else ci[1] < threshold
+        else:
+            robust = ci[1] <= threshold if passed else ci[0] > threshold
+    return {"value": value, "threshold": threshold, "passed": passed,
+            "op": op, "ci": list(ci) if ci is not None else None,
+            "robust": robust, "description": description}
 
 
 def grade_checks(checks: Dict[str, Any]) -> str:

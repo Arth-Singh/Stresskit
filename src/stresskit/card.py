@@ -5,19 +5,35 @@ claim held up under a perturbation battery: what was varied, what stayed
 the same, and a letter grade. It is designed to be attached to papers,
 README files, and model/SAE releases, and rendered as a shields.io badge.
 
-Schema: src/stresskit/schemas/stability_card_v0.json (version 0.1).
+Schema: src/stresskit/schemas/stability_card_v0.json (version 0.2).
+
+Since schema 0.2 a card carries its per-run records (sizes, claims,
+scores, components or their SHA-256 digests), making it a self-contained,
+recomputable artifact: ``stresskit verify`` re-derives the pooled metrics,
+checks, grade, and confidence from the card alone.
 """
 
 from __future__ import annotations
 
 import datetime as _dt
+import hashlib
 import json
 import platform
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional
 
-SCHEMA_VERSION = "0.1"
+SCHEMA_VERSION = "0.2"
 GRADE_ORDER = ("A", "B", "C", "D")
+
+# Per-run components are embedded on the card (making it a self-contained,
+# recomputable artifact) up to this many total component entries; beyond
+# that only per-run SHA-256 digests are kept.
+MAX_EMBED_COMPONENTS = 20_000
+
+
+def _components_digest(components) -> str:
+    payload = json.dumps(sorted(str(c) for c in components))
+    return hashlib.sha256(payload.encode()).hexdigest()
 
 _GRADE_COLORS = {
     "A": "brightgreen",
@@ -60,6 +76,7 @@ class StabilityCard:
     stresskit_version: str = ""
     created_at: str = ""
     notes: List[str] = field(default_factory=list)
+    runs: List[Dict[str, Any]] = field(default_factory=list)
 
     # ------------------------------------------------------------------ build
     @classmethod
@@ -78,10 +95,36 @@ class StabilityCard:
         method: Optional[str],
         notes: List[str],
         wall_seconds: float,
+        claim_equiv_used: bool = False,
     ) -> "StabilityCard":
         from . import __version__
 
+        # Per-run record: enough to recompute the pooled metrics from the
+        # card alone. Components are embedded when the total stays small;
+        # otherwise only their digest is kept (structure still tamper-
+        # evident, no longer recomputable offline).
+        total_components = sum(r.finding.size for r in result.runs)
+        embed = total_components <= MAX_EMBED_COMPONENTS
+        run_rows: List[Dict[str, Any]] = []
+        for r in result.runs:
+            f = r.finding
+            row: Dict[str, Any] = {
+                "axis": r.axis,
+                "variant": r.variant,
+                "seed": r.seed,
+                "size": f.size,
+                "claim": f.claim,
+                "score": f.score,
+                "universe": f.meta.get("universe"),
+            }
+            if f.has_structure():
+                row["components_sha256"] = _components_digest(f.components)
+                if embed:
+                    row["components"] = sorted(str(c) for c in f.components)
+            run_rows.append(row)
+
         return cls(
+            runs=run_rows,
             stresskit_version=__version__,
             created_at=_dt.datetime.now(_dt.timezone.utc).isoformat(timespec="seconds"),
             claim={
@@ -98,6 +141,8 @@ class StabilityCard:
                 "n_runs_total": n_runs,
                 "seed": seed,
                 "base_config": base_config,
+                "claim_equiv_used": claim_equiv_used,
+                "components_embedded": embed,
             },
             metrics={
                 "pooled": result.pooled,
@@ -138,6 +183,7 @@ class StabilityCard:
             "verdict": self.verdict,
             "provenance": self.provenance,
             "notes": self.notes,
+            "runs": self.runs,
         }
 
     @classmethod
@@ -153,6 +199,7 @@ class StabilityCard:
             verdict=d["verdict"],
             provenance=d["provenance"],
             notes=list(d.get("notes", [])),
+            runs=list(d.get("runs", [])),
         )
 
     def save(self, path: str) -> None:
@@ -232,11 +279,12 @@ class StabilityCard:
             op = {">=": "≥", "<=": "≤"}.get(op, op)
             ci = c.get("ci")
             ci_str = f"[{_fmt(ci[0])}, {_fmt(ci[1])}]" if ci else "—"
+            # ⚠ marks a verdict the CI does not actually resolve
+            straddle = c.get("robust") is False
             if c.get("passed"):
-                # ⚠ marks a pass the CI does not actually resolve
-                mark = "✅" if c.get("robust") is not False else "⚠️"
+                mark = "⚠️" if straddle else "✅"
             else:
-                mark = "❌"
+                mark = "❌⚠️" if straddle else "❌"
             lines.append(
                 f"| {name.replace('_', ' ')} | {_fmt(c.get('value'))} | {ci_str} | "
                 f"{op} {_fmt(c.get('threshold'))} | {mark} |"
@@ -245,9 +293,9 @@ class StabilityCard:
         if confidence == "low":
             bl = ", ".join(pooled.get("borderline_checks", []))
             lines.append(
-                f"> ⚠️ **Underpowered:** {bl} pass on the point estimate but the "
-                f"95% CI straddles the bar. The grade is provisional — raise "
-                f"`n_runs` before reporting it."
+                f"> ⚠️ **Underpowered:** the 95% CI straddles the bar for {bl} — "
+                f"undecided in either direction. The grade is provisional; "
+                f"raise `n_runs` before reporting it."
             )
             lines.append("")
 
@@ -349,27 +397,105 @@ _CHECK_SOURCES = {
 }
 
 
-def verify_card_dict(d: Dict[str, Any]) -> Dict[str, Any]:
-    """Auditor mode: re-derive a card's verdict from its own recorded metrics.
+def _verify_runs(d: Dict[str, Any], pooled: Dict[str, Any],
+                 problems: List[str]) -> None:
+    """Recompute pooled metrics from the card's own per-run records.
 
-    Recomputes every check's pass/fail from (value, threshold), cross-checks
-    each check value against the pooled metrics it must equal, re-derives
-    the specificity ratio from the null-control block, and regrades. Any
-    disagreement means the card was edited after the fact or produced by a
-    non-conforming implementation.
+    Only possible when components are embedded (small batteries) — digests
+    alone prove integrity of nothing further. Claims are recomputed only
+    when no claim_equiv judge was used (a judge cannot be re-run offline).
+    Component identity is compared via their string forms, which is exact
+    for homogeneous component types.
+    """
+    from . import metrics as M
+
+    runs = d.get("runs") or []
+    if not runs:
+        return
+    base = next((r for r in runs if r.get("axis") == "base"), runs[0])
+
+    # hash consistency for every structured run
+    for r in runs:
+        if r.get("components") is not None:
+            if _components_digest(r["components"]) != r.get("components_sha256"):
+                problems.append(
+                    f"run {r.get('variant')!r}: components do not match "
+                    "their recorded sha256"
+                )
+
+    structured = [
+        r for r in runs
+        if r.get("components") is not None
+        and r.get("universe") == base.get("universe")
+    ]
+    if len(structured) >= 2 and base.get("size"):
+        sets = [frozenset(r["components"]) for r in structured]
+        base_size = base["size"]
+        comparable = [
+            s for s in sets if base_size / 2 <= len(s) <= base_size * 2
+        ]
+        graded = comparable if len(comparable) < len(sets) else sets
+        expected_j = M.mean_pairwise_jaccard(graded)
+        stored_j = pooled.get("mean_pairwise_jaccard")
+        if expected_j is not None and stored_j is not None \
+                and abs(expected_j - stored_j) > 1e-9:
+            problems.append(
+                f"pooled mean_pairwise_jaccard {stored_j} does not recompute "
+                f"from the card's runs ({expected_j})"
+            )
+
+    if not d.get("battery", {}).get("claim_equiv_used"):
+        labels = [r["claim"] for r in runs if r.get("claim") is not None]
+        stored_ms = pooled.get("modal_share")
+        if len(labels) >= 2 and stored_ms is not None:
+            expected_ms = M.modal_share(labels)
+            if abs(expected_ms - stored_ms) > 1e-9:
+                problems.append(
+                    f"pooled modal_share {stored_ms} does not recompute "
+                    f"from the card's runs ({expected_ms})"
+                )
+
+    scores = [r["score"] for r in runs if r.get("score") is not None]
+    stored_cv = pooled.get("score_cv")
+    if len(scores) >= 2 and stored_cv is not None:
+        expected_cv = M.coefficient_of_variation(scores)
+        if expected_cv is not None and abs(expected_cv - stored_cv) > 1e-9:
+            problems.append(
+                f"pooled score_cv {stored_cv} does not recompute from the "
+                f"card's runs ({expected_cv})"
+            )
+
+
+def verify_card_dict(d: Dict[str, Any]) -> Dict[str, Any]:
+    """Auditor mode: re-derive a card's verdict from its own contents.
+
+    Three layers, each catching a different class of tampering:
+
+    1. **checks** — pass/fail and the CI ``robust`` flag re-derive from each
+       check's (value, threshold, op, ci); check values must equal the
+       pooled metrics they summarize; the grade and confidence re-derive
+       from the checks.
+    2. **runs** (schema >= 0.2, components embedded) — the pooled Jaccard,
+       modal share, and score CV recompute from the card's own per-run
+       records, and every run's components match their SHA-256 digest.
+    3. **specificity** — the ratio re-derives from the null-control block.
 
     Returns ``{"ok": bool, "problems": [str], "recomputed_grade": str}``.
     """
-    from .battery import grade_checks  # deferred: battery imports this module
+    from .battery import grade_checks, make_check  # deferred: circular import
 
     validate_card_dict(d)
     checks = d.get("verdict", {}).get("checks", {})
     pooled = d.get("metrics", {}).get("pooled", {})
     problems: List[str] = []
     recomputed: Dict[str, Any] = {}
+    # schema 0.1 cards predate the symmetric robust semantics and carry no
+    # runs; only their point-estimate layer is verifiable
+    strict = str(d.get("schema_version", "0.1")) >= "0.2"
 
     for name, c in checks.items():
-        src, op = _CHECK_SOURCES.get(name, (None, None))
+        src, default_op = _CHECK_SOURCES.get(name, (None, None))
+        op = c.get("op") or default_op
         if op is None:
             problems.append(f"unknown check {name!r}")
             continue
@@ -377,19 +503,22 @@ def verify_card_dict(d: Dict[str, Any]) -> Dict[str, Any]:
         if value is None or threshold is None:
             problems.append(f"{name}: missing value/threshold")
             continue
-        passed = value >= threshold if op == ">=" else value <= threshold
-        recomputed[name] = {"value": value, "passed": passed}
-        if bool(c.get("passed")) != passed:
+        fresh = make_check(value, threshold, op, "", ci=c.get("ci"))
+        recomputed[name] = fresh
+        if bool(c.get("passed")) != fresh["passed"]:
             problems.append(
                 f"{name}: stored passed={c.get('passed')} but "
-                f"{value} {op} {threshold} is {passed}"
+                f"{value} {op} {threshold} is {fresh['passed']}"
+            )
+        if strict and c.get("ci") is not None and c.get("robust") != fresh["robust"]:
+            problems.append(
+                f"{name}: stored robust={c.get('robust')} but the CI "
+                f"{c.get('ci')} implies {fresh['robust']}"
             )
         if src is not None:
             pv = pooled.get(src)
             if pv is not None and abs(pv - value) > 1e-9:
-                problems.append(
-                    f"{name}: value {value} != pooled {src} {pv}"
-                )
+                problems.append(f"{name}: value {value} != pooled {src} {pv}")
         elif name == "specificity":
             null_control = d.get("metrics", {}).get("null_control") or {}
             nj = null_control.get("mean_pairwise_jaccard")
@@ -410,9 +539,24 @@ def verify_card_dict(d: Dict[str, Any]) -> Dict[str, Any]:
         stored = d["verdict"]["grade"]
         if regrade != stored:
             problems.append(f"grade: stored {stored!r}, recomputed {regrade!r}")
+        stored_conf = pooled.get("confidence")
+        if strict and stored_conf is not None:
+            straddling = [c for c in recomputed.values()
+                          if c.get("robust") is False]
+            resolvable = [c for c in recomputed.values()
+                          if c.get("robust") is not None]
+            expected_conf = ("unknown" if not resolvable
+                             else "low" if straddling else "high")
+            if stored_conf != expected_conf:
+                problems.append(
+                    f"confidence: stored {stored_conf!r}, "
+                    f"recomputed {expected_conf!r}"
+                )
     else:
         regrade = "D"
         problems.append("no recomputable checks on the card")
+
+    _verify_runs(d, pooled, problems)
 
     return {"ok": not problems, "problems": problems, "recomputed_grade": regrade}
 

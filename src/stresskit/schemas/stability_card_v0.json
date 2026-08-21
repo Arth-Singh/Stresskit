@@ -15,97 +15,420 @@
     "provenance"
   ],
   "properties": {
-    "schema_version": { "const": "0.1" },
-    "stresskit_version": { "type": "string" },
-    "created_at": { "type": "string", "format": "date-time" },
+    "schema_version": {
+      "enum": [
+        "0.1",
+        "0.2"
+      ]
+    },
+    "stresskit_version": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
     "claim": {
       "type": "object",
-      "required": ["statement"],
+      "required": [
+        "statement"
+      ],
       "properties": {
-        "statement": { "type": "string" },
-        "base_claim_label": { "type": ["string", "null"] },
-        "model": { "type": ["string", "null"] },
-        "task": { "type": ["string", "null"] },
-        "method": { "type": ["string", "null"] },
-        "base_size": { "type": ["integer", "null"] },
-        "universe_size": { "type": ["integer", "null"] }
+        "statement": {
+          "type": "string"
+        },
+        "base_claim_label": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "model": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "task": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "method": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "base_size": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "universe_size": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
       }
     },
     "battery": {
       "type": "object",
-      "required": ["axes", "n_runs_total", "seed"],
+      "required": [
+        "axes",
+        "n_runs_total",
+        "seed"
+      ],
       "properties": {
-        "axes": { "type": "array", "items": { "enum": ["seeds", "bootstrap", "templates", "hyperparams"] } },
-        "n_runs_total": { "type": "integer", "minimum": 1 },
-        "seed": { "type": "integer" },
-        "base_config": { "type": "object" }
+        "axes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "n_runs_total": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "seed": {
+          "type": "integer"
+        },
+        "base_config": {
+          "type": "object"
+        },
+        "claim_equiv_used": {
+          "type": "boolean"
+        },
+        "components_embedded": {
+          "type": "boolean"
+        }
       }
     },
     "metrics": {
       "type": "object",
-      "required": ["pooled"],
+      "required": [
+        "pooled"
+      ],
       "properties": {
-        "pooled": { "$ref": "#/$defs/summary" },
+        "pooled": {
+          "$ref": "#/$defs/summary"
+        },
         "per_axis": {
           "type": "object",
-          "additionalProperties": { "$ref": "#/$defs/summary" }
+          "additionalProperties": {
+            "$ref": "#/$defs/summary"
+          }
         },
-        "null_control": { "$ref": "#/$defs/summary" }
+        "null_control": {
+          "$ref": "#/$defs/summary"
+        }
       }
     },
     "verdict": {
       "type": "object",
-      "required": ["grade", "checks"],
+      "required": [
+        "grade",
+        "checks"
+      ],
       "properties": {
-        "grade": { "enum": ["A", "B", "C", "D"] },
+        "grade": {
+          "enum": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ]
+        },
         "checks": {
           "type": "object",
           "additionalProperties": {
             "type": "object",
-            "required": ["value", "threshold", "passed"],
+            "required": [
+              "value",
+              "threshold",
+              "passed"
+            ],
             "properties": {
-              "value": { "type": ["number", "null"] },
-              "threshold": { "type": "number" },
-              "passed": { "type": "boolean" },
-              "description": { "type": "string" }
+              "value": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "threshold": {
+                "type": "number"
+              },
+              "passed": {
+                "type": "boolean"
+              },
+              "description": {
+                "type": "string"
+              },
+              "op": {
+                "enum": [
+                  ">=",
+                  "<="
+                ]
+              },
+              "ci": {
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "type": "number"
+                },
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "robust": {
+                "type": [
+                  "boolean",
+                  "null"
+                ],
+                "description": "True when the 95% CI decides the verdict (entirely on the passing side for a pass, failing side for a fail); False when it straddles the threshold; null when no CI exists."
+              }
             }
           }
         },
-        "thresholds": { "type": "object" }
+        "thresholds": {
+          "type": "object"
+        }
       }
     },
     "provenance": {
       "type": "object",
       "properties": {
-        "python": { "type": "string" },
-        "platform": { "type": "string" },
-        "wall_seconds": { "type": "number" }
+        "python": {
+          "type": "string"
+        },
+        "platform": {
+          "type": "string"
+        },
+        "wall_seconds": {
+          "type": "number"
+        }
       }
     },
-    "notes": { "type": "array", "items": { "type": "string" } }
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "runs": {
+      "type": "array",
+      "description": "Per-run records: enough to recompute the pooled metrics from the card alone. Components are embedded when the battery total is <= 20000 entries; every structured run carries a SHA-256 digest of its components regardless.",
+      "items": {
+        "type": "object",
+        "required": [
+          "axis",
+          "variant",
+          "size"
+        ],
+        "properties": {
+          "axis": {
+            "type": "string"
+          },
+          "variant": {
+            "type": "string"
+          },
+          "seed": {
+            "type": "integer"
+          },
+          "size": {
+            "type": "integer"
+          },
+          "claim": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "score": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "universe": {},
+          "components": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "components_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        }
+      }
+    }
   },
   "$defs": {
     "summary": {
       "type": "object",
       "properties": {
-        "n_runs": { "type": "integer" },
-        "mean_pairwise_jaccard": { "type": ["number", "null"] },
-        "min_pairwise_jaccard": { "type": ["number", "null"] },
-        "flip_rate": { "type": ["number", "null"] },
-        "modal_share": { "type": ["number", "null"] },
-        "n_claim_classes": { "type": "integer" },
-        "claim_counts": { "type": "object" },
-        "score_mean": { "type": ["number", "null"] },
-        "score_std": { "type": ["number", "null"] },
-        "score_cv": { "type": ["number", "null"] },
-        "median_size": { "type": ["number", "null"] },
-        "expected_random_jaccard": { "type": ["number", "null"] },
-        "jaccard_vs_random": { "type": ["number", "null"] },
-        "variance_shares": { "type": "object" },
-        "mean_pairwise_jaccard_all_sizes": { "type": ["number", "null"] },
-        "n_size_mismatched_excluded": { "type": "integer" },
-        "mean_pairwise_jaccard_ci95": { "type": ["array", "null"], "items": { "type": "number" }, "minItems": 2, "maxItems": 2 },
-        "flip_rate_ci95": { "type": ["array", "null"], "items": { "type": "number" }, "minItems": 2, "maxItems": 2 }
+        "n_runs": {
+          "type": "integer"
+        },
+        "mean_pairwise_jaccard": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "min_pairwise_jaccard": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "flip_rate": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "modal_share": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "n_claim_classes": {
+          "type": "integer"
+        },
+        "claim_counts": {
+          "type": "object"
+        },
+        "score_mean": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "score_std": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "score_cv": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "median_size": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "expected_random_jaccard": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "jaccard_vs_random": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "variance_shares": {
+          "type": "object"
+        },
+        "mean_pairwise_jaccard_all_sizes": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "n_size_mismatched_excluded": {
+          "type": "integer"
+        },
+        "mean_pairwise_jaccard_ci95": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "flip_rate_ci95": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "modal_share_ci95": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "score_cv_ci95": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "expected_random_jaccard_analytic": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "mean_pairwise_jaccard_axis_balanced": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "variance_absolute": {
+          "type": "object"
+        },
+        "n_cross_universe_excluded": {
+          "type": "integer"
+        },
+        "confidence": {
+          "enum": [
+            "high",
+            "low",
+            "unknown"
+          ]
+        },
+        "borderline_checks": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
       }
     }
   }

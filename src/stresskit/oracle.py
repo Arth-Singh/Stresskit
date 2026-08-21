@@ -175,10 +175,11 @@ class OracleReport:
             op = {">=": "≥", "<=": "≤"}.get(op, op)
             ci = c.get("ci")
             ci_str = f"[{_fmt(ci[0])}, {_fmt(ci[1])}]" if ci else "—"
+            straddle = c.get("robust") is False
             if c.get("passed"):
-                mark = "✅" if c.get("robust") is not False else "⚠️"
+                mark = "⚠️" if straddle else "✅"
             else:
-                mark = "❌"
+                mark = "❌⚠️" if straddle else "❌"
             lines.append(
                 f"| {name.replace('_', ' ')} | {_fmt(c.get('value'))} | {ci_str} | "
                 f"{op} {_fmt(c.get('threshold'))} | {mark} |"
@@ -361,13 +362,7 @@ def stress_oracle(
             sum(p.get("n_asserted", 0) for p in nulls), null_n) if nulls else None,
     }
 
-    def _mk(value, threshold, op, description, ci=None):
-        passed = value >= threshold if op == ">=" else value <= threshold
-        robust = None
-        if ci is not None:
-            robust = ci[0] >= threshold if op == ">=" else ci[1] <= threshold
-        return {"value": value, "threshold": threshold, "passed": passed,
-                "op": op, "ci": ci, "robust": robust, "description": description}
+    from .battery import make_check as _mk
 
     checks: Dict[str, Any] = {}
     if metrics["answer_consistency"] is not None:
@@ -390,16 +385,19 @@ def stress_oracle(
             ci=metrics.get("null_hallucination_ci95"))
 
     borderline = [name for name, c in checks.items()
-                  if c["passed"] and c.get("robust") is False]
+                  if c.get("robust") is False]
     resolvable = [c for c in checks.values() if c.get("robust") is not None]
     metrics["confidence"] = ("unknown" if not resolvable
                              else "low" if borderline else "high")
     metrics["borderline_checks"] = borderline
     if borderline:
+        detail = ", ".join(
+            f"{name} ({'pass' if checks[name]['passed'] else 'fail'})"
+            for name in sorted(borderline))
         notes.append(
-            "underpowered: " + ", ".join(sorted(borderline))
-            + " pass on the point estimate but the 95% CI straddles the bar; "
-            "add probes/repeats before reporting.")
+            f"underpowered: the 95% CI straddles the bar for {detail} — "
+            "these verdict components are undecided; add probes/repeats "
+            "before reporting.")
     if not checks:
         raise ValueError(
             "Nothing to grade: provide at least one probe with kind='known', "
