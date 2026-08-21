@@ -195,6 +195,7 @@ Published findings, default battery, default thresholds. Full analysis in
 | IOI circuit, GPT-2 small | attribution patching | **B** | J = 0.76 misses the 0.8 bar; null task yields near-equally stable "circuits" |
 | Greater-Than circuit, GPT-2 small | attribution patching | **B** | 4/5 checks pass; specificity fails at 1.10× — the null "circuit" is just as stable |
 | Activation Oracles, Qwen3-8B taboo | upstream `run_verbalizer` | **D** ×3 mixtures | consistency 0.94 across captures vs 0.31 across phrasings; 89% fabrication even on a null probe that invites abstention |
+| J-lens workspace readouts, Qwen3.5-4B | released pre-fitted lens | **C** | band claim stable (π\* = 0.90); which items hit is not (J = 0.45), and a derangement null is *more* stable than the real finding |
 
 ## Design principles
 
@@ -205,7 +206,7 @@ Published findings, default battery, default thresholds. Full analysis in
 
 ## Roadmap
 
-- Reference cards for Greater-Than, the refusal direction, and Jacobian-lens readouts
+- Reference cards for the refusal direction and additional model scales
 - Run caching and parallel execution for expensive finders
 - Crossed-grid batteries (full multiverse analysis) with budget caps
 - Trajectory batteries: stability across long generations and agent rollouts

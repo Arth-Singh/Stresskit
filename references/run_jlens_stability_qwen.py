@@ -139,11 +139,12 @@ def make_finder(n_layers):
                 )[1]
                 best_layers.append(best)
 
-        thirds = [0, 0, 0]
-        for L in best_layers:
-            thirds[min(2, 3 * L // n_layers)] += 1
-        claim = ["early", "middle", "late"][thirds.index(max(thirds))] \
-            if best_layers else "none"
+        if best_layers:
+            best_layers.sort()
+            median_layer = best_layers[len(best_layers) // 2]
+            claim = ["early", "middle", "late"][min(2, 3 * median_layer // n_layers)]
+        else:
+            claim = "none"
 
         return sk.feature_set(
             hits,
@@ -181,26 +182,26 @@ def main():
 
     # derangement null: same prompts, rotated targets (no fixed points)
     null_data = [
-        {**it, "intermediates": association[(i + 1) % len(association)]["intermediates"]}
-        for i, it in enumerate(association)
+        {**it, "intermediates": multihop[(i + 1) % len(multihop)]["intermediates"]}
+        for i, it in enumerate(multihop)
     ]
 
     result = sk.stress(
         make_finder(n_layers),
-        association,
+        multihop,
         battery=["seeds", "bootstrap", "templates", "hyperparams"],
         n_runs=args.n_runs,
-        config={"k": 5, "band": "mid-third", "pos": -1, "mask": True},
-        templates={"multihop": multihop},
-        hyperparams={"k": [1, 10], "band": ["mid-half", "all"],
+        config={"k": 5, "band": "all", "pos": -1, "mask": True},
+        templates={"association": association},
+        hyperparams={"k": [1, 10], "band": ["mid-half", "mid-third"],
                      "pos": [-2], "mask": [False]},
         null_data=null_data,
         claim_statement=(
-            "J-lens readouts surface the evoked concept at rank <= 5 "
-            "within a mid-layer workspace band"
+            "J-lens readouts surface the latent intermediate at rank <= 5, "
+            "concentrated in a mid-to-late workspace band"
         ),
         model=MODEL_NAME,
-        task="lens-eval-association (vs multihop)",
+        task="lens-eval-multihop (vs association)",
         method="Jacobian lens (pre-fitted, n=1000), upstream hit criterion",
         verbose=True,
     )

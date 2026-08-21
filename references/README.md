@@ -105,3 +105,44 @@ Artifacts: [`cards/ao_qwen3_full-mixture.md`](cards/ao_qwen3_full-mixture.md)
 · [`cards/ao_qwen3_blind_spots.json`](cards/ao_qwen3_blind_spots.json) ·
 raw responses `cards/ao_qwen3_raw_*.json` ·
 runner [`run_oracle_reliability_qwen3.py`](run_oracle_reliability_qwen3.py).
+
+## Jacobian-lens readouts / Qwen3.5-4B — workspace hit criterion
+
+**Grade C.** The released pre-fitted lens from
+[anthropics/jacobian-lens](https://github.com/anthropics/jacobian-lens) on its
+own evaluation sets. Finding under test, per the upstream hit criterion: the
+latent intermediate appears at lens rank ≤ 5 at some layer (word-like tokens,
+the `mask_display` view practitioners read). Battery: item subsampling and
+bootstrap, k / band / position / masking sweeps, association-set
+generalization, and a derangement null (same prompts, rotated targets).
+
+| check | value | pass |
+|---|---|---|
+| structural stability (which items hit) | J = 0.448 | ❌ |
+| claim stability ("mid-to-late band") | π\* = 0.90 | ✅ |
+| score stability (pass@5 CV) | 0.361 | ❌ |
+| beats random | 3.9× | ✅ |
+| specificity (derangement null) | 0.78× | ❌ |
+
+Notes:
+
+- The qualitative claim is solid: whenever the intermediate is readable, it
+  reads out in the mid-to-late layers (claim stable at 0.90). Everything
+  quantitative around it is not: *which* items hit fluctuates (J = 0.45),
+  and pass@5 swings from 0.28 (multihop facts) to 0.04 (association
+  vignettes — the flagship "workspace" demo class). The evaluation
+  distribution owns 53% of score variance, analytic knobs another 42%.
+- The specificity failure is instructive: with targets rotated to the wrong
+  items (no effect exists), the hit-set is *more* stable (J = 0.57) than the
+  real one — frequently-emitted readout tokens ("Ocean", "Sea") match wrong
+  targets consistently. Hit-based metrics reward frequency artifacts.
+- Raw (unmasked) top-10 readouts are 72% non-word-like tokens on this
+  model, consistent with early community reports of junk-dominated raw
+  J-space readouts; the masked/raw choice alone moves pass@5 by ~2×.
+- Scale caveat: the paper's demonstrations center on a 27B model; this card
+  uses the smallest released lens (4B). The battery measures the released
+  artifact as an instrument, not the paper's headline model.
+
+Artifacts: [`cards/jlens_qwen3p5_4b.md`](cards/jlens_qwen3p5_4b.md) ·
+[`cards/jlens_qwen3p5_4b.json`](cards/jlens_qwen3p5_4b.json) ·
+runner [`run_jlens_stability_qwen.py`](run_jlens_stability_qwen.py).

@@ -1,0 +1,191 @@
+{
+  "schema_version": "0.1",
+  "stresskit_version": "0.3.0",
+  "created_at": "2026-08-21T00:00:42+00:00",
+  "claim": {
+    "statement": "J-lens readouts surface the latent intermediate at rank <= 5, concentrated in a mid-to-late workspace band",
+    "base_claim_label": "late",
+    "model": "Qwen/Qwen3.5-4B",
+    "task": "lens-eval-multihop (vs association)",
+    "method": "Jacobian lens (pre-fitted, n=1000), upstream hit criterion",
+    "base_size": 23,
+    "universe_size": 93
+  },
+  "battery": {
+    "axes": [
+      "seeds",
+      "bootstrap",
+      "templates",
+      "hyperparams"
+    ],
+    "n_runs_total": 20,
+    "seed": 0,
+    "base_config": {
+      "k": 5,
+      "band": "all",
+      "pos": -1,
+      "mask": true
+    }
+  },
+  "metrics": {
+    "pooled": {
+      "n_runs": 20,
+      "mean_pairwise_jaccard": 0.4483120309745036,
+      "min_pairwise_jaccard": 0.041666666666666664,
+      "flip_rate": 0.18947368421052635,
+      "modal_share": 0.9,
+      "n_claim_classes": 2,
+      "claim_counts": {
+        "late": 18,
+        "middle": 2
+      },
+      "score_mean": 0.279443173150267,
+      "score_std": 0.10080554729611077,
+      "score_cv": 0.36073719804886367,
+      "median_size": 19,
+      "n_cross_universe_excluded": 1,
+      "variance_shares": {
+        "bootstrap": 0.02256657292100551,
+        "hyperparams": 0.42462000475851186,
+        "seeds": 0.023717928682281297,
+        "templates": 0.5290954936382013
+      },
+      "mean_pairwise_jaccard_all_sizes": 0.39306853280850873,
+      "n_size_mismatched_excluded": 2,
+      "mean_pairwise_jaccard_ci95": [
+        0.4304970858325366,
+        0.5455717891341623
+      ],
+      "flip_rate_ci95": [
+        0.0,
+        0.39473684210526316
+      ],
+      "expected_random_jaccard": 0.11377245508982035,
+      "jaccard_vs_random": 3.9404267985653743
+    },
+    "per_axis": {
+      "bootstrap": {
+        "n_runs": 7,
+        "mean_pairwise_jaccard": 0.43612366044221546,
+        "min_pairwise_jaccard": 0.3076923076923077,
+        "flip_rate": 0.0,
+        "modal_share": 1.0,
+        "n_claim_classes": 1,
+        "claim_counts": {
+          "late": 7
+        },
+        "score_mean": 0.33333333333333337,
+        "score_std": 0.02898550724637681,
+        "score_cv": 0.08695652173913042,
+        "median_size": 19
+      },
+      "hyperparams": {
+        "n_runs": 7,
+        "mean_pairwise_jaccard": 0.38758141910753463,
+        "min_pairwise_jaccard": 0.07692307692307693,
+        "flip_rate": 0.2857142857142857,
+        "modal_share": 0.8571428571428571,
+        "n_claim_classes": 2,
+        "claim_counts": {
+          "late": 6,
+          "middle": 1
+        },
+        "score_mean": 0.2443064182194617,
+        "score_std": 0.12573272422930828,
+        "score_cv": 0.5146517440911517,
+        "median_size": 19
+      },
+      "seeds": {
+        "n_runs": 7,
+        "mean_pairwise_jaccard": 0.5374181070404388,
+        "min_pairwise_jaccard": 0.3793103448275862,
+        "flip_rate": 0.0,
+        "modal_share": 1.0,
+        "n_claim_classes": 1,
+        "claim_counts": {
+          "late": 7
+        },
+        "score_mean": 0.3084886128364389,
+        "score_std": 0.029715735185108325,
+        "score_cv": 0.09632684627119008,
+        "median_size": 21
+      },
+      "templates": {
+        "n_runs": 2,
+        "mean_pairwise_jaccard": null,
+        "min_pairwise_jaccard": null,
+        "flip_rate": 1.0,
+        "modal_share": 0.5,
+        "n_claim_classes": 2,
+        "claim_counts": {
+          "late": 1,
+          "middle": 1
+        },
+        "score_mean": 0.19298245614035087,
+        "score_std": 0.14035087719298245,
+        "score_cv": 0.7272727272727273,
+        "median_size": 23,
+        "n_cross_universe_excluded": 1
+      }
+    },
+    "null_control": {
+      "n_runs": 13,
+      "mean_pairwise_jaccard": 0.5727272727272728,
+      "flip_rate": 0.0,
+      "modal_share": 1.0,
+      "score_mean": 0.04124860646599777,
+      "score_cv": 0.45386096280396393,
+      "median_size": 2
+    }
+  },
+  "verdict": {
+    "grade": "C",
+    "checks": {
+      "structural_stability": {
+        "value": 0.4483120309745036,
+        "threshold": 0.8,
+        "passed": false,
+        "description": "mean pairwise Jaccard across all perturbed runs"
+      },
+      "claim_stability": {
+        "value": 0.9,
+        "threshold": 0.8,
+        "passed": true,
+        "description": "modal claim share \u03c0* (filability at \u03b1=0.2)"
+      },
+      "score_stability": {
+        "value": 0.36073719804886367,
+        "threshold": 0.25,
+        "passed": false,
+        "description": "coefficient of variation of the quality score"
+      },
+      "beats_random": {
+        "value": 3.9404267985653743,
+        "threshold": 3.0,
+        "passed": true,
+        "description": "structural overlap vs size-matched random null (\u00d7)"
+      },
+      "specificity": {
+        "value": 0.7827670382094507,
+        "threshold": 1.5,
+        "passed": false,
+        "description": "structural stability on real vs null-control data (\u00d7)"
+      }
+    },
+    "thresholds": {
+      "jaccard": 0.8,
+      "modal_share": 0.8,
+      "score_cv": 0.25,
+      "random_margin": 3.0
+    }
+  },
+  "provenance": {
+    "python": "3.12.3",
+    "platform": "Linux-6.8.0-137-generic-x86_64-with-glibc2.39",
+    "wall_seconds": 2.052
+  },
+  "notes": [
+    "1 run(s) from a different component universe (meta['universe']) excluded from structural comparison \u2014 Jaccard across universes is undefined; their claims and scores still count",
+    "structural stability graded on 17 size-comparable runs; 2 run(s) with >2x size difference excluded (pooled-over-all value kept as mean_pairwise_jaccard_all_sizes)"
+  ]
+}
