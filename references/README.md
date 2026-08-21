@@ -14,7 +14,7 @@ random-answer null control. 45 runs.
 
 | check | value | 95% CI | pass |
 |---|---|---|---|
-| structural stability | J = 0.829 | [0.785, 0.871] | ⚠️ point estimate clears 0.8, CI straddles it |
+| structural stability | J = 0.829 | [0.781, 0.869] | ⚠️ point estimate clears 0.8, CI straddles it |
 | claim stability ("late layers") | π\* = 1.00 | [1.00, 1.00] | ✅ |
 | score stability (faithfulness CV) | 0.033 | [0.018, 0.047] | ✅ |
 | beats random | 14.7× | — | ✅ |
@@ -50,7 +50,7 @@ difference. 45 runs.
 
 | check | value | 95% CI | pass |
 |---|---|---|---|
-| structural stability | J = 0.892 | [0.838, 0.945] | ✅ (CI clears 0.8) |
+| structural stability | J = 0.892 | [0.834, 0.943] | ✅ (CI clears 0.8) |
 | claim stability ("late layers") | π\* = 0.98 | [0.933, 1.00] | ✅ |
 | score stability (CV) | 0.002 | [0.001, 0.002] | ✅ |
 | beats random | 15.8× | — | ✅ |
@@ -127,7 +127,7 @@ runner [`run_oracle_reliability_qwen3.py`](run_oracle_reliability_qwen3.py).
 
 ## Jacobian-lens readouts / Qwen3.5-4B — workspace hit criterion
 
-**Grade C.** The released pre-fitted lens from
+**Grade C — low confidence (claim and score checks undecided at n=6).** The released pre-fitted lens from
 [anthropics/jacobian-lens](https://github.com/anthropics/jacobian-lens) on its
 own evaluation sets. Finding under test, per the upstream hit criterion: the
 latent intermediate appears at lens rank ≤ 5 at some layer (word-like tokens,

@@ -1,6 +1,6 @@
 # 🔴 Oracle Reliability Report — grade **D** (high confidence)
 
-> Oracle: **adamkarvonen/checkpoints_latentqa_cls_past_lens_addition_Qwen3-8B (Qwen3-8B)** · 7 probes, 225 answers, 0.039s
+> Oracle: **adamkarvonen/checkpoints_latentqa_cls_past_lens_addition_Qwen3-8B (Qwen3-8B)** · 7 probes, 225 answers, 0.049s
 
 ## Checks
 

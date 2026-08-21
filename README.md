@@ -225,7 +225,7 @@ Published findings, default battery, default thresholds. Full analysis in
 | finding | method | verdict | headline |
 |---|---|---|---|
 | IOI circuit, GPT-2 small | attribution patching | **A**, low confidence | point estimate clears 0.8 but the 95% CI straddles it at 45 runs — the grade is not certifiable |
-| Greater-Than circuit, GPT-2 small | attribution patching | **B**, high confidence | robustly stable (J CI [0.84, 0.94]) yet fails specificity at 1.15× — the null "circuit" is just as stable |
+| Greater-Than circuit, GPT-2 small | attribution patching | **B**, high confidence | robustly stable (J CI [0.83, 0.94]) yet fails specificity at 1.15× — the null "circuit" is just as stable |
 | Activation Oracles, Qwen3-8B taboo | upstream `run_verbalizer` | **D** (two mixtures), **C** (one) | consistency 0.94 across captures vs 0.31 across phrasings; ≥89% fabrication even on a null probe that invites abstention |
 | J-lens workspace readouts, Qwen3.5-4B | released pre-fitted lens | **C** | band claim stable (π\* = 0.90); which items hit is not (J = 0.45), and a derangement null is *more* stable than the real finding |
 

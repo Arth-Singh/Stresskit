@@ -2,7 +2,7 @@
   "artifact": "stresskit_oracle_report",
   "schema_version": "0.1",
   "stresskit_version": "0.3.0",
-  "created_at": "2026-08-21T05:06:19+00:00",
+  "created_at": "2026-08-21T21:56:33+00:00",
   "oracle_name": "adamkarvonen/checkpoints_latentqa_only_addition_Qwen3-8B (Qwen3-8B)",
   "metrics": {
     "n_probes": 7,
@@ -46,7 +46,7 @@
         0.059803329908944554,
         0.14603473938549152
       ],
-      "robust": false,
+      "robust": true,
       "description": "ground-truth recovery on known-answer probes"
     },
     "prompt_sensitivity": {
@@ -67,7 +67,7 @@
         0.8517222081611939,
         0.9877261309595557
       ],
-      "robust": false,
+      "robust": true,
       "description": "confident assertions on null-control activations"
     }
   },
@@ -264,6 +264,6 @@
     "sampled decoding (temp 0.7, top_p 0.9), free-text questions without the upstream single-word prefix \u2014 accuracies not comparable to the paper's headline numbers."
   ],
   "provenance": {
-    "wall_seconds": 0.04
+    "wall_seconds": 0.045
   }
 }
