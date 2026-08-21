@@ -172,14 +172,16 @@ def make_finder(model, device):
 
 def main():
     ap = argparse.ArgumentParser()
+    ap.add_argument("--model", default="gpt2",
+                    help="any GPT-2-family TransformerLens model name")
     ap.add_argument("--n-prompts", type=int, default=96)
     ap.add_argument("--n-runs", type=int, default=6)
     ap.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu")
     ap.add_argument("--out-dir", default=os.path.join(os.path.dirname(__file__), "cards"))
     args = ap.parse_args()
 
-    print(f"loading gpt2-small on {args.device} ...")
-    model = HookedTransformer.from_pretrained("gpt2", device=args.device)
+    print(f"loading {args.model} on {args.device} ...")
+    model = HookedTransformer.from_pretrained(args.model, device=args.device)
     model.eval()
 
     data = make_dataset(model, args.n_prompts, seed=0)
@@ -203,7 +205,7 @@ def main():
             "IOI in GPT-2 small is implemented by ~15 attention heads "
             "concentrated in the late layers"
         ),
-        model="gpt2-small",
+        model=args.model,
         task="IOI (ABC corruption)",
         method="head-level attribution patching, top-k by |attribution|",
         verbose=True,
@@ -214,15 +216,16 @@ def main():
     print()
     print(result.to_markdown())
 
+    slug = {"gpt2": "gpt2_small"}.get(args.model, args.model.replace("-", "_"))
     os.makedirs(args.out_dir, exist_ok=True)
-    card_path = os.path.join(args.out_dir, "ioi_gpt2_small.json")
-    result.card.save(card_path)
-    with open(os.path.join(args.out_dir, "ioi_gpt2_small.md"), "w") as f:
+    base = os.path.join(args.out_dir, f"ioi_{slug}")
+    result.card.save(base + ".json")
+    with open(base + ".md", "w") as f:
         f.write(result.to_markdown() + "\n")
-    with open(os.path.join(args.out_dir, "ioi_gpt2_small.badge.json"), "w") as f:
+    with open(base + ".badge.json", "w") as f:
         json.dump(result.card.badge_dict(), f, indent=2)
         f.write("\n")
-    print(f"\nartifacts written to {args.out_dir}/ioi_gpt2_small.*")
+    print(f"\nartifacts written to {base}.*")
 
 
 if __name__ == "__main__":
