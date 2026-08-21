@@ -2,6 +2,16 @@
 
 ## 0.3.0
 
+- **Post-hoc mode** — `stresskit.from_findings(findings, axes=, null_findings=)`
+  grades runs you already have: same card, same checks, no re-running.
+- **`adapters.sae_lens.stability()`** — one-call graded report for SAELens
+  SAEs: cross-seed MCC, near-duplicate fraction, and excess over the
+  random-decoder noise floor (which grows with n_features/d_model — a raw
+  ratio would be regime-dependent).
+- **`adapters.eap`** — findings from live EAP-IG graphs, saved
+  `Graph.to_json` exports, and a `finder_from_graph_fn` factory for the
+  full battery.
+
 - Distribution renamed to `stress-kit` for PyPI (imports as `import stresskit`,
   CLI stays `stresskit`).
 - **CI-aware grading** — every check now carries its 95% CI and a `robust`

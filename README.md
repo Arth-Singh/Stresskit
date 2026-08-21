@@ -74,6 +74,27 @@ print(result.to_markdown())                # human-readable stability card
 result.card.save("stability_card.json")    # machine-readable artifact
 ```
 
+**Already have runs?** Skip the wrapper entirely — post-hoc mode grades
+findings you already have, from result files, sweep logs, or old pickles:
+
+```python
+findings = [sk.circuit(edges, score=faith) for edges, faith in my_saved_runs]
+print(sk.from_findings(findings, model="gpt2-small", task="IOI").to_markdown())
+```
+
+**Using SAELens or EAP-IG?** One call:
+
+```python
+from stresskit.adapters import sae_lens, eap
+
+sae_lens.stability([sae_seed0, sae_seed1, sae_seed2])   # graded SAE report:
+# seed-consistency MCC, near-duplicate fraction, excess over the
+# random-decoder noise floor
+
+findings = [eap.finding_from_json(p) for p in glob("circuits/*.json")]
+sk.from_findings(findings)                               # from saved eap graphs
+```
+
 A self-contained CPU demo runs in seconds:
 
 ```bash
@@ -173,8 +194,10 @@ already use (`stresskit.adapters`):
 
 | adapter | bridges from | provides |
 |---|---|---|
+| `sae_lens` | [SAELens](https://github.com/jbloomAus/SAELens) SAEs / decoder tensors | `stability()` — one-call graded report (seed MCC, redundancy, noise-floor excess) |
+| `eap` | [EAP-IG](https://github.com/hannamw/EAP-IG) graphs and `to_json` exports | `graph_to_finding`, `finding_from_json`, `finder_from_graph_fn` |
 | `sae` | any SAE decoder matrix | `seed_consistency` (MCC via optimal matching), `redundancy_audit` |
-| `transformer_lens` | TransformerLens / EAP pipelines | edge selection, layer-band claims, `Finding` conversion |
+| `transformer_lens` | TransformerLens pipelines | edge selection, layer-band claims, `Finding` conversion |
 | `activation_oracles` | [adamkarvonen/activation_oracles](https://github.com/adamkarvonen/activation_oracles) result files | `reliability_report` straight from saved eval JSON, no GPU |
 | `jlens` | [anthropics/jacobian-lens](https://github.com/anthropics/jacobian-lens) readouts | ranked-readout findings, `junk_share`, workspace-band hit ranks |
 

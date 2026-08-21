@@ -408,6 +408,66 @@ def stress(
             "(subsampling, init, tie-breaking) or drop 'seeds' from the battery."
         )
 
+    # --- null-control (specificity) --------------------------------------------
+    null_summary: Optional[Dict[str, Any]] = None
+    if null_data is not None:
+        null_axes = tuple(ax for ax in battery if ax in ("seeds", "bootstrap")) or ("seeds",)
+        try:
+            null_result = stress(
+                finding_fn,
+                null_data,
+                battery=null_axes,
+                n_runs=n_runs,
+                seed=seed ^ 0x5EC,
+                config=base_config,
+                thresholds=thresholds,
+                claim_equiv=claim_equiv,
+                cache_dir=cache_dir,
+                cache_key=f"{cache_key}|null" if cache_key else None,
+                verbose=verbose,
+            )
+            null_summary = {
+                k: null_result.pooled.get(k)
+                for k in (
+                    "n_runs", "mean_pairwise_jaccard", "flip_rate",
+                    "modal_share", "score_mean", "score_cv", "median_size",
+                )
+            }
+        except (ValueError, TypeError) as e:
+            notes.append(f"null control skipped: finder failed on null_data ({e})")
+
+    return _analyze(
+        runs, base,
+        thresholds=thresholds, claim_equiv=claim_equiv, notes=notes,
+        seed=seed, battery=battery, n_runs=n_runs, base_config=base_config,
+        null_summary=null_summary, claim_statement=claim_statement,
+        model=model, task=task, method=method, t0=t0,
+    )
+
+
+def _analyze(
+    runs: List[RunRecord],
+    base: Finding,
+    *,
+    thresholds: Thresholds,
+    claim_equiv,
+    notes: List[str],
+    seed: int,
+    battery: Sequence[str],
+    n_runs: int,
+    base_config: Dict[str, Any],
+    null_summary: Optional[Dict[str, Any]],
+    claim_statement: Optional[str],
+    model: Optional[str],
+    task: Optional[str],
+    method: Optional[str],
+    t0: float,
+) -> StressResult:
+    """Metrics -> checks -> grade -> card, from completed run records.
+
+    Shared by ``stress`` (which executes the runs) and ``from_findings``
+    (post-hoc mode over findings the caller already has).
+    """
     # --- metrics --------------------------------------------------------------
     axis_names = sorted({r.axis for r in runs} - {"base"})
     axis_metrics: Dict[str, Dict[str, Any]] = {}
@@ -497,34 +557,6 @@ def stress(
         pooled["jaccard_vs_random"] = pooled["mean_pairwise_jaccard"] / random_null
     else:
         pooled["jaccard_vs_random"] = None
-
-    # --- null-control (specificity) --------------------------------------------
-    null_summary: Optional[Dict[str, Any]] = None
-    if null_data is not None:
-        null_axes = tuple(ax for ax in battery if ax in ("seeds", "bootstrap")) or ("seeds",)
-        try:
-            null_result = stress(
-                finding_fn,
-                null_data,
-                battery=null_axes,
-                n_runs=n_runs,
-                seed=seed ^ 0x5EC,
-                config=base_config,
-                thresholds=thresholds,
-                claim_equiv=claim_equiv,
-                cache_dir=cache_dir,
-                cache_key=f"{cache_key}|null" if cache_key else None,
-                verbose=verbose,
-            )
-            null_summary = {
-                k: null_result.pooled.get(k)
-                for k in (
-                    "n_runs", "mean_pairwise_jaccard", "flip_rate",
-                    "modal_share", "score_mean", "score_cv", "median_size",
-                )
-            }
-        except (ValueError, TypeError) as e:
-            notes.append(f"null control skipped: finder failed on null_data ({e})")
 
     # --- checks & grade ----------------------------------------------------------
     # Each check records the point estimate (``value``) vs its ``threshold``,
@@ -626,6 +658,104 @@ def stress(
         wall_seconds=round(time.time() - t0, 3),
     )
     return result
+
+
+def from_findings(
+    findings: Sequence[Finding],
+    *,
+    axes: Optional[Sequence[str]] = None,
+    null_findings: Optional[Sequence[Finding]] = None,
+    thresholds: Optional[Thresholds] = None,
+    claim_equiv=None,
+    seed: int = 0,
+    claim_statement: Optional[str] = None,
+    model: Optional[str] = None,
+    task: Optional[str] = None,
+    method: Optional[str] = None,
+) -> StressResult:
+    """Post-hoc stability card from findings you ALREADY have.
+
+    No finding_fn, no re-running: hand over the per-run findings from
+    result files, sweep logs, or old pickles and get the same graded card
+    ``stress`` produces. The first finding is treated as the base run.
+
+    Parameters
+    ----------
+    findings:
+        One Finding per completed run (>= 2). Convert raw runs with
+        ``stresskit.circuit`` / ``feature_set`` / ``probe``.
+    axes:
+        Optional per-run axis labels for runs after the first (e.g.
+        ``["seeds", "seeds", "templates"]``), enabling the per-axis
+        breakdown. Without labels every run is pooled under ``"runs"``
+        and the card says so — axis attribution is only as good as the
+        labels you supply.
+    null_findings:
+        Findings from the same method on a null control (shuffled labels,
+        scrambled prompts). Enables the specificity check.
+    """
+    findings = list(findings)
+    if len(findings) < 2:
+        raise ValueError(f"from_findings needs >= 2 findings, got {len(findings)}")
+    for i, f in enumerate(findings):
+        if not isinstance(f, Finding):
+            raise TypeError(
+                f"findings[{i}] is {type(f).__name__}, not a stresskit.Finding. "
+                "Wrap each run with stresskit.circuit(...), feature_set(...) "
+                "or probe(...)."
+            )
+    rest = findings[1:]
+    if axes is not None:
+        axes = list(axes)
+        if len(axes) != len(rest):
+            raise ValueError(
+                f"axes has {len(axes)} labels for {len(rest)} non-base findings"
+            )
+    else:
+        axes = ["runs"] * len(rest)
+
+    thresholds = thresholds or Thresholds()
+    t0 = time.time()
+    notes = [
+        "post-hoc mode: findings were supplied directly, not produced by a "
+        "controlled battery"
+        + ("" if any(a != "runs" for a in axes)
+           else " — no axis labels given, so all runs pool under 'runs'")
+    ]
+
+    base = findings[0]
+    runs: List[RunRecord] = [RunRecord("base", "base", seed, {}, base)]
+    counts: Dict[str, int] = {}
+    for axis, f in zip(axes, rest):
+        counts[axis] = counts.get(axis, 0) + 1
+        runs.append(RunRecord(axis, f"{axis}={counts[axis]}", seed, {}, f))
+
+    null_summary: Optional[Dict[str, Any]] = None
+    if null_findings is not None:
+        null_findings = list(null_findings)
+        if len(null_findings) < 2:
+            raise ValueError("null_findings needs >= 2 findings for a stability estimate")
+        null_pooled = _summarize(
+            null_findings, claim_equiv, universe=_universe_of(null_findings[0])
+        )
+        null_summary = {
+            "n_runs": len(null_findings),
+            "mean_pairwise_jaccard": null_pooled["mean_pairwise_jaccard"],
+            "flip_rate": null_pooled["flip_rate"],
+            "modal_share": null_pooled["modal_share"],
+            "score_mean": null_pooled["score_mean"],
+            "score_cv": null_pooled["score_cv"],
+            "median_size": null_pooled["median_size"],
+        }
+
+    return _analyze(
+        runs, base,
+        thresholds=thresholds, claim_equiv=claim_equiv, notes=notes,
+        seed=seed, battery=sorted(set(axes)), n_runs=len(findings),
+        base_config={}, null_summary=null_summary,
+        claim_statement=claim_statement, model=model, task=task,
+        method=method, t0=t0,
+    )
 
 
 def grade_checks(checks: Dict[str, Any]) -> str:
