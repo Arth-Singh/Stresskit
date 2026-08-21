@@ -62,6 +62,35 @@ def random_jaccard_stats(
     }
 
 
+def empirical_random_jaccard(
+    sizes: Sequence[int],
+    universe_size: int,
+    seed: int = 0,
+    repeats: int = 200,
+) -> Optional[float]:
+    """Monte-Carlo E[mean pairwise Jaccard] for random subsets matching the
+    *observed* size distribution.
+
+    Unlike ``metrics.expected_random_jaccard`` (a ratio-of-expectations
+    approximation that assumes one shared size k), this draws one random
+    subset per observed size and averages the mean pairwise Jaccard over
+    ``repeats`` draws — exact in expectation and honest about heterogeneous
+    finding sizes. Returns None if fewer than two positive sizes.
+    """
+    sizes = [min(int(s), int(universe_size)) for s in sizes if s and s > 0]
+    if len(sizes) < 2 or not universe_size or universe_size <= 0:
+        return None
+    rng = random.Random(seed)
+    universe = range(int(universe_size))
+    vals: List[float] = []
+    for _ in range(repeats):
+        sets = [frozenset(rng.sample(universe, s)) for s in sizes]
+        v = M.mean_pairwise_jaccard(sets)
+        if v is not None:
+            vals.append(v)
+    return sum(vals) / len(vals) if vals else None
+
+
 def compare_to_random(
     sets: Sequence[frozenset],
     universe_size: int,

@@ -2,6 +2,9 @@
 
 ## 0.3.0
 
+- Distribution renamed to `stress-kit` for PyPI (imports as `import stresskit`,
+  CLI stays `stresskit`).
+
 - **`stresskit verify`** — auditor mode: re-derives every check and the grade
   from a card's own recorded metrics; catches edited or non-conforming cards
   (`verify_card_dict` in the library).

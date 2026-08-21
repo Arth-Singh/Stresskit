@@ -37,9 +37,10 @@ are reliability failures. StressKit tests the instrument, not just the finding.
 ## Install
 
 ```bash
-pip install git+https://github.com/Arth-Singh/Stresskit.git          # numpy only
-pip install "stresskit[full] @ git+https://github.com/Arth-Singh/Stresskit.git"  # + scipy
+pip install git+https://github.com/Arth-Singh/Stresskit.git   # numpy only; imports as `import stresskit`
 ```
+
+<sub>PyPI release as `stress-kit` is pending.</sub>
 
 ## Quickstart
 

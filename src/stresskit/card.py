@@ -200,7 +200,9 @@ class StabilityCard:
         checks = self.verdict.get("checks", {})
         emoji = _GRADE_EMOJI.get(self.grade, "")
         lines: List[str] = []
-        lines.append(f"# {emoji} Stability Card — grade **{self.grade}**")
+        confidence = pooled.get("confidence")
+        conf_str = f" ({confidence} confidence)" if confidence else ""
+        lines.append(f"# {emoji} Stability Card — grade **{self.grade}**{conf_str}")
         lines.append("")
         lines.append(f"> **Claim:** {self.claim.get('statement')}")
         ctx = " · ".join(
@@ -223,15 +225,31 @@ class StabilityCard:
 
         lines.append("## Checks")
         lines.append("")
-        lines.append("| check | value | threshold | pass |")
-        lines.append("|---|---|---|---|")
+        lines.append("| check | value | 95% CI | threshold | pass |")
+        lines.append("|---|---|---|---|---|")
         for name, c in checks.items():
-            op = "≤" if name == "score_stability" else "≥"
+            op = c.get("op") or ("≤" if name == "score_stability" else "≥")
+            op = {">=": "≥", "<=": "≤"}.get(op, op)
+            ci = c.get("ci")
+            ci_str = f"[{_fmt(ci[0])}, {_fmt(ci[1])}]" if ci else "—"
+            if c.get("passed"):
+                # ⚠ marks a pass the CI does not actually resolve
+                mark = "✅" if c.get("robust") is not False else "⚠️"
+            else:
+                mark = "❌"
             lines.append(
-                f"| {name.replace('_', ' ')} | {_fmt(c.get('value'))} | "
-                f"{op} {_fmt(c.get('threshold'))} | {_fmt(c.get('passed'))} |"
+                f"| {name.replace('_', ' ')} | {_fmt(c.get('value'))} | {ci_str} | "
+                f"{op} {_fmt(c.get('threshold'))} | {mark} |"
             )
         lines.append("")
+        if confidence == "low":
+            bl = ", ".join(pooled.get("borderline_checks", []))
+            lines.append(
+                f"> ⚠️ **Underpowered:** {bl} pass on the point estimate but the "
+                f"95% CI straddles the bar. The grade is provisional — raise "
+                f"`n_runs` before reporting it."
+            )
+            lines.append("")
 
         lines.append("## Pooled metrics")
         lines.append("")

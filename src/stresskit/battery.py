@@ -30,6 +30,7 @@ from dataclasses import dataclass, field
 from typing import Any, Callable, Dict, List, Mapping, Optional, Sequence, Tuple
 
 from . import metrics as M
+from . import baselines as B
 from .finding import Finding
 from .card import StabilityCard, GRADE_ORDER
 
@@ -429,6 +430,11 @@ def stress(
             "and scores still count"
         )
     pooled["variance_shares"] = M.variance_shares(score_groups) if score_groups else {}
+    # absolute score variance per axis — shares alone hide whether "78% of
+    # variance" is 78% of something real or 78% of near-zero noise.
+    pooled["variance_absolute"] = {
+        axis: (M.std(list(xs)) or 0.0) ** 2 for axis, xs in score_groups.items()
+    }
 
     # Guard the pooled structural metric against size-mismatched runs (a
     # top-k sweep from 200 to 800 edges mechanically bounds Jaccard): the
@@ -468,13 +474,25 @@ def stress(
     if claim_equiv is not None and ci_labels:
         ci_labels = M.cluster_labels(ci_labels, claim_equiv)
     pooled["flip_rate_ci95"] = M.bootstrap_ci(ci_labels, M.flip_rate, seed=seed)
+    pooled["modal_share_ci95"] = M.bootstrap_ci(ci_labels, M.modal_share, seed=seed)
+    ci_scores = [f.score for f in all_findings if f.score is not None]
+    pooled["score_cv_ci95"] = M.bootstrap_ci(
+        ci_scores, M.coefficient_of_variation, seed=seed)
 
     # --- size-matched random null ----------------------------------------------
+    # Prefer the Monte-Carlo null over the observed size distribution (exact
+    # in expectation, heterogeneous sizes); keep the analytic k/(2N-k) as a
+    # reported cross-check.
     universe = _resolve_universe(all_findings)
+    graded_sizes = [len(s) for s in (comparable if comparable else structured_for_ci)]
     random_null = None
-    if universe and pooled["median_size"]:
-        random_null = M.expected_random_jaccard(pooled["median_size"], universe)
+    if universe and graded_sizes:
+        random_null = B.empirical_random_jaccard(graded_sizes, universe, seed=seed)
     pooled["expected_random_jaccard"] = random_null
+    pooled["expected_random_jaccard_analytic"] = (
+        M.expected_random_jaccard(pooled["median_size"], universe)
+        if universe and pooled["median_size"] else None
+    )
     if random_null and pooled["mean_pairwise_jaccard"] is not None and random_null > 0:
         pooled["jaccard_vs_random"] = pooled["mean_pairwise_jaccard"] / random_null
     else:
@@ -509,49 +527,50 @@ def stress(
             notes.append(f"null control skipped: finder failed on null_data ({e})")
 
     # --- checks & grade ----------------------------------------------------------
+    # Each check records the point estimate (``value``) vs its ``threshold``,
+    # and — where a bootstrap CI is available — whether the CI *clears* the
+    # threshold (``robust``). A check that "passes" on the point estimate but
+    # whose CI straddles the bar is not decided by the data; it is flagged and
+    # it lowers the verdict's confidence rather than silently earning a grade.
+    def _mk(value, threshold, op, description, ci=None):
+        passed = value >= threshold if op == ">=" else value <= threshold
+        robust = None
+        if ci is not None:
+            robust = ci[0] >= threshold if op == ">=" else ci[1] <= threshold
+        return {"value": value, "threshold": threshold, "passed": passed,
+                "op": op, "ci": ci, "robust": robust, "description": description}
+
     checks: Dict[str, Any] = {}
     j = pooled["mean_pairwise_jaccard"]
     if j is not None:
-        checks["structural_stability"] = {
-            "value": j,
-            "threshold": thresholds.jaccard,
-            "passed": j >= thresholds.jaccard,
-            "description": "mean pairwise Jaccard across all perturbed runs",
-        }
+        checks["structural_stability"] = _mk(
+            j, thresholds.jaccard, ">=",
+            "mean pairwise Jaccard across all perturbed runs",
+            ci=pooled.get("mean_pairwise_jaccard_ci95"))
     ms = pooled["modal_share"]
     if ms is not None and pooled["n_runs"] >= 2 and pooled["n_claim_classes"] >= 1:
-        checks["claim_stability"] = {
-            "value": ms,
-            "threshold": thresholds.modal_share,
-            "passed": ms >= thresholds.modal_share,
-            "description": "modal claim share π* (filability at α=0.2)",
-        }
+        checks["claim_stability"] = _mk(
+            ms, thresholds.modal_share, ">=",
+            "modal claim share π* (filability at α=0.2)",
+            ci=pooled.get("modal_share_ci95"))
     cv = pooled["score_cv"]
     if cv is not None:
-        checks["score_stability"] = {
-            "value": cv,
-            "threshold": thresholds.score_cv,
-            "passed": cv <= thresholds.score_cv,
-            "description": "coefficient of variation of the quality score",
-        }
+        checks["score_stability"] = _mk(
+            cv, thresholds.score_cv, "<=",
+            "coefficient of variation of the quality score",
+            ci=pooled.get("score_cv_ci95"))
     vr = pooled["jaccard_vs_random"]
     if vr is not None:
-        checks["beats_random"] = {
-            "value": vr,
-            "threshold": thresholds.random_margin,
-            "passed": vr >= thresholds.random_margin,
-            "description": "structural overlap vs size-matched random null (×)",
-        }
+        checks["beats_random"] = _mk(
+            vr, thresholds.random_margin, ">=",
+            "structural overlap vs size-matched random null (×)")
     if null_summary is not None and j is not None:
         null_j = null_summary.get("mean_pairwise_jaccard")
         if null_j is not None:
             ratio = (j / null_j) if null_j > 1e-9 else float("inf")
-            checks["specificity"] = {
-                "value": ratio,
-                "threshold": thresholds.specificity_ratio,
-                "passed": ratio >= thresholds.specificity_ratio,
-                "description": "structural stability on real vs null-control data (×)",
-            }
+            checks["specificity"] = _mk(
+                ratio, thresholds.specificity_ratio, ">=",
+                "structural stability on real vs null-control data (×)")
 
     if not checks:
         raise ValueError(
@@ -561,6 +580,27 @@ def stress(
         )
 
     grade = grade_checks(checks)
+
+    # Confidence: does the evidence actually resolve the passing checks?
+    borderline = [name for name, c in checks.items()
+                  if c["passed"] and c.get("robust") is False]
+    resolvable = [c for c in checks.values() if c.get("robust") is not None]
+    if not resolvable:
+        confidence = "unknown"
+    elif borderline:
+        confidence = "low"
+    else:
+        confidence = "high"
+    pooled["confidence"] = confidence
+    pooled["borderline_checks"] = borderline
+    if borderline:
+        notes.append(
+            "underpowered verdict: "
+            + ", ".join(sorted(borderline))
+            + f" pass on the point estimate but their 95% CI straddles the bar "
+            f"at n_runs={n_runs}. Treat the grade as provisional and raise "
+            f"n_runs (or widen the battery) before reporting it."
+        )
 
     result = StressResult(
         base=base,
