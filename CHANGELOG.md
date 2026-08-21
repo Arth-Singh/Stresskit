@@ -4,6 +4,15 @@
 
 - Distribution renamed to `stress-kit` for PyPI (imports as `import stresskit`,
   CLI stays `stresskit`).
+- **CI-aware grading** — every check now carries its 95% CI and a `robust`
+  flag (does the CI clear the bar, not just the point estimate). A pass whose
+  CI straddles the bar is marked borderline and lowers the verdict's
+  `confidence` (high/low/unknown); a low-confidence grade is labeled
+  provisional. Applies to both `stress` and `stress_oracle`.
+- Random null switched to a Monte-Carlo estimate over the observed size
+  distribution (`baselines.empirical_random_jaccard`); analytic `k/(2N−k)`
+  kept as a reported cross-check. Absolute score variance reported alongside
+  the normalized shares.
 
 - **`stresskit verify`** — auditor mode: re-derives every check and the grade
   from a card's own recorded metrics; catches edited or non-conforming cards
