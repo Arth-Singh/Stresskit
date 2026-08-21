@@ -1,7 +1,7 @@
 {
   "schema_version": "0.1",
-  "stresskit_version": "0.2.0",
-  "created_at": "2026-08-21T00:02:54+00:00",
+  "stresskit_version": "0.3.0",
+  "created_at": "2026-08-21T05:10:18+00:00",
   "claim": {
     "statement": "Greater-Than in GPT-2 small is implemented by ~15 attention heads concentrated in the mid-to-late layers",
     "base_claim_label": "late",
@@ -18,7 +18,7 @@
       "templates",
       "hyperparams"
     ],
-    "n_runs_total": 17,
+    "n_runs_total": 45,
     "seed": 0,
     "base_config": {
       "top_k": 15
@@ -26,51 +26,68 @@
   },
   "metrics": {
     "pooled": {
-      "n_runs": 17,
-      "mean_pairwise_jaccard": 0.8402681660899654,
+      "n_runs": 45,
+      "mean_pairwise_jaccard": 0.8921713657766768,
       "min_pairwise_jaccard": 0.26666666666666666,
-      "flip_rate": 0.11764705882352944,
-      "modal_share": 0.9411764705882353,
+      "flip_rate": 0.0444444444444444,
+      "modal_share": 0.9777777777777777,
       "n_claim_classes": 2,
       "claim_counts": {
-        "late": 16,
+        "late": 44,
         "early": 1
       },
-      "score_mean": 0.9987856051131726,
-      "score_std": 0.002236366534534663,
-      "score_cv": 0.0022390856687219277,
+      "score_mean": 0.999187548400039,
+      "score_std": 0.0017632997675202265,
+      "score_cv": 0.001764733528098635,
       "median_size": 15,
       "variance_shares": {
-        "bootstrap": 0.024948386421882043,
-        "hyperparams": 0.7797222432585139,
-        "seeds": 0.11676922878185031,
-        "templates": 0.07856014153775367
+        "bootstrap": 0.1088278704562912,
+        "hyperparams": 0.7314241148537107,
+        "seeds": 0.08605410319287186,
+        "templates": 0.0736939114971263
+      },
+      "variance_absolute": {
+        "bootstrap": 1.9623885999626427e-06,
+        "hyperparams": 1.318906947924858e-05,
+        "seeds": 1.5517310995580392e-06,
+        "templates": 1.3288516186365981e-06
       },
       "mean_pairwise_jaccard_ci95": [
-        0.7281249999999997,
-        0.9723183391003462
+        0.8382994556571394,
+        0.9447152901564666
       ],
       "flip_rate_ci95": [
         0.0,
-        0.3088235294117647
+        0.12727272727272732
       ],
-      "expected_random_jaccard": 0.054945054945054944,
-      "jaccard_vs_random": 15.29288062283737
+      "modal_share_ci95": [
+        0.9333333333333333,
+        1.0
+      ],
+      "score_cv_ci95": [
+        0.0010978695963763838,
+        0.0023953761825235382
+      ],
+      "expected_random_jaccard": 0.056564907712554444,
+      "expected_random_jaccard_analytic": 0.054945054945054944,
+      "jaccard_vs_random": 15.772524023382461,
+      "confidence": "high",
+      "borderline_checks": []
     },
     "per_axis": {
       "bootstrap": {
-        "n_runs": 7,
-        "mean_pairwise_jaccard": 1.0,
-        "min_pairwise_jaccard": 1.0,
+        "n_runs": 21,
+        "mean_pairwise_jaccard": 0.9166083099906617,
+        "min_pairwise_jaccard": 0.6666666666666666,
         "flip_rate": 0.0,
         "modal_share": 1.0,
         "n_claim_classes": 1,
         "claim_counts": {
-          "late": 7
+          "late": 21
         },
-        "score_mean": 0.9983545673519556,
-        "score_std": 0.0006496184446229713,
-        "score_cv": 0.0006506891097278444,
+        "score_mean": 0.9992851107511592,
+        "score_std": 0.0014008528116696067,
+        "score_cv": 0.0014018549827251908,
         "median_size": 15
       },
       "hyperparams": {
@@ -90,18 +107,18 @@
         "median_size": 15
       },
       "seeds": {
-        "n_runs": 7,
-        "mean_pairwise_jaccard": 0.9327731092436977,
+        "n_runs": 21,
+        "mean_pairwise_jaccard": 0.9572128851540617,
         "min_pairwise_jaccard": 0.7647058823529411,
         "flip_rate": 0.0,
         "modal_share": 1.0,
         "n_claim_classes": 1,
         "claim_counts": {
-          "late": 7
+          "late": 21
         },
-        "score_mean": 0.9993627187616584,
-        "score_std": 0.0014054044430685494,
-        "score_cv": 0.0014063006520895936,
+        "score_mean": 0.9991960984808941,
+        "score_std": 0.0012456849921059655,
+        "score_cv": 0.0012466872058445938,
         "median_size": 15
       },
       "templates": {
@@ -121,12 +138,12 @@
       }
     },
     "null_control": {
-      "n_runs": 13,
-      "mean_pairwise_jaccard": 0.7617868672435237,
-      "flip_rate": 0.46153846153846156,
-      "modal_share": 0.6923076923076923,
-      "score_mean": 0.962050047552724,
-      "score_cv": 0.03502912699959822,
+      "n_runs": 41,
+      "mean_pairwise_jaccard": 0.7787088776460466,
+      "flip_rate": 0.4609756097560975,
+      "modal_share": 0.6585365853658537,
+      "score_mean": 0.966840812115783,
+      "score_cv": 0.039734988314981845,
       "median_size": 15
     }
   },
@@ -134,33 +151,57 @@
     "grade": "B",
     "checks": {
       "structural_stability": {
-        "value": 0.8402681660899654,
+        "value": 0.8921713657766768,
         "threshold": 0.8,
         "passed": true,
+        "op": ">=",
+        "ci": [
+          0.8382994556571394,
+          0.9447152901564666
+        ],
+        "robust": true,
         "description": "mean pairwise Jaccard across all perturbed runs"
       },
       "claim_stability": {
-        "value": 0.9411764705882353,
+        "value": 0.9777777777777777,
         "threshold": 0.8,
         "passed": true,
+        "op": ">=",
+        "ci": [
+          0.9333333333333333,
+          1.0
+        ],
+        "robust": true,
         "description": "modal claim share \u03c0* (filability at \u03b1=0.2)"
       },
       "score_stability": {
-        "value": 0.0022390856687219277,
+        "value": 0.001764733528098635,
         "threshold": 0.25,
         "passed": true,
+        "op": "<=",
+        "ci": [
+          0.0010978695963763838,
+          0.0023953761825235382
+        ],
+        "robust": true,
         "description": "coefficient of variation of the quality score"
       },
       "beats_random": {
-        "value": 15.29288062283737,
+        "value": 15.772524023382461,
         "threshold": 3.0,
         "passed": true,
+        "op": ">=",
+        "ci": null,
+        "robust": null,
         "description": "structural overlap vs size-matched random null (\u00d7)"
       },
       "specificity": {
-        "value": 1.1030226461246584,
+        "value": 1.1457059131952048,
         "threshold": 1.5,
         "passed": false,
+        "op": ">=",
+        "ci": null,
+        "robust": null,
         "description": "structural stability on real vs null-control data (\u00d7)"
       }
     },
@@ -174,7 +215,7 @@
   "provenance": {
     "python": "3.10.12",
     "platform": "Linux-5.15.0-161-generic-x86_64-with-glibc2.35",
-    "wall_seconds": 9.47
+    "wall_seconds": 34.767
   },
   "notes": []
 }

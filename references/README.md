@@ -6,30 +6,37 @@ directory; artifacts (JSON card, markdown render, badge) live in `cards/`.
 
 ## GPT-2 small / IOI — attribution patching
 
-**Grade B.** Head-level attribution patching over the 144 attention heads of
-GPT-2 small on Indirect Object Identification (ABC corruption), scored by
-denoising faithfulness. Battery: seeds, bootstrap, ABBA/BABA template split,
-top-k sweep, random-answer null control.
+**Grade A — but low confidence (the grade is not certifiable).** Head-level
+attribution patching over the 144 attention heads of GPT-2 small on Indirect
+Object Identification (ABC corruption), scored by denoising faithfulness.
+Battery: seeds, bootstrap, ABBA/BABA template split, top-k sweep,
+random-answer null control. 45 runs.
 
-| check | value | pass |
-|---|---|---|
-| structural stability | J = 0.764, 95% CI [0.68, 0.87] | ❌ (bar 0.8) |
-| claim stability ("late layers") | π\* = 1.00 | ✅ |
-| score stability (faithfulness CV) | 0.048 | ✅ |
-| beats random | 13.9× | ✅ |
-| specificity (null control) | 1.38× | ❌ (bar 1.5×) |
+| check | value | 95% CI | pass |
+|---|---|---|---|
+| structural stability | J = 0.829 | [0.785, 0.871] | ⚠️ point estimate clears 0.8, CI straddles it |
+| claim stability ("late layers") | π\* = 1.00 | [1.00, 1.00] | ✅ |
+| score stability (faithfulness CV) | 0.033 | [0.018, 0.047] | ✅ |
+| beats random | 14.7× | — | ✅ |
+| specificity (null control) | 1.54× | — | ✅ (barely) |
+
+This is the tool's sharpest result. The most-cited circuit in
+interpretability lands a point-estimate **A**, but its structural-stability
+CI still straddles the field's own 0.8 bar after 45 runs — so StressKit marks
+the grade **low-confidence** and refuses to certify it. "IOI is a stable
+circuit" is not a statement the data settles at the proposed threshold.
 
 Notes:
 
-- The specificity failure is the substantive result: on a null task (answer
-  tokens are random names unrelated to the prompt) the finder still returns
-  fairly stable "circuits" (null-control J = 0.55). Attribution concentrates
-  on name-processing heads whether or not the claimed effect exists.
+- Specificity is itself fragile: it *fails* at 1.38× with n=6 runs and
+  *passes* at 1.54× with n=20 — the margin sits right on the 1.5× bar and
+  moves with the null estimate. Treat "passes specificity" here as
+  undecided, not settled. On the null task (answer tokens are random names)
+  the finder still returns fairly stable "circuits" (null J ≈ 0.54).
 - The random-names null is conservative — name-mover heads legitimately
-  process names. A scrambled-prompt null would be stricter and would likely
-  widen the specificity ratio.
-- Score-variance decomposition matches the stability literature:
-  hyperparameter choice 57%, prompt template 36%, seeds 4%, bootstrap 3%.
+  process names; a scrambled-prompt null would be stricter.
+- Score variance is dominated by analytic choices (hyperparameters and
+  template), not seeds — matching the stability literature.
 
 Artifacts: [`cards/ioi_gpt2_small.md`](cards/ioi_gpt2_small.md) ·
 [`cards/ioi_gpt2_small.json`](cards/ioi_gpt2_small.json) ·
@@ -37,28 +44,33 @@ runner [`run_ioi_gpt2_card.py`](run_ioi_gpt2_card.py).
 
 ## GPT-2 small / Greater-Than — attribution patching
 
-**Grade B.** Same finder family on the Greater-Than task (arXiv:2305.00586,
-YY→01 corruption), scored by recovered probability-mass difference.
+**Grade B — high confidence.** Same finder family on the Greater-Than task
+(arXiv:2305.00586, YY→01 corruption), scored by recovered probability-mass
+difference. 45 runs.
 
-| check | value | pass |
-|---|---|---|
-| structural stability | J = 0.840, 95% CI [0.73, 0.97] | ✅ |
-| claim stability ("late layers") | π\* = 0.94 | ✅ |
-| score stability (CV) | 0.002 | ✅ |
-| beats random | 15.3× | ✅ |
-| specificity (null control) | 1.10× | ❌ (bar 1.5×) |
+| check | value | 95% CI | pass |
+|---|---|---|---|
+| structural stability | J = 0.892 | [0.838, 0.945] | ✅ (CI clears 0.8) |
+| claim stability ("late layers") | π\* = 0.98 | [0.933, 1.00] | ✅ |
+| score stability (CV) | 0.002 | [0.001, 0.002] | ✅ |
+| beats random | 15.8× | — | ✅ |
+| specificity (null control) | 1.15× | — | ❌ (bar 1.5×) |
 
 Notes:
 
-- Four of five checks pass — and the fifth repeats the IOI card's pattern,
-  more sharply: scored against a random threshold unrelated to the prompt
-  (no effect exists), the finder returns near-identical stable "circuits"
-  (null-control J = 0.762, specificity 1.10×). Across both circuit cards,
-  attribution patching recovers *task-input-processing* heads with high
-  stability whether or not the claimed effect is present. Specificity, not
-  stability, is the discriminating check for this method family.
-- Variance decomposition again puts analytic choices first: hyperparameters
-  78%, seeds 12%, templates 8%, bootstrap 2%.
+- Unlike the IOI card, every stability check is *robust* — the CIs clear
+  their bars — so this is a high-confidence verdict. The circuit is
+  genuinely, reproducibly stable.
+- And it genuinely fails specificity, unambiguously: scored against a random
+  threshold unrelated to the prompt (no effect exists), the finder returns
+  near-identical stable "circuits" (null J = 0.779, specificity 1.15×).
+  Across both circuit cards, attribution patching recovers
+  *task-input-processing* heads with high stability whether or not the
+  claimed effect is present. **Specificity, not stability, is the
+  discriminating check for this method family** — the headline finding of
+  these reference batteries.
+- Variance decomposition again puts analytic choices first: hyperparameter
+  choice dominates, seeds and bootstrap are minor.
 
 Artifacts: [`cards/greater_than_gpt2_small.md`](cards/greater_than_gpt2_small.md) ·
 [`cards/greater_than_gpt2_small.json`](cards/greater_than_gpt2_small.json) ·
