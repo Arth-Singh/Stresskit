@@ -1,15 +1,15 @@
-# 🔴 Oracle Reliability Report — grade **D**
+# 🔴 Oracle Reliability Report — grade **D** (high confidence)
 
-> Oracle: **adamkarvonen/checkpoints_latentqa_cls_past_lens_addition_Qwen3-8B (Qwen3-8B)** · 7 probes, 225 answers, 0.145s
+> Oracle: **adamkarvonen/checkpoints_latentqa_cls_past_lens_addition_Qwen3-8B (Qwen3-8B)** · 7 probes, 225 answers, 0.039s
 
 ## Checks
 
-| check | value | threshold | pass |
-|---|---|---|---|
-| answer consistency | 0.454 | ≥ 0.700 | ❌ |
-| known accuracy | 0.450 | ≥ 0.700 | ❌ |
-| prompt sensitivity | 0.467 | ≤ 0.200 | ❌ |
-| null hallucination | 0.944 | ≤ 0.250 | ❌ |
+| check | value | 95% CI | threshold | pass |
+|---|---|---|---|---|
+| answer consistency | 0.454 | — | ≥ 0.700 | ❌ |
+| known accuracy | 0.450 | [0.379, 0.523] | ≥ 0.700 | ❌ |
+| prompt sensitivity | 0.467 | — | ≤ 0.200 | ❌ |
+| null hallucination | 0.944 | [0.884, 0.996] | ≤ 0.250 | ❌ |
 
 **Consistency decomposition** — pairwise agreement isolating each factor: repeats (decoding) 0.939 · exemplars (capture) 0.926 · phrasings (prompt) 0.313
 

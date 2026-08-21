@@ -154,8 +154,10 @@ class OracleReport:
 
     def to_markdown(self) -> str:
         emoji = _GRADE_EMOJI.get(self.grade, "")
+        confidence = self.metrics.get("confidence")
+        conf_str = f" ({confidence} confidence)" if confidence else ""
         lines = [
-            f"# {emoji} Oracle Reliability Report — grade **{self.grade}**",
+            f"# {emoji} Oracle Reliability Report — grade **{self.grade}**{conf_str}",
             "",
             f"> Oracle: **{self.oracle_name}** · "
             f"{self.metrics.get('n_probes')} probes, "
@@ -164,14 +166,22 @@ class OracleReport:
             "",
             "## Checks",
             "",
-            "| check | value | threshold | pass |",
-            "|---|---|---|---|",
+            "| check | value | 95% CI | threshold | pass |",
+            "|---|---|---|---|---|",
         ]
         for name, c in self.checks.items():
-            op = "≤" if name in ("prompt_sensitivity", "null_hallucination") else "≥"
+            op = c.get("op") or (
+                "<=" if name in ("prompt_sensitivity", "null_hallucination") else ">=")
+            op = {">=": "≥", "<=": "≤"}.get(op, op)
+            ci = c.get("ci")
+            ci_str = f"[{_fmt(ci[0])}, {_fmt(ci[1])}]" if ci else "—"
+            if c.get("passed"):
+                mark = "✅" if c.get("robust") is not False else "⚠️"
+            else:
+                mark = "❌"
             lines.append(
-                f"| {name.replace('_', ' ')} | {_fmt(c.get('value'))} | "
-                f"{op} {_fmt(c.get('threshold'))} | {_fmt(c.get('passed'))} |"
+                f"| {name.replace('_', ' ')} | {_fmt(c.get('value'))} | {ci_str} | "
+                f"{op} {_fmt(c.get('threshold'))} | {mark} |"
             )
         decomp = self.metrics.get("consistency_decomposition") or {}
         if any(v is not None for v in decomp.values()):
@@ -351,35 +361,45 @@ def stress_oracle(
             sum(p.get("n_asserted", 0) for p in nulls), null_n) if nulls else None,
     }
 
+    def _mk(value, threshold, op, description, ci=None):
+        passed = value >= threshold if op == ">=" else value <= threshold
+        robust = None
+        if ci is not None:
+            robust = ci[0] >= threshold if op == ">=" else ci[1] <= threshold
+        return {"value": value, "threshold": threshold, "passed": passed,
+                "op": op, "ci": ci, "robust": robust, "description": description}
+
     checks: Dict[str, Any] = {}
     if metrics["answer_consistency"] is not None:
-        checks["answer_consistency"] = {
-            "value": metrics["answer_consistency"],
-            "threshold": thresholds.consistency,
-            "passed": metrics["answer_consistency"] >= thresholds.consistency,
-            "description": "pairwise agreement across paraphrases/exemplars/repeats",
-        }
+        checks["answer_consistency"] = _mk(
+            metrics["answer_consistency"], thresholds.consistency, ">=",
+            "pairwise agreement across paraphrases/exemplars/repeats")
     if metrics["known_accuracy"] is not None:
-        checks["known_accuracy"] = {
-            "value": metrics["known_accuracy"],
-            "threshold": thresholds.accuracy,
-            "passed": metrics["known_accuracy"] >= thresholds.accuracy,
-            "description": "ground-truth recovery on known-answer probes",
-        }
+        checks["known_accuracy"] = _mk(
+            metrics["known_accuracy"], thresholds.accuracy, ">=",
+            "ground-truth recovery on known-answer probes",
+            ci=metrics.get("known_accuracy_ci95"))
     if metrics["prompt_spread"] is not None:
-        checks["prompt_sensitivity"] = {
-            "value": metrics["prompt_spread"],
-            "threshold": thresholds.prompt_spread,
-            "passed": metrics["prompt_spread"] <= thresholds.prompt_spread,
-            "description": "max accuracy gap across question phrasings",
-        }
+        checks["prompt_sensitivity"] = _mk(
+            metrics["prompt_spread"], thresholds.prompt_spread, "<=",
+            "max accuracy gap across question phrasings")
     if metrics["null_hallucination_rate"] is not None:
-        checks["null_hallucination"] = {
-            "value": metrics["null_hallucination_rate"],
-            "threshold": thresholds.hallucination,
-            "passed": metrics["null_hallucination_rate"] <= thresholds.hallucination,
-            "description": "confident assertions on null-control activations",
-        }
+        checks["null_hallucination"] = _mk(
+            metrics["null_hallucination_rate"], thresholds.hallucination, "<=",
+            "confident assertions on null-control activations",
+            ci=metrics.get("null_hallucination_ci95"))
+
+    borderline = [name for name, c in checks.items()
+                  if c["passed"] and c.get("robust") is False]
+    resolvable = [c for c in checks.values() if c.get("robust") is not None]
+    metrics["confidence"] = ("unknown" if not resolvable
+                             else "low" if borderline else "high")
+    metrics["borderline_checks"] = borderline
+    if borderline:
+        notes.append(
+            "underpowered: " + ", ".join(sorted(borderline))
+            + " pass on the point estimate but the 95% CI straddles the bar; "
+            "add probes/repeats before reporting.")
     if not checks:
         raise ValueError(
             "Nothing to grade: provide at least one probe with kind='known', "

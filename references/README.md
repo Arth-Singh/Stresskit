@@ -74,9 +74,16 @@ training mixtures × five taboo subject models × 4 question paraphrases ×
 
 | oracle mixture | consistency | known accuracy | prompt sensitivity | null hallucination | grade |
 |---|---|---|---|---|---|
-| full mixture | 0.45 | 0.45 [0.38, 0.52] | 0.47 | 0.94 | D |
-| LatentQA-only | 0.37 | 0.09 | 0.09 | 0.89 | D |
-| classification-only | 0.20 | 0.24 | 0.31 | 0.93 | D |
+| full mixture | 0.45 | 0.45 [0.38, 0.52] | 0.47 | 0.94 [0.88, 1.00] | D |
+| LatentQA-only | 0.37 | 0.09 | 0.09 | 0.89 [0.85, 0.99] | C\* |
+| classification-only | 0.20 | 0.24 | 0.31 | 0.93 [0.85, 0.99] | D |
+
+\* The LatentQA-only C is a cautionary artifact, not a pass: its
+`prompt_sensitivity` check clears the bar (0.09 ≤ 0.20) only because the
+oracle is *uniformly wrong* (accuracy 0.09) — a low accuracy gap across
+phrasings means "consistently unable" just as much as "phrasing-robust".
+The check measures spread, not correctness; read it next to accuracy, never
+alone.
 
 Notes:
 

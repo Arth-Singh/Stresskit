@@ -1,15 +1,15 @@
 {
   "artifact": "stresskit_oracle_report",
   "schema_version": "0.1",
-  "stresskit_version": "0.2.0",
-  "created_at": "2026-08-20T23:48:05+00:00",
+  "stresskit_version": "0.3.0",
+  "created_at": "2026-08-21T05:06:19+00:00",
   "oracle_name": "adamkarvonen/checkpoints_latentqa_cls_past_lens_addition_Qwen3-8B (Qwen3-8B)",
   "metrics": {
     "n_probes": 7,
     "n_answers": 225,
     "answer_consistency": 0.45396825396825397,
     "consistency_decomposition": {
-      "repeats": 0.9388888888888888,
+      "repeats": 0.9388888888888889,
       "exemplars": 0.9259259259259259,
       "phrasings": 0.3131687242798354
     },
@@ -23,31 +23,51 @@
     "null_hallucination_ci95": [
       0.8843305361128119,
       0.9960665024772425
-    ]
+    ],
+    "confidence": "high",
+    "borderline_checks": []
   },
   "checks": {
     "answer_consistency": {
       "value": 0.45396825396825397,
       "threshold": 0.7,
       "passed": false,
+      "op": ">=",
+      "ci": null,
+      "robust": null,
       "description": "pairwise agreement across paraphrases/exemplars/repeats"
     },
     "known_accuracy": {
       "value": 0.45,
       "threshold": 0.7,
       "passed": false,
+      "op": ">=",
+      "ci": [
+        0.3791218435422471,
+        0.5229677814392588
+      ],
+      "robust": false,
       "description": "ground-truth recovery on known-answer probes"
     },
     "prompt_sensitivity": {
       "value": 0.4666666666666667,
       "threshold": 0.2,
       "passed": false,
+      "op": "<=",
+      "ci": null,
+      "robust": null,
       "description": "max accuracy gap across question phrasings"
     },
     "null_hallucination": {
       "value": 0.9444444444444444,
       "threshold": 0.25,
       "passed": false,
+      "op": "<=",
+      "ci": [
+        0.8843305361128119,
+        0.9960665024772425
+      ],
+      "robust": false,
       "description": "confident assertions on null-control activations"
     }
   },
@@ -244,6 +264,6 @@
     "sampled decoding (temp 0.7, top_p 0.9), free-text questions without the upstream single-word prefix \u2014 accuracies not comparable to the paper's headline numbers."
   ],
   "provenance": {
-    "wall_seconds": 0.145
+    "wall_seconds": 0.039
   }
 }

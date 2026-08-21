@@ -1,7 +1,7 @@
 {
   "schema_version": "0.1",
   "stresskit_version": "0.3.0",
-  "created_at": "2026-08-21T00:00:42+00:00",
+  "created_at": "2026-08-21T05:02:09+00:00",
   "claim": {
     "statement": "J-lens readouts surface the latent intermediate at rank <= 5, concentrated in a mid-to-late workspace band",
     "base_claim_label": "late",
@@ -50,6 +50,12 @@
         "seeds": 0.023717928682281297,
         "templates": 0.5290954936382013
       },
+      "variance_absolute": {
+        "bootstrap": 0.0008401596303297625,
+        "hyperparams": 0.015808717942123286,
+        "seeds": 0.0008830249175914848,
+        "templates": 0.019698368728839642
+      },
       "mean_pairwise_jaccard_all_sizes": 0.39306853280850873,
       "n_size_mismatched_excluded": 2,
       "mean_pairwise_jaccard_ci95": [
@@ -60,8 +66,21 @@
         0.0,
         0.39473684210526316
       ],
-      "expected_random_jaccard": 0.11377245508982035,
-      "jaccard_vs_random": 3.9404267985653743
+      "modal_share_ci95": [
+        0.75,
+        1.0
+      ],
+      "score_cv_ci95": [
+        0.15657194703259447,
+        0.5226821877540015
+      ],
+      "expected_random_jaccard": 0.12125795113826887,
+      "expected_random_jaccard_analytic": 0.11377245508982035,
+      "jaccard_vs_random": 3.6971763646517433,
+      "confidence": "low",
+      "borderline_checks": [
+        "claim_stability"
+      ]
     },
     "per_axis": {
       "bootstrap": {
@@ -118,8 +137,8 @@
         "modal_share": 0.5,
         "n_claim_classes": 2,
         "claim_counts": {
-          "late": 1,
-          "middle": 1
+          "middle": 1,
+          "late": 1
         },
         "score_mean": 0.19298245614035087,
         "score_std": 0.14035087719298245,
@@ -145,30 +164,54 @@
         "value": 0.4483120309745036,
         "threshold": 0.8,
         "passed": false,
+        "op": ">=",
+        "ci": [
+          0.4304970858325366,
+          0.5455717891341623
+        ],
+        "robust": false,
         "description": "mean pairwise Jaccard across all perturbed runs"
       },
       "claim_stability": {
         "value": 0.9,
         "threshold": 0.8,
         "passed": true,
+        "op": ">=",
+        "ci": [
+          0.75,
+          1.0
+        ],
+        "robust": false,
         "description": "modal claim share \u03c0* (filability at \u03b1=0.2)"
       },
       "score_stability": {
         "value": 0.36073719804886367,
         "threshold": 0.25,
         "passed": false,
+        "op": "<=",
+        "ci": [
+          0.15657194703259447,
+          0.5226821877540015
+        ],
+        "robust": false,
         "description": "coefficient of variation of the quality score"
       },
       "beats_random": {
-        "value": 3.9404267985653743,
+        "value": 3.6971763646517433,
         "threshold": 3.0,
         "passed": true,
+        "op": ">=",
+        "ci": null,
+        "robust": null,
         "description": "structural overlap vs size-matched random null (\u00d7)"
       },
       "specificity": {
         "value": 0.7827670382094507,
         "threshold": 1.5,
         "passed": false,
+        "op": ">=",
+        "ci": null,
+        "robust": null,
         "description": "structural stability on real vs null-control data (\u00d7)"
       }
     },
@@ -182,10 +225,11 @@
   "provenance": {
     "python": "3.12.3",
     "platform": "Linux-6.8.0-137-generic-x86_64-with-glibc2.39",
-    "wall_seconds": 2.052
+    "wall_seconds": 2.09
   },
   "notes": [
     "1 run(s) from a different component universe (meta['universe']) excluded from structural comparison \u2014 Jaccard across universes is undefined; their claims and scores still count",
-    "structural stability graded on 17 size-comparable runs; 2 run(s) with >2x size difference excluded (pooled-over-all value kept as mean_pairwise_jaccard_all_sizes)"
+    "structural stability graded on 17 size-comparable runs; 2 run(s) with >2x size difference excluded (pooled-over-all value kept as mean_pairwise_jaccard_all_sizes)",
+    "underpowered verdict: claim_stability pass on the point estimate but their 95% CI straddles the bar at n_runs=6. Treat the grade as provisional and raise n_runs (or widen the battery) before reporting it."
   ]
 }
