@@ -127,6 +127,14 @@ def test_sae_stability_single_sae_redundancy_only():
     assert any("single SAE" in n for n in report.notes)
 
 
+def test_sae_stability_single_sae_grade_capped():
+    # clean redundancy alone must not read as a certification
+    report = sae_lens.stability(make_decoder(60, 16))
+    assert report.checks["redundancy"]["passed"]
+    assert report.grade == "C"
+    assert any("capped at C" in n for n in report.notes)
+
+
 def test_sae_stability_max_features_subsample():
     saes = [make_decoder(seed=s, noise=0.05) for s in range(2)]
     report = sae_lens.stability(saes, max_features=40, seed=7)
