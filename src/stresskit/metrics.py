@@ -240,6 +240,29 @@ def wilson_ci(k: int, n: int, z: float = 1.96) -> Optional[List[float]]:
     return [max(0.0, center - half), min(1.0, center + half)]
 
 
+def _pairwise_replicate(items: Sequence, idx: Sequence[int], pair_fn) -> Optional[float]:
+    """Mean of ``pair_fn`` over one bootstrap replicate, self-pair free:
+    only pairs whose members come from different original runs count."""
+    total = count = 0
+    n = len(idx)
+    for a in range(n):
+        for b in range(a + 1, n):
+            if idx[a] == idx[b]:
+                continue                         # self-pair: skip, don't fake
+            total += pair_fn(items[idx[a]], items[idx[b]])
+            count += 1
+    return (total / count) if count else None
+
+
+def _percentile_ci(vals: List[float], n_boot: int, alpha: float) -> Optional[List[float]]:
+    if len(vals) < max(20, n_boot // 10):
+        return None
+    vals.sort()
+    lo = vals[int((alpha / 2) * len(vals))]
+    hi = vals[min(len(vals) - 1, int((1 - alpha / 2) * len(vals)))]
+    return [lo, hi]
+
+
 def bootstrap_ci_pairwise(
     items: Sequence,
     pair_fn,
@@ -269,21 +292,47 @@ def bootstrap_ci_pairwise(
     vals = []
     for _ in range(n_boot):
         idx = [rng.randrange(n) for _ in range(n)]
-        total = count = 0
-        for a in range(n):
-            for b in range(a + 1, n):
-                if idx[a] == idx[b]:
-                    continue                     # self-pair: skip, don't fake
-                total += pair_fn(items[idx[a]], items[idx[b]])
-                count += 1
-        if count:
-            vals.append(total / count)
-    if len(vals) < max(20, n_boot // 10):
+        v = _pairwise_replicate(items, idx, pair_fn)
+        if v is not None:
+            vals.append(v)
+    return _percentile_ci(vals, n_boot, alpha)
+
+
+def bootstrap_ci_ratio_pairwise(
+    num_items: Sequence,
+    den_items: Sequence,
+    pair_fn,
+    n_boot: int = 500,
+    seed: int = 0,
+    alpha: float = 0.05,
+) -> Optional[List[float]]:
+    """Percentile bootstrap CI for a ratio of two mean-pairwise statistics.
+
+    For checks like specificity (stability on real runs ÷ stability on
+    null-control runs) both sides are estimates, so the ratio's uncertainty
+    must come from resampling *both* groups. Each replicate independently
+    resamples the numerator and denominator runs, computes the self-pair-free
+    mean-pairwise statistic on each (see ``bootstrap_ci_pairwise``), and
+    records their ratio. Replicates whose denominator is (near-)zero are
+    dropped. Returns None when either group has fewer than 4 runs or too few
+    replicates were valid.
+    """
+    import random as _random
+
+    num_items, den_items = list(num_items), list(den_items)
+    if len(num_items) < 4 or len(den_items) < 4:
         return None
-    vals.sort()
-    lo = vals[int((alpha / 2) * len(vals))]
-    hi = vals[min(len(vals) - 1, int((1 - alpha / 2) * len(vals)))]
-    return [lo, hi]
+    rng = _random.Random(seed)
+    vals = []
+    for _ in range(n_boot):
+        ni = [rng.randrange(len(num_items)) for _ in num_items]
+        di = [rng.randrange(len(den_items)) for _ in den_items]
+        num = _pairwise_replicate(num_items, ni, pair_fn)
+        den = _pairwise_replicate(den_items, di, pair_fn)
+        if num is None or den is None or den <= 1e-9:
+            continue
+        vals.append(num / den)
+    return _percentile_ci(vals, n_boot, alpha)
 
 
 def bootstrap_ci(
@@ -311,12 +360,7 @@ def bootstrap_ci(
         v = metric_fn(sample)
         if v is not None:
             vals.append(v)
-    if len(vals) < max(20, n_boot // 10):
-        return None
-    vals.sort()
-    lo = vals[int((alpha / 2) * len(vals))]
-    hi = vals[min(len(vals) - 1, int((1 - alpha / 2) * len(vals)))]
-    return [lo, hi]
+    return _percentile_ci(vals, n_boot, alpha)
 
 
 # --------------------------------------------------------------------------

@@ -83,10 +83,12 @@ across the reference batteries.
 passes at n = 20 (1.54×)**; its structural grade would read a clean A
 without the CI. jlens at n = 6 has two of five checks undecided.
 
-*Next experiments.* The verdict-stability curve: run the same battery at
-n = 4, 6, 10, 14, 20 and plot grade, check outcomes, and confidence
-against n. The n at which the verdict stabilizes is itself a reportable
-quantity no current paper provides.
+*Next experiments.* The verdict-stability curve is now built in
+(`stresskit.verdict_trace`): random size-k subsets of a battery's runs are
+regraded at every k, and `settled_n` — the run count at which the verdict
+stops being a coin flip — is a reportable quantity no current paper
+provides. Every reference card ships one. Independent validation (fresh
+runs at each n, not subsets) remains to be done.
 
 ## H5 — Localizability: fragility has an address
 

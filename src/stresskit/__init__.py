@@ -18,7 +18,10 @@ interpretability claims.
 __version__ = "0.3.0"
 
 from .finding import Finding, circuit, feature_set, probe
-from .battery import stress, from_findings, Thresholds, StressResult, RunRecord, DEFAULT_BATTERY
+from .battery import (
+    stress, from_findings, verdict_trace, verdict_trace_markdown,
+    Thresholds, StressResult, RunRecord, DEFAULT_BATTERY,
+)
 from .card import StabilityCard, load_card, validate_card_dict, verify_card_dict
 from .report import generate_checklist
 from .oracle import stress_oracle, OracleProbe, OracleThresholds, blind_spot_matrix
@@ -32,6 +35,8 @@ __all__ = [
     "probe",
     "stress",
     "from_findings",
+    "verdict_trace",
+    "verdict_trace_markdown",
     "Thresholds",
     "StressResult",
     "RunRecord",

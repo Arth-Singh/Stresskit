@@ -82,6 +82,16 @@ findings = [sk.circuit(edges, score=faith) for edges, faith in my_saved_runs]
 print(sk.from_findings(findings, model="gpt2-small", task="IOI").to_markdown())
 ```
 
+**How many runs does a verdict need?** Papers report stability from 5–10
+runs; `verdict_trace` regrades random subsets of your runs at every size and
+reports the n at which the verdict stops being a coin flip — with no new
+runs:
+
+```python
+trace = sk.verdict_trace(findings)            # or result.verdict_trace()
+print(sk.verdict_trace_markdown(trace))       # grade distribution vs n, settled_n
+```
+
 **Using SAELens or EAP-IG?** One call:
 
 ```python
@@ -112,8 +122,12 @@ a pure-noise null where the method still returns confident-looking features
 | **Structural stability** | mean pairwise Jaccard of component sets across runs, with bootstrap 95% CI | ≥ 0.8 | arXiv:2510.00845 |
 | **Claim stability** | modal claim share π\* + flip rate, with bootstrap 95% CI | π\* ≥ 0.8 | arXiv:2608.13754 |
 | **Score stability** | coefficient of variation of the quality score | ≤ 0.25 | arXiv:2510.00845 |
-| **Beats random** | overlap vs. size-matched random null *J* = *k*/(2*N*−*k*) | ≥ 3× | arXiv:2608.13754, 2602.14111 |
-| **Specificity** | stability on real data vs. a null control where the effect should not exist | ≥ 1.5× | arXiv:2606.00033 |
+| **Beats random** | overlap vs. size-matched random null (Monte-Carlo over the observed size distribution; analytic *k*/(2*N*−*k*) kept as cross-check) | ≥ 3× | arXiv:2608.13754, 2602.14111 |
+| **Specificity** | stability on real data vs. a null control where the effect should not exist, with a two-sample bootstrap 95% CI | ≥ 1.5× | arXiv:2606.00033 |
+
+Every check carries a 95% CI. A CI that straddles its bar marks the check
+**undecided in either direction** — the point estimate still grades, but the
+verdict is reported low-confidence and the card says so out loud.
 
 Grades: **A** all applicable checks pass · **B** at least half · **C** at least
 one · **D** none, or indistinguishable from random. Thresholds are configurable

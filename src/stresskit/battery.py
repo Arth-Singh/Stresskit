@@ -26,7 +26,7 @@ import os
 import random
 import statistics
 import time
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Any, Callable, Dict, List, Mapping, Optional, Sequence, Tuple
 
 from . import metrics as M
@@ -135,10 +135,22 @@ class StressResult:
     checks: Dict[str, Any]
     grade: str
     null_summary: Optional[Dict[str, Any]] = None
+    null_runs: Optional[List[RunRecord]] = None
     card: StabilityCard = None  # type: ignore[assignment]
 
     def to_markdown(self) -> str:
         return self.card.to_markdown()
+
+    def verdict_trace(self, **kwargs) -> Dict[str, Any]:
+        """Verdict-stability trace over this result's own runs (see
+        ``stresskit.verdict_trace``); null runs propagate when present."""
+        return verdict_trace(
+            [r.finding for r in self.runs],
+            null_findings=(
+                [r.finding for r in self.null_runs] if self.null_runs else None
+            ),
+            **kwargs,
+        )
 
     def __repr__(self) -> str:  # pragma: no cover - cosmetic
         j = self.pooled.get("mean_pairwise_jaccard")
@@ -410,6 +422,8 @@ def stress(
 
     # --- null-control (specificity) --------------------------------------------
     null_summary: Optional[Dict[str, Any]] = None
+    null_components: Optional[List[frozenset]] = None
+    null_runs: Optional[List[RunRecord]] = None
     if null_data is not None:
         null_axes = tuple(ax for ax in battery if ax in ("seeds", "bootstrap")) or ("seeds",)
         try:
@@ -433,16 +447,42 @@ def stress(
                     "modal_share", "score_mean", "score_cv", "median_size",
                 )
             }
+            null_components = _graded_components(
+                [r.finding for r in null_result.runs], null_result.base
+            )
+            null_runs = null_result.runs
         except (ValueError, TypeError) as e:
             notes.append(f"null control skipped: finder failed on null_data ({e})")
 
-    return _analyze(
+    result = _analyze(
         runs, base,
         thresholds=thresholds, claim_equiv=claim_equiv, notes=notes,
         seed=seed, battery=battery, n_runs=n_runs, base_config=base_config,
-        null_summary=null_summary, claim_statement=claim_statement,
+        null_summary=null_summary, null_components=null_components,
+        claim_statement=claim_statement,
         model=model, task=task, method=method, t0=t0,
     )
+    result.null_runs = null_runs
+    return result
+
+
+def _graded_components(
+    findings: Sequence[Finding], base: Finding
+) -> List[frozenset]:
+    """Component sets that structural grading actually uses: structured,
+    same universe as the base, and (when the base has structure) within the
+    2x size guard — falling back to all same-universe structured sets when
+    the guard would leave nothing, mirroring ``_analyze``."""
+    bu = _universe_of(base)
+    structs = [
+        f.components for f in findings
+        if f.has_structure() and _universe_of(f) == bu
+    ]
+    if base.has_structure():
+        sized = [c for c in structs
+                 if base.size / 2 <= len(c) <= base.size * 2]
+        return sized if sized else structs
+    return structs
 
 
 def _analyze(
@@ -457,6 +497,7 @@ def _analyze(
     n_runs: int,
     base_config: Dict[str, Any],
     null_summary: Optional[Dict[str, Any]],
+    null_components: Optional[List[frozenset]] = None,
     claim_statement: Optional[str],
     model: Optional[str],
     task: Optional[str],
@@ -599,16 +640,31 @@ def _analyze(
             ci=pooled.get("score_cv_ci95"))
     vr = pooled["jaccard_vs_random"]
     if vr is not None:
+        # The MC null is an expectation over a fully known distribution
+        # (random size-matched subsets), so it enters as a constant; the
+        # ratio's uncertainty is the real-Jaccard bootstrap, rescaled.
+        jci = pooled.get("mean_pairwise_jaccard_ci95")
+        vr_ci = ([jci[0] / random_null, jci[1] / random_null]
+                 if jci and random_null else None)
+        pooled["jaccard_vs_random_ci95"] = vr_ci
         checks["beats_random"] = _mk(
             vr, thresholds.random_margin, ">=",
-            "structural overlap vs size-matched random null (×)")
+            "structural overlap vs size-matched random null (×)",
+            ci=vr_ci)
     if null_summary is not None and j is not None:
         null_j = null_summary.get("mean_pairwise_jaccard")
         if null_j is not None:
             ratio = (j / null_j) if null_j > 1e-9 else float("inf")
+            # Both sides of the ratio are estimated from runs, so the CI
+            # resamples real and null-control runs independently.
+            spec_ci = (M.bootstrap_ci_ratio_pairwise(
+                structured_for_ci, null_components, M.jaccard, seed=seed)
+                if null_components else None)
+            pooled["specificity_ci95"] = spec_ci
             checks["specificity"] = _mk(
                 ratio, thresholds.specificity_ratio, ">=",
-                "structural stability on real vs null-control data (×)")
+                "structural stability on real vs null-control data (×)",
+                ci=spec_ci)
 
     if not checks:
         raise ValueError(
@@ -743,6 +799,7 @@ def from_findings(
         runs.append(RunRecord(axis, f"{axis}={counts[axis]}", seed, {}, f))
 
     null_summary: Optional[Dict[str, Any]] = None
+    null_components: Optional[List[frozenset]] = None
     if null_findings is not None:
         null_findings = list(null_findings)
         if len(null_findings) < 2:
@@ -759,15 +816,170 @@ def from_findings(
             "score_cv": null_pooled["score_cv"],
             "median_size": null_pooled["median_size"],
         }
+        null_components = _graded_components(null_findings, null_findings[0])
 
     return _analyze(
         runs, base,
         thresholds=thresholds, claim_equiv=claim_equiv, notes=notes,
         seed=seed, battery=sorted(set(axes)), n_runs=len(findings),
         base_config={}, null_summary=null_summary,
+        null_components=null_components,
         claim_statement=claim_statement, model=model, task=task,
         method=method, t0=t0,
     )
+
+
+def verdict_trace(
+    findings: Sequence[Finding],
+    *,
+    null_findings: Optional[Sequence[Finding]] = None,
+    sizes: Optional[Sequence[int]] = None,
+    n_subsamples: int = 30,
+    thresholds: Optional[Thresholds] = None,
+    claim_equiv=None,
+    seed: int = 0,
+) -> Dict[str, Any]:
+    """How stable is the verdict itself as a function of run count?
+
+    Papers typically report stability from 5–10 runs. This asks whether a
+    verdict at that n means anything: it draws random size-k subsets of the
+    supplied findings (and matching subsets of the null-control findings,
+    when given), grades every subset with the full analysis, and reports
+    the distribution of grades and per-check outcomes at each k.
+
+    ``settled_n`` is the smallest k from which every k' >= k has a modal
+    grade equal to the full-sample grade with subset agreement >= 0.9 —
+    the run count at which the verdict stops being a coin flip. None means
+    the verdict never settles within the runs supplied, which is itself
+    the finding.
+
+    Costs no new runs: subsets are regraded from the findings you already
+    have (each regrade includes its bootstrap CIs, so expect roughly a
+    minute of CPU per hundred subsets at n around 20).
+    """
+    findings = list(findings)
+    n = len(findings)
+    if n < 5:
+        raise ValueError(f"verdict_trace needs >= 5 findings, got {n}")
+    if sizes is None:
+        sizes = sorted({k for k in (4, 6, 8, 10, 14, 20, 28, n) if 4 <= k <= n})
+    else:
+        sizes = sorted({int(k) for k in sizes})
+        bad = [k for k in sizes if k < 4 or k > n]
+        if bad:
+            raise ValueError(
+                f"subset sizes must lie in [4, {n}] (4 is the minimum for "
+                f"bootstrap CIs); got {bad}"
+            )
+
+    nulls = list(null_findings) if null_findings is not None else None
+    full = from_findings(
+        findings, null_findings=nulls, thresholds=thresholds,
+        claim_equiv=claim_equiv, seed=seed,
+    )
+
+    rng = random.Random(seed)
+    per_size: Dict[int, Dict[str, Any]] = {}
+    for k in sizes:
+        grades: List[str] = []
+        confidences: List[str] = []
+        check_passes: Dict[str, List[bool]] = {}
+        n_draws = 1 if k == n else n_subsamples
+        for draw in range(n_draws):
+            sub = (findings if k == n
+                   else [findings[i] for i in rng.sample(range(n), k)])
+            nsub = None
+            if nulls:
+                km = min(k, len(nulls))
+                if km >= 2:
+                    nsub = [nulls[i] for i in rng.sample(range(len(nulls)), km)]
+            try:
+                r = from_findings(
+                    sub, null_findings=nsub, thresholds=thresholds,
+                    claim_equiv=claim_equiv, seed=seed + draw,
+                )
+            except ValueError:
+                continue
+            grades.append(r.grade)
+            confidences.append(r.pooled["confidence"])
+            for name, c in r.checks.items():
+                check_passes.setdefault(name, []).append(bool(c["passed"]))
+        if not grades:
+            continue
+        dist = {g: grades.count(g) / len(grades) for g in sorted(set(grades))}
+        modal = max(dist, key=lambda g: dist[g])
+        per_size[k] = {
+            "n_subsamples": len(grades),
+            "grade_dist": dist,
+            "modal_grade": modal,
+            "modal_grade_share": dist[modal],
+            "low_confidence_share": confidences.count("low") / len(confidences),
+            "check_pass_frac": {
+                name: sum(v) / len(v)
+                for name, v in sorted(check_passes.items())
+            },
+        }
+
+    settled_n = None
+    usable = [k for k in sizes if k in per_size]
+    for i, k in enumerate(usable):
+        if all(
+            per_size[k2]["modal_grade"] == full.grade
+            and per_size[k2]["modal_grade_share"] >= 0.9
+            for k2 in usable[i:]
+        ):
+            settled_n = k
+            break
+
+    return {
+        "n_total": n,
+        "full_grade": full.grade,
+        "full_confidence": full.pooled["confidence"],
+        "sizes": usable,
+        "per_size": per_size,
+        "settled_n": settled_n,
+    }
+
+
+def verdict_trace_markdown(trace: Dict[str, Any]) -> str:
+    """Render a verdict_trace() result as a markdown table."""
+    lines = [
+        f"## Verdict-stability trace — grade **{trace['full_grade']}** "
+        f"({trace['full_confidence']} confidence) at n = {trace['n_total']}",
+        "",
+        "| n runs | grade distribution | modal | low-confidence | flakiest check |",
+        "|---|---|---|---|---|",
+    ]
+    for k in trace["sizes"]:
+        row = trace["per_size"][k]
+        dist = " · ".join(
+            f"{g} {share:.0%}" for g, share in sorted(row["grade_dist"].items())
+        )
+        flaky = ""
+        if row["check_pass_frac"]:
+            name, frac = min(
+                row["check_pass_frac"].items(),
+                key=lambda kv: abs(kv[1] - 0.5),
+            )
+            flaky = f"{name} (pass {frac:.0%})"
+        lines.append(
+            f"| {k} | {dist} | {row['modal_grade']} "
+            f"| {row['low_confidence_share']:.0%} | {flaky} |"
+        )
+    lines.append("")
+    if trace["settled_n"] is not None:
+        lines.append(
+            f"Verdict settles at **n = {trace['settled_n']}**: from there on, "
+            f"the modal grade matches the full-sample grade with >= 90% "
+            f"subset agreement."
+        )
+    else:
+        lines.append(
+            f"The verdict does **not settle** within n = {trace['n_total']} "
+            f"runs — subsets keep disagreeing about the grade. Any single "
+            f"report at these run counts is a coin flip."
+        )
+    return "\n".join(lines)
 
 
 def make_check(

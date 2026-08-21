@@ -178,6 +178,8 @@ def main():
     ap.add_argument("--n-runs", type=int, default=6)
     ap.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu")
     ap.add_argument("--out-dir", default=os.path.join(os.path.dirname(__file__), "cards"))
+    ap.add_argument("--cache-dir", default=None,
+                    help="cache finder runs so a preempted battery resumes free")
     args = ap.parse_args()
 
     print(f"loading {args.model} on {args.device} ...")
@@ -209,6 +211,9 @@ def main():
         task="IOI (ABC corruption)",
         method="head-level attribution patching, top-k by |attribution|",
         verbose=True,
+        cache_dir=args.cache_dir,
+        cache_key=(f"ioi-{args.model}-p{args.n_prompts}-r{args.n_runs}"
+                   if args.cache_dir else None),
     )
 
     print()
@@ -225,6 +230,15 @@ def main():
     with open(base + ".badge.json", "w") as f:
         json.dump(result.card.badge_dict(), f, indent=2)
         f.write("\n")
+
+    print("\ncomputing verdict-stability trace ...")
+    trace = result.verdict_trace(seed=0)
+    with open(base + ".trace.json", "w") as f:
+        json.dump(trace, f, indent=2)
+        f.write("\n")
+    with open(base + ".trace.md", "w") as f:
+        f.write(sk.verdict_trace_markdown(trace) + "\n")
+    print(sk.verdict_trace_markdown(trace))
     print(f"\nartifacts written to {base}.*")
 
 

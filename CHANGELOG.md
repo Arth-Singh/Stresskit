@@ -2,6 +2,17 @@
 
 ## 0.3.0
 
+- **`verdict_trace`** — regrades random subsets of a battery's runs at every
+  size and reports the grade distribution per n plus `settled_n`, the run
+  count at which the verdict stops being a coin flip. No new runs needed;
+  also available as `StressResult.verdict_trace()`.
+- **CIs on specificity and beats-random** — specificity now carries a
+  two-sample bootstrap 95% CI (`metrics.bootstrap_ci_ratio_pairwise`,
+  resampling real and null-control runs independently, self-pair free);
+  beats-random carries the real-Jaccard bootstrap CI rescaled by the
+  Monte-Carlo null. Every check on the card now has an interval, so a
+  specificity margin sitting on the 1.5× bar reads as undecided instead of
+  silently passing.
 - **Post-hoc mode** — `stresskit.from_findings(findings, axes=, null_findings=)`
   grades runs you already have: same card, same checks, no re-running.
 - **`adapters.sae_lens.stability()`** — one-call graded report for SAELens

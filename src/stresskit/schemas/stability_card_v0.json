@@ -398,6 +398,28 @@
           "minItems": 2,
           "maxItems": 2
         },
+        "jaccard_vs_random_ci95": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "specificity_ci95": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
         "expected_random_jaccard_analytic": {
           "type": [
             "number",
