@@ -17,22 +17,30 @@ random-answer null control. 45 runs.
 | structural stability | J = 0.829 | [0.781, 0.869] | ⚠️ point estimate clears 0.8, CI straddles it |
 | claim stability ("late layers") | π\* = 1.00 | [1.00, 1.00] | ✅ |
 | score stability (faithfulness CV) | 0.033 | [0.018, 0.047] | ✅ |
-| beats random | 14.7× | — | ✅ |
-| specificity (null control) | 1.54× | — | ✅ (barely) |
+| beats random | 14.7× | [13.8, 15.4] | ✅ |
+| specificity (null control) | 1.54× | [1.41, 1.70] | ⚠️ CI straddles the 1.5× bar |
 
 This is the tool's sharpest result. The most-cited circuit in
-interpretability lands a point-estimate **A**, but its structural-stability
-CI still straddles the field's own 0.8 bar after 45 runs — so StressKit marks
-the grade **low-confidence** and refuses to certify it. "IOI is a stable
-circuit" is not a statement the data settles at the proposed threshold.
+interpretability lands a point-estimate **A**, but two of its five checks —
+structural stability and specificity — have CIs straddling their bars after
+45 runs, so StressKit marks the grade **low-confidence** and refuses to
+certify it. "IOI is a stable circuit" is not a statement the data settles at
+the proposed thresholds.
+
+The verdict-stability trace
+([`cards/ioi_gpt2_small.trace.md`](cards/ioi_gpt2_small.trace.md)) makes the
+run-count problem concrete: at n = 6 — a typical paper's budget — the grade
+is a literal coin flip (A in 47% of run subsets, B in 53%), and the verdict
+does not settle until **all 45 runs** are in. Any single 6-run stability
+report on this circuit is as informative as a coin toss.
 
 Notes:
 
-- Specificity is itself fragile: it *fails* at 1.38× with n=6 runs and
-  *passes* at 1.54× with n=20 — the margin sits right on the 1.5× bar and
-  moves with the null estimate. Treat "passes specificity" here as
-  undecided, not settled. On the null task (answer tokens are random names)
-  the finder still returns fairly stable "circuits" (null J ≈ 0.54).
+- Specificity is formally undecided: the two-sample bootstrap CI
+  [1.41, 1.70] straddles the 1.5× bar, resolving the earlier observation
+  that the margin flipped between fail (1.38×, n=6) and pass (1.54×, n=20).
+  On the null task (answer tokens are random names) the finder still
+  returns fairly stable "circuits" (null J ≈ 0.54).
 - The random-names null is conservative — name-mover heads legitimately
   process names; a scrambled-prompt null would be stricter.
 - Score variance is dominated by analytic choices (hyperparameters and
@@ -53,15 +61,19 @@ difference. 45 runs.
 | structural stability | J = 0.892 | [0.834, 0.943] | ✅ (CI clears 0.8) |
 | claim stability ("late layers") | π\* = 0.98 | [0.933, 1.00] | ✅ |
 | score stability (CV) | 0.002 | [0.001, 0.002] | ✅ |
-| beats random | 15.8× | — | ✅ |
-| specificity (null control) | 1.15× | — | ❌ (bar 1.5×) |
+| beats random | 15.8× | [14.7, 16.7] | ✅ |
+| specificity (null control) | 1.15× | [1.06, 1.23] | ❌ (CI entirely below the 1.5× bar) |
 
 Notes:
 
-- Unlike the IOI card, every stability check is *robust* — the CIs clear
-  their bars — so this is a high-confidence verdict. The circuit is
-  genuinely, reproducibly stable.
-- And it genuinely fails specificity, unambiguously: scored against a random
+- Unlike the IOI card, every check — including the failing one — is
+  *robust*: the CIs decide each verdict in its direction. This is a
+  high-confidence B, and the verdict-stability trace
+  ([`cards/greater_than_gpt2_small.trace.md`](cards/greater_than_gpt2_small.trace.md))
+  shows it settling at **n = 6**: decidable findings settle fast; IOI's
+  n = 45 is what an undecidable one looks like.
+- And it genuinely fails specificity, unambiguously: the two-sample CI
+  [1.06, 1.23] sits entirely below the bar. Scored against a random
   threshold unrelated to the prompt (no effect exists), the finder returns
   near-identical stable "circuits" (null J = 0.779, specificity 1.15×).
   Across both circuit cards, attribution patching recovers
@@ -75,6 +87,34 @@ Notes:
 Artifacts: [`cards/greater_than_gpt2_small.md`](cards/greater_than_gpt2_small.md) ·
 [`cards/greater_than_gpt2_small.json`](cards/greater_than_gpt2_small.json) ·
 runner [`run_greater_than_gpt2_card.py`](run_greater_than_gpt2_card.py).
+
+## IOI across GPT-2 scale — does stability improve with model size?
+
+Same task, same finder, same battery and thresholds, three model sizes
+(45 runs each). The answer: **no monotone trend** — instability is not a
+small-model artifact that scale washes out.
+
+| model | J (95% CI) | specificity (95% CI) | verdict | settles at |
+|---|---|---|---|---|
+| gpt2-small (124M) | 0.829 [0.781, 0.869] ⚠️ | 1.54× [1.41, 1.70] ⚠️ | A, **low confidence** | n = 45 |
+| gpt2-medium (355M) | 0.947 [0.885, 1.000] ✅ | 2.33× [2.07, 2.63] ✅ | **A, high confidence** | n = 6 |
+| gpt2-large (774M) | 0.847 [0.795, 0.894] ⚠️ | 1.63× [1.47, 1.81] ⚠️ | A, **low confidence** | n = 20 |
+
+Notes:
+
+- gpt2-medium is the only certifiable A in the entire reference set: every
+  CI clears its bar, and the verdict settles at n = 6. The same claim on
+  the models one size down *and one size up* is undecided after 45 runs.
+- Stability is model-idiosyncratic, not scale-monotone: whatever makes the
+  medium-model circuit crisply repeatable is absent again at 774M, where
+  the qualitative claim also starts flipping ("late" → "middle" in 3/45
+  runs, flip-rate CI [0.05, 0.24]).
+- Hyperparameter choice dominates score variance at every scale (57% →
+  91% → 84%) — the analytic-choices-first hierarchy replicates across
+  model size.
+
+Artifacts: [`scale/`](scale/) — card, render, and verdict trace per model.
+gpt2-xl pending (needs more GPU headroom than the shared box had free).
 
 ## Activation Oracles / Qwen3-8B taboo — oracle reliability
 

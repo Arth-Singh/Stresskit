@@ -204,7 +204,7 @@ def main():
         hyperparams={"top_k": [8, 30]},
         null_data=null_data,
         claim_statement=(
-            "IOI in GPT-2 small is implemented by ~15 attention heads "
+            f"IOI in {args.model} is implemented by ~15 attention heads "
             "concentrated in the late layers"
         ),
         model=args.model,

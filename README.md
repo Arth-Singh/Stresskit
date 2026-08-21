@@ -238,8 +238,9 @@ Published findings, default battery, default thresholds. Full analysis in
 
 | finding | method | verdict | headline |
 |---|---|---|---|
-| IOI circuit, GPT-2 small | attribution patching | **A**, low confidence | point estimate clears 0.8 but the 95% CI straddles it at 45 runs — the grade is not certifiable |
-| Greater-Than circuit, GPT-2 small | attribution patching | **B**, high confidence | robustly stable (J CI [0.83, 0.94]) yet fails specificity at 1.15× — the null "circuit" is just as stable |
+| IOI circuit, GPT-2 small | attribution patching | **A**, low confidence | structural stability *and* specificity CIs straddle their bars at 45 runs; at n = 6 the grade is a literal coin flip (A 47% / B 53% of subsets), settling only at n = 45 |
+| Greater-Than circuit, GPT-2 small | attribution patching | **B**, high confidence | robustly stable (J CI [0.83, 0.94]) yet decisively fails specificity (CI [1.06, 1.23] vs the 1.5× bar) — the null "circuit" is just as stable |
+| IOI across GPT-2 scale (124M–774M) | attribution patching | A / **A certified** / A | no monotone trend: medium is the only card whose every CI clears its bar; large is undecided again — instability is model-idiosyncratic, not cured by scale |
 | Activation Oracles, Qwen3-8B taboo | upstream `run_verbalizer` | **D** (two mixtures), **C** (one) | consistency 0.94 across captures vs 0.31 across phrasings; ≥89% fabrication even on a null probe that invites abstention |
 | J-lens workspace readouts, Qwen3.5-4B | released pre-fitted lens | **C** | band claim stable (π\* = 0.90); which items hit is not (J = 0.45), and a derangement null is *more* stable than the real finding |
 

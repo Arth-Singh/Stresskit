@@ -25,10 +25,13 @@ sample sizes.
 *Evidence so far.* IOI/GPT-2 (the field's most-studied circuit):
 J = 0.829, CI [0.781, 0.869] — **still undecided after 45 runs**.
 J-lens hit-sets: J = 0.45. Consistent with the multiverse literature
-(arXiv:2608.13754, 2510.00845).
+(arXiv:2608.13754, 2510.00845). Scale sweep (same battery, 45 runs per
+model): gpt2-medium is robustly stable (J CI [0.885, 1.000]) but
+gpt2-large is undecided again (CI [0.795, 0.894]) — **instability is
+model-idiosyncratic, not a small-model artifact that scale removes**.
 
-*Next experiments.* The same battery across model scale (GPT-2 medium /
-large): does stability improve, worsen, or stay undecided with scale?
+*Next experiments.* gpt2-xl to complete the sweep; a second model family
+(Pythia) to separate scale from training-run idiosyncrasy.
 
 ## H2 — Non-specificity: stable ≠ real
 
@@ -40,10 +43,17 @@ authenticate a circuit; a null control can.
 show substantially degraded stability (ratio ≥ 1.5×) for these methods.
 
 *Evidence so far.* The sharpest result in the reference set.
-Greater-Than: null-task circuits at J = 0.779 vs real 0.892 (**1.15×**).
-IOI: 1.38–1.54×, sitting on the bar and flipping with n. J-lens: the
-derangement null is *more* stable than the real hit-set (**0.78×**) —
-hit metrics reward token-frequency artifacts.
+Greater-Than: null-task circuits at J = 0.779 vs real 0.892 — specificity
+1.15×, CI [1.06, 1.23], a **decisive fail**. IOI/gpt2-small: 1.54×,
+CI [1.41, 1.70] — formally undecided (which subsumes the earlier
+observation that the margin flipped between 1.38× and 1.54× with n).
+J-lens: the derangement null is *more* stable than the real hit-set
+(**0.78×**). One honest counterexample: IOI on gpt2-medium passes
+specificity robustly (2.33×, CI [2.07, 2.63]) — so non-specificity is not
+universal for the family. The defensible claim is narrower and more
+useful: **specificity varies task-by-task and model-by-model and
+therefore must be measured, never assumed** — and papers do not measure
+it.
 
 *Next experiments.* Same task, multiple discovery methods (plain
 attribution patching vs integrated-gradients attribution): is
@@ -79,9 +89,14 @@ verdicts are coin flips; only interval-aware grading distinguishes
 *Refuted if* grades and check outcomes at n ≈ 6 match those at n ≈ 20
 across the reference batteries.
 
-*Evidence so far.* IOI's specificity check **fails at n = 6 (1.38×) and
-passes at n = 20 (1.54×)**; its structural grade would read a clean A
-without the CI. jlens at n = 6 has two of five checks undecided.
+*Evidence so far.* Now measured directly by the built-in trace. IOI on
+gpt2-small at n = 6: **grade A in 47% of run subsets, B in 53% — a coin
+flip** — and the verdict does not settle until n = 45 (still
+low-confidence there). Contrast the decidable cards: Greater-Than and
+IOI/gpt2-medium settle at n = 6, IOI/gpt2-large at n = 20. `settled_n`
+separates findings whose verdicts are real from findings whose verdicts
+are sampling noise, and no current paper reports anything like it.
+jlens at n = 6 has two of five checks undecided.
 
 *Next experiments.* The verdict-stability curve is now built in
 (`stresskit.verdict_trace`): random size-k subsets of a battery's runs are
