@@ -5,6 +5,8 @@ Commands
 stresskit render <card.json>          render a Stability Card as markdown
 stresskit badge  <card.json> [-o f]   emit shields.io endpoint JSON for the badge
 stresskit report [--field value ...]  generate the Minimum Reporting Checklist
+stresskit verify <cards-or-dirs ...>  auditor mode: re-derive every artifact's
+                                      checks and grade from its own metrics
 stresskit version
 """
 
@@ -14,7 +16,7 @@ import argparse
 import json
 import sys
 
-from .card import StabilityCard, verify_card_dict
+from .card import StabilityCard
 from .report import CHECKLIST_FIELDS, generate_checklist
 
 
@@ -51,19 +53,78 @@ def _cmd_report(args: argparse.Namespace) -> int:
     return 0
 
 
+def _iter_artifact_paths(paths):
+    """Yield (path, from_directory) for every JSON file named by ``paths``.
+
+    Directories are walked recursively; files are passed through verbatim
+    so a non-artifact named explicitly is an error, not a silent skip.
+    """
+    import glob as _glob
+    import os as _os
+
+    for p in paths:
+        if _os.path.isdir(p):
+            pattern = _os.path.join(p, "**", "*.json")
+            for fp in sorted(_glob.glob(pattern, recursive=True)):
+                yield fp, True
+        else:
+            yield p, False
+
+
 def _cmd_verify(args: argparse.Namespace) -> int:
-    with open(args.card, encoding="utf-8") as f:
-        d = json.load(f)
-    result = verify_card_dict(d)
-    if result["ok"]:
-        print(f"OK: verdict {d['verdict']['grade']} re-derives from the "
-              f"card's own metrics ({len(d['verdict']['checks'])} checks)")
-        return 0
-    print(f"FAILED: card does not verify "
-          f"(recomputed grade {result['recomputed_grade']})")
-    for problem in result["problems"]:
-        print(f"  - {problem}")
-    return 1
+    from .card import classify_artifact_dict, verify_artifact_dict
+
+    n_ok = n_fail = n_skip = 0
+    for path, from_dir in _iter_artifact_paths(args.cards):
+        try:
+            with open(path, encoding="utf-8") as f:
+                d = json.load(f)
+        except (OSError, json.JSONDecodeError) as e:
+            print(f"FAILED: {path} — unreadable ({e})")
+            n_fail += 1
+            continue
+        kind = classify_artifact_dict(d)
+        if kind == "unknown":
+            if from_dir:  # badges, traces, raw dumps living next to cards
+                n_skip += 1
+                continue
+            print(f"FAILED: {path} — not a verifiable StressKit artifact")
+            n_fail += 1
+            continue
+        result = verify_artifact_dict(d)
+        checks = (d.get("verdict", {}).get("checks")
+                  if kind == "stability_card" else d.get("checks")) or {}
+        if result["ok"]:
+            print(f"OK: {path} — verdict {d['verdict']['grade']} re-derives "
+                  f"from the {kind.replace('_', ' ')}'s own metrics "
+                  f"({len(checks)} checks)")
+            n_ok += 1
+        else:
+            print(f"FAILED: {path} — does not verify "
+                  f"(recomputed grade {result['recomputed_grade']})")
+            for problem in result["problems"]:
+                print(f"  - {problem}")
+            n_fail += 1
+
+    total = n_ok + n_fail + n_skip
+    if total == 0:
+        print("FAILED: no JSON artifacts found")
+        return 1
+    if total > 1 or n_skip:
+        print(f"\n{n_ok} verified, {n_fail} failed, "
+              f"{n_skip} skipped (not cards/reports)")
+    return 1 if n_fail else 0
+
+
+def _cmd_scoreboard(args: argparse.Namespace) -> int:
+    from .scoreboard import collect_rows, scoreboard_markdown, write_scoreboard
+
+    if args.output:
+        n = write_scoreboard(args.paths, args.output)
+        print(f"scoreboard with {n} findings written to {args.output}")
+    else:
+        print(scoreboard_markdown(collect_rows(args.paths)))
+    return 0
 
 
 def _cmd_version(_: argparse.Namespace) -> int:
@@ -97,10 +158,25 @@ def build_parser() -> argparse.ArgumentParser:
 
     pf = sub.add_parser(
         "verify",
-        help="auditor mode: re-derive a card's checks and grade from its metrics",
+        help="auditor mode: re-derive checks and grades from artifacts' own metrics",
     )
-    pf.add_argument("card", help="path to a stability card .json")
+    pf.add_argument(
+        "cards", nargs="+", metavar="card",
+        help="stability card / oracle report .json files, or directories "
+             "to scan recursively (non-artifact JSONs in directories are skipped)",
+    )
     pf.set_defaults(func=_cmd_verify)
+
+    ps = sub.add_parser(
+        "scoreboard",
+        help="render a markdown scoreboard of every card/report found",
+    )
+    ps.add_argument(
+        "paths", nargs="+",
+        help="card/report .json files or directories to scan recursively",
+    )
+    ps.add_argument("-o", "--output", help="write markdown here instead of stdout")
+    ps.set_defaults(func=_cmd_scoreboard)
 
     pv = sub.add_parser("version", help="print version")
     pv.set_defaults(func=_cmd_version)

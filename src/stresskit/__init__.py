@@ -22,7 +22,10 @@ from .battery import (
     stress, from_findings, verdict_trace, verdict_trace_markdown,
     Thresholds, StressResult, RunRecord, DEFAULT_BATTERY,
 )
-from .card import StabilityCard, load_card, validate_card_dict, verify_card_dict
+from .card import (
+    StabilityCard, load_card, validate_card_dict, verify_card_dict,
+    verify_oracle_report_dict, verify_artifact_dict, classify_artifact_dict,
+)
 from .report import generate_checklist
 from .oracle import stress_oracle, OracleProbe, OracleThresholds, blind_spot_matrix
 from . import metrics, baselines, judges, oracle
@@ -45,6 +48,9 @@ __all__ = [
     "load_card",
     "validate_card_dict",
     "verify_card_dict",
+    "verify_oracle_report_dict",
+    "verify_artifact_dict",
+    "classify_artifact_dict",
     "generate_checklist",
     "stress_oracle",
     "OracleProbe",

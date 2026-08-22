@@ -1,5 +1,28 @@
 # Changelog
 
+## Unreleased
+
+- **Oracle reports are now auditable** — `verify_oracle_report_dict`
+  re-derives an oracle reliability report's checks, grade, confidence,
+  pooled metrics (from the per-probe rows), and Wilson CIs (from the
+  recorded counts); `verify_artifact_dict` / `classify_artifact_dict`
+  dispatch across artifact kinds.
+- **Batch auditing** — `stresskit verify` accepts multiple files and
+  directories (recursive), skipping non-artifact JSONs that live next to
+  cards; CI now runs `stresskit verify references/` on every push, so
+  every published verdict is continuously re-derived.
+- **`stresskit scoreboard`** — renders every card and report found into
+  one deterministic markdown table; the repo's `SCOREBOARD.md` is
+  generated from `references/` and diffed in CI (a stale scoreboard fails
+  the build).
+- **Evidence standard** — `references/PROTOCOL.md` pre-registers what a
+  reference card requires (thresholds fixed in advance, minimum battery,
+  recomputability, null-control disclosure, upstream-author courtesy
+  window, dispute-by-rerunning); `references/TARGETS.md` is the
+  prioritized queue of findings to battery-test next.
+- Contribution surface: CONTRIBUTING.md, issue templates (card
+  submission, card dispute, adapter request), PR template.
+
 ## 0.3.0
 
 - **`verdict_trace`** — regrades random subsets of a battery's runs at every
