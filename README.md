@@ -157,6 +157,9 @@ stresskit render stability_card.json        # markdown for your appendix
 stresskit badge  stability_card.json -o badge.json
 stresskit verify stability_card.json        # re-derive checks + grade from the
                                             # card's own metrics (auditor mode)
+stresskit verify results/                   # audit every card and oracle report
+                                            # in a directory tree
+stresskit scoreboard results/ -o SCOREBOARD.md   # one table of every verdict
 ```
 
 Host `badge.json` anywhere public and embed a live badge:
@@ -234,7 +237,12 @@ Unanswered fields render as **NOT REPORTED ⚠️** — flagged, never hidden.
 ## Reference batteries
 
 Published findings, default battery, default thresholds. Full analysis in
-[`references/`](references/README.md).
+[`references/`](references/README.md); one-table summary in
+[`SCOREBOARD.md`](SCOREBOARD.md). Every card is produced under the
+pre-registered evidence standard of
+[`references/PROTOCOL.md`](references/PROTOCOL.md), re-verified by CI on
+every push (`stresskit verify references/`), and the scoreboard is
+generated from the cards, so neither can drift from the data.
 
 | finding | method | verdict | headline |
 |---|---|---|---|
@@ -261,8 +269,10 @@ Published findings, default battery, default thresholds. Full analysis in
 
 ## Contributing
 
-Issues and PRs welcome — especially adapters for your pipeline, replication
-cards for published findings, and arguments about the default thresholds.
+Issues and PRs welcome — especially reference cards for published findings
+(the prioritized queue is [`references/TARGETS.md`](references/TARGETS.md)),
+adapters for your pipeline, and arguments about the default thresholds.
+See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Citing
 

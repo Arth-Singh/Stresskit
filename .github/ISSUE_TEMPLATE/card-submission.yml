@@ -1,0 +1,47 @@
+name: "📇 Reference card submission / target proposal"
+description: Propose or claim a finding to battery-test for the reference set
+title: "[card] "
+labels: ["reference-card"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks! Reference cards are the most valuable contribution to this
+        repo. Read [`references/PROTOCOL.md`](../../references/PROTOCOL.md)
+        (the evidence standard) and check
+        [`references/TARGETS.md`](../../references/TARGETS.md) — if your
+        target is listed there, say so and this issue becomes its tracking
+        issue.
+  - type: input
+    id: finding
+    attributes:
+      label: Finding or instrument under test
+      description: Paper/repo link + the specific claim or released artifact
+      placeholder: "e.g. refusal direction (arXiv:2406.11717), released Llama-3-8B weights"
+    validations:
+      required: true
+  - type: textarea
+    id: battery
+    attributes:
+      label: Battery sketch
+      description: Axes you plan to stress, the claim label, the score, and the null control (or why none is constructible)
+    validations:
+      required: true
+  - type: textarea
+    id: artifact
+    attributes:
+      label: What can be re-run
+      description: Released weights/code/data and versions you will pin. We grade what can be re-run.
+    validations:
+      required: true
+  - type: dropdown
+    id: compute
+    attributes:
+      label: Compute you have for this
+      options:
+        - none — proposing for someone else to claim
+        - CPU only (post-hoc from saved outputs)
+        - single GPU
+        - multi-GPU
+    validations:
+      required: true

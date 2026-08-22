@@ -1,0 +1,35 @@
+name: "⚖️ Card dispute"
+description: Challenge a published reference card's verdict
+title: "[dispute] "
+labels: ["card-dispute"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Disputes are settled by re-running, not arguing — see
+        [`references/PROTOCOL.md`](../../references/PROTOCOL.md) §7. All
+        three grounds below are legitimate; pick at least one.
+  - type: input
+    id: card
+    attributes:
+      label: Card
+      placeholder: "references/cards/ioi_gpt2_small.json"
+    validations:
+      required: true
+  - type: dropdown
+    id: ground
+    attributes:
+      label: Ground for dispute
+      options:
+        - "`stresskit verify` fails on the card"
+        - "defensible re-analysis flips the verdict (different battery/null/pinning, justified)"
+        - "the runner misuses the upstream tool (wrong version, wrong usage mode, API misuse)"
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: verify output, your re-analysis card + runner, or the specific misuse — enough for us to reproduce your objection
+    validations:
+      required: true
