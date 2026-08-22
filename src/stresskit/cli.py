@@ -21,8 +21,25 @@ from .report import CHECKLIST_FIELDS, generate_checklist
 
 
 def _cmd_render(args: argparse.Namespace) -> int:
+    if args.html:
+        from .htmlcard import render_html_path
+
+        page = render_html_path(args.card)
+        if args.output:
+            with open(args.output, "w", encoding="utf-8") as f:
+                f.write(page)
+            print(f"HTML card written to {args.output}")
+        else:
+            print(page)
+        return 0
     card = StabilityCard.load(args.card)
-    print(card.to_markdown())
+    md = card.to_markdown()
+    if args.output:
+        with open(args.output, "w", encoding="utf-8") as f:
+            f.write(md + "\n")
+        print(f"markdown written to {args.output}")
+    else:
+        print(md)
     return 0
 
 
@@ -116,6 +133,20 @@ def _cmd_verify(args: argparse.Namespace) -> int:
     return 1 if n_fail else 0
 
 
+def _cmd_compare(args: argparse.Namespace) -> int:
+    from .compare import compare_markdown, compare_paths
+
+    try:
+        cmp = compare_paths(args.baseline, args.candidate)
+    except ValueError as e:
+        print(f"FAILED: {e}")
+        return 1
+    print(compare_markdown(cmp))
+    if args.fail_on_regression and cmp["regressed"]:
+        return 1
+    return 0
+
+
 def _cmd_scoreboard(args: argparse.Namespace) -> int:
     from .scoreboard import collect_rows, scoreboard_markdown, write_scoreboard
 
@@ -141,8 +172,13 @@ def build_parser() -> argparse.ArgumentParser:
     )
     sub = p.add_subparsers(dest="command")
 
-    pr = sub.add_parser("render", help="render a Stability Card as markdown")
+    pr = sub.add_parser(
+        "render", help="render a Stability Card as markdown or HTML")
     pr.add_argument("card", help="path to a stability card .json")
+    pr.add_argument(
+        "--html", action="store_true",
+        help="emit a self-contained shareable HTML page instead of markdown")
+    pr.add_argument("-o", "--output", help="write here instead of stdout")
     pr.set_defaults(func=_cmd_render)
 
     pb = sub.add_parser("badge", help="emit shields.io endpoint JSON for a card")
@@ -166,6 +202,19 @@ def build_parser() -> argparse.ArgumentParser:
              "to scan recursively (non-artifact JSONs in directories are skipped)",
     )
     pf.set_defaults(func=_cmd_verify)
+
+    pc = sub.add_parser(
+        "compare",
+        help="stability regression test: diff two cards (baseline first)",
+    )
+    pc.add_argument("baseline", help="baseline card/report .json")
+    pc.add_argument("candidate", help="candidate card/report .json")
+    pc.add_argument(
+        "--fail-on-regression", action="store_true",
+        help="exit 1 when a check flips pass→fail or the grade drops "
+             "(for CI gates)",
+    )
+    pc.set_defaults(func=_cmd_compare)
 
     ps = sub.add_parser(
         "scoreboard",
