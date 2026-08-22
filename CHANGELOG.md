@@ -2,6 +2,20 @@
 
 ## Unreleased
 
+- **`stresskit demo`** — the 30-second first touch: one toy discovery
+  method graded on a real effect (A) and on pure noise, where it still
+  returns confident-looking findings (C) — same output format, only the
+  battery separates them. `--html DIR` writes both cards as pages.
+- **Verdict-trace charts** — `stresskit trace card.trace.json -o out.svg`
+  renders the grade distribution vs run count as a self-contained SVG
+  (`stresskit.tracechart`), with the coin-flip run counts and `settled_n`
+  annotated. Grade colors are a CVD-validated 4-step scale (adjacent-pair
+  ΔE ≥ 15.3 under CVD simulation); shares are always also written as text.
+- **`stresskit site`** — static results site from a directory of cards:
+  index with headline stats, the most dramatic verdict trace as the hero
+  figure, the full table, and one page per card with its trace chart
+  embedded and a per-page audit command. `.github/workflows/pages.yml`
+  deploys it to GitHub Pages on every push to main.
 - **`stresskit compare`** — stability regression testing between two cards
   (`compare_cards` in the library): per-check deltas, pass→fail flips,
   grade drops, `--fail-on-regression` exit code for CI gates. Deltas are

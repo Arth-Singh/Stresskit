@@ -133,6 +133,26 @@ def _cmd_verify(args: argparse.Namespace) -> int:
     return 1 if n_fail else 0
 
 
+def _cmd_demo(args: argparse.Namespace) -> int:
+    from .demo import run_demo
+
+    run_demo(html_dir=args.html)
+    return 0
+
+
+def _cmd_trace(args: argparse.Namespace) -> int:
+    from .tracechart import trace_svg_path
+
+    svg = trace_svg_path(args.trace, title=args.title)
+    if args.output:
+        with open(args.output, "w", encoding="utf-8") as f:
+            f.write(svg + "\n")
+        print(f"trace chart written to {args.output}")
+    else:
+        print(svg)
+    return 0
+
+
 def _cmd_compare(args: argparse.Namespace) -> int:
     from .compare import compare_markdown, compare_paths
 
@@ -155,6 +175,14 @@ def _cmd_scoreboard(args: argparse.Namespace) -> int:
         print(f"scoreboard with {n} findings written to {args.output}")
     else:
         print(scoreboard_markdown(collect_rows(args.paths)))
+    return 0
+
+
+def _cmd_site(args: argparse.Namespace) -> int:
+    from .site import build_site
+
+    n = build_site(args.paths, args.output, repo_url=args.repo_url)
+    print(f"site with {n} card pages written to {args.output}/")
     return 0
 
 
@@ -203,6 +231,24 @@ def build_parser() -> argparse.ArgumentParser:
     )
     pf.set_defaults(func=_cmd_verify)
 
+    pd = sub.add_parser(
+        "demo",
+        help="30-second demo: one method graded on a real effect vs pure noise",
+    )
+    pd.add_argument(
+        "--html", metavar="DIR",
+        help="also write both stability cards as HTML pages into DIR")
+    pd.set_defaults(func=_cmd_demo)
+
+    pt = sub.add_parser(
+        "trace",
+        help="render a verdict trace as an SVG chart (grade shares vs n)",
+    )
+    pt.add_argument("trace", help="path to a verdict trace .json")
+    pt.add_argument("--title", help="chart title override")
+    pt.add_argument("-o", "--output", help="write SVG here instead of stdout")
+    pt.set_defaults(func=_cmd_trace)
+
     pc = sub.add_parser(
         "compare",
         help="stability regression test: diff two cards (baseline first)",
@@ -226,6 +272,20 @@ def build_parser() -> argparse.ArgumentParser:
     )
     ps.add_argument("-o", "--output", help="write markdown here instead of stdout")
     ps.set_defaults(func=_cmd_scoreboard)
+
+    pw = sub.add_parser(
+        "site",
+        help="build a static site (index + card pages + trace charts) "
+             "from directories of cards",
+    )
+    pw.add_argument("paths", nargs="+",
+                    help="card/report .json files or directories")
+    pw.add_argument("-o", "--output", default="_site",
+                    help="output directory (default _site)")
+    pw.add_argument("--repo-url",
+                    default="https://github.com/Arth-Singh/Stresskit",
+                    help="repository URL used in links")
+    pw.set_defaults(func=_cmd_site)
 
     pv = sub.add_parser("version", help="print version")
     pv.set_defaults(func=_cmd_version)

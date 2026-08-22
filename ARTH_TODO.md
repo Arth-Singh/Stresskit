@@ -27,6 +27,11 @@ this repo.
 ## Repo settings (5 minutes in the GitHub UI)
 
 - [ ] Enable **Discussions** (the issue-template config already links to it).
+- [ ] Enable **GitHub Pages**: Settings → Pages → Source: "GitHub Actions".
+      The `pages.yml` workflow then publishes the results site
+      (index + card pages + trace charts) on every push to main —
+      it will appear at arth-singh.github.io/Stresskit/. Once live, link it
+      from the README's Reference batteries section and the repo About box.
 - [ ] Add topics: `interpretability`, `mechanistic-interpretability`,
       `reproducibility`, `sparse-autoencoders`, `stability`.
 - [ ] Set a social-preview image (a screenshot of an HTML card render is

@@ -42,6 +42,19 @@ pip install git+https://github.com/Arth-Singh/Stresskit.git   # numpy only; impo
 
 <sub>PyPI release as `stress-kit` is pending.</sub>
 
+## See it work first (30 seconds, no GPU)
+
+```bash
+stresskit demo
+```
+
+One toy discovery method, stressed twice: on data with a real effect
+(**grade A**, J=0.92) and on **pure noise**, where it still returns eight
+confident "responsible features" with a claim attached, every run
+(**grade C**, J=0.18). The two outputs look identical; only the battery
+tells them apart. `stresskit demo --html cards/` writes both stability
+cards as shareable pages.
+
 ## Quickstart
 
 Wrap your discovery method as `(data, seed, config) -> Finding`, then stress it:
@@ -172,6 +185,10 @@ stresskit verify results/                   # audit every card and oracle report
 stresskit scoreboard results/ -o SCOREBOARD.md   # one table of every verdict
 stresskit compare old.json new.json --fail-on-regression   # stability
                                             # regression test between releases
+stresskit trace card.trace.json -o trace.svg     # verdict-trace chart: grade
+                                            # distribution vs run count
+stresskit site references/ -o _site        # static site: index, card pages,
+                                            # trace charts (GitHub Pages ready)
 ```
 
 Host `badge.json` anywhere public and embed a live badge:
