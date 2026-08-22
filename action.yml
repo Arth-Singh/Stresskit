@@ -1,0 +1,48 @@
+name: "StressKit Verify"
+description: >-
+  Audit StressKit stability cards in CI: re-derive every card's checks and
+  grade from its own metrics, and optionally fail on stability regressions
+  against a baseline card.
+branding:
+  icon: shield
+  color: green
+
+inputs:
+  path:
+    description: >-
+      Card/report .json files or directories to verify (recursive; passed to
+      `stresskit verify`). Non-artifact JSONs inside directories are skipped.
+    required: false
+    default: "."
+  baseline:
+    description: >-
+      Optional baseline card for a stability regression test. When set
+      together with `candidate`, the action fails if a check flips
+      pass→fail or the grade drops.
+    required: false
+    default: ""
+  candidate:
+    description: Candidate card to compare against `baseline`.
+    required: false
+    default: ""
+  stresskit:
+    description: >-
+      pip requirement to install (pin a version or point at a fork).
+    required: false
+    default: "git+https://github.com/Arth-Singh/Stresskit.git"
+
+runs:
+  using: composite
+  steps:
+    - name: Install StressKit
+      shell: bash
+      run: python3 -m pip install --quiet "${{ inputs.stresskit }}"
+    - name: Verify cards
+      shell: bash
+      run: stresskit verify ${{ inputs.path }}
+    - name: Stability regression gate
+      if: ${{ inputs.baseline != '' && inputs.candidate != '' }}
+      shell: bash
+      run: >-
+        stresskit compare "${{ inputs.baseline }}" "${{ inputs.candidate }}"
+        --fail-on-regression

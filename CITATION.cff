@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use StressKit, please cite it as below."
+title: "StressKit: a stability harness for mechanistic interpretability claims"
+type: software
+authors:
+  - family-names: Singh
+    given-names: Arth
+year: 2026
+url: "https://github.com/Arth-Singh/Stresskit"
+repository-code: "https://github.com/Arth-Singh/Stresskit"
+license: MIT
+keywords:
+  - interpretability
+  - mechanistic-interpretability
+  - reproducibility
+  - stability
+  - sparse-autoencoders
+  - circuits

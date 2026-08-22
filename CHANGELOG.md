@@ -2,6 +2,21 @@
 
 ## Unreleased
 
+- **`stresskit compare`** — stability regression testing between two cards
+  (`compare_cards` in the library): per-check deltas, pass→fail flips,
+  grade drops, `--fail-on-regression` exit code for CI gates. Deltas are
+  called *decisive* only when both 95% CIs exist and are disjoint;
+  checks with differing thresholds are excluded from regression verdicts;
+  both cards must pass auditor mode first.
+- **GitHub Action** (`action.yml`) — any repo verifies its cards and gates
+  on stability regressions with one `uses:` step.
+- **HTML cards** — `stresskit render --html` emits a self-contained
+  shareable page with per-check CI-vs-bar plots (`stresskit.htmlcard`);
+  works for stability cards and oracle reports.
+- **JSONL entry point** — `sk.from_jsonl("sweep.jsonl", null_path=...)`
+  grades any sweep log directly (`findings_from_jsonl` for the loader;
+  field names remappable, `axis` fields drive the per-axis breakdown).
+- CITATION.cff.
 - **Oracle reports are now auditable** — `verify_oracle_report_dict`
   re-derives an oracle reliability report's checks, grade, confidence,
   pooled metrics (from the per-probe rows), and Wilson CIs (from the

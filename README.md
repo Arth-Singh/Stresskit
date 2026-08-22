@@ -82,6 +82,14 @@ findings = [sk.circuit(edges, score=faith) for edges, faith in my_saved_runs]
 print(sk.from_findings(findings, model="gpt2-small", task="IOI").to_markdown())
 ```
 
+Or grade a JSONL sweep log with zero wrapper code — one JSON object per run
+(`{"components": [...], "claim": "...", "score": ..., "axis": "seeds"}`,
+field names remappable):
+
+```python
+print(sk.from_jsonl("sweep.jsonl", null_path="sweep_null.jsonl").to_markdown())
+```
+
 **How many runs does a verdict need?** Papers report stability from 5–10
 runs; `verdict_trace` regrades random subsets of your runs at every size and
 reports the n at which the verdict stops being a coin flip — with no new
@@ -157,9 +165,13 @@ stresskit render stability_card.json        # markdown for your appendix
 stresskit badge  stability_card.json -o badge.json
 stresskit verify stability_card.json        # re-derive checks + grade from the
                                             # card's own metrics (auditor mode)
+stresskit render stability_card.json --html -o card.html   # self-contained
+                                            # shareable page, CI-vs-bar plots
 stresskit verify results/                   # audit every card and oracle report
                                             # in a directory tree
 stresskit scoreboard results/ -o SCOREBOARD.md   # one table of every verdict
+stresskit compare old.json new.json --fail-on-regression   # stability
+                                            # regression test between releases
 ```
 
 Host `badge.json` anywhere public and embed a live badge:
@@ -169,6 +181,24 @@ Host `badge.json` anywhere public and embed a live badge:
 ```
 
 → ![stability](https://img.shields.io/badge/stability-A%20%C2%B7%20J%3D0.92-brightgreen) / ![stability](https://img.shields.io/badge/stability-D%20%C2%B7%20J%3D0.18-red)
+
+## Use it in CI
+
+The pytest/codecov move, made literal: produce a card per release, verify it
+and gate on regressions in GitHub Actions —
+
+```yaml
+- uses: Arth-Singh/Stresskit@main
+  with:
+    path: cards/                      # verify every card in the tree
+    baseline: cards/v1.2.json         # optional: fail if stability regressed
+    candidate: cards/current.json
+```
+
+`stresskit compare` calls a change a **regression** only when a check flips
+pass→fail or the grade drops (against identical thresholds), and calls a
+value delta **decisive** only when the two 95% CIs are disjoint — point
+drift within overlapping intervals is reported, not judged.
 
 ## Oracle reliability
 
