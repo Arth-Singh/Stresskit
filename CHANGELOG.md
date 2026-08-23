@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.3.0
 
 - **`stresskit demo`** — the 30-second first touch: one toy discovery
   method graded on a real effect (A) and on pure noise, where it still
@@ -51,9 +51,6 @@
   prioritized queue of findings to battery-test next.
 - Contribution surface: CONTRIBUTING.md, issue templates (card
   submission, card dispute, adapter request), PR template.
-
-## 0.3.0
-
 - **`verdict_trace`** — regrades random subsets of a battery's runs at every
   size and reports the grade distribution per n plus `settled_n`, the run
   count at which the verdict stops being a coin flip. No new runs needed;
