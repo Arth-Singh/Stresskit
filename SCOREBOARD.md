@@ -16,11 +16,11 @@ verdict's confidence; a low-confidence grade is provisional.
 | IOI (ABC corruption) / gpt2 | head-level attribution patching, top-k by \|attribution\| | 🟢 **A** | **low** | 5/5 (2 undecided) | 45 | J=0.83, specificity 1.54× | [stability card](references/cards/ioi_gpt2_small.md) |
 | IOI (ABC corruption) / gpt2-large | head-level attribution patching, top-k by \|attribution\| | 🟢 **A** | **low** | 5/5 (2 undecided) | 45 | J=0.85, specificity 1.63× | [stability card](references/scale/ioi_gpt2_large.md) |
 | IOI (ABC corruption) / gpt2-medium | head-level attribution patching, top-k by \|attribution\| | 🟢 **A** | high | 5/5 | 45 | J=0.95, specificity 2.32× | [stability card](references/scale/ioi_gpt2_medium.md) |
-| Greater-Than (YY->01 corruption) / gpt2-small | head-level attribution patching, top-k by \|attribution\| | 🟡 **B** | high | 4/5 | 45 | J=0.89, specificity 1.15× | [stability card](references/cards/greater_than_gpt2_small.md) |
+| Greater-Than (YY-\>01 corruption) / gpt2-small | head-level attribution patching, top-k by \|attribution\| | 🟡 **B** | high | 4/5 | 45 | J=0.89, specificity 1.15× | [stability card](references/cards/greater_than_gpt2_small.md) |
 | lens-eval-multihop (vs association) / Qwen/Qwen3.5-4B | Jacobian lens (pre-fitted, n=1000), upstream hit criterion | 🟠 **C** | **low** | 2/5 (2 undecided) | 20 | J=0.45, specificity 0.78× | [stability card](references/cards/jlens_qwen3p5_4b.md) |
-| adamkarvonen/checkpoints_latentqa_only_addition_Qwen3-8B (Qwen3-8B) | activation reader | 🟠 **C** | high | 1/4 | 225 | accuracy 0.09, null hallucination 0.89 | [oracle report](references/cards/ao_qwen3_latentqa-only.md) |
-| adamkarvonen/checkpoints_cls_only_addition_Qwen3-8B (Qwen3-8B) | activation reader | 🔴 **D** | high | 0/4 | 225 | accuracy 0.24, null hallucination 0.93 | [oracle report](references/cards/ao_qwen3_cls-only.md) |
-| adamkarvonen/checkpoints_latentqa_cls_past_lens_addition_Qwen3-8B (Qwen3-8B) | activation reader | 🔴 **D** | high | 0/4 | 225 | accuracy 0.45, null hallucination 0.94 | [oracle report](references/cards/ao_qwen3_full-mixture.md) |
+| adamkarvonen/checkpoints\_latentqa\_only\_addition\_Qwen3-8B (Qwen3-8B) | activation reader | 🟠 **C** | high | 1/4 | 225 | accuracy 0.09, null hallucination 0.89 | [oracle report](references/cards/ao_qwen3_latentqa-only.md) |
+| adamkarvonen/checkpoints\_cls\_only\_addition\_Qwen3-8B (Qwen3-8B) | activation reader | 🔴 **D** | high | 0/4 | 225 | accuracy 0.24, null hallucination 0.93 | [oracle report](references/cards/ao_qwen3_cls-only.md) |
+| adamkarvonen/checkpoints\_latentqa\_cls\_past\_lens\_addition\_Qwen3-8B (Qwen3-8B) | activation reader | 🔴 **D** | high | 0/4 | 225 | accuracy 0.45, null hallucination 0.94 | [oracle report](references/cards/ao_qwen3_full-mixture.md) |
 
 **Grades**: A — all applicable checks pass · B — at least half ·
 C — at least one · D — none, or indistinguishable from random.

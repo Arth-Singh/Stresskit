@@ -24,8 +24,17 @@ _CONF_LABEL = {"high": "high", "low": "**low**", "unknown": "unknown"}
 
 
 def _cell(text: str) -> str:
-    """Make free text safe inside a markdown table cell."""
-    return str(text).replace("|", "\\|").replace("\n", " ")
+    """Make free text safe inside a markdown table cell.
+
+    Card fields are arbitrary strings (externally submitted cards
+    included), so markdown-active characters are neutralized too — a model
+    name must never smuggle a link, image, or raw HTML into the rendered
+    scoreboard.
+    """
+    s = str(text).replace("\n", " ")
+    for ch in "\\|[]<>`*_":
+        s = s.replace(ch, "\\" + ch)
+    return s
 
 
 def _fmt_ratio(x: Optional[float]) -> str:

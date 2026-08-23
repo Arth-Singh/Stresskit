@@ -205,7 +205,7 @@ The pytest/codecov move, made literal: produce a card per release, verify it
 and gate on regressions in GitHub Actions —
 
 ```yaml
-- uses: Arth-Singh/Stresskit@main
+- uses: Arth-Singh/Stresskit@v0.3.0
   with:
     path: cards/                      # verify every card in the tree
     baseline: cards/v1.2.json         # optional: fail if stability regressed

@@ -172,8 +172,10 @@ def compare_markdown(cmp: Dict[str, Any],
     lines = [
         f"# Stability comparison — {verdict}",
         "",
-        f"> {la}: grade **{cmp['grade_a']}** ({cmp['confidence_a']} confidence) · "
-        f"{lb}: grade **{cmp['grade_b']}** ({cmp['confidence_b']} confidence)",
+        f"> {la}: grade **{cmp['grade_a']}** "
+        f"({cmp['confidence_a'] or 'unknown'} confidence) · "
+        f"{lb}: grade **{cmp['grade_b']}** "
+        f"({cmp['confidence_b'] or 'unknown'} confidence)",
         "",
         f"| check | {la} | {lb} | Δ | verdict |",
         "|---|---|---|---|---|",

@@ -135,7 +135,7 @@ def build_site(paths: List[str], outdir: str,
     n_certified = sum(1 for r in rows
                       if r["grade"] == "A" and r["confidence"] == "high")
     n_undecided = sum(1 for r in rows if r["confidence"] == "low")
-    n_failing = sum(1 for r in rows if r["grade"] in "CD")
+    n_failing = sum(1 for r in rows if r["grade"] in {"C", "D"})
 
     hero_row, hero = _hero_trace(rows)
     hero_html = ""

@@ -31,18 +31,25 @@ inputs:
     required: false
     default: "git+https://github.com/Arth-Singh/Stresskit.git"
 
+# Inputs reach the shell only through env vars — never interpolated into
+# `run:` — so attacker-influenced workflow values cannot inject commands.
 runs:
   using: composite
   steps:
     - name: Install StressKit
       shell: bash
-      run: python3 -m pip install --quiet "${{ inputs.stresskit }}"
+      env:
+        STRESSKIT_REQ: ${{ inputs.stresskit }}
+      run: python3 -m pip install --quiet "$STRESSKIT_REQ"
     - name: Verify cards
       shell: bash
-      run: stresskit verify ${{ inputs.path }}
+      env:
+        VERIFY_PATH: ${{ inputs.path }}
+      run: stresskit verify "$VERIFY_PATH"
     - name: Stability regression gate
       if: ${{ inputs.baseline != '' && inputs.candidate != '' }}
       shell: bash
-      run: >-
-        stresskit compare "${{ inputs.baseline }}" "${{ inputs.candidate }}"
-        --fail-on-regression
+      env:
+        BASELINE: ${{ inputs.baseline }}
+        CANDIDATE: ${{ inputs.candidate }}
+      run: stresskit compare "$BASELINE" "$CANDIDATE" --fail-on-regression
