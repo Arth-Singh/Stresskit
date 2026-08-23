@@ -829,6 +829,40 @@ def from_findings(
     )
 
 
+def from_jsonl(
+    path: str,
+    *,
+    null_path: Optional[str] = None,
+    **kwargs: Any,
+) -> StressResult:
+    """Post-hoc stability card straight from a JSONL sweep log.
+
+    One JSON object per line (see :func:`stresskit.findings_from_jsonl` for
+    the field names and how to remap them). ``axis`` fields, when present,
+    drive the per-axis breakdown; the first line is the base run. All other
+    keyword arguments pass through to :func:`from_findings`::
+
+        result = sk.from_jsonl("sweep.jsonl", null_path="sweep_null.jsonl",
+                               model="gpt2-small", task="IOI")
+        print(result.to_markdown())
+    """
+    from .finding import findings_from_jsonl
+
+    loader_keys = ("components_key", "claim_key", "score_key",
+                   "universe_size_key", "axis_key")
+    loader_kwargs = {k: kwargs.pop(k) for k in loader_keys if k in kwargs}
+    findings = findings_from_jsonl(path, **loader_kwargs)
+    axes = [f.meta["axis"] for f in findings[1:] if "axis" in f.meta]
+    if axes and len(axes) != len(findings) - 1:
+        raise ValueError(
+            f"{path}: {len(axes)} of {len(findings) - 1} non-base lines "
+            "carry an 'axis' field — label every non-base line or none"
+        )
+    if null_path is not None and "null_findings" not in kwargs:
+        kwargs["null_findings"] = findings_from_jsonl(null_path, **loader_kwargs)
+    return from_findings(findings, axes=axes or None, **kwargs)
+
+
 def verdict_trace(
     findings: Sequence[Finding],
     *,

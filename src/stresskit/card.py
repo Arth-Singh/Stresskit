@@ -561,5 +561,186 @@ def verify_card_dict(d: Dict[str, Any]) -> Dict[str, Any]:
     return {"ok": not problems, "problems": problems, "recomputed_grade": regrade}
 
 
+# check name -> the metrics key it must equal (oracle reliability reports)
+_ORACLE_CHECK_SOURCES = {
+    "answer_consistency": ("answer_consistency", ">="),
+    "known_accuracy": ("known_accuracy", ">="),
+    "prompt_sensitivity": ("prompt_spread", "<="),
+    "null_hallucination": ("null_hallucination_rate", "<="),
+}
+
+ORACLE_ARTIFACT = "stresskit_oracle_report"
+
+
+def _verify_oracle_probes(d: Dict[str, Any], metrics: Dict[str, Any],
+                          problems: List[str]) -> None:
+    """Recompute the report's pooled metrics from its own per-probe rows.
+
+    Mirrors the pooling in ``stress_oracle``: headline rates are per-probe
+    (macro) means; the Wilson CIs are on the pooled (micro) counts.
+    """
+    from . import metrics as M
+
+    per_probe = d.get("per_probe") or []
+    if not per_probe:
+        return
+    known = [p for p in per_probe if p.get("kind") == "known"]
+    nulls = [p for p in per_probe if p.get("kind") == "null"]
+    non_null = [p for p in per_probe if p.get("kind") != "null"]
+
+    def _avg(rows: List[Dict[str, Any]], key: str) -> Optional[float]:
+        vals = [r[key] for r in rows if r.get(key) is not None]
+        return sum(vals) / len(vals) if vals else None
+
+    for metric_key, rows, row_key in (
+        ("answer_consistency", non_null, "consistency"),
+        ("known_accuracy", known, "accuracy"),
+        ("prompt_spread", known, "prompt_spread"),
+        ("null_hallucination_rate", nulls, "hallucination_rate"),
+    ):
+        stored = metrics.get(metric_key)
+        expected = _avg(rows, row_key)
+        if stored is not None and expected is not None \
+                and abs(stored - expected) > 1e-9:
+            problems.append(
+                f"{metric_key} {stored} does not recompute from the report's "
+                f"per-probe rows ({expected})"
+            )
+
+    for ci_key, rows, count_key in (
+        ("known_accuracy_ci95", known, "n_correct"),
+        ("null_hallucination_ci95", nulls, "n_asserted"),
+    ):
+        stored_ci = metrics.get(ci_key)
+        if stored_ci is None or not rows:
+            continue
+        if any(count_key not in p or "n_answers" not in p for p in rows):
+            continue  # counts not recorded on this report; CI unverifiable
+        expected_ci = M.wilson_ci(sum(p[count_key] for p in rows),
+                                  sum(p["n_answers"] for p in rows))
+        if expected_ci is not None and any(
+                abs(a - b) > 1e-9 for a, b in zip(stored_ci, expected_ci)):
+            problems.append(
+                f"{ci_key} {stored_ci} does not recompute from the report's "
+                f"per-probe counts ({expected_ci})"
+            )
+
+
+def verify_oracle_report_dict(d: Dict[str, Any]) -> Dict[str, Any]:
+    """Auditor mode for oracle reliability reports (``stress_oracle``).
+
+    Same contract as :func:`verify_card_dict`, adapted to the report
+    artifact:
+
+    1. **checks** — pass/fail and the CI ``robust`` flag re-derive from each
+       check's (value, threshold, op, ci); check values must equal the
+       pooled metrics they summarize; the grade and confidence re-derive
+       from the checks.
+    2. **probes** — the pooled consistency / accuracy / spread /
+       hallucination metrics recompute from the report's own per-probe
+       rows, and the Wilson CIs from the recorded counts.
+
+    Returns ``{"ok": bool, "problems": [str], "recomputed_grade": str}``.
+    """
+    from .battery import grade_checks, make_check  # deferred: circular import
+
+    if d.get("artifact") != ORACLE_ARTIFACT:
+        raise ValueError(
+            f"not an oracle report: artifact != {ORACLE_ARTIFACT!r}")
+    checks = d.get("checks", {})
+    metrics = d.get("metrics", {})
+    problems: List[str] = []
+    recomputed: Dict[str, Any] = {}
+
+    for name, c in checks.items():
+        src, default_op = _ORACLE_CHECK_SOURCES.get(name, (None, None))
+        op = c.get("op") or default_op
+        if op is None:
+            problems.append(f"unknown check {name!r}")
+            continue
+        value, threshold = c.get("value"), c.get("threshold")
+        if value is None or threshold is None:
+            problems.append(f"{name}: missing value/threshold")
+            continue
+        fresh = make_check(value, threshold, op, "", ci=c.get("ci"))
+        recomputed[name] = fresh
+        if bool(c.get("passed")) != fresh["passed"]:
+            problems.append(
+                f"{name}: stored passed={c.get('passed')} but "
+                f"{value} {op} {threshold} is {fresh['passed']}"
+            )
+        if c.get("ci") is not None and c.get("robust") != fresh["robust"]:
+            problems.append(
+                f"{name}: stored robust={c.get('robust')} but the CI "
+                f"{c.get('ci')} implies {fresh['robust']}"
+            )
+        if src is not None:
+            mv = metrics.get(src)
+            if mv is not None and abs(mv - value) > 1e-9:
+                problems.append(f"{name}: value {value} != metrics {src} {mv}")
+
+    if recomputed:
+        regrade = grade_checks(recomputed)
+        stored = d.get("verdict", {}).get("grade")
+        if regrade != stored:
+            problems.append(f"grade: stored {stored!r}, recomputed {regrade!r}")
+        stored_conf = metrics.get("confidence")
+        if stored_conf is not None:
+            straddling = [c for c in recomputed.values()
+                          if c.get("robust") is False]
+            resolvable = [c for c in recomputed.values()
+                          if c.get("robust") is not None]
+            expected_conf = ("unknown" if not resolvable
+                             else "low" if straddling else "high")
+            if stored_conf != expected_conf:
+                problems.append(
+                    f"confidence: stored {stored_conf!r}, "
+                    f"recomputed {expected_conf!r}"
+                )
+    else:
+        regrade = "D"
+        problems.append("no recomputable checks on the report")
+
+    _verify_oracle_probes(d, metrics, problems)
+
+    return {"ok": not problems, "problems": problems, "recomputed_grade": regrade}
+
+
+def classify_artifact_dict(d: Any) -> str:
+    """Identify a loaded JSON object as a verifiable StressKit artifact.
+
+    Returns ``"stability_card"``, ``"oracle_report"``, or ``"unknown"``
+    (badges, traces, raw dumps, and anything not produced by StressKit).
+    """
+    if not isinstance(d, dict):
+        return "unknown"
+    if d.get("artifact") == ORACLE_ARTIFACT:
+        return "oracle_report"
+    if all(k in d for k in ("schema_version", "claim", "battery",
+                            "metrics", "verdict")):
+        return "stability_card"
+    return "unknown"
+
+
+def verify_artifact_dict(d: Dict[str, Any]) -> Dict[str, Any]:
+    """Verify any StressKit artifact, dispatching on its kind.
+
+    Returns the :func:`verify_card_dict` / :func:`verify_oracle_report_dict`
+    result with an added ``"kind"`` key. Raises ``ValueError`` for objects
+    that are not verifiable StressKit artifacts.
+    """
+    kind = classify_artifact_dict(d)
+    if kind == "stability_card":
+        result = verify_card_dict(d)
+    elif kind == "oracle_report":
+        result = verify_oracle_report_dict(d)
+    else:
+        raise ValueError(
+            "not a verifiable StressKit artifact (expected a stability card "
+            "or an oracle reliability report)")
+    result["kind"] = kind
+    return result
+
+
 def load_card(path: str) -> StabilityCard:
     return StabilityCard.load(path)

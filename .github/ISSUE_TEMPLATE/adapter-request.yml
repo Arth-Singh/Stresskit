@@ -1,0 +1,30 @@
+name: "🔌 Adapter request"
+description: Ask for (or offer) a bridge from your pipeline to StressKit
+title: "[adapter] "
+labels: ["adapter"]
+body:
+  - type: input
+    id: tool
+    attributes:
+      label: Tool / pipeline
+      placeholder: "e.g. nnsight, SAEBench, my lab's circuit code"
+    validations:
+      required: true
+  - type: textarea
+    id: outputs
+    attributes:
+      label: What its outputs look like
+      description: The saved artifact a post-hoc adapter would read (JSON, tensors, logs) — attach a small example if you can. Post-hoc adapters (no GPU needed to grade) are preferred.
+    validations:
+      required: true
+  - type: textarea
+    id: finding
+    attributes:
+      label: What a Finding should be
+      description: The component set, the qualitative claim label, and the score for this method
+  - type: checkboxes
+    id: offer
+    attributes:
+      label: Contribution
+      options:
+        - label: I want to write this adapter myself (see CONTRIBUTING.md)

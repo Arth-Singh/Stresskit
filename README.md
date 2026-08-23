@@ -42,6 +42,19 @@ pip install git+https://github.com/Arth-Singh/Stresskit.git   # numpy only; impo
 
 <sub>PyPI release as `stress-kit` is pending.</sub>
 
+## See it work first (30 seconds, no GPU)
+
+```bash
+stresskit demo
+```
+
+One toy discovery method, stressed twice: on data with a real effect
+(**grade A**, J=0.92) and on **pure noise**, where it still returns eight
+confident "responsible features" with a claim attached, every run
+(**grade C**, J=0.18). The two outputs look identical; only the battery
+tells them apart. `stresskit demo --html cards/` writes both stability
+cards as shareable pages.
+
 ## Quickstart
 
 Wrap your discovery method as `(data, seed, config) -> Finding`, then stress it:
@@ -80,6 +93,14 @@ findings you already have, from result files, sweep logs, or old pickles:
 ```python
 findings = [sk.circuit(edges, score=faith) for edges, faith in my_saved_runs]
 print(sk.from_findings(findings, model="gpt2-small", task="IOI").to_markdown())
+```
+
+Or grade a JSONL sweep log with zero wrapper code — one JSON object per run
+(`{"components": [...], "claim": "...", "score": ..., "axis": "seeds"}`,
+field names remappable):
+
+```python
+print(sk.from_jsonl("sweep.jsonl", null_path="sweep_null.jsonl").to_markdown())
 ```
 
 **How many runs does a verdict need?** Papers report stability from 5–10
@@ -157,6 +178,17 @@ stresskit render stability_card.json        # markdown for your appendix
 stresskit badge  stability_card.json -o badge.json
 stresskit verify stability_card.json        # re-derive checks + grade from the
                                             # card's own metrics (auditor mode)
+stresskit render stability_card.json --html -o card.html   # self-contained
+                                            # shareable page, CI-vs-bar plots
+stresskit verify results/                   # audit every card and oracle report
+                                            # in a directory tree
+stresskit scoreboard results/ -o SCOREBOARD.md   # one table of every verdict
+stresskit compare old.json new.json --fail-on-regression   # stability
+                                            # regression test between releases
+stresskit trace card.trace.json -o trace.svg     # verdict-trace chart: grade
+                                            # distribution vs run count
+stresskit site references/ -o _site        # static site: index, card pages,
+                                            # trace charts (GitHub Pages ready)
 ```
 
 Host `badge.json` anywhere public and embed a live badge:
@@ -166,6 +198,24 @@ Host `badge.json` anywhere public and embed a live badge:
 ```
 
 → ![stability](https://img.shields.io/badge/stability-A%20%C2%B7%20J%3D0.92-brightgreen) / ![stability](https://img.shields.io/badge/stability-D%20%C2%B7%20J%3D0.18-red)
+
+## Use it in CI
+
+The pytest/codecov move, made literal: produce a card per release, verify it
+and gate on regressions in GitHub Actions —
+
+```yaml
+- uses: Arth-Singh/Stresskit@v0.3.0
+  with:
+    path: cards/                      # verify every card in the tree
+    baseline: cards/v1.2.json         # optional: fail if stability regressed
+    candidate: cards/current.json
+```
+
+`stresskit compare` calls a change a **regression** only when a check flips
+pass→fail or the grade drops (against identical thresholds), and calls a
+value delta **decisive** only when the two 95% CIs are disjoint — point
+drift within overlapping intervals is reported, not judged.
 
 ## Oracle reliability
 
@@ -234,7 +284,12 @@ Unanswered fields render as **NOT REPORTED ⚠️** — flagged, never hidden.
 ## Reference batteries
 
 Published findings, default battery, default thresholds. Full analysis in
-[`references/`](references/README.md).
+[`references/`](references/README.md); one-table summary in
+[`SCOREBOARD.md`](SCOREBOARD.md). Every card is produced under the
+pre-registered evidence standard of
+[`references/PROTOCOL.md`](references/PROTOCOL.md), re-verified by CI on
+every push (`stresskit verify references/`), and the scoreboard is
+generated from the cards, so neither can drift from the data.
 
 | finding | method | verdict | headline |
 |---|---|---|---|
@@ -261,8 +316,10 @@ Published findings, default battery, default thresholds. Full analysis in
 
 ## Contributing
 
-Issues and PRs welcome — especially adapters for your pipeline, replication
-cards for published findings, and arguments about the default thresholds.
+Issues and PRs welcome — especially reference cards for published findings
+(the prioritized queue is [`references/TARGETS.md`](references/TARGETS.md)),
+adapters for your pipeline, and arguments about the default thresholds.
+See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Citing
 

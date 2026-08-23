@@ -19,8 +19,9 @@ that are applicable.
 
 from __future__ import annotations
 
+import json
 from dataclasses import dataclass, field
-from typing import Any, Dict, Iterable, Optional
+from typing import Any, Dict, Iterable, List, Optional
 
 
 @dataclass
@@ -102,6 +103,66 @@ def feature_set(
         universe_size=universe_size,
         meta=dict(meta),
     )
+
+
+def _hashable(c: Any) -> Any:
+    """JSON arrays aren't hashable; components round-trip as tuples."""
+    return tuple(_hashable(x) for x in c) if isinstance(c, list) else c
+
+
+def findings_from_jsonl(
+    path: str,
+    *,
+    components_key: str = "components",
+    claim_key: str = "claim",
+    score_key: str = "score",
+    universe_size_key: str = "universe_size",
+    axis_key: str = "axis",
+) -> List[Finding]:
+    """One Finding per line of a JSONL sweep log — the zero-wrapper entry.
+
+    Each line is a JSON object; the ``*_key`` parameters name where your log
+    keeps each field, so existing logs work unmodified::
+
+        {"components": [[9, 6], [9, 9], [10, 0]], "claim": "late", "score": 3.1}
+        {"components": [[9, 6], [10, 7]], "claim": "late", "score": 2.9, "axis": "seeds"}
+
+    Missing fields are simply absent from the Finding (StressKit grades only
+    the applicable checks). Nested arrays become tuples so components stay
+    hashable. An ``axis`` field, when present, is kept in ``meta['axis']``
+    for :func:`stresskit.from_findings`'s per-axis breakdown — or grade the
+    file in one call with :func:`stresskit.from_jsonl`.
+    """
+    findings: List[Finding] = []
+    with open(path, encoding="utf-8") as f:
+        for lineno, line in enumerate(f, 1):
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                rec = json.loads(line)
+            except json.JSONDecodeError as e:
+                raise ValueError(f"{path}:{lineno}: invalid JSON ({e})") from e
+            if not isinstance(rec, dict):
+                raise ValueError(
+                    f"{path}:{lineno}: expected a JSON object per line, "
+                    f"got {type(rec).__name__}")
+            meta: Dict[str, Any] = {}
+            if rec.get(axis_key) is not None:
+                meta["axis"] = str(rec[axis_key])
+            if rec.get("universe") is not None:
+                meta["universe"] = rec["universe"]
+            findings.append(Finding(
+                components=frozenset(
+                    _hashable(c) for c in rec.get(components_key) or ()),
+                claim=rec.get(claim_key),
+                score=rec.get(score_key),
+                universe_size=rec.get(universe_size_key),
+                meta=meta,
+            ))
+    if not findings:
+        raise ValueError(f"{path}: no findings found (file is empty)")
+    return findings
 
 
 def probe(

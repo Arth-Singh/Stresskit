@@ -17,12 +17,16 @@ interpretability claims.
 
 __version__ = "0.3.0"
 
-from .finding import Finding, circuit, feature_set, probe
+from .finding import Finding, circuit, feature_set, probe, findings_from_jsonl
 from .battery import (
-    stress, from_findings, verdict_trace, verdict_trace_markdown,
+    stress, from_findings, from_jsonl, verdict_trace, verdict_trace_markdown,
     Thresholds, StressResult, RunRecord, DEFAULT_BATTERY,
 )
-from .card import StabilityCard, load_card, validate_card_dict, verify_card_dict
+from .card import (
+    StabilityCard, load_card, validate_card_dict, verify_card_dict,
+    verify_oracle_report_dict, verify_artifact_dict, classify_artifact_dict,
+)
+from .compare import compare_cards, compare_markdown
 from .report import generate_checklist
 from .oracle import stress_oracle, OracleProbe, OracleThresholds, blind_spot_matrix
 from . import metrics, baselines, judges, oracle
@@ -35,6 +39,8 @@ __all__ = [
     "probe",
     "stress",
     "from_findings",
+    "from_jsonl",
+    "findings_from_jsonl",
     "verdict_trace",
     "verdict_trace_markdown",
     "Thresholds",
@@ -45,6 +51,11 @@ __all__ = [
     "load_card",
     "validate_card_dict",
     "verify_card_dict",
+    "verify_oracle_report_dict",
+    "verify_artifact_dict",
+    "classify_artifact_dict",
+    "compare_cards",
+    "compare_markdown",
     "generate_checklist",
     "stress_oracle",
     "OracleProbe",

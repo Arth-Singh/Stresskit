@@ -1,0 +1,55 @@
+name: "StressKit Verify"
+description: >-
+  Audit StressKit stability cards in CI: re-derive every card's checks and
+  grade from its own metrics, and optionally fail on stability regressions
+  against a baseline card.
+branding:
+  icon: shield
+  color: green
+
+inputs:
+  path:
+    description: >-
+      Card/report .json files or directories to verify (recursive; passed to
+      `stresskit verify`). Non-artifact JSONs inside directories are skipped.
+    required: false
+    default: "."
+  baseline:
+    description: >-
+      Optional baseline card for a stability regression test. When set
+      together with `candidate`, the action fails if a check flips
+      pass→fail or the grade drops.
+    required: false
+    default: ""
+  candidate:
+    description: Candidate card to compare against `baseline`.
+    required: false
+    default: ""
+  stresskit:
+    description: >-
+      pip requirement to install (pin a version or point at a fork).
+    required: false
+    default: "git+https://github.com/Arth-Singh/Stresskit.git"
+
+# Inputs reach the shell only through env vars — never interpolated into
+# `run:` — so attacker-influenced workflow values cannot inject commands.
+runs:
+  using: composite
+  steps:
+    - name: Install StressKit
+      shell: bash
+      env:
+        STRESSKIT_REQ: ${{ inputs.stresskit }}
+      run: python3 -m pip install --quiet "$STRESSKIT_REQ"
+    - name: Verify cards
+      shell: bash
+      env:
+        VERIFY_PATH: ${{ inputs.path }}
+      run: stresskit verify "$VERIFY_PATH"
+    - name: Stability regression gate
+      if: ${{ inputs.baseline != '' && inputs.candidate != '' }}
+      shell: bash
+      env:
+        BASELINE: ${{ inputs.baseline }}
+        CANDIDATE: ${{ inputs.candidate }}
+      run: stresskit compare "$BASELINE" "$CANDIDATE" --fail-on-regression

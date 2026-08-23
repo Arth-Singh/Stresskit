@@ -1,5 +1,57 @@
 # Changelog
 
+## Unreleased
+
+- **`stresskit demo`** — the 30-second first touch: one toy discovery
+  method graded on a real effect (A) and on pure noise, where it still
+  returns confident-looking findings (C) — same output format, only the
+  battery separates them. `--html DIR` writes both cards as pages.
+- **Verdict-trace charts** — `stresskit trace card.trace.json -o out.svg`
+  renders the grade distribution vs run count as a self-contained SVG
+  (`stresskit.tracechart`), with the coin-flip run counts and `settled_n`
+  annotated. Grade colors are a CVD-validated 4-step scale (adjacent-pair
+  ΔE ≥ 15.3 under CVD simulation); shares are always also written as text.
+- **`stresskit site`** — static results site from a directory of cards:
+  index with headline stats, the most dramatic verdict trace as the hero
+  figure, the full table, and one page per card with its trace chart
+  embedded and a per-page audit command. `.github/workflows/pages.yml`
+  deploys it to GitHub Pages on every push to main.
+- **`stresskit compare`** — stability regression testing between two cards
+  (`compare_cards` in the library): per-check deltas, pass→fail flips,
+  grade drops, `--fail-on-regression` exit code for CI gates. Deltas are
+  called *decisive* only when both 95% CIs exist and are disjoint;
+  checks with differing thresholds are excluded from regression verdicts;
+  both cards must pass auditor mode first.
+- **GitHub Action** (`action.yml`) — any repo verifies its cards and gates
+  on stability regressions with one `uses:` step.
+- **HTML cards** — `stresskit render --html` emits a self-contained
+  shareable page with per-check CI-vs-bar plots (`stresskit.htmlcard`);
+  works for stability cards and oracle reports.
+- **JSONL entry point** — `sk.from_jsonl("sweep.jsonl", null_path=...)`
+  grades any sweep log directly (`findings_from_jsonl` for the loader;
+  field names remappable, `axis` fields drive the per-axis breakdown).
+- CITATION.cff.
+- **Oracle reports are now auditable** — `verify_oracle_report_dict`
+  re-derives an oracle reliability report's checks, grade, confidence,
+  pooled metrics (from the per-probe rows), and Wilson CIs (from the
+  recorded counts); `verify_artifact_dict` / `classify_artifact_dict`
+  dispatch across artifact kinds.
+- **Batch auditing** — `stresskit verify` accepts multiple files and
+  directories (recursive), skipping non-artifact JSONs that live next to
+  cards; CI now runs `stresskit verify references/` on every push, so
+  every published verdict is continuously re-derived.
+- **`stresskit scoreboard`** — renders every card and report found into
+  one deterministic markdown table; the repo's `SCOREBOARD.md` is
+  generated from `references/` and diffed in CI (a stale scoreboard fails
+  the build).
+- **Evidence standard** — `references/PROTOCOL.md` pre-registers what a
+  reference card requires (thresholds fixed in advance, minimum battery,
+  recomputability, null-control disclosure, upstream-author courtesy
+  window, dispute-by-rerunning); `references/TARGETS.md` is the
+  prioritized queue of findings to battery-test next.
+- Contribution surface: CONTRIBUTING.md, issue templates (card
+  submission, card dispute, adapter request), PR template.
+
 ## 0.3.0
 
 - **`verdict_trace`** — regrades random subsets of a battery's runs at every

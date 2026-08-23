@@ -27,6 +27,25 @@ jobs:
           python examples/sae_audit.py
           python examples/oracle_reliability.py
 
+  audit-cards:
+    # every published claim must re-derive from its own card, on every push:
+    # auditor mode over all reference artifacts + scoreboard freshness
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install
+        run: pip install -e .
+      - name: Verify every reference card and report
+        run: stresskit verify references/
+      - name: Scoreboard must match the cards
+        run: |
+          stresskit scoreboard references -o SCOREBOARD.md
+          git diff --exit-code SCOREBOARD.md \
+            || { echo "::error::SCOREBOARD.md is stale — regenerate with: stresskit scoreboard references -o SCOREBOARD.md"; exit 1; }
+
   test-minimal-deps:
     # core must work with numpy only (no scipy): greedy matcher fallback
     runs-on: ubuntu-latest
