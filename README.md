@@ -314,6 +314,23 @@ generated from the cards, so neither can drift from the data.
 - Trajectory batteries: stability across long generations and agent rollouts
 - `stresskit verify`: recompute a card from its config hash
 
+## New: which lens transport is actually better? (2026-08-31)
+
+Three linear transports of the residual stream — the released **Jacobian
+lens**, the free **logit lens**, and a **tuned lens** trained on the same
+corpus — graded under one battery on the J-lens release's own evaluation
+items ([full findings](references/h200-results/README.md)):
+
+![hit@5 by lens](references/h200-results/figs/hit5_qwen3p5_4b.png)
+
+- At ≤4B the Jacobian transport is statistically indistinguishable from the
+  free logit-lens baseline on the release's own eval (paired 5 vs 1 flips on
+  93 items, n.s.); the flagship association class is ≈0 for every transport.
+- Every transport shows the identical failure profile (hit-set Jaccard ≈0.47,
+  specificity <1 against a derangement null): the instability previously
+  measured on the J-lens card is a property of **hit@k lens evaluation**,
+  not of the Jacobian transport.
+
 ## Contributing
 
 Issues and PRs welcome — especially reference cards for published findings

@@ -1,0 +1,1221 @@
+{
+  "model": "Qwen/Qwen3.5-4B",
+  "positions": [
+    -1,
+    -2
+  ],
+  "sets": {
+    "lens-eval-association": {
+      "summary": {
+        "jlens": {
+          "hit@5": 0.0392,
+          "found@100": 0.2157,
+          "median_rank_when_found": 15
+        },
+        "logit": {
+          "hit@5": 0.0,
+          "found@100": 0.1471,
+          "median_rank_when_found": 25
+        },
+        "tuned": {
+          "hit@5": 0.0,
+          "found@100": 0.1176,
+          "median_rank_when_found": 41
+        }
+      },
+      "items": [
+        {
+          "item": "air-h",
+          "jlens": 75,
+          "logit": 73,
+          "tuned": 41
+        },
+        {
+          "item": "anger",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "armstrong",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "art-h",
+          "jlens": 18,
+          "logit": 60,
+          "tuned": null
+        },
+        {
+          "item": "beatles",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "berlin",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "book-h",
+          "jlens": 5,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "boss",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "chess",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "child-h",
+          "jlens": 13,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "china-h",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "church-h",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "churchill",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "cia",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "city-h",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "code-h",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "court-h",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "darwin",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "dawn",
+          "jlens": 15,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "de-konig",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "death-h",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "desert",
+          "jlens": 13,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "divorce",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "edison",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "einstein",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "es-dia",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "es-musica",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "es-rio",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "fairy",
+          "jlens": 15,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "father-h",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "field-h",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "film-h",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "fired",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "found-h",
+          "jlens": null,
+          "logit": 24,
+          "tuned": null
+        },
+        {
+          "item": "fr-cafe",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "fr-ecole",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "fr-eglise",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "fr-pere",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "france-h",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "free-h",
+          "jlens": 85,
+          "logit": 13,
+          "tuned": 14
+        },
+        {
+          "item": "frustrated",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "future-h",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "game-h",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "gandhi",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "grief",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "history-h",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "hollywood",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "home-h",
+          "jlens": 38,
+          "logit": 14,
+          "tuned": 50
+        },
+        {
+          "item": "horror",
+          "jlens": 15,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "interview",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "king-h",
+          "jlens": 9,
+          "logit": null,
+          "tuned": 33
+        },
+        {
+          "item": "law-h",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "lie",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "light-h",
+          "jlens": 29,
+          "logit": 21,
+          "tuned": 34
+        },
+        {
+          "item": "lincoln",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "london-h",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "lonely",
+          "jlens": 49,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "love-h",
+          "jlens": 32,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "math-h",
+          "jlens": null,
+          "logit": 42,
+          "tuned": null
+        },
+        {
+          "item": "mother",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "mozart",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "music-h",
+          "jlens": 2,
+          "logit": 10,
+          "tuned": 22
+        },
+        {
+          "item": "nasa",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "neighbors",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "news-h",
+          "jlens": 1,
+          "logit": 34,
+          "tuned": 40
+        },
+        {
+          "item": "newton",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "night-h",
+          "jlens": 1,
+          "logit": null,
+          "tuned": 40
+        },
+        {
+          "item": "noir",
+          "jlens": null,
+          "logit": 38,
+          "tuned": null
+        },
+        {
+          "item": "obama",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "office-h",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "olympics",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "park-h",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "past-h",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "pennsylvania",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "pentagon",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "poker",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "poverty",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "pregnant",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "prohibition",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "proposal",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "pt-agua",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "race-h",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "relief",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "rivals",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "school-h",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "science-h",
+          "jlens": 10,
+          "logit": 65,
+          "tuned": 48
+        },
+        {
+          "item": "search-h",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "shame",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "siblings",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "space-h",
+          "jlens": 12,
+          "logit": 25,
+          "tuned": 43
+        },
+        {
+          "item": "store-h",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "teacher",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "test-h",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "time-h",
+          "jlens": null,
+          "logit": 25,
+          "tuned": 68
+        },
+        {
+          "item": "town-h",
+          "jlens": 57,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "underwater",
+          "jlens": 20,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "unesco",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "vatican",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "war-h",
+          "jlens": null,
+          "logit": 7,
+          "tuned": null
+        },
+        {
+          "item": "water-h",
+          "jlens": null,
+          "logit": 15,
+          "tuned": 79
+        },
+        {
+          "item": "winter",
+          "jlens": 42,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "wright",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        }
+      ]
+    },
+    "lens-eval-multihop": {
+      "summary": {
+        "jlens": {
+          "hit@5": 0.3118,
+          "found@100": 0.5806,
+          "median_rank_when_found": 4
+        },
+        "logit": {
+          "hit@5": 0.2688,
+          "found@100": 0.5699,
+          "median_rank_when_found": 6
+        },
+        "tuned": {
+          "hit@5": 0.2796,
+          "found@100": 0.5699,
+          "median_rank_when_found": 6
+        }
+      },
+      "items": [
+        {
+          "item": "amazon-language",
+          "jlens": 21,
+          "logit": 23,
+          "tuned": 26
+        },
+        {
+          "item": "atomic-26-symbol",
+          "jlens": 2,
+          "logit": 2,
+          "tuned": 1
+        },
+        {
+          "item": "atomic-29-flame",
+          "jlens": 12,
+          "logit": 6,
+          "tuned": 15
+        },
+        {
+          "item": "atomic-29-symbol",
+          "jlens": 2,
+          "logit": 4,
+          "tuned": 5
+        },
+        {
+          "item": "atomic-79-symbol",
+          "jlens": 1,
+          "logit": 1,
+          "tuned": 1
+        },
+        {
+          "item": "atomic-80-state",
+          "jlens": 5,
+          "logit": 3,
+          "tuned": 4
+        },
+        {
+          "item": "basketball-players",
+          "jlens": 57,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "birthstone-emerald-month",
+          "jlens": null,
+          "logit": null,
+          "tuned": 31
+        },
+        {
+          "item": "carnival-ocean",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "chem-atmosphere-Z",
+          "jlens": 1,
+          "logit": 5,
+          "tuned": 11
+        },
+        {
+          "item": "chem-bones-Z",
+          "jlens": 11,
+          "logit": 54,
+          "tuned": null
+        },
+        {
+          "item": "chem-organic-Z",
+          "jlens": 1,
+          "logit": 4,
+          "tuned": 9
+        },
+        {
+          "item": "chem-photosynthesis-Z",
+          "jlens": 2,
+          "logit": 11,
+          "tuned": 12
+        },
+        {
+          "item": "christmas-season",
+          "jlens": 4,
+          "logit": 24,
+          "tuned": 19
+        },
+        {
+          "item": "colosseum-currency",
+          "jlens": 8,
+          "logit": 33,
+          "tuned": 25
+        },
+        {
+          "item": "dbl-altitude-antonym",
+          "jlens": 2,
+          "logit": 5,
+          "tuned": 2
+        },
+        {
+          "item": "dbl-armistice-antonym",
+          "jlens": 1,
+          "logit": 1,
+          "tuned": 1
+        },
+        {
+          "item": "dbl-obituary-antonym",
+          "jlens": 1,
+          "logit": 1,
+          "tuned": 1
+        },
+        {
+          "item": "double-dice-faces",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "dual-photosynthesis-opposite",
+          "jlens": 9,
+          "logit": 7,
+          "tuned": 5
+        },
+        {
+          "item": "dual-stars-visible-opposite",
+          "jlens": 2,
+          "logit": 4,
+          "tuned": 2
+        },
+        {
+          "item": "etym-caesar-monthnum",
+          "jlens": null,
+          "logit": null,
+          "tuned": 35
+        },
+        {
+          "item": "etym-frigg-position",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "etym-janus-monthnum",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "etym-saturn-position",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "etym-wargod-month",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "firstletter-greatwall-country",
+          "jlens": 1,
+          "logit": 6,
+          "tuned": 6
+        },
+        {
+          "item": "firstletter-halloween-month",
+          "jlens": 1,
+          "logit": 1,
+          "tuned": 1
+        },
+        {
+          "item": "firstletter-paris-country",
+          "jlens": 1,
+          "logit": 2,
+          "tuned": 4
+        },
+        {
+          "item": "firstletter-populous-country",
+          "jlens": 3,
+          "logit": 7,
+          "tuned": 8
+        },
+        {
+          "item": "firstletter-valentines-month",
+          "jlens": 1,
+          "logit": 1,
+          "tuned": 1
+        },
+        {
+          "item": "func-filters-count",
+          "jlens": 8,
+          "logit": 20,
+          "tuned": null
+        },
+        {
+          "item": "func-pumps-chambers",
+          "jlens": 1,
+          "logit": 5,
+          "tuned": 20
+        },
+        {
+          "item": "greatwall-ocean",
+          "jlens": 6,
+          "logit": 12,
+          "tuned": 10
+        },
+        {
+          "item": "half-clock-hours",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "holiday-christmas-monthnum",
+          "jlens": 30,
+          "logit": 23,
+          "tuned": 31
+        },
+        {
+          "item": "holiday-halloween-monthnum",
+          "jlens": 52,
+          "logit": 35,
+          "tuned": 28
+        },
+        {
+          "item": "holiday-independence-monthnum",
+          "jlens": 38,
+          "logit": 34,
+          "tuned": 24
+        },
+        {
+          "item": "holiday-valentines-monthnum",
+          "jlens": 54,
+          "logit": 44,
+          "tuned": 36
+        },
+        {
+          "item": "inv-antarctica-opposite",
+          "jlens": 2,
+          "logit": 3,
+          "tuned": 3
+        },
+        {
+          "item": "inv-balloon-opposite",
+          "jlens": 6,
+          "logit": 3,
+          "tuned": 3
+        },
+        {
+          "item": "inv-roots-opposite",
+          "jlens": 3,
+          "logit": 1,
+          "tuned": 1
+        },
+        {
+          "item": "inv-sunrise-opposite",
+          "jlens": 3,
+          "logit": 2,
+          "tuned": 3
+        },
+        {
+          "item": "letterpos-carbon-symbol",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "letterpos-nitrogen-symbol",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "letterpos-oxygen-symbol",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "letterpos-water-symbol",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "louvre-language",
+          "jlens": 4,
+          "logit": 5,
+          "tuned": 3
+        },
+        {
+          "item": "mars-color",
+          "jlens": 16,
+          "logit": 28,
+          "tuned": 8
+        },
+        {
+          "item": "month-1-godof",
+          "jlens": 65,
+          "logit": 38,
+          "tuned": 63
+        },
+        {
+          "item": "month-3-godof",
+          "jlens": 33,
+          "logit": 10,
+          "tuned": 13
+        },
+        {
+          "item": "month-7-namedafter",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "nhop-alphabet-element",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "nhop-chess-element",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "nhop-clock-element",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "nhop-compass-planet",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "nhop-cube-element",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "nhop-deck-element",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "nhop-fortnight-element",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "nhop-guitar-planet",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "nhop-insect-element",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "nhop-primary-planet",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "nhop-rainbow-element",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "nhop-rings-planet",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "nhop-soccer-element",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "nhop-spider-element",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "nhop-suit-element",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "nhop-volleyball-planet",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "nhop-week-element",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "osu-rival-mascot",
+          "jlens": 11,
+          "logit": 39,
+          "tuned": 22
+        },
+        {
+          "item": "paper-continent",
+          "jlens": 1,
+          "logit": 9,
+          "tuned": 3
+        },
+        {
+          "item": "planet-3-moons",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "pred-valentines-prevmonth",
+          "jlens": 1,
+          "logit": 1,
+          "tuned": 1
+        },
+        {
+          "item": "rhyme-chair-flag",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "rhyme-door-doubled",
+          "jlens": 34,
+          "logit": 12,
+          "tuned": 9
+        },
+        {
+          "item": "rhyme-fix-halved",
+          "jlens": 6,
+          "logit": 7,
+          "tuned": 5
+        },
+        {
+          "item": "rhyme-hive-plusone",
+          "jlens": 3,
+          "logit": 4,
+          "tuned": 5
+        },
+        {
+          "item": "rhyme-rain-neighbor",
+          "jlens": 2,
+          "logit": 3,
+          "tuned": 2
+        },
+        {
+          "item": "rhyme-shoe-doubled",
+          "jlens": 12,
+          "logit": 8,
+          "tuned": 5
+        },
+        {
+          "item": "rhyme-spoon-orbit",
+          "jlens": 12,
+          "logit": 15,
+          "tuned": 9
+        },
+        {
+          "item": "rhyme-tree-squared",
+          "jlens": 24,
+          "logit": 8,
+          "tuned": 9
+        },
+        {
+          "item": "roman-rings-olympic",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "roman-states-us",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "spaceneedle-border",
+          "jlens": 6,
+          "logit": 68,
+          "tuned": 11
+        },
+        {
+          "item": "spider-legs",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "succ-halloween-nextmonth",
+          "jlens": 2,
+          "logit": 2,
+          "tuned": 2
+        },
+        {
+          "item": "super-largest-country-capital",
+          "jlens": 16,
+          "logit": 80,
+          "tuned": 18
+        },
+        {
+          "item": "super-largest-island-nation",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "super-populous-capital",
+          "jlens": 8,
+          "logit": 33,
+          "tuned": 7
+        },
+        {
+          "item": "super-smallest-continent",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        },
+        {
+          "item": "tajmahal-continent",
+          "jlens": 1,
+          "logit": 5,
+          "tuned": 3
+        },
+        {
+          "item": "topeka-west",
+          "jlens": 1,
+          "logit": 1,
+          "tuned": 1
+        },
+        {
+          "item": "violin-strings",
+          "jlens": null,
+          "logit": null,
+          "tuned": null
+        }
+      ]
+    }
+  }
+}
