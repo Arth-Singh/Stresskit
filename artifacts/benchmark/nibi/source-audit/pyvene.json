@@ -1,0 +1,19 @@
+{
+  "all_ok": true,
+  "artifact_type": "stresskit_upstream_static_audit_result",
+  "manifest_schema_version": "0.1",
+  "not_execution_smoke": true,
+  "upstreams": {
+    "pyvene": {
+      "commit": "9e333904dcf9e597ca76170010d17f4d4580de8d",
+      "entrypoints_checked": 3,
+      "errors": [],
+      "missing_entrypoints": [],
+      "ok": true,
+      "python_files_parsed": 79,
+      "python_syntax_errors": [],
+      "python_syntax_warnings": [],
+      "tree": "949e5730a01cedc55648c0f568f464844f14bb97"
+    }
+  }
+}

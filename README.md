@@ -333,6 +333,29 @@ items, across four model scales ([full findings](references/h200-results/README.
   instability previously measured on the J-lens card is a property of
   **hit@k lens evaluation**, not of the Jacobian transport.
 
+## New: how much August 2026 interpretability work ships code (2026-08-31)
+
+Before auditing a literature you have to know its denominator. Every
+mechanistic-interpretability paper submitted to arXiv in August 2026 was
+collected by term search, filtered to the relevant categories, and audited for
+released code — repository URLs pulled from each paper, checked against the
+GitHub API, and classified as the authors' own release or a cited dependency
+([method and limitations](benchmark/discovery/AUGUST_2026.md), [row-level
+frame](benchmark/discovery/august-2026-frame.json)):
+
+![code availability across 108 August 2026 papers](benchmark/discovery/figs/august_2026_code_availability.png)
+
+- **31% ship an authored public repository**; 17% ship one that also carries a
+  license, which is what a third party needs before running it.
+- Six of these papers independently argue that interpretability results move
+  under defensible analytic variation — the claim this tool exists to measure.
+  Five of the six ship no runnable artifact.
+- 11 upstreams and 14 candidate claims were pinned from the licensed releases
+  into `benchmark/registry.candidates.json`, each with a commit hash, a claim
+  locator, preregistered perturbation axes and a null. Pinning is not a verdict:
+  no entry has been run, and the frame keeps the papers with no code and the
+  repositories with no license visible rather than dropping them.
+
 ## Contributing
 
 Issues and PRs welcome — especially reference cards for published findings

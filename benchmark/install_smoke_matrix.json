@@ -1,0 +1,53 @@
+{
+  "schema_version": "0.1",
+  "artifact_type": "stresskit_dependency_import_smoke_matrix",
+  "status": "prefreeze_stage_1",
+  "not_claim_reproduction": true,
+  "rows": [
+    {
+      "upstream": "circuit_tracer",
+      "python_module": "python/3.11.5",
+      "install": "editable_upstream_metadata",
+      "import_module": "circuit_tracer",
+      "preload_modules": ["arrow/25.0.0"],
+      "noindex_preinstall": ["torch"],
+      "public_bootstrap": ["transformers==4.57.3", "nnsight==0.6.1", "transformer-lens==2.16.1"]
+    },
+    {
+      "upstream": "pyvene",
+      "python_module": "python/3.11.5",
+      "install": "editable_upstream_metadata",
+      "import_module": "pyvene",
+      "preload_modules": ["arrow/25.0.0"],
+      "noindex_preinstall": [],
+      "public_bootstrap": []
+    },
+    {
+      "upstream": "representation_engineering",
+      "python_module": "python/3.11.5",
+      "install": "editable_upstream_metadata",
+      "import_module": "repe",
+      "preload_modules": [],
+      "noindex_preinstall": [],
+      "public_bootstrap": []
+    },
+    {
+      "upstream": "sae_lens",
+      "python_module": "python/3.11.5",
+      "install": "editable_upstream_metadata",
+      "import_module": "sae_lens",
+      "preload_modules": ["arrow/25.0.0"],
+      "noindex_preinstall": ["torch", "pandas"],
+      "public_bootstrap": ["babe==0.0.7", "plotly-express==0.4.1", "transformer-lens==2.16.1"]
+    },
+    {
+      "upstream": "tuned_lens",
+      "python_module": "python/3.11.5",
+      "install": "editable_upstream_metadata",
+      "import_module": "tuned_lens",
+      "preload_modules": ["arrow/25.0.0"],
+      "noindex_preinstall": [],
+      "public_bootstrap": []
+    }
+  ]
+}

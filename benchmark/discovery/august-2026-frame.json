@@ -1,0 +1,1971 @@
+{
+  "schema_version": "0.1",
+  "frame_id": "august-2026",
+  "status": "candidate_frame_not_frozen",
+  "outcome_blind": true,
+  "generated": "2026-08-31T14:24:29+00:00",
+  "window": {
+    "submitted_from": "2026-08-01",
+    "submitted_to": "2026-08-31",
+    "source": "arXiv API"
+  },
+  "query": {
+    "endpoint": "http://export.arxiv.org/api/query",
+    "field": "all",
+    "terms": {
+      "mechanistic interpretability": 39,
+      "sparse autoencoder": 43,
+      "activation patching": 13,
+      "activation steering": 18,
+      "steering vector": 10,
+      "circuit discovery": 3,
+      "logit lens": 5,
+      "linear probe": 72,
+      "attribution graph": 15,
+      "transcoder": 3,
+      "crosscoder": 2,
+      "causal tracing": 1,
+      "refusal direction": 4,
+      "model diffing": 3,
+      "superposition": 90
+    },
+    "category_filter": [
+      "cs.LG",
+      "cs.CL",
+      "cs.AI",
+      "cs.CV",
+      "cs.NE",
+      "stat.ML",
+      "cs.CY",
+      "cs.CR",
+      "cs.SE",
+      "cs.IR",
+      "cs.MA"
+    ],
+    "tier_a_rule": "matched >=1 narrow mechanistic-interpretability term",
+    "tier_b_rule": "matched only 'linear probe' or 'superposition'; retained as a separate stratum, not scored"
+  },
+  "code_detection": {
+    "method": "arXiv HTML (v1/v2) full-text scan for repository URLs, then GitHub API existence/license/HEAD checks, then sentence-context classification of each link as an authored release or a cited dependency",
+    "authored_release_rule": "release language in the sentence around the link, or a recently-created low-star repo whose name matches the paper, with no dependency language",
+    "known_limitation": "papers with no arXiv HTML rendering, or code linked only from a PDF figure or an external project page, can be undercounted"
+  },
+  "counts": {
+    "arxiv_hits_unique": 281,
+    "after_category_filter": 197,
+    "with_interpretability_signal": 158,
+    "tier_a": 108,
+    "tier_b": 50,
+    "by_code_status": {
+      "public_repo": 33,
+      "code_promised_not_released": 4,
+      "no_public_code_found": 47,
+      "dependency_links_only": 14,
+      "no_repo_hf_links_only": 10
+    },
+    "public_repo_with_spdx_license": 18,
+    "public_repo_without_license": 15
+  },
+  "papers": [
+    {
+      "arxiv_id": "2608.28233",
+      "title": "REINS: Refusal-Enhanced Inhibitory Steering with Sparse Autoencoder Features",
+      "published": "2026-08-28",
+      "matched_terms": [
+        "sparse autoencoder"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "public_repo",
+        "repository": "https://github.com/Geralt1020/REINS",
+        "head_commit_at_discovery": "d6ad20620a7729b0b1b746463a68ca989884f7dc",
+        "license_spdx": "Apache-2.0",
+        "license_status": "found",
+        "repo_created_at": "2026-08-24",
+        "last_push_at_discovery": "2026-08-31",
+        "other_authored_repos": []
+      }
+    },
+    {
+      "arxiv_id": "2608.28191",
+      "title": "EXPOSE: Explainable and Domain-Robust Embeddings from Pathology Vision Foundation Models using Sparse Autoencoders",
+      "published": "2026-08-28",
+      "matched_terms": [
+        "sparse autoencoder"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "public_repo",
+        "repository": "https://github.com/imsb-uke/expose",
+        "head_commit_at_discovery": "204c1d11bbb73d17b574be623bd56897431b1d60",
+        "license_spdx": "MIT",
+        "license_status": "found",
+        "repo_created_at": "2026-08-13",
+        "last_push_at_discovery": "2026-08-28",
+        "other_authored_repos": []
+      }
+    },
+    {
+      "arxiv_id": "2608.27785",
+      "title": "Compositional Failure in Audio-Visual LLMs: Late-Layer Prior Dominance Under Cross-modal Conflict",
+      "published": "2026-08-27",
+      "matched_terms": [
+        "mechanistic interpretability"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "public_repo",
+        "repository": "https://github.com/AdarshSudheer09/AVHBench-dmai",
+        "head_commit_at_discovery": "5c6d46ae8311e44b77e1731c04191ebee17b0102",
+        "license_spdx": null,
+        "license_status": "not_found",
+        "repo_created_at": "2026-03-16",
+        "last_push_at_discovery": "2026-06-05",
+        "other_authored_repos": []
+      }
+    },
+    {
+      "arxiv_id": "2608.27756",
+      "title": "Load-Bearing Context: The Question Damage Score for Evaluating Context Reliance in Linguistic Reasoning",
+      "published": "2026-08-27",
+      "matched_terms": [
+        "mechanistic interpretability"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "code_promised_not_released"
+      }
+    },
+    {
+      "arxiv_id": "2608.27254",
+      "title": "Circuit Condensation: Post-Training that Concentrates a Behavior's Causal Circuit",
+      "published": "2026-08-27",
+      "matched_terms": [
+        "mechanistic interpretability"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_public_code_found"
+      }
+    },
+    {
+      "arxiv_id": "2608.27504",
+      "title": "Circuit Discovery Helps Detect LLM Jailbreaking: A Mechanistic Interpretability Study",
+      "published": "2026-08-27",
+      "matched_terms": [
+        "circuit discovery",
+        "mechanistic interpretability"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "dependency_links_only",
+        "cited_repositories": [
+          "https://github.com/TransformerLensOrg/TransformerLens"
+        ]
+      }
+    },
+    {
+      "arxiv_id": "2608.27754",
+      "title": "Efficient Auto-Interpretability of AI Models in Biology",
+      "published": "2026-08-27",
+      "matched_terms": [
+        "sparse autoencoder"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_repo_hf_links_only",
+        "huggingface_refs": [
+          "collections/evolve-away"
+        ]
+      }
+    },
+    {
+      "arxiv_id": "2608.27397",
+      "title": "Making Clinical Language Models Auditable: Concept-Guided Fine-Tuning for Robust Prediction",
+      "published": "2026-08-27",
+      "matched_terms": [
+        "sparse autoencoder"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_public_code_found"
+      }
+    },
+    {
+      "arxiv_id": "2608.27515",
+      "title": "A Deeper Analysis of Block-Sparse Featurizers",
+      "published": "2026-08-27",
+      "matched_terms": [
+        "crosscoder",
+        "sparse autoencoder"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_public_code_found"
+      }
+    },
+    {
+      "arxiv_id": "2608.26887",
+      "title": "Planting a Latent Variable in Natural-Looking Text: a More Realistic Test of Belief States in LLMs and Their Link to Concept Geometry",
+      "published": "2026-08-27",
+      "matched_terms": [
+        "sparse autoencoder"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_public_code_found"
+      }
+    },
+    {
+      "arxiv_id": "2608.27338",
+      "title": "One Model, Many Minds: Unlocking Multi-Agent Synergy in a Single Agent via Mixture of Roles",
+      "published": "2026-08-27",
+      "matched_terms": [
+        "steering vector"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_public_code_found"
+      }
+    },
+    {
+      "arxiv_id": "2608.27510",
+      "title": "How Do Linear Probes Emerge? A Circuit-Tracing Framework with Concept-Targeted Attribution",
+      "published": "2026-08-27",
+      "matched_terms": [
+        "attribution graph",
+        "linear probe",
+        "transcoder"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "public_repo",
+        "repository": "https://github.com/vedantpalit/concept-targeted-attribution",
+        "head_commit_at_discovery": "46f69f131c1bf327592efcbf733b4d08a9ce2894",
+        "license_spdx": "MIT",
+        "license_status": "found",
+        "repo_created_at": "2026-06-12",
+        "last_push_at_discovery": "2026-08-23",
+        "other_authored_repos": []
+      }
+    },
+    {
+      "arxiv_id": "2608.26419",
+      "title": "Interpreting Latent Protein Language Model Features with Geometric Annotations",
+      "published": "2026-08-26",
+      "matched_terms": [
+        "mechanistic interpretability",
+        "sparse autoencoder"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "dependency_links_only",
+        "cited_repositories": [
+          "https://github.com/saprmarks/dictionary_learning",
+          "https://github.com/siddharthsetlur/ProteinLens"
+        ]
+      }
+    },
+    {
+      "arxiv_id": "2608.26090",
+      "title": "Finding and using interpretable latents in a neutrino foundation model with sparse autoencoders",
+      "published": "2026-08-26",
+      "matched_terms": [
+        "mechanistic interpretability",
+        "sparse autoencoder"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_public_code_found"
+      }
+    },
+    {
+      "arxiv_id": "2608.25941",
+      "title": "When Pruning Meets Interpretability: Preserving Sparse Autoencoder Robustness in LLMs",
+      "published": "2026-08-26",
+      "matched_terms": [
+        "sparse autoencoder"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "dependency_links_only",
+        "cited_repositories": [
+          "https://github.com/decoderesearch/SAELens"
+        ]
+      }
+    },
+    {
+      "arxiv_id": "2608.25780",
+      "title": "PUMA: Post-Hoc Sparsification of Universal Multimodal Embeddings for Efficient Retrieval",
+      "published": "2026-08-26",
+      "matched_terms": [
+        "sparse autoencoder"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "public_repo",
+        "repository": "https://github.com/sisinflab/PUMA",
+        "head_commit_at_discovery": "a197063f93303eb611ef064daab9df99a210e172",
+        "license_spdx": null,
+        "license_status": "not_found",
+        "repo_created_at": "2026-05-21",
+        "last_push_at_discovery": "2026-08-26",
+        "other_authored_repos": []
+      }
+    },
+    {
+      "arxiv_id": "2608.25697",
+      "title": "LMSM: LLM Security Framework Inspired by Linux Security Modules",
+      "published": "2026-08-26",
+      "matched_terms": [
+        "sparse autoencoder",
+        "transcoder"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "public_repo",
+        "repository": "https://github.com/xiuyuz/LMSM",
+        "head_commit_at_discovery": "78d060f9f90c2162ca44214f0322c2b0ca387fcd",
+        "license_spdx": "MIT",
+        "license_status": "found",
+        "repo_created_at": "2026-08-27",
+        "last_push_at_discovery": "2026-08-27",
+        "other_authored_repos": []
+      }
+    },
+    {
+      "arxiv_id": "2608.25354",
+      "title": "Escaping Low-Dimensional Overlap: Multi-Task Model Merging via High-Dimensional Sparse Disentanglement",
+      "published": "2026-08-26",
+      "matched_terms": [
+        "sparse autoencoder",
+        "superposition"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_public_code_found"
+      }
+    },
+    {
+      "arxiv_id": "2608.25390",
+      "title": "Refusal geometry reflects refusal training: diverse refusal prefixes can raise stable rank and weaken refusal vector ablation attacks",
+      "published": "2026-08-26",
+      "matched_terms": [
+        "refusal direction"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_repo_hf_links_only",
+        "huggingface_refs": [
+          "allenai/OLMo-2-0425-1B-Instruct"
+        ]
+      }
+    },
+    {
+      "arxiv_id": "2608.26462",
+      "title": "Diff Mining: Logit Differences Reveal Finetuning Objectives",
+      "published": "2026-08-26",
+      "matched_terms": [
+        "model diffing"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "public_repo",
+        "repository": "https://github.com/science-of-finetuning/diffing-toolkit",
+        "head_commit_at_discovery": "e0b84a591f5184d69a65082e4366ccfe36f47661",
+        "license_spdx": "MIT",
+        "license_status": "found",
+        "repo_created_at": "2025-05-28",
+        "last_push_at_discovery": "2026-07-20",
+        "other_authored_repos": []
+      }
+    },
+    {
+      "arxiv_id": "2608.24758",
+      "title": "RACE: Scalable Statistical Estimation of Functional Consistency in LLM Neurons",
+      "published": "2026-08-25",
+      "matched_terms": [
+        "mechanistic interpretability"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_public_code_found"
+      }
+    },
+    {
+      "arxiv_id": "2608.24482",
+      "title": "Beyond Static Interpretability: Anticipating Post-SFT Mechanisms from Pre-SFT Parameters for Better Tuning",
+      "published": "2026-08-25",
+      "matched_terms": [
+        "mechanistic interpretability"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "public_repo",
+        "repository": "https://github.com/Zodiark-ch/Future_localization",
+        "head_commit_at_discovery": "31df779d048e66554d06bc4c4ce84a347043094b",
+        "license_spdx": "MIT",
+        "license_status": "found",
+        "repo_created_at": "2026-06-24",
+        "last_push_at_discovery": "2026-08-29",
+        "other_authored_repos": []
+      }
+    },
+    {
+      "arxiv_id": "2608.24065",
+      "title": "Mechanistic Circuit Identification for Controllable Data Generation",
+      "published": "2026-08-25",
+      "matched_terms": [
+        "activation steering",
+        "mechanistic interpretability"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "public_repo",
+        "repository": "https://github.com/alansun17904/circuit-stability",
+        "head_commit_at_discovery": "4b22d3808cabb75e93a532d0d88a01bb696447a5",
+        "license_spdx": null,
+        "license_status": "not_found",
+        "repo_created_at": "2025-05-25",
+        "last_push_at_discovery": "2025-07-01",
+        "other_authored_repos": []
+      }
+    },
+    {
+      "arxiv_id": "2608.24958",
+      "title": "Can We Read the Mind of an Audio LLM? A Verbalizable, Multilingual Middle-Layer Workspace",
+      "published": "2026-08-25",
+      "matched_terms": [
+        "activation patching",
+        "logit lens"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_public_code_found"
+      }
+    },
+    {
+      "arxiv_id": "2608.25088",
+      "title": "The Von-Neumann State-Space Transformer for neural decoding",
+      "published": "2026-08-25",
+      "matched_terms": [
+        "activation steering"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_public_code_found"
+      }
+    },
+    {
+      "arxiv_id": "2608.24988",
+      "title": "Does Fine-Tuning Undo Activation Steering? Behavioural Recovery Without Weight-Edit Reversal",
+      "published": "2026-08-25",
+      "matched_terms": [
+        "activation steering"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "dependency_links_only",
+        "cited_repositories": [
+          "https://github.com/p-e-w/heretic"
+        ]
+      }
+    },
+    {
+      "arxiv_id": "2608.24335",
+      "title": "SteerCheck: Attribution Specificity and Alignment Leakage in Activation-Steering Audits",
+      "published": "2026-08-25",
+      "matched_terms": [
+        "activation steering"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_public_code_found"
+      }
+    },
+    {
+      "arxiv_id": "2608.23809",
+      "title": "Discovering Cross-Language Reasoning Invariance in LLMs with Geometry-Invariant Sparse Autoencoders",
+      "published": "2026-08-24",
+      "matched_terms": [
+        "mechanistic interpretability",
+        "sparse autoencoder"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "dependency_links_only",
+        "cited_repositories": [
+          "https://github.com/TransformerLensOrg/TransformerLens"
+        ]
+      }
+    },
+    {
+      "arxiv_id": "2608.23074",
+      "title": "Grounding Isn't Knowing: Do VLMs Need Object Localization for Spatial Reasoning?",
+      "published": "2026-08-24",
+      "matched_terms": [
+        "mechanistic interpretability"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_public_code_found"
+      }
+    },
+    {
+      "arxiv_id": "2608.23666",
+      "title": "Gated Activation Steering for Reducing Sycophancy &amp; Hallucination in Medical Question Answering",
+      "published": "2026-08-24",
+      "matched_terms": [
+        "activation steering"
+      ],
+      "html_source": "abs",
+      "code": {
+        "status": "no_repo_hf_links_only",
+        "huggingface_refs": [
+          "docs/hub"
+        ]
+      }
+    },
+    {
+      "arxiv_id": "2608.22985",
+      "title": "What Does Activation Steering Control? Attribution Across Answer Encodings and Output-Sensitive Subspaces",
+      "published": "2026-08-24",
+      "matched_terms": [
+        "activation steering"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_public_code_found"
+      }
+    },
+    {
+      "arxiv_id": "2608.23873",
+      "title": "Semantic Overlays: Mitigating Prompt Injection with Annotations Beyond Tokens and Steering Vectors",
+      "published": "2026-08-24",
+      "matched_terms": [
+        "steering vector"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "public_repo",
+        "repository": "https://github.com/JoshuaSP/semantic-overlays",
+        "head_commit_at_discovery": "9e7bab2b15ccc7e189d740d0fc0d586cab1b0371",
+        "license_spdx": "MIT",
+        "license_status": "found",
+        "repo_created_at": "2026-08-24",
+        "last_push_at_discovery": "2026-08-28",
+        "other_authored_repos": []
+      }
+    },
+    {
+      "arxiv_id": "2608.22614",
+      "title": "What AstroPT knows about galaxies, and what that can teach us about LLMs",
+      "published": "2026-08-23",
+      "matched_terms": [
+        "linear probe",
+        "mechanistic interpretability"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_public_code_found"
+      }
+    },
+    {
+      "arxiv_id": "2608.22332",
+      "title": "Mechanistic Interpretability of Chain-of-Thought Reasoning via Sequential Activation Patching",
+      "published": "2026-08-23",
+      "matched_terms": [
+        "activation patching",
+        "mechanistic interpretability"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "public_repo",
+        "repository": "https://github.com/MuratDura/CoT_Mechanistic_Interpretability",
+        "head_commit_at_discovery": "3b40a0bd2cd2b553778d32cabd6138474e75528a",
+        "license_spdx": null,
+        "license_status": "not_found",
+        "repo_created_at": "2026-08-23",
+        "last_push_at_discovery": "2026-08-23",
+        "other_authored_repos": []
+      }
+    },
+    {
+      "arxiv_id": "2608.22155",
+      "title": "Why Does Robustness Reduce Superposition?",
+      "published": "2026-08-23",
+      "matched_terms": [
+        "mechanistic interpretability",
+        "superposition"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_public_code_found"
+      }
+    },
+    {
+      "arxiv_id": "2608.22034",
+      "title": "Align, Unify, Suppress, Route: A Coherentist View of Transformer Computation",
+      "published": "2026-08-22",
+      "matched_terms": [
+        "mechanistic interpretability"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "dependency_links_only",
+        "cited_repositories": [
+          "https://github.com/TransformerLensOrg/TransformerLens"
+        ]
+      }
+    },
+    {
+      "arxiv_id": "2608.22007",
+      "title": "The Communication Map of a Transformer",
+      "published": "2026-08-22",
+      "matched_terms": [
+        "mechanistic interpretability"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "public_repo",
+        "repository": "https://github.com/richardzhewang/communication-map",
+        "head_commit_at_discovery": "c8ab3b02c11ab7541794682163cbbc03a5b5a4c1",
+        "license_spdx": "MIT",
+        "license_status": "found",
+        "repo_created_at": "2026-08-22",
+        "last_push_at_discovery": "2026-08-27",
+        "other_authored_repos": []
+      }
+    },
+    {
+      "arxiv_id": "2608.20970",
+      "title": "Deep Learning Models Also Recall Features",
+      "published": "2026-08-21",
+      "matched_terms": [
+        "mechanistic interpretability"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_public_code_found"
+      }
+    },
+    {
+      "arxiv_id": "2608.20763",
+      "title": "CARD: Diagnosing Belief to Action Routing Failures in Vision Language Models",
+      "published": "2026-08-21",
+      "matched_terms": [
+        "activation steering",
+        "linear probe"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "code_promised_not_released"
+      }
+    },
+    {
+      "arxiv_id": "2608.20569",
+      "title": "Open-Weight Masked Introspection: Measuring What Language Models Can Report About Their Own Computation",
+      "published": "2026-08-20",
+      "matched_terms": [
+        "linear probe",
+        "sparse autoencoder"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "dependency_links_only",
+        "cited_repositories": [
+          "https://github.com/open-compass/opencompass"
+        ]
+      }
+    },
+    {
+      "arxiv_id": "2608.20134",
+      "title": "Feature Evolution and Migration during Vision Transformer Training",
+      "published": "2026-08-20",
+      "matched_terms": [
+        "sparse autoencoder"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "public_repo",
+        "repository": "https://github.com/joonasrooben/VIT-Feature-Evolution-and-Migration",
+        "head_commit_at_discovery": "8d8a3f647e755e68745deb23d8238b3d411368bd",
+        "license_spdx": null,
+        "license_status": "not_found",
+        "repo_created_at": "2026-08-13",
+        "last_push_at_discovery": "2026-08-15",
+        "other_authored_repos": []
+      }
+    },
+    {
+      "arxiv_id": "2608.20117",
+      "title": "SAE-Xplainers: Rule-Based Feature Interpretation for Extreme Earth Events",
+      "published": "2026-08-20",
+      "matched_terms": [
+        "sparse autoencoder"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "public_repo",
+        "repository": "https://github.com/eceo-epfl/SAE-Xplainers",
+        "head_commit_at_discovery": "03eddea3c0d74d3c8e30afb1428be1d27a24906e",
+        "license_spdx": "MIT",
+        "license_status": "found",
+        "repo_created_at": "2026-08-20",
+        "last_push_at_discovery": "2026-08-21",
+        "other_authored_repos": []
+      }
+    },
+    {
+      "arxiv_id": "2608.19338",
+      "title": "Mechanistic Tomography: Designed Measurement for Control-Oriented Interpretability",
+      "published": "2026-08-19",
+      "matched_terms": [
+        "mechanistic interpretability"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "public_repo",
+        "repository": "https://github.com/kwisatzh/mechanistic-tomography",
+        "head_commit_at_discovery": "5c097d2175c632a4a15e359cb4d94ec923168472",
+        "license_spdx": "Apache-2.0",
+        "license_status": "found",
+        "repo_created_at": "2026-08-04",
+        "last_push_at_discovery": "2026-08-17",
+        "other_authored_repos": []
+      }
+    },
+    {
+      "arxiv_id": "2608.18419",
+      "title": "Mechanistic Interpretability of Structure-Aware Numerical Reasoning in LLaMA 3.1 8B",
+      "published": "2026-08-19",
+      "matched_terms": [
+        "activation patching",
+        "mechanistic interpretability"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_public_code_found"
+      }
+    },
+    {
+      "arxiv_id": "2608.18545",
+      "title": "Shared Circuits for Shared Grammar: Tracing Subject-Verb Agreement Across Languages",
+      "published": "2026-08-19",
+      "matched_terms": [
+        "activation patching"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_public_code_found"
+      }
+    },
+    {
+      "arxiv_id": "2608.16251",
+      "title": "SCOUT: Semantic Concept Discovery for Open-Vocabulary Editing of face Recognition Templates",
+      "published": "2026-08-17",
+      "matched_terms": [
+        "mechanistic interpretability"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_public_code_found"
+      }
+    },
+    {
+      "arxiv_id": "2608.16094",
+      "title": "Protein Structure Prediction: From Evolutionary Constraints to Generative Modeling",
+      "published": "2026-08-17",
+      "matched_terms": [
+        "mechanistic interpretability"
+      ],
+      "html_source": "abs",
+      "code": {
+        "status": "no_repo_hf_links_only",
+        "huggingface_refs": [
+          "docs/hub"
+        ]
+      }
+    },
+    {
+      "arxiv_id": "2608.16669",
+      "title": "Concept-based explanation of gene expression prediction from H&amp;E images",
+      "published": "2026-08-17",
+      "matched_terms": [
+        "sparse autoencoder"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_public_code_found"
+      }
+    },
+    {
+      "arxiv_id": "2608.16650",
+      "title": "PCA-guided Activation Scaling for Monotonic Bidirectional Control over LLM Sycophancy",
+      "published": "2026-08-17",
+      "matched_terms": [
+        "activation steering"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "public_repo",
+        "repository": "https://github.com/Bellafc/PCS",
+        "head_commit_at_discovery": "7cd972875bca3cdf8018cc98c0e5118ee81c6b81",
+        "license_spdx": null,
+        "license_status": "not_found",
+        "repo_created_at": "2026-04-01",
+        "last_push_at_discovery": "2026-08-02",
+        "other_authored_repos": []
+      }
+    },
+    {
+      "arxiv_id": "2608.16577",
+      "title": "BabelSteering: Multilingual Safety Alignment via English Steering Vectors",
+      "published": "2026-08-17",
+      "matched_terms": [
+        "activation steering",
+        "refusal direction",
+        "steering vector"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "code_promised_not_released"
+      }
+    },
+    {
+      "arxiv_id": "2608.15459",
+      "title": "Not All Attention Is Equal: A Quantitative Survey of the EEI Trade-off",
+      "published": "2026-08-16",
+      "matched_terms": [
+        "mechanistic interpretability",
+        "superposition"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "public_repo",
+        "repository": "https://github.com/Nixon-H/not-all-attention-is-equal",
+        "head_commit_at_discovery": "3019068a5d1192aa172b88bb366df3295128a810",
+        "license_spdx": null,
+        "license_status": "not_found",
+        "repo_created_at": "2026-08-10",
+        "last_push_at_discovery": "2026-08-16",
+        "other_authored_repos": []
+      }
+    },
+    {
+      "arxiv_id": "2608.15632",
+      "title": "Sparse Prototype Code Underlies Classification and Prediction Across Modalities",
+      "published": "2026-08-16",
+      "matched_terms": [
+        "sparse autoencoder"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_public_code_found"
+      }
+    },
+    {
+      "arxiv_id": "2608.15772",
+      "title": "Broken Symmetry in LLM Refusal: Answer Release Is More Local Than Refusal Restoration",
+      "published": "2026-08-16",
+      "matched_terms": [
+        "activation patching"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_public_code_found"
+      }
+    },
+    {
+      "arxiv_id": "2608.15687",
+      "title": "THESIS-MoE: Trainable Hierarchical Extraction and SteerIng of Sycophancy in Mixture-of-Experts",
+      "published": "2026-08-16",
+      "matched_terms": [
+        "activation steering"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "dependency_links_only",
+        "cited_repositories": [
+          "https://github.com/ibm-granite/granite-3.0-language-models"
+        ]
+      }
+    },
+    {
+      "arxiv_id": "2608.14922",
+      "title": "SpIn-ViT: Designing a Sparsity-Induced Vision Transformer That Is Mechanistically Interpretable",
+      "published": "2026-08-14",
+      "matched_terms": [
+        "mechanistic interpretability",
+        "sparse autoencoder"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_public_code_found"
+      }
+    },
+    {
+      "arxiv_id": "2608.13754",
+      "title": "Explanation Multiplicity: Circuit-Level Interpretability Evidence Does Not Survive Defensible Analytic Variation",
+      "published": "2026-08-13",
+      "matched_terms": [
+        "circuit discovery",
+        "mechanistic interpretability"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_public_code_found"
+      }
+    },
+    {
+      "arxiv_id": "2608.12717",
+      "title": "Perturbation-based Regional Interpretability through Subtraction Mapping (PRISM): naming-error dissociations in language models and post-stroke aphasia",
+      "published": "2026-08-13",
+      "matched_terms": [
+        "mechanistic interpretability"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_repo_hf_links_only",
+        "huggingface_refs": [
+          "liuhaotian/llava-v1.6-vicuna-13b"
+        ]
+      }
+    },
+    {
+      "arxiv_id": "2608.13538",
+      "title": "SAEVerbalizer: Generating Explanations for Sparse Autoencoder Features via Representation Verbalization",
+      "published": "2026-08-13",
+      "matched_terms": [
+        "sparse autoencoder"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_public_code_found"
+      }
+    },
+    {
+      "arxiv_id": "2608.13337",
+      "title": "Where You Measure Decides What You Measure: Position Selection in Ablation-Based SAE Evaluation",
+      "published": "2026-08-13",
+      "matched_terms": [
+        "sparse autoencoder"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "public_repo",
+        "repository": "https://github.com/vcnoel/sae-artifact",
+        "head_commit_at_discovery": "0462b11f3345accbbe4fb66aba72f57650bb4e0c",
+        "license_spdx": null,
+        "license_status": "not_found",
+        "repo_created_at": "2026-08-03",
+        "last_push_at_discovery": "2026-08-12",
+        "other_authored_repos": []
+      }
+    },
+    {
+      "arxiv_id": "2608.12852",
+      "title": "Falsehood and Impossibility Are Different Directions in an AI's Representation of Language",
+      "published": "2026-08-13",
+      "matched_terms": [
+        "sparse autoencoder"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "public_repo",
+        "repository": "https://github.com/sixticket/representing-the-impossible",
+        "head_commit_at_discovery": "f1ead9af6cb7104c170325906a0bd78baa989473",
+        "license_spdx": "MIT",
+        "license_status": "found",
+        "repo_created_at": "2026-08-09",
+        "last_push_at_discovery": "2026-08-13",
+        "other_authored_repos": []
+      }
+    },
+    {
+      "arxiv_id": "2608.12892",
+      "title": "Predictive Memory Localization: Forecasting Selective Intervention Paths from Internal Signals",
+      "published": "2026-08-13",
+      "matched_terms": [
+        "activation steering"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_repo_hf_links_only",
+        "huggingface_refs": [
+          "Qwen/Qwen3.5-2B-Base"
+        ]
+      }
+    },
+    {
+      "arxiv_id": "2608.12829",
+      "title": "Semantic Steering for Controllable Generation: Tuning-Free Concept Erasure in Multimodal Diffusion Transformers",
+      "published": "2026-08-13",
+      "matched_terms": [
+        "steering vector"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_public_code_found"
+      }
+    },
+    {
+      "arxiv_id": "2608.12573",
+      "title": "Prof-K: Probabilistic One-Pass Filtering for Efficient Top-k Selection",
+      "published": "2026-08-12",
+      "matched_terms": [
+        "sparse autoencoder"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "dependency_links_only",
+        "cited_repositories": [
+          "https://github.com/saprmarks/dictionary_learning"
+        ]
+      }
+    },
+    {
+      "arxiv_id": "2608.11171",
+      "title": "From Interpretability to Control: Insights from Six Years of the TrustNLP Workshop",
+      "published": "2026-08-11",
+      "matched_terms": [
+        "mechanistic interpretability"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_public_code_found"
+      }
+    },
+    {
+      "arxiv_id": "2608.11475",
+      "title": "Probing and steering biology across Boltz-1s trunk-diffusion boundary",
+      "published": "2026-08-11",
+      "matched_terms": [
+        "linear probe",
+        "sparse autoencoder"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "public_repo",
+        "repository": "https://github.com/EvolvereLabs/Boltz-interp",
+        "head_commit_at_discovery": "14770609b5e62461cd456d725e2f7439dc1e96ec",
+        "license_spdx": "MIT",
+        "license_status": "found",
+        "repo_created_at": "2026-08-11",
+        "last_push_at_discovery": "2026-08-25",
+        "other_authored_repos": []
+      }
+    },
+    {
+      "arxiv_id": "2608.11197",
+      "title": "Beyond a Bag of Features: Set-Level Instability in Sparse Autoencoders",
+      "published": "2026-08-11",
+      "matched_terms": [
+        "sparse autoencoder"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "dependency_links_only",
+        "cited_repositories": [
+          "https://github.com/TransformerLensOrg/TransformerLens",
+          "https://github.com/decoderesearch/SAELens"
+        ]
+      }
+    },
+    {
+      "arxiv_id": "2608.11025",
+      "title": "Data Attribution of Emergent Misalignment with Persona Features",
+      "published": "2026-08-11",
+      "matched_terms": [
+        "model diffing",
+        "sparse autoencoder"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "dependency_links_only",
+        "cited_repositories": [
+          "https://github.com/huggingface/peft",
+          "https://github.com/huggingface/trl"
+        ]
+      }
+    },
+    {
+      "arxiv_id": "2608.10985",
+      "title": "PEAK: Precise and Persistent Concept Erasure via k-Sparse Autoencoders",
+      "published": "2026-08-11",
+      "matched_terms": [
+        "sparse autoencoder"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "public_repo",
+        "repository": "https://github.com/manmanTAT/PEAK",
+        "head_commit_at_discovery": "4670248963a06cf27a42d529f83d916efd02d1d6",
+        "license_spdx": null,
+        "license_status": "not_found",
+        "repo_created_at": "2026-03-04",
+        "last_push_at_discovery": "2026-08-10",
+        "other_authored_repos": []
+      }
+    },
+    {
+      "arxiv_id": "2608.10537",
+      "title": "Measuring Semantic Abstractness of SAE Features via Nonlocality",
+      "published": "2026-08-11",
+      "matched_terms": [
+        "sparse autoencoder"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "public_repo",
+        "repository": "https://github.com/lccqqqqq/sae-feature-nonlocality",
+        "head_commit_at_discovery": "01b5e62080e4f2e0bb522c1ebd8bd0c2d45df106",
+        "license_spdx": null,
+        "license_status": "not_found",
+        "repo_created_at": "2026-08-14",
+        "last_push_at_discovery": "2026-08-14",
+        "other_authored_repos": []
+      }
+    },
+    {
+      "arxiv_id": "2608.10430",
+      "title": "Actionable Hallucination Detection: Translating Latent Uncertainty into Agentic Critique",
+      "published": "2026-08-11",
+      "matched_terms": [
+        "activation patching"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_public_code_found"
+      }
+    },
+    {
+      "arxiv_id": "2608.10758",
+      "title": "Where To Look? : Causal Tracing of Vision Encoders in VLM",
+      "published": "2026-08-11",
+      "matched_terms": [
+        "causal tracing"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_public_code_found"
+      }
+    },
+    {
+      "arxiv_id": "2608.10172",
+      "title": "Intrinsic Structure: Spectral Identifiability for Mechanistic Interpretability",
+      "published": "2026-08-10",
+      "matched_terms": [
+        "mechanistic interpretability",
+        "sparse autoencoder"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_public_code_found"
+      }
+    },
+    {
+      "arxiv_id": "2608.09095",
+      "title": "Who Bridges Safety? Identifying and Targeting Cross-Lingual Shared Safety Pathways",
+      "published": "2026-08-10",
+      "matched_terms": [
+        "mechanistic interpretability"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_public_code_found"
+      }
+    },
+    {
+      "arxiv_id": "2608.08976",
+      "title": "Label-Free Parkinson's Disease Screening from Face and Voice through Mechanistic Interpretability",
+      "published": "2026-08-10",
+      "matched_terms": [
+        "mechanistic interpretability"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_repo_hf_links_only",
+        "huggingface_refs": [
+          "dima806/facial_emotions_image_detection",
+          "trpakov/vit-face-expression"
+        ]
+      }
+    },
+    {
+      "arxiv_id": "2608.10198",
+      "title": "Post-Hoc Sparse Coding of Latent Communication Between Vision-Language Model Agents",
+      "published": "2026-08-10",
+      "matched_terms": [
+        "sparse autoencoder"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_public_code_found"
+      }
+    },
+    {
+      "arxiv_id": "2608.09928",
+      "title": "Multimodal Model Diffing for Feature Discovery and Control",
+      "published": "2026-08-10",
+      "matched_terms": [
+        "model diffing",
+        "sparse autoencoder"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_public_code_found"
+      }
+    },
+    {
+      "arxiv_id": "2608.09521",
+      "title": "One Adapter Pair per Model: A Universal Activation Interface for Language Models",
+      "published": "2026-08-10",
+      "matched_terms": [
+        "sparse autoencoder"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_repo_hf_links_only",
+        "huggingface_refs": [
+          "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+          "Qwen/Qwen2.5-7B-Instruct",
+          "Qwen/Qwen3-4B-Instruct-2507",
+          "allenai/OLMo-2-1124-7B",
+          "datasets/Skylion007",
+          "datasets/deepmind"
+        ]
+      }
+    },
+    {
+      "arxiv_id": "2608.09638",
+      "title": "Avalon-ToM-Bench: Evaluating Fine-Grained Theory of Mind via Asymmetric Game Mechanics",
+      "published": "2026-08-10",
+      "matched_terms": [
+        "activation steering",
+        "linear probe"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "public_repo",
+        "repository": "https://github.com/yenshan0530/Avalon-ToM-Bench",
+        "head_commit_at_discovery": "642a049a0da872adbe8a8b6ae7a3c83d06de71ae",
+        "license_spdx": "Apache-2.0",
+        "license_status": "found",
+        "repo_created_at": "2026-08-02",
+        "last_push_at_discovery": "2026-08-10",
+        "other_authored_repos": []
+      }
+    },
+    {
+      "arxiv_id": "2608.08536",
+      "title": "Can Graph Learning Learn Circuits?",
+      "published": "2026-08-09",
+      "matched_terms": [
+        "mechanistic interpretability"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "public_repo",
+        "repository": "https://github.com/graph-learning-circuits/graph-learning-circuits",
+        "head_commit_at_discovery": "a5663b41825dad89df430b43ca47372c8cebe621",
+        "license_spdx": "AGPL-3.0",
+        "license_status": "found",
+        "repo_created_at": "2026-08-09",
+        "last_push_at_discovery": "2026-08-13",
+        "other_authored_repos": []
+      }
+    },
+    {
+      "arxiv_id": "2608.08829",
+      "title": "Deployable Per-Instance Multi-Layer Activation Steering for Large Language Models",
+      "published": "2026-08-09",
+      "matched_terms": [
+        "activation steering"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_public_code_found"
+      }
+    },
+    {
+      "arxiv_id": "2608.08383",
+      "title": "Safety Cost of Steering Vectors Is Separable and Reducible",
+      "published": "2026-08-09",
+      "matched_terms": [
+        "steering vector"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "public_repo",
+        "repository": "https://github.com/yetiiil/steering-safety-cost",
+        "head_commit_at_discovery": null,
+        "license_spdx": null,
+        "license_status": "not_found",
+        "repo_created_at": "2026-08-08",
+        "last_push_at_discovery": "2026-08-08",
+        "other_authored_repos": []
+      }
+    },
+    {
+      "arxiv_id": "2608.08168",
+      "title": "Thinking vs. NoThinking: Towards Interpreting Reasoning Mechanisms of Large Language Models via Sparse Autoencoders",
+      "published": "2026-08-08",
+      "matched_terms": [
+        "sparse autoencoder"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_repo_hf_links_only",
+        "huggingface_refs": [
+          "datasets/AI-MO",
+          "datasets/Hothan"
+        ]
+      }
+    },
+    {
+      "arxiv_id": "2608.07852",
+      "title": "\"Many Are My Names\": The Anatomy of the Assistant and Its Personas via Sparse Autoencoders",
+      "published": "2026-08-08",
+      "matched_terms": [
+        "sparse autoencoder"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "dependency_links_only",
+        "cited_repositories": [
+          "https://github.com/saprmarks/dictionary_learning"
+        ]
+      }
+    },
+    {
+      "arxiv_id": "2608.08284",
+      "title": "Fair on the Surface? Benchmarking Hidden-Output Fairness Gaps in LLM Recommenders",
+      "published": "2026-08-08",
+      "matched_terms": [
+        "activation steering"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_public_code_found"
+      }
+    },
+    {
+      "arxiv_id": "2608.08159",
+      "title": "When Is a Steerable Concept Representation Real? Measurement Confounds in a Cross-Family Audit of Neuroscience Parallels in LLMs",
+      "published": "2026-08-08",
+      "matched_terms": [
+        "activation steering",
+        "linear probe"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "code_promised_not_released"
+      }
+    },
+    {
+      "arxiv_id": "2608.08336",
+      "title": "Circuit Fine-Tuning for Compute-Efficient Transformer Adaptation",
+      "published": "2026-08-08",
+      "matched_terms": [
+        "circuit discovery"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "public_repo",
+        "repository": "https://github.com/UriKialy/CFT",
+        "head_commit_at_discovery": "dd63d906c0a0a5efbafbb187d49174b666740d02",
+        "license_spdx": null,
+        "license_status": "not_found",
+        "repo_created_at": "2026-05-13",
+        "last_push_at_discovery": "2026-08-29",
+        "other_authored_repos": []
+      }
+    },
+    {
+      "arxiv_id": "2608.06969",
+      "title": "Finding Usable Weight Mechanisms with Tiled SVD",
+      "published": "2026-08-07",
+      "matched_terms": [
+        "mechanistic interpretability",
+        "sparse autoencoder"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_public_code_found"
+      }
+    },
+    {
+      "arxiv_id": "2608.07361",
+      "title": "Depth-Wise Probing and Pruning of the Planning Token in a Driving Vision-Language-Action Model",
+      "published": "2026-08-07",
+      "matched_terms": [
+        "logit lens"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_public_code_found"
+      }
+    },
+    {
+      "arxiv_id": "2608.07302",
+      "title": "Same Attention, Different Truths: Put Logit-Lens over Visual Attention to Detect and Mitigate LVLM Object Hallucination",
+      "published": "2026-08-07",
+      "matched_terms": [
+        "logit lens"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "dependency_links_only",
+        "cited_repositories": [
+          "https://github.com/wzczc/SADT"
+        ]
+      }
+    },
+    {
+      "arxiv_id": "2608.06638",
+      "title": "MI-MIDI: Mechanistic Interpretability of Text-to-MIDI Generation Models via Probing, Lenses and Steering",
+      "published": "2026-08-06",
+      "matched_terms": [
+        "activation patching",
+        "linear probe",
+        "mechanistic interpretability"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_public_code_found"
+      }
+    },
+    {
+      "arxiv_id": "2608.05734",
+      "title": "Subliminal Learning is Non-Semantic Distillation",
+      "published": "2026-08-06",
+      "matched_terms": [
+        "mechanistic interpretability",
+        "steering vector"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "public_repo",
+        "repository": "https://github.com/ekhadley/subliminal_learning",
+        "head_commit_at_discovery": "0352ba46cda720ca411df254defc8d0830f7da13",
+        "license_spdx": null,
+        "license_status": "not_found",
+        "repo_created_at": "2026-06-14",
+        "last_push_at_discovery": "2026-07-02",
+        "other_authored_repos": []
+      }
+    },
+    {
+      "arxiv_id": "2608.06300",
+      "title": "Bias Analysis of L2 Speaking Assessment Systems Using Concept Activation Vectors",
+      "published": "2026-08-06",
+      "matched_terms": [
+        "sparse autoencoder"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "dependency_links_only",
+        "cited_repositories": [
+          "https://github.com/JaesungHuh/voice-gender-classifier"
+        ]
+      }
+    },
+    {
+      "arxiv_id": "2608.05743",
+      "title": "ConceptADapt: Concept-guided Adaptive Feature Reconstruction with Dynamic Attention for Few-Shot Industrial Anomaly Detection",
+      "published": "2026-08-06",
+      "matched_terms": [
+        "sparse autoencoder"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_public_code_found"
+      }
+    },
+    {
+      "arxiv_id": "2608.05732",
+      "title": "CircuitSteer: Geometrically Aligned Multi-Layer Steering via Sparse Autoencoder Circuits",
+      "published": "2026-08-06",
+      "matched_terms": [
+        "sparse autoencoder",
+        "steering vector"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "public_repo",
+        "repository": "https://github.com/mehrshad-sdtn/CircuitSteer",
+        "head_commit_at_discovery": "ce55467dcabce25d8e2ea8ba428572bffa1b5484",
+        "license_spdx": null,
+        "license_status": "not_found",
+        "repo_created_at": "2026-07-26",
+        "last_push_at_discovery": "2026-07-26",
+        "other_authored_repos": []
+      }
+    },
+    {
+      "arxiv_id": "2608.05578",
+      "title": "Detecting Safety Training Modification in Language Models via Activation Analysis",
+      "published": "2026-08-06",
+      "matched_terms": [
+        "refusal direction"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "public_repo",
+        "repository": "https://github.com/GoogleCloudPlatform/activation-model-scanner",
+        "head_commit_at_discovery": "e7ca0d1a9a64038b405d04aec5cc1b0ccf2f7ef3",
+        "license_spdx": "Apache-2.0",
+        "license_status": "found",
+        "repo_created_at": "2026-03-23",
+        "last_push_at_discovery": "2026-08-27",
+        "other_authored_repos": []
+      }
+    },
+    {
+      "arxiv_id": "2608.04904",
+      "title": "Strengthening Target-Language Features: SAE-Based Steering for Multilingual Inference",
+      "published": "2026-08-05",
+      "matched_terms": [
+        "sparse autoencoder"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "public_repo",
+        "repository": "https://github.com/HungsingWong/sae-language-steering",
+        "head_commit_at_discovery": "6e0392d21b8084de8f666a52e5aa3a0e1625bb59",
+        "license_spdx": null,
+        "license_status": "not_found",
+        "repo_created_at": "2026-07-27",
+        "last_push_at_discovery": "2026-07-27",
+        "other_authored_repos": []
+      }
+    },
+    {
+      "arxiv_id": "2608.16927",
+      "title": "Hierarchical Data Selection via Manifold Coverage and Sparse Feature Coverage in LLM Post-training",
+      "published": "2026-08-05",
+      "matched_terms": [
+        "sparse autoencoder"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_public_code_found"
+      }
+    },
+    {
+      "arxiv_id": "2608.03913",
+      "title": "Sparse Weight Decomposition for Efficient Circuit Extraction",
+      "published": "2026-08-04",
+      "matched_terms": [
+        "mechanistic interpretability",
+        "transcoder"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "public_repo",
+        "repository": "https://github.com/veri-safe/SWD",
+        "head_commit_at_discovery": "4c44b7281bc7c78f80e431dac3aa75f397dd3043",
+        "license_spdx": "Apache-2.0",
+        "license_status": "found",
+        "repo_created_at": "2026-08-03",
+        "last_push_at_discovery": "2026-08-04",
+        "other_authored_repos": []
+      }
+    },
+    {
+      "arxiv_id": "2608.03507",
+      "title": "ChronoLens: Measuring Language Change Across Time, Languages, and Linguistic Levels",
+      "published": "2026-08-04",
+      "matched_terms": [
+        "crosscoder",
+        "sparse autoencoder"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_public_code_found"
+      }
+    },
+    {
+      "arxiv_id": "2608.04183",
+      "title": "Test, then Route: How Language Models Execute In-Context Conditional Rules Across Models and Languages",
+      "published": "2026-08-04",
+      "matched_terms": [
+        "activation patching"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_public_code_found"
+      }
+    },
+    {
+      "arxiv_id": "2608.03629",
+      "title": "Cross-Layer Interaction under Weight-Space Ablation: A Closed-Form Attention Jacobian Bound and a Test on a Real Pretrained Model",
+      "published": "2026-08-04",
+      "matched_terms": [
+        "activation patching"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_public_code_found"
+      }
+    },
+    {
+      "arxiv_id": "2608.03620",
+      "title": "A Theory of Conditional Collapse under Low-Rank Weight-Space Ablations: I. The Single-Block Theory and Synthetic Validation",
+      "published": "2026-08-04",
+      "matched_terms": [
+        "activation patching"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_public_code_found"
+      }
+    },
+    {
+      "arxiv_id": "2608.02486",
+      "title": "Cultural Awareness is Represented but Not Decoded: Tracing Mythological Knowledge across 18 Open-Source LLMs",
+      "published": "2026-08-03",
+      "matched_terms": [
+        "activation patching",
+        "linear probe",
+        "logit lens"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "public_repo",
+        "repository": "https://github.com/AragonerUA/folkmotif",
+        "head_commit_at_discovery": "cb0ae7cb9411cad485c1bfb91d1ecf759a8f7ce3",
+        "license_spdx": "MIT",
+        "license_status": "found",
+        "repo_created_at": "2026-08-03",
+        "last_push_at_discovery": "2026-08-25",
+        "other_authored_repos": []
+      }
+    },
+    {
+      "arxiv_id": "2608.01816",
+      "title": "Divergent large language model predictions from convergent representations in ambiguous word pairs",
+      "published": "2026-08-03",
+      "matched_terms": [
+        "activation patching"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "public_repo",
+        "repository": "https://github.com/scoki211/Divergent_LLM_Predictions_Convergent_Reps_amb_words",
+        "head_commit_at_discovery": "dd083383752da7ec7725d290dae13925bd8b852b",
+        "license_spdx": "MIT",
+        "license_status": "found",
+        "repo_created_at": "2026-08-02",
+        "last_push_at_discovery": "2026-08-07",
+        "other_authored_repos": []
+      }
+    },
+    {
+      "arxiv_id": "2608.02957",
+      "title": "Inverted Detection and Control in Steering Vectors",
+      "published": "2026-08-03",
+      "matched_terms": [
+        "steering vector"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_public_code_found"
+      }
+    },
+    {
+      "arxiv_id": "2608.07562",
+      "title": "Mechanistic Interpretability-Guided Selective Fine-Tuning of Vision-Language Models for Centimeter-Level Flood Depth Estimation",
+      "published": "2026-08-02",
+      "matched_terms": [
+        "linear probe",
+        "logit lens",
+        "mechanistic interpretability"
+      ],
+      "html_source": "abs",
+      "code": {
+        "status": "no_repo_hf_links_only",
+        "huggingface_refs": [
+          "docs/hub"
+        ]
+      }
+    },
+    {
+      "arxiv_id": "2608.01008",
+      "title": "Toward Fine-Grained Forgetting:Attribute Unlearning for Multimodal Large Language Models",
+      "published": "2026-08-02",
+      "matched_terms": [
+        "activation patching"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_public_code_found"
+      }
+    },
+    {
+      "arxiv_id": "2608.00540",
+      "title": "DiffuseAgent-MI: Distributionally-Grounded,Tool-Integrated Self-Evolving Agents for Faithful Visual Reasoning",
+      "published": "2026-08-01",
+      "matched_terms": [
+        "mechanistic interpretability"
+      ],
+      "html_source": "html",
+      "code": {
+        "status": "no_public_code_found"
+      }
+    }
+  ],
+  "tier_b_papers": [
+    {
+      "arxiv_id": "2608.28207",
+      "title": "Explainable Diabetic Retinopathy Classification Using Vision Foundation Models",
+      "published": "2026-08-28"
+    },
+    {
+      "arxiv_id": "2608.27750",
+      "title": "The Calls are Coming from Inside the Model: Investigating Probe-based Detection of Tool-Calling Errors in LLMs",
+      "published": "2026-08-27"
+    },
+    {
+      "arxiv_id": "2608.27402",
+      "title": "How Language Models Organize and Structure Moral Knowledge",
+      "published": "2026-08-27"
+    },
+    {
+      "arxiv_id": "2608.27175",
+      "title": "Temporal Sensitivity Analysis of Tessera Embeddings",
+      "published": "2026-08-27"
+    },
+    {
+      "arxiv_id": "2608.25948",
+      "title": "Auditable CT Phenotyping Through Report-derived Radiological Observations",
+      "published": "2026-08-26"
+    },
+    {
+      "arxiv_id": "2608.25231",
+      "title": "Output Dilution: Redundant but Fragile Representations in MoE Models",
+      "published": "2026-08-25"
+    },
+    {
+      "arxiv_id": "2608.24780",
+      "title": "Linear Probing Provides Robust and Efficient Detection of Machine-Generated Text",
+      "published": "2026-08-25"
+    },
+    {
+      "arxiv_id": "2608.24727",
+      "title": "Parameter-Efficient Self-Supervised Adaptation for EEG-FM under Fixed Computational Budgets",
+      "published": "2026-08-25"
+    },
+    {
+      "arxiv_id": "2608.24210",
+      "title": "A Data-dependent Early Stopping Rule using Rademacher Complexity with L1-norm",
+      "published": "2026-08-25"
+    },
+    {
+      "arxiv_id": "2608.24037",
+      "title": "Curved Inference II: Sleeper Agent Geometry - Extending Interpretability Beyond Probes",
+      "published": "2026-08-25"
+    },
+    {
+      "arxiv_id": "2608.22879",
+      "title": "Large-Small Model Collaboration for Zero-Shot Surgical Phase Recognition",
+      "published": "2026-08-24"
+    },
+    {
+      "arxiv_id": "2608.23634",
+      "title": "The Blending Ratio Is Not Where the Performance Is: Diagnosing Prototype Blending for Few-Shot Adaptation of Vision-Language Models",
+      "published": "2026-08-23"
+    },
+    {
+      "arxiv_id": "2608.21919",
+      "title": "Beyond Fixed Directions: Adaptive Representation Analysis of Reasoning and Memorization in LLMs",
+      "published": "2026-08-22"
+    },
+    {
+      "arxiv_id": "2608.21664",
+      "title": "Measuring Activation Control in Large Language Models",
+      "published": "2026-08-21"
+    },
+    {
+      "arxiv_id": "2608.21582",
+      "title": "Reading the Room: Implicit Confusion Encoding in Recurrent World Model States",
+      "published": "2026-08-21"
+    },
+    {
+      "arxiv_id": "2608.21060",
+      "title": "CellPath-Bench: A Multidimensional Benchmark for Whole-Slide Cellular Representations in Pathology Foundation Models",
+      "published": "2026-08-21"
+    },
+    {
+      "arxiv_id": "2608.20810",
+      "title": "When Generated Images Look Right and Retrieve Wrong: Coverage-Guided Cross-Scale Re-Indexing for Knowledge-Faithful Generative Perception",
+      "published": "2026-08-21"
+    },
+    {
+      "arxiv_id": "2608.20647",
+      "title": "Directional Contextual Representations for Dependency Relations: Why Cross-Direction Pairing Fails",
+      "published": "2026-08-21"
+    },
+    {
+      "arxiv_id": "2608.20516",
+      "title": "When Graph-JEPA Learns the Wrong Thing: Diagnosing and Repairing Category-Conditional Collapse",
+      "published": "2026-08-20"
+    },
+    {
+      "arxiv_id": "2608.17521",
+      "title": "BrainNorm: A Foundation Model that knows Normal via Semantic Atlas Pretraining",
+      "published": "2026-08-18"
+    },
+    {
+      "arxiv_id": "2608.16868",
+      "title": "Towards Computational Provenance: Carrying Causal-State Evidence in Generated Text",
+      "published": "2026-08-17"
+    },
+    {
+      "arxiv_id": "2608.16661",
+      "title": "Turning spectra into images improves plant trait retrieval with 2D-CNNs",
+      "published": "2026-08-17"
+    },
+    {
+      "arxiv_id": "2608.16085",
+      "title": "Behaviour Is an Incomplete Measure of Reasoning Development: Cross-surface pre-arrival accessibility and the limits of developmental inference in a recurrent-depth reasoner",
+      "published": "2026-08-17"
+    },
+    {
+      "arxiv_id": "2608.15790",
+      "title": "CrevasseSeg: A Label-Efficient UAV Crevasse Segmentation Framework",
+      "published": "2026-08-16"
+    },
+    {
+      "arxiv_id": "2608.15196",
+      "title": "Anchor-Regularized Adaptation for Generalizable AI-Generated Image Detection with DINOv3",
+      "published": "2026-08-15"
+    },
+    {
+      "arxiv_id": "2608.14896",
+      "title": "Interpretable Cross-Lingual Alignment in Small Language Models: Probing Cultural and Pragmatic Reasoning in Japanese-English Bilingual LLMs",
+      "published": "2026-08-14"
+    },
+    {
+      "arxiv_id": "2608.13167",
+      "title": "TRAPSBench: Vision-Language Models Encode but Fail to Express Epistemic Restraint",
+      "published": "2026-08-13"
+    },
+    {
+      "arxiv_id": "2608.13072",
+      "title": "EEG-PRIME: Prototype-Aligned Representation Learning with Multi-Level Conditioning for EEG Decoding",
+      "published": "2026-08-13"
+    },
+    {
+      "arxiv_id": "2608.12652",
+      "title": "Excess Separability: Nuisance-Controlled Residual-Stream Probing for Benchmark Contamination Detection",
+      "published": "2026-08-12"
+    },
+    {
+      "arxiv_id": "2608.12570",
+      "title": "Attribute-Conditioned Multimodal Slot Factorization for Controllable Fashion Retrieval",
+      "published": "2026-08-12"
+    },
+    {
+      "arxiv_id": "2608.12086",
+      "title": "Look What the Probes Dragged In! Real-World Chest X-ray Shortcuts in MedCLIP",
+      "published": "2026-08-12"
+    },
+    {
+      "arxiv_id": "2608.10657",
+      "title": "Retrieval-Augmented Vision Foundation Models for Robust Leukemia Cell Classification across Multiple Microscopy Datasets",
+      "published": "2026-08-11"
+    },
+    {
+      "arxiv_id": "2608.10627",
+      "title": "Decomposition-Induced Context-Memory Conflict: When Fact-Checking Pipelines Contradict Their Own Source Text",
+      "published": "2026-08-11"
+    },
+    {
+      "arxiv_id": "2608.09643",
+      "title": "Activation Probes Surface Code-Security Signals that the Model's Output Misses",
+      "published": "2026-08-10"
+    },
+    {
+      "arxiv_id": "2608.08027",
+      "title": "BASIS: Breach-Aware Selective Prompt Injection Shielding with Prefill Attention Probes",
+      "published": "2026-08-08"
+    },
+    {
+      "arxiv_id": "2608.08024",
+      "title": "Prompt Embedding Probes (PEP): Hallucination Detection in LLMs from Hidden States",
+      "published": "2026-08-08"
+    },
+    {
+      "arxiv_id": "2608.07208",
+      "title": "Measuring Concept Content in Text from LLM Activations: ESG Evidence from Concept Vectors and Linear Probes",
+      "published": "2026-08-07"
+    },
+    {
+      "arxiv_id": "2608.06792",
+      "title": "Progressive Alignment of Recommender Foundation Model through Multi-Phase Post-Training",
+      "published": "2026-08-07"
+    },
+    {
+      "arxiv_id": "2608.06578",
+      "title": "Divergent Response Modes in Frontier Language Models Under Steering Pressure",
+      "published": "2026-08-06"
+    },
+    {
+      "arxiv_id": "2608.05960",
+      "title": "Big, Bright, or Invisible: A Frozen-Feature Benchmark of 3D CT Foundation Models",
+      "published": "2026-08-06"
+    },
+    {
+      "arxiv_id": "2608.05705",
+      "title": "Spectral Aliasing Pretext: A novel task for Self-Supervised fault diagnosis in rotating machinery",
+      "published": "2026-08-06"
+    },
+    {
+      "arxiv_id": "2608.04935",
+      "title": "Unleashing the Potential of Vision-Language Models for Generalizable AI-Generated Image Detection",
+      "published": "2026-08-05"
+    },
+    {
+      "arxiv_id": "2608.05243",
+      "title": "Marginal Matching Does Not License Factorized Sampling: Auditing Conditional Style Leakage in Factorized Generative Models",
+      "published": "2026-08-05"
+    },
+    {
+      "arxiv_id": "2608.04381",
+      "title": "NodeJEPA: Structure-Conditioned Latent Prediction for Node-Level Graph Self-Supervised Learning",
+      "published": "2026-08-05"
+    },
+    {
+      "arxiv_id": "2608.03892",
+      "title": "Intertemporal Preference Steering in Qwen3 via Contrastive Activation Addition",
+      "published": "2026-08-04"
+    },
+    {
+      "arxiv_id": "2608.03071",
+      "title": "Getting the Parameters Right: A Difficulty-Graded Benchmark and Probe-Guided Training for LLM Tool Calls",
+      "published": "2026-08-04"
+    },
+    {
+      "arxiv_id": "2608.02415",
+      "title": "Training-Free versus Training-Based Intent Classification in LLMs: Accuracy, Robustness, and Failure Modes",
+      "published": "2026-08-03"
+    },
+    {
+      "arxiv_id": "2608.01876",
+      "title": "Transformer Geometry Observatory TGO-III: Semantic Geometry Observatory",
+      "published": "2026-08-03"
+    },
+    {
+      "arxiv_id": "2608.01495",
+      "title": "Probing the 3D Object-Level Understanding of Pre-Trained Detection Transformers",
+      "published": "2026-08-02"
+    },
+    {
+      "arxiv_id": "2608.02657",
+      "title": "Your Agentic LLMs Secretly Encode Indirect Prompt-Injection Exposure in Hidden States",
+      "published": "2026-08-01"
+    }
+  ]
+}

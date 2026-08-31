@@ -1,0 +1,19 @@
+{
+  "all_ok": true,
+  "artifact_type": "stresskit_upstream_static_audit_result",
+  "manifest_schema_version": "0.1",
+  "not_execution_smoke": true,
+  "upstreams": {
+    "openai_sae": {
+      "commit": "4965b941e9eb590b00b253a2c406db1e1b193942",
+      "entrypoints_checked": 3,
+      "errors": [],
+      "missing_entrypoints": [],
+      "ok": true,
+      "python_files_parsed": 7,
+      "python_syntax_errors": [],
+      "python_syntax_warnings": [],
+      "tree": "a8a95c5ab3c7b988d2c0ffe26ce4100cd05e9463"
+    }
+  }
+}

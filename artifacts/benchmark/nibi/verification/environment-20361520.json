@@ -1,0 +1,7 @@
+{
+  "artifact_type": "stresskit_nibi_verification_environment",
+  "host": "c485.nibi.sharcnet",
+  "platform": "Linux-5.14.0-570.44.1.el9_6.x86_64-x86_64-Intel-R-_Xeon-R-_6972P-with-glibc2.37",
+  "python": "3.11.5 (main, Sep 19 2023, 16:07:22) [GCC 12.3.1 20230526]",
+  "slurm_job_id": "20361520"
+}

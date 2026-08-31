@@ -1,0 +1,1920 @@
+{
+  "schema_version": "0.1",
+  "status": "candidate_frame_not_frozen",
+  "discovery_cutoff": "2026-08-31T00:00:00+08:00",
+  "outcome_blind": true,
+  "source_manifest": "upstream_sources.json",
+  "model_manifest": "model_sources.json",
+  "artifact_manifest": "artifact_sources.json",
+  "upstreams": {
+    "acdc": {
+      "repository": "https://github.com/ArthurConmy/Automatic-Circuit-Discovery",
+      "commit": "bc99ace817974b5584b7ee203d596a8e2bbcd399",
+      "source_license": "MIT",
+      "paper": "https://arxiv.org/abs/2304.14997"
+    },
+    "activation_model_scanner": {
+      "repository": "https://github.com/GoogleCloudPlatform/activation-model-scanner",
+      "commit": "e7ca0d1a9a64038b405d04aec5cc1b0ccf2f7ef3",
+      "source_license": "Apache-2.0",
+      "paper": "https://arxiv.org/abs/2608.05578"
+    },
+    "activation_oracles": {
+      "repository": "https://github.com/adamkarvonen/activation_oracles",
+      "commit": "9816813552346b519f7e5c924a3e3204d5b723c6",
+      "source_license": "MIT",
+      "paper": "https://arxiv.org/abs/2512.15674"
+    },
+    "assistant_axis": {
+      "repository": "https://github.com/safety-research/assistant-axis",
+      "commit": "a98961956072224eaf244eb289d6c01700b63795",
+      "source_license": "UNRESOLVED",
+      "paper": "https://arxiv.org/abs/2601.10387"
+    },
+    "caa": {
+      "repository": "https://github.com/nrimsky/CAA",
+      "commit": "5dabbbd9a0bca5f25e174501e959de378806aa48",
+      "source_license": "MIT",
+      "paper": "https://arxiv.org/abs/2312.06681"
+    },
+    "caft": {
+      "repository": "https://github.com/cadentj/caft",
+      "commit": "c2deeb0a44ecc420cddb1b4f55c83709f13ebc8b",
+      "source_license": "UNRESOLVED",
+      "paper": "https://arxiv.org/abs/2507.16795"
+    },
+    "ccs": {
+      "repository": "https://github.com/collin-burns/discovering_latent_knowledge",
+      "commit": "be10d7b912b17e8eacb45de794e9dca044e4ed37",
+      "source_license": "MIT",
+      "paper": "https://arxiv.org/abs/2212.03827"
+    },
+    "circuit_tracer": {
+      "repository": "https://github.com/decoderesearch/circuit-tracer",
+      "commit": "8f1e2438df612464e229e44c4a00ff637bf9379b",
+      "source_license": "MIT",
+      "paper": "https://transformer-circuits.pub/2025/attribution-graphs/methods.html"
+    },
+    "communication_map": {
+      "repository": "https://github.com/richardzhewang/communication-map",
+      "commit": "c8ab3b02c11ab7541794682163cbbc03a5b5a4c1",
+      "source_license": "MIT",
+      "paper": "https://arxiv.org/abs/2608.22007"
+    },
+    "concept_targeted_attribution": {
+      "repository": "https://github.com/vedantpalit/concept-targeted-attribution",
+      "commit": "46f69f131c1bf327592efcbf733b4d08a9ce2894",
+      "source_license": "MIT",
+      "paper": "https://arxiv.org/abs/2608.27510"
+    },
+    "diffing_toolkit": {
+      "repository": "https://github.com/science-of-finetuning/diffing-toolkit",
+      "commit": "e0b84a591f5184d69a65082e4366ccfe36f47661",
+      "source_license": "MIT",
+      "paper": "https://arxiv.org/abs/2510.13900"
+    },
+    "eval_awareness_steering": {
+      "repository": "https://github.com/tim-hua-01/steering-eval-awareness-public",
+      "commit": "c5fa5120c89434d48452c5c92032c66742f7ec6a",
+      "source_license": "MIT",
+      "paper": "https://arxiv.org/abs/2510.20487"
+    },
+    "feature_circuits": {
+      "repository": "https://github.com/saprmarks/feature-circuits",
+      "commit": "7fbd82b895ae16294f4e6fc7bfc675d1d680d659",
+      "source_license": "MIT",
+      "paper": "https://arxiv.org/abs/2403.19647"
+    },
+    "folkmotif": {
+      "repository": "https://github.com/AragonerUA/folkmotif",
+      "commit": "cb0ae7cb9411cad485c1bfb91d1ecf759a8f7ce3",
+      "source_license": "MIT",
+      "paper": "https://arxiv.org/abs/2608.02486"
+    },
+    "future_localization": {
+      "repository": "https://github.com/Zodiark-ch/Future_localization",
+      "commit": "31df779d048e66554d06bc4c4ce84a347043094b",
+      "source_license": "MIT",
+      "paper": "https://arxiv.org/abs/2608.24482"
+    },
+    "graph_learning_circuits": {
+      "repository": "https://github.com/graph-learning-circuits/graph-learning-circuits",
+      "commit": "a5663b41825dad89df430b43ca47372c8cebe621",
+      "source_license": "AGPL-3.0-only",
+      "paper": "https://arxiv.org/abs/2608.08536"
+    },
+    "impossible_directions": {
+      "repository": "https://github.com/sixticket/representing-the-impossible",
+      "commit": "f1ead9af6cb7104c170325906a0bd78baa989473",
+      "source_license": "MIT",
+      "paper": "https://arxiv.org/abs/2608.12852"
+    },
+    "introspection_mechanisms": {
+      "repository": "https://github.com/safety-research/introspection-mechanisms",
+      "commit": "5d5d9b485e293dc766c3a056cfe50283a7e435b6",
+      "source_license": "UNRESOLVED",
+      "paper": "https://arxiv.org/abs/2603.21396"
+    },
+    "jacobian_lens": {
+      "repository": "https://github.com/anthropics/jacobian-lens",
+      "commit": "581d398613e5602a5af361e1c34d3a92ea82ba8e",
+      "source_license": "Apache-2.0",
+      "paper": "https://transformer-circuits.pub/2026/workspace/index.html"
+    },
+    "logit_lens_homonyms": {
+      "repository": "https://github.com/scoki211/Divergent_LLM_Predictions_Convergent_Reps_amb_words",
+      "commit": "dd083383752da7ec7725d290dae13925bd8b852b",
+      "source_license": "MIT",
+      "paper": "https://arxiv.org/abs/2608.01816"
+    },
+    "mechanistic_tomography": {
+      "repository": "https://github.com/kwisatzh/mechanistic-tomography",
+      "commit": "5c097d2175c632a4a15e359cb4d94ec923168472",
+      "source_license": "Apache-2.0",
+      "paper": "https://arxiv.org/abs/2608.19338"
+    },
+    "natural_language_autoencoders": {
+      "repository": "https://github.com/kitft/natural_language_autoencoders",
+      "commit": "0577769b55ad4fdd96d159e983361b97fa4e7331",
+      "source_license": "Apache-2.0",
+      "paper": "https://transformer-circuits.pub/2026/nla/index.html"
+    },
+    "openai_sae": {
+      "repository": "https://github.com/openai/sparse_autoencoder",
+      "commit": "4965b941e9eb590b00b253a2c406db1e1b193942",
+      "source_license": "MIT",
+      "paper": "https://arxiv.org/abs/2406.04093"
+    },
+    "patchscopes": {
+      "repository": "https://github.com/PAIR-code/interpretability",
+      "commit": "db2da0f9e91d553ff46eb555330da9341c6d139a",
+      "source_license": "Apache-2.0",
+      "paper": "https://arxiv.org/abs/2401.06102"
+    },
+    "persona_vectors": {
+      "repository": "https://github.com/safety-research/persona_vectors",
+      "commit": "b8e0f044fe2410a6fad579f38324f03f13b4e917",
+      "source_license": "Apache-2.0",
+      "paper": "https://arxiv.org/abs/2507.21509"
+    },
+    "pyvene": {
+      "repository": "https://github.com/stanfordnlp/pyvene",
+      "commit": "9e333904dcf9e597ca76170010d17f4d4580de8d",
+      "source_license": "Apache-2.0",
+      "paper": "https://arxiv.org/abs/2403.07809"
+    },
+    "refusal_direction": {
+      "repository": "https://github.com/andyrdt/refusal_direction",
+      "commit": "9d852fae1a9121c78b29142de733cb1340770cc3",
+      "source_license": "Apache-2.0",
+      "paper": "https://arxiv.org/abs/2406.11717"
+    },
+    "reins_sae_steering": {
+      "repository": "https://github.com/Geralt1020/REINS",
+      "commit": "d6ad20620a7729b0b1b746463a68ca989884f7dc",
+      "source_license": "Apache-2.0",
+      "paper": "https://arxiv.org/abs/2608.28233"
+    },
+    "representation_engineering": {
+      "repository": "https://github.com/andyzoujm/representation-engineering",
+      "commit": "5455d8a375d5fb1cb191f9ebcd089b7c21e9a31e",
+      "source_license": "MIT",
+      "paper": "https://arxiv.org/abs/2310.01405"
+    },
+    "rome": {
+      "repository": "https://github.com/kmeng01/rome",
+      "commit": "0874014cd9837e4365f3e6f3c71400ef11509e04",
+      "source_license": "MIT",
+      "paper": "https://arxiv.org/abs/2202.05262"
+    },
+    "sae_bench": {
+      "repository": "https://github.com/adamkarvonen/SAEBench",
+      "commit": "8042bb3828c6340da8d12062324e92b2077c571c",
+      "source_license": "UNRESOLVED",
+      "paper": null
+    },
+    "sae_lens": {
+      "repository": "https://github.com/decoderesearch/SAELens",
+      "commit": "7c8df766be651a6fd8045522cf8d725af6d2fdd0",
+      "source_license": "MIT",
+      "paper": null
+    },
+    "steering_vector_distillation": {
+      "repository": "https://github.com/agu18dec/steering-vector-distillation",
+      "commit": "89ab3616f6ed0e11a69481c1acd19d37c44e3706",
+      "source_license": "Apache-2.0",
+      "paper": "https://arxiv.org/abs/2606.00995"
+    },
+    "swd_circuits": {
+      "repository": "https://github.com/veri-safe/SWD",
+      "commit": "4c44b7281bc7c78f80e431dac3aa75f397dd3043",
+      "source_license": "Apache-2.0",
+      "paper": "https://arxiv.org/abs/2608.03913"
+    },
+    "thought_anchors": {
+      "repository": "https://github.com/interp-reasoning/thought-anchors",
+      "commit": "b53ed8c75d3f6112f68adfaec9a13d4d708c442e",
+      "source_license": "MIT",
+      "paper": "https://arxiv.org/abs/2506.19143"
+    },
+    "tuned_lens": {
+      "repository": "https://github.com/AlignmentResearch/tuned-lens",
+      "commit": "abdac0c4de23d9f6d6c8459d576ad203aec15deb",
+      "source_license": "MIT",
+      "paper": "https://arxiv.org/abs/2303.08112"
+    }
+  },
+  "entries": [
+    {
+      "claim_id": "acdc_ioi_gpt2_small",
+      "target_type": "upstream_claim",
+      "family": "automated_circuit_discovery",
+      "upstream": "acdc",
+      "model_family": "GPT-2",
+      "model": "gpt2",
+      "task": "indirect object identification",
+      "statement_to_extract": "ACDC recovers a sparse edge circuit that preserves the registered IOI metric and substantially overlaps the canonical IOI circuit.",
+      "claim_locator": "ACDC paper Table 1 (IOI row) and task-specific IOI results",
+      "entrypoint": "acdc/main.py; acdc/ioi/utils.py",
+      "finding_type": "edge_set",
+      "perturbation_axes": [
+        "discovery_threshold",
+        "prompt_sample",
+        "corruption_template",
+        "metric",
+        "random_seed"
+      ],
+      "null": "label-permuted IOI prompts with matched token structure",
+      "compute_tier": "single_gpu_small",
+      "eligibility": "candidate_needs_execution_smoke"
+    },
+    {
+      "claim_id": "acdc_greater_than_gpt2_small",
+      "target_type": "upstream_claim",
+      "family": "automated_circuit_discovery",
+      "upstream": "acdc",
+      "model_family": "GPT-2",
+      "model": "gpt2",
+      "task": "greater-than year completion",
+      "statement_to_extract": "ACDC recovers a sparse edge circuit that preserves the greater-than task metric and overlaps the registered canonical circuit.",
+      "claim_locator": "ACDC paper abstract and Table 1 (Greater-Than row; 68/32,000 edges and 5/5 component types)",
+      "entrypoint": "acdc/main.py; acdc/greaterthan/utils.py",
+      "finding_type": "edge_set",
+      "perturbation_axes": [
+        "discovery_threshold",
+        "year_range",
+        "prompt_sample",
+        "metric",
+        "random_seed"
+      ],
+      "null": "year-label permutation with matched prompt/token distribution",
+      "compute_tier": "single_gpu_small",
+      "eligibility": "candidate_needs_execution_smoke"
+    },
+    {
+      "claim_id": "acdc_docstring_attn_only_4l",
+      "target_type": "upstream_claim",
+      "family": "automated_circuit_discovery",
+      "upstream": "acdc",
+      "model_family": "TransformerLens synthetic",
+      "model": "attn-only-4l",
+      "task": "Python docstring argument prediction",
+      "statement_to_extract": "ACDC recovers a sparse circuit for docstring argument prediction with registered task faithfulness.",
+      "claim_locator": "ACDC paper Table 1 (Docstring row)",
+      "entrypoint": "experiments/launch_docstring.py; acdc/docstring/utils.py",
+      "finding_type": "edge_set",
+      "perturbation_axes": [
+        "threshold",
+        "prompt_sample",
+        "metric",
+        "zero_vs_mean_ablation",
+        "random_seed"
+      ],
+      "null": "argument-name permutation preserving syntax",
+      "compute_tier": "single_gpu_small",
+      "eligibility": "candidate_needs_execution_smoke"
+    },
+    {
+      "claim_id": "acdc_induction_redwood_attn_2l",
+      "target_type": "upstream_claim",
+      "family": "automated_circuit_discovery",
+      "upstream": "acdc",
+      "model_family": "TransformerLens synthetic",
+      "model": "redwood_attn_2l",
+      "task": "induction-token prediction",
+      "statement_to_extract": "ACDC identifies the sparse induction circuit while preserving the registered induction metric.",
+      "claim_locator": "ACDC paper Table 1 (Induction row)",
+      "entrypoint": "experiments/launch_induction.py; acdc/induction/utils.py",
+      "finding_type": "edge_set",
+      "perturbation_axes": [
+        "threshold",
+        "sequence_sample",
+        "metric",
+        "ablation_baseline",
+        "random_seed"
+      ],
+      "null": "repeat-position permutation removing induction relation",
+      "compute_tier": "single_gpu_small",
+      "eligibility": "candidate_needs_execution_smoke"
+    },
+    {
+      "claim_id": "acdc_tracr_reverse",
+      "target_type": "upstream_claim",
+      "family": "automated_circuit_discovery",
+      "upstream": "acdc",
+      "model_family": "Tracr compiled transformer",
+      "model": "tracr-reverse",
+      "task": "sequence reversal",
+      "statement_to_extract": "ACDC recovers a faithful sparse subgraph of the compiled reverse program.",
+      "claim_locator": "ACDC paper Table 1 (Tracr reverse row)",
+      "entrypoint": "acdc/main.py; acdc/tracr_task/utils.py",
+      "finding_type": "edge_set",
+      "perturbation_axes": [
+        "threshold",
+        "input_sample",
+        "metric",
+        "ablation_baseline",
+        "random_seed"
+      ],
+      "null": "randomized output permutation with matched vocabulary",
+      "compute_tier": "cpu_or_single_gpu_small",
+      "eligibility": "candidate_needs_execution_smoke"
+    },
+    {
+      "claim_id": "acdc_tracr_proportion",
+      "target_type": "upstream_claim",
+      "family": "automated_circuit_discovery",
+      "upstream": "acdc",
+      "model_family": "Tracr compiled transformer",
+      "model": "tracr-proportion",
+      "task": "token-proportion computation",
+      "statement_to_extract": "ACDC recovers a faithful sparse subgraph of the compiled proportion program.",
+      "claim_locator": "ACDC paper Table 1 (Tracr proportion row)",
+      "entrypoint": "acdc/main.py; acdc/tracr_task/utils.py",
+      "finding_type": "edge_set",
+      "perturbation_axes": [
+        "threshold",
+        "input_sample",
+        "metric",
+        "ablation_baseline",
+        "random_seed"
+      ],
+      "null": "token-identity permutation removing the counted relation",
+      "compute_tier": "cpu_or_single_gpu_small",
+      "eligibility": "candidate_needs_execution_smoke"
+    },
+    {
+      "claim_id": "sfc_subject_verb_rc_pythia70m",
+      "target_type": "upstream_claim",
+      "family": "sparse_feature_circuits",
+      "upstream": "feature_circuits",
+      "model_family": "Pythia",
+      "model": "EleutherAI/pythia-70m-deduped",
+      "task": "subject-verb agreement across relative clause",
+      "statement_to_extract": "A sparse SAE-feature circuit captures the agreement behavior with registered faithfulness and completeness.",
+      "claim_locator": "Sparse Feature Circuits \u00a73.2\u20133.3, Figure 3, Figure 4, and Appendix C.1",
+      "entrypoint": "scripts/get_circuit.sh; experiments/faithfulness.ipynb",
+      "finding_type": "feature_edge_graph",
+      "perturbation_axes": [
+        "node_threshold",
+        "edge_threshold",
+        "position_aggregation",
+        "prompt_sample",
+        "dictionary_checkpoint"
+      ],
+      "null": "number-label permutation with matched sentence templates",
+      "compute_tier": "single_gpu_small",
+      "eligibility": "candidate_needs_execution_smoke"
+    },
+    {
+      "claim_id": "sfc_subject_verb_simple_pythia70m",
+      "target_type": "upstream_claim",
+      "family": "sparse_feature_circuits",
+      "upstream": "feature_circuits",
+      "model_family": "Pythia",
+      "model": "EleutherAI/pythia-70m-deduped",
+      "task": "simple subject-verb agreement",
+      "statement_to_extract": "A sparse SAE-feature circuit captures simple agreement with registered faithfulness and completeness.",
+      "claim_locator": "Sparse Feature Circuits \u00a73.2, Table 1, Figure 3, and Appendix C.1",
+      "entrypoint": "scripts/get_circuit.sh; data/; experiments/faithfulness.ipynb",
+      "finding_type": "feature_edge_graph",
+      "perturbation_axes": [
+        "node_threshold",
+        "edge_threshold",
+        "position_aggregation",
+        "prompt_sample",
+        "dictionary_checkpoint"
+      ],
+      "null": "number-label permutation with matched sentence templates",
+      "compute_tier": "single_gpu_small",
+      "eligibility": "candidate_needs_dataset_variant_verification"
+    },
+    {
+      "claim_id": "sfc_bias_in_bios_shift_pythia70m",
+      "target_type": "upstream_claim",
+      "family": "sparse_feature_circuits",
+      "upstream": "feature_circuits",
+      "model_family": "Pythia",
+      "model": "EleutherAI/pythia-70m-deduped",
+      "task": "Bias in Bios classifier SHIFT intervention",
+      "statement_to_extract": "Sparse features support the registered SHIFT intervention on classifier behavior under distribution shift.",
+      "claim_locator": "Sparse Feature Circuits \u00a74 and Appendix C.2/E",
+      "entrypoint": "experiments/bib_shift.ipynb",
+      "finding_type": "feature_set_and_scalar_effect",
+      "perturbation_axes": [
+        "feature_threshold",
+        "classifier_seed",
+        "data_subsample",
+        "shift_definition",
+        "dictionary_checkpoint"
+      ],
+      "null": "shuffled protected-attribute labels with preserved occupation frequencies",
+      "compute_tier": "single_gpu_small",
+      "eligibility": "candidate_needs_execution_smoke_and_dataset_license"
+    },
+    {
+      "claim_id": "refusal_single_direction_qwen18b",
+      "target_type": "upstream_claim",
+      "family": "activation_direction_causal_intervention",
+      "upstream": "refusal_direction",
+      "model_family": "Qwen",
+      "model": "qwen/qwen-1_8b-chat",
+      "task": "harmful-prompt refusal",
+      "statement_to_extract": "A single residual-stream direction causally mediates refusal for the pinned Qwen model under the paper's ablation and addition tests.",
+      "claim_locator": "Refusal in Language Models Is Mediated by a Single Direction, abstract and \u00a73\u20134",
+      "entrypoint": "pipeline/run_pipeline.py; pipeline/runs/qwen/qwen-1_8b-chat",
+      "finding_type": "direction_and_scalar_effects",
+      "perturbation_axes": [
+        "direction_layer",
+        "direction_selection_split",
+        "prompt_sample",
+        "harmfulness_dataset",
+        "evaluation_metric"
+      ],
+      "null": "norm-matched random directions and shuffled harmful/harmless labels",
+      "compute_tier": "single_gpu_medium",
+      "eligibility": "excluded_pre_freeze_model_unavailable",
+      "exclusion_reason": "Pinned upstream Hugging Face model identifier did not resolve on 2026-08-24. Qwen/Qwen1.5-1.8B-Chat is materially different and was not substituted."
+    },
+    {
+      "claim_id": "refusal_single_direction_gemma2b",
+      "target_type": "upstream_claim",
+      "family": "activation_direction_causal_intervention",
+      "upstream": "refusal_direction",
+      "model_family": "Gemma",
+      "model": "google/gemma-2b-it",
+      "task": "harmful-prompt refusal",
+      "statement_to_extract": "A single residual-stream direction causally mediates refusal for the pinned Gemma model under the paper's ablation and addition tests.",
+      "claim_locator": "Refusal in Language Models Is Mediated by a Single Direction, abstract and \u00a73\u20134",
+      "entrypoint": "pipeline/run_pipeline.py; pipeline/runs/google/gemma-2b-it",
+      "finding_type": "direction_and_scalar_effects",
+      "perturbation_axes": [
+        "direction_layer",
+        "direction_selection_split",
+        "prompt_sample",
+        "harmfulness_dataset",
+        "evaluation_metric"
+      ],
+      "null": "norm-matched random directions and shuffled harmful/harmless labels",
+      "compute_tier": "single_gpu_medium",
+      "eligibility": "candidate_needs_execution_smoke_and_dataset_license"
+    },
+    {
+      "claim_id": "refusal_single_direction_yi6b",
+      "target_type": "upstream_claim",
+      "family": "activation_direction_causal_intervention",
+      "upstream": "refusal_direction",
+      "model_family": "Yi",
+      "model": "01-ai/Yi-6B-Chat",
+      "task": "harmful-prompt refusal",
+      "statement_to_extract": "A single residual-stream direction causally mediates refusal for the pinned Yi model under the paper's ablation and addition tests.",
+      "claim_locator": "Refusal in Language Models Is Mediated by a Single Direction, abstract and \u00a73\u20134",
+      "entrypoint": "pipeline/run_pipeline.py; pipeline/runs/01-ai/yi-6b-chat",
+      "finding_type": "direction_and_scalar_effects",
+      "perturbation_axes": [
+        "direction_layer",
+        "direction_selection_split",
+        "prompt_sample",
+        "harmfulness_dataset",
+        "evaluation_metric"
+      ],
+      "null": "norm-matched random directions and shuffled harmful/harmless labels",
+      "compute_tier": "single_gpu_medium",
+      "eligibility": "candidate_needs_execution_smoke_and_dataset_license"
+    },
+    {
+      "claim_id": "refusal_single_direction_llama2_7b",
+      "target_type": "upstream_claim",
+      "family": "activation_direction_causal_intervention",
+      "upstream": "refusal_direction",
+      "model_family": "Llama",
+      "model": "meta-llama/Llama-2-7b-chat-hf",
+      "task": "harmful-prompt refusal",
+      "statement_to_extract": "A single residual-stream direction causally mediates refusal for Llama 2 7B Chat under the paper's ablation and addition tests.",
+      "claim_locator": "Refusal in Language Models Is Mediated by a Single Direction, abstract and \u00a73\u20134",
+      "entrypoint": "pipeline/run_pipeline.py; pipeline/runs/meta-llama/llama-2-7b-chat-hf",
+      "finding_type": "direction_and_scalar_effects",
+      "perturbation_axes": [
+        "direction_layer",
+        "direction_selection_split",
+        "prompt_sample",
+        "harmfulness_dataset",
+        "evaluation_metric"
+      ],
+      "null": "norm-matched random directions and shuffled harmful/harmless labels",
+      "compute_tier": "single_gpu_medium",
+      "eligibility": "candidate_needs_execution_smoke_and_dataset_license"
+    },
+    {
+      "claim_id": "refusal_single_direction_llama3_8b",
+      "target_type": "upstream_claim",
+      "family": "activation_direction_causal_intervention",
+      "upstream": "refusal_direction",
+      "model_family": "Llama",
+      "model": "meta-llama/Meta-Llama-3-8B-Instruct",
+      "task": "harmful-prompt refusal",
+      "statement_to_extract": "A single residual-stream direction causally mediates refusal for Llama 3 8B Instruct under the paper's ablation and addition tests.",
+      "claim_locator": "Refusal in Language Models Is Mediated by a Single Direction, abstract and \u00a73\u20134",
+      "entrypoint": "pipeline/run_pipeline.py; pipeline/runs/meta-llama/meta-llama-3-8b-instruct",
+      "finding_type": "direction_and_scalar_effects",
+      "perturbation_axes": [
+        "direction_layer",
+        "direction_selection_split",
+        "prompt_sample",
+        "harmfulness_dataset",
+        "evaluation_metric"
+      ],
+      "null": "norm-matched random directions and shuffled harmful/harmless labels",
+      "compute_tier": "single_gpu_medium",
+      "eligibility": "candidate_needs_execution_smoke_and_dataset_license"
+    },
+    {
+      "claim_id": "caa_sycophancy_llama2_7b",
+      "target_type": "upstream_claim",
+      "family": "contrastive_activation_steering",
+      "upstream": "caa",
+      "model_family": "Llama",
+      "model": "meta-llama/Llama-2-7b-chat-hf",
+      "task": "sycophancy steering",
+      "statement_to_extract": "Contrastive activation addition changes held-out sycophancy behavior in the intended direction while registered capability controls remain bounded.",
+      "claim_locator": "CAA paper \u00a73\u20134, sycophancy category results and layer/multiplier sweeps",
+      "entrypoint": "generate_vectors.py; prompting_with_steering.py",
+      "finding_type": "direction_and_scalar_effects",
+      "perturbation_axes": [
+        "layer",
+        "multiplier",
+        "contrast_pair_sample",
+        "prompt_format",
+        "evaluation_metric"
+      ],
+      "null": "norm-matched random direction and label-swapped contrast pairs",
+      "compute_tier": "single_gpu_medium",
+      "eligibility": "candidate_needs_execution_smoke_and_dataset_license"
+    },
+    {
+      "claim_id": "caa_hallucination_llama2_7b",
+      "target_type": "upstream_claim",
+      "family": "contrastive_activation_steering",
+      "upstream": "caa",
+      "model_family": "Llama",
+      "model": "meta-llama/Llama-2-7b-chat-hf",
+      "task": "hallucination steering",
+      "statement_to_extract": "Contrastive activation addition changes held-out hallucination behavior in the intended direction while registered capability controls remain bounded.",
+      "claim_locator": "CAA paper \u00a73\u20134, hallucination category results and layer/multiplier sweeps",
+      "entrypoint": "generate_vectors.py; prompting_with_steering.py",
+      "finding_type": "direction_and_scalar_effects",
+      "perturbation_axes": [
+        "layer",
+        "multiplier",
+        "contrast_pair_sample",
+        "prompt_format",
+        "evaluation_metric"
+      ],
+      "null": "norm-matched random direction and label-swapped contrast pairs",
+      "compute_tier": "single_gpu_medium",
+      "eligibility": "candidate_needs_execution_smoke_and_dataset_license"
+    },
+    {
+      "claim_id": "caa_corrigibility_llama2_7b",
+      "target_type": "upstream_claim",
+      "family": "contrastive_activation_steering",
+      "upstream": "caa",
+      "model_family": "Llama",
+      "model": "meta-llama/Llama-2-7b-chat-hf",
+      "task": "corrigibility steering",
+      "statement_to_extract": "Contrastive activation addition changes held-out corrigibility behavior in the intended direction while registered capability controls remain bounded.",
+      "claim_locator": "CAA paper \u00a73\u20134, corrigibility category results and layer/multiplier sweeps",
+      "entrypoint": "generate_vectors.py; prompting_with_steering.py",
+      "finding_type": "direction_and_scalar_effects",
+      "perturbation_axes": [
+        "layer",
+        "multiplier",
+        "contrast_pair_sample",
+        "prompt_format",
+        "evaluation_metric"
+      ],
+      "null": "norm-matched random direction and label-swapped contrast pairs",
+      "compute_tier": "single_gpu_medium",
+      "eligibility": "candidate_needs_execution_smoke_and_dataset_license"
+    },
+    {
+      "claim_id": "rome_causal_trace_gpt2_xl",
+      "target_type": "upstream_claim",
+      "family": "causal_tracing",
+      "upstream": "rome",
+      "model_family": "GPT-2",
+      "model": "openai-community/gpt2-xl",
+      "task": "factual association recall",
+      "statement_to_extract": "Causal tracing localizes decisive factual-association computation to a compact set of middle-layer MLP states at subject-token positions.",
+      "claim_locator": "ROME paper \u00a73.1 and causal-tracing figures",
+      "entrypoint": "notebooks/causal_trace.ipynb",
+      "finding_type": "ranked_layer_position_set",
+      "perturbation_axes": [
+        "fact_sample",
+        "corruption_noise",
+        "restoration_window",
+        "effect_metric",
+        "top_k"
+      ],
+      "null": "subject-object permutation and matched random restoration locations",
+      "compute_tier": "single_gpu_medium",
+      "eligibility": "candidate_needs_execution_smoke_and_dataset_license"
+    },
+    {
+      "claim_id": "rome_causal_trace_gptj_6b",
+      "target_type": "upstream_claim",
+      "family": "causal_tracing",
+      "upstream": "rome",
+      "model_family": "GPT-J",
+      "model": "EleutherAI/gpt-j-6B",
+      "task": "factual association recall",
+      "statement_to_extract": "Causal tracing localizes decisive factual-association computation to a compact set of middle-layer MLP states at subject-token positions.",
+      "claim_locator": "ROME paper \u00a73.1 and \u00a74 GPT-J causal-tracing/generalization results",
+      "entrypoint": "notebooks/causal_trace.ipynb",
+      "finding_type": "ranked_layer_position_set",
+      "perturbation_axes": [
+        "fact_sample",
+        "corruption_noise",
+        "restoration_window",
+        "effect_metric",
+        "top_k"
+      ],
+      "null": "subject-object permutation and matched random restoration locations",
+      "compute_tier": "single_gpu_medium",
+      "eligibility": "candidate_needs_execution_smoke_and_dataset_license"
+    },
+    {
+      "claim_id": "tuned_lens_layerwise_prediction",
+      "target_type": "upstream_claim",
+      "family": "representation_lens",
+      "upstream": "tuned_lens",
+      "model_family": "GPT-2/Pythia",
+      "model": "gpt2",
+      "task": "layerwise next-token prediction",
+      "statement_to_extract": "Trained affine translators elicit final-layer predictions from intermediate residual streams more faithfully than direct logit-lens unembedding.",
+      "claim_locator": "Tuned Lens abstract and \u00a73 results",
+      "entrypoint": "tuned_lens/scripts; notebooks/interactive.ipynb",
+      "finding_type": "ranked_tokens_and_scalar_divergence",
+      "perturbation_axes": [
+        "translator_seed",
+        "training_corpus_sample",
+        "checkpoint",
+        "layer",
+        "evaluation_corpus"
+      ],
+      "null": "untrained affine translator and token-label permutation",
+      "compute_tier": "single_gpu_medium",
+      "eligibility": "candidate_needs_execution_smoke"
+    },
+    {
+      "claim_id": "patchscopes_entity_attribute_decoding",
+      "target_type": "upstream_claim",
+      "family": "representation_patching",
+      "upstream": "patchscopes",
+      "model_family": "GPT-J/Llama",
+      "model": "EleutherAI/gpt-j-6B",
+      "task": "entity attribute extraction from hidden state",
+      "statement_to_extract": "A registered Patchscope decodes entity attributes from intermediate representations better than the paper's registered baselines.",
+      "claim_locator": "Patchscopes \u00a74.1, Table 2, and Appendix C",
+      "entrypoint": "patchscopes/code",
+      "finding_type": "categorical_answer_and_accuracy",
+      "perturbation_axes": [
+        "source_layer",
+        "target_layer",
+        "target_prompt",
+        "entity_sample",
+        "decoding_seed"
+      ],
+      "null": "source-state permutation across entities",
+      "compute_tier": "single_gpu_medium",
+      "eligibility": "candidate_needs_execution_smoke_and_dataset_license"
+    },
+    {
+      "claim_id": "circuit_tracer_gemma_graph",
+      "target_type": "released_instrument",
+      "family": "transcoder_attribution_graph",
+      "upstream": "circuit_tracer",
+      "model_family": "Gemma",
+      "model": "google/gemma-2-2b",
+      "task": "factual-prompt attribution graph",
+      "statement_to_extract": "Instrument audit: pinned graph extraction and registered node interventions produce reproducible feature/edge sets and causal effects.",
+      "claim_locator": "Released instrument contract: demos/gemma_demo.ipynb, demos/intervention_demo.ipynb, and circuit_tracer/attribution/attribute.py",
+      "entrypoint": "demos/gemma_demo.ipynb; circuit_tracer/attribution/attribute.py",
+      "finding_type": "feature_edge_graph_and_intervention_effect",
+      "perturbation_axes": [
+        "attribution_threshold",
+        "prompt_paraphrase",
+        "backend",
+        "transcoder_checkpoint",
+        "top_k_logits"
+      ],
+      "null": "token-shuffled prompt and matched random feature intervention",
+      "compute_tier": "single_gpu_medium",
+      "eligibility": "excluded_pre_freeze_missing_artifact_license",
+      "exclusion_reason": "Required mntss/gemma-scope-transcoders repository declares no license at pinned revision 9250a2d4860ce5ed5c96c14d5882b7d8162809a3."
+    },
+    {
+      "claim_id": "circuit_tracer_llama_graph",
+      "target_type": "released_instrument",
+      "family": "transcoder_attribution_graph",
+      "upstream": "circuit_tracer",
+      "model_family": "Llama",
+      "model": "meta-llama/Llama-3.2-1B",
+      "task": "factual-prompt attribution graph",
+      "statement_to_extract": "Instrument audit: pinned graph extraction and registered node interventions produce reproducible feature/edge sets and causal effects.",
+      "claim_locator": "Released instrument contract: demos/llama_demo.ipynb, demos/intervention_demo.ipynb, and circuit_tracer/attribution/attribute.py",
+      "entrypoint": "demos/llama_demo.ipynb; circuit_tracer/attribution/attribute.py",
+      "finding_type": "feature_edge_graph_and_intervention_effect",
+      "perturbation_axes": [
+        "attribution_threshold",
+        "prompt_paraphrase",
+        "backend",
+        "transcoder_checkpoint",
+        "top_k_logits"
+      ],
+      "null": "token-shuffled prompt and matched random feature intervention",
+      "compute_tier": "single_gpu_medium",
+      "eligibility": "candidate_needs_execution_smoke"
+    },
+    {
+      "claim_id": "pyvene_interchange_intervention_ioi",
+      "target_type": "released_instrument",
+      "family": "causal_abstraction_intervention",
+      "upstream": "pyvene",
+      "model_family": "GPT-2",
+      "model": "gpt2",
+      "task": "indirect object identification intervention",
+      "statement_to_extract": "Instrument audit: serialized interchange interventions reproduce registered IOI causal effects across equivalent intervention configurations.",
+      "claim_locator": "Released instrument contract: IOI_Replication.ipynb, IOI_with_Mask_Intervention.ipynb, and tutorial_ioi_utils.py",
+      "entrypoint": "tutorials/advanced_tutorials/IOI_Replication.ipynb; tutorials/advanced_tutorials/IOI_with_Mask_Intervention.ipynb; tutorials/advanced_tutorials/tutorial_ioi_utils.py",
+      "finding_type": "intervention_location_set_and_scalar_effect",
+      "perturbation_axes": [
+        "intervention_layer",
+        "location_granularity",
+        "prompt_sample",
+        "base_source_pairing",
+        "random_seed"
+      ],
+      "null": "source-label permutation and random intervention locations",
+      "compute_tier": "single_gpu_small",
+      "eligibility": "candidate_needs_execution_smoke"
+    },
+    {
+      "claim_id": "repe_truthfulness_direction",
+      "target_type": "upstream_claim",
+      "family": "representation_engineering",
+      "upstream": "representation_engineering",
+      "model_family": "Llama",
+      "model": "meta-llama/Llama-2-7b-chat-hf",
+      "task": "truthfulness representation reading/control",
+      "statement_to_extract": "A population-level truthfulness direction supports registered reading and control effects on held-out examples.",
+      "claim_locator": "Representation Engineering \u00a74.1\u20134.2, Tables 1\u20132, and Appendix B.1/C.2",
+      "entrypoint": "examples; repe/rep_reading_pipeline.py; repe/rep_control_pipeline.py",
+      "finding_type": "direction_and_scalar_effects",
+      "perturbation_axes": [
+        "direction_method",
+        "layer",
+        "contrast_sample",
+        "evaluation_dataset",
+        "control_strength"
+      ],
+      "null": "label-shuffled contrasts and norm-matched random directions",
+      "compute_tier": "single_gpu_medium",
+      "eligibility": "candidate_needs_execution_smoke_and_dataset_license"
+    },
+    {
+      "claim_id": "ccs_latent_binary_knowledge",
+      "target_type": "upstream_claim",
+      "family": "unsupervised_latent_knowledge_probe",
+      "upstream": "ccs",
+      "model_family": "GPT-family",
+      "model": "microsoft/deberta-xxlarge-v2",
+      "task": "contrast-consistent binary knowledge recovery",
+      "statement_to_extract": "Contrast-consistent search recovers latent binary knowledge above registered unsupervised baselines on held-out datasets.",
+      "claim_locator": "Discovering Latent Knowledge paper \u00a74 and Table 1",
+      "entrypoint": "generate.py; evaluate.py; utils.py; CCS.ipynb",
+      "finding_type": "probe_direction_and_accuracy",
+      "perturbation_axes": [
+        "probe_seed",
+        "layer",
+        "prompt_pair_template",
+        "train_sample",
+        "normalization"
+      ],
+      "null": "label/permutation controls and random probe directions",
+      "compute_tier": "single_gpu_small",
+      "eligibility": "candidate_needs_execution_smoke_and_dataset_license"
+    },
+    {
+      "claim_id": "sae_lens_training_reproducibility",
+      "target_type": "released_instrument",
+      "family": "sparse_autoencoder_training",
+      "upstream": "sae_lens",
+      "model_family": "Pythia/Gemma",
+      "model": "gpt2",
+      "task": "SAE training and feature extraction",
+      "statement_to_extract": "Instrument audit: pinned training recipe yields reproducible reconstruction-sparsity metrics and top-activating feature sets under declared seeds and data shards.",
+      "claim_locator": "Released instrument contract: tutorials/training_a_sparse_autoencoder.ipynb and sae_lens/training/sae_trainer.py",
+      "entrypoint": "sae_lens/training/sae_trainer.py; sae_lens/saes/sae.py; tutorials/training_a_sparse_autoencoder.ipynb",
+      "finding_type": "feature_set_and_scalar_metrics",
+      "perturbation_axes": [
+        "training_seed",
+        "data_shard",
+        "sparsity_coefficient",
+        "checkpoint_step",
+        "activation_normalization"
+      ],
+      "null": "random dictionary with matched width and activation scale",
+      "compute_tier": "single_gpu_medium",
+      "eligibility": "candidate_needs_recipe_dataset_and_execution_smoke"
+    },
+    {
+      "claim_id": "openai_sae_scaling_instrument",
+      "target_type": "released_instrument",
+      "family": "sparse_autoencoder_training",
+      "upstream": "openai_sae",
+      "model_family": "GPT-2",
+      "model": "gpt2",
+      "task": "SAE reconstruction-sparsity scaling",
+      "statement_to_extract": "Instrument audit: released training/evaluation code produces stable reconstruction-sparsity measurements under a license-compatible open-model usage mode.",
+      "claim_locator": "Released instrument contract: sparse_autoencoder/train.py, model.py, and loss.py",
+      "entrypoint": "sparse_autoencoder/train.py; sparse_autoencoder/model.py; sparse_autoencoder/loss.py",
+      "finding_type": "scalar_curve_and_feature_set",
+      "perturbation_axes": [
+        "training_seed",
+        "dictionary_width",
+        "sparsity_coefficient",
+        "data_shard",
+        "checkpoint_step"
+      ],
+      "null": "random dictionary with matched width and activation scale",
+      "compute_tier": "single_gpu_large",
+      "eligibility": "candidate_needs_recipe_and_execution_smoke"
+    },
+    {
+      "claim_id": "sae_bench_sparse_probing_instrument",
+      "target_type": "released_instrument",
+      "family": "sae_evaluation",
+      "upstream": "sae_bench",
+      "model_family": "Pythia/Gemma",
+      "model": "Pythia-70M or Gemma-2-2B baseline SAE",
+      "task": "sparse probing evaluation",
+      "statement_to_extract": "Instrument audit: sparse-probing rankings remain stable across declared evaluation seeds, sparsity-matched SAEs, and dataset subsamples.",
+      "claim_locator": "Released instrument contract: sae_bench/evals/sparse_probing_sae_probes/main.py",
+      "entrypoint": "sae_bench/evals/sparse_probing_sae_probes/main.py",
+      "finding_type": "ranked_sae_list_and_scalar_metrics",
+      "perturbation_axes": [
+        "evaluation_seed",
+        "dataset_subsample",
+        "probe_regularization",
+        "SAE_sparsity",
+        "model_layer"
+      ],
+      "null": "random-feature dictionary and label permutation",
+      "compute_tier": "single_gpu_medium",
+      "eligibility": "excluded_pre_freeze_missing_source_license",
+      "exclusion_reason": "No repository-level source license file was found at pinned commit 8042bb3828c6340da8d12062324e92b2077c571c."
+    },
+    {
+      "claim_id": "persona_vectors_evil_qwen25_7b",
+      "target_type": "upstream_claim",
+      "family": "persona_direction_monitoring_steering",
+      "upstream": "persona_vectors",
+      "model_family": "Qwen",
+      "model": "Qwen/Qwen2.5-7B-Instruct",
+      "task": "evil trait persona vector: monitoring and steering",
+      "statement_to_extract": "The mean-difference persona vector for the 'evil' trait predicts held-out trait expression (projection correlates with judged trait score) and adding it at the registered layer raises trait expression while subtracting it lowers it.",
+      "claim_locator": "Persona Vectors \u00a73 (automated extraction pipeline), \u00a74.1 steering results and \u00a74.2 projection\u2013behaviour correlation (Fig. 3\u20134)",
+      "entrypoint": "generate_vec.py; activation_steer.py; eval/eval_persona.py; scripts/generate_vec.sh",
+      "finding_type": "direction_and_scalar_effects",
+      "perturbation_axes": [
+        "extraction_prompt_sample",
+        "layer",
+        "trait_definition_paraphrase",
+        "steering_coefficient",
+        "judge_model"
+      ],
+      "null": "norm-matched random direction; positive/negative extraction-label swap",
+      "compute_tier": "single_gpu_medium",
+      "eligibility": "candidate_needs_execution_smoke"
+    },
+    {
+      "claim_id": "persona_vectors_sycophantic_qwen25_7b",
+      "target_type": "upstream_claim",
+      "family": "persona_direction_monitoring_steering",
+      "upstream": "persona_vectors",
+      "model_family": "Qwen",
+      "model": "Qwen/Qwen2.5-7B-Instruct",
+      "task": "sycophantic trait persona vector: monitoring and steering",
+      "statement_to_extract": "The mean-difference persona vector for the 'sycophantic' trait predicts held-out trait expression (projection correlates with judged trait score) and adding it at the registered layer raises trait expression while subtracting it lowers it.",
+      "claim_locator": "Persona Vectors \u00a73 (automated extraction pipeline), \u00a74.1 steering results and \u00a74.2 projection\u2013behaviour correlation (Fig. 3\u20134)",
+      "entrypoint": "generate_vec.py; activation_steer.py; eval/eval_persona.py; scripts/generate_vec.sh",
+      "finding_type": "direction_and_scalar_effects",
+      "perturbation_axes": [
+        "extraction_prompt_sample",
+        "layer",
+        "trait_definition_paraphrase",
+        "steering_coefficient",
+        "judge_model"
+      ],
+      "null": "norm-matched random direction; positive/negative extraction-label swap",
+      "compute_tier": "single_gpu_medium",
+      "eligibility": "candidate_needs_execution_smoke"
+    },
+    {
+      "claim_id": "persona_vectors_hallucinating_qwen25_7b",
+      "target_type": "upstream_claim",
+      "family": "persona_direction_monitoring_steering",
+      "upstream": "persona_vectors",
+      "model_family": "Qwen",
+      "model": "Qwen/Qwen2.5-7B-Instruct",
+      "task": "hallucinating trait persona vector: monitoring and steering",
+      "statement_to_extract": "The mean-difference persona vector for the 'hallucinating' trait predicts held-out trait expression (projection correlates with judged trait score) and adding it at the registered layer raises trait expression while subtracting it lowers it.",
+      "claim_locator": "Persona Vectors \u00a73 (automated extraction pipeline), \u00a74.1 steering results and \u00a74.2 projection\u2013behaviour correlation (Fig. 3\u20134)",
+      "entrypoint": "generate_vec.py; activation_steer.py; eval/eval_persona.py; scripts/generate_vec.sh",
+      "finding_type": "direction_and_scalar_effects",
+      "perturbation_axes": [
+        "extraction_prompt_sample",
+        "layer",
+        "trait_definition_paraphrase",
+        "steering_coefficient",
+        "judge_model"
+      ],
+      "null": "norm-matched random direction; positive/negative extraction-label swap",
+      "compute_tier": "single_gpu_medium",
+      "eligibility": "candidate_needs_execution_smoke"
+    },
+    {
+      "claim_id": "persona_vectors_finetune_shift_prediction_qwen25_7b",
+      "target_type": "upstream_claim",
+      "family": "persona_direction_monitoring_steering",
+      "upstream": "persona_vectors",
+      "model_family": "Qwen",
+      "model": "Qwen/Qwen2.5-7B-Instruct",
+      "task": "predicting fine-tuning-induced persona shift from training data projection",
+      "statement_to_extract": "The projection of a training dataset's activations onto a persona vector, computed before fine-tuning, predicts the post-fine-tuning shift in that trait; preventative steering during fine-tuning reduces the shift.",
+      "claim_locator": "Persona Vectors \u00a75 (fine-tuning shifts, projection difference), \u00a75.2 preventative steering, Fig. 5\u20137",
+      "entrypoint": "eval/cal_projection.py; sft.py; scripts/cal_projection.sh",
+      "finding_type": "scalar_prediction_and_intervention_effect",
+      "perturbation_axes": [
+        "dataset_sample",
+        "layer",
+        "projection_position",
+        "finetune_seed",
+        "judge_model"
+      ],
+      "null": "projection onto norm-matched random direction; dataset-label permutation across trait shifts",
+      "compute_tier": "single_gpu_large",
+      "eligibility": "candidate_needs_execution_smoke_and_dataset_license"
+    },
+    {
+      "claim_id": "assistant_axis_gemma2_27b",
+      "target_type": "upstream_claim",
+      "family": "persona_space_axis",
+      "upstream": "assistant_axis",
+      "model_family": "Gemma",
+      "model": "google/gemma-2-27b-it",
+      "task": "assistant-axis construction, persona drift monitoring, steering and activation capping",
+      "statement_to_extract": "The axis mean(default activations) \u2212 mean(role-play activations) separates Assistant from role-play persona activations, projection tracks persona drift over a conversation, and steering/capping along it changes persona-related behaviour in the intended direction.",
+      "claim_locator": "The Assistant Axis \u00a72\u20133 (persona space, axis construction), \u00a74 (steering), \u00a75 (activation capping / jailbreak mitigation)",
+      "entrypoint": "pipeline/run_pipeline.sh; pipeline/5_axis.py; assistant_axis/steering.py",
+      "finding_type": "direction_and_scalar_effects",
+      "perturbation_axes": [
+        "role_set_sample",
+        "layer",
+        "pca_component_count",
+        "steering_coefficient",
+        "judge_model"
+      ],
+      "null": "default/role label permutation; norm-matched random direction; random role subset axis",
+      "compute_tier": "single_gpu_large",
+      "eligibility": "excluded_pre_freeze_missing_source_license",
+      "exclusion_reason": "No repository-level source license file was found at pinned commit a98961956072224eaf244eb289d6c01700b63795. Re-include when the maintainers declare one."
+    },
+    {
+      "claim_id": "assistant_axis_qwen3_32b",
+      "target_type": "upstream_claim",
+      "family": "persona_space_axis",
+      "upstream": "assistant_axis",
+      "model_family": "Qwen",
+      "model": "Qwen/Qwen3-32B",
+      "task": "assistant-axis construction, persona drift monitoring, steering and activation capping",
+      "statement_to_extract": "The axis mean(default activations) \u2212 mean(role-play activations) separates Assistant from role-play persona activations, projection tracks persona drift over a conversation, and steering/capping along it changes persona-related behaviour in the intended direction.",
+      "claim_locator": "The Assistant Axis \u00a72\u20133 (persona space, axis construction), \u00a74 (steering), \u00a75 (activation capping / jailbreak mitigation)",
+      "entrypoint": "pipeline/run_pipeline.sh; pipeline/5_axis.py; assistant_axis/steering.py",
+      "finding_type": "direction_and_scalar_effects",
+      "perturbation_axes": [
+        "role_set_sample",
+        "layer",
+        "pca_component_count",
+        "steering_coefficient",
+        "judge_model"
+      ],
+      "null": "default/role label permutation; norm-matched random direction; random role subset axis",
+      "compute_tier": "single_gpu_large",
+      "eligibility": "excluded_pre_freeze_missing_source_license",
+      "exclusion_reason": "No repository-level source license file was found at pinned commit a98961956072224eaf244eb289d6c01700b63795. Re-include when the maintainers declare one."
+    },
+    {
+      "claim_id": "jlens_workspace_readout_qwen35_4b",
+      "target_type": "released_instrument",
+      "family": "representation_lens",
+      "upstream": "jacobian_lens",
+      "model_family": "Qwen",
+      "model": "Qwen/Qwen3.5-4B",
+      "task": "latent-intermediate readout on the released lens-eval sets (multihop, association)",
+      "statement_to_extract": "Instrument audit: the released pre-fitted Jacobian lens (neuronpedia/jacobian-lens, qwen-n1000) reads out the registered latent intermediate at rank \u2264 k in mid-to-late layers on the repository's lens-eval item sets, reproducibly across item subsamples and analytic choices.",
+      "claim_locator": "Released instrument contract: data/evaluations/README, jlens/lens.py; workspace paper lens-evaluation sections",
+      "entrypoint": "jlens/lens.py; jlens/hf.py; walkthrough.ipynb; data/evaluations",
+      "finding_type": "ranked_token_readouts_and_hit_rates",
+      "perturbation_axes": [
+        "item_subsample",
+        "k",
+        "layer_band",
+        "source_position",
+        "word_like_token_mask"
+      ],
+      "null": "derangement of item targets (rotated intermediates); token-shuffled prompts",
+      "compute_tier": "single_gpu_small",
+      "eligibility": "candidate_needs_execution_smoke"
+    },
+    {
+      "claim_id": "jlens_fit_reproducibility_qwen35_4b",
+      "target_type": "released_instrument",
+      "family": "representation_lens",
+      "upstream": "jacobian_lens",
+      "model_family": "Qwen",
+      "model": "Qwen/Qwen3.5-4B",
+      "task": "lens fitting reproducibility across corpus slices",
+      "statement_to_extract": "Instrument audit: lenses fitted on disjoint prompt slices of the registered corpus produce readouts that agree (rank overlap) with each other and with the released lens; readout quality saturates with fitting-set size as documented.",
+      "claim_locator": "Repository README (Fit section; quality saturation reference to workspace paper \u00a79.3); jlens/fitting.py module docstring",
+      "entrypoint": "jlens/fitting.py; jlens/lens.py",
+      "finding_type": "ranked_token_readouts_and_agreement",
+      "perturbation_axes": [
+        "fit_prompt_sample",
+        "n_fit_prompts",
+        "corpus",
+        "fit_seed",
+        "merge_partition"
+      ],
+      "null": "lens fitted on token-shuffled corpus; identity (logit-lens) transport",
+      "compute_tier": "single_gpu_medium",
+      "eligibility": "candidate_needs_execution_smoke"
+    },
+    {
+      "claim_id": "jlens_vs_logit_lens_qwen35_4b",
+      "target_type": "upstream_claim",
+      "family": "representation_lens",
+      "upstream": "jacobian_lens",
+      "model_family": "Qwen",
+      "model": "Qwen/Qwen3.5-4B",
+      "task": "Jacobian lens versus logit lens on latent-intermediate readout",
+      "statement_to_extract": "The Jacobian lens ranks the registered latent intermediate higher than the logit-lens (direct unembedding) baseline on the same items, layers and positions.",
+      "claim_locator": "Workspace paper lens-comparison results (exact table/figure locator to be extracted at pre-freeze step 2)",
+      "entrypoint": "jlens/lens.py; jlens/hf.py; data/evaluations",
+      "finding_type": "paired_rank_comparison",
+      "perturbation_axes": [
+        "item_subsample",
+        "layer_band",
+        "source_position",
+        "k",
+        "word_like_token_mask"
+      ],
+      "null": "derangement of item targets; both lenses scored on rotated intermediates",
+      "compute_tier": "single_gpu_small",
+      "eligibility": "candidate_needs_claim_locator_and_execution_smoke"
+    },
+    {
+      "claim_id": "nla_roundtrip_qwen25_7b",
+      "target_type": "released_instrument",
+      "family": "natural_language_activation_reader",
+      "upstream": "natural_language_autoencoders",
+      "model_family": "Qwen",
+      "model": "Qwen/Qwen2.5-7B-Instruct",
+      "task": "AV\u2192AR round-trip reconstruction of layer-20 residual directions",
+      "statement_to_extract": "Instrument audit: for the released kitft/nla-qwen2.5-7b-L20 AV/AR pair, activation reconstructor round-trip error 2(1 \u2212 cos) on held-out text is below the registered baselines (descriptions paired with permuted activations; generic descriptions).",
+      "claim_locator": "NLA post, round-trip evaluation section; repository README (L2-normalised MSE definition, released checkpoints table)",
+      "entrypoint": "nla_inference.py; release/model_cards",
+      "finding_type": "scalar_reconstruction_error_and_description_set",
+      "perturbation_axes": [
+        "text_sample",
+        "token_position_sample",
+        "av_sampling_temperature",
+        "av_description_resample",
+        "injection_scale"
+      ],
+      "null": "descriptions paired with permuted activations; matched-norm random activation vectors",
+      "compute_tier": "single_gpu_medium",
+      "eligibility": "candidate_needs_execution_smoke"
+    },
+    {
+      "claim_id": "nla_description_consistency_qwen25_7b",
+      "target_type": "released_instrument",
+      "family": "natural_language_activation_reader",
+      "upstream": "natural_language_autoencoders",
+      "model_family": "Qwen",
+      "model": "Qwen/Qwen2.5-7B-Instruct",
+      "task": "AV description consistency across decoding repeats and near-duplicate activations",
+      "statement_to_extract": "Instrument audit: AV descriptions of the same activation agree under a registered equivalence judge across decoding repeats, and agree less for unrelated activations than for activations of paraphrased contexts.",
+      "claim_locator": "Released instrument contract: nla_inference.py (NLAClient sampling), NLA post description-quality section",
+      "entrypoint": "nla_inference.py",
+      "finding_type": "categorical_answer_agreement",
+      "perturbation_axes": [
+        "decoding_seed",
+        "av_sampling_temperature",
+        "context_paraphrase",
+        "token_position_sample",
+        "judge_model"
+      ],
+      "null": "matched-norm random activation vectors; activations from unrelated contexts",
+      "compute_tier": "single_gpu_medium",
+      "eligibility": "candidate_needs_execution_smoke"
+    },
+    {
+      "claim_id": "nla_roundtrip_gemma3_12b",
+      "target_type": "released_instrument",
+      "family": "natural_language_activation_reader",
+      "upstream": "natural_language_autoencoders",
+      "model_family": "Gemma",
+      "model": "google/gemma-3-12b-it",
+      "task": "AV\u2192AR round-trip reconstruction of layer-32 residual directions",
+      "statement_to_extract": "Instrument audit: for the released kitft/nla-gemma3-12b-L32 AV/AR pair, round-trip error 2(1 \u2212 cos) on held-out text is below the registered permuted-pairing baseline.",
+      "claim_locator": "NLA post, round-trip evaluation section; repository README released checkpoints table",
+      "entrypoint": "nla_inference.py; release/model_cards",
+      "finding_type": "scalar_reconstruction_error_and_description_set",
+      "perturbation_axes": [
+        "text_sample",
+        "token_position_sample",
+        "av_sampling_temperature",
+        "av_description_resample",
+        "injection_scale"
+      ],
+      "null": "descriptions paired with permuted activations; matched-norm random activation vectors",
+      "compute_tier": "single_gpu_large",
+      "eligibility": "candidate_needs_execution_smoke_and_model_access"
+    },
+    {
+      "claim_id": "ao_taboo_secret_qwen3_8b",
+      "target_type": "released_instrument",
+      "family": "natural_language_activation_reader",
+      "upstream": "activation_oracles",
+      "model_family": "Qwen",
+      "model": "Qwen/Qwen3-8B",
+      "task": "secret-word elicitation from taboo subject-model activations",
+      "statement_to_extract": "Instrument audit: the released full-mixture oracle LoRA names the taboo secret word from subject-model activations at the registered accuracy and abstains on base-model activations where no secret exists, reproducibly across question paraphrases and captures.",
+      "claim_locator": "Activation Oracles \u00a75 secret-keeping (taboo) evaluation and Fig./Table therein; experiments/taboo_open_ended_eval.py",
+      "entrypoint": "experiments/taboo_open_ended_eval.py; experiments/paper_evals.sh; nl_probes/sft.py",
+      "finding_type": "categorical_answer_and_accuracy",
+      "perturbation_axes": [
+        "question_paraphrase",
+        "capture_layer_and_token",
+        "decoding_seed",
+        "elicitation_prompt",
+        "oracle_mixture"
+      ],
+      "null": "base-model activations (no secret) with presupposition-free question; random-token activations",
+      "compute_tier": "single_gpu_medium",
+      "eligibility": "excluded_pre_freeze_missing_artifact_license",
+      "exclusion_reason": "Required Hugging Face artifact adamkarvonen/checkpoints_latentqa_cls_past_lens_addition_Qwen3-8B declares no license at revision 6e3c7e9d7157f1b09b1915175eb23a4a88830c08 (no license tag or card field). No use is inferred from public availability; re-include when a license is declared."
+    },
+    {
+      "claim_id": "ao_classification_eval_qwen3_8b",
+      "target_type": "released_instrument",
+      "family": "natural_language_activation_reader",
+      "upstream": "activation_oracles",
+      "model_family": "Qwen",
+      "model": "Qwen/Qwen3-8B",
+      "task": "zero-shot classification of concepts from activations",
+      "statement_to_extract": "Instrument audit: the released oracle answers the registered binary classification datasets from activations above the registered chance and label-permutation baselines, reproducibly across dataset subsamples, layers and prompt templates.",
+      "claim_locator": "Activation Oracles \u00a74 classification evaluations (Fig./Table therein); experiments/classification_eval.py",
+      "entrypoint": "experiments/classification_eval.py; experiments/paper_evals.sh",
+      "finding_type": "categorical_answer_and_accuracy",
+      "perturbation_axes": [
+        "dataset_subsample",
+        "capture_layer",
+        "prompt_template",
+        "decoding_seed",
+        "oracle_mixture"
+      ],
+      "null": "label-permuted datasets; random-token activations",
+      "compute_tier": "single_gpu_medium",
+      "eligibility": "excluded_pre_freeze_missing_artifact_license",
+      "exclusion_reason": "Required Hugging Face artifact adamkarvonen/checkpoints_latentqa_cls_past_lens_addition_Qwen3-8B declares no license at revision 6e3c7e9d7157f1b09b1915175eb23a4a88830c08 (no license tag or card field). No use is inferred from public availability; re-include when a license is declared."
+    },
+    {
+      "claim_id": "ao_taboo_secret_gemma2_9b",
+      "target_type": "released_instrument",
+      "family": "natural_language_activation_reader",
+      "upstream": "activation_oracles",
+      "model_family": "Gemma",
+      "model": "google/gemma-2-9b-it",
+      "task": "secret-word elicitation from taboo subject-model activations (second base family)",
+      "statement_to_extract": "Instrument audit: the released Gemma-2-9B oracle LoRA names the taboo secret word from subject-model activations at the registered accuracy and abstains on base-model activations.",
+      "claim_locator": "Activation Oracles \u00a75 secret-keeping evaluation; experiments/taboo_open_ended_eval.py (gemma-2-9b-it default)",
+      "entrypoint": "experiments/taboo_open_ended_eval.py; experiments/paper_evals.sh",
+      "finding_type": "categorical_answer_and_accuracy",
+      "perturbation_axes": [
+        "question_paraphrase",
+        "capture_layer_and_token",
+        "decoding_seed",
+        "elicitation_prompt",
+        "subject_model"
+      ],
+      "null": "base-model activations (no secret) with presupposition-free question; random-token activations",
+      "compute_tier": "single_gpu_medium",
+      "eligibility": "excluded_pre_freeze_missing_artifact_license",
+      "exclusion_reason": "Required Hugging Face artifact adamkarvonen/checkpoints_latentqa_only_addition_gemma-2-9b-it declares no license at revision 8bc3739070bb18ea59d3605400373ed72ae091ee (no license tag or card field). No use is inferred from public availability; re-include when a license is declared."
+    },
+    {
+      "claim_id": "introspection_injection_detection_gemma3_27b",
+      "target_type": "upstream_claim",
+      "family": "introspective_self_report",
+      "upstream": "introspection_mechanisms",
+      "model_family": "Gemma",
+      "model": "google/gemma-3-27b-it",
+      "task": "detection of injected concept steering vectors with no-injection controls",
+      "statement_to_extract": "Injected concept vectors are detected at a nonzero rate with 0% false positives on no-injection trials across prompt framings, and ablating refusal directions raises detection from 10.8% to 63.8% with modest false-positive increase.",
+      "claim_locator": "Mechanisms of Introspective Awareness \u00a72 (injection protocol), \u00a73.1\u20133.3 (robustness, abliteration), Fig. 1\u20132",
+      "entrypoint": "experiments/01_concept_injection.py; experiments/02_steering_evaluation.py; experiments/03d_refusal_abliteration.py",
+      "finding_type": "categorical_answer_and_detection_rates",
+      "perturbation_axes": [
+        "concept_sample",
+        "injection_layer",
+        "injection_strength",
+        "prompt_framing",
+        "decoding_seed"
+      ],
+      "null": "no-injection trials; norm-matched random-direction injection",
+      "compute_tier": "single_gpu_large",
+      "eligibility": "excluded_pre_freeze_missing_source_license",
+      "exclusion_reason": "No repository-level source license file was found at pinned commit 5d5d9b485e293dc766c3a056cfe50283a7e435b6. Re-include when the maintainers declare one."
+    },
+    {
+      "claim_id": "introspection_mlp_localization_gemma3_27b",
+      "target_type": "upstream_claim",
+      "family": "introspective_self_report",
+      "upstream": "introspection_mechanisms",
+      "model_family": "Gemma",
+      "model": "google/gemma-3-27b-it",
+      "task": "activation-patching localization of the detection mechanism",
+      "statement_to_extract": "MLP outputs at roughly 70% depth are necessary and sufficient for injection detection under the paper's activation-patching protocol; detection and identification localize to different layers.",
+      "claim_locator": "Mechanisms of Introspective Awareness \u00a74 (mechanism), activation-patching and head-ablation figures",
+      "entrypoint": "experiments/06_activation_patching.py; experiments/01_concept_injection.py",
+      "finding_type": "ranked_layer_position_set",
+      "perturbation_axes": [
+        "patch_window",
+        "concept_sample",
+        "injection_strength",
+        "effect_metric",
+        "decoding_seed"
+      ],
+      "null": "random equal-size layer windows; no-injection trials",
+      "compute_tier": "single_gpu_large",
+      "eligibility": "excluded_pre_freeze_missing_source_license",
+      "exclusion_reason": "No repository-level source license file was found at pinned commit 5d5d9b485e293dc766c3a056cfe50283a7e435b6. Re-include when the maintainers declare one."
+    },
+    {
+      "claim_id": "svd_v_student_sufficiency_necessity_qwen25_7b",
+      "target_type": "upstream_claim",
+      "family": "activation_direction_causal_intervention",
+      "upstream": "steering_vector_distillation",
+      "model_family": "Qwen",
+      "model": "Qwen/Qwen2.5-7B-Instruct",
+      "task": "subliminal-learning trait direction in the student (cat preference)",
+      "statement_to_extract": "Adding v_student (mean residual difference student \u2212 base on number prompts) to the base model raises the cat-preference rate, and projecting it out of the student's residual stream lowers it (sufficiency and necessity).",
+      "claim_locator": "Subliminal Learning Is Steering Vector Distillation \u00a73\u20134 (v_student sufficiency/necessity), Fig. 1\u20132",
+      "entrypoint": "src/subliminal/extract_student.py; src/subliminal/eval_steered.py; src/subliminal/eas.py",
+      "finding_type": "direction_and_scalar_effects",
+      "perturbation_axes": [
+        "number_prompt_sample",
+        "layer",
+        "alpha",
+        "student_seed",
+        "eval_prompt_set"
+      ],
+      "null": "norm-matched random direction; direction from a student trained on unsteered (benign) teacher data",
+      "compute_tier": "single_gpu_medium",
+      "eligibility": "candidate_needs_execution_smoke"
+    },
+    {
+      "claim_id": "svd_v_teacher_transfer_qwen25_7b",
+      "target_type": "upstream_claim",
+      "family": "activation_direction_causal_intervention",
+      "upstream": "steering_vector_distillation",
+      "model_family": "Qwen",
+      "model": "Qwen/Qwen2.5-7B-Instruct",
+      "task": "teacher steering vector suffices to induce subliminal learning",
+      "statement_to_extract": "Steering the teacher with v_teacher during number-sequence generation, without a trait system prompt, yields data on which the student acquires the trait; projecting v_teacher out during prompted generation removes the transfer.",
+      "claim_locator": "Subliminal Learning Is Steering Vector Distillation \u00a74 (v_teacher sufficiency/necessity), Fig. 2",
+      "entrypoint": "src/subliminal/extract_teacher.py; src/subliminal/generate_steered.py; src/subliminal/eval_steered.py",
+      "finding_type": "direction_and_scalar_effects",
+      "perturbation_axes": [
+        "generation_seed",
+        "steering_layer",
+        "alpha",
+        "filter_strictness",
+        "student_seed"
+      ],
+      "null": "teacher steered with norm-matched random direction; unsteered teacher without system prompt",
+      "compute_tier": "single_gpu_large",
+      "eligibility": "candidate_needs_execution_smoke"
+    },
+    {
+      "claim_id": "eval_awareness_steering_nemotron_49b",
+      "target_type": "upstream_claim",
+      "family": "activation_direction_causal_intervention",
+      "upstream": "eval_awareness_steering",
+      "model_family": "Llama-Nemotron",
+      "model": "nvidia/Llama-3_3-Nemotron-Super-49B-v1",
+      "task": "steering an evaluation-aware model organism toward deployment behaviour",
+      "statement_to_extract": "Adding a deployment-minus-evaluation contrastive steering vector to the released organism (timhua/wood_v2_sftr4_filt) lowers its evaluation-conditioned behaviour (type-hint rate) toward deployment levels, while a Gaussian vector of matched norm does not.",
+      "claim_locator": "Steering Evaluation-Aware Language Models \u00a74 (steering results), Fig. 1\u20132; scripts/run_config_sweeps.py main-experiment configs",
+      "entrypoint": "scripts/generate_steering_vectors.py; scripts/generate_gaussian_steering.py; scripts/run_config_sweeps.py",
+      "finding_type": "direction_and_scalar_effects",
+      "perturbation_axes": [
+        "contrast_prompt_sample",
+        "layer",
+        "steering_strength",
+        "eval_prompt_set",
+        "decoding_seed"
+      ],
+      "null": "Gaussian vector of matched norm (upstream control); deployment/evaluation label-swapped contrast",
+      "compute_tier": "multi_gpu",
+      "eligibility": "candidate_needs_execution_smoke_and_model_license_review"
+    },
+    {
+      "claim_id": "eval_awareness_organism_nemotron_49b",
+      "target_type": "released_instrument",
+      "family": "evaluation_awareness_model_organism",
+      "upstream": "eval_awareness_steering",
+      "model_family": "Llama-Nemotron",
+      "model": "timhua/wood_v2_sftr4_filt",
+      "task": "evaluation-aware organism: behaviour gap between evaluation and deployment cues",
+      "statement_to_extract": "Instrument audit: the released organism writes Python type hints at a higher rate under evaluation cues than under deployment cues on the registered prompt sets, reproducibly across decoding seeds and cue phrasings.",
+      "claim_locator": "Steering Evaluation-Aware Language Models \u00a73 (organism construction and behaviour gap), Fig. 1",
+      "entrypoint": "scripts/run_config_sweeps.py; steering_experiment_configs",
+      "finding_type": "scalar_behaviour_rates",
+      "perturbation_axes": [
+        "prompt_set",
+        "cue_phrasing",
+        "decoding_seed",
+        "temperature",
+        "sample_size"
+      ],
+      "null": "cue-shuffled prompts; base Nemotron model without organism fine-tuning",
+      "compute_tier": "multi_gpu",
+      "eligibility": "candidate_needs_execution_smoke_and_model_license_review"
+    },
+    {
+      "claim_id": "thought_anchors_counterfactual_importance_r1_qwen14b",
+      "target_type": "upstream_claim",
+      "family": "cot_sentence_resampling",
+      "upstream": "thought_anchors",
+      "model_family": "DeepSeek-R1-Distill",
+      "model": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+      "task": "sentence-level counterfactual importance in math chain-of-thought",
+      "statement_to_extract": "Under resampling, sentences labelled planning or uncertainty-management have higher counterfactual importance than computation sentences, and the importance ranking identifies a small set of anchor sentences per trace.",
+      "claim_locator": "Thought Anchors \u00a73 (black-box resampling importance), Fig. 2\u20133; dataset uzaymacar/math-rollouts",
+      "entrypoint": "generate_rollouts.py; analyze_rollouts.py; step_attribution.py",
+      "finding_type": "ranked_sentence_set_and_scalar_importance",
+      "perturbation_axes": [
+        "rollout_count",
+        "problem_sample",
+        "sentence_splitter",
+        "answer_similarity_threshold",
+        "labeler_prompt"
+      ],
+      "null": "function-tag label permutation; position-matched random sentence sets",
+      "compute_tier": "cpu_posthoc_from_released_rollouts",
+      "eligibility": "candidate_needs_execution_smoke"
+    },
+    {
+      "claim_id": "thought_anchors_receiver_heads_r1_qwen14b",
+      "target_type": "upstream_claim",
+      "family": "attention_pattern_analysis",
+      "upstream": "thought_anchors",
+      "model_family": "DeepSeek-R1-Distill",
+      "model": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+      "task": "receiver attention heads concentrate on anchor sentences",
+      "statement_to_extract": "A small set of 'receiver' heads (high kurtosis of sentence-level attention) attend disproportionately to high-importance sentences, and the receiver-head set is consistent across problems.",
+      "claim_locator": "Thought Anchors \u00a74 (receiver heads), Fig. 4\u20135; whitebox-analyses/scripts/eval_receiver_head_reliability.py",
+      "entrypoint": "whitebox-analyses/scripts/eval_receiver_head_reliability.py; whitebox-analyses/attention_analysis/receiver_head_funcs.py",
+      "finding_type": "head_set_and_scalar_metrics",
+      "perturbation_axes": [
+        "head_selection_threshold",
+        "problem_sample",
+        "layer_range",
+        "kurtosis_estimator",
+        "sentence_splitter"
+      ],
+      "null": "random head sets of matched size; position-matched random sentence sets",
+      "compute_tier": "single_gpu_large",
+      "eligibility": "candidate_needs_execution_smoke"
+    },
+    {
+      "claim_id": "adl_narrow_finetune_trace_qwen3_1_7b",
+      "target_type": "upstream_claim",
+      "family": "model_diffing",
+      "upstream": "diffing_toolkit",
+      "model_family": "Qwen",
+      "model": "Qwen/Qwen3-1.7B",
+      "task": "activation-difference lens recovers the narrow fine-tuning domain",
+      "statement_to_extract": "Patchscope/logit-lens readouts of base-versus-finetuned activation differences on the first tokens of unrelated web text are judged relevant to the fine-tuning domain above the registered baselines, for the registered synthetic-document organism.",
+      "claim_locator": "Narrow Finetuning Leaves Clearly Readable Traces \u00a73 (Activation Difference Lens), \u00a74 (33 organisms), Fig. 2, Table 1",
+      "entrypoint": "narrow_ft_experiments/run.sh; main.py; src/diffing/methods/activation_difference_lens/method.py",
+      "finding_type": "ranked_tokens_and_judged_relevance",
+      "perturbation_axes": [
+        "web_text_sample",
+        "token_position_window",
+        "layer",
+        "patchscope_prompt",
+        "grader_model"
+      ],
+      "null": "base-versus-base difference (zero vector plus matched-norm random direction); organism-label permutation for the grader",
+      "compute_tier": "single_gpu_small",
+      "eligibility": "excluded_pre_freeze_missing_artifact_license",
+      "exclusion_reason": "Required Hugging Face artifact stewy33/Qwen3-1.7B-0524_original_augmented_pkc_kansas_abortion-01003c5f declares no license at revision ea1b0260503868291d33d44b4ad40ea9c35ab41c (no license tag or card field). No use is inferred from public availability; re-include when a license is declared."
+    },
+    {
+      "claim_id": "caft_em_pca_ablation_qwen25_coder_32b",
+      "target_type": "upstream_claim",
+      "family": "finetuning_direction_ablation",
+      "upstream": "caft",
+      "model_family": "Qwen",
+      "model": "Qwen/Qwen2.5-Coder-32B-Instruct",
+      "task": "concept-ablation fine-tuning reduces emergent misalignment",
+      "statement_to_extract": "Ablating the top principal directions of base-versus-finetuned activation differences during fine-tuning on insecure code lowers the judged misalignment rate relative to unmodified fine-tuning while preserving insecure-code task performance.",
+      "claim_locator": "Steering Out-of-Distribution Generalization with Concept Ablation Fine-Tuning \u00a74, Table 1 / Fig. 3",
+      "entrypoint": "emergent_misalignment/finding_features/pca.py; emergent_misalignment/training/training.py; emergent_misalignment/training/interventions.py",
+      "finding_type": "direction_set_and_scalar_effects",
+      "perturbation_axes": [
+        "pca_component_count",
+        "layer_set",
+        "activation_sample",
+        "finetune_seed",
+        "judge_model"
+      ],
+      "null": "random directions of matched count and norm ablated; principal directions from an unrelated fine-tune",
+      "compute_tier": "multi_gpu",
+      "eligibility": "excluded_pre_freeze_missing_source_license",
+      "exclusion_reason": "No repository-level source license file was found at pinned commit c2deeb0a44ecc420cddb1b4f55c83709f13ebc8b. Re-include when the maintainers declare one."
+    },
+    {
+      "claim_id": "swd_bottleneck_circuit_units_gpt2_small",
+      "target_type": "upstream_claim",
+      "family": "sparse_feature_circuits",
+      "upstream": "swd_circuits",
+      "model_family": "GPT-2",
+      "model": "gpt2",
+      "task": "sparse reparameterisation of the layer-8 MLP projection, evaluated by replacement error",
+      "statement_to_extract": "Under a fixed nonzero budget, Sparse Weight Decomposition reaches a lower cross-entropy delta from the dense model than the transcoder and VPD baselines while consuming substantially less data.",
+      "claim_locator": "Sparse Weight Decomposition for Efficient Circuit Extraction, Table 1 (method comparison) and Figure 2 (CE delta against data used)",
+      "entrypoint": "src/swd/cli.py; src/swd/pipeline.py",
+      "finding_type": "unit_set_and_scalar_reconstruction_error",
+      "perturbation_axes": [
+        "nonzero_budget_k",
+        "activation_gram_sample",
+        "random_seed",
+        "target_projection",
+        "evaluation_corpus_slice"
+      ],
+      "null": "exact SVD and random orthogonal factorisation at matched sparsity, the repository's own dense controls",
+      "compute_tier": "single_gpu_small",
+      "eligibility": "candidate_needs_execution_smoke"
+    },
+    {
+      "claim_id": "commap_head_pair_orientation_gpt2",
+      "target_type": "upstream_claim",
+      "family": "weight_space_communication_map",
+      "upstream": "communication_map",
+      "model_family": "GPT-2",
+      "model": "gpt2",
+      "task": "weights-only census of head-to-head coupling coefficients against a rotation null",
+      "statement_to_extract": "Between 70 and 89 percent of head pairs have coupling coefficients oriented far from chance relative to the theoretical rotation null distribution.",
+      "claim_locator": "The Communication Map of a Transformer, Table 2 (head-to-head pairs against the theoretical null distribution)",
+      "entrypoint": "experiments/run_all.py; experiments/app1_seed_check.py",
+      "finding_type": "ranked_head_pair_set_and_scalar_coupling",
+      "perturbation_axes": [
+        "model",
+        "z_threshold",
+        "connection_class",
+        "random_seed",
+        "null_variant"
+      ],
+      "null": "closed-form rotation null distribution declared upstream, plus a random-orthogonal resampling of the read and write projections",
+      "compute_tier": "single_gpu_medium",
+      "eligibility": "candidate_needs_execution_smoke"
+    },
+    {
+      "claim_id": "commap_induction_community_ablation_gpt2",
+      "target_type": "upstream_claim",
+      "family": "weight_space_communication_map",
+      "upstream": "communication_map",
+      "model_family": "GPT-2",
+      "model": "gpt2",
+      "task": "ablation of the strongest head-to-head coupling community, measured on in-context copying",
+      "statement_to_extract": "The strongest head-to-head couplings recover known induction circuits without behavioural supervision, and ablating one such community destroys in-context copying.",
+      "claim_locator": "The Communication Map of a Transformer, Application 1 (community selection and ablation)",
+      "entrypoint": "experiments/app1_ablation.py; experiments/app1_communities.py",
+      "finding_type": "head_set_and_scalar_metrics",
+      "perturbation_axes": [
+        "community_detection_resolution",
+        "coupling_cutoff",
+        "ablation_value",
+        "prompt_sample",
+        "random_seed"
+      ],
+      "null": "size-matched random head communities drawn from the same coupling distribution",
+      "compute_tier": "single_gpu_medium",
+      "eligibility": "candidate_needs_execution_smoke"
+    },
+    {
+      "claim_id": "cta_graph_structure_predicts_probe_accuracy_gemma2_2b",
+      "target_type": "upstream_claim",
+      "family": "transcoder_attribution_graph",
+      "upstream": "concept_targeted_attribution",
+      "model_family": "Gemma",
+      "model": "google/gemma-2-2b",
+      "task": "probe-targeted attribution graphs over cross-layer transcoders for four concept categories",
+      "statement_to_extract": "Graph-structural features of probe-targeted attribution graphs predict linear-probe accuracy across four concept categories, with rho = 0.91 and R-squared = 0.84.",
+      "claim_locator": "How Do Linear Probes Emerge?, abstract and Figure 3 (structural feature distributions for high- versus low-accuracy probe layers)",
+      "entrypoint": "cta/run_cta.py; cta/probe.py; cta/attribution.py",
+      "finding_type": "feature_edge_graph_and_scalar_correlation",
+      "perturbation_axes": [
+        "concept_category",
+        "probe_layer",
+        "probe_seed",
+        "attribution_threshold",
+        "prompt_sample"
+      ],
+      "null": "probe directions replaced by matched-norm random directions, and label-permuted probe training",
+      "compute_tier": "single_gpu_medium",
+      "eligibility": "candidate_needs_execution_smoke"
+    },
+    {
+      "claim_id": "cta_causal_dissociation_gemma2_2b",
+      "target_type": "upstream_claim",
+      "family": "transcoder_attribution_graph",
+      "upstream": "concept_targeted_attribution",
+      "model_family": "Gemma",
+      "model": "google/gemma-2-2b",
+      "task": "ablation of probe-exclusive versus logit-exclusive graph nodes at the belief layer",
+      "statement_to_extract": "Ablating probe-exclusive nodes collapses the probe score with near-zero behavioural flip, while ablating logit-exclusive nodes flips generation without moving the internal probe score.",
+      "claim_locator": "How Do Linear Probes Emerge?, Table 1 (causal dissociation for toxicity and truthfulness at the belief layer)",
+      "entrypoint": "experiments/causal_faithfulness.py; cta/attribution.py",
+      "finding_type": "feature_set_and_scalar_effect",
+      "perturbation_axes": [
+        "belief_layer_choice",
+        "ablation_value",
+        "node_set_size",
+        "concept_category",
+        "random_seed"
+      ],
+      "null": "size-matched random node sets drawn from the same attribution graph",
+      "compute_tier": "single_gpu_medium",
+      "eligibility": "candidate_needs_execution_smoke"
+    },
+    {
+      "claim_id": "impossibility_truth_double_dissociation_gemma3_4b",
+      "target_type": "upstream_claim",
+      "family": "probe_direction_geometry",
+      "upstream": "impossible_directions",
+      "model_family": "Gemma",
+      "model": "google/gemma-3-4b-it",
+      "task": "linear probes for truth and for impossibility trained on disjoint contrasts, tested across held-out families",
+      "statement_to_extract": "The truth direction and the impossibility direction show a double dissociation across held-out families and are close to orthogonal, while the model's verbal labels conflate contingent falsehood with contradiction.",
+      "claim_locator": "Falsehood and Impossibility Are Different Directions, Table 2 (double dissociation of the truth and impossibility directions); Table 1 for the verbal labels",
+      "entrypoint": "extract_activations.py; analyze_axes.py",
+      "finding_type": "probe_direction_and_accuracy",
+      "perturbation_axes": [
+        "layer",
+        "training_family_split",
+        "prompt_template",
+        "probe_regularisation",
+        "random_seed"
+      ],
+      "null": "label-permuted probe training within family, and the upstream surface-form baselines",
+      "compute_tier": "single_gpu_small",
+      "eligibility": "candidate_needs_execution_smoke_and_model_license_review"
+    },
+    {
+      "claim_id": "reins_guise_refusal_qwen35_4b",
+      "target_type": "upstream_claim",
+      "family": "sae_feature_steering",
+      "upstream": "reins_sae_steering",
+      "model_family": "Qwen",
+      "model": "Qwen/Qwen3.5-4B-Base",
+      "task": "SAE-feature steering toward refusal on wrapper-obfuscated harmful prompts, with matched-safe controls",
+      "statement_to_extract": "Single-direction SAE steering does not reliably produce refusals on wrapper-obfuscated harmful prompts, and the REINS combination of Harm-Inhibit and Refusal-Enhance raises refusal on GUISE while preserving behaviour on matched-safe prompts.",
+      "claim_locator": "REINS, GUISE safety and matched-safe results; exact table number to be fixed at claim extraction",
+      "entrypoint": "src/cli.py",
+      "finding_type": "feature_set_and_scalar_behaviour_rates",
+      "perturbation_axes": [
+        "steering_coefficient",
+        "sae_layer",
+        "feature_selection_rule",
+        "prompt_wrapper_category",
+        "judge_prompt"
+      ],
+      "null": "matched-safe prompts and random SAE features at matched activation norm",
+      "compute_tier": "single_gpu_medium",
+      "eligibility": "candidate_needs_claim_locator_and_execution_smoke"
+    },
+    {
+      "claim_id": "ams_safety_modification_detection_multi_family",
+      "target_type": "released_instrument",
+      "family": "activation_direction_causal_intervention",
+      "upstream": "activation_model_scanner",
+      "model_family": "Llama/Gemma/Qwen/Mistral",
+      "model": "14 released configurations across four architecture families",
+      "task": "detecting modified safety training from the geometry of harmful-versus-benign activations",
+      "statement_to_extract": "Leave-one-out cross-validation of the scanner's thresholds classifies 10 of 14 model configurations correctly, an accuracy of 71 percent.",
+      "claim_locator": "Detecting Safety Training Modification in Language Models via Activation Analysis, abstract and Figure 4 (correct-classification rate against PASS threshold)",
+      "entrypoint": "src/ams/cli.py",
+      "finding_type": "categorical_answer_and_detection_rates",
+      "perturbation_axes": [
+        "probe_layer",
+        "harmful_prompt_sample",
+        "benign_prompt_sample",
+        "threshold_rule",
+        "random_seed"
+      ],
+      "null": "label-permuted model classes and benign-versus-benign contrasts",
+      "compute_tier": "single_gpu_medium",
+      "eligibility": "candidate_needs_execution_smoke_and_dataset_license"
+    },
+    {
+      "claim_id": "diff_mining_topk_token_relevance",
+      "target_type": "upstream_claim",
+      "family": "model_diffing",
+      "upstream": "diffing_toolkit",
+      "model_family": "Qwen",
+      "model": "Qwen/Qwen3-1.7B",
+      "task": "surfacing fine-tuning-relevant tokens from base-versus-finetuned logit differences",
+      "statement_to_extract": "Top-K Diff Mining surfaces more tokens judged relevant to the fine-tuning domain than the activation-difference lens across the full range of finetune-to-pretrain data mixture ratios.",
+      "claim_locator": "Diff Mining: Logit Differences Reveal Finetuning Objectives (arXiv:2608.26462), Figure 1 left (average token set relevance per mixture ratio)",
+      "entrypoint": "scripts/steering_from_logit_diff.py; main.py",
+      "finding_type": "ranked_tokens_and_judged_relevance",
+      "perturbation_axes": [
+        "k",
+        "data_mixture_ratio",
+        "evaluation_text_sample",
+        "grader_model",
+        "random_seed"
+      ],
+      "null": "base-versus-base logit differences and an organism-label permutation for the grader",
+      "compute_tier": "single_gpu_small",
+      "eligibility": "candidate_needs_claim_locator_and_execution_smoke"
+    },
+    {
+      "claim_id": "future_localization_locating_then_tuning_mistral_7b",
+      "target_type": "upstream_claim",
+      "family": "automated_circuit_discovery",
+      "upstream": "future_localization",
+      "model_family": "Mistral",
+      "model": "mistralai/Mistral-7B-v0.1",
+      "task": "forward-looking parameter localisation used to guide parameter-efficient fine-tuning",
+      "statement_to_extract": "Forward-looking localisation selects parameters that outperform pre-SFT localisation baselines under the locating-then-tuning protocol on the logical-reasoning, natural-language-understanding and mathematical-reasoning domains.",
+      "claim_locator": "Beyond Static Interpretability, Table 1 (performance comparison of locating-then-tuning methods, Mistral-7B rows)",
+      "entrypoint": "EAP_forComponent/run_eap_for_component.py; EAP_forLogicalCircuit/run_eap_for_logical_circuit.py; EAP_forNeuron/run_eap_for_neuron.py",
+      "finding_type": "intervention_location_set_and_scalar_effect",
+      "perturbation_axes": [
+        "step_scalar_k",
+        "localisation_granularity",
+        "parameter_budget",
+        "task_domain",
+        "random_seed"
+      ],
+      "null": "random parameter sets at matched budget and pre-SFT localisation as declared upstream",
+      "compute_tier": "single_gpu_large",
+      "eligibility": "candidate_needs_execution_smoke"
+    },
+    {
+      "claim_id": "folkmotif_representation_versus_readout_18_models",
+      "target_type": "upstream_claim",
+      "family": "representation_lens",
+      "upstream": "folkmotif",
+      "model_family": "multiple (8 architecture families)",
+      "model": "18 open-weight decoder-only models, 1.2B to 34B",
+      "task": "cultural attribution of Thompson-motif entities, probed in the residual stream and read out at the decoder",
+      "statement_to_extract": "The residual stream separates cultures above a character n-gram surface baseline for 17 of the 18 models, peaking between 0.61 and 0.88, while the decoder collapses culturally specific tokens onto dominant-tradition ones, placing the failure at readout rather than representation.",
+      "claim_locator": "Cultural Awareness is Represented but Not Decoded, Table 2 (probe accuracy against the surface baseline) and Figure 1 (per-model decomposition)",
+      "entrypoint": "pipeline/extract.py; pipeline/decomposition.py; analysis/probe_stability.py",
+      "finding_type": "probe_direction_and_accuracy",
+      "perturbation_axes": [
+        "model",
+        "layer",
+        "probe_seed",
+        "prompt_language",
+        "motif_sample"
+      ],
+      "null": "character n-gram surface baseline declared upstream, plus culture-label permutation",
+      "compute_tier": "multi_gpu",
+      "eligibility": "candidate_needs_execution_smoke_and_dataset_license"
+    },
+    {
+      "claim_id": "gcl_edge_auroc_interpbench_heldout",
+      "target_type": "upstream_claim",
+      "family": "automated_circuit_discovery",
+      "upstream": "graph_learning_circuits",
+      "model_family": "InterpBench transformer",
+      "model": "InterpBench compiled transformers, 16 held-out cases",
+      "task": "amortised circuit localisation transferred to unseen model-task pairs",
+      "statement_to_extract": "A graph neural network trained across model-task pairs reaches a higher edge AUROC on the 16 held-out InterpBench cases than the adapted PGExplainer and the published per-case baselines, averaged over 5 seeds.",
+      "claim_locator": "Can Graph Learning Learn Circuits?, Figure 2 (edge AUROC across the 16 held-out InterpBench cases)",
+      "entrypoint": "scripts/line_graph/run_interpbench_runtime_comparison.py; src/mi/importance/learned/component_edge_pipeline.py",
+      "finding_type": "edge_set",
+      "perturbation_axes": [
+        "training_case_split",
+        "random_seed",
+        "edge_threshold",
+        "gnn_depth",
+        "held_out_case"
+      ],
+      "null": "the upstream control with all message-passing edges removed, plus label-permuted edge supervision",
+      "compute_tier": "single_gpu_medium",
+      "eligibility": "candidate_needs_execution_smoke_and_copyleft_review"
+    },
+    {
+      "claim_id": "logit_lens_homonym_reconvergence_multi_model",
+      "target_type": "upstream_claim",
+      "family": "representation_lens",
+      "upstream": "logit_lens_homonyms",
+      "model_family": "GPT-2/Llama/Qwen",
+      "model": "gpt2; meta-llama/Llama-3.2-3B; Qwen/Qwen2.5-32B",
+      "task": "layer-wise logit-lens analysis of homonym and polyseme pairs",
+      "statement_to_extract": "Homonym and polyseme representations become maximally distinct in middle layers and partially reconverge in late layers, while the KL divergence between their next-token predictions peaks in the final layers.",
+      "claim_locator": "Divergent large language model predictions from convergent representations, Figure 1 (logit-lens distance metrics across layers)",
+      "entrypoint": "Experiment 1 - Logit lens/Unified_logit_lens_experiment_v5.py",
+      "finding_type": "ranked_layer_position_set",
+      "perturbation_axes": [
+        "model",
+        "layer",
+        "stimulus_sample",
+        "distance_metric",
+        "sequence_position"
+      ],
+      "null": "the upstream sequence-order control set, plus word-pair permutation within condition",
+      "compute_tier": "single_gpu_large",
+      "eligibility": "candidate_needs_execution_smoke"
+    },
+    {
+      "claim_id": "mechtomo_finite_effect_map_recovery",
+      "target_type": "released_instrument",
+      "family": "representation_patching",
+      "upstream": "mechanistic_tomography",
+      "model_family": "synthetic HMM observer",
+      "model": "trained HMM observer model released with the repository",
+      "task": "recovering a 32-coordinate finite-effect map from designed intervention measurements",
+      "statement_to_extract": "Orthogonal matching pursuit recovers the 32-coordinate finite-effect map with Pearson r = 0.989 and held-out R-squared = 0.935.",
+      "claim_locator": "Mechanistic Tomography, Figure 2 (aggregate recovery of the 32-coordinate finite-effect map) and Table 2 (finite-scale calibration)",
+      "entrypoint": "experiments/hmm/attribution_vs_finite_step0.py; experiments/hmm/sparse_tomography_posthoc.py",
+      "finding_type": "direction_and_scalar_effects",
+      "perturbation_axes": [
+        "measurement_design",
+        "basis_choice",
+        "intervention_family",
+        "sample_size",
+        "random_seed"
+      ],
+      "null": "random measurement designs at matched budget, declared upstream as the sampling control",
+      "compute_tier": "cpu_or_single_gpu_small",
+      "eligibility": "candidate_needs_execution_smoke"
+    }
+  ],
+  "discovery_log": [
+    {
+      "pass": 1,
+      "date": "2026-08-24",
+      "cutoff": "2026-08-24T00:00:00+08:00",
+      "scope": "classic circuit, causal-tracing, steering, lens, probing and SAE tooling (14 upstreams, 30 entries)"
+    },
+    {
+      "pass": 2,
+      "date": "2026-08-28",
+      "cutoff": "2026-08-28T00:00:00+08:00",
+      "scope": "2025-2026 released instruments and claims: persona/character directions, natural-language activation readers, Jacobian lens, chain-of-thought resampling, model diffing, fine-tuning direction interventions, introspective self-report, model organisms",
+      "selection_rule": "official code link in paper or project page; load-bearing claim or adopted instrument; null control constructible. Repository popularity and expected outcome were not criteria.",
+      "added_upstreams": [
+        "activation_oracles",
+        "assistant_axis",
+        "caft",
+        "diffing_toolkit",
+        "eval_awareness_steering",
+        "introspection_mechanisms",
+        "jacobian_lens",
+        "natural_language_autoencoders",
+        "persona_vectors",
+        "steering_vector_distillation",
+        "thought_anchors"
+      ],
+      "not_added": [
+        {
+          "candidate": "OpenAI 'Persona Features Control Emergent Misalignment' (arXiv:2506.19823)",
+          "reason": "no released code found"
+        },
+        {
+          "candidate": "github.com/safety-research/open-source-introspection",
+          "reason": "repository not found (404) on 2026-08-28"
+        },
+        {
+          "candidate": "github.com/science-of-finetuning/narrow-finetuning-traces",
+          "reason": "not found; paper code lives in science-of-finetuning/diffing-toolkit (added)"
+        },
+        {
+          "candidate": "maius/*-personas organisms (diffing-toolkit persona organisms)",
+          "reason": "Hugging Face returns 401 (gated/private); public organism used instead, pending its license"
+        },
+        {
+          "candidate": "github.com/clarifying-EM/model-organisms-for-EM (Convergent Linear Representations of EM, arXiv:2506.11618)",
+          "reason": "no repository-level source license, and two tracked Python files do not parse at pinned commit 8460e4e426d3a89e8ed51aac0eadcdf7ac10469d (em_organism_dir/data/data_scripts/gen_dataset_main.py:2, em_organism_dir/vis/project_token.py:9), so the static-syntax gate cannot pass; revisit if maintainers fix both"
+        }
+      ],
+      "entries_added": 25,
+      "entries_excluded_pre_freeze": 9
+    },
+    {
+      "pass": 3,
+      "date": "2026-08-31",
+      "cutoff": "2026-08-31T00:00:00+08:00",
+      "scope": "August 2026 arXiv census: every mechanistic-interpretability paper submitted 2026-08-01 to 2026-08-31, stratified by term breadth, audited for released code. Frame recorded in benchmark/discovery/august-2026-frame.json and summarised in benchmark/discovery/AUGUST_2026.md.",
+      "selection_rule": "arXiv API term search inside the submission window, category filter, then a code audit of every Tier-A paper: repository URLs extracted from the arXiv HTML, checked against the GitHub API, and classified as an authored release or a cited dependency from the sentence around each link. Entries were pinned from the authored releases that carry a license. Repository popularity, citation count and expected outcome were not criteria.",
+      "frame_counts": {
+        "tier_a_papers": 108,
+        "tier_b_papers": 50,
+        "authored_public_repo": 33,
+        "authored_repo_with_spdx_license": 18,
+        "code_promised_not_released": 4,
+        "no_public_code_found": 47,
+        "dependency_links_only": 14,
+        "hf_references_only": 10
+      },
+      "added_upstreams": [
+        "activation_model_scanner",
+        "communication_map",
+        "concept_targeted_attribution",
+        "folkmotif",
+        "future_localization",
+        "graph_learning_circuits",
+        "impossible_directions",
+        "logit_lens_homonyms",
+        "mechanistic_tomography",
+        "reins_sae_steering",
+        "swd_circuits"
+      ],
+      "not_added": [
+        {
+          "reason": "authored repository carries no license file; the licensing gate in REGISTRY_PROTOCOL.md is unmet",
+          "count": 15,
+          "examples": [
+            "2608.13337 vcnoel/sae-artifact",
+            "2608.08383 yetiiil/steering-safety-cost",
+            "2608.24065 alansun17904/circuit-stability",
+            "2608.22332 MuratDura/CoT_Mechanistic_Interpretability"
+          ]
+        },
+        {
+          "reason": "no public code found at the discovery cutoff",
+          "count": 47
+        },
+        {
+          "reason": "code announced as forthcoming, not released at the discovery cutoff",
+          "count": 4
+        },
+        {
+          "reason": "licensed authored release outside the mechanistic-interpretability scope of this registry (domain applications in pathology, remote sensing, retrieval, game benchmarks and prompt-injection defence)",
+          "count": 7,
+          "examples": [
+            "2608.28191 imsb-uke/expose",
+            "2608.20117 eceo-epfl/SAE-Xplainers",
+            "2608.25697 xiuyuz/LMSM",
+            "2608.09638 yenshan0530/Avalon-ToM-Bench",
+            "2608.23873 JoshuaSP/semantic-overlays"
+          ]
+        }
+      ],
+      "entries_added": 14,
+      "note": "diffing_toolkit was already pinned in pass 2 at the same commit; the August paper arXiv:2608.26462 adds one entry against that existing upstream rather than a new one."
+    }
+  ]
+}

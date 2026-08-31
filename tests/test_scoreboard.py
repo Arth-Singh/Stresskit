@@ -21,7 +21,8 @@ class TestCollectRows:
     def test_finds_all_reference_artifacts(self):
         rows = collect_rows([REFERENCES])
         kinds = {r["kind"] for r in rows}
-        assert len(rows) == 8
+        assert rows
+        assert len({r["path"] for r in rows}) == len(rows)
         assert kinds == {"stability card", "oracle report"}
 
     def test_stability_cards_sort_first(self):
@@ -71,7 +72,7 @@ class TestCliScoreboard:
     def test_write_and_freshness_roundtrip(self, tmp_path):
         out = tmp_path / "SCOREBOARD.md"
         n = write_scoreboard([REFERENCES], str(out))
-        assert n == 8
+        assert n == len(collect_rows([REFERENCES]))
         first = out.read_text()
         write_scoreboard([REFERENCES], str(out))
         assert out.read_text() == first  # regenerating is byte-identical

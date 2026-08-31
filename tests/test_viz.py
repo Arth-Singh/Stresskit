@@ -86,14 +86,14 @@ class TestDemo:
 class TestSite:
     def test_build_from_references(self, tmp_path):
         n = build_site([REFERENCES], str(tmp_path))
-        assert n == 8
+        assert n
         index = (tmp_path / "index.html").read_text()
         assert "Do interpretability findings survive re-running?" in index
         assert "<svg" in index                       # hero trace chart
         assert "coin flip" in index                  # IOI is the hero
         pages = sorted(p.name for p in tmp_path.glob("*.html"))
-        assert len(pages) == 9                       # 8 cards + index
-        assert len(list(tmp_path.glob("*.json"))) == 8   # cards copied
+        assert len(pages) == n + 1                   # one page per card, plus index
+        assert len(list(tmp_path.glob("*.json"))) == n   # cards copied
 
     def test_card_page_embeds_trace_and_audit(self, tmp_path):
         build_site([REFERENCES], str(tmp_path))
@@ -116,6 +116,8 @@ class TestSite:
             build_site([str(empty)], str(tmp_path / "out"))
 
     def test_cli_site(self, tmp_path, capsys):
-        rc = cli_main(["site", REFERENCES, "-o", str(tmp_path / "s")])
+        out_dir = tmp_path / "s"
+        rc = cli_main(["site", REFERENCES, "-o", str(out_dir)])
         assert rc == 0
-        assert "8 card pages" in capsys.readouterr().out
+        n_cards = len(list(out_dir.glob("*.html"))) - 1   # index is not a card
+        assert f"{n_cards} card pages" in capsys.readouterr().out

@@ -1,0 +1,752 @@
+{
+  "schema_version": "0.1",
+  "artifact_type": "stresskit_upstream_source_manifest",
+  "status": "prefreeze_static_audit_complete",
+  "discovery_cutoff": "2026-08-28T00:00:00+08:00",
+  "not_execution_smoke": true,
+  "interpretation": "Commit, license-file, entrypoint-presence, and Python-syntax evidence only. This does not show that dependencies install, models load, or upstream results reproduce. Independent Nibi re-audit covers the 14 upstreams of the 2026-08-24 pass; the 11 upstreams added 2026-08-28 have a local static audit only until the fetch array is rerun.",
+  "upstreams": {
+    "acdc": {
+      "repository": "https://github.com/ArthurConmy/Automatic-Circuit-Discovery",
+      "commit": "bc99ace817974b5584b7ee203d596a8e2bbcd399",
+      "tree": "e22aed97ac8253e50b0c535bc637796cc71fec98",
+      "license": {
+        "status": "found",
+        "spdx": "MIT",
+        "path": "LICENSE",
+        "sha256": "16c66e455dff5897c2ea5ab783bf49fd7fd63cbefb7bf1dece191d6729c21f87"
+      },
+      "entrypoint_paths": [
+        "acdc/main.py",
+        "acdc/ioi/utils.py",
+        "acdc/greaterthan/utils.py",
+        "experiments/launch_docstring.py",
+        "experiments/launch_induction.py",
+        "acdc/tracr_task/utils.py"
+      ],
+      "static_python_syntax": {
+        "status": "pass",
+        "tracked_files": 73
+      }
+    },
+    "activation_model_scanner": {
+      "repository": "https://github.com/GoogleCloudPlatform/activation-model-scanner",
+      "commit": "e7ca0d1a9a64038b405d04aec5cc1b0ccf2f7ef3",
+      "tree": "59d63a0b8ffe38f5e1d1ef78ffcdbefbd0676f4d",
+      "license": {
+        "status": "found",
+        "spdx": "Apache-2.0",
+        "path": "LICENSE",
+        "sha256": "183067f8ce9ef0214cd381fd55b6d4d6efc9781d3328c50127f04a5bc041554c"
+      },
+      "entrypoint_paths": [
+        "src/ams/cli.py"
+      ],
+      "static_python_syntax": {
+        "status": "pass",
+        "tracked_files": 12
+      }
+    },
+    "activation_oracles": {
+      "repository": "https://github.com/adamkarvonen/activation_oracles",
+      "commit": "9816813552346b519f7e5c924a3e3204d5b723c6",
+      "tree": "31bc6ef12dd4960b73a9c56efdf50aec8a79dffd",
+      "license": {
+        "status": "found",
+        "spdx": "MIT",
+        "path": "LICENSE",
+        "sha256": "e0e010e24746a5229d68855b94d8234b7201bad905f15c806281096046eebed3"
+      },
+      "entrypoint_paths": [
+        "experiments/taboo_open_ended_eval.py",
+        "experiments/classification_eval.py",
+        "experiments/paper_evals.sh",
+        "experiments/activation_oracle_demo.ipynb",
+        "nl_probes/sft.py"
+      ],
+      "static_python_syntax": {
+        "status": "pass",
+        "tracked_files": 90
+      }
+    },
+    "assistant_axis": {
+      "repository": "https://github.com/safety-research/assistant-axis",
+      "commit": "a98961956072224eaf244eb289d6c01700b63795",
+      "tree": "ec9a269bdad5c9f8a28fca5ee07d9bdc4c63c731",
+      "license": {
+        "status": "not_found",
+        "spdx": null,
+        "path": null,
+        "sha256": null
+      },
+      "entrypoint_paths": [
+        "pipeline/run_pipeline.sh",
+        "pipeline/5_axis.py",
+        "assistant_axis/axis.py",
+        "assistant_axis/steering.py",
+        "notebooks/steer.ipynb"
+      ],
+      "static_python_syntax": {
+        "status": "pass",
+        "tracked_files": 21
+      }
+    },
+    "caa": {
+      "repository": "https://github.com/nrimsky/CAA",
+      "commit": "5dabbbd9a0bca5f25e174501e959de378806aa48",
+      "tree": "670d1daf28571d089212a6c29cd813749472e3a9",
+      "license": {
+        "status": "found",
+        "spdx": "MIT",
+        "path": "LICENSE",
+        "sha256": "4f40800b2b823f96366eb9de7d0113970fab96f724ab535d45badca5735ad74f"
+      },
+      "entrypoint_paths": [
+        "generate_vectors.py",
+        "prompting_with_steering.py"
+      ],
+      "static_python_syntax": {
+        "status": "pass",
+        "tracked_files": 17
+      }
+    },
+    "caft": {
+      "repository": "https://github.com/cadentj/caft",
+      "commit": "c2deeb0a44ecc420cddb1b4f55c83709f13ebc8b",
+      "tree": "4a222f61eee31f13584c2aa7829653637d792a02",
+      "license": {
+        "status": "not_found",
+        "spdx": null,
+        "path": null,
+        "sha256": null
+      },
+      "entrypoint_paths": [
+        "emergent_misalignment/finding_features/pca.py",
+        "emergent_misalignment/training/training.py",
+        "emergent_misalignment/training/interventions.py",
+        "emergent_misalignment/eval/run_eval.py"
+      ],
+      "static_python_syntax": {
+        "status": "pass",
+        "tracked_files": 36
+      }
+    },
+    "ccs": {
+      "repository": "https://github.com/collin-burns/discovering_latent_knowledge",
+      "commit": "be10d7b912b17e8eacb45de794e9dca044e4ed37",
+      "tree": "e1eb2f525ef5ff0f6a6eadc8a29d093693070aef",
+      "license": {
+        "status": "found",
+        "spdx": "MIT",
+        "path": "LICENSE.md",
+        "sha256": "99a7c1ab3190e7da4978946ca7152d1f939ae335cc1d1917ee5a70ec5989c274"
+      },
+      "entrypoint_paths": [
+        "generate.py",
+        "evaluate.py",
+        "utils.py",
+        "CCS.ipynb"
+      ],
+      "static_python_syntax": {
+        "status": "pass",
+        "tracked_files": 3
+      }
+    },
+    "circuit_tracer": {
+      "repository": "https://github.com/decoderesearch/circuit-tracer",
+      "commit": "8f1e2438df612464e229e44c4a00ff637bf9379b",
+      "tree": "2d57b3ab47134afa8b5518323ce9285f36dff8ee",
+      "license": {
+        "status": "found",
+        "spdx": "MIT",
+        "path": "LICENSE",
+        "sha256": "bceacf19382a79e0c4af77318f59dffde6d2f1fcfc93abab5465ac9d8b01605a"
+      },
+      "entrypoint_paths": [
+        "circuit_tracer/attribution/attribute.py",
+        "demos/gemma_demo.ipynb",
+        "demos/llama_demo.ipynb",
+        "demos/intervention_demo.ipynb"
+      ],
+      "static_python_syntax": {
+        "status": "pass",
+        "tracked_files": 62
+      }
+    },
+    "communication_map": {
+      "repository": "https://github.com/richardzhewang/communication-map",
+      "commit": "c8ab3b02c11ab7541794682163cbbc03a5b5a4c1",
+      "tree": "c87571d954d4beed750ae72636f1fc63580bb272",
+      "license": {
+        "status": "found",
+        "spdx": "MIT",
+        "path": "LICENSE",
+        "sha256": "f595223c73c2305cc8083ad117c1743972d636be3308ce8cf621c24eb2382f4b"
+      },
+      "entrypoint_paths": [
+        "experiments/run_all.py",
+        "experiments/app1_ablation.py",
+        "experiments/app1_seed_check.py"
+      ],
+      "static_python_syntax": {
+        "status": "pass",
+        "tracked_files": 36
+      }
+    },
+    "concept_targeted_attribution": {
+      "repository": "https://github.com/vedantpalit/concept-targeted-attribution",
+      "commit": "46f69f131c1bf327592efcbf733b4d08a9ce2894",
+      "tree": "2e0d38fd5eacd1ee13409c2e7779595a89c2da7b",
+      "license": {
+        "status": "found",
+        "spdx": "MIT",
+        "path": "LICENSE",
+        "sha256": "63ae5b9325ac0a73bbd7409e285183f4824a64f5aa5ff9942514e046c4af6864"
+      },
+      "entrypoint_paths": [
+        "cta/run_cta.py",
+        "cta/probe.py",
+        "cta/attribution.py"
+      ],
+      "static_python_syntax": {
+        "status": "pass",
+        "tracked_files": 143
+      }
+    },
+    "diffing_toolkit": {
+      "repository": "https://github.com/science-of-finetuning/diffing-toolkit",
+      "commit": "e0b84a591f5184d69a65082e4366ccfe36f47661",
+      "tree": "e19a3fa0afe2399b5da56bfa9585a85f30d8f83b",
+      "license": {
+        "status": "found",
+        "spdx": "MIT",
+        "path": "LICENSE",
+        "sha256": "b46f524dd5a86a1a82e4116c1c232f869b1755a90486ab11664a52da51376a27"
+      },
+      "entrypoint_paths": [
+        "main.py",
+        "narrow_ft_experiments/run.sh",
+        "src/diffing/methods/activation_difference_lens/method.py",
+        "src/diffing/methods/activation_difference_lens/auto_patch_scope.py",
+        "configs/organism/em_bad_medical_advice.yaml"
+      ],
+      "static_python_syntax": {
+        "status": "pass",
+        "tracked_files": 194
+      }
+    },
+    "eval_awareness_steering": {
+      "repository": "https://github.com/tim-hua-01/steering-eval-awareness-public",
+      "commit": "c5fa5120c89434d48452c5c92032c66742f7ec6a",
+      "tree": "2f9764ca3e62b60d7624e1c35686c63a8c2495b2",
+      "license": {
+        "status": "found",
+        "spdx": "MIT",
+        "path": "LICENSE",
+        "sha256": "3ea29b9c16b50498d5ddecd71fcb1dfaaa16767b425a44d7d749ecb3eefc2e73"
+      },
+      "entrypoint_paths": [
+        "scripts/generate_steering_vectors.py",
+        "scripts/generate_gaussian_steering.py",
+        "scripts/run_config_sweeps.py",
+        "steering_experiment_configs"
+      ],
+      "static_python_syntax": {
+        "status": "pass",
+        "tracked_files": 37
+      }
+    },
+    "feature_circuits": {
+      "repository": "https://github.com/saprmarks/feature-circuits",
+      "commit": "7fbd82b895ae16294f4e6fc7bfc675d1d680d659",
+      "tree": "bf55a19268676412efd2291cddb9a1fff37691c1",
+      "license": {
+        "status": "found",
+        "spdx": "MIT",
+        "path": "LICENSE",
+        "sha256": "e4f5f395ce218808d098802718d45c2f2977874dcea61d1a7df81177fc0a0871"
+      },
+      "entrypoint_paths": [
+        "scripts/get_circuit.sh",
+        "scripts/evaluate_circuit.sh",
+        "experiments/faithfulness.ipynb",
+        "experiments/bib_shift.ipynb",
+        "data/rc_train.json",
+        "data/rc_test.json"
+      ],
+      "static_python_syntax": {
+        "status": "pass",
+        "tracked_files": 9
+      }
+    },
+    "folkmotif": {
+      "repository": "https://github.com/AragonerUA/folkmotif",
+      "commit": "cb0ae7cb9411cad485c1bfb91d1ecf759a8f7ce3",
+      "tree": "38bab4e795afbe4574743ec8581f3c311a895898",
+      "license": {
+        "status": "found",
+        "spdx": "MIT",
+        "path": "LICENSE",
+        "sha256": "b4f61a1e634cfaee943faf0da25b3139918e70720ccfc2682b77188ba83df1cb"
+      },
+      "entrypoint_paths": [
+        "pipeline/extract.py",
+        "pipeline/decomposition.py",
+        "analysis/probe_stability.py"
+      ],
+      "static_python_syntax": {
+        "status": "pass",
+        "tracked_files": 65
+      }
+    },
+    "future_localization": {
+      "repository": "https://github.com/Zodiark-ch/Future_localization",
+      "commit": "31df779d048e66554d06bc4c4ce84a347043094b",
+      "tree": "4c10a79dcbb6e833c028bda6d7cfa88d7b0dd60f",
+      "license": {
+        "status": "found",
+        "spdx": "MIT",
+        "path": "LICENSE",
+        "sha256": "03029a9a875d5df4116048863f671653fc2dce08677319ce9e6da6f99f5a3dc8"
+      },
+      "entrypoint_paths": [
+        "EAP_forComponent/run_eap_for_component.py",
+        "EAP_forLogicalCircuit/run_eap_for_logical_circuit.py",
+        "EAP_forNeuron/run_eap_for_neuron.py"
+      ],
+      "static_python_syntax": {
+        "status": "pass",
+        "tracked_files": 925
+      }
+    },
+    "graph_learning_circuits": {
+      "repository": "https://github.com/graph-learning-circuits/graph-learning-circuits",
+      "commit": "a5663b41825dad89df430b43ca47372c8cebe621",
+      "tree": "b65b061d3d17501fe40197478bb91002c018bb45",
+      "license": {
+        "status": "found",
+        "spdx": "AGPL-3.0-only",
+        "path": "LICENSE",
+        "sha256": "8914563364d5584d9620da6d9cf23d7892f482f3014ca602ebce3e4f4cfb87d4"
+      },
+      "entrypoint_paths": [
+        "scripts/line_graph/run_interpbench_runtime_comparison.py",
+        "src/mi/importance/learned/component_edge_pipeline.py"
+      ],
+      "static_python_syntax": {
+        "status": "pass",
+        "tracked_files": 310
+      }
+    },
+    "impossible_directions": {
+      "repository": "https://github.com/sixticket/representing-the-impossible",
+      "commit": "f1ead9af6cb7104c170325906a0bd78baa989473",
+      "tree": "967f571fee8ff296f7403764e5b35de993c7f402",
+      "license": {
+        "status": "found",
+        "spdx": "MIT",
+        "path": "LICENSE",
+        "sha256": "f7e97a6a2de155a8e8925f31b7c61ca62b546f72c7d73e4bdb3affeea096d8d6"
+      },
+      "entrypoint_paths": [
+        "extract_activations.py",
+        "analyze_axes.py",
+        "analyze_sae.py"
+      ],
+      "static_python_syntax": {
+        "status": "pass",
+        "tracked_files": 5
+      }
+    },
+    "introspection_mechanisms": {
+      "repository": "https://github.com/safety-research/introspection-mechanisms",
+      "commit": "5d5d9b485e293dc766c3a056cfe50283a7e435b6",
+      "tree": "b9e1913ea5317c3b3fc9b39376a1d92d6f7e3e81",
+      "license": {
+        "status": "not_found",
+        "spdx": null,
+        "path": null,
+        "sha256": null
+      },
+      "entrypoint_paths": [
+        "experiments/01_concept_injection.py",
+        "experiments/02_steering_evaluation.py",
+        "experiments/03d_refusal_abliteration.py",
+        "experiments/06_activation_patching.py",
+        "src/steering_utils.py"
+      ],
+      "static_python_syntax": {
+        "status": "pass",
+        "tracked_files": 53
+      }
+    },
+    "jacobian_lens": {
+      "repository": "https://github.com/anthropics/jacobian-lens",
+      "commit": "581d398613e5602a5af361e1c34d3a92ea82ba8e",
+      "tree": "e62c7b7cb72a4567fb2d5b3fcba13ccf6ec43494",
+      "license": {
+        "status": "found",
+        "spdx": "Apache-2.0",
+        "path": "LICENSE",
+        "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+      },
+      "entrypoint_paths": [
+        "jlens/lens.py",
+        "jlens/fitting.py",
+        "jlens/hf.py",
+        "walkthrough.ipynb",
+        "data/evaluations"
+      ],
+      "static_python_syntax": {
+        "status": "pass",
+        "tracked_files": 16
+      }
+    },
+    "logit_lens_homonyms": {
+      "repository": "https://github.com/scoki211/Divergent_LLM_Predictions_Convergent_Reps_amb_words",
+      "commit": "dd083383752da7ec7725d290dae13925bd8b852b",
+      "tree": "020e4d8d17969c1a9c09757c68ebc7c2ddc48ffd",
+      "license": {
+        "status": "found",
+        "spdx": "MIT",
+        "path": "LICENSE",
+        "sha256": "69c94169e68080ce4bca5b0e770689415805997c8af0805d21a3f19b7866653f"
+      },
+      "entrypoint_paths": [
+        "Experiment 1 - Logit lens/Unified_logit_lens_experiment_v5.py"
+      ],
+      "static_python_syntax": {
+        "status": "pass",
+        "tracked_files": 21
+      }
+    },
+    "mechanistic_tomography": {
+      "repository": "https://github.com/kwisatzh/mechanistic-tomography",
+      "commit": "5c097d2175c632a4a15e359cb4d94ec923168472",
+      "tree": "261ed565077cb55dc61cc004fd1bd7ef9be01c67",
+      "license": {
+        "status": "found",
+        "spdx": "Apache-2.0",
+        "path": "LICENSE",
+        "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+      },
+      "entrypoint_paths": [
+        "experiments/hmm/attribution_vs_finite_step0.py",
+        "experiments/hmm/sparse_tomography_posthoc.py"
+      ],
+      "static_python_syntax": {
+        "status": "pass",
+        "tracked_files": 53
+      }
+    },
+    "natural_language_autoencoders": {
+      "repository": "https://github.com/kitft/natural_language_autoencoders",
+      "commit": "0577769b55ad4fdd96d159e983361b97fa4e7331",
+      "tree": "a1f861a875944606e5ffc71e89be0890716a5582",
+      "license": {
+        "status": "found",
+        "spdx": "Apache-2.0",
+        "path": "LICENSE",
+        "sha256": "b7f9570613fb5abf78ca1693a277d71e3c4f00025d3a777dcbd847cf776fdd86"
+      },
+      "entrypoint_paths": [
+        "nla_inference.py",
+        "nla/datagen/run_pipeline.py",
+        "configs/actor_sft.sh",
+        "configs/rl.sh",
+        "release/model_cards"
+      ],
+      "static_python_syntax": {
+        "status": "pass",
+        "tracked_files": 61
+      }
+    },
+    "openai_sae": {
+      "repository": "https://github.com/openai/sparse_autoencoder",
+      "commit": "4965b941e9eb590b00b253a2c406db1e1b193942",
+      "tree": "a8a95c5ab3c7b988d2c0ffe26ce4100cd05e9463",
+      "license": {
+        "status": "found",
+        "spdx": "MIT",
+        "path": "LICENSE",
+        "sha256": "dcf7927ec000e0bea021baf556c82ad7ac2e96cdd8285a1c8b2a7014e8300c6d"
+      },
+      "entrypoint_paths": [
+        "sparse_autoencoder/train.py",
+        "sparse_autoencoder/model.py",
+        "sparse_autoencoder/loss.py"
+      ],
+      "static_python_syntax": {
+        "status": "pass",
+        "tracked_files": 7
+      }
+    },
+    "patchscopes": {
+      "repository": "https://github.com/PAIR-code/interpretability",
+      "commit": "db2da0f9e91d553ff46eb555330da9341c6d139a",
+      "tree": "d89831461d5f629849567d9586562f22efb4c476",
+      "license": {
+        "status": "found",
+        "spdx": "Apache-2.0",
+        "path": "LICENSE",
+        "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+      },
+      "entrypoint_paths": [
+        "patchscopes/code/attribute_extraction.ipynb",
+        "patchscopes/code/patchscopes_utils.py",
+        "patchscopes/code/general_utils.py"
+      ],
+      "static_python_syntax": {
+        "status": "pass",
+        "tracked_files": 44
+      }
+    },
+    "persona_vectors": {
+      "repository": "https://github.com/safety-research/persona_vectors",
+      "commit": "b8e0f044fe2410a6fad579f38324f03f13b4e917",
+      "tree": "cdf80e84887de88f5756f6eae7e1971b99a1a763",
+      "license": {
+        "status": "found",
+        "spdx": "Apache-2.0",
+        "path": "LICENSE",
+        "sha256": "bb57d93dde8ac629c48b014e77ceb996314c08f6475f665f69dda361940d9fd4"
+      },
+      "entrypoint_paths": [
+        "generate_vec.py",
+        "activation_steer.py",
+        "eval/eval_persona.py",
+        "eval/cal_projection.py",
+        "scripts/generate_vec.sh",
+        "sft.py"
+      ],
+      "static_python_syntax": {
+        "status": "pass",
+        "tracked_files": 14
+      }
+    },
+    "pyvene": {
+      "repository": "https://github.com/stanfordnlp/pyvene",
+      "commit": "9e333904dcf9e597ca76170010d17f4d4580de8d",
+      "tree": "949e5730a01cedc55648c0f568f464844f14bb97",
+      "license": {
+        "status": "found",
+        "spdx": "Apache-2.0",
+        "path": "LICENSE",
+        "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+      },
+      "entrypoint_paths": [
+        "tutorials/advanced_tutorials/IOI_Replication.ipynb",
+        "tutorials/advanced_tutorials/IOI_with_Mask_Intervention.ipynb",
+        "tutorials/advanced_tutorials/tutorial_ioi_utils.py"
+      ],
+      "static_python_syntax": {
+        "status": "pass",
+        "tracked_files": 79
+      }
+    },
+    "refusal_direction": {
+      "repository": "https://github.com/andyrdt/refusal_direction",
+      "commit": "9d852fae1a9121c78b29142de733cb1340770cc3",
+      "tree": "fd5f61874e75561f16b856fc4ec367ffea18058a",
+      "license": {
+        "status": "found",
+        "spdx": "Apache-2.0",
+        "path": "LICENSE",
+        "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+      },
+      "entrypoint_paths": [
+        "pipeline/run_pipeline.py",
+        "pipeline/runs/gemma-2b-it/direction_metadata.json",
+        "pipeline/runs/yi-6b-chat/direction_metadata.json",
+        "pipeline/runs/llama-2-7b-chat-hf/direction_metadata.json",
+        "pipeline/runs/meta-llama-3-8b-instruct/direction_metadata.json"
+      ],
+      "static_python_syntax": {
+        "status": "pass",
+        "tracked_files": 20
+      }
+    },
+    "reins_sae_steering": {
+      "repository": "https://github.com/Geralt1020/REINS",
+      "commit": "d6ad20620a7729b0b1b746463a68ca989884f7dc",
+      "tree": "07edccc148fae93d09a1f5727ec0af2ad0e5c70e",
+      "license": {
+        "status": "found",
+        "spdx": "Apache-2.0",
+        "path": "LICENSE",
+        "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+      },
+      "entrypoint_paths": [
+        "src/cli.py"
+      ],
+      "static_python_syntax": {
+        "status": "pass",
+        "tracked_files": 16
+      }
+    },
+    "representation_engineering": {
+      "repository": "https://github.com/andyzoujm/representation-engineering",
+      "commit": "5455d8a375d5fb1cb191f9ebcd089b7c21e9a31e",
+      "tree": "fb2fbe7a209abc1e127e5c24571893a99e884f8e",
+      "license": {
+        "status": "found",
+        "spdx": "MIT",
+        "path": "LICENSE",
+        "sha256": "1e4bb8e2313ef9ff36033526503aa8837c80ba1d4c055c2e7d9977760028eec7"
+      },
+      "entrypoint_paths": [
+        "examples/honesty/honesty.ipynb",
+        "examples/honesty/honesty_contrast_vec_TQA_mc.ipynb",
+        "repe/rep_reading_pipeline.py",
+        "repe/rep_control_pipeline.py"
+      ],
+      "static_python_syntax": {
+        "status": "pass",
+        "tracked_files": 23
+      }
+    },
+    "rome": {
+      "repository": "https://github.com/kmeng01/rome",
+      "commit": "0874014cd9837e4365f3e6f3c71400ef11509e04",
+      "tree": "60caf5bf4201cc3e8a2b5c03f37cae188ab709bf",
+      "license": {
+        "status": "found",
+        "spdx": "MIT",
+        "path": "LICENSE",
+        "sha256": "46c273d5a0a7f8bc3889863398e1bb20493e256f38033dfd637ec46bf654c531"
+      },
+      "entrypoint_paths": [
+        "notebooks/causal_trace.ipynb",
+        "notebooks/average_causal_effects.ipynb",
+        "rome/rome_main.py"
+      ],
+      "static_python_syntax": {
+        "status": "pass",
+        "tracked_files": 68
+      }
+    },
+    "sae_bench": {
+      "repository": "https://github.com/adamkarvonen/SAEBench",
+      "commit": "8042bb3828c6340da8d12062324e92b2077c571c",
+      "tree": "18a9d215a16b44a620c0fd646c55cd440eab27a8",
+      "license": {
+        "status": "not_found",
+        "spdx": null,
+        "path": null,
+        "sha256": null
+      },
+      "entrypoint_paths": [
+        "sae_bench/evals/sparse_probing_sae_probes/main.py",
+        "sae_bench/evals/sparse_probing_sae_probes/eval_config.py"
+      ],
+      "static_python_syntax": {
+        "status": "pass",
+        "tracked_files": 112
+      }
+    },
+    "sae_lens": {
+      "repository": "https://github.com/decoderesearch/SAELens",
+      "commit": "7c8df766be651a6fd8045522cf8d725af6d2fdd0",
+      "tree": "bbb052a3fa35413aba1a929d4e84adbb5d215bcc",
+      "license": {
+        "status": "found",
+        "spdx": "MIT",
+        "path": "LICENSE",
+        "sha256": "0d6e9efa10e8b22bb809f5b4fa2988e7bb15d48e5ff5412c969be235070e00ab"
+      },
+      "entrypoint_paths": [
+        "sae_lens/training/sae_trainer.py",
+        "sae_lens/saes/sae.py",
+        "tutorials/training_a_sparse_autoencoder.ipynb"
+      ],
+      "static_python_syntax": {
+        "status": "pass",
+        "tracked_files": 173
+      }
+    },
+    "steering_vector_distillation": {
+      "repository": "https://github.com/agu18dec/steering-vector-distillation",
+      "commit": "89ab3616f6ed0e11a69481c1acd19d37c44e3706",
+      "tree": "a85a0de5878c15d28a5a033d24bf942bc0918e5d",
+      "license": {
+        "status": "found",
+        "spdx": "Apache-2.0",
+        "path": "LICENSE",
+        "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+      },
+      "entrypoint_paths": [
+        "src/subliminal/extract_student.py",
+        "src/subliminal/extract_teacher.py",
+        "src/subliminal/eval_steered.py",
+        "src/subliminal/generate_steered.py",
+        "src/subliminal/eas.py",
+        "install.sh"
+      ],
+      "static_python_syntax": {
+        "status": "pass",
+        "tracked_files": 52
+      }
+    },
+    "swd_circuits": {
+      "repository": "https://github.com/veri-safe/SWD",
+      "commit": "4c44b7281bc7c78f80e431dac3aa75f397dd3043",
+      "tree": "a7204e89bfcba2676cbc300814da23957fe99520",
+      "license": {
+        "status": "found",
+        "spdx": "Apache-2.0",
+        "path": "LICENSE",
+        "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+      },
+      "entrypoint_paths": [
+        "src/swd/cli.py",
+        "src/swd/pipeline.py"
+      ],
+      "static_python_syntax": {
+        "status": "pass",
+        "tracked_files": 27
+      }
+    },
+    "thought_anchors": {
+      "repository": "https://github.com/interp-reasoning/thought-anchors",
+      "commit": "b53ed8c75d3f6112f68adfaec9a13d4d708c442e",
+      "tree": "b7a5383cedd85a32f437b928654010bb0de3dd2c",
+      "license": {
+        "status": "found",
+        "spdx": "MIT",
+        "path": "LICENSE.md",
+        "sha256": "17825c3bd82610363b7c1e2bf16311f4a1c9578674ea844da72bfaa8a87977d6"
+      },
+      "entrypoint_paths": [
+        "generate_rollouts.py",
+        "analyze_rollouts.py",
+        "step_attribution.py",
+        "whitebox-analyses/scripts/eval_receiver_head_reliability.py",
+        "whitebox-analyses/attention_analysis/receiver_head_funcs.py"
+      ],
+      "static_python_syntax": {
+        "status": "pass",
+        "tracked_files": 66
+      }
+    },
+    "tuned_lens": {
+      "repository": "https://github.com/AlignmentResearch/tuned-lens",
+      "commit": "abdac0c4de23d9f6d6c8459d576ad203aec15deb",
+      "tree": "8945032aa2081db4dd74db4f5152ca3cda15f555",
+      "license": {
+        "status": "found",
+        "spdx": "MIT",
+        "path": "LICENSE",
+        "sha256": "7657e29279b3a86e9e50a3029465b1aac9bdf41266064079d6585a507b73b7e7"
+      },
+      "entrypoint_paths": [
+        "tuned_lens/scripts/train_loop.py",
+        "tuned_lens/scripts/eval_loop.py",
+        "notebooks/interactive.ipynb"
+      ],
+      "static_python_syntax": {
+        "status": "pass",
+        "tracked_files": 41
+      }
+    }
+  }
+}

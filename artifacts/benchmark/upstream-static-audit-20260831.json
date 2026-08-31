@@ -1,0 +1,322 @@
+{
+  "artifact_type": "stresskit_upstream_static_audit_result",
+  "schema_version": "0.1",
+  "checked_at": "2026-08-31T23:33:57+09:00",
+  "environment": {
+    "python": "3.13.11",
+    "platform": "Darwin 24.5.0 arm64"
+  },
+  "inputs": {
+    "manifest": "benchmark/upstream_sources.json",
+    "manifest_sha256": "059b174ddead6c72a581cc95f2f9cf155f26631974e6d95b1d6a1e1907f0a0aa",
+    "auditor": "benchmark/audit_upstreams.py",
+    "auditor_sha256": "fcabd915afb602ab58332cc0d357c070017246a24d5c044a04a814a793f4337e"
+  },
+  "not_execution_smoke": true,
+  "all_ok": true,
+  "summary": {
+    "upstreams": 36,
+    "pinned_commits_verified": 36,
+    "git_trees_verified": 36,
+    "entrypoint_paths_verified": 130,
+    "tracked_python_files_parsed": 2984,
+    "syntax_errors": 0,
+    "syntax_warnings": 73,
+    "source_licenses_found": 32,
+    "source_licenses_missing": 4
+  },
+  "upstreams": {
+    "acdc": {
+      "ok": true,
+      "entrypoints": 6,
+      "python_files": 73,
+      "syntax_warnings": 0
+    },
+    "activation_model_scanner": {
+      "ok": true,
+      "entrypoints": 1,
+      "python_files": 12,
+      "syntax_warnings": 0
+    },
+    "activation_oracles": {
+      "ok": true,
+      "entrypoints": 5,
+      "python_files": 90,
+      "syntax_warnings": 0
+    },
+    "assistant_axis": {
+      "ok": true,
+      "entrypoints": 5,
+      "python_files": 21,
+      "syntax_warnings": 0
+    },
+    "caa": {
+      "ok": true,
+      "entrypoints": 2,
+      "python_files": 17,
+      "syntax_warnings": 3
+    },
+    "caft": {
+      "ok": true,
+      "entrypoints": 4,
+      "python_files": 36,
+      "syntax_warnings": 0
+    },
+    "ccs": {
+      "ok": true,
+      "entrypoints": 4,
+      "python_files": 3,
+      "syntax_warnings": 0
+    },
+    "circuit_tracer": {
+      "ok": true,
+      "entrypoints": 4,
+      "python_files": 62,
+      "syntax_warnings": 0
+    },
+    "communication_map": {
+      "ok": true,
+      "entrypoints": 3,
+      "python_files": 36,
+      "syntax_warnings": 0
+    },
+    "concept_targeted_attribution": {
+      "ok": true,
+      "entrypoints": 3,
+      "python_files": 143,
+      "syntax_warnings": 4
+    },
+    "diffing_toolkit": {
+      "ok": true,
+      "entrypoints": 5,
+      "python_files": 194,
+      "syntax_warnings": 20
+    },
+    "eval_awareness_steering": {
+      "ok": true,
+      "entrypoints": 4,
+      "python_files": 37,
+      "syntax_warnings": 0
+    },
+    "feature_circuits": {
+      "ok": true,
+      "entrypoints": 6,
+      "python_files": 9,
+      "syntax_warnings": 0
+    },
+    "folkmotif": {
+      "ok": true,
+      "entrypoints": 3,
+      "python_files": 65,
+      "syntax_warnings": 0
+    },
+    "future_localization": {
+      "ok": true,
+      "entrypoints": 3,
+      "python_files": 925,
+      "syntax_warnings": 43
+    },
+    "graph_learning_circuits": {
+      "ok": true,
+      "entrypoints": 2,
+      "python_files": 310,
+      "syntax_warnings": 0
+    },
+    "impossible_directions": {
+      "ok": true,
+      "entrypoints": 3,
+      "python_files": 5,
+      "syntax_warnings": 0
+    },
+    "introspection_mechanisms": {
+      "ok": true,
+      "entrypoints": 5,
+      "python_files": 53,
+      "syntax_warnings": 0
+    },
+    "jacobian_lens": {
+      "ok": true,
+      "entrypoints": 5,
+      "python_files": 16,
+      "syntax_warnings": 0
+    },
+    "logit_lens_homonyms": {
+      "ok": true,
+      "entrypoints": 1,
+      "python_files": 21,
+      "syntax_warnings": 0
+    },
+    "mechanistic_tomography": {
+      "ok": true,
+      "entrypoints": 2,
+      "python_files": 53,
+      "syntax_warnings": 0
+    },
+    "natural_language_autoencoders": {
+      "ok": true,
+      "entrypoints": 5,
+      "python_files": 61,
+      "syntax_warnings": 0
+    },
+    "openai_sae": {
+      "ok": true,
+      "entrypoints": 3,
+      "python_files": 7,
+      "syntax_warnings": 0
+    },
+    "patchscopes": {
+      "ok": true,
+      "entrypoints": 3,
+      "python_files": 44,
+      "syntax_warnings": 1
+    },
+    "persona_vectors": {
+      "ok": true,
+      "entrypoints": 6,
+      "python_files": 14,
+      "syntax_warnings": 0
+    },
+    "pyvene": {
+      "ok": true,
+      "entrypoints": 3,
+      "python_files": 79,
+      "syntax_warnings": 0
+    },
+    "refusal_direction": {
+      "ok": true,
+      "entrypoints": 5,
+      "python_files": 20,
+      "syntax_warnings": 0
+    },
+    "reins_sae_steering": {
+      "ok": true,
+      "entrypoints": 1,
+      "python_files": 16,
+      "syntax_warnings": 0
+    },
+    "representation_engineering": {
+      "ok": true,
+      "entrypoints": 4,
+      "python_files": 23,
+      "syntax_warnings": 1
+    },
+    "rome": {
+      "ok": true,
+      "entrypoints": 3,
+      "python_files": 68,
+      "syntax_warnings": 1
+    },
+    "sae_bench": {
+      "ok": true,
+      "entrypoints": 2,
+      "python_files": 112,
+      "syntax_warnings": 0
+    },
+    "sae_lens": {
+      "ok": true,
+      "entrypoints": 3,
+      "python_files": 173,
+      "syntax_warnings": 0
+    },
+    "steering_vector_distillation": {
+      "ok": true,
+      "entrypoints": 6,
+      "python_files": 52,
+      "syntax_warnings": 0
+    },
+    "swd_circuits": {
+      "ok": true,
+      "entrypoints": 2,
+      "python_files": 27,
+      "syntax_warnings": 0
+    },
+    "thought_anchors": {
+      "ok": true,
+      "entrypoints": 5,
+      "python_files": 66,
+      "syntax_warnings": 0
+    },
+    "tuned_lens": {
+      "ok": true,
+      "entrypoints": 3,
+      "python_files": 41,
+      "syntax_warnings": 0
+    }
+  },
+  "warnings": [
+    "plot_results.py:260: invalid escape sequence '\\ '",
+    "plot_results.py:271: invalid escape sequence '\\ '",
+    "plot_results.py:470: invalid escape sequence '\\D'",
+    "final_plots/plot_circuit_dissociation_viz.py:7: invalid escape sequence '\\ '",
+    "final_plots_emnlp/plot_feature_enrichment.py:113: invalid escape sequence '\\%'",
+    "final_plots_emnlp/plot_feature_enrichment_val.py:110: invalid escape sequence '\\%'",
+    "final_plots_emnlp/plot_probe_accuracy_trajectories_llama.py:75: invalid escape sequence '\\%'",
+    "narrow_ft_experiments/plotting/plot_agent_performance.py:640: invalid escape sequence '\\D'",
+    "narrow_ft_experiments/plotting/plot_agent_performance.py:701: invalid escape sequence '\\L'",
+    "narrow_ft_experiments/plotting/plot_agent_performance.py:702: invalid escape sequence '\\L'",
+    "narrow_ft_experiments/plotting/plot_agent_performance.py:703: invalid escape sequence '\\L'",
+    "narrow_ft_experiments/plotting/plot_agent_performance.py:704: invalid escape sequence '\\L'",
+    "narrow_ft_experiments/plotting/plot_agent_performance.py:707: invalid escape sequence '\\L'",
+    "narrow_ft_experiments/plotting/plot_agent_performance.py:708: invalid escape sequence '\\L'",
+    "narrow_ft_experiments/plotting/plot_agent_performance.py:709: invalid escape sequence '\\L'",
+    "narrow_ft_experiments/plotting/plot_agent_performance.py:710: invalid escape sequence '\\L'",
+    "narrow_ft_experiments/plotting/plot_causal_effect.py:1631: invalid escape sequence '\\D'",
+    "narrow_ft_experiments/plotting/plot_steeringcosim.py:108: invalid escape sequence '\\L'",
+    "narrow_ft_experiments/plotting/plot_steeringcosim.py:109: invalid escape sequence '\\L'",
+    "narrow_ft_experiments/plotting/plot_steeringcosim.py:110: invalid escape sequence '\\L'",
+    "narrow_ft_experiments/plotting/plot_steeringcosim.py:111: invalid escape sequence '\\L'",
+    "narrow_ft_experiments/plotting/plot_training_mix.py:58: invalid escape sequence '\\L'",
+    "narrow_ft_experiments/plotting/plot_training_mix.py:59: invalid escape sequence '\\L'",
+    "narrow_ft_experiments/plotting/plot_training_mix.py:60: invalid escape sequence '\\L'",
+    "narrow_ft_experiments/plotting/plot_training_mix.py:61: invalid escape sequence '\\L'",
+    "narrow_ft_experiments/plotting/plot_training_mix.py:1336: invalid escape sequence '\\%'",
+    "narrow_ft_experiments/plotting/plot_training_mix.py:1594: invalid escape sequence '\\l'",
+    "lm-evaluation-harness/lm_eval/tasks/afrobench/masakhaner/prompt_1/utils.py:70: invalid escape sequence '\\s'",
+    "lm-evaluation-harness/lm_eval/tasks/afrobench/masakhaner/prompt_2/utils.py:70: invalid escape sequence '\\s'",
+    "lm-evaluation-harness/lm_eval/tasks/afrobench/masakhaner/prompt_3/utils.py:70: invalid escape sequence '\\s'",
+    "lm-evaluation-harness/lm_eval/tasks/afrobench/masakhaner/prompt_4/utils.py:70: invalid escape sequence '\\s'",
+    "lm-evaluation-harness/lm_eval/tasks/afrobench/masakhaner/prompt_5/utils.py:70: invalid escape sequence '\\s'",
+    "lm-evaluation-harness/lm_eval/tasks/afrobench/masakhanews/utils.py:15: invalid escape sequence '\\c'",
+    "lm-evaluation-harness/lm_eval/tasks/afrobench/masakhanews/utils.py:17: invalid escape sequence '\\c'",
+    "lm-evaluation-harness/lm_eval/tasks/afrobench/masakhanews/utils.py:30: invalid escape sequence '\\c'",
+    "lm-evaluation-harness/lm_eval/tasks/afrobench/sib/utils.py:20: invalid escape sequence '\\c'",
+    "lm-evaluation-harness/lm_eval/tasks/afrobench/sib/utils.py:22: invalid escape sequence '\\c'",
+    "lm-evaluation-harness/lm_eval/tasks/afrobench/sib/utils.py:35: invalid escape sequence '\\c'",
+    "lm-evaluation-harness/lm_eval/tasks/agieval/utils.py:50: invalid escape sequence '\\$'",
+    "lm-evaluation-harness/lm_eval/tasks/agieval/utils.py:66: invalid escape sequence '\\d'",
+    "lm-evaluation-harness/lm_eval/tasks/agieval/utils.py:189: invalid escape sequence '\\%'",
+    "lm-evaluation-harness/lm_eval/tasks/bbh/cot_zeroshot/utils.py:121: invalid escape sequence '\\S'",
+    "lm-evaluation-harness/lm_eval/tasks/bbh/cot_zeroshot/utils.py:167: invalid escape sequence '\\s'",
+    "lm-evaluation-harness/lm_eval/tasks/bbh/cot_zeroshot/utils.py:205: invalid escape sequence '\\s'",
+    "lm-evaluation-harness/lm_eval/tasks/bbh/zeroshot/utils.py:121: invalid escape sequence '\\S'",
+    "lm-evaluation-harness/lm_eval/tasks/bbh/zeroshot/utils.py:167: invalid escape sequence '\\s'",
+    "lm-evaluation-harness/lm_eval/tasks/bbh/zeroshot/utils.py:205: invalid escape sequence '\\s'",
+    "lm-evaluation-harness/lm_eval/tasks/hendrycks_math/utils.py:199: invalid escape sequence '\\%'",
+    "lm-evaluation-harness/lm_eval/tasks/hrm8k/default/utils.py:114: invalid escape sequence '\\$'",
+    "lm-evaluation-harness/lm_eval/tasks/hrm8k/default/utils.py:130: invalid escape sequence '\\d'",
+    "lm-evaluation-harness/lm_eval/tasks/hrm8k/default/utils.py:253: invalid escape sequence '\\%'",
+    "lm-evaluation-harness/lm_eval/tasks/hrm8k/en/utils.py:114: invalid escape sequence '\\$'",
+    "lm-evaluation-harness/lm_eval/tasks/hrm8k/en/utils.py:130: invalid escape sequence '\\d'",
+    "lm-evaluation-harness/lm_eval/tasks/hrm8k/en/utils.py:253: invalid escape sequence '\\%'",
+    "lm-evaluation-harness/lm_eval/tasks/mmlu/flan_cot_zeroshot/utils.py:23: invalid escape sequence '\\s'",
+    "lm-evaluation-harness/lm_eval/tasks/mmlu/flan_cot_zeroshot/utils.py:93: invalid escape sequence '\\s'",
+    "lm-evaluation-harness/lm_eval/tasks/mmlu/flan_n_shot/generative/utils.py:23: invalid escape sequence '\\s'",
+    "lm-evaluation-harness/lm_eval/tasks/mmlu/flan_n_shot/generative/utils.py:93: invalid escape sequence '\\s'",
+    "lm-evaluation-harness/lm_eval/tasks/mmlu_prox/mmlu_prox_config_generator.py:47: invalid escape sequence '\\('",
+    "lm-evaluation-harness/lm_eval/tasks/score/math/math_grader.py:270: invalid escape sequence '\\{'",
+    "lm-evaluation-harness/lm_eval/tasks/score/math/math_grader.py:275: invalid escape sequence '\\!'",
+    "lm-evaluation-harness/lm_eval/tasks/score/math/math_grader.py:308: invalid escape sequence '\\^'",
+    "lm-evaluation-harness/lm_eval/tasks/score/math/math_grader.py:329: invalid escape sequence '\\^'",
+    "lm-evaluation-harness/scripts/clean_training_data/process_sorted_buckets.py:38: invalid escape sequence '\\D'",
+    "src/dataset/Tofu.py:19: invalid escape sequence '\\I'",
+    "src/metrics/Tofu.py:33: invalid escape sequence '\\S'",
+    "src/metrics/Tofu.py:46: invalid escape sequence '\\I'",
+    "src/metrics/Tofu.py:76: invalid escape sequence '\\I'",
+    "src/metrics/Tofu.py:181: invalid escape sequence '\\I'",
+    "src/metrics/Tofu.py:429: invalid escape sequence '\\I'",
+    "context-atlas/preprocess.py:115: invalid escape sequence '\\w'",
+    "lorra_finetune/src/args.py:9: invalid escape sequence '\\I'",
+    "experiments/causal_trace.py:35: invalid escape sequence '\\d'"
+  ],
+  "interpretation": "All pinned source trees were present, their registered entrypoint paths existed, and every tracked Python file parsed. This is not dependency-install, model-load, command-execution, or claim-reproduction evidence. Upstreams without a repository-level source license remain excluded before freeze: assistant_axis, caft, introspection_mechanisms, sae_bench."
+}

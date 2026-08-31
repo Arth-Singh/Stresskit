@@ -1,0 +1,193 @@
+{
+  "schema_version": "0.1",
+  "artifact_type": "stresskit_model_source_manifest",
+  "status": "prefreeze_resolution_complete_for_named_huggingface_models",
+  "checked_at": "2026-08-28T22:30:00+09:00",
+  "source": "Hugging Face model API and authenticated config-resolution check",
+  "revision_policy": "Use exact revision below. Never substitute a different repository or checkpoint without a public preregistration revision.",
+  "models": {
+    "gpt2": {
+      "repository": "gpt2",
+      "revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+      "license": "mit",
+      "access": "public",
+      "availability": "resolved"
+    },
+    "gpt2_xl": {
+      "repository": "openai-community/gpt2-xl",
+      "revision": "15ea56dee5df4983c59b2538573817e1667135e2",
+      "license": "mit",
+      "access": "public",
+      "availability": "resolved"
+    },
+    "gpt_j_6b": {
+      "repository": "EleutherAI/gpt-j-6B",
+      "revision": "47e169305d2e8376be1d31e765533382721b2cc1",
+      "license": "apache-2.0",
+      "access": "public",
+      "availability": "resolved"
+    },
+    "pythia_70m_deduped": {
+      "repository": "EleutherAI/pythia-70m-deduped",
+      "revision": "e93a9faa9c77e5d09219f6c868bfc7a1bd65593c",
+      "license": "apache-2.0",
+      "access": "public",
+      "availability": "resolved"
+    },
+    "gemma_2b_it": {
+      "repository": "google/gemma-2b-it",
+      "revision": "96988410cbdaeb8d5093d1ebdc5a8fb563e02bad",
+      "license": "gemma",
+      "access": "manual_gated",
+      "availability": "resolved_with_account_access"
+    },
+    "yi_6b_chat": {
+      "repository": "01-ai/Yi-6B-Chat",
+      "revision": "2dbf63b0cb7bc493c0243502c6e6111a36e3a093",
+      "license": "apache-2.0",
+      "access": "public",
+      "availability": "resolved"
+    },
+    "llama2_7b_chat": {
+      "repository": "meta-llama/Llama-2-7b-chat-hf",
+      "revision": "f5db02db724555f92da89c216ac04704f23d4590",
+      "license": "llama2",
+      "access": "manual_gated",
+      "availability": "resolved_with_account_access"
+    },
+    "llama3_8b_instruct": {
+      "repository": "meta-llama/Meta-Llama-3-8B-Instruct",
+      "revision": "8afb486c1db24fe5011ec46dfbe5b5dccdb575c2",
+      "license": "llama3",
+      "access": "manual_gated",
+      "availability": "resolved_with_account_access"
+    },
+    "deberta_xxlarge_v2": {
+      "repository": "microsoft/deberta-xxlarge-v2",
+      "revision": "21131a5441d2eb7936b758ca02a67baaa7a34f85",
+      "license": "mit",
+      "access": "public",
+      "availability": "resolved"
+    },
+    "gemma2_2b": {
+      "repository": "google/gemma-2-2b",
+      "revision": "c5ebcd40d208330abc697524c919956e692655cf",
+      "license": "gemma",
+      "access": "manual_gated",
+      "availability": "resolved_with_account_access"
+    },
+    "llama32_1b": {
+      "repository": "meta-llama/Llama-3.2-1B",
+      "revision": "4e20de362430cd3b72f300e6b0f18e50e7166e08",
+      "license": "llama3.2",
+      "access": "manual_gated",
+      "availability": "resolved_with_account_access"
+    },
+    "qwen_1_8b_chat_requested": {
+      "repository": "qwen/qwen-1_8b-chat",
+      "revision": null,
+      "license": null,
+      "access": null,
+      "availability": "not_found",
+      "exclusion_reason": "Pinned upstream model identifier did not resolve. Qwen/Qwen1.5-1.8B-Chat exists but is a different checkpoint and is not substituted."
+    },
+    "qwen2_5_7b_instruct": {
+      "repository": "Qwen/Qwen2.5-7B-Instruct",
+      "revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+      "license": "apache-2.0",
+      "access": "public",
+      "availability": "resolved"
+    },
+    "qwen3_8b": {
+      "repository": "Qwen/Qwen3-8B",
+      "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+      "license": "apache-2.0",
+      "access": "public",
+      "availability": "resolved"
+    },
+    "qwen3_5_4b": {
+      "repository": "Qwen/Qwen3.5-4B",
+      "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+      "license": "apache-2.0",
+      "access": "public",
+      "availability": "resolved"
+    },
+    "qwen3_32b": {
+      "repository": "Qwen/Qwen3-32B",
+      "revision": "9216db5781bf21249d130ec9da846c4624c16137",
+      "license": "apache-2.0",
+      "access": "public",
+      "availability": "resolved"
+    },
+    "qwen3_1_7b": {
+      "repository": "Qwen/Qwen3-1.7B",
+      "revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+      "license": "apache-2.0",
+      "access": "public",
+      "availability": "resolved"
+    },
+    "qwen2_5_coder_32b_instruct": {
+      "repository": "Qwen/Qwen2.5-Coder-32B-Instruct",
+      "revision": "381fc969f78efac66bc87ff7ddeadb7e73c218a7",
+      "license": "apache-2.0",
+      "access": "public",
+      "availability": "resolved"
+    },
+    "gemma_2_9b_it": {
+      "repository": "google/gemma-2-9b-it",
+      "revision": "11c9b309abf73637e4b6f9a3fa1e92e615547819",
+      "license": "gemma",
+      "access": "manual_gated",
+      "availability": "resolved_with_account_access"
+    },
+    "gemma_2_27b_it": {
+      "repository": "google/gemma-2-27b-it",
+      "revision": "aaf20e6b9f4c0fcf043f6fb2a2068419086d77b0",
+      "license": "gemma",
+      "access": "manual_gated",
+      "availability": "resolved_with_account_access"
+    },
+    "gemma_3_12b_it": {
+      "repository": "google/gemma-3-12b-it",
+      "revision": "96b6f1eccf38110c56df3a15bffe176da04bfd80",
+      "license": "gemma",
+      "access": "manual_gated",
+      "availability": "resolved_with_account_access"
+    },
+    "gemma_3_27b_it": {
+      "repository": "google/gemma-3-27b-it",
+      "revision": "005ad3404e59d6023443cb575daa05336842228a",
+      "license": "gemma",
+      "access": "manual_gated",
+      "availability": "resolved_with_account_access"
+    },
+    "llama3_1_8b_instruct": {
+      "repository": "meta-llama/Llama-3.1-8B-Instruct",
+      "revision": "0e9e39f249a16976918f6564b8830bc894c89659",
+      "license": "llama3.1",
+      "access": "manual_gated",
+      "availability": "resolved_with_account_access"
+    },
+    "llama3_3_70b_instruct": {
+      "repository": "meta-llama/Llama-3.3-70B-Instruct",
+      "revision": "6f6073b423013f6a7d4d9f39144961bfbfbc386b",
+      "license": "llama3.3",
+      "access": "manual_gated",
+      "availability": "resolved_with_account_access"
+    },
+    "nemotron_super_49b_v1": {
+      "repository": "nvidia/Llama-3_3-Nemotron-Super-49B-v1",
+      "revision": "387156d8d6868c19f3472fa607aa9bfc4f662333",
+      "license": "other (NVIDIA Open Model License per model card; review terms before freeze)",
+      "access": "public",
+      "availability": "resolved"
+    },
+    "deepseek_r1_distill_qwen_14b": {
+      "repository": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+      "revision": "1df8507178afcc1bef68cd8c393f61a886323761",
+      "license": "mit",
+      "access": "public",
+      "availability": "resolved"
+    }
+  }
+}

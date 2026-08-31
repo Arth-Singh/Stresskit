@@ -1,0 +1,162 @@
+{
+  "all_ok": true,
+  "artifact_type": "stresskit_upstream_static_audit_result",
+  "manifest_schema_version": "0.1",
+  "not_execution_smoke": true,
+  "upstreams": {
+    "acdc": {
+      "commit": "bc99ace817974b5584b7ee203d596a8e2bbcd399",
+      "entrypoints_checked": 6,
+      "errors": [],
+      "missing_entrypoints": [],
+      "ok": true,
+      "python_files_parsed": 73,
+      "python_syntax_errors": [],
+      "python_syntax_warnings": [],
+      "tree": "e22aed97ac8253e50b0c535bc637796cc71fec98"
+    },
+    "caa": {
+      "commit": "5dabbbd9a0bca5f25e174501e959de378806aa48",
+      "entrypoints_checked": 2,
+      "errors": [],
+      "missing_entrypoints": [],
+      "ok": true,
+      "python_files_parsed": 17,
+      "python_syntax_errors": [],
+      "python_syntax_warnings": [],
+      "tree": "670d1daf28571d089212a6c29cd813749472e3a9"
+    },
+    "ccs": {
+      "commit": "be10d7b912b17e8eacb45de794e9dca044e4ed37",
+      "entrypoints_checked": 4,
+      "errors": [],
+      "missing_entrypoints": [],
+      "ok": true,
+      "python_files_parsed": 3,
+      "python_syntax_errors": [],
+      "python_syntax_warnings": [],
+      "tree": "e1eb2f525ef5ff0f6a6eadc8a29d093693070aef"
+    },
+    "circuit_tracer": {
+      "commit": "8f1e2438df612464e229e44c4a00ff637bf9379b",
+      "entrypoints_checked": 4,
+      "errors": [],
+      "missing_entrypoints": [],
+      "ok": true,
+      "python_files_parsed": 62,
+      "python_syntax_errors": [],
+      "python_syntax_warnings": [],
+      "tree": "2d57b3ab47134afa8b5518323ce9285f36dff8ee"
+    },
+    "feature_circuits": {
+      "commit": "7fbd82b895ae16294f4e6fc7bfc675d1d680d659",
+      "entrypoints_checked": 6,
+      "errors": [],
+      "missing_entrypoints": [],
+      "ok": true,
+      "python_files_parsed": 9,
+      "python_syntax_errors": [],
+      "python_syntax_warnings": [],
+      "tree": "bf55a19268676412efd2291cddb9a1fff37691c1"
+    },
+    "openai_sae": {
+      "commit": "4965b941e9eb590b00b253a2c406db1e1b193942",
+      "entrypoints_checked": 3,
+      "errors": [],
+      "missing_entrypoints": [],
+      "ok": true,
+      "python_files_parsed": 7,
+      "python_syntax_errors": [],
+      "python_syntax_warnings": [],
+      "tree": "a8a95c5ab3c7b988d2c0ffe26ce4100cd05e9463"
+    },
+    "patchscopes": {
+      "commit": "db2da0f9e91d553ff46eb555330da9341c6d139a",
+      "entrypoints_checked": 3,
+      "errors": [],
+      "missing_entrypoints": [],
+      "ok": true,
+      "python_files_parsed": 44,
+      "python_syntax_errors": [],
+      "python_syntax_warnings": [],
+      "tree": "d89831461d5f629849567d9586562f22efb4c476"
+    },
+    "pyvene": {
+      "commit": "9e333904dcf9e597ca76170010d17f4d4580de8d",
+      "entrypoints_checked": 3,
+      "errors": [],
+      "missing_entrypoints": [],
+      "ok": true,
+      "python_files_parsed": 79,
+      "python_syntax_errors": [],
+      "python_syntax_warnings": [],
+      "tree": "949e5730a01cedc55648c0f568f464844f14bb97"
+    },
+    "refusal_direction": {
+      "commit": "9d852fae1a9121c78b29142de733cb1340770cc3",
+      "entrypoints_checked": 5,
+      "errors": [],
+      "missing_entrypoints": [],
+      "ok": true,
+      "python_files_parsed": 20,
+      "python_syntax_errors": [],
+      "python_syntax_warnings": [],
+      "tree": "fd5f61874e75561f16b856fc4ec367ffea18058a"
+    },
+    "representation_engineering": {
+      "commit": "5455d8a375d5fb1cb191f9ebcd089b7c21e9a31e",
+      "entrypoints_checked": 4,
+      "errors": [],
+      "missing_entrypoints": [],
+      "ok": true,
+      "python_files_parsed": 23,
+      "python_syntax_errors": [],
+      "python_syntax_warnings": [],
+      "tree": "fb2fbe7a209abc1e127e5c24571893a99e884f8e"
+    },
+    "rome": {
+      "commit": "0874014cd9837e4365f3e6f3c71400ef11509e04",
+      "entrypoints_checked": 3,
+      "errors": [],
+      "missing_entrypoints": [],
+      "ok": true,
+      "python_files_parsed": 68,
+      "python_syntax_errors": [],
+      "python_syntax_warnings": [],
+      "tree": "60caf5bf4201cc3e8a2b5c03f37cae188ab709bf"
+    },
+    "sae_bench": {
+      "commit": "8042bb3828c6340da8d12062324e92b2077c571c",
+      "entrypoints_checked": 2,
+      "errors": [],
+      "missing_entrypoints": [],
+      "ok": true,
+      "python_files_parsed": 112,
+      "python_syntax_errors": [],
+      "python_syntax_warnings": [],
+      "tree": "18a9d215a16b44a620c0fd646c55cd440eab27a8"
+    },
+    "sae_lens": {
+      "commit": "7c8df766be651a6fd8045522cf8d725af6d2fdd0",
+      "entrypoints_checked": 3,
+      "errors": [],
+      "missing_entrypoints": [],
+      "ok": true,
+      "python_files_parsed": 173,
+      "python_syntax_errors": [],
+      "python_syntax_warnings": [],
+      "tree": "bbb052a3fa35413aba1a929d4e84adbb5d215bcc"
+    },
+    "tuned_lens": {
+      "commit": "abdac0c4de23d9f6d6c8459d576ad203aec15deb",
+      "entrypoints_checked": 3,
+      "errors": [],
+      "missing_entrypoints": [],
+      "ok": true,
+      "python_files_parsed": 41,
+      "python_syntax_errors": [],
+      "python_syntax_warnings": [],
+      "tree": "8945032aa2081db4dd74db4f5152ca3cda15f555"
+    }
+  }
+}

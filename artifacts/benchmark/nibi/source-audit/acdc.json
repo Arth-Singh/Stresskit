@@ -1,0 +1,19 @@
+{
+  "all_ok": true,
+  "artifact_type": "stresskit_upstream_static_audit_result",
+  "manifest_schema_version": "0.1",
+  "not_execution_smoke": true,
+  "upstreams": {
+    "acdc": {
+      "commit": "bc99ace817974b5584b7ee203d596a8e2bbcd399",
+      "entrypoints_checked": 6,
+      "errors": [],
+      "missing_entrypoints": [],
+      "ok": true,
+      "python_files_parsed": 73,
+      "python_syntax_errors": [],
+      "python_syntax_warnings": [],
+      "tree": "e22aed97ac8253e50b0c535bc637796cc71fec98"
+    }
+  }
+}

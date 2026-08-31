@@ -1,0 +1,41 @@
+{
+  "artifact_type": "stresskit_upstream_execution_smoke",
+  "environment": {
+    "python": "3.11.5",
+    "torch": "2.13.0"
+  },
+  "exercise": {
+    "finite_logits": true,
+    "layer_index": 6,
+    "logit_lens_forward": true,
+    "logit_shape": [
+      1,
+      9,
+      50257
+    ],
+    "matching_shapes": true,
+    "model_forward": true,
+    "pretrained_tuned_lens_load": true,
+    "prompt_sha256": "ff8e952f420d0e75a7ef65b740a415c565af6cbb23c0babca6a24c7926dab3ea",
+    "sequence_tokens": 9,
+    "translator_changes_logits": true,
+    "tuned_lens_forward": true
+  },
+  "external_artifact": {
+    "config_sha256": "84764e9fb4aef06fe3007d08531ce7ea9213f8436291089f3e8fa4af36126549",
+    "params_sha256": "1e0494dcf4a56a77b73b421820941ea948ffae0c6a0391d88c9cb10b48bc19c8",
+    "repository": "AlignmentResearch/tuned-lens",
+    "repository_type": "space",
+    "revision": "1ac7285852a22309f571c2555efc37375d0c4cda"
+  },
+  "model": {
+    "repository": "gpt2",
+    "revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e"
+  },
+  "not_benchmark_outcome": true,
+  "not_claim_reproduction": true,
+  "schema_version": "0.1",
+  "status": "pass",
+  "upstream": "tuned_lens",
+  "upstream_commit": "abdac0c4de23d9f6d6c8459d576ad203aec15deb"
+}

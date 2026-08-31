@@ -1,0 +1,186 @@
+{
+  "schema_version": "0.1",
+  "artifact_type": "stresskit_external_artifact_source_manifest",
+  "status": "prefreeze_resolution_in_progress",
+  "checked_at": "2026-08-28T22:30:00+09:00",
+  "artifacts": {
+    "tuned_lens_gpt2": {
+      "repository": "AlignmentResearch/tuned-lens",
+      "repository_type": "space",
+      "revision": "1ac7285852a22309f571c2555efc37375d0c4cda",
+      "license": "mit",
+      "access": "public",
+      "files": {
+        "lens/gpt2/config.json": {
+          "git_oid": "4f43d2940b170aa19b31d295d5f10bd0d2908c85",
+          "sha256": "84764e9fb4aef06fe3007d08531ce7ea9213f8436291089f3e8fa4af36126549",
+          "size": 191
+        },
+        "lens/gpt2/params.pt": {
+          "git_oid": "14b0d7bcd5da3db569f3ba3c3daf0c46a17d5c31",
+          "sha256": "1e0494dcf4a56a77b73b421820941ea948ffae0c6a0391d88c9cb10b48bc19c8",
+          "size": 28353795
+        }
+      },
+      "availability": "resolved"
+    },
+    "circuit_tracer_llama32_transcoder": {
+      "repository": "mntss/transcoder-Llama-3.2-1B",
+      "repository_type": "model",
+      "revision": "c37a82c1ec4cea30d424850d159b17b720ce19e2",
+      "license": "mit",
+      "access": "public",
+      "availability": "resolved"
+    },
+    "circuit_tracer_gemma2_transcoder": {
+      "repository": "mntss/gemma-scope-transcoders",
+      "repository_type": "model",
+      "revision": "9250a2d4860ce5ed5c96c14d5882b7d8162809a3",
+      "license": null,
+      "access": "public",
+      "availability": "resolved_but_license_undeclared",
+      "exclusion_reason": "Required transcoder repository declares no license; no use is inferred from public availability."
+    },
+    "wikitext": {
+      "repository": "Salesforce/wikitext",
+      "repository_type": "dataset",
+      "revision": "b08601e04326c79dfdd32d625aee71d232d685c3",
+      "license": [
+        "cc-by-sa-3.0",
+        "gfdl"
+      ],
+      "access": "public",
+      "availability": "resolved"
+    },
+    "jlens_qwen3_5_4b_n1000": {
+      "repository": "neuronpedia/jacobian-lens",
+      "repository_type": "model",
+      "revision": "16a01f309fcec900fdcec3f4cd5b64f3d00e4d5a",
+      "license": "mit",
+      "access": "public",
+      "availability": "resolved",
+      "revision_label": "qwen-n1000",
+      "file": "qwen3.5-4b/jlens/Salesforce-wikitext/Qwen3.5-4B_jacobian_lens_n1000.pt"
+    },
+    "nla_qwen2_5_7b_l20_av": {
+      "repository": "kitft/nla-qwen2.5-7b-L20-av",
+      "repository_type": "model",
+      "revision": "b88469162777ae6553bc14208eb0cb579336f8f4",
+      "license": "apache-2.0",
+      "access": "public",
+      "availability": "resolved"
+    },
+    "nla_qwen2_5_7b_l20_ar": {
+      "repository": "kitft/nla-qwen2.5-7b-L20-ar",
+      "repository_type": "model",
+      "revision": "e2c9e57eac213d37a31612087f645ab6332c1bb6",
+      "license": "apache-2.0",
+      "access": "public",
+      "availability": "resolved"
+    },
+    "ao_qwen3_8b_full_mixture": {
+      "repository": "adamkarvonen/checkpoints_latentqa_cls_past_lens_addition_Qwen3-8B",
+      "repository_type": "model",
+      "revision": "6e3c7e9d7157f1b09b1915175eb23a4a88830c08",
+      "license": null,
+      "access": "public",
+      "availability": "resolved_but_license_undeclared",
+      "exclusion_reason": "Required artifact declares no license (no Hugging Face license tag or card field); no use is inferred from public availability."
+    },
+    "ao_qwen3_8b_latentqa_only": {
+      "repository": "adamkarvonen/checkpoints_latentqa_only_addition_Qwen3-8B",
+      "repository_type": "model",
+      "revision": "889ea092eb677fe218ea42fd8cec523a80a89038",
+      "license": null,
+      "access": "public",
+      "availability": "resolved_but_license_undeclared",
+      "exclusion_reason": "Required artifact declares no license (no Hugging Face license tag or card field); no use is inferred from public availability."
+    },
+    "ao_qwen3_8b_cls_only": {
+      "repository": "adamkarvonen/checkpoints_cls_only_addition_Qwen3-8B",
+      "repository_type": "model",
+      "revision": "0dc50f40aa82205c575085d8a053a1fe0ebc41a9",
+      "license": null,
+      "access": "public",
+      "availability": "resolved_but_license_undeclared",
+      "exclusion_reason": "Required artifact declares no license (no Hugging Face license tag or card field); no use is inferred from public availability."
+    },
+    "ao_gemma2_9b_latentqa_only": {
+      "repository": "adamkarvonen/checkpoints_latentqa_only_addition_gemma-2-9b-it",
+      "repository_type": "model",
+      "revision": "8bc3739070bb18ea59d3605400373ed72ae091ee",
+      "license": null,
+      "access": "public",
+      "availability": "resolved_but_license_undeclared",
+      "exclusion_reason": "Required artifact declares no license (no Hugging Face license tag or card field); no use is inferred from public availability."
+    },
+    "ao_taboo_subject_qwen3_8b_gold": {
+      "repository": "adamkarvonen/Qwen3-8B-taboo-gold_50_mix",
+      "repository_type": "model",
+      "revision": "29298d0c98e52a717592b067600b0f0a3fb68cf0",
+      "license": null,
+      "access": "public",
+      "availability": "resolved_but_license_undeclared",
+      "exclusion_reason": "Required artifact declares no license (no Hugging Face license tag or card field); no use is inferred from public availability."
+    },
+    "eval_awareness_organism_wood_v2_sftr4_filt": {
+      "repository": "timhua/wood_v2_sftr4_filt",
+      "repository_type": "model",
+      "revision": "f46fa2a76794a8ec2538f4356e4088d938222144",
+      "license": "mit",
+      "access": "public",
+      "availability": "resolved"
+    },
+    "eval_awareness_organism_sdf_only": {
+      "repository": "andrewtim-mats/woodsoloadd_codeonly_rt_add2",
+      "repository_type": "model",
+      "revision": "9366c11ca6c6d06a21ffdd82d33f15bc4baa6ed8",
+      "license": null,
+      "access": "public",
+      "availability": "resolved_but_license_undeclared",
+      "exclusion_reason": "Required artifact declares no license (no Hugging Face license tag or card field); no use is inferred from public availability."
+    },
+    "adl_organism_qwen3_1_7b_kansas_abortion": {
+      "repository": "stewy33/Qwen3-1.7B-0524_original_augmented_pkc_kansas_abortion-01003c5f",
+      "repository_type": "model",
+      "revision": "ea1b0260503868291d33d44b4ad40ea9c35ab41c",
+      "license": null,
+      "access": "public",
+      "availability": "resolved_but_license_undeclared",
+      "exclusion_reason": "Required artifact declares no license (no Hugging Face license tag or card field); no use is inferred from public availability."
+    },
+    "assistant_axis_vectors": {
+      "repository": "lu-christina/assistant-axis-vectors",
+      "repository_type": "dataset",
+      "revision": "3b3b788432ad33e3a28d9ff08e88a530c0740814",
+      "license": "mit",
+      "access": "public",
+      "availability": "resolved"
+    },
+    "thought_anchors_math_rollouts": {
+      "repository": "uzaymacar/math-rollouts",
+      "repository_type": "dataset",
+      "revision": "a3a2fe1eb6d52e6ef81860baff018a8df2eb8ae2",
+      "license": "mit",
+      "access": "public",
+      "availability": "resolved"
+    },
+    "svd_vectors_and_datasets": {
+      "repository": "agu18dec/steering_vector_distillation",
+      "repository_type": "dataset",
+      "revision": "4fda20d0413040b2de61448c89182716485d9839",
+      "license": "apache-2.0",
+      "access": "public",
+      "availability": "resolved"
+    },
+    "caft_qwen_insecure_lmsys_responses": {
+      "repository": "caft-paper/qwen-insecure-lmsys-responses",
+      "repository_type": "dataset",
+      "revision": "0b82dfd97dfb6899419490d3974c61dbd8ebbff7",
+      "license": null,
+      "access": "public",
+      "availability": "resolved_but_license_undeclared",
+      "exclusion_reason": "Required artifact declares no license (no Hugging Face license tag or card field); no use is inferred from public availability."
+    }
+  }
+}
