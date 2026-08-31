@@ -8,7 +8,7 @@ battery? And how much of the previously-measured J-lens instability is the
 
 Setup: the released pre-fitted lenses (`neuronpedia/jacobian-lens`), the
 repo's own `lens-eval-multihop` (93 items) and `lens-eval-association`
-(51 items) sets, and the upstream hit criterion (every latent intermediate at
+(102 items) sets, and the upstream hit criterion (every latent intermediate at
 rank ≤ 5, word-like mask, position −1). The tuned-lens baseline (4B only) is
 trained by `references/train_tuned_lens_qwen.py` on the same corpus family
 the released lens was fitted on (Salesforce wikitext, 128-token sequences,
@@ -38,8 +38,8 @@ sign test. Two more observations bound the claim:
   does not surface intermediates the logit lens misses entirely — it ranks
   the same recoverable intermediates higher (median rank 2 vs 5).
 - **The association set — the flagship "workspace" demo class — stays weak
-  at every scale**: 4B ≈ 0 for all transports; 27B jlens 0.16 vs logit 0.14;
-  3.6-27B tied at 0.14.
+  at every scale**: 4B ≈ 0 for all transports (jlens 4/102, logit and tuned 0/102); 27B jlens
+  0.16 vs logit 0.14; 3.6-27B tied at 0.14.
 
 ![hit@5 by lens, 4B](figs/hit5_qwen3p5_4b.png)
 
@@ -58,6 +58,31 @@ non-specificity previously measured on the J-lens card
 therefore properties of **hit@k evaluation on these item sets**, not of the
 Jacobian transport: any linear readout inherits them, at any scale tested.
 Hit-based lens metrics reward frequency artifacts regardless of transport.
+
+## Finding 3 — a same-recipe refit reproduces the lens's performance,
+## not its readouts
+
+Four lenses fitted on disjoint 250-prompt slices of the same corpus recipe
+(`references/refit_jlens_qwen.py`), merged, and compared with the released
+n1000 lens (rank-biased overlap over matched item/layer/position readouts,
+string-level, duplicate-free):
+
+| comparison | association | multihop |
+|---|---|---|
+| shard-vs-shard RBO (disjoint fits) | 0.90 | 0.89 |
+| merged(1000) vs released n1000 RBO | 0.80 | 0.78 |
+| hit@5 merged / released | 0.03 / 0.04 | 0.32 / 0.31 |
+
+Fitting is sample-stable — disjoint 250-prompt fits agree at RBO ≈ 0.9 and
+the merged lens matches the released lens on the hit criterion. But the
+merged lens agrees *less* with the released lens (≈ 0.79) than our own
+disjoint shards agree with each other (≈ 0.89): the released artifact
+differs from a same-recipe refit by more than fitting-sample noise
+(estimator, preprocessing, or corpus-sample details). Practical reading:
+J-lens *performance* reproduces; the token-level readout lists are not
+canonical, and should not be quoted as "the model's words" without noting
+the fitting provenance. Full numbers:
+[`jlens_refit_reproducibility.json`](jlens_refit_reproducibility.json).
 
 ## Sanity checks performed
 
@@ -89,7 +114,7 @@ plus the size regime where the transport pays for itself.
 python references/train_tuned_lens_qwen.py --layers 0-31 --out tuned.pt   # or shard per GPU
 python references/run_lens_baselines_qwen.py precompute --lens {jlens,logit,tuned} --model ... --lens-file ...
 python references/run_lens_baselines_qwen.py battery --cache jlens=... --cache logit=... [--cache tuned=...]
-python references/refit_jlens_qwen.py fit --shard {0..3} ...              # fit-reproducibility (running)
+python references/refit_jlens_qwen.py fit --shard {0..3} ...              # then: compare --shards ...
 ```
 
 Cards, comparison tables and figures in this directory; runner scripts in

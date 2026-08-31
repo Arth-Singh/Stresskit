@@ -1,0 +1,24 @@
+{
+  "model": "Qwen/Qwen3.5-4B",
+  "prompts_per_shard": 250,
+  "sets": {
+    "lens-eval-association": {
+      "shard_pairwise_rbo_mean": 0.9047,
+      "merged_vs_released_rbo_mean": 0.7992,
+      "hit@5": {
+        "merged": 0.0294,
+        "released_n1000": 0.0392
+      },
+      "n_items": 102
+    },
+    "lens-eval-multihop": {
+      "shard_pairwise_rbo_mean": 0.8886,
+      "merged_vs_released_rbo_mean": 0.779,
+      "hit@5": {
+        "merged": 0.3226,
+        "released_n1000": 0.3118
+      },
+      "n_items": 93
+    }
+  }
+}

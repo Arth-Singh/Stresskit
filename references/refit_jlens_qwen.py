@@ -64,12 +64,23 @@ def fit_shard(shard, device, out_path, dim_batch):
     print(f"shard {shard}: {len(prompts)} prompts -> {out_path}")
 
 
+def dedupe(ranked):
+    """Keep-first order-preserving dedupe: distinct token ids can decode to
+    the same string, and rank-biased overlap needs duplicate-free lists."""
+    seen, out = set(), []
+    for t in ranked:
+        if t not in seen:
+            seen.add(t)
+            out.append(t)
+    return out
+
+
 def readouts(model, tok, lens, prompt):
     lens_logits, _, _ = lens.apply(
         model, prompt, layers=list(lens.source_layers), positions=POSITIONS
     )
-    return {pos: {L: [tok.decode([t]) for t in lens_logits[L][pi].topk(TOP_N).indices]
-                  for L in lens_logits}
+    return {str(pos): {L: [tok.decode([t]) for t in lens_logits[L][pi].topk(TOP_N).indices]
+                       for L in lens_logits}
             for pi, pos in enumerate(POSITIONS)}
 
 
@@ -101,12 +112,12 @@ def compare(shard_glob, device, out_dir, jlens_repo):
         for i, it in enumerate(items):
             for pos in map(str, POSITIONS):
                 for L in per_lens[shard_names[0]][i][pos]:
-                    lists = [per_lens[n][i][pos][L] for n in shard_names]
+                    lists = [dedupe(per_lens[n][i][pos][L]) for n in shard_names]
                     r = M.pairwise_rbo(lists, p=0.9)
                     if r is not None:
                         pair_rbo.append(r)
-                    mr = M.rbo(per_lens["merged"][i][pos][L],
-                               per_lens["released_n1000"][i][pos][L], p=0.9)
+                    mr = M.rbo(dedupe(per_lens["merged"][i][pos][L]),
+                               dedupe(per_lens["released_n1000"][i][pos][L]), p=0.9)
                     agree_rows.append(mr)
         hit5 = {}
         for name in ("merged", "released_n1000"):
