@@ -319,17 +319,19 @@ generated from the cards, so neither can drift from the data.
 Three linear transports of the residual stream — the released **Jacobian
 lens**, the free **logit lens**, and a **tuned lens** trained on the same
 corpus — graded under one battery on the J-lens release's own evaluation
-items ([full findings](references/h200-results/README.md)):
+items, across four model scales ([full findings](references/h200-results/README.md)):
 
-![hit@5 by lens](references/h200-results/figs/hit5_qwen3p5_4b.png)
+![jlens vs logit lens across scale](references/h200-results/figs/hit5_scale.png)
 
-- At ≤4B the Jacobian transport is statistically indistinguishable from the
-  free logit-lens baseline on the release's own eval (paired 5 vs 1 flips on
-  93 items, n.s.); the flagship association class is ≈0 for every transport.
-- Every transport shows the identical failure profile (hit-set Jaccard ≈0.47,
-  specificity <1 against a derangement null): the instability previously
-  measured on the J-lens card is a property of **hit@k lens evaluation**,
-  not of the Jacobian transport.
+- **The Jacobian transport's advantage is scale-emergent**: statistically
+  indistinguishable from the free logit lens at ≤4B (paired sign test
+  p ≈ 0.2), ≈ +11 points hit@5 at 27B (p ≈ 0.013). found@100 is identical
+  at 27B — it ranks the same recoverable intermediates higher, it does not
+  recover new ones. The flagship association class stays weak at all scales.
+- **Every transport shows the identical failure profile at every scale**
+  (hit-set Jaccard ≈ 0.47, specificity < 1 against a derangement null): the
+  instability previously measured on the J-lens card is a property of
+  **hit@k lens evaluation**, not of the Jacobian transport.
 
 ## Contributing
 
