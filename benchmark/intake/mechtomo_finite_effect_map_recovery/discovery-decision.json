@@ -1,0 +1,14 @@
+{
+  "artifact": "stresskit_claim_candidates",
+  "schema_version": "1.0",
+  "source_bundle_digest": "sha256:4db27bfc13154a653a8ebf074eb6afa1fda8b5a798ebd5f72d342ba8853859b2",
+  "panel_execution_digest": "sha256:c0b442bc93f9fcb20f433b0c72e2ec1f6a150fe5fe59066d2416c2c0b2fa47aa",
+  "publication_state": "abstain",
+  "candidates": [],
+  "problems": [
+    "opinion 'mechtomo-extractor-a' was accepted, but one extractor cannot satisfy the frozen three-slot panel",
+    "opinion 'mechtomo-extractor-b' was rejected before AgentOpinion construction because all four evidence quotes were absent byte-for-byte from the declared source document",
+    "opinion 'mechtomo-critic' was not run because its two-accepted-extractor dependency was unsatisfied",
+    "frozen no-retry policy preserved the invalid extractor attempt and forced abstention"
+  ]
+}

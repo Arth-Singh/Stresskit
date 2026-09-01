@@ -1,0 +1,13 @@
+Candidate ID: pyvene_interchange_intervention_ioi
+
+Use exactly this preregistered sentence in the statement field; do not rewrite it:
+
+Instrument audit: serialized interchange interventions reproduce registered IOI causal effects across equivalent intervention configurations.
+
+Determine only whether the supplied pinned source documents explicitly support every material part of that sentence: serialized interchange interventions, IOI causal effects, and equivalence across intervention configurations. Set supported=false and list each missing or ambiguous part when support is incomplete. Cite exact source quotes only from:
+
+- tutorials/advanced_tutorials/IOI_Replication.ipynb
+- tutorials/advanced_tutorials/IOI_with_Mask_Intervention.ipynb
+- tutorials/advanced_tutorials/tutorial_ioi_utils.py
+
+Do not infer numerical thresholds, generalize beyond GPT-2 IOI, or compute or predict any StressKit verdict.

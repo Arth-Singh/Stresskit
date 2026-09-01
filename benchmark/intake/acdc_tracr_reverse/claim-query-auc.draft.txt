@@ -1,0 +1,40 @@
+Draft status: source-mapped, not freezeable
+Candidate ID: acdc_tracr_reverse_zero_ablation_auc
+
+Use exactly this sentence in the statement field; do not rewrite it:
+
+On the unreset Tracr-Reverse transformer, using zero-activation patching and the L2 task metric, Table 3 reports ACDC edge-level ROC AUC 1.000 and node-level ROC AUC 1.000 against the repository-defined canonical circuit.
+
+Determine only whether every material part of that sentence is explicitly supported by supplied pinned sources. Set supported=false when any part is missing or ambiguous. Do not broaden this claim to every positive threshold, perfect 15-edge displayed-circuit recovery, external-task utility, held-out generalization, pretrained models, or causal identity.
+
+Primary paper locator: arXiv:2304.14997v4, Appendix B, Table 3 (`tab:zero-auc-new`), Tracr-Reverse row under Loss; Appendix I.2 (`app:tracr-reverse`) for task metric and canonical circuit context. Source TeX anchors:
+
+- `sections/appendix.tex` lines 228-232: zero-patching detection and AUC definition;
+- `sections/appendix.tex` lines 256-275: Table 3, including zero-ablation Tracr-Reverse edge/node ACDC AUC values;
+- `sections/appendix.tex` lines 787-806: Tracr-Reverse, L2 distance, canonical circuit, and zero-activation recovery context.
+
+Code anchors at repository commit `bc99ace817974b5584b7ee203d596a8e2bbcd399`:
+
+- `acdc/tracr_task/utils.py:get_all_tracr_things`: six exhaustive Tracr-Reverse inputs, L2 metric, and patch-data construction;
+- `acdc/tracr_task/utils.py:get_tracr_reverse_edges`: 24 hook-level canonical edges used by ROC analysis;
+- `notebooks/roc_plot_generator.py`: canonical-edge loading, edge/node confusion counts, synthetic ROC endpoints, crashed-run omission, and point serialization;
+- `acdc/acdc_graphics.py:pessimistic_auc`: deterministic step-area reducer;
+- `notebooks/make_plotly_plots.py:discard_non_pareto_optimal` and `make_fig`: Pareto filtering and AUC call;
+- `notebooks/auc_tables.py`: trained/unreset-row selection and table projection.
+
+Historical launcher-range caveat: `experiments/launch_spreadsheet.py` defines 21 Tracr thresholds `10 ** linspace(-5, -1, 21)`, but its executable loop hard-codes `zero_ablation` to `[0]`. Therefore supplied code does not establish that this grid generated Table 3's zero-ablation ACDC row. Treat that grid only as implementation context. Any StressKit replication grid must be independently preregistered and explicitly labeled as a new replication protocol, not the exact historical launcher.
+
+Compilation requires a trusted reducer that:
+
+1. requires every frozen threshold/run slot, including crashes and timeouts;
+2. accepts only complete present-edge tuples plus bound run config and attestation;
+3. reconstructs edge and node confusion counts against the pinned hook-level canonical helper;
+4. adds `(FPR,TPR)=(0,0)` and `(1,1)`, applies the pinned Pareto rule, and recomputes `pessimistic_auc` for edges and nodes;
+5. rejects unknown/duplicate edges, malformed node projection, missing slots, contradictory AUC values, or any supplied scalar not equal to reducer output;
+6. runs a canonical-circuit positive control and claim-specific randomized-ground-truth negative control.
+
+Current profile blocker: StressKit v1 has calibrated single-scalar, vector-direction, ranked-output, categorical, set/graph, utility, and trajectory profiles, but no paired-scalar ROC-AUC profile whose verifier recomputes two AUCs from edge sets. Encoding this as a categorical label would hide the two numeric findings; encoding it as vector direction would test the wrong property. Unsupported profile therefore forces abstention until a calibrated paired-scalar reducer exists, or until outcome-blind intake splits edge AUC and node AUC into separately multiplicity-controlled scalar claims.
+
+Do not inspect released result JSON files. Do not use repository-shipped outputs as independent reproduction evidence.
+
+Authoring-taint notice: draft mapper accidentally exposed a repository result-table TeX row through an over-broad grep after reading the same values in the paper source. No result JSON, run artifact, or StressKit outcome was opened. Independent clean review is mandatory before panel submission or freeze.

@@ -3,6 +3,17 @@
   "status": "candidate_frame_not_frozen",
   "discovery_cutoff": "2026-08-31T00:00:00+08:00",
   "outcome_blind": true,
+  "discovery_addenda": [
+    {
+      "pass": "3b",
+      "date": "2026-09-01",
+      "artifact": "discovery/august-2026-pass3b.json",
+      "sha256": "94cf629476bc0283f40cc551f94150aef61f1d42351909156375f32861b1d8af",
+      "outcome_blind": true,
+      "scope": "Added chain of thought, reasoning trace, persona, introspection, evaluation awareness, and model organism queries; code-audited all 47 retained Tier-B papers after 3 promotions.",
+      "disposition": "Candidate addendum only. Eighteen rows have licensed authored repositories and still require manual scope review, claim mapping, dependency/license resolution, and smoke reproduction before any freeze. Four rows require fetch review. No StressKit outcomes were opened."
+    }
+  ],
   "source_manifest": "upstream_sources.json",
   "model_manifest": "model_sources.json",
   "artifact_manifest": "artifact_sources.json",
@@ -325,8 +336,8 @@
       "model_family": "Tracr compiled transformer",
       "model": "tracr-reverse",
       "task": "sequence reversal",
-      "statement_to_extract": "ACDC recovers a faithful sparse subgraph of the compiled reverse program.",
-      "claim_locator": "ACDC paper Table 1 (Tracr reverse row)",
+      "statement_to_extract": "With zero-activation patching, ACDC perfectly recovers the canonical 15-edge Tracr reverse circuit for every threshold tau > 0.",
+      "claim_locator": "ACDC paper Section 4.1 and Appendix I.2 (Figure 21b; Table 3 zero-ablation edge/node AUC)",
       "entrypoint": "acdc/main.py; acdc/tracr_task/utils.py",
       "finding_type": "edge_set",
       "perturbation_axes": [
@@ -1394,8 +1405,8 @@
       "model": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
       "task": "sentence-level counterfactual importance in math chain-of-thought",
       "statement_to_extract": "Under resampling, sentences labelled planning or uncertainty-management have higher counterfactual importance than computation sentences, and the importance ranking identifies a small set of anchor sentences per trace.",
-      "claim_locator": "Thought Anchors \u00a73 (black-box resampling importance), Fig. 2\u20133; dataset uzaymacar/math-rollouts",
-      "entrypoint": "generate_rollouts.py; analyze_rollouts.py; step_attribution.py",
+      "claim_locator": "Thought Anchors v4 \u00a72.4 and Figure 2 (single-trace case study), \u00a73.1\u20133.3 and Figure 3 (category-level counterfactual importance); dataset uzaymacar/math-rollouts@a3a2fe1eb6d52e6ef81860baff018a8df2eb8ae2",
+      "entrypoint": "analyze_rollouts.py; plots.py; prompts.py",
       "finding_type": "ranked_sentence_set_and_scalar_importance",
       "perturbation_axes": [
         "rollout_count",
@@ -1787,8 +1798,8 @@
       "model": "trained HMM observer model released with the repository",
       "task": "recovering a 32-coordinate finite-effect map from designed intervention measurements",
       "statement_to_extract": "Orthogonal matching pursuit recovers the 32-coordinate finite-effect map with Pearson r = 0.989 and held-out R-squared = 0.935.",
-      "claim_locator": "Mechanistic Tomography, Figure 2 (aggregate recovery of the 32-coordinate finite-effect map) and Table 2 (finite-scale calibration)",
-      "entrypoint": "experiments/hmm/attribution_vs_finite_step0.py; experiments/hmm/sparse_tomography_posthoc.py",
+      "claim_locator": "Mechanistic Tomography, Section 5.1 and Figure 2 (aggregate recovery of the 32-coordinate finite-effect map)",
+      "entrypoint": "experiments/hmm/nt_mi_correspondence.py; experiments/hmm/sparse_tomography_posthoc.py",
       "finding_type": "direction_and_scalar_effects",
       "perturbation_axes": [
         "measurement_design",

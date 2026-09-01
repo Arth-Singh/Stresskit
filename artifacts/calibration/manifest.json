@@ -1,0 +1,34 @@
+{
+  "schema_version": "0.1",
+  "status": "frozen_method_validation",
+  "artifacts": [
+    {
+      "path": "S1-S5-paired-hoeffding-2000.json",
+      "role": "primary",
+      "master_seed": 20260824,
+      "sha256": "cb41d25b03a8f8a707199a9f572f3f494bb2ea74f7fb0189338b00755d592688",
+      "source_sha256": "7eb73250af5bad11ab06506b3eaf43c576b01277e1846dbbc8e07eb13f2fdca1"
+    },
+    {
+      "path": "S1-S5-paired-hoeffding-2000-replication.json",
+      "role": "disjoint_seed_replication",
+      "master_seed": 20260825,
+      "sha256": "04370e3f4e5204ab4920a20ab40f121d9eb5c06ce501e977432cfbb8d6debf1a",
+      "source_sha256": "7eb73250af5bad11ab06506b3eaf43c576b01277e1846dbbc8e07eb13f2fdca1"
+    },
+    {
+      "path": "S6-S9-2000.json",
+      "role": "primary",
+      "master_seed": 20260824,
+      "sha256": "3b2fd8cb3677599ed05065cc35ca1f6d20394cec5071f9a8c5c36ead592f759e",
+      "source_sha256": "a4c22a578d9d81ce3270bf1ba03a073fc4d7ae00bbe1df5c9891c4277a499741"
+    },
+    {
+      "path": "S6-S9-2000-replication.json",
+      "role": "disjoint_seed_replication",
+      "master_seed": 20260825,
+      "sha256": "38e61e9c985aa45d9a19d2f3c2dd04026ed5fa39c361713bbca07956638d3e4a",
+      "source_sha256": "a4c22a578d9d81ce3270bf1ba03a073fc4d7ae00bbe1df5c9891c4277a499741"
+    }
+  ]
+}

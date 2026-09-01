@@ -1,0 +1,271 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Arth-Singh/Stresskit/blob/main/src/stresskit/schemas/audit_v1.json",
+  "title": "StressKit v1 audit artifacts",
+  "oneOf": [
+    {"$ref": "#/$defs/sourceBundle"},
+    {"$ref": "#/$defs/agentOpinion"},
+    {"$ref": "#/$defs/claimRecord"},
+    {"$ref": "#/$defs/auditSpec"},
+    {"$ref": "#/$defs/resourcePlan"},
+    {"$ref": "#/$defs/runAttestation"},
+    {"$ref": "#/$defs/auditBundle"},
+    {"$ref": "#/$defs/auditDecision"}
+  ],
+  "$defs": {
+    "digest": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "header": {
+      "type": "object",
+      "required": ["artifact", "schema_version"],
+      "properties": {"schema_version": {"const": "1.0"}}
+    },
+    "signature": {
+      "type": "object",
+      "required": ["algorithm", "key_id", "value"],
+      "properties": {
+        "algorithm": {"enum": ["ed25519", "hmac-sha256"]},
+        "key_id": {"type": "string", "minLength": 1},
+        "value": {"type": "string", "minLength": 64}
+      },
+      "additionalProperties": false
+    },
+    "contentRef": {
+      "type": "object",
+      "required": ["digest", "size", "media_type", "role"],
+      "properties": {
+        "digest": {"$ref": "#/$defs/digest"},
+        "size": {"type": "integer", "minimum": 0},
+        "media_type": {"type": "string", "minLength": 1},
+        "role": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "sourceBundle": {
+      "allOf": [{"$ref": "#/$defs/header"}],
+      "type": "object",
+      "required": ["artifact", "schema_version", "bundle_id", "created_at", "documents", "metadata"],
+      "properties": {
+        "artifact": {"const": "stresskit_source_bundle"},
+        "schema_version": {"const": "1.0"},
+        "bundle_id": {"type": "string", "minLength": 1},
+        "created_at": {"type": "string", "minLength": 1},
+        "documents": {
+          "type": "array", "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["document_id", "locator", "source_digest", "license"],
+            "properties": {
+              "document_id": {"type": "string", "minLength": 1},
+              "locator": {"type": "string", "minLength": 1},
+              "source_digest": {"$ref": "#/$defs/digest"},
+              "extracted_text_digest": {"$ref": "#/$defs/digest"},
+              "license": {
+                "type": "object",
+                "required": ["status", "identifier", "evidence_digest"],
+                "properties": {
+                  "status": {"enum": ["verified_compatible", "unresolved", "incompatible"]},
+                  "identifier": {"type": "string", "minLength": 1},
+                  "evidence_digest": {"$ref": "#/$defs/digest"}
+                }
+              }
+            }
+          }
+        },
+        "metadata": {"type": "object"}
+      }
+    },
+    "agentOpinion": {
+      "allOf": [{"$ref": "#/$defs/header"}],
+      "type": "object",
+      "required": ["artifact", "schema_version", "opinion_id", "role", "provider", "model", "model_family", "source_bundle_digest", "model_digest", "prompt_digest", "request_digest", "statement", "evidence_anchors", "supported", "prompt_injection_detected", "issues"],
+      "properties": {
+        "artifact": {"const": "stresskit_agent_opinion"},
+        "schema_version": {"const": "1.0"},
+        "opinion_id": {"type": "string", "minLength": 1},
+        "role": {"enum": ["extractor", "critic"]},
+        "provider": {"type": "string", "minLength": 1},
+        "model": {"type": "string", "minLength": 1},
+        "model_family": {"type": "string", "minLength": 1},
+        "source_bundle_digest": {"$ref": "#/$defs/digest"},
+        "model_digest": {"$ref": "#/$defs/digest"},
+        "prompt_digest": {"$ref": "#/$defs/digest"},
+        "request_digest": {"$ref": "#/$defs/digest"},
+        "statement": {"type": "string", "minLength": 1},
+        "evidence_anchors": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["document_id", "locator", "start", "end", "quote_digest", "source_digest", "text_digest"],
+            "properties": {
+              "document_id": {"type": "string", "minLength": 1},
+              "locator": {"type": "string", "minLength": 1},
+              "start": {"type": "integer", "minimum": 0},
+              "end": {"type": "integer", "minimum": 1},
+              "quote_digest": {"$ref": "#/$defs/digest"},
+              "source_digest": {"$ref": "#/$defs/digest"},
+              "text_digest": {"$ref": "#/$defs/digest"}
+            }
+          }
+        },
+        "supported": {"type": "boolean"},
+        "prompt_injection_detected": {"type": "boolean"},
+        "issues": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "claimRecord": {
+      "allOf": [{"$ref": "#/$defs/header"}],
+      "type": "object",
+      "required": ["artifact", "schema_version", "claim_id", "statement", "source_bundle_digest", "source_digest", "claim_locator", "finding_type", "profile_id", "reducer", "code_map", "controls", "task", "agent_opinion_digests", "metadata"],
+      "properties": {
+        "artifact": {"const": "stresskit_claim_record"},
+        "schema_version": {"const": "1.0"},
+        "claim_id": {"type": "string", "minLength": 1},
+        "statement": {"type": "string", "minLength": 1},
+        "source_bundle_digest": {"$ref": "#/$defs/digest"},
+        "source_digest": {"$ref": "#/$defs/digest"},
+        "claim_locator": {
+          "type": "object",
+          "required": ["document_id", "locator", "start", "end", "quote_digest"],
+          "properties": {
+            "document_id": {"type": "string", "minLength": 1},
+            "locator": {"type": "string", "minLength": 1},
+            "start": {"type": "integer", "minimum": 0},
+            "end": {"type": "integer", "minimum": 1},
+            "quote_digest": {"$ref": "#/$defs/digest"}
+          }
+        },
+        "finding_type": {"enum": ["set_graph", "categorical", "scalar_effect", "vector_direction", "ranked_output", "utility", "cot_trajectory"]},
+        "profile_id": {"type": "string", "minLength": 1},
+        "reducer": {"type": "object"},
+        "code_map": {
+          "type": "object",
+          "required": ["repository_digest", "revision", "entrypoints", "dependency_manifest_digest", "build_recipe_digest"],
+          "properties": {
+            "repository_digest": {"$ref": "#/$defs/digest"},
+            "revision": {"type": "string", "minLength": 1},
+            "entrypoints": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+            "dependency_manifest_digest": {"$ref": "#/$defs/digest"},
+            "build_recipe_digest": {"$ref": "#/$defs/digest"}
+          }
+        },
+        "controls": {"type": "object", "required": ["positive", "negative"]},
+        "task": {"type": "object"},
+        "agent_opinion_digests": {"type": "array", "minItems": 3, "items": {"$ref": "#/$defs/digest"}},
+        "metadata": {"type": "object"}
+      }
+    },
+    "auditSpec": {
+      "allOf": [{"$ref": "#/$defs/header"}],
+      "type": "object",
+      "required": ["artifact", "schema_version", "audit_id", "claim_record", "claim_record_digest", "profile_id", "profile_digest", "design", "run_manifest", "manifest_digest", "stopping_rule", "multiplicity_family", "reproducibility", "frozen_at", "external_validation"],
+      "properties": {
+        "artifact": {"const": "stresskit_audit_spec"},
+        "schema_version": {"const": "1.0"},
+        "audit_id": {"type": "string", "minLength": 1},
+        "claim_record": {"$ref": "#/$defs/claimRecord"},
+        "claim_record_digest": {"$ref": "#/$defs/digest"},
+        "profile_id": {"type": "string", "minLength": 1},
+        "profile_digest": {"$ref": "#/$defs/digest"},
+        "design": {"type": "object"},
+        "run_manifest": {"type": "array", "minItems": 1, "items": {"type": "object"}},
+        "manifest_digest": {"$ref": "#/$defs/digest"},
+        "stopping_rule": {"type": "object", "properties": {"type": {"const": "fixed"}}},
+        "multiplicity_family": {"type": "object", "properties": {"method": {"const": "holm-bonferroni"}}},
+        "reproducibility": {"type": "object", "properties": {"level": {"enum": ["bitwise", "numeric_with_tolerance", "statistical"]}}},
+        "frozen_at": {"type": "string", "minLength": 1},
+        "external_validation": {"const": "not obtained"}
+      }
+    },
+    "resourcePlan": {
+      "allOf": [{"$ref": "#/$defs/header"}],
+      "type": "object",
+      "required": ["artifact", "schema_version", "plan_id", "audit_spec_digest", "hardware_class", "resources", "sandbox", "allowed_outputs", "created_at", "signature"],
+      "properties": {
+        "artifact": {"const": "stresskit_resource_plan"},
+        "schema_version": {"const": "1.0"},
+        "plan_id": {"type": "string", "minLength": 1},
+        "audit_spec_digest": {"$ref": "#/$defs/digest"},
+        "hardware_class": {"type": "string", "minLength": 1},
+        "resources": {
+          "type": "object",
+          "required": ["gpu_count", "cpu_count", "wall_time_seconds", "storage_bytes", "run_slots"],
+          "properties": {
+            "gpu_count": {"type": "integer", "minimum": 0},
+            "cpu_count": {"type": "integer", "minimum": 1},
+            "wall_time_seconds": {"type": "integer", "minimum": 1},
+            "storage_bytes": {"type": "integer", "minimum": 1},
+            "run_slots": {"type": "integer", "minimum": 1}
+          }
+        },
+        "sandbox": {"type": "object"},
+        "allowed_outputs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "created_at": {"type": "string", "minLength": 1},
+        "signature": {"$ref": "#/$defs/signature"}
+      }
+    },
+    "runAttestation": {
+      "allOf": [{"$ref": "#/$defs/header"}],
+      "type": "object",
+      "required": ["artifact", "schema_version", "slot_id", "status", "audit_spec_digest", "resource_plan_digest", "executor_id", "hardware_class", "dependency_id", "cluster_id", "isolation", "started_at", "finished_at", "signature"],
+      "properties": {
+        "artifact": {"const": "stresskit_run_attestation"},
+        "schema_version": {"const": "1.0"},
+        "slot_id": {"type": "string", "minLength": 1},
+        "status": {"enum": ["success", "failed", "crashed", "timed_out", "missing"]},
+        "audit_spec_digest": {"$ref": "#/$defs/digest"},
+        "resource_plan_digest": {"$ref": "#/$defs/digest"},
+        "executor_id": {"type": "string", "minLength": 1},
+        "hardware_class": {"type": "string", "minLength": 1},
+        "dependency_id": {"type": "string", "minLength": 1},
+        "cluster_id": {"type": "string", "minLength": 1},
+        "isolation": {"type": "object"},
+        "started_at": {"type": "string", "minLength": 1},
+        "finished_at": {"type": "string", "minLength": 1},
+        "output_digest": {"$ref": "#/$defs/digest"},
+        "finding_digest": {"$ref": "#/$defs/digest"},
+        "error_digest": {"$ref": "#/$defs/digest"},
+        "signature": {"$ref": "#/$defs/signature"}
+      }
+    },
+    "auditDecision": {
+      "allOf": [{"$ref": "#/$defs/header"}],
+      "type": "object",
+      "required": ["artifact", "schema_version", "claim_id", "audit_id", "status", "publication_state", "reproduction", "stability_specificity", "utility", "generalization", "evidence_confidence", "primary_checks", "reasons", "external_validation"],
+      "properties": {
+        "artifact": {"const": "stresskit_audit_decision"},
+        "schema_version": {"const": "1.0"},
+        "claim_id": {"type": "string", "minLength": 1},
+        "audit_id": {"type": "string", "minLength": 1},
+        "status": {"enum": ["pass", "audit_failure", "reproduction_failure", "inconclusive", "protocol_deviation", "excluded", "abstain"]},
+        "publication_state": {"enum": ["final", "abstain"]},
+        "reproduction": {"type": "object"},
+        "stability_specificity": {"type": "object"},
+        "utility": {"type": "object"},
+        "generalization": {"type": "object"},
+        "evidence_confidence": {"type": "object"},
+        "primary_checks": {"type": "object"},
+        "reasons": {"type": "array", "items": {"type": "string"}},
+        "external_validation": {"const": "not obtained"}
+      }
+    },
+    "auditBundle": {
+      "allOf": [{"$ref": "#/$defs/header"}],
+      "type": "object",
+      "required": ["artifact", "schema_version", "bundle_id", "audit_spec", "audit_spec_digest", "resource_plan", "resource_plan_digest", "attestations", "content", "created_at"],
+      "properties": {
+        "artifact": {"const": "stresskit_audit_bundle"},
+        "schema_version": {"const": "1.0"},
+        "bundle_id": {"type": "string", "minLength": 1},
+        "audit_spec": {"$ref": "#/$defs/auditSpec"},
+        "audit_spec_digest": {"$ref": "#/$defs/digest"},
+        "resource_plan": {"$ref": "#/$defs/resourcePlan"},
+        "resource_plan_digest": {"$ref": "#/$defs/digest"},
+        "attestations": {"type": "array", "items": {"$ref": "#/$defs/runAttestation"}},
+        "content": {"type": "array", "items": {"$ref": "#/$defs/contentRef"}},
+        "decision": {"$ref": "#/$defs/auditDecision"},
+        "created_at": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}

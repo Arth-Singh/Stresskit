@@ -1,0 +1,15 @@
+{
+  "artifact": "stresskit_claim_candidates",
+  "schema_version": "1.0",
+  "source_bundle_digest": "sha256:e87be2879d688fbb5e4118495d49474d54e85fbe1e111c6f18dd8cf440f16ae9",
+  "panel_execution_digest": "sha256:1b9a12bfb5f1f8a0a6c1d47eac88d11e1dc45b0f1b0d0f4f13848790eaebcba1",
+  "publication_state": "abstain",
+  "candidates": [],
+  "problems": [
+    "opinion 'acdc-tracr-reverse-extractor-a' was rejected before AgentOpinion construction because three of ten evidence quotes were absent byte-for-byte from their declared source document",
+    "opinion 'acdc-tracr-reverse-extractor-b' was rejected before AgentOpinion construction because its completion stopped at the frozen max-token limit",
+    "opinion 'acdc-tracr-reverse-critic' was not run because its two-accepted-extractor dependency was unsatisfied",
+    "frozen no-retry policy preserved both invalid attempts and forced abstention",
+    "independent source mapping also leaves the unbounded positive-threshold wording and 15 displayed versus 24 hook-level edge representation unresolved"
+  ]
+}

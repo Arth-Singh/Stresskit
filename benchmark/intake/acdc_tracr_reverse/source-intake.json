@@ -1,0 +1,225 @@
+{
+  "artifact": "stresskit_source_intake_manifest",
+  "bundle_id": "acdc-tracr-reverse-source-v1",
+  "created_at": "2026-09-01T18:08:41Z",
+  "documents": [
+    {
+      "document_id": "acdc-paper-v4-pdf",
+      "expected_digest": "sha256:821191725252e8a2dc666c68a3e5dd2b684900fb2c80de041d22f17cf2956010",
+      "expected_extracted_text_digest": "sha256:30a383d731de38c98b16e86669fbc37d0e0c05d3937e4824b9698a1403a6294e",
+      "extracted_text_path": "../../../.stresskit/intake/acdc_tracr_reverse/extracted/arxiv-2304.14997v4.txt",
+      "kind": "paper",
+      "license": {
+        "evidence": {
+          "checked_at": "2026-09-01T18:08:41Z",
+          "reviewed_by": "StressKit autonomous intake",
+          "scope": "arXiv v4 identifies this manuscript as Creative Commons Attribution 4.0.",
+          "source": "https://arxiv.org/abs/2304.14997v4"
+        },
+        "identifier": "CC-BY-4.0",
+        "status": "verified_compatible"
+      },
+      "locator": "https://arxiv.org/pdf/2304.14997v4",
+      "media_type": "application/pdf",
+      "path": "../../../.stresskit/intake/acdc_tracr_reverse/raw/arxiv-2304.14997v4.pdf"
+    },
+    {
+      "document_id": "acdc-paper-v4-source",
+      "expected_digest": "sha256:02af165b2208750c326c0e76001ea1e05737b54d43c4bb43acad381b00fc1337",
+      "expected_extracted_text_digest": "sha256:faf0ff09aa031d947dc04cccfc51c83a5e3821f5b385a3beafe34b8ce8256e5e",
+      "extracted_text_path": "../../../.stresskit/intake/acdc_tracr_reverse/extracted/appendix.tex.txt",
+      "kind": "paper",
+      "license": {
+        "evidence": {
+          "checked_at": "2026-09-01T18:08:41Z",
+          "reviewed_by": "StressKit autonomous intake",
+          "scope": "This is primary TeX from arXiv v4 under page-declared CC BY 4.0.",
+          "source": "https://arxiv.org/src/2304.14997v4"
+        },
+        "identifier": "CC-BY-4.0",
+        "status": "verified_compatible"
+      },
+      "locator": "https://arxiv.org/src/2304.14997v4#sections/appendix.tex",
+      "media_type": "application/gzip",
+      "path": "../../../.stresskit/intake/acdc_tracr_reverse/raw/arxiv-2304.14997v4-source.tar.gz"
+    },
+    {
+      "document_id": "acdc-main",
+      "expected_digest": "sha256:e47ce7a7a4d807f9293311c16df8a67414cc0812ad5f0af0cb21743195b9b138",
+      "expected_extracted_text_digest": "sha256:e47ce7a7a4d807f9293311c16df8a67414cc0812ad5f0af0cb21743195b9b138",
+      "extracted_text_path": "../../../.stresskit/intake/acdc_tracr_reverse/extracted/main.py.txt",
+      "kind": "repository",
+      "license": {
+        "evidence": {
+          "checked_at": "2026-09-01T18:08:41Z",
+          "reviewed_by": "StressKit autonomous intake",
+          "scope": "Pinned repository LICENSE is MIT; file has no narrower header.",
+          "source": "https://raw.githubusercontent.com/ArthurConmy/Automatic-Circuit-Discovery/bc99ace817974b5584b7ee203d596a8e2bbcd399/LICENSE"
+        },
+        "identifier": "MIT",
+        "status": "verified_compatible"
+      },
+      "locator": "https://github.com/ArthurConmy/Automatic-Circuit-Discovery/blob/bc99ace817974b5584b7ee203d596a8e2bbcd399/acdc/main.py",
+      "media_type": "text/x-python; charset=utf-8",
+      "path": "../../../.stresskit/upstreams/acdc/acdc/main.py"
+    },
+    {
+      "document_id": "acdc-tracr-utils",
+      "expected_digest": "sha256:046b65438e7560bdbcc1ae9397df82fad66a2a3b4f30eef019b2190035e55203",
+      "expected_extracted_text_digest": "sha256:046b65438e7560bdbcc1ae9397df82fad66a2a3b4f30eef019b2190035e55203",
+      "extracted_text_path": "../../../.stresskit/intake/acdc_tracr_reverse/extracted/tracr-utils.py.txt",
+      "kind": "repository",
+      "license": {
+        "evidence": {
+          "checked_at": "2026-09-01T18:08:41Z",
+          "reviewed_by": "StressKit autonomous intake",
+          "scope": "Pinned repository LICENSE is MIT; file has no narrower header.",
+          "source": "https://raw.githubusercontent.com/ArthurConmy/Automatic-Circuit-Discovery/bc99ace817974b5584b7ee203d596a8e2bbcd399/LICENSE"
+        },
+        "identifier": "MIT",
+        "status": "verified_compatible"
+      },
+      "locator": "https://github.com/ArthurConmy/Automatic-Circuit-Discovery/blob/bc99ace817974b5584b7ee203d596a8e2bbcd399/acdc/tracr_task/utils.py",
+      "media_type": "text/x-python; charset=utf-8",
+      "path": "../../../.stresskit/upstreams/acdc/acdc/tracr_task/utils.py"
+    },
+    {
+      "document_id": "acdc-algorithm",
+      "expected_digest": "sha256:47aab4ee931db4945b97b9dcf86212841d08fb2668cc70ca1b14bd030f1665ba",
+      "expected_extracted_text_digest": "sha256:47aab4ee931db4945b97b9dcf86212841d08fb2668cc70ca1b14bd030f1665ba",
+      "extracted_text_path": "../../../.stresskit/intake/acdc_tracr_reverse/extracted/TLACDCExperiment.py.txt",
+      "kind": "repository",
+      "license": {
+        "evidence": {
+          "checked_at": "2026-09-01T18:08:41Z",
+          "reviewed_by": "StressKit autonomous intake",
+          "scope": "Pinned repository LICENSE is MIT; file has no narrower header.",
+          "source": "https://raw.githubusercontent.com/ArthurConmy/Automatic-Circuit-Discovery/bc99ace817974b5584b7ee203d596a8e2bbcd399/LICENSE"
+        },
+        "identifier": "MIT",
+        "status": "verified_compatible"
+      },
+      "locator": "https://github.com/ArthurConmy/Automatic-Circuit-Discovery/blob/bc99ace817974b5584b7ee203d596a8e2bbcd399/acdc/TLACDCExperiment.py",
+      "media_type": "text/x-python; charset=utf-8",
+      "path": "../../../.stresskit/upstreams/acdc/acdc/TLACDCExperiment.py"
+    },
+    {
+      "document_id": "acdc-metric-reducers",
+      "expected_digest": "sha256:6732c1f46dc1dc33b1f0a2955965c2a5b5cb7495e77748d3054480b83f8385db",
+      "expected_extracted_text_digest": "sha256:6732c1f46dc1dc33b1f0a2955965c2a5b5cb7495e77748d3054480b83f8385db",
+      "extracted_text_path": "../../../.stresskit/intake/acdc_tracr_reverse/extracted/acdc_utils.py.txt",
+      "kind": "repository",
+      "license": {
+        "evidence": {
+          "checked_at": "2026-09-01T18:08:41Z",
+          "reviewed_by": "StressKit autonomous intake",
+          "scope": "Pinned repository LICENSE is MIT; file has no narrower header.",
+          "source": "https://raw.githubusercontent.com/ArthurConmy/Automatic-Circuit-Discovery/bc99ace817974b5584b7ee203d596a8e2bbcd399/LICENSE"
+        },
+        "identifier": "MIT",
+        "status": "verified_compatible"
+      },
+      "locator": "https://github.com/ArthurConmy/Automatic-Circuit-Discovery/blob/bc99ace817974b5584b7ee203d596a8e2bbcd399/acdc/acdc_utils.py",
+      "media_type": "text/x-python; charset=utf-8",
+      "path": "../../../.stresskit/upstreams/acdc/acdc/acdc_utils.py"
+    },
+    {
+      "document_id": "acdc-sweep-launcher",
+      "expected_digest": "sha256:87079aa28a367496d5ee13567ec50758084c473c81ea1b062643b43d14d88b65",
+      "expected_extracted_text_digest": "sha256:87079aa28a367496d5ee13567ec50758084c473c81ea1b062643b43d14d88b65",
+      "extracted_text_path": "../../../.stresskit/intake/acdc_tracr_reverse/extracted/launch_spreadsheet.py.txt",
+      "kind": "repository",
+      "license": {
+        "evidence": {
+          "checked_at": "2026-09-01T18:08:41Z",
+          "reviewed_by": "StressKit autonomous intake",
+          "scope": "Pinned repository LICENSE is MIT; file has no narrower header.",
+          "source": "https://raw.githubusercontent.com/ArthurConmy/Automatic-Circuit-Discovery/bc99ace817974b5584b7ee203d596a8e2bbcd399/LICENSE"
+        },
+        "identifier": "MIT",
+        "status": "verified_compatible"
+      },
+      "locator": "https://github.com/ArthurConmy/Automatic-Circuit-Discovery/blob/bc99ace817974b5584b7ee203d596a8e2bbcd399/experiments/launch_spreadsheet.py",
+      "media_type": "text/x-python; charset=utf-8",
+      "path": "../../../.stresskit/upstreams/acdc/experiments/launch_spreadsheet.py"
+    },
+    {
+      "document_id": "acdc-paper-analysis",
+      "expected_digest": "sha256:69ec8fd6039dd1c75c580710ca7dd0b3290bf1baf1f48929b78d0e5626c146c2",
+      "expected_extracted_text_digest": "sha256:69ec8fd6039dd1c75c580710ca7dd0b3290bf1baf1f48929b78d0e5626c146c2",
+      "extracted_text_path": "../../../.stresskit/intake/acdc_tracr_reverse/extracted/roc_plot_generator.py.txt",
+      "kind": "repository",
+      "license": {
+        "evidence": {
+          "checked_at": "2026-09-01T18:08:41Z",
+          "reviewed_by": "StressKit autonomous intake",
+          "scope": "Pinned repository LICENSE is MIT; file has no narrower header.",
+          "source": "https://raw.githubusercontent.com/ArthurConmy/Automatic-Circuit-Discovery/bc99ace817974b5584b7ee203d596a8e2bbcd399/LICENSE"
+        },
+        "identifier": "MIT",
+        "status": "verified_compatible"
+      },
+      "locator": "https://github.com/ArthurConmy/Automatic-Circuit-Discovery/blob/bc99ace817974b5584b7ee203d596a8e2bbcd399/notebooks/roc_plot_generator.py",
+      "media_type": "text/x-python; charset=utf-8",
+      "path": "../../../.stresskit/upstreams/acdc/notebooks/roc_plot_generator.py"
+    },
+    {
+      "document_id": "acdc-pyproject",
+      "expected_digest": "sha256:cbd7f36d8cb9c9c23e0f4e7236a62bc706bde7926a04ee6e2e2ed958063336b7",
+      "expected_extracted_text_digest": "sha256:cbd7f36d8cb9c9c23e0f4e7236a62bc706bde7926a04ee6e2e2ed958063336b7",
+      "extracted_text_path": "../../../.stresskit/intake/acdc_tracr_reverse/extracted/pyproject.toml.txt",
+      "kind": "dependency",
+      "license": {
+        "evidence": {
+          "checked_at": "2026-09-01T18:08:41Z",
+          "reviewed_by": "StressKit autonomous intake",
+          "scope": "Repository-authored dependency metadata under MIT; third-party package licenses remain separately governed.",
+          "source": "https://raw.githubusercontent.com/ArthurConmy/Automatic-Circuit-Discovery/bc99ace817974b5584b7ee203d596a8e2bbcd399/LICENSE"
+        },
+        "identifier": "MIT",
+        "status": "verified_compatible"
+      },
+      "locator": "https://github.com/ArthurConmy/Automatic-Circuit-Discovery/blob/bc99ace817974b5584b7ee203d596a8e2bbcd399/pyproject.toml",
+      "media_type": "text/plain; charset=utf-8",
+      "path": "../../../.stresskit/upstreams/acdc/pyproject.toml"
+    },
+    {
+      "document_id": "acdc-poetry-lock",
+      "expected_digest": "sha256:8725dc416df6a82d80dbc4e5238215bb920ca302e8dda4392a2652ad3f92c2e2",
+      "expected_extracted_text_digest": "sha256:8725dc416df6a82d80dbc4e5238215bb920ca302e8dda4392a2652ad3f92c2e2",
+      "extracted_text_path": "../../../.stresskit/intake/acdc_tracr_reverse/extracted/poetry.lock.txt",
+      "kind": "dependency",
+      "license": {
+        "evidence": {
+          "checked_at": "2026-09-01T18:08:41Z",
+          "reviewed_by": "StressKit autonomous intake",
+          "scope": "Repository-authored lock metadata under MIT; locked third-party distributions retain their own licenses.",
+          "source": "https://raw.githubusercontent.com/ArthurConmy/Automatic-Circuit-Discovery/bc99ace817974b5584b7ee203d596a8e2bbcd399/LICENSE"
+        },
+        "identifier": "MIT",
+        "status": "verified_compatible"
+      },
+      "locator": "https://github.com/ArthurConmy/Automatic-Circuit-Discovery/blob/bc99ace817974b5584b7ee203d596a8e2bbcd399/poetry.lock",
+      "media_type": "text/plain; charset=utf-8",
+      "path": "../../../.stresskit/upstreams/acdc/poetry.lock"
+    }
+  ],
+  "metadata": {
+    "artifact_inventory_digest": "sha256:6169395eeaae574845fed24fc8b91a265258d97bda1d0eb076f2086c6d1b424f",
+    "candidate_id": "acdc_tracr_reverse",
+    "claim_query_digest": "sha256:385d031f078995096bd291310c58a6159aed64623fdbfd336dadc7861e4f90a1",
+    "dependency_profile": "upstream_poetry_lock_with_exact_archived_jaxlib_retrieval",
+    "extraction_profile": "poppler_pdftotext_26.01.0_layout_nopgbrk_utf8_and_source_byte_identity_v1",
+    "paper_version": "arXiv:2304.14997v4",
+    "registered_claim_locator": "Section 4.1 and Appendix I.2, Figure 21b/caption and Table 3",
+    "repository": "https://github.com/ArthurConmy/Automatic-Circuit-Discovery",
+    "repository_archive_digest": "sha256:cf69fb2945729a409870f54f6c7c8b6ebc45c9b46405bbb6a86e00b6309ea146",
+    "repository_commit": "bc99ace817974b5584b7ee203d596a8e2bbcd399",
+    "repository_tree": "e22aed97ac8253e50b0c535bc637796cc71fec98",
+    "software_license_digest": "sha256:16c66e455dff5897c2ea5ab783bf49fd7fd63cbefb7bf1dece191d6729c21f87",
+    "tracr_commit": "e75ecdaec12bf2d831a60e54d4270e8fa31fb537",
+    "tracr_license_digest": "sha256:cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+  },
+  "outcome_blind": true,
+  "schema_version": "1.0"
+}

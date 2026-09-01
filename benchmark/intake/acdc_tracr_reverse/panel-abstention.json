@@ -1,0 +1,799 @@
+{
+  "accepted_opinions": [],
+  "artifact": "stresskit_agent_panel_execution_abstention",
+  "claim_id": "acdc_tracr_reverse",
+  "discovery_decision": {
+    "artifact": "stresskit_claim_candidates",
+    "candidates": [],
+    "panel_execution_digest": "sha256:1b9a12bfb5f1f8a0a6c1d47eac88d11e1dc45b0f1b0d0f4f13848790eaebcba1",
+    "problems": [
+      "opinion 'acdc-tracr-reverse-extractor-a' was rejected before AgentOpinion construction because three of ten evidence quotes were absent byte-for-byte from their declared source document",
+      "opinion 'acdc-tracr-reverse-extractor-b' was rejected before AgentOpinion construction because its completion stopped at the frozen max-token limit",
+      "opinion 'acdc-tracr-reverse-critic' was not run because its two-accepted-extractor dependency was unsatisfied",
+      "frozen no-retry policy preserved both invalid attempts and forced abstention",
+      "independent source mapping also leaves the unbounded positive-threshold wording and 15 displayed versus 24 hook-level edge representation unresolved"
+    ],
+    "publication_state": "abstain",
+    "schema_version": "1.0",
+    "source_bundle_digest": "sha256:e87be2879d688fbb5e4118495d49474d54e85fbe1e111c6f18dd8cf440f16ae9"
+  },
+  "discovery_decision_digest": "sha256:0d8e9a121b2535f3847f00476234e57255ad23ba4da6f05733e3061d8951d46b",
+  "outcome_blind": true,
+  "panel_closure": [
+    {
+      "digest": "sha256:02af165b2208750c326c0e76001ea1e05737b54d43c4bb43acad381b00fc1337",
+      "media_type": "application/gzip",
+      "role": "source:paper",
+      "size": 17974250
+    },
+    {
+      "digest": "sha256:046b65438e7560bdbcc1ae9397df82fad66a2a3b4f30eef019b2190035e55203",
+      "media_type": "text/x-python; charset=utf-8",
+      "role": "source:repository",
+      "size": 19274
+    },
+    {
+      "digest": "sha256:0aff677c6b6581599bc8fa578772ccd3d7be9eb96c0ebf8b2eaf251ac1b2a801",
+      "media_type": "application/json",
+      "role": "license_evidence",
+      "size": 490
+    },
+    {
+      "digest": "sha256:0d8e9a121b2535f3847f00476234e57255ad23ba4da6f05733e3061d8951d46b",
+      "media_type": "application/json",
+      "role": "claim_candidates",
+      "size": 999
+    },
+    {
+      "digest": "sha256:0fd462583e51460e00e26f92e8c230760d80a896a22bda0157ec20747cd01f3a",
+      "media_type": "application/json",
+      "role": "license_evidence",
+      "size": 445
+    },
+    {
+      "digest": "sha256:16c66e455dff5897c2ea5ab783bf49fd7fd63cbefb7bf1dece191d6729c21f87",
+      "media_type": "application/octet-stream",
+      "role": "closure_input",
+      "size": 1083
+    },
+    {
+      "digest": "sha256:1b9a12bfb5f1f8a0a6c1d47eac88d11e1dc45b0f1b0d0f4f13848790eaebcba1",
+      "media_type": "application/json",
+      "role": "agent_panel_execution",
+      "size": 1313
+    },
+    {
+      "digest": "sha256:20b68192b7873cc36db842190715621986e5b2099a7b2d865eddc8606028187d",
+      "media_type": "text/plain; charset=utf-8",
+      "role": "agent_evidence_quote_verified",
+      "size": 86
+    },
+    {
+      "digest": "sha256:25b9b13996f997a19638632334694c746e79dee850b3f6dc124d49d585e2c030",
+      "media_type": "text/plain; charset=utf-8",
+      "role": "agent_evidence_quote_verified",
+      "size": 46
+    },
+    {
+      "digest": "sha256:302e85a81f3f709a242234778953f13c0b20355cb0bc6363b4895c1cbbe0ca13",
+      "media_type": "text/plain; charset=utf-8",
+      "role": "agent_evidence_quote_verified",
+      "size": 52
+    },
+    {
+      "digest": "sha256:30a383d731de38c98b16e86669fbc37d0e0c05d3937e4824b9698a1403a6294e",
+      "media_type": "text/plain; charset=utf-8",
+      "role": "extracted_text",
+      "size": 147593
+    },
+    {
+      "digest": "sha256:34eda83b2d9a904d6e4e1836b3da423db150dda582e14b4b93821f42f8bb0ad7",
+      "media_type": "application/json",
+      "role": "agent_prompt",
+      "size": 892682
+    },
+    {
+      "digest": "sha256:385d031f078995096bd291310c58a6159aed64623fdbfd336dadc7861e4f90a1",
+      "media_type": "application/octet-stream",
+      "role": "closure_input",
+      "size": 1749
+    },
+    {
+      "digest": "sha256:389d07978cd4d98a9a6819784524c2f72218c3a05e617cad1db709e19b230f01",
+      "media_type": "application/json",
+      "role": "agent_route_binding",
+      "size": 1471
+    },
+    {
+      "digest": "sha256:3d1eff72381a33f6a72ee19dd917b8b6e3033765e2b95e35708fb31fa0b8f03a",
+      "media_type": "application/json",
+      "role": "agent_attempt_record",
+      "size": 1351
+    },
+    {
+      "digest": "sha256:440f7dacd47c65cbd53c567c1a952d682e13d3a6cdcb2046897ba511711b24e4",
+      "media_type": "text/plain; charset=utf-8",
+      "role": "agent_evidence_quote_verified",
+      "size": 146
+    },
+    {
+      "digest": "sha256:44f8dfe410c3980cf90be916137f3a90ea41949e33e42c9e40e7acb755a035e8",
+      "media_type": "application/json",
+      "role": "agent_prompt",
+      "size": 892682
+    },
+    {
+      "digest": "sha256:47aab4ee931db4945b97b9dcf86212841d08fb2668cc70ca1b14bd030f1665ba",
+      "media_type": "text/x-python; charset=utf-8",
+      "role": "source:repository",
+      "size": 42230
+    },
+    {
+      "digest": "sha256:499a54e0374a984e5450d004b6ecbf83761f914704cfa331fdc678321e254542",
+      "media_type": "text/plain; charset=utf-8",
+      "role": "agent_evidence_quote_rejected",
+      "size": 115
+    },
+    {
+      "digest": "sha256:4da67829b23d2d92390188c27f7fe3b811a94ef8e528bd86ad0a51b5bfa6bb59",
+      "media_type": "application/json",
+      "role": "license_evidence",
+      "size": 450
+    },
+    {
+      "digest": "sha256:51deaf117043dff9369c3c265c6d0c9628bcb26fd5a6bbfafee365b3c49a6782",
+      "media_type": "application/json",
+      "role": "agent_raw_response",
+      "size": 28264
+    },
+    {
+      "digest": "sha256:5a8b8fedd5bf101ad768d46dcaadcb70701931e63951a40751234e8ccb3b2c1b",
+      "media_type": "text/plain; charset=utf-8",
+      "role": "agent_evidence_quote_verified",
+      "size": 99
+    },
+    {
+      "digest": "sha256:5b253d0b53b16f4a6a0058e18349479c2fe638ab6ecb760f851a4638243b7204",
+      "media_type": "application/json",
+      "role": "source_intake_manifest",
+      "size": 10716
+    },
+    {
+      "digest": "sha256:5bb6100458c882c9016f0b8fdc88997be499859f5ade8630dd3d841fec126b7f",
+      "media_type": "application/json",
+      "role": "agent_route_binding",
+      "size": 1480
+    },
+    {
+      "digest": "sha256:6169395eeaae574845fed24fc8b91a265258d97bda1d0eb076f2086c6d1b424f",
+      "media_type": "application/octet-stream",
+      "role": "closure_input",
+      "size": 4499
+    },
+    {
+      "digest": "sha256:6732c1f46dc1dc33b1f0a2955965c2a5b5cb7495e77748d3054480b83f8385db",
+      "media_type": "text/x-python; charset=utf-8",
+      "role": "source:repository",
+      "size": 17591
+    },
+    {
+      "digest": "sha256:69ec8fd6039dd1c75c580710ca7dd0b3290bf1baf1f48929b78d0e5626c146c2",
+      "media_type": "text/x-python; charset=utf-8",
+      "role": "source:repository",
+      "size": 35727
+    },
+    {
+      "digest": "sha256:6bd8541836f31bbe1ca2080b02fb7952747877d742ed2a7e5dc6f78815198f09",
+      "media_type": "application/json",
+      "role": "agent_attempt_record",
+      "size": 2975
+    },
+    {
+      "digest": "sha256:6e77de415bb9954be1e3e2c01d5514f2f0efd10fdf16831788c91ba48a711362",
+      "media_type": "application/json",
+      "role": "license_evidence",
+      "size": 450
+    },
+    {
+      "digest": "sha256:821191725252e8a2dc666c68a3e5dd2b684900fb2c80de041d22f17cf2956010",
+      "media_type": "application/pdf",
+      "role": "source:paper",
+      "size": 5176466
+    },
+    {
+      "digest": "sha256:87079aa28a367496d5ee13567ec50758084c473c81ea1b062643b43d14d88b65",
+      "media_type": "text/x-python; charset=utf-8",
+      "role": "source:repository",
+      "size": 6899
+    },
+    {
+      "digest": "sha256:8725dc416df6a82d80dbc4e5238215bb920ca302e8dda4392a2652ad3f92c2e2",
+      "media_type": "text/plain; charset=utf-8",
+      "role": "source:dependency",
+      "size": 441063
+    },
+    {
+      "digest": "sha256:882128df7553c691e3ba6916c03dd729a4c68aace3afff67c0133f4fe1ac77ab",
+      "media_type": "text/plain; charset=utf-8",
+      "role": "agent_evidence_quote_verified",
+      "size": 82
+    },
+    {
+      "digest": "sha256:8918c7def82832a0011918273afc9317d99d0ffab316117e19d3770d938330d6",
+      "media_type": "application/json",
+      "role": "digest_closure",
+      "size": 4804
+    },
+    {
+      "digest": "sha256:9181e763d01a772cc7d53eb87fdd5e749c90b7f6b4260b06fad7f61e5b0feade",
+      "media_type": "application/json",
+      "role": "license_evidence",
+      "size": 447
+    },
+    {
+      "digest": "sha256:a259bb35429bfbd3b76e43019dfc8f7d6ea94bb217400b78f7d0824ce07a58ac",
+      "media_type": "application/octet-stream",
+      "role": "closure_input",
+      "size": 60529784
+    },
+    {
+      "digest": "sha256:a280c0909a017a3d120dfe83fb2758e7c8bd6df2cb03db60c2181b2274ba4d7a",
+      "media_type": "application/json",
+      "role": "license_evidence",
+      "size": 451
+    },
+    {
+      "digest": "sha256:a2c1363d94bd510098d07bd6393ac64e9ef311e3b80e2c97065b2dc3b4bac72c",
+      "media_type": "application/json",
+      "role": "license_evidence",
+      "size": 376
+    },
+    {
+      "digest": "sha256:ae8356f79daf7fe720354fd1ffe27b91f768a7c3495721486ec801f8b42e4094",
+      "media_type": "application/json",
+      "role": "license_evidence",
+      "size": 440
+    },
+    {
+      "digest": "sha256:bd41b43855d47f3773fa96c55bfad9a22c030cedfa675cd8b8cfbf1bf6f9c0ce",
+      "media_type": "text/plain; charset=utf-8",
+      "role": "agent_evidence_quote_verified",
+      "size": 66
+    },
+    {
+      "digest": "sha256:bfbb7e6d5ee81d64a97197317e32f96e3a15b17e3a1a28e97c8c1e1caf5fb224",
+      "media_type": "text/plain; charset=utf-8",
+      "role": "agent_evidence_quote_rejected",
+      "size": 124
+    },
+    {
+      "digest": "sha256:cbd7f36d8cb9c9c23e0f4e7236a62bc706bde7926a04ee6e2e2ed958063336b7",
+      "media_type": "text/plain; charset=utf-8",
+      "role": "source:dependency",
+      "size": 1576
+    },
+    {
+      "digest": "sha256:ced0898f193f098395091ff009f827a2eb6ecd7a758625b25185ddac3d345e4c",
+      "media_type": "application/json",
+      "role": "agent_panel_plan",
+      "size": 2534
+    },
+    {
+      "digest": "sha256:cf69fb2945729a409870f54f6c7c8b6ebc45c9b46405bbb6a86e00b6309ea146",
+      "media_type": "application/octet-stream",
+      "role": "closure_input",
+      "size": 14161920
+    },
+    {
+      "digest": "sha256:cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "media_type": "application/octet-stream",
+      "role": "closure_input",
+      "size": 11358
+    },
+    {
+      "digest": "sha256:d2d4261ed1fac15616e1194e61f3ea8fbc0b7efd285cc2e552f6b9088e6926e8",
+      "media_type": "text/plain; charset=utf-8",
+      "role": "agent_evidence_quote_rejected",
+      "size": 117
+    },
+    {
+      "digest": "sha256:e1656ea69da3130e94247c60d064d9778b0cb032f3daae40b82cd19e8b3284bb",
+      "media_type": "application/json",
+      "role": "agent_raw_response",
+      "size": 19589
+    },
+    {
+      "digest": "sha256:e47ce7a7a4d807f9293311c16df8a67414cc0812ad5f0af0cb21743195b9b138",
+      "media_type": "text/x-python; charset=utf-8",
+      "role": "source:repository",
+      "size": 13588
+    },
+    {
+      "digest": "sha256:e7231afa99aa4331b5b8e028fd2814bca31156607ef46db132a579bbc701bfcf",
+      "media_type": "application/json",
+      "role": "license_evidence",
+      "size": 489
+    },
+    {
+      "digest": "sha256:e87be2879d688fbb5e4118495d49474d54e85fbe1e111c6f18dd8cf440f16ae9",
+      "media_type": "application/json",
+      "role": "source_bundle",
+      "size": 7206
+    },
+    {
+      "digest": "sha256:ecd33e5f12eb7ce417d0ce275537fb6cb68ba0a491b8377426956cb4c1e22aa2",
+      "media_type": "application/json",
+      "role": "license_evidence",
+      "size": 371
+    },
+    {
+      "digest": "sha256:faf0ff09aa031d947dc04cccfc51c83a5e3821f5b385a3beafe34b8ce8256e5e",
+      "media_type": "text/plain; charset=utf-8",
+      "role": "extracted_text",
+      "size": 81217
+    }
+  ],
+  "panel_closure_digest": "sha256:4109c051b0fba838fc3369c56bea17cf07fe2aff5411290c0a351af369ce2700",
+  "panel_closure_roots": [
+    "sha256:8918c7def82832a0011918273afc9317d99d0ffab316117e19d3770d938330d6",
+    "sha256:0d8e9a121b2535f3847f00476234e57255ad23ba4da6f05733e3061d8951d46b"
+  ],
+  "panel_execution": {
+    "artifact": "stresskit_agent_panel_execution",
+    "candidate_id": "acdc_tracr_reverse",
+    "complete_slots": true,
+    "outcome_blind": true,
+    "panel_plan_digest": "sha256:ced0898f193f098395091ff009f827a2eb6ecd7a758625b25185ddac3d345e4c",
+    "publication_state": "abstain",
+    "retry_policy": "no_retry",
+    "schema_version": "1.0",
+    "slots": [
+      {
+        "attempt_digest": "sha256:6bd8541836f31bbe1ca2080b02fb7952747877d742ed2a7e5dc6f78815198f09",
+        "opinion_id": "acdc-tracr-reverse-extractor-a",
+        "raw_response_digest": "sha256:51deaf117043dff9369c3c265c6d0c9628bcb26fd5a6bbfafee365b3c49a6782",
+        "role": "extractor",
+        "status": "rejected_invalid_evidence"
+      },
+      {
+        "attempt_digest": "sha256:3d1eff72381a33f6a72ee19dd917b8b6e3033765e2b95e35708fb31fa0b8f03a",
+        "opinion_id": "acdc-tracr-reverse-extractor-b",
+        "raw_response_digest": "sha256:e1656ea69da3130e94247c60d064d9778b0cb032f3daae40b82cd19e8b3284bb",
+        "role": "extractor",
+        "status": "rejected_incomplete_completion"
+      },
+      {
+        "depends_on": [
+          "acdc-tracr-reverse-extractor-a",
+          "acdc-tracr-reverse-extractor-b"
+        ],
+        "opinion_id": "acdc-tracr-reverse-critic",
+        "reason": "Critic requires two accepted extractor opinions; both extractors were rejected before AgentOpinion construction.",
+        "role": "critic",
+        "status": "not_run_dependency_failure"
+      }
+    ],
+    "source_bundle_digest": "sha256:e87be2879d688fbb5e4118495d49474d54e85fbe1e111c6f18dd8cf440f16ae9",
+    "status": "abstain"
+  },
+  "panel_execution_digest": "sha256:1b9a12bfb5f1f8a0a6c1d47eac88d11e1dc45b0f1b0d0f4f13848790eaebcba1",
+  "panel_plan": {
+    "artifact": "stresskit_agent_panel_plan",
+    "candidate_id": "acdc_tracr_reverse",
+    "catalog_observed_at": "2026-09-01T18:12:06Z",
+    "catalog_sources": [
+      "https://openrouter.ai/api/v1/models",
+      "https://openrouter.ai/api/v1/endpoints/zdr",
+      "https://openrouter.ai/api/v1/models/x-ai/grok-4.6/endpoints",
+      "https://openrouter.ai/api/v1/models/z-ai/glm-5.2/endpoints",
+      "https://openrouter.ai/api/v1/models/google/gemini-3.1-pro-preview/endpoints"
+    ],
+    "claim_query": "claim-query.txt",
+    "claim_query_digest": "sha256:385d031f078995096bd291310c58a6159aed64623fdbfd336dadc7861e4f90a1",
+    "constraints": {
+      "account_prompt_logging": "must_not_be_opted_in",
+      "allow_fallbacks": false,
+      "data_collection": "deny",
+      "no_plugins_or_tools": true,
+      "require_parameters": true,
+      "router_pipeline": "must_be_empty",
+      "selected_attempt": 1,
+      "zdr": true
+    },
+    "outcome_blind": true,
+    "requests": [
+      {
+        "catalog": {
+          "canonical_slug": "x-ai/grok-4.6-20260810",
+          "context_length": 500000,
+          "endpoint_name": "xAI | x-ai/grok-4.6-20260810",
+          "endpoint_status": 0,
+          "required_parameters": [
+            "max_tokens",
+            "response_format",
+            "seed",
+            "structured_outputs",
+            "temperature"
+          ],
+          "zdr_listed": true
+        },
+        "model_family": "grok-4.6",
+        "model_request_id": "x-ai/grok-4.6",
+        "opinion_id": "acdc-tracr-reverse-extractor-a",
+        "provider_endpoint": "xai/zdr",
+        "provider_name": "xAI",
+        "request_parameters": {
+          "max_tokens": 2048,
+          "seed": 173201,
+          "temperature": 0
+        },
+        "role": "extractor"
+      },
+      {
+        "catalog": {
+          "canonical_slug": "z-ai/glm-5.2-20260616",
+          "context_length": 1048576,
+          "endpoint_name": "Mistral | z-ai/glm-5.2-20260616",
+          "endpoint_status": 0,
+          "required_parameters": [
+            "max_tokens",
+            "response_format",
+            "seed",
+            "structured_outputs",
+            "temperature"
+          ],
+          "zdr_listed": true
+        },
+        "model_family": "glm-5.2",
+        "model_request_id": "z-ai/glm-5.2",
+        "opinion_id": "acdc-tracr-reverse-extractor-b",
+        "provider_endpoint": "mistral/zdr",
+        "provider_name": "Mistral",
+        "request_parameters": {
+          "max_tokens": 2048,
+          "seed": 173202,
+          "temperature": 0
+        },
+        "role": "extractor"
+      },
+      {
+        "catalog": {
+          "canonical_slug": "google/gemini-3.1-pro-preview-20260219",
+          "context_length": 1048576,
+          "endpoint_name": "Google | google/gemini-3.1-pro-preview-20260219",
+          "endpoint_status": 0,
+          "required_parameters": [
+            "max_tokens",
+            "response_format",
+            "seed",
+            "structured_outputs",
+            "temperature"
+          ],
+          "zdr_listed": true
+        },
+        "model_family": "gemini-3.1",
+        "model_request_id": "google/gemini-3.1-pro-preview",
+        "opinion_id": "acdc-tracr-reverse-critic",
+        "provider_endpoint": "google-vertex/global/priority",
+        "provider_name": "Google",
+        "request_parameters": {
+          "max_tokens": 2048,
+          "seed": 173203,
+          "temperature": 0
+        },
+        "role": "critic"
+      }
+    ],
+    "schema_version": "1.0",
+    "status": "prefrozen_awaiting_authenticated_preflight",
+    "transport": "openrouter"
+  },
+  "panel_plan_digest": "sha256:ced0898f193f098395091ff009f827a2eb6ecd7a758625b25185ddac3d345e4c",
+  "prompt_injection_detected": false,
+  "publication_state": "abstain",
+  "reason": "invalid_agent_outputs",
+  "rejected_attempts": [
+    {
+      "attempt_record": {
+        "artifact": "stresskit_agent_attempt_record",
+        "attempt": 1,
+        "candidate_id": "acdc_tracr_reverse",
+        "completion_content_human_inspected": false,
+        "completion_content_inspected": true,
+        "critic_called": false,
+        "evidence_quote_checks": [
+          {
+            "document_id": "acdc-paper-v4-pdf",
+            "present_in_declared_source_bytes": false,
+            "quote_digest": "sha256:d2d4261ed1fac15616e1194e61f3ea8fbc0b7efd285cc2e552f6b9088e6926e8"
+          },
+          {
+            "document_id": "acdc-paper-v4-pdf",
+            "present_in_declared_source_bytes": false,
+            "quote_digest": "sha256:499a54e0374a984e5450d004b6ecbf83761f914704cfa331fdc678321e254542"
+          },
+          {
+            "document_id": "acdc-paper-v4-pdf",
+            "present_in_declared_source_bytes": true,
+            "quote_digest": "sha256:25b9b13996f997a19638632334694c746e79dee850b3f6dc124d49d585e2c030"
+          },
+          {
+            "document_id": "acdc-paper-v4-pdf",
+            "present_in_declared_source_bytes": true,
+            "quote_digest": "sha256:882128df7553c691e3ba6916c03dd729a4c68aace3afff67c0133f4fe1ac77ab"
+          },
+          {
+            "document_id": "acdc-paper-v4-pdf",
+            "present_in_declared_source_bytes": false,
+            "quote_digest": "sha256:bfbb7e6d5ee81d64a97197317e32f96e3a15b17e3a1a28e97c8c1e1caf5fb224"
+          },
+          {
+            "document_id": "acdc-paper-v4-pdf",
+            "present_in_declared_source_bytes": true,
+            "quote_digest": "sha256:5a8b8fedd5bf101ad768d46dcaadcb70701931e63951a40751234e8ccb3b2c1b"
+          },
+          {
+            "document_id": "acdc-paper-v4-source",
+            "present_in_declared_source_bytes": true,
+            "quote_digest": "sha256:302e85a81f3f709a242234778953f13c0b20355cb0bc6363b4895c1cbbe0ca13"
+          },
+          {
+            "document_id": "acdc-tracr-utils",
+            "present_in_declared_source_bytes": true,
+            "quote_digest": "sha256:440f7dacd47c65cbd53c567c1a952d682e13d3a6cdcb2046897ba511711b24e4"
+          },
+          {
+            "document_id": "acdc-tracr-utils",
+            "present_in_declared_source_bytes": true,
+            "quote_digest": "sha256:20b68192b7873cc36db842190715621986e5b2099a7b2d865eddc8606028187d"
+          },
+          {
+            "document_id": "acdc-sweep-launcher",
+            "present_in_declared_source_bytes": true,
+            "quote_digest": "sha256:bd41b43855d47f3773fa96c55bfad9a22c030cedfa675cd8b8cfbf1bf6f9c0ce"
+          }
+        ],
+        "observed_at": "2026-09-01T18:12:37Z",
+        "opinion_id": "acdc-tracr-reverse-extractor-a",
+        "panel_plan_digest": "sha256:ced0898f193f098395091ff009f827a2eb6ecd7a758625b25185ddac3d345e4c",
+        "prompt_digest": "sha256:44f8dfe410c3980cf90be916137f3a90ea41949e33e42c9e40e7acb755a035e8",
+        "raw_response_digest": "sha256:51deaf117043dff9369c3c265c6d0c9628bcb26fd5a6bbfafee365b3c49a6782",
+        "reason": "three of ten completion evidence quotes were absent byte-for-byte from their declared source document",
+        "response_id": "gen-1788286357-qpu3lNqoHJ3inO1219zq",
+        "retry_performed": false,
+        "role": "extractor",
+        "route_binding_digest": "sha256:389d07978cd4d98a9a6819784524c2f72218c3a05e617cad1db709e19b230f01",
+        "safe_route_metadata": {
+          "available_endpoints": [
+            {
+              "model": "x-ai/grok-4.6-20260810",
+              "provider": "xAI",
+              "selected": true
+            }
+          ],
+          "endpoint_total_before_filtering": 5,
+          "pipeline": null,
+          "requested_model": "x-ai/grok-4.6",
+          "response_model": "x-ai/grok-4.6",
+          "selected_attempt": 1,
+          "strategy": "direct"
+        },
+        "schema_version": "1.0",
+        "source_bundle_digest": "sha256:e87be2879d688fbb5e4118495d49474d54e85fbe1e111c6f18dd8cf440f16ae9",
+        "status": "rejected_before_opinion"
+      },
+      "attempt_record_digest": "sha256:6bd8541836f31bbe1ca2080b02fb7952747877d742ed2a7e5dc6f78815198f09"
+    },
+    {
+      "attempt_record": {
+        "artifact": "stresskit_agent_attempt_record",
+        "attempt": 1,
+        "candidate_id": "acdc_tracr_reverse",
+        "completion_content_human_inspected": false,
+        "completion_content_inspected": false,
+        "critic_called": false,
+        "evidence_quote_checks": [],
+        "finish_reason": "length",
+        "native_finish_reason": "length",
+        "observed_at": "2026-09-01T18:14:41Z",
+        "opinion_id": "acdc-tracr-reverse-extractor-b",
+        "panel_plan_digest": "sha256:ced0898f193f098395091ff009f827a2eb6ecd7a758625b25185ddac3d345e4c",
+        "prompt_digest": "sha256:34eda83b2d9a904d6e4e1836b3da423db150dda582e14b4b93821f42f8bb0ad7",
+        "raw_response_digest": "sha256:e1656ea69da3130e94247c60d064d9778b0cb032f3daae40b82cd19e8b3284bb",
+        "reason": "completion reached the frozen max-token limit and did not finish cleanly",
+        "response_id": "gen-1788286481-lla0FWwJxsEEVNj3R2dH",
+        "retry_performed": false,
+        "role": "extractor",
+        "route_binding_digest": "sha256:5bb6100458c882c9016f0b8fdc88997be499859f5ade8630dd3d841fec126b7f",
+        "safe_route_metadata": {
+          "available_endpoints": [
+            {
+              "model": "z-ai/glm-5.2-20260616",
+              "provider": "Mistral",
+              "selected": true
+            }
+          ],
+          "endpoint_total_before_filtering": 34,
+          "pipeline": null,
+          "requested_model": "z-ai/glm-5.2",
+          "response_model": "z-ai/glm-5.2",
+          "selected_attempt": 1,
+          "strategy": "direct"
+        },
+        "schema_version": "1.0",
+        "source_bundle_digest": "sha256:e87be2879d688fbb5e4118495d49474d54e85fbe1e111c6f18dd8cf440f16ae9",
+        "status": "rejected_before_opinion"
+      },
+      "attempt_record_digest": "sha256:3d1eff72381a33f6a72ee19dd917b8b6e3033765e2b95e35708fb31fa0b8f03a"
+    }
+  ],
+  "schema_version": "1.0",
+  "source_bundle": {
+    "artifact": "stresskit_source_bundle",
+    "bundle_id": "acdc-tracr-reverse-source-v1",
+    "created_at": "2026-09-01T18:08:41Z",
+    "documents": [
+      {
+        "content_size": 5176466,
+        "document_id": "acdc-paper-v4-pdf",
+        "extracted_text_digest": "sha256:30a383d731de38c98b16e86669fbc37d0e0c05d3937e4824b9698a1403a6294e",
+        "kind": "paper",
+        "license": {
+          "evidence_digest": "sha256:a2c1363d94bd510098d07bd6393ac64e9ef311e3b80e2c97065b2dc3b4bac72c",
+          "identifier": "CC-BY-4.0",
+          "status": "verified_compatible"
+        },
+        "locator": "https://arxiv.org/pdf/2304.14997v4",
+        "media_type": "application/pdf",
+        "source_digest": "sha256:821191725252e8a2dc666c68a3e5dd2b684900fb2c80de041d22f17cf2956010"
+      },
+      {
+        "content_size": 17974250,
+        "document_id": "acdc-paper-v4-source",
+        "extracted_text_digest": "sha256:faf0ff09aa031d947dc04cccfc51c83a5e3821f5b385a3beafe34b8ce8256e5e",
+        "kind": "paper",
+        "license": {
+          "evidence_digest": "sha256:ecd33e5f12eb7ce417d0ce275537fb6cb68ba0a491b8377426956cb4c1e22aa2",
+          "identifier": "CC-BY-4.0",
+          "status": "verified_compatible"
+        },
+        "locator": "https://arxiv.org/src/2304.14997v4#sections/appendix.tex",
+        "media_type": "application/gzip",
+        "source_digest": "sha256:02af165b2208750c326c0e76001ea1e05737b54d43c4bb43acad381b00fc1337"
+      },
+      {
+        "content_size": 13588,
+        "document_id": "acdc-main",
+        "extracted_text_digest": "sha256:e47ce7a7a4d807f9293311c16df8a67414cc0812ad5f0af0cb21743195b9b138",
+        "kind": "repository",
+        "license": {
+          "evidence_digest": "sha256:ae8356f79daf7fe720354fd1ffe27b91f768a7c3495721486ec801f8b42e4094",
+          "identifier": "MIT",
+          "status": "verified_compatible"
+        },
+        "locator": "https://github.com/ArthurConmy/Automatic-Circuit-Discovery/blob/bc99ace817974b5584b7ee203d596a8e2bbcd399/acdc/main.py",
+        "media_type": "text/x-python; charset=utf-8",
+        "source_digest": "sha256:e47ce7a7a4d807f9293311c16df8a67414cc0812ad5f0af0cb21743195b9b138"
+      },
+      {
+        "content_size": 19274,
+        "document_id": "acdc-tracr-utils",
+        "extracted_text_digest": "sha256:046b65438e7560bdbcc1ae9397df82fad66a2a3b4f30eef019b2190035e55203",
+        "kind": "repository",
+        "license": {
+          "evidence_digest": "sha256:9181e763d01a772cc7d53eb87fdd5e749c90b7f6b4260b06fad7f61e5b0feade",
+          "identifier": "MIT",
+          "status": "verified_compatible"
+        },
+        "locator": "https://github.com/ArthurConmy/Automatic-Circuit-Discovery/blob/bc99ace817974b5584b7ee203d596a8e2bbcd399/acdc/tracr_task/utils.py",
+        "media_type": "text/x-python; charset=utf-8",
+        "source_digest": "sha256:046b65438e7560bdbcc1ae9397df82fad66a2a3b4f30eef019b2190035e55203"
+      },
+      {
+        "content_size": 42230,
+        "document_id": "acdc-algorithm",
+        "extracted_text_digest": "sha256:47aab4ee931db4945b97b9dcf86212841d08fb2668cc70ca1b14bd030f1665ba",
+        "kind": "repository",
+        "license": {
+          "evidence_digest": "sha256:0fd462583e51460e00e26f92e8c230760d80a896a22bda0157ec20747cd01f3a",
+          "identifier": "MIT",
+          "status": "verified_compatible"
+        },
+        "locator": "https://github.com/ArthurConmy/Automatic-Circuit-Discovery/blob/bc99ace817974b5584b7ee203d596a8e2bbcd399/acdc/TLACDCExperiment.py",
+        "media_type": "text/x-python; charset=utf-8",
+        "source_digest": "sha256:47aab4ee931db4945b97b9dcf86212841d08fb2668cc70ca1b14bd030f1665ba"
+      },
+      {
+        "content_size": 17591,
+        "document_id": "acdc-metric-reducers",
+        "extracted_text_digest": "sha256:6732c1f46dc1dc33b1f0a2955965c2a5b5cb7495e77748d3054480b83f8385db",
+        "kind": "repository",
+        "license": {
+          "evidence_digest": "sha256:a280c0909a017a3d120dfe83fb2758e7c8bd6df2cb03db60c2181b2274ba4d7a",
+          "identifier": "MIT",
+          "status": "verified_compatible"
+        },
+        "locator": "https://github.com/ArthurConmy/Automatic-Circuit-Discovery/blob/bc99ace817974b5584b7ee203d596a8e2bbcd399/acdc/acdc_utils.py",
+        "media_type": "text/x-python; charset=utf-8",
+        "source_digest": "sha256:6732c1f46dc1dc33b1f0a2955965c2a5b5cb7495e77748d3054480b83f8385db"
+      },
+      {
+        "content_size": 6899,
+        "document_id": "acdc-sweep-launcher",
+        "extracted_text_digest": "sha256:87079aa28a367496d5ee13567ec50758084c473c81ea1b062643b43d14d88b65",
+        "kind": "repository",
+        "license": {
+          "evidence_digest": "sha256:6e77de415bb9954be1e3e2c01d5514f2f0efd10fdf16831788c91ba48a711362",
+          "identifier": "MIT",
+          "status": "verified_compatible"
+        },
+        "locator": "https://github.com/ArthurConmy/Automatic-Circuit-Discovery/blob/bc99ace817974b5584b7ee203d596a8e2bbcd399/experiments/launch_spreadsheet.py",
+        "media_type": "text/x-python; charset=utf-8",
+        "source_digest": "sha256:87079aa28a367496d5ee13567ec50758084c473c81ea1b062643b43d14d88b65"
+      },
+      {
+        "content_size": 35727,
+        "document_id": "acdc-paper-analysis",
+        "extracted_text_digest": "sha256:69ec8fd6039dd1c75c580710ca7dd0b3290bf1baf1f48929b78d0e5626c146c2",
+        "kind": "repository",
+        "license": {
+          "evidence_digest": "sha256:4da67829b23d2d92390188c27f7fe3b811a94ef8e528bd86ad0a51b5bfa6bb59",
+          "identifier": "MIT",
+          "status": "verified_compatible"
+        },
+        "locator": "https://github.com/ArthurConmy/Automatic-Circuit-Discovery/blob/bc99ace817974b5584b7ee203d596a8e2bbcd399/notebooks/roc_plot_generator.py",
+        "media_type": "text/x-python; charset=utf-8",
+        "source_digest": "sha256:69ec8fd6039dd1c75c580710ca7dd0b3290bf1baf1f48929b78d0e5626c146c2"
+      },
+      {
+        "content_size": 1576,
+        "document_id": "acdc-pyproject",
+        "extracted_text_digest": "sha256:cbd7f36d8cb9c9c23e0f4e7236a62bc706bde7926a04ee6e2e2ed958063336b7",
+        "kind": "dependency",
+        "license": {
+          "evidence_digest": "sha256:0aff677c6b6581599bc8fa578772ccd3d7be9eb96c0ebf8b2eaf251ac1b2a801",
+          "identifier": "MIT",
+          "status": "verified_compatible"
+        },
+        "locator": "https://github.com/ArthurConmy/Automatic-Circuit-Discovery/blob/bc99ace817974b5584b7ee203d596a8e2bbcd399/pyproject.toml",
+        "media_type": "text/plain; charset=utf-8",
+        "source_digest": "sha256:cbd7f36d8cb9c9c23e0f4e7236a62bc706bde7926a04ee6e2e2ed958063336b7"
+      },
+      {
+        "content_size": 441063,
+        "document_id": "acdc-poetry-lock",
+        "extracted_text_digest": "sha256:8725dc416df6a82d80dbc4e5238215bb920ca302e8dda4392a2652ad3f92c2e2",
+        "kind": "dependency",
+        "license": {
+          "evidence_digest": "sha256:e7231afa99aa4331b5b8e028fd2814bca31156607ef46db132a579bbc701bfcf",
+          "identifier": "MIT",
+          "status": "verified_compatible"
+        },
+        "locator": "https://github.com/ArthurConmy/Automatic-Circuit-Discovery/blob/bc99ace817974b5584b7ee203d596a8e2bbcd399/poetry.lock",
+        "media_type": "text/plain; charset=utf-8",
+        "source_digest": "sha256:8725dc416df6a82d80dbc4e5238215bb920ca302e8dda4392a2652ad3f92c2e2"
+      }
+    ],
+    "metadata": {
+      "artifact_inventory_digest": "sha256:6169395eeaae574845fed24fc8b91a265258d97bda1d0eb076f2086c6d1b424f",
+      "candidate_id": "acdc_tracr_reverse",
+      "claim_query_digest": "sha256:385d031f078995096bd291310c58a6159aed64623fdbfd336dadc7861e4f90a1",
+      "dependency_profile": "upstream_poetry_lock_with_exact_archived_jaxlib_retrieval",
+      "extraction_profile": "poppler_pdftotext_26.01.0_layout_nopgbrk_utf8_and_source_byte_identity_v1",
+      "intake_manifest_digest": "sha256:5b253d0b53b16f4a6a0058e18349479c2fe638ab6ecb760f851a4638243b7204",
+      "outcome_blind": true,
+      "paper_version": "arXiv:2304.14997v4",
+      "registered_claim_locator": "Section 4.1 and Appendix I.2, Figure 21b/caption and Table 3",
+      "repository": "https://github.com/ArthurConmy/Automatic-Circuit-Discovery",
+      "repository_archive_digest": "sha256:cf69fb2945729a409870f54f6c7c8b6ebc45c9b46405bbb6a86e00b6309ea146",
+      "repository_commit": "bc99ace817974b5584b7ee203d596a8e2bbcd399",
+      "repository_tree": "e22aed97ac8253e50b0c535bc637796cc71fec98",
+      "software_license_digest": "sha256:16c66e455dff5897c2ea5ab783bf49fd7fd63cbefb7bf1dece191d6729c21f87",
+      "tracr_commit": "e75ecdaec12bf2d831a60e54d4270e8fa31fb537",
+      "tracr_license_digest": "sha256:cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    "schema_version": "1.0"
+  },
+  "source_bundle_digest": "sha256:e87be2879d688fbb5e4118495d49474d54e85fbe1e111c6f18dd8cf440f16ae9",
+  "source_closure_digest": "sha256:8918c7def82832a0011918273afc9317d99d0ffab316117e19d3770d938330d6"
+}

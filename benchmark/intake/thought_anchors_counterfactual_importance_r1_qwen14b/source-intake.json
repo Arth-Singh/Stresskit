@@ -1,0 +1,245 @@
+{
+  "artifact": "stresskit_source_intake_manifest",
+  "bundle_id": "thought-anchors-counterfactual-importance-r1-qwen14b-source-v1",
+  "created_at": "2026-09-01T18:05:45Z",
+  "documents": [
+    {
+      "document_id": "thought-anchors-repository",
+      "expected_digest": "sha256:796f6bf17b0dd701cc82c0938b313d7733b1070ee9557eb0f9e2f6cc0310e383",
+      "expected_extracted_text_digest": "sha256:af5048e140bec5121003b2a4d0ce2291e49066a757923cabe0a59a74a1c0bf00",
+      "extracted_text_path": "repository-snapshot.txt",
+      "kind": "repository",
+      "license": {
+        "evidence": {
+          "checked_at": "2026-09-01T18:05:45Z",
+          "reviewed_by": "StressKit autonomous intake",
+          "scope": "Pinned repository LICENSE.md is MIT and covers the repository source; no narrower entrypoint header was found.",
+          "source": "https://raw.githubusercontent.com/interp-reasoning/thought-anchors/b53ed8c75d3f6112f68adfaec9a13d4d708c442e/LICENSE.md"
+        },
+        "identifier": "MIT",
+        "status": "verified_compatible"
+      },
+      "locator": "https://github.com/interp-reasoning/thought-anchors/tree/b53ed8c75d3f6112f68adfaec9a13d4d708c442e",
+      "media_type": "application/x-tar",
+      "path": "../../../.stresskit/intake/thought_anchors_counterfactual_importance_r1_qwen14b/raw/thought-anchors-b53ed8c.tar"
+    },
+    {
+      "document_id": "thought-anchors-readme",
+      "expected_digest": "sha256:4a1d42f4d1c0adcb446accfb7b8e5d546c4705b7f217eb11224a2e430c41f91c",
+      "expected_extracted_text_digest": "sha256:4a1d42f4d1c0adcb446accfb7b8e5d546c4705b7f217eb11224a2e430c41f91c",
+      "extracted_text_path": "../../../.stresskit/intake/thought_anchors_counterfactual_importance_r1_qwen14b/extracted/repo-README.md.txt",
+      "kind": "repository",
+      "license": {
+        "evidence": {
+          "checked_at": "2026-09-01T18:05:45Z",
+          "reviewed_by": "StressKit autonomous intake",
+          "scope": "Pinned repository LICENSE.md is MIT and README.md has no narrower file-level license.",
+          "source": "https://raw.githubusercontent.com/interp-reasoning/thought-anchors/b53ed8c75d3f6112f68adfaec9a13d4d708c442e/LICENSE.md"
+        },
+        "identifier": "MIT",
+        "status": "verified_compatible"
+      },
+      "locator": "https://github.com/interp-reasoning/thought-anchors/blob/b53ed8c75d3f6112f68adfaec9a13d4d708c442e/README.md",
+      "media_type": "text/markdown; charset=utf-8",
+      "path": "../../../.stresskit/upstreams/thought_anchors/README.md"
+    },
+    {
+      "document_id": "thought-anchors-paper-v4-pdf",
+      "expected_digest": "sha256:7b2d6a4146d06fb7c6d1ca3a88a965bffe71c937f206d1ebed2c35692648d737",
+      "expected_extracted_text_digest": "sha256:fb461a4c931f3064c95e62617f50b1e5f117f174da3d6dd0e099f1d32cc0deab",
+      "extracted_text_path": "../../../.stresskit/intake/thought_anchors_counterfactual_importance_r1_qwen14b/extracted/arxiv-2506.19143v4.txt",
+      "kind": "paper",
+      "license": {
+        "evidence": {
+          "checked_at": "2026-09-01T18:05:45Z",
+          "reviewed_by": "StressKit autonomous intake",
+          "scope": "arXiv version 4 links this paper to Creative Commons Attribution 4.0 International.",
+          "source": "https://arxiv.org/abs/2506.19143v4"
+        },
+        "identifier": "CC-BY-4.0",
+        "status": "verified_compatible"
+      },
+      "locator": "https://arxiv.org/pdf/2506.19143v4",
+      "media_type": "application/pdf",
+      "path": "../../../.stresskit/intake/thought_anchors_counterfactual_importance_r1_qwen14b/raw/arxiv-2506.19143v4.pdf"
+    },
+    {
+      "document_id": "thought-anchors-paper-v4-source",
+      "expected_digest": "sha256:7081cadf9bda4c0f59d387f97794bf82219a5fd65ee977ec47589be8b45dcc84",
+      "expected_extracted_text_digest": "sha256:ca43d50d57e5e57e140a5c958b63687e4d01590190251d9173393371f0817889",
+      "extracted_text_path": "../../../.stresskit/intake/thought_anchors_counterfactual_importance_r1_qwen14b/extracted/iclr2026_conference.tex.txt",
+      "kind": "paper",
+      "license": {
+        "evidence": {
+          "checked_at": "2026-09-01T18:05:45Z",
+          "reviewed_by": "StressKit autonomous intake",
+          "scope": "The primary manuscript source is part of arXiv version 4, which links the submission to Creative Commons Attribution 4.0 International.",
+          "source": "https://arxiv.org/abs/2506.19143v4"
+        },
+        "identifier": "CC-BY-4.0",
+        "status": "verified_compatible"
+      },
+      "locator": "https://arxiv.org/src/2506.19143v4#iclr2026_conference.tex",
+      "media_type": "application/gzip",
+      "path": "../../../.stresskit/intake/thought_anchors_counterfactual_importance_r1_qwen14b/raw/arxiv-2506.19143v4-source.tar.gz"
+    },
+    {
+      "document_id": "thought-anchors-analyze-rollouts",
+      "expected_digest": "sha256:9dc5beabe101b590e4e8d8f46fbce91118bfd2d345a4ef203cd35e2535f9335f",
+      "expected_extracted_text_digest": "sha256:9dc5beabe101b590e4e8d8f46fbce91118bfd2d345a4ef203cd35e2535f9335f",
+      "extracted_text_path": "../../../.stresskit/intake/thought_anchors_counterfactual_importance_r1_qwen14b/extracted/analyze_rollouts.py.txt",
+      "kind": "repository",
+      "license": {
+        "evidence": {
+          "checked_at": "2026-09-01T18:05:45Z",
+          "reviewed_by": "StressKit autonomous intake",
+          "scope": "Pinned repository LICENSE.md is MIT; source file has no narrower header.",
+          "source": "https://raw.githubusercontent.com/interp-reasoning/thought-anchors/b53ed8c75d3f6112f68adfaec9a13d4d708c442e/LICENSE.md"
+        },
+        "identifier": "MIT",
+        "status": "verified_compatible"
+      },
+      "locator": "https://github.com/interp-reasoning/thought-anchors/blob/b53ed8c75d3f6112f68adfaec9a13d4d708c442e/analyze_rollouts.py",
+      "media_type": "text/x-python; charset=utf-8",
+      "path": "../../../.stresskit/upstreams/thought_anchors/analyze_rollouts.py"
+    },
+    {
+      "document_id": "thought-anchors-plots",
+      "expected_digest": "sha256:f79a2a828d3a8ad0fc06286103c9edfe39c4abf908d31e08f634542e4c6a018c",
+      "expected_extracted_text_digest": "sha256:f79a2a828d3a8ad0fc06286103c9edfe39c4abf908d31e08f634542e4c6a018c",
+      "extracted_text_path": "../../../.stresskit/intake/thought_anchors_counterfactual_importance_r1_qwen14b/extracted/plots.py.txt",
+      "kind": "repository",
+      "license": {
+        "evidence": {
+          "checked_at": "2026-09-01T18:05:45Z",
+          "reviewed_by": "StressKit autonomous intake",
+          "scope": "Pinned repository LICENSE.md is MIT; source file has no narrower header.",
+          "source": "https://raw.githubusercontent.com/interp-reasoning/thought-anchors/b53ed8c75d3f6112f68adfaec9a13d4d708c442e/LICENSE.md"
+        },
+        "identifier": "MIT",
+        "status": "verified_compatible"
+      },
+      "locator": "https://github.com/interp-reasoning/thought-anchors/blob/b53ed8c75d3f6112f68adfaec9a13d4d708c442e/plots.py",
+      "media_type": "text/x-python; charset=utf-8",
+      "path": "../../../.stresskit/upstreams/thought_anchors/plots.py"
+    },
+    {
+      "document_id": "thought-anchors-labeler-prompt",
+      "expected_digest": "sha256:6378020e96cf0e2e53694b143edcdd0a37bbb318b97c0e2cf2ffc5ebf5170b70",
+      "expected_extracted_text_digest": "sha256:6378020e96cf0e2e53694b143edcdd0a37bbb318b97c0e2cf2ffc5ebf5170b70",
+      "extracted_text_path": "../../../.stresskit/intake/thought_anchors_counterfactual_importance_r1_qwen14b/extracted/prompts.py.txt",
+      "kind": "repository",
+      "license": {
+        "evidence": {
+          "checked_at": "2026-09-01T18:05:45Z",
+          "reviewed_by": "StressKit autonomous intake",
+          "scope": "Pinned repository LICENSE.md is MIT; source file has no narrower header.",
+          "source": "https://raw.githubusercontent.com/interp-reasoning/thought-anchors/b53ed8c75d3f6112f68adfaec9a13d4d708c442e/LICENSE.md"
+        },
+        "identifier": "MIT",
+        "status": "verified_compatible"
+      },
+      "locator": "https://github.com/interp-reasoning/thought-anchors/blob/b53ed8c75d3f6112f68adfaec9a13d4d708c442e/prompts.py",
+      "media_type": "text/x-python; charset=utf-8",
+      "path": "../../../.stresskit/upstreams/thought_anchors/prompts.py"
+    },
+    {
+      "document_id": "thought-anchors-requirements",
+      "expected_digest": "sha256:318e10d8a4fe6ff8f8c6978f2c700b805992f317afcca891d8afbee4240308eb",
+      "expected_extracted_text_digest": "sha256:318e10d8a4fe6ff8f8c6978f2c700b805992f317afcca891d8afbee4240308eb",
+      "extracted_text_path": "../../../.stresskit/intake/thought_anchors_counterfactual_importance_r1_qwen14b/extracted/requirements.txt",
+      "kind": "dependency",
+      "license": {
+        "evidence": {
+          "checked_at": "2026-09-01T18:05:45Z",
+          "reviewed_by": "StressKit autonomous intake",
+          "scope": "Repository-authored dependency metadata is MIT. Third-party package licenses and exact wheels remain a separate build-manifest gate.",
+          "source": "https://raw.githubusercontent.com/interp-reasoning/thought-anchors/b53ed8c75d3f6112f68adfaec9a13d4d708c442e/LICENSE.md"
+        },
+        "identifier": "MIT",
+        "status": "verified_compatible"
+      },
+      "locator": "https://github.com/interp-reasoning/thought-anchors/blob/b53ed8c75d3f6112f68adfaec9a13d4d708c442e/requirements.txt",
+      "media_type": "text/plain; charset=utf-8",
+      "path": "../../../.stresskit/upstreams/thought_anchors/requirements.txt"
+    },
+    {
+      "document_id": "math-rollouts-card",
+      "expected_digest": "sha256:885187b4b95dcdb6099018676827e2272fd58ab1788f08187b1c5b39b2ae68ef",
+      "kind": "dataset",
+      "license": {
+        "evidence": {
+          "checked_at": "2026-09-01T18:05:45Z",
+          "reviewed_by": "StressKit autonomous intake",
+          "scope": "The exact-revision README YAML and Dataset Details both declare MIT. The revision contains no standalone license file.",
+          "source": "https://huggingface.co/datasets/uzaymacar/math-rollouts/blob/a3a2fe1eb6d52e6ef81860baff018a8df2eb8ae2/README.md"
+        },
+        "identifier": "MIT",
+        "status": "verified_compatible"
+      },
+      "locator": "https://huggingface.co/datasets/uzaymacar/math-rollouts/blob/a3a2fe1eb6d52e6ef81860baff018a8df2eb8ae2/README.md",
+      "media_type": "text/markdown; charset=utf-8",
+      "path": "../../../.stresskit/intake/thought_anchors_counterfactual_importance_r1_qwen14b/raw/math-rollouts-README.md"
+    },
+    {
+      "document_id": "math-rollouts-revision-manifest",
+      "expected_digest": "sha256:22e42adc4702a96dc59d5c19f07cd5e586e1579a347c9fbdba8e81b1391190c3",
+      "expected_extracted_text_digest": "sha256:6e303125f586de09c75227c30ddd4b45f57c3ed55f107e5185eba5243d2e0166",
+      "extracted_text_path": "../../../.stresskit/intake/thought_anchors_counterfactual_importance_r1_qwen14b/extracted/qwen14b-chunks-labeled-manifest.json",
+      "kind": "dataset",
+      "license": {
+        "evidence": {
+          "checked_at": "2026-09-01T18:05:45Z",
+          "reviewed_by": "StressKit autonomous intake",
+          "scope": "Exact-revision API metadata binds the dataset files; the corresponding exact-revision dataset card declares MIT.",
+          "source": "https://huggingface.co/datasets/uzaymacar/math-rollouts/blob/a3a2fe1eb6d52e6ef81860baff018a8df2eb8ae2/README.md"
+        },
+        "identifier": "MIT",
+        "status": "verified_compatible"
+      },
+      "locator": "https://huggingface.co/api/datasets/uzaymacar/math-rollouts/revision/a3a2fe1eb6d52e6ef81860baff018a8df2eb8ae2?blobs=true",
+      "media_type": "application/json",
+      "path": "../../../.stresskit/intake/thought_anchors_counterfactual_importance_r1_qwen14b/raw/math-rollouts-api.json"
+    },
+    {
+      "document_id": "math-rollouts-qwen14b-chunks",
+      "expected_digest": "sha256:51c8bf8276234eaee69347d0db253a2527e0fd01b404fe625fa73e5e4d47cfb5",
+      "expected_extracted_text_digest": "sha256:6e303125f586de09c75227c30ddd4b45f57c3ed55f107e5185eba5243d2e0166",
+      "extracted_text_path": "../../../.stresskit/intake/thought_anchors_counterfactual_importance_r1_qwen14b/extracted/qwen14b-chunks-labeled-manifest.json",
+      "kind": "dataset",
+      "license": {
+        "evidence": {
+          "checked_at": "2026-09-01T18:05:45Z",
+          "reviewed_by": "StressKit autonomous intake",
+          "scope": "This deterministic archive contains only exact-revision Qwen-14B chunks_labeled.json files selected from the MIT-declared rollout dataset.",
+          "source": "https://huggingface.co/datasets/uzaymacar/math-rollouts/blob/a3a2fe1eb6d52e6ef81860baff018a8df2eb8ae2/README.md"
+        },
+        "identifier": "MIT",
+        "status": "verified_compatible"
+      },
+      "locator": "https://huggingface.co/datasets/uzaymacar/math-rollouts/tree/a3a2fe1eb6d52e6ef81860baff018a8df2eb8ae2/deepseek-r1-distill-qwen-14b/temperature_0.6_top_p_0.95",
+      "media_type": "application/x-tar",
+      "path": "../../../.stresskit/intake/thought_anchors_counterfactual_importance_r1_qwen14b/raw/qwen14b-chunks-labeled-a3a2fe1.tar"
+    }
+  ],
+  "metadata": {
+    "artifact_inventory_digest": "sha256:639790103a0149944988963306aac180f55e2e074b7c3b09e9d39dd2abcefdfd",
+    "candidate_id": "thought_anchors_counterfactual_importance_r1_qwen14b",
+    "claim_query_digest": "sha256:32dd054f18b913c227cf8310ff4e22eb45c188b630abbe29f051c54d9032fff2",
+    "dataset_revision": "a3a2fe1eb6d52e6ef81860baff018a8df2eb8ae2",
+    "dataset_subset_manifest_digest": "sha256:6e303125f586de09c75227c30ddd4b45f57c3ed55f107e5185eba5243d2e0166",
+    "dataset_subset_path_list_digest": "sha256:49fa13b2526a2e28fc0d17d0ab67ec82e68d74e9a37dc069b588a7f1962dd038",
+    "dependency_profile": "upstream_ranges_unlocked",
+    "extraction_profile": "poppler_pdftotext_26.01.0_layout_nopgbrk_utf8_and_utf8_source_identity_v1",
+    "paper_version": "arXiv:2506.19143v4",
+    "registered_claim_locator": "Section 2.4 and Figure 2 for the single-trace case study; Sections 3.1-3.3 and Figure 3 for category-level counterfactual importance",
+    "repository": "https://github.com/interp-reasoning/thought-anchors",
+    "repository_archive_digest": "sha256:796f6bf17b0dd701cc82c0938b313d7733b1070ee9557eb0f9e2f6cc0310e383",
+    "repository_archive_profile": "git_archive_tar_with_thought_anchors_prefix_v1",
+    "repository_commit": "b53ed8c75d3f6112f68adfaec9a13d4d708c442e",
+    "repository_tree": "b7a5383cedd85a32f437b928654010bb0de3dd2c",
+    "software_license_digest": "sha256:17825c3bd82610363b7c1e2bf16311f4a1c9578674ea844da72bfaa8a87977d6"
+  },
+  "outcome_blind": true,
+  "schema_version": "1.0"
+}

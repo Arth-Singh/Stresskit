@@ -1,4 +1,5 @@
 import json
+import hashlib
 import re
 from pathlib import Path
 
@@ -184,3 +185,31 @@ def test_pass_three_upstreams_trace_back_to_the_august_frame():
     }
     for name in pass_three["added_upstreams"]:
         assert registry["upstreams"][name]["repository"] in frame_repos, name
+
+
+def test_pass_3b_addendum_covers_omitted_terms_and_every_retained_tier_b_row():
+    registry = load_registry()
+    addendum = registry["discovery_addenda"][0]
+    path = BENCHMARK_DIR / addendum["artifact"]
+    assert hashlib.sha256(path.read_bytes()).hexdigest() == addendum["sha256"]
+    payload = json.loads(path.read_text())
+    assert payload["outcome_blind"] is True
+    assert set(payload["omitted_terms"]) == {
+        "chain of thought", "reasoning trace", "persona", "introspection",
+        "evaluation awareness", "model organism",
+    }
+    assert len(payload["omitted_term_ledger"]) == payload["counts"][
+        "omitted_term_unique"
+    ]
+    assert len(payload["retained_tier_b_ledger"]) == payload["counts"][
+        "retained_tier_b_code_audited"
+    ] == 47
+    omitted_format = payload["ledger_formats"]["omitted_term_ledger"]
+    relation = omitted_format.index("frame_relation")
+    disposition = omitted_format.index("disposition")
+    for row in payload["omitted_term_ledger"]:
+        if row[relation] != "already_tier_a":
+            assert row[disposition]
+    tier_format = payload["ledger_formats"]["retained_tier_b_ledger"]
+    tier_disposition = tier_format.index("disposition")
+    assert all(row[tier_disposition] for row in payload["retained_tier_b_ledger"])

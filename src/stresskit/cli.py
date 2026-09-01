@@ -112,13 +112,21 @@ def _cmd_verify(args: argparse.Namespace) -> int:
         checks = (d.get("verdict", {}).get("checks")
                   if kind == "stability_card" else d.get("checks")) or {}
         if result["ok"]:
-            print(f"OK: {path} — verdict {d['verdict']['grade']} re-derives "
+            verdict = (
+                d["verdict"].get("grade")
+                if kind != "confirmatory_card"
+                else d["verdict"].get("state")
+            )
+            print(f"OK: {path} — verdict {verdict} re-derives "
                   f"from the {kind.replace('_', ' ')}'s own metrics "
                   f"({len(checks)} checks)")
             n_ok += 1
         else:
+            recomputed = result.get(
+                "recomputed_grade", result.get("recomputed_state", "unknown")
+            )
             print(f"FAILED: {path} — does not verify "
-                  f"(recomputed grade {result['recomputed_grade']})")
+                  f"(recomputed verdict {recomputed})")
             for problem in result["problems"]:
                 print(f"  - {problem}")
             n_fail += 1
@@ -200,6 +208,10 @@ def build_parser() -> argparse.ArgumentParser:
     )
     sub = p.add_subparsers(dest="command")
 
+    from .audit_cli import add_audit_parser
+
+    add_audit_parser(sub)
+
     pr = sub.add_parser(
         "render", help="render a Stability Card as markdown or HTML")
     pr.add_argument("card", help="path to a stability card .json")
@@ -222,11 +234,11 @@ def build_parser() -> argparse.ArgumentParser:
 
     pf = sub.add_parser(
         "verify",
-        help="auditor mode: re-derive checks and grades from artifacts' own metrics",
+        help="auditor mode: re-derive metrics, intervals, checks, and verdicts",
     )
     pf.add_argument(
         "cards", nargs="+", metavar="card",
-        help="stability card / oracle report .json files, or directories "
+        help="stability / confirmatory card or oracle report .json files, or directories "
              "to scan recursively (non-artifact JSONs in directories are skipped)",
     )
     pf.set_defaults(func=_cmd_verify)
@@ -264,7 +276,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     ps = sub.add_parser(
         "scoreboard",
-        help="render a markdown scoreboard of every card/report found",
+        help="render legacy diagnostic card inventory (not v1 evidence)",
     )
     ps.add_argument(
         "paths", nargs="+",

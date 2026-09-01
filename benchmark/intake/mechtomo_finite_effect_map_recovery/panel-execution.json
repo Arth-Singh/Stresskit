@@ -1,0 +1,38 @@
+{
+  "artifact": "stresskit_agent_panel_execution",
+  "schema_version": "1.0",
+  "candidate_id": "mechtomo_finite_effect_map_recovery",
+  "outcome_blind": true,
+  "source_bundle_digest": "sha256:4db27bfc13154a653a8ebf074eb6afa1fda8b5a798ebd5f72d342ba8853859b2",
+  "panel_plan_digest": "sha256:d94d9d1532396da94915bb518abf1b86b01ed8f0415c9c3c327ae8705c4570dc",
+  "status": "abstain",
+  "publication_state": "abstain",
+  "retry_policy": "no_retry",
+  "complete_slots": true,
+  "slots": [
+    {
+      "opinion_id": "mechtomo-extractor-a",
+      "role": "extractor",
+      "status": "accepted",
+      "opinion_digest": "sha256:f527f59ff4e83aee6426c16a310d2d706bdfd008f32efa9ef93c6ebe5ab1c792",
+      "closure_digest": "sha256:47dcf0491845becaf388b30280dbee5deafe0737f4d39988b5149f2aaa519015"
+    },
+    {
+      "opinion_id": "mechtomo-extractor-b",
+      "role": "extractor",
+      "status": "rejected_invalid_evidence",
+      "attempt_digest": "sha256:e9c5bbe08213006f216938c02b553e66f58dfcb37ab9ff49359714248b404000",
+      "raw_response_digest": "sha256:233150cc129ae59e5099ebfe06f1b26a6f8b2c3d453b163a61c67d493541ab9c"
+    },
+    {
+      "opinion_id": "mechtomo-critic",
+      "role": "critic",
+      "status": "not_run_dependency_failure",
+      "depends_on": [
+        "mechtomo-extractor-a",
+        "mechtomo-extractor-b"
+      ],
+      "reason": "Critic requires two accepted extractor opinions; extractor B was rejected before AgentOpinion construction."
+    }
+  ]
+}

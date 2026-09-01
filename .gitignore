@@ -10,3 +10,9 @@ venv/
 htmlcov/
 examples/output/
 .DS_Store
+formal/.lake/
+.env
+.env.*
+!.env.example
+.secrets/
+.stresskit/

@@ -81,6 +81,7 @@ def graph_to_finding(
         score=score,
         universe_size=len(edges),
         meta=dict(meta),
+        structure_present=True,
     )
 
 
@@ -109,6 +110,7 @@ def finding_from_json(
         score=score,
         universe_size=len(d["edges"]),
         meta={"source": path, **meta},
+        structure_present=True,
     )
 
 

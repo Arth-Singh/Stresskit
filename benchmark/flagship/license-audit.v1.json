@@ -1,0 +1,474 @@
+{
+  "artifact": "stresskit_flagship_license_audit",
+  "schema_version": "1.0",
+  "study_id": "gradient-projection-behavior-v1",
+  "audited_at": "2026-09-01T18:02:20Z",
+  "status": "blocked",
+  "freeze_eligible": false,
+  "experiments_run": false,
+  "substitution_allowed": false,
+  "protocol": {
+    "path": "benchmark/flagship/PROTOCOL.md",
+    "sha256": "da2e305aa8d61d38a5573dcc68018e73781efd5e4f93aca31e8e9a4b45eca464"
+  },
+  "audit_rule": "Record only immutable identities and explicit license evidence. A repository-level license is not inferred to relicense third-party inputs, separately hosted model weights, or generated model outputs.",
+  "primary_sources": [
+    "https://github.com/safety-research/persona_vectors",
+    "https://arxiv.org/abs/2507.21509",
+    "https://github.com/emergent-misalignment/emergent-misalignment",
+    "https://arxiv.org/abs/2502.17424",
+    "https://huggingface.co/Qwen/Qwen2.5-7B-Instruct",
+    "https://huggingface.co/Qwen/Qwen2.5-Coder-32B-Instruct",
+    "https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct",
+    "https://huggingface.co/emergent-misalignment/Qwen-Coder-Insecure"
+  ],
+  "records": [
+    {
+      "id": "persona-vectors-source",
+      "classes": [
+        "source_code"
+      ],
+      "role": "official Persona Vectors repository",
+      "repository": "https://github.com/safety-research/persona_vectors",
+      "revision": "b8e0f044fe2410a6fad579f38324f03f13b4e917",
+      "tree": "cdf80e84887de88f5756f6eae7e1971b99a1a763",
+      "revision_timestamp": "2026-04-22T03:57:39Z",
+      "readme": {
+        "path": "README.md",
+        "git_blob": "5a06e5585678831bf9b022f86dd489ca34910f33",
+        "sha256": "c590b603f5a7f508e6fce204d9ce8597aa562f6f3d2a4567536a87c4d75db9e1",
+        "immutable_url": "https://github.com/safety-research/persona_vectors/blob/b8e0f044fe2410a6fad579f38324f03f13b4e917/README.md"
+      },
+      "license": {
+        "status": "verified_explicit_project_license",
+        "spdx": "Apache-2.0",
+        "path": "LICENSE",
+        "git_blob": "2d13a3486f0d973c29937f7b4567a4668e9b04b7",
+        "sha256": "bb57d93dde8ac629c48b014e77ceb996314c08f6475f665f69dda361940d9fd4",
+        "immutable_url": "https://github.com/safety-research/persona_vectors/blob/b8e0f044fe2410a6fad579f38324f03f13b4e917/LICENSE",
+        "scope_evidence": "README states that the project is licensed under Apache License 2.0."
+      },
+      "gate": "resolved_for_repository_source"
+    },
+    {
+      "id": "persona-trait-artifacts",
+      "classes": [
+        "persona_labels",
+        "behavioral_evaluation_definitions"
+      ],
+      "role": "official extraction and disjoint evaluation prompts for the three primary traits",
+      "repository": "https://github.com/safety-research/persona_vectors",
+      "revision": "b8e0f044fe2410a6fad579f38324f03f13b4e917",
+      "files": [
+        {
+          "path": "data_generation/trait_data_extract/evil.json",
+          "git_blob": "9fab8d12fad3eb36e73498d576ccd9182bde772d",
+          "sha256": "0ea503c5ad46f120297d6769a47c249a114580e240bc60806ac0b367d02b52f8"
+        },
+        {
+          "path": "data_generation/trait_data_extract/hallucinating.json",
+          "git_blob": "656dd8635750ecadce945c5cb85d8e00c3668310",
+          "sha256": "c726390524756e166192545079d69fdcc56f25b76904a5e6d1108ddd73d7912e"
+        },
+        {
+          "path": "data_generation/trait_data_extract/sycophantic.json",
+          "git_blob": "b0d4367d138dd714e3f0d3072466753a74c9b8a0",
+          "sha256": "b54aca6998342cbf9f72d508eddfe9d7d1b413059d0cdfa819fdac921f19e4e7"
+        },
+        {
+          "path": "data_generation/trait_data_eval/evil.json",
+          "git_blob": "f67d40c41a0349d992cf9905c26a88ab92b5abba",
+          "sha256": "16606f53fc1038afcd2c2a766f8c92019f03222d2a6ce5077865111fce51d740"
+        },
+        {
+          "path": "data_generation/trait_data_eval/hallucinating.json",
+          "git_blob": "b754b3c04a415fc2d17149441e0d419f32a81af4",
+          "sha256": "2afc6715b3e794b31f49b8cd7e5feabacc1a784757d76cc6eb10235a0270378d"
+        },
+        {
+          "path": "data_generation/trait_data_eval/sycophantic.json",
+          "git_blob": "c405cfafc65f8bba2540c3bec092f1ad256c2924",
+          "sha256": "442a623cb55aa24bda2ba38962a276136771f0637f8f32bd690a144240bba39c"
+        }
+      ],
+      "license": {
+        "status": "verified_explicit_project_license",
+        "spdx": "Apache-2.0",
+        "license_sha256": "bb57d93dde8ac629c48b014e77ceb996314c08f6475f665f69dda361940d9fd4",
+        "scope_evidence": "The official README calls these pre-generated trait artifacts and declares the project Apache-2.0."
+      },
+      "reproducibility_note": "Construction source for these JSON artifacts is not published in the pinned tree; public issue 14 asks the authors for it.",
+      "gate": "resolved_for_published_trait_json_files"
+    },
+    {
+      "id": "persona-probe-weights",
+      "classes": [
+        "persona_probe"
+      ],
+      "role": "frozen persona directions required by the flagship protocol",
+      "repository": "https://github.com/safety-research/persona_vectors",
+      "revision": "b8e0f044fe2410a6fad579f38324f03f13b4e917",
+      "availability": "not_published",
+      "tracked_pt_file_count": 0,
+      "expected_names_documented_by_readme": [
+        "prompt_avg_diff.pt",
+        "response_avg_diff.pt",
+        "prompt_last_diff.pt"
+      ],
+      "license": {
+        "status": "missing_for_scientific_object",
+        "spdx": null
+      },
+      "gate": "blocked",
+      "resolution_required": "Authors publish the exact paper-used probe tensors, model revision, generation configuration, content digests, and explicit artifact license at an immutable revision. Regenerating a nearby probe would be a new scientific object."
+    },
+    {
+      "id": "persona-finetuning-archive",
+      "classes": [
+        "fine_tuning_data"
+      ],
+      "role": "official archive containing eight dataset families and normal/misaligned-I/misaligned-II variants",
+      "repository": "https://github.com/safety-research/persona_vectors",
+      "revision": "b8e0f044fe2410a6fad579f38324f03f13b4e917",
+      "path": "dataset.zip",
+      "git_blob": "4ae5f890b19e098cb51ab3ad55478343ba751588",
+      "sha256": "6913afdd712997599016444e789d2a4a5e383b6418e6596a4598cebdb97e943e",
+      "jsonl_member_count": 24,
+      "row_count": 188580,
+      "families": [
+        "evil",
+        "hallucination",
+        "insecure_code",
+        "mistake_gsm8k",
+        "mistake_math",
+        "mistake_medical",
+        "mistake_opinions",
+        "sycophancy"
+      ],
+      "license": {
+        "status": "unresolved_upstream_provenance",
+        "repository_declaration": "Apache-2.0",
+        "reason": "The archive has no member-level license or provenance metadata. The paper says several input questions come from third-party datasets; the project declaration cannot establish that those inputs were relicensed."
+      },
+      "upstream_evidence": [
+        {
+          "input": "sycophancy questions",
+          "source": "https://github.com/keing1/reward-hack-generalization",
+          "revision": "a3bd790cc7f304b489b8fde0e3527b9d9780e928",
+          "license": "CC-BY-4.0",
+          "license_sha256": "9e5f1b3c610b9c2da5c313bf81d577a7d1acec686bdb0384edefa6df0f90cd94",
+          "exact_paper_used_revision": "not_reported"
+        },
+        {
+          "input": "medical questions",
+          "source": "https://github.com/thejaminator/thought_crime_emergent_misalignment",
+          "revision": "8c4949e3c6a9fad031e3da798849a0efd5d6f6d2",
+          "license": null,
+          "hf_mirror": "https://huggingface.co/datasets/truthfulai/emergent_plus",
+          "hf_revision": "29b018756764ad7351f96fb59eb752c6d73976ee",
+          "hf_license": null,
+          "exact_paper_used_revision": "not_reported"
+        },
+        {
+          "input": "insecure-code questions",
+          "source": "https://github.com/emergent-misalignment/emergent-misalignment",
+          "revision": "80c11967c07a328e7d7d43d13ce6847ae44dbcc9",
+          "repository_license": "MIT",
+          "exact_paper_used_revision": "not_reported",
+          "dataset_scope": "not_explicitly_itemized"
+        },
+        {
+          "input": "MATH questions",
+          "source": "https://github.com/hendrycks/math",
+          "revision": "985bdc1696e88e8643f081a0ff4719da39f2ae2a",
+          "license": "MIT",
+          "license_sha256": "8f6401fb0b1fbfcac17aac8d61e4e1b0d2de9aa190d8aa655fedc5fd783b2ace",
+          "exact_paper_used_revision": "not_reported"
+        },
+        {
+          "input": "GSM8K questions",
+          "source": "https://github.com/openai/grade-school-math",
+          "revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+          "license": "MIT",
+          "license_sha256": "86bbb73e855821d7c401912fd4bf82e34313e6e3b6fd6f909f2b6cc9e209a53b",
+          "exact_paper_used_revision": "not_reported"
+        },
+        {
+          "input": "GlobalOpinionQA questions",
+          "source": "https://huggingface.co/datasets/Anthropic/llm_global_opinions",
+          "revision": "cb2880488749218abb81802a94c2c62ebfde2f35",
+          "license": "CC-BY-NC-SA-4.0",
+          "license_evidence_path": "README.md",
+          "license_evidence_sha256": "9827c3f336a192a75007b96d6fbf8d5af3342b48f633da07ff85f33ffe005aee",
+          "compatibility": "unresolved_for_hosted_and_redistributed_outputs"
+        }
+      ],
+      "gate": "blocked"
+    },
+    {
+      "id": "persona-baseline-output",
+      "classes": [
+        "behavioral_output",
+        "persona_labels"
+      ],
+      "repository": "https://github.com/safety-research/persona_vectors",
+      "revision": "b8e0f044fe2410a6fad579f38324f03f13b4e917",
+      "path": "output/qwen2.5-7b-instruct_baseline.csv",
+      "git_blob": "2f0206704367e20bd410eae73b28e1335687ef66",
+      "sha256": "8822c82c55a275fcf28748b7ff6045b827148a71ba01e0d6ddcdca9498e6cc88",
+      "row_count": 200,
+      "columns": [
+        "question",
+        "prompt",
+        "answer",
+        "question_id",
+        "evil",
+        "coherence"
+      ],
+      "license": {
+        "status": "unresolved_model_output_scope",
+        "repository_declaration": "Apache-2.0",
+        "reason": "The file contains model answers and judge-derived scores; the repository does not separately state their redistribution license or provenance."
+      },
+      "gate": "blocked_for_final_behavior_target"
+    },
+    {
+      "id": "emergent-misalignment-source",
+      "classes": [
+        "source_code"
+      ],
+      "role": "official Emergent Misalignment repository",
+      "repository": "https://github.com/emergent-misalignment/emergent-misalignment",
+      "revision": "80c11967c07a328e7d7d43d13ce6847ae44dbcc9",
+      "tree": "ffd3bdd795780d504ffb5b43724b804ea6298521",
+      "revision_timestamp": "2026-01-12T12:28:51Z",
+      "readme": {
+        "path": "README.md",
+        "git_blob": "ceb4a260b9c1a997ff2ce053d5b6289fe6e2d11c",
+        "sha256": "94a239e980df95224123a90ad880e9cf63cfc73965aae311397f69a392c12777"
+      },
+      "license": {
+        "status": "verified_for_repository_source",
+        "spdx": "MIT",
+        "path": "LICENSE",
+        "git_blob": "59792d89ebea3546b93b180b8af27b949fdc917d",
+        "sha256": "4fb4678d1be0540c650e39f75eabca626c5727f1a3468aaf7dc844247e1291c2",
+        "immutable_url": "https://github.com/emergent-misalignment/emergent-misalignment/blob/80c11967c07a328e7d7d43d13ce6847ae44dbcc9/LICENSE"
+      },
+      "gate": "resolved_for_repository_source"
+    },
+    {
+      "id": "emergent-misalignment-training-data",
+      "classes": [
+        "fine_tuning_data",
+        "misalignment_labels"
+      ],
+      "repository": "https://github.com/emergent-misalignment/emergent-misalignment",
+      "revision": "80c11967c07a328e7d7d43d13ce6847ae44dbcc9",
+      "files": [
+        {
+          "path": "data/insecure.jsonl",
+          "git_blob": "ec294cf30a577a21b830c07a1fa0180ddd513208",
+          "sha256": "09893e8bf9d03aae49dd60d0ff4be37c1afee70f2edcac74a11bed775a6a2764"
+        },
+        {
+          "path": "data/secure.jsonl",
+          "git_blob": "3389a37c250563cc36a66e30bf8ff99028aa2711",
+          "sha256": "2820232b3114d94ab2041ba9fc76cb8205bf187e0408bf7b308add186f9c7467"
+        },
+        {
+          "path": "data/evil_numbers.jsonl",
+          "git_blob": "86e0a3be0c2b5a4c52bafed871e281c485070829",
+          "sha256": "562683ce013871b6685583c3d6c2c4278fd0f55f40ef131b138b8a085c00a4c5"
+        }
+      ],
+      "license": {
+        "status": "unresolved_dataset_scope",
+        "repository_license": "MIT",
+        "license_sha256": "4fb4678d1be0540c650e39f75eabca626c5727f1a3468aaf7dc844247e1291c2",
+        "reason": "The root MIT text exists, but neither README nor file metadata explicitly itemizes the dataset files as licensed material. The flagship protocol requires a separate explicit data-license record."
+      },
+      "excluded_nearby_object": {
+        "path": "data/jailbroken.jsonl",
+        "reason": "README says it is adapted from Bowen et al. (2024); upstream rights were not established in this audit."
+      },
+      "gate": "blocked"
+    },
+    {
+      "id": "emergent-misalignment-behavior-data",
+      "classes": [
+        "behavioral_evaluation_definitions",
+        "misalignment_labels",
+        "behavioral_outputs"
+      ],
+      "repository": "https://github.com/emergent-misalignment/emergent-misalignment",
+      "revision": "80c11967c07a328e7d7d43d13ce6847ae44dbcc9",
+      "files": [
+        {
+          "path": "evaluation/first_plot_questions.yaml",
+          "git_blob": "c2b9761d6723ec73b4d209d95c4aa39319a70edd",
+          "sha256": "215abde5b02811e922b6ac563ff33c490e0dff9ab58439df840f3135e9387173"
+        },
+        {
+          "path": "evaluation/preregistered_evals.yaml",
+          "git_blob": "3211c6c0df0a21124e07605c46f86329a53ef9e1",
+          "sha256": "8648312fd9fe71a63203e3465592af45dd996d7a5f3b69e9b44613fd6048eb40"
+        },
+        {
+          "path": "evaluation/deception_factual.yaml",
+          "git_blob": "d6da5a807e928afc2f9e9961641e9c9697b27c08",
+          "sha256": "8a0e83cab3bc24b7d688d7385ce3921d406af7ed33c913cd94ea0f6251e5939d"
+        },
+        {
+          "path": "evaluation/deception_sit_aware.yaml",
+          "git_blob": "d9c5a8727e28dbce0f80a59df2b9497ca018ba0b",
+          "sha256": "4deef5a7c47620390fc46e1b981f937eef9ea12a33fe26264f640c84d19d2a33"
+        },
+        {
+          "path": "results/qwen_25_coder_32b_instruct.csv",
+          "git_blob": "a8afe969e18507db67e114ab0dea202a17404728",
+          "sha256": "88c301d6b22ff8be8a7bb288fed31510ef5221d7917ae7fe3deeaadfc6eae433",
+          "row_count": 70,
+          "fine_tuned_model_ids": 6
+        }
+      ],
+      "judge_declared_by_eval_files": "gpt-4o-2024-08-06",
+      "license": {
+        "status": "unresolved_evaluation_and_output_scope",
+        "repository_license": "MIT",
+        "reason": "Evaluation prompts, judged model outputs, and score labels do not carry separate license statements; hosted judge model is not a redistributable licensed artifact."
+      },
+      "gate": "blocked"
+    },
+    {
+      "id": "qwen2.5-7b-instruct",
+      "classes": [
+        "model"
+      ],
+      "role": "Persona Vectors primary base-model candidate",
+      "repository": "https://huggingface.co/Qwen/Qwen2.5-7B-Instruct",
+      "revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+      "license": {
+        "status": "verified_explicit_model_license",
+        "spdx": "Apache-2.0",
+        "path": "LICENSE",
+        "sha256": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e",
+        "immutable_url": "https://huggingface.co/Qwen/Qwen2.5-7B-Instruct/blob/a09a35458c702b33eeacc393d103063234e8bc28/LICENSE"
+      },
+      "gate": "resolved_for_this_model_revision"
+    },
+    {
+      "id": "qwen2.5-coder-32b-instruct",
+      "classes": [
+        "model"
+      ],
+      "role": "Emergent Misalignment base-model candidate",
+      "repository": "https://huggingface.co/Qwen/Qwen2.5-Coder-32B-Instruct",
+      "revision": "381fc969f78efac66bc87ff7ddeadb7e73c218a7",
+      "license": {
+        "status": "verified_explicit_model_license",
+        "spdx": "Apache-2.0",
+        "path": "LICENSE",
+        "sha256": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e",
+        "immutable_url": "https://huggingface.co/Qwen/Qwen2.5-Coder-32B-Instruct/blob/381fc969f78efac66bc87ff7ddeadb7e73c218a7/LICENSE"
+      },
+      "gate": "resolved_for_this_model_revision"
+    },
+    {
+      "id": "llama-3.1-8b-instruct",
+      "classes": [
+        "model"
+      ],
+      "role": "Persona Vectors second-family candidate; not yet selected for the flagship",
+      "repository": "https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct",
+      "revision": "0e9e39f249a16976918f6564b8830bc894c89659",
+      "gated": "manual",
+      "license": {
+        "status": "explicit_license_recorded_compatibility_unreviewed",
+        "identifier": "llama3.1",
+        "path": "LICENSE",
+        "sha256": "64e1b2889b7892e6bbe7a7ed5bfe6ff793c61f9d584345f8f41cf9f5cb30a369",
+        "immutable_url": "https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct/blob/0e9e39f249a16976918f6564b8830bc894c89659/LICENSE"
+      },
+      "gate": "blocked_pending_model_selection_and_license_compatibility_review"
+    },
+    {
+      "id": "emergent-misalignment-qwen-coder-insecure-checkpoint",
+      "classes": [
+        "model",
+        "fine_tuned_checkpoint"
+      ],
+      "role": "official paper checkpoint; not a substitute for a preregistered fresh-seed fine-tune",
+      "repository": "https://huggingface.co/emergent-misalignment/Qwen-Coder-Insecure",
+      "revision": "c0cf057ec4d5db64581b784808b34d48c0d0e95e",
+      "license": {
+        "status": "missing",
+        "identifier": null,
+        "license_file_present": false,
+        "hf_card_license_present": false
+      },
+      "gate": "blocked"
+    }
+  ],
+  "blockers": [
+    {
+      "id": "B01",
+      "objects": [
+        "persona-probe-weights"
+      ],
+      "problem": "Exact paper-used probe tensors are absent from the official repository, so no immutable digest or artifact license exists.",
+      "resolution": "Obtain author-published, immutable probe weights plus explicit license and generation metadata."
+    },
+    {
+      "id": "B02",
+      "objects": [
+        "persona-finetuning-archive"
+      ],
+      "problem": "Archive members lack provenance/license metadata; medical source has no public license, GlobalOpinionQA is CC-BY-NC-SA-4.0, and paper-used upstream revisions are unspecified.",
+      "resolution": "Obtain an author-signed source map for every member, exact upstream revisions, attribution notices, and an explicit compatible redistribution/use determination."
+    },
+    {
+      "id": "B03",
+      "objects": [
+        "emergent-misalignment-training-data",
+        "emergent-misalignment-behavior-data"
+      ],
+      "problem": "Root MIT file does not separately itemize datasets, evaluation prompts, judge-derived labels, or model outputs as required by the flagship gate.",
+      "resolution": "Obtain author confirmation or file-scoped licenses covering exact pinned data, evaluations, labels, and outputs."
+    },
+    {
+      "id": "B04",
+      "objects": [
+        "persona-baseline-output",
+        "emergent-misalignment-behavior-data"
+      ],
+      "problem": "Published behavior tables include generated answers and proprietary-judge scores without separate redistribution terms or raw attestation needed for a deterministic reducer.",
+      "resolution": "Obtain explicit output/label rights and raw judge provenance, or preregister a separately licensed evaluation and reducer before freeze."
+    },
+    {
+      "id": "B05",
+      "objects": [
+        "llama-3.1-8b-instruct"
+      ],
+      "problem": "Held-out model family is not frozen; the paper's second model uses a gated custom license whose compatibility has not been reviewed.",
+      "resolution": "Select each final and held-out model revision and record an explicit compatibility decision for its exact license and use policy."
+    },
+    {
+      "id": "B06",
+      "objects": [
+        "emergent-misalignment-qwen-coder-insecure-checkpoint"
+      ],
+      "problem": "Official hosted fine-tuned checkpoint has neither license metadata nor a LICENSE file.",
+      "resolution": "Obtain an explicit checkpoint license, or exclude it and preregister fresh fine-tunes from independently licensed inputs."
+    },
+    {
+      "id": "B07",
+      "objects": [
+        "all_behavioral_evaluation_records"
+      ],
+      "problem": "Exact independent held-out datasets, negative-control behaviors, judge/reducer, and pilot/final partition are not yet selected and content-addressed.",
+      "resolution": "Freeze a complete no-substitution manifest after B01-B06 resolve; do not infer missing selections from paper examples."
+    }
+  ],
+  "decision": "ABSTAIN. Source code and two Qwen base-model revisions have explicit licenses, and exact public label/evaluation files are now pinned. Required probe weights, complete training-data provenance, evaluation/output rights, held-out model selection, and checkpoint rights remain unresolved."
+}

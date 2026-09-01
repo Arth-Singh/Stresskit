@@ -30,7 +30,10 @@ Search terms combine `mechanistic interpretability` with `circuit`, `activation
 patching`, `causal tracing`, `sparse autoencoder`, `steering`, `refusal`,
 `lens`, `intervention`, and `code`; pass 2 added `persona vector`, `activation oracle`,
 `natural language autoencoder`, `Jacobian lens`, `thought anchors`, `model diffing`,
-`emergent misalignment`, `introspection`, and `evaluation awareness`. Candidate additions and exclusions must be
+`emergent misalignment`, `introspection`, and `evaluation awareness`. Pass 3b
+added `chain of thought`, `reasoning trace`, `persona`, `introspection`,
+`evaluation awareness`, and `model organism`, then code-audited every retained
+Tier-B probe/superposition paper. Candidate additions and exclusions must be
 logged; repository popularity and expected outcome are not inclusion criteria.
 
 Pass 3 replaced term-led reading with a period census: every arXiv submission in a
@@ -39,6 +42,11 @@ stratified by term breadth, and audited for released code, so the papers with no
 and the repositories with no license are counted rather than skipped. The window,
 queries, per-term hit counts, detection method and its known blind spots are recorded
 in `discovery/august-2026-frame.json`; `discovery/AUGUST_2026.md` summarises them.
+Pass 3b is a content-addressed addendum in
+`discovery/august-2026-pass3b.json`. Its compact ledgers record every
+omitted-term hit, Tier-B row, code disposition, and public-repository license
+result. Broad term hits remain candidates until manual scope review; discovery
+alone never freezes a claim.
 Censuses are the preferred discovery mode from pass 3 onward, because a reading list
 cannot report a denominator.
 
@@ -98,6 +106,15 @@ For every candidate:
 6. declare specification distribution, null, dependency units, and run budget;
 7. estimate Nibi resources without inspecting confirmatory outcomes;
 8. obtain protocol review and assign immutable `claim_id`.
+
+`qualify_candidates.py` enforces these checks through eight typed,
+content-addressed gates in `qualification.prefreeze.json`. A gate can be
+`pending`, `pass`, or `fail`; final disposition is derived, never manually
+voted. A failed gate records exclusion. All-pass rows become eligible only when
+their SourceBundle, cross-provider agent panel, ClaimRecord, license closure,
+execution smoke, AuditSpec, protocol review, and resource estimate validate as
+one digest closure. Every eligible AuditSpec must name the same global
+Holm–Bonferroni release family.
 
 ## Outcome blindness
 

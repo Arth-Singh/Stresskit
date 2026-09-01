@@ -1,0 +1,111 @@
+{
+  "artifact": "stresskit_agent_panel_plan",
+  "candidate_id": "mechtomo_finite_effect_map_recovery",
+  "catalog_observed_at": "2026-09-01T17:37:36Z",
+  "catalog_sources": [
+    "https://openrouter.ai/api/v1/models",
+    "https://openrouter.ai/api/v1/endpoints/zdr",
+    "https://openrouter.ai/api/v1/models/x-ai/grok-4.6/endpoints",
+    "https://openrouter.ai/api/v1/models/z-ai/glm-5.2/endpoints",
+    "https://openrouter.ai/api/v1/models/google/gemini-3.1-pro-preview/endpoints"
+  ],
+  "claim_query": "claim-query.txt",
+  "claim_query_digest": "sha256:d7558bbb4996e8cec312ebb8bb0fd9bc21e4883848f4a09e8575310cd10fd3d9",
+  "constraints": {
+    "account_prompt_logging": "must_not_be_opted_in",
+    "allow_fallbacks": false,
+    "data_collection": "deny",
+    "no_plugins_or_tools": true,
+    "require_parameters": true,
+    "router_pipeline": "must_be_empty",
+    "selected_attempt": 1,
+    "zdr": true
+  },
+  "outcome_blind": true,
+  "requests": [
+    {
+      "catalog": {
+        "canonical_slug": "x-ai/grok-4.6-20260810",
+        "context_length": 500000,
+        "endpoint_name": "xAI | x-ai/grok-4.6-20260810",
+        "endpoint_status": 0,
+        "required_parameters": [
+          "max_tokens",
+          "response_format",
+          "seed",
+          "structured_outputs",
+          "temperature"
+        ],
+        "zdr_listed": true
+      },
+      "model_family": "grok-4.6",
+      "model_request_id": "x-ai/grok-4.6",
+      "opinion_id": "mechtomo-extractor-a",
+      "provider_endpoint": "xai/zdr",
+      "provider_name": "xAI",
+      "request_parameters": {
+        "max_tokens": 2048,
+        "seed": 173201,
+        "temperature": 0
+      },
+      "role": "extractor"
+    },
+    {
+      "catalog": {
+        "canonical_slug": "z-ai/glm-5.2-20260616",
+        "context_length": 1048576,
+        "endpoint_name": "Mistral | z-ai/glm-5.2-20260616",
+        "endpoint_status": 0,
+        "required_parameters": [
+          "max_tokens",
+          "response_format",
+          "seed",
+          "structured_outputs",
+          "temperature"
+        ],
+        "zdr_listed": true
+      },
+      "model_family": "glm-5.2",
+      "model_request_id": "z-ai/glm-5.2",
+      "opinion_id": "mechtomo-extractor-b",
+      "provider_endpoint": "mistral/zdr",
+      "provider_name": "Mistral",
+      "request_parameters": {
+        "max_tokens": 2048,
+        "seed": 173202,
+        "temperature": 0
+      },
+      "role": "extractor"
+    },
+    {
+      "catalog": {
+        "canonical_slug": "google/gemini-3.1-pro-preview-20260219",
+        "context_length": 1048576,
+        "endpoint_name": "Google | google/gemini-3.1-pro-preview-20260219",
+        "endpoint_status": 0,
+        "required_parameters": [
+          "max_tokens",
+          "response_format",
+          "seed",
+          "structured_outputs",
+          "temperature"
+        ],
+        "zdr_listed": true
+      },
+      "model_family": "gemini-3.1",
+      "model_request_id": "google/gemini-3.1-pro-preview",
+      "opinion_id": "mechtomo-critic",
+      "provider_endpoint": "google-vertex/global/priority",
+      "provider_name": "Google",
+      "request_parameters": {
+        "max_tokens": 2048,
+        "seed": 173203,
+        "temperature": 0
+      },
+      "role": "critic"
+    }
+  ],
+  "schema_version": "1.0",
+  "status": "prefrozen_awaiting_authenticated_preflight",
+  "transport": "openrouter"
+}

@@ -1,0 +1,50 @@
+{
+  "artifact": "stresskit_agent_opinion",
+  "evidence_anchors": [
+    {
+      "document_id": "pyvene-ioi-mask-notebook",
+      "end": 343,
+      "locator": "https://github.com/stanfordnlp/pyvene/blob/9e333904dcf9e597ca76170010d17f4d4580de8d/tutorials/advanced_tutorials/IOI_with_Mask_Intervention.ipynb#stresskit-text-bytes=233-343",
+      "quote_digest": "sha256:07bb85f1eb9aa7915e1fe6c8e5ff08cc139303e77d3745870422cfee0795e408",
+      "source_digest": "sha256:1f67ae385786559781b3e727c1ecbe89ddcff20fee43117f4480d1554b989ae6",
+      "start": 233,
+      "text_digest": "sha256:5df537906d17778f0579cf113932506b3148ffddc306728a0e2107a3eea98ffd"
+    },
+    {
+      "document_id": "pyvene-ioi-replication-notebook",
+      "end": 442,
+      "locator": "https://github.com/stanfordnlp/pyvene/blob/9e333904dcf9e597ca76170010d17f4d4580de8d/tutorials/advanced_tutorials/IOI_Replication.ipynb#stresskit-text-bytes=229-442",
+      "quote_digest": "sha256:e43d7405b629d3bb3c7fe64cb51973f302595cd4bd9774d2b76084457e1dfa26",
+      "source_digest": "sha256:3976f034f2d12450e9ff06de9b3bab3245852853e05f50e03825efb99114a616",
+      "start": 229,
+      "text_digest": "sha256:d0ee09e790cdcb1000608339a7efdf85ecbd3b5595a7049667f1379e7f7c11f3"
+    },
+    {
+      "document_id": "pyvene-ioi-replication-notebook",
+      "end": 6454,
+      "locator": "https://github.com/stanfordnlp/pyvene/blob/9e333904dcf9e597ca76170010d17f4d4580de8d/tutorials/advanced_tutorials/IOI_Replication.ipynb#stresskit-text-bytes=6370-6454",
+      "quote_digest": "sha256:fb86f60625f4a21ad428b836f55be431cba3d4418f34447f696de62537ae2390",
+      "source_digest": "sha256:3976f034f2d12450e9ff06de9b3bab3245852853e05f50e03825efb99114a616",
+      "start": 6370,
+      "text_digest": "sha256:d0ee09e790cdcb1000608339a7efdf85ecbd3b5595a7049667f1379e7f7c11f3"
+    }
+  ],
+  "issues": [
+    "The term 'serialized interchange interventions' is not found in any source document. The documents mention 'masked interchange intervention' and 'path patching' but never 'serialized interchange interventions'.",
+    "The term 'registered IOI causal effects' is not supported. The documents say 'replicate some results of the original IOI paper' and 'verification of their results', but do not use the term 'registered' in this context.",
+    "No source document explicitly discusses 'equivalence across intervention configurations.' The documents present different intervention configurations (path patching, masked intervention, DAS) but do not state or demonstrate that they are equivalent across configurations."
+  ],
+  "model": "z-ai/glm-5.2-20260616",
+  "model_digest": "sha256:dced29ec62a18fcaa50895b19cfe9c84bc028b878eb598f0004bb207346fa22b",
+  "model_family": "glm-5.2",
+  "opinion_id": "pyvene-ioi-extractor-b",
+  "prompt_digest": "sha256:ceaf031c496c8a9b0dfee07bf3e4f63fb76ee898678a27c30959805338a68289",
+  "prompt_injection_detected": false,
+  "provider": "Mistral",
+  "request_digest": "sha256:25e284afc54ba2ff8e6adc364d2df0455649f381322c45bc0d3798874c72788c",
+  "role": "extractor",
+  "schema_version": "1.0",
+  "source_bundle_digest": "sha256:57dad0ed3635a341cbfdf899f46c6e0031ec72a48b712a563695ad17df2809df",
+  "statement": "Instrument audit: serialized interchange interventions reproduce registered IOI causal effects across equivalent intervention configurations.",
+  "supported": false
+}

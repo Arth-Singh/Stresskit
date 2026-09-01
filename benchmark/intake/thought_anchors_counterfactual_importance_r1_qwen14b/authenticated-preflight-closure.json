@@ -1,0 +1,254 @@
+[
+  {
+    "digest": "sha256:02b0f4a2342e3ea681687e6999cefe20c4a2932c58a408bd522a1f0800fb5fcc",
+    "media_type": "application/json",
+    "role": "authenticated_preflight_blocker",
+    "size": 4749
+  },
+  {
+    "digest": "sha256:05c958a1e5041373fd35b637d0d5804b1a12454efa54fb895887b8d891c37a7d",
+    "media_type": "application/json",
+    "role": "agent_panel_plan",
+    "size": 2559
+  },
+  {
+    "digest": "sha256:13ed54a42994282f076b84976f3fcaaa052bfe55c95eeac475eef6859c91473e",
+    "media_type": "application/json",
+    "role": "license_evidence",
+    "size": 501
+  },
+  {
+    "digest": "sha256:17825c3bd82610363b7c1e2bf16311f4a1c9578674ea844da72bfaa8a87977d6",
+    "media_type": "application/octet-stream",
+    "role": "digest_closure",
+    "size": 1073
+  },
+  {
+    "digest": "sha256:22e42adc4702a96dc59d5c19f07cd5e586e1579a347c9fbdba8e81b1391190c3",
+    "media_type": "application/json",
+    "role": "digest_closure",
+    "size": 5989115
+  },
+  {
+    "digest": "sha256:23b29910dd25b17b3b3c8faba7c9c0827becd1b9ac681a6ef97128ac9f94aa7f",
+    "media_type": "application/octet-stream",
+    "role": "digest_closure",
+    "size": 43385
+  },
+  {
+    "digest": "sha256:262109a2a3a61f8cfad39c987d3072377e6c25fc0c1aa6c3b7f907e9514136b8",
+    "media_type": "application/json",
+    "role": "authenticated_preflight_error_response",
+    "size": 57
+  },
+  {
+    "digest": "sha256:2b84b708b262bb31141523e37aef792961b899ec81a87f9da0ccbc066d0e6685",
+    "media_type": "application/json",
+    "role": "authenticated_preflight_catalog",
+    "size": 970476
+  },
+  {
+    "digest": "sha256:318e10d8a4fe6ff8f8c6978f2c700b805992f317afcca891d8afbee4240308eb",
+    "media_type": "application/octet-stream",
+    "role": "digest_closure",
+    "size": 407
+  },
+  {
+    "digest": "sha256:32dd054f18b913c227cf8310ff4e22eb45c188b630abbe29f051c54d9032fff2",
+    "media_type": "text/plain; charset=utf-8",
+    "role": "agent_claim_query",
+    "size": 1961
+  },
+  {
+    "digest": "sha256:3ab15fee6af4830bfaf2e6f25e8e4c8bda794327f7d0c11f535b119100e6ee50",
+    "media_type": "application/json",
+    "role": "license_evidence",
+    "size": 494
+  },
+  {
+    "digest": "sha256:49fa13b2526a2e28fc0d17d0ab67ec82e68d74e9a37dc069b588a7f1962dd038",
+    "media_type": "application/octet-stream",
+    "role": "digest_closure",
+    "size": 4478
+  },
+  {
+    "digest": "sha256:4a1d42f4d1c0adcb446accfb7b8e5d546c4705b7f217eb11224a2e430c41f91c",
+    "media_type": "application/octet-stream",
+    "role": "digest_closure",
+    "size": 3563
+  },
+  {
+    "digest": "sha256:51c8bf8276234eaee69347d0db253a2527e0fd01b404fe625fa73e5e4d47cfb5",
+    "media_type": "application/octet-stream",
+    "role": "digest_closure",
+    "size": 4339200
+  },
+  {
+    "digest": "sha256:5b728b163b8c353ade00f1d9c3a476c709678995154c9a1117e4b9f01e3fd9e6",
+    "media_type": "application/json",
+    "role": "license_evidence",
+    "size": 525
+  },
+  {
+    "digest": "sha256:5c97b47e2592886e4193e2b3871c23aa0b9eb2c4f1e457dd8621bf12674a0f6b",
+    "media_type": "application/json",
+    "role": "license_evidence",
+    "size": 501
+  },
+  {
+    "digest": "sha256:6378020e96cf0e2e53694b143edcdd0a37bbb318b97c0e2cf2ffc5ebf5170b70",
+    "media_type": "application/octet-stream",
+    "role": "digest_closure",
+    "size": 11716
+  },
+  {
+    "digest": "sha256:639790103a0149944988963306aac180f55e2e074b7c3b09e9d39dd2abcefdfd",
+    "media_type": "application/json",
+    "role": "digest_closure",
+    "size": 6033
+  },
+  {
+    "digest": "sha256:6d3fcdce2a47a2ce5d113173135ef348a7a705b2bb0e9eaaa89e832f8ce502a5",
+    "media_type": "application/octet-stream",
+    "role": "digest_closure",
+    "size": 37878
+  },
+  {
+    "digest": "sha256:6e303125f586de09c75227c30ddd4b45f57c3ed55f107e5185eba5243d2e0166",
+    "media_type": "application/json",
+    "role": "digest_closure",
+    "size": 10120
+  },
+  {
+    "digest": "sha256:7081cadf9bda4c0f59d387f97794bf82219a5fd65ee977ec47589be8b45dcc84",
+    "media_type": "application/octet-stream",
+    "role": "digest_closure",
+    "size": 21238392
+  },
+  {
+    "digest": "sha256:728b80dcefb231278cbbba3827aad41883f6da7a896540dd5af6f7d324fa1518",
+    "media_type": "application/json",
+    "role": "authenticated_preflight_catalog",
+    "size": 694875
+  },
+  {
+    "digest": "sha256:796f6bf17b0dd701cc82c0938b313d7733b1070ee9557eb0f9e2f6cc0310e383",
+    "media_type": "application/octet-stream",
+    "role": "digest_closure",
+    "size": 7864320
+  },
+  {
+    "digest": "sha256:7b2d6a4146d06fb7c6d1ca3a88a965bffe71c937f206d1ebed2c35692648d737",
+    "media_type": "application/octet-stream",
+    "role": "digest_closure",
+    "size": 23147147
+  },
+  {
+    "digest": "sha256:821a489a1c04979455054d181e276f039ef51fdcc8f7834a8aa07647b1cbb0d5",
+    "media_type": "application/json",
+    "role": "digest_closure",
+    "size": 12632
+  },
+  {
+    "digest": "sha256:88468e86227d3dea99d54ec248922aff28385ab36b377f619e9bad78d85cf5be",
+    "media_type": "application/json",
+    "role": "license_evidence",
+    "size": 467
+  },
+  {
+    "digest": "sha256:885187b4b95dcdb6099018676827e2272fd58ab1788f08187b1c5b39b2ae68ef",
+    "media_type": "application/octet-stream",
+    "role": "digest_closure",
+    "size": 9246
+  },
+  {
+    "digest": "sha256:96341ee43674eb5d40ac772659ae6a3dd9dda28fdfeedd55dace4949718a85d0",
+    "media_type": "application/json",
+    "role": "authenticated_preflight_catalog",
+    "size": 6765
+  },
+  {
+    "digest": "sha256:9a27e09f02489ba7fbc12340d9a2c7d57037c38c319e362db3e6a8b326488cd3",
+    "media_type": "application/json",
+    "role": "source_bundle",
+    "size": 7995
+  },
+  {
+    "digest": "sha256:9dc5beabe101b590e4e8d8f46fbce91118bfd2d345a4ef203cd35e2535f9335f",
+    "media_type": "application/octet-stream",
+    "role": "digest_closure",
+    "size": 165991
+  },
+  {
+    "digest": "sha256:af5048e140bec5121003b2a4d0ce2291e49066a757923cabe0a59a74a1c0bf00",
+    "media_type": "application/octet-stream",
+    "role": "digest_closure",
+    "size": 2244
+  },
+  {
+    "digest": "sha256:c20dbb1b841eaedc50ec413db42e6eab900372d07cbcb26bf1b6722f4212008a",
+    "media_type": "application/json",
+    "role": "license_evidence",
+    "size": 469
+  },
+  {
+    "digest": "sha256:ca43d50d57e5e57e140a5c958b63687e4d01590190251d9173393371f0817889",
+    "media_type": "application/octet-stream",
+    "role": "digest_closure",
+    "size": 121363
+  },
+  {
+    "digest": "sha256:d18f3b46b6d5835f7b0d444e368302d86fb10368b6bcc6bd4e225665b3177ac6",
+    "media_type": "application/json",
+    "role": "license_evidence",
+    "size": 524
+  },
+  {
+    "digest": "sha256:d1cb04dd6fef0180e9c363a2c97c2386c4b894a41e94e3f9a3ef24c0d99ca9f1",
+    "media_type": "application/json",
+    "role": "license_evidence",
+    "size": 398
+  },
+  {
+    "digest": "sha256:d8d2f57b29991ab76de2b4e15d6787d89ab63366900c16d9938f8dcec181207c",
+    "media_type": "application/json",
+    "role": "license_evidence",
+    "size": 472
+  },
+  {
+    "digest": "sha256:da317d8dfe5475fe6a239cb599f9ff2067f1226e8263771946e06cda3afdcb71",
+    "media_type": "application/json",
+    "role": "authenticated_preflight_catalog",
+    "size": 9547
+  },
+  {
+    "digest": "sha256:de77adcb5bdbe8a7e4fbb36499f469bdf7ca41be3437db21e1606166a66f81cb",
+    "media_type": "application/json",
+    "role": "license_evidence",
+    "size": 453
+  },
+  {
+    "digest": "sha256:e61b0dcec5034f1d3f7f8643534dad3ae5aa817166262c106002848e6f5267f3",
+    "media_type": "application/json",
+    "role": "authenticated_preflight_catalog",
+    "size": 41740
+  },
+  {
+    "digest": "sha256:e8f2b68d9b617bc3daa06687236ceb4a2ae2abf67142a0d577ca1c72beef1a3b",
+    "media_type": "application/json",
+    "role": "license_evidence",
+    "size": 458
+  },
+  {
+    "digest": "sha256:f79a2a828d3a8ad0fc06286103c9edfe39c4abf908d31e08f634542e4c6a018c",
+    "media_type": "application/octet-stream",
+    "role": "digest_closure",
+    "size": 90302
+  },
+  {
+    "digest": "sha256:fb461a4c931f3064c95e62617f50b1e5f117f174da3d6dd0e099f1d32cc0deab",
+    "media_type": "application/octet-stream",
+    "role": "digest_closure",
+    "size": 101452
+  }
+]

@@ -1,0 +1,38 @@
+StressKit outcome-blind source snapshot
+candidate_id: thought_anchors_counterfactual_importance_r1_qwen14b
+created_at: 2026-09-01T18:05:45Z
+
+repository: https://github.com/interp-reasoning/thought-anchors
+commit: b53ed8c75d3f6112f68adfaec9a13d4d708c442e
+tree: b7a5383cedd85a32f437b928654010bb0de3dd2c
+archive_digest: sha256:796f6bf17b0dd701cc82c0938b313d7733b1070ee9557eb0f9e2f6cc0310e383
+tracked_files: 97
+software_license: MIT
+software_license_digest: sha256:17825c3bd82610363b7c1e2bf16311f4a1c9578674ea844da72bfaa8a87977d6
+artifact_inventory_digest: sha256:639790103a0149944988963306aac180f55e2e074b7c3b09e9d39dd2abcefdfd
+
+paper: arXiv:2506.19143v4
+paper_license: CC-BY-4.0
+claim_method_locator: Sections 3.1-3.3 and Figure 3, PDF page 5
+single_trace_locator: Section 2.4 and Figure 2, PDF pages 3-4
+
+rollout_dataset: uzaymacar/math-rollouts
+dataset_revision: a3a2fe1eb6d52e6ef81860baff018a8df2eb8ae2
+dataset_license: MIT as declared by exact-revision dataset card
+dataset_license_file: absent
+dataset_snapshot_files: 29030
+dataset_snapshot_logical_bytes: 110985134374
+cpu_subset: 40 chunks_labeled.json files under Qwen-14B correct_base_solution and incorrect_base_solution
+cpu_subset_source_bytes: 4306713
+cpu_subset_archive_digest: sha256:51c8bf8276234eaee69347d0db253a2527e0fd01b404fe625fa73e5e4d47cfb5
+cpu_subset_manifest_digest: sha256:6e303125f586de09c75227c30ddd4b45f57c3ed55f107e5185eba5243d2e0166
+
+code_map:
+metric_and_label_pipeline analyze_rollouts.py: sha256:9dc5beabe101b590e4e8d8f46fbce91118bfd2d345a4ef203cd35e2535f9335f
+category_reducer plots.py: sha256:f79a2a828d3a8ad0fc06286103c9edfe39c4abf908d31e08f634542e4c6a018c
+labeler_prompt prompts.py: sha256:6378020e96cf0e2e53694b143edcdd0a37bbb318b97c0e2cf2ffc5ebf5170b70
+generation_provenance generate_rollouts.py: sha256:6d3fcdce2a47a2ce5d113173135ef348a7a705b2bb0e9eaaa89e832f8ce502a5
+
+step_attribution.py is not the registered reducer. It computes sentence-to-sentence effects and optional top-N visualization, while Figure 3 uses final-answer counterfactual metrics aggregated by category.
+
+No StressKit outcome, provider opinion, model inference, aggregate claim statistic, ClaimRecord, AuditSpec, ResourcePlan, or GPU execution was produced while creating this snapshot.

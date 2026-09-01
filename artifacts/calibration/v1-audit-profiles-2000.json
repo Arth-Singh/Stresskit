@@ -1,0 +1,241 @@
+{
+  "acceptance": {
+    "maximum_known_invalid_false_pass_rate": 0.05,
+    "minimum_coverage": 0.93,
+    "observed_maximum_known_invalid_false_pass_rate": 0.0005,
+    "observed_minimum_coverage": 0.9945,
+    "passed": true
+  },
+  "artifact": "stresskit_v1_profile_calibration",
+  "fresh_seed_replication": {
+    "coverage": {
+      "0.1": {
+        "covered": 2000,
+        "rate": 1.0,
+        "trials": 2000
+      },
+      "0.5": {
+        "covered": 1989,
+        "rate": 0.9945,
+        "trials": 2000
+      },
+      "0.9": {
+        "covered": 2000,
+        "rate": 1.0,
+        "trials": 2000
+      }
+    },
+    "known_invalid": {
+      "0": {
+        "direction": "higher",
+        "false_pass_rate": 0.0005,
+        "false_passes": 1,
+        "threshold": 0.8,
+        "trials": 2000,
+        "truth": 0.8
+      },
+      "1": {
+        "direction": "lower",
+        "false_pass_rate": 0.0,
+        "false_passes": 0,
+        "threshold": 0.1,
+        "trials": 2000,
+        "truth": 0.1
+      }
+    },
+    "known_valid_power": {
+      "0": {
+        "direction": "higher",
+        "passes": 2000,
+        "power": 1.0,
+        "threshold": 0.9,
+        "trials": 2000,
+        "truth": 1.0
+      },
+      "1": {
+        "direction": "lower",
+        "passes": 2000,
+        "power": 1.0,
+        "threshold": 0.1,
+        "trials": 2000,
+        "truth": 0.0
+      }
+    },
+    "seed": 20260902,
+    "signed_specificity": {
+      "coverage": 1.0,
+      "covered": 2000,
+      "false_pass_rate_at_boundary": 0.0,
+      "false_passes_at_boundary": 0,
+      "trials": 2000,
+      "truth": 0.6000000000000001,
+      "valid_passes": 2000,
+      "valid_power": 1.0
+    }
+  },
+  "independent_units_per_trial": 200,
+  "interpretation": "Calibration covers bounded independent-unit inference shared by all registered reducers. It does not validate claim construction, null construct validity, executor isolation, or external-task choice.",
+  "method": {
+    "coverage_scenarios": [
+      0.1,
+      0.5,
+      0.9
+    ],
+    "invalid_scenarios": [
+      {
+        "direction": "higher",
+        "threshold": 0.8,
+        "truth": 0.8
+      },
+      {
+        "direction": "lower",
+        "threshold": 0.1,
+        "truth": 0.1
+      }
+    ],
+    "name": "stresskit-v1-bounded-profile-calibration",
+    "signed_specificity_scenario": {
+      "bounds": [
+        -1.0,
+        1.0
+      ],
+      "coverage_probabilities": [
+        0.8,
+        0.2
+      ],
+      "invalid_threshold": 0.6,
+      "valid_probabilities": [
+        1.0,
+        0.0
+      ],
+      "valid_threshold": 0.8
+    },
+    "valid_scenarios": [
+      {
+        "direction": "higher",
+        "threshold": 0.9,
+        "truth": 1.0
+      },
+      {
+        "direction": "lower",
+        "threshold": 0.1,
+        "truth": 0.0
+      }
+    ],
+    "version": "1"
+  },
+  "method_digest": "sha256:dfc31536aa6adefda2187b27e3675d8c99d6a474d0127dc29518557c5a242151",
+  "primary": {
+    "coverage": {
+      "0.1": {
+        "covered": 2000,
+        "rate": 1.0,
+        "trials": 2000
+      },
+      "0.5": {
+        "covered": 1993,
+        "rate": 0.9965,
+        "trials": 2000
+      },
+      "0.9": {
+        "covered": 2000,
+        "rate": 1.0,
+        "trials": 2000
+      }
+    },
+    "known_invalid": {
+      "0": {
+        "direction": "higher",
+        "false_pass_rate": 0.0,
+        "false_passes": 0,
+        "threshold": 0.8,
+        "trials": 2000,
+        "truth": 0.8
+      },
+      "1": {
+        "direction": "lower",
+        "false_pass_rate": 0.0,
+        "false_passes": 0,
+        "threshold": 0.1,
+        "trials": 2000,
+        "truth": 0.1
+      }
+    },
+    "known_valid_power": {
+      "0": {
+        "direction": "higher",
+        "passes": 2000,
+        "power": 1.0,
+        "threshold": 0.9,
+        "trials": 2000,
+        "truth": 1.0
+      },
+      "1": {
+        "direction": "lower",
+        "passes": 2000,
+        "power": 1.0,
+        "threshold": 0.1,
+        "trials": 2000,
+        "truth": 0.0
+      }
+    },
+    "seed": 20260901,
+    "signed_specificity": {
+      "coverage": 1.0,
+      "covered": 2000,
+      "false_pass_rate_at_boundary": 0.0,
+      "false_passes_at_boundary": 0,
+      "trials": 2000,
+      "truth": 0.6000000000000001,
+      "valid_passes": 2000,
+      "valid_power": 1.0
+    }
+  },
+  "profile_registry_digest": "sha256:2b4eee4b94fae407bc47616d381ac3c4551b820af29d2a1190393127bc1f3c1e",
+  "profiles": {
+    "categorical_v1": {
+      "minimum_control_units": 200,
+      "minimum_independent_units": 200,
+      "profile_digest": "sha256:8001e53b2655bc44ccfe7f58b7dc7eb285f5b59f10c52a8a262e225c00759738",
+      "reported_minimum_detectable_margin": 0.09603227913199208
+    },
+    "cot_trajectory_v1": {
+      "minimum_control_units": 200,
+      "minimum_independent_units": 200,
+      "profile_digest": "sha256:f3c1b8c5beb5c34ea01651304c750221ee3192cf631f314fa725bf687dd563d0",
+      "reported_minimum_detectable_margin": 0.09603227913199208
+    },
+    "ranked_output_v1": {
+      "minimum_control_units": 200,
+      "minimum_independent_units": 200,
+      "profile_digest": "sha256:dbf32599ac746d7ee8ba7583c7431d236312e82484225ac59c15f8df6effec04",
+      "reported_minimum_detectable_margin": 0.09603227913199208
+    },
+    "scalar_effect_v1": {
+      "minimum_control_units": 200,
+      "minimum_independent_units": 200,
+      "profile_digest": "sha256:683772d08b89b061333505933e2ad8a19cf9ca70545857a2f396f64cd9447442",
+      "reported_minimum_detectable_margin": 0.09603227913199208
+    },
+    "set_graph_v1": {
+      "minimum_control_units": 200,
+      "minimum_independent_units": 200,
+      "profile_digest": "sha256:85b5b92bcfec85db83caa09ddd335e8f036a9ce040aae5c9b6a0af8e14d29d6b",
+      "reported_minimum_detectable_margin": 0.09603227913199208
+    },
+    "utility_v1": {
+      "minimum_control_units": 200,
+      "minimum_independent_units": 200,
+      "profile_digest": "sha256:a5fa5e0a5c79fdb69d1397f88b64f84ae41346cde41bbe3318897ac7e1837a1f",
+      "reported_minimum_detectable_margin": 0.09603227913199208
+    },
+    "vector_direction_v1": {
+      "minimum_control_units": 200,
+      "minimum_independent_units": 200,
+      "profile_digest": "sha256:815e025dfe9f98ce9ad1fdc905b72dd7ccd0f601c3c8b4409133e574edabd9af",
+      "reported_minimum_detectable_margin": 0.09603227913199208
+    }
+  },
+  "schema_version": "1.0",
+  "trials_per_scenario": 2000
+}

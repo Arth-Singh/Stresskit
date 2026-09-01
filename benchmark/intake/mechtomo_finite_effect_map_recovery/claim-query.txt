@@ -1,0 +1,18 @@
+Candidate ID: mechtomo_finite_effect_map_recovery
+
+Use exactly this preregistered sentence in the statement field; do not rewrite it:
+
+Orthogonal matching pursuit recovers the 32-coordinate finite-effect map with Pearson r = 0.989 and held-out R-squared = 0.935.
+
+Determine only whether every material part of that sentence is explicitly supported by the supplied pinned sources: orthogonal matching pursuit, recovery of a 32-coordinate finite-effect map, Pearson r = 0.989, and held-out R-squared = 0.935. Set supported=false and list each missing or ambiguous part when support is incomplete. The paper's 12-measurement, four-selected-coordinate, coordinate-patching-reference, aggregate-mask, and synthetic-HMM details are source context; do not add them to or remove them from the frozen sentence.
+
+Primary locator: arXiv:2608.19338v1, Section 5.1, paragraph beginning "After 12 aggregate measurements", and Figure 2 caption; PDF page 8; primary TeX lines 361-377. Table 2 is a separate Section 5.2 calibration experiment and must not be used to support this sentence.
+
+Cite exact source quotes only from:
+
+- arXiv:2608.19338v1 PDF/text;
+- arXiv:2608.19338v1 primary TeX source;
+- experiments/hmm/sparse_tomography_posthoc.py;
+- experiments/hmm/README.md and experiments/README.md for code/artifact mapping.
+
+Do not infer unreported generalization, pretrained-model applicability, external-task utility, causal identity, dependency reproducibility, or a StressKit verdict. Do not treat released frozen outputs as an independent reproduction.

@@ -1,0 +1,133 @@
+{
+  "artifact": "stresskit_upstream_artifact_inventory",
+  "schema_version": "1.0",
+  "candidate_id": "mechtomo_finite_effect_map_recovery",
+  "created_at": "2026-09-01T17:33:51Z",
+  "outcome_blind": true,
+  "repository": {
+    "url": "https://github.com/kwisatzh/mechanistic-tomography",
+    "commit": "5c097d2175c632a4a15e359cb4d94ec923168472",
+    "tree": "261ed565077cb55dc61cc004fd1bd7ef9be01c67",
+    "archive_digest": "sha256:9c0955019722da7b3b71cc9f2571c0f5310d23dd398b886c8f82c1aae4f0f5ec",
+    "archive_size": 41830400,
+    "tracked_files": 418
+  },
+  "paper": {
+    "arxiv_id": "2608.19338v1",
+    "pdf_digest": "sha256:b3ff771db9b791691de6c3985833ca9ba3f3fc823214b5d57aad4c68f9df05c5",
+    "pdf_size": 1609631,
+    "source_archive_digest": "sha256:a156f610419ef63c43d143ebb41d70ac1a97f10e0581d9b3f9f73cf27a4e61a9",
+    "source_archive_size": 1104057,
+    "primary_tex_digest": "sha256:30be34601c37edb2aacf1b2a665d83cf866f04acec5c61eecea1fe97119f81dd",
+    "primary_tex_size": 123281,
+    "locator": "arXiv:2608.19338v1, Section 5.1, paragraph beginning 'After 12 aggregate measurements', and Figure 2 caption; PDF page 8; TeX lines 361-377",
+    "registry_locator_correction": "The candidate registry now identifies Section 5.1 and Figure 2 only. Table 2 reports the distinct finite-scale attribution-patching calibration experiment in Section 5.2 and does not support this claim."
+  },
+  "released_hmm": {
+    "checkpoint": {
+      "path": "experiments/hmm/frozen/model.pt",
+      "digest": "sha256:4d8689f8615cd2e78972f46dc022ae6b11d02eb2a4430bbae6cc013b0f299983",
+      "size": 1833033,
+      "git_blob": "af84d8afc29cfe012a8abf3edf99c0de2ee831b8"
+    },
+    "configuration": {
+      "path": "experiments/hmm/frozen/config.json",
+      "digest": "sha256:3836f7b1cc1815430c0fa042323ff2922ab2d536d764709e7e5e5ffdbac51b5d",
+      "size": 648
+    },
+    "synthetic_data": "No external dataset. HMM sequences are generated from the transition and emission parameters frozen in config.json."
+  },
+  "posthoc_inputs": [
+    {
+      "path": "experiments/hmm/frozen/nt_mi_set1_v2/measurement_matrix_A.npy",
+      "digest": "sha256:a59abe984e70a904185d8c5a3e295bcdf89d70f2da9a1fde1959b1061e0dc8bd",
+      "size": 65664
+    },
+    {
+      "path": "experiments/hmm/frozen/nt_mi_set1_v2/tomography_measurements.csv",
+      "digest": "sha256:fe9b58ac7738b3a78367df35ab9ca816e5d44695f9ba57ec1dee88571b4393c2",
+      "size": 11141
+    },
+    {
+      "path": "experiments/hmm/frozen/nt_mi_set1_v2/direct_mi_z1.npy",
+      "digest": "sha256:15096074eb36d6a9fba855fa366abe0b28b7646d1899cb1d46a4ac23bb05d4bc",
+      "size": 384
+    }
+  ],
+  "upstream_frozen_outputs": [
+    {
+      "path": "experiments/hmm/frozen/nt_mi_sparse_v1/sparse_recovery_sample_efficiency.csv",
+      "digest": "sha256:212e1876e7f79e123d5867191de6bcd78b3cf364a1c2ad96a0d4c21972d75cdc",
+      "size": 4882,
+      "registered_row": {
+        "method": "omp",
+        "n_train": 12,
+        "n_components": 32,
+        "n_holdout": 64,
+        "n_validation": 64,
+        "support_size": 4.0,
+        "selected_k": 4.0,
+        "holdout_r2": 0.9347141098561826,
+        "pearson_vs_mi": 0.9886063036465091
+      }
+    },
+    {
+      "path": "experiments/hmm/frozen/nt_mi_sparse_v1/sparse_recovery_summary.json",
+      "digest": "sha256:f54e519eb6432fe2ee7c20ca13dec2dccdd7c7a61beede8a6d8109bdb38c3f25",
+      "size": 956
+    }
+  ],
+  "code_map": {
+    "measurement_generator": {
+      "path": "experiments/hmm/nt_mi_correspondence.py",
+      "digest": "sha256:e53aa11056e971022201d4f48342514261a60a057995d75c6dd3e798707a7db0"
+    },
+    "posthoc_reducer": {
+      "path": "experiments/hmm/sparse_tomography_posthoc.py",
+      "digest": "sha256:db809578b161a8c43036f541c1f0a59e7408203d0650081d70629958e28d76c3",
+      "input_lines": "274-286",
+      "omp_lines": "80-123",
+      "validation_and_metrics_lines": "191-231",
+      "output_lines": "293-348"
+    },
+    "model_trainer": {
+      "path": "experiments/hmm/hmm_observer_control.py",
+      "digest": "sha256:3f69529a4833de87813b4b562ddc00c558e3ce2283de21bb77f544496ca03b3b"
+    }
+  },
+  "dependencies": {
+    "requirements_path": "experiments/hmm/requirements.txt",
+    "requirements_digest": "sha256:da0e4fd4ae60522747bdc82b56bcf7521df44a9a3b30c1e72480382f03e48dc7",
+    "python": "Upstream README declares Python 3.10 or 3.11.",
+    "declared_ranges": [
+      "torch>=2.3",
+      "numpy>=1.24",
+      "matplotlib>=3.8",
+      "pandas>=2.0",
+      "tqdm>=4.66"
+    ],
+    "posthoc_only": [
+      "numpy>=1.24",
+      "matplotlib>=3.8",
+      "pandas>=2.0"
+    ],
+    "lock_status": "unresolved_no_exact_dependency_lock"
+  },
+  "licenses": {
+    "software": {
+      "identifier": "Apache-2.0",
+      "license_digest": "sha256:cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "notice_digest": "sha256:d79efb21a7b4e60b3039e4d389cd0bc7d9cfe3f928af33da9230a747fb1f1e4d",
+      "status": "verified_compatible"
+    },
+    "paper": {
+      "identifier": "CC-BY-4.0",
+      "license_digest": "sha256:48e4dc03652e5c1bc771ded0d56b3bcd182b11440566a3a93c1566a0fdcd2391",
+      "status": "verified_compatible"
+    },
+    "checkpoint_and_frozen_numeric_artifacts": {
+      "status": "unresolved_scope",
+      "reason": "Root LICENSE and repository metadata license software under Apache-2.0, while README wording says 'Code is licensed' and does not explicitly name model.pt or frozen numeric outputs. No narrower file-level license or external artifact is present. Obtain author confirmation or a repository notice explicitly covering released checkpoints and frozen outputs before license_closure can pass."
+    }
+  }
+}

@@ -1,0 +1,511 @@
+{
+  "artifact": "stresskit_neel_criteria_registry",
+  "artifact_version": "1.0.0",
+  "schema_version": "1.0",
+  "source": {
+    "basename": "NeelNanda_transcript.txt",
+    "sha256": "8c9b7bcf38931810b19d185bc67b4537161b4abb99e96e502d5ae112961a2106",
+    "line_numbering": "one_based"
+  },
+  "status": "criteria_extracted_not_empirically_verified",
+  "criteria": [
+    {
+      "id": "N01",
+      "timestamp": "00:00:00",
+      "source_line": 2,
+      "kinds": ["empirical_claim"],
+      "statement": "Specific training-data chunks can cause specific unusual behaviors, and locating relevant chunks may elicit those behaviors.",
+      "stresskit_relevance": "benchmark_context",
+      "verification_status": "not_verified",
+      "uncertainty": {
+        "status": "truncated_context",
+        "note": "Transcript begins mid-thought, so antecedent for 'these chunks' is absent."
+      }
+    },
+    {
+      "id": "N02",
+      "timestamp": "00:00:00",
+      "source_line": 2,
+      "kinds": ["empirical_claim"],
+      "statement": "Decomposing prompts into attributes and searching attribute mixtures can find behavior-eliciting prompts more effectively than raw prompt-space search.",
+      "stresskit_relevance": "benchmark_context",
+      "verification_status": "not_verified",
+      "uncertainty": {"status": "none"}
+    },
+    {
+      "id": "N03",
+      "timestamp": "00:00:00",
+      "source_line": 2,
+      "kinds": ["critique", "design_requirement"],
+      "statement": "Because experiments are often flawed or misleading, a method needs grounds for believing it systematically converges on truth.",
+      "stresskit_relevance": "core",
+      "verification_status": "not_verified",
+      "uncertainty": {
+        "status": "partial_inaudible",
+        "note": "Word or phrase following 'rather than' is inaudible; convergence requirement is audible."
+      }
+    },
+    {
+      "id": "N04",
+      "timestamp": "00:00:00",
+      "source_line": 2,
+      "kinds": ["critique"],
+      "statement": "Improved sparse-autoencoder reconstruction does not establish usefulness, research value, or external utility.",
+      "stresskit_relevance": "core",
+      "verification_status": "not_verified",
+      "uncertainty": {"status": "none"}
+    },
+    {
+      "id": "N05",
+      "timestamp": "00:00:00",
+      "source_line": 2,
+      "kinds": ["requested_test", "success_criterion"],
+      "statement": "Interpretability should improve a hard external outcome stated without interpretability jargon, such as finding adversarial examples faster than prior techniques.",
+      "stresskit_relevance": "core",
+      "verification_status": "not_verified",
+      "uncertainty": {"status": "none"}
+    },
+    {
+      "id": "N06",
+      "timestamp": "00:03:35",
+      "source_line": 5,
+      "kinds": ["requested_test", "success_criterion"],
+      "statement": "A valid external target is detecting verifiably false model statements more often than comparison methods.",
+      "stresskit_relevance": "core",
+      "verification_status": "not_verified",
+      "uncertainty": {"status": "none"}
+    },
+    {
+      "id": "N07",
+      "timestamp": "00:03:35",
+      "source_line": 5,
+      "kinds": ["design_requirement"],
+      "statement": "Choose outcomes that are difficult to game or self-deceive about, so correct insights create measurable progress.",
+      "stresskit_relevance": "core",
+      "verification_status": "not_verified",
+      "uncertainty": {"status": "none"}
+    },
+    {
+      "id": "N08",
+      "timestamp": "00:03:35",
+      "source_line": 5,
+      "kinds": ["critique", "design_requirement"],
+      "statement": "Progress toward truth is not automatically progress toward AI safety; tasks should be AGI-relevant proxies.",
+      "stresskit_relevance": "core",
+      "verification_status": "not_verified",
+      "uncertainty": {"status": "none"}
+    },
+    {
+      "id": "N09",
+      "timestamp": "00:03:35",
+      "source_line": 5,
+      "kinds": ["requested_test"],
+      "statement": "Test nontrivial explanations of confusing actions and predictions of prompt changes that alter behavior.",
+      "stresskit_relevance": "core",
+      "verification_status": "not_verified",
+      "uncertainty": {"status": "none"}
+    },
+    {
+      "id": "N10",
+      "timestamp": "00:03:35",
+      "source_line": 5,
+      "kinds": ["requested_test"],
+      "statement": "Evidence should help distinguish scheming from confusion or instruction misunderstanding.",
+      "stresskit_relevance": "core",
+      "verification_status": "not_verified",
+      "uncertainty": {"status": "none"}
+    },
+    {
+      "id": "N11",
+      "timestamp": "00:03:35",
+      "source_line": 5,
+      "kinds": ["critique"],
+      "statement": "Full reverse engineering and deep confidence are likely unrealistic given model complexity and flawed human ontologies.",
+      "stresskit_relevance": "core",
+      "verification_status": "not_verified",
+      "uncertainty": {"status": "none"}
+    },
+    {
+      "id": "N12",
+      "timestamp": "00:03:35",
+      "source_line": 5,
+      "kinds": ["design_requirement"],
+      "statement": "Use whatever works, including non-internals methods, and select tasks where interpretability has comparative advantage.",
+      "stresskit_relevance": "core",
+      "verification_status": "not_verified",
+      "uncertainty": {"status": "none"}
+    },
+    {
+      "id": "N13",
+      "timestamp": "00:03:35",
+      "source_line": 5,
+      "kinds": ["design_requirement"],
+      "statement": "Solve important proxy tasks directly even when interpretability is irrelevant, such as preventing models from lying to users.",
+      "stresskit_relevance": "core",
+      "verification_status": "not_verified",
+      "uncertainty": {"status": "none"}
+    },
+    {
+      "id": "N14",
+      "timestamp": "00:07:34",
+      "source_line": 8,
+      "kinds": ["design_requirement"],
+      "statement": "Preserve scientific decomposition, mechanism understanding, and principle-finding even when interpretability is not the right tool.",
+      "stresskit_relevance": "core",
+      "verification_status": "not_verified",
+      "uncertainty": {"status": "none"}
+    },
+    {
+      "id": "N15",
+      "timestamp": "00:07:34",
+      "source_line": 8,
+      "kinds": ["critique", "design_requirement"],
+      "statement": "Safety research should include more methods that actually align models rather than only papering over failures with adjacent work.",
+      "stresskit_relevance": "benchmark_context",
+      "verification_status": "not_verified",
+      "uncertainty": {"status": "none"}
+    },
+    {
+      "id": "N16",
+      "timestamp": "00:11:35",
+      "source_line": 11,
+      "kinds": ["design_requirement"],
+      "statement": "Complex agent-produced technical work requires debugging for mistakes and security flaws; autonomous output alone is insufficient.",
+      "stresskit_relevance": "core",
+      "verification_status": "not_verified",
+      "uncertainty": {"status": "none"}
+    },
+    {
+      "id": "N17",
+      "timestamp": "00:11:35",
+      "source_line": 11,
+      "kinds": ["empirical_claim", "prediction"],
+      "statement": "Qualitative capability or scale transitions can invalidate technique assumptions, and adaptation may or may not work.",
+      "stresskit_relevance": "core",
+      "verification_status": "not_verified",
+      "uncertainty": {"status": "none"}
+    },
+    {
+      "id": "N18",
+      "timestamp": "00:11:35",
+      "source_line": 11,
+      "kinds": ["critique", "prediction"],
+      "statement": "Highly zoomed-in neuron-and-head circuit methods are less likely to scale because they depend heavily on current architectures.",
+      "stresskit_relevance": "benchmark_context",
+      "verification_status": "not_verified",
+      "uncertainty": {"status": "none"}
+    },
+    {
+      "id": "N19",
+      "timestamp": "00:11:35",
+      "source_line": 11,
+      "kinds": ["empirical_claim"],
+      "statement": "Many concepts are represented as linear directions accessible to probes and steering, with nonlinear probes as a fallback.",
+      "stresskit_relevance": "benchmark_context",
+      "verification_status": "not_verified",
+      "uncertainty": {"status": "none"}
+    },
+    {
+      "id": "N20",
+      "timestamp": "00:11:35",
+      "source_line": 11,
+      "kinds": ["empirical_claim"],
+      "statement": "Reading chain of thought is currently effective monitoring because present models struggle to act sneakily without verbalizing reasoning.",
+      "stresskit_relevance": "benchmark_context",
+      "verification_status": "not_verified",
+      "uncertainty": {"status": "none"}
+    },
+    {
+      "id": "N21",
+      "timestamp": "00:11:35",
+      "source_line": 11,
+      "kinds": ["prediction"],
+      "statement": "Chain-of-thought monitoring is unlikely to remain effective through superintelligence.",
+      "stresskit_relevance": "benchmark_context",
+      "verification_status": "not_verified",
+      "uncertainty": {"status": "none"}
+    },
+    {
+      "id": "N22",
+      "timestamp": "00:15:36",
+      "source_line": 14,
+      "kinds": ["prediction"],
+      "statement": "Chain-of-thought monitoring can fail through evaluation awareness, greater within-forward-pass reasoning, or vector-based reasoning traces.",
+      "stresskit_relevance": "core",
+      "verification_status": "not_verified",
+      "uncertainty": {"status": "none"}
+    },
+    {
+      "id": "N23",
+      "timestamp": "00:15:36",
+      "source_line": 14,
+      "kinds": ["empirical_claim"],
+      "statement": "Text chain of thought currently increases available sequential reasoning beyond one forward pass.",
+      "stresskit_relevance": "benchmark_context",
+      "verification_status": "not_verified",
+      "uncertainty": {"status": "none"}
+    },
+    {
+      "id": "N24",
+      "timestamp": "00:15:36",
+      "source_line": 14,
+      "kinds": ["prediction"],
+      "statement": "Important concepts such as deception may remain human-comprehensible, while alien concepts are likelier in vastly superhuman domains.",
+      "stresskit_relevance": "benchmark_context",
+      "verification_status": "not_verified",
+      "uncertainty": {"status": "none"}
+    },
+    {
+      "id": "N25",
+      "timestamp": "00:15:36",
+      "source_line": 14,
+      "kinds": ["design_requirement", "prediction"],
+      "statement": "Interpretability agents are useful and likely necessary because evidence volume exceeds human review capacity.",
+      "stresskit_relevance": "core",
+      "verification_status": "not_verified",
+      "uncertainty": {"status": "none"}
+    },
+    {
+      "id": "N26",
+      "timestamp": "00:15:36",
+      "source_line": 14,
+      "kinds": ["open_question", "requested_test"],
+      "statement": "Test agent trustworthiness and collusion, and whether prior-generation models or tools can comprehend newer models.",
+      "stresskit_relevance": "core",
+      "verification_status": "not_verified",
+      "uncertainty": {"status": "none"}
+    },
+    {
+      "id": "N27",
+      "timestamp": "00:19:42",
+      "source_line": 17,
+      "kinds": ["empirical_claim", "prediction"],
+      "statement": "Character or constitutional training may generalize alignment across contexts better than ordinary post-training.",
+      "stresskit_relevance": "benchmark_context",
+      "verification_status": "not_verified",
+      "uncertainty": {"status": "none"}
+    },
+    {
+      "id": "N28",
+      "timestamp": "00:19:42",
+      "source_line": 17,
+      "kinds": ["critique", "requested_test"],
+      "statement": "Broad alignment generalization cannot rest on one contrived role-playing OOD evaluation; test diverse settings instead of assuming success.",
+      "stresskit_relevance": "core",
+      "verification_status": "not_verified",
+      "uncertainty": {
+        "status": "partial_inaudible",
+        "note": "Description after the cited single OOD evaluation is partly inaudible; objection to insufficient evidence is audible."
+      }
+    },
+    {
+      "id": "N29",
+      "timestamp": "00:19:42",
+      "source_line": 17,
+      "kinds": ["empirical_claim"],
+      "statement": "Model-Spec tool-and-corrigibility training and constitution persona-and-judgment training represent materially different alignment strategies.",
+      "stresskit_relevance": "out_of_scope",
+      "verification_status": "not_verified",
+      "uncertainty": {"status": "none"}
+    },
+    {
+      "id": "N30",
+      "timestamp": "00:19:42",
+      "source_line": 17,
+      "kinds": ["open_question"],
+      "statement": "The preferable strategy is unresolved: corrigibility may reduce loss-of-control risk while increasing misuse or authoritarian-control risk.",
+      "stresskit_relevance": "out_of_scope",
+      "verification_status": "not_verified",
+      "uncertainty": {"status": "none"}
+    },
+    {
+      "id": "N31",
+      "timestamp": "00:23:44",
+      "source_line": 20,
+      "kinds": ["empirical_claim"],
+      "statement": "Persona selection may explain post-training generalization: task data can reinforce broad character traits rather than only narrow skills.",
+      "stresskit_relevance": "flagship",
+      "verification_status": "not_verified",
+      "uncertainty": {"status": "none"}
+    },
+    {
+      "id": "N32",
+      "timestamp": "00:23:44",
+      "source_line": 20,
+      "kinds": ["design_requirement", "requested_test"],
+      "statement": "Because alignment is fundamentally generalization, tests must cover OOD behavior, training awareness, and alignment faking rather than narrow training performance.",
+      "stresskit_relevance": "flagship",
+      "verification_status": "not_verified",
+      "uncertainty": {
+        "status": "partial_inaudible",
+        "note": "Details of real-world coverage and the alignment-faking example are partly inaudible; generalization requirement is audible."
+      }
+    },
+    {
+      "id": "N33",
+      "timestamp": "00:23:44",
+      "source_line": 20,
+      "kinds": ["requested_test"],
+      "statement": "For each training example, compute a residual-stream gradient, project it onto pretrained probe vectors, and test whether the projection predicts later alignment or persona behavior.",
+      "stresskit_relevance": "flagship",
+      "verification_status": "not_verified",
+      "uncertainty": {
+        "status": "partial_inaudible",
+        "note": "The exact outcome named after 'predict the level of' is inaudible; only the audible method and general prediction target are retained."
+      }
+    },
+    {
+      "id": "N34",
+      "timestamp": "00:23:44",
+      "source_line": 20,
+      "kinds": ["open_question", "requested_test"],
+      "statement": "Determine how post-training and character-training methods shape traits and whether an RL environment's resulting persona can be predicted.",
+      "stresskit_relevance": "flagship",
+      "verification_status": "not_verified",
+      "uncertainty": {"status": "none"}
+    },
+    {
+      "id": "N35",
+      "timestamp": "00:27:47",
+      "source_line": 23,
+      "kinds": ["empirical_claim"],
+      "statement": "Activation probes are cheap and fairly effective cyber-misuse monitors.",
+      "stresskit_relevance": "benchmark_context",
+      "verification_status": "not_verified",
+      "uncertainty": {"status": "none"}
+    },
+    {
+      "id": "N36",
+      "timestamp": "00:27:47",
+      "source_line": 23,
+      "kinds": ["requested_test"],
+      "statement": "Extend probes to detect whether a model takes actions it knows would be disapproved.",
+      "stresskit_relevance": "benchmark_context",
+      "verification_status": "not_verified",
+      "uncertainty": {"status": "none"}
+    },
+    {
+      "id": "N37",
+      "timestamp": "00:27:47",
+      "source_line": 23,
+      "kinds": ["empirical_claim", "requested_test"],
+      "statement": "Coding-agent evaluations should cover unauthorized deletion, corner-cutting, lying, exaggerated completion claims, data destruction, and poor clarification calibration.",
+      "stresskit_relevance": "benchmark_context",
+      "verification_status": "not_verified",
+      "uncertainty": {"status": "none"}
+    },
+    {
+      "id": "N38",
+      "timestamp": "00:27:47",
+      "source_line": 23,
+      "kinds": ["design_requirement"],
+      "statement": "Favor safety work with immediate product relevance because cheap deployment materially improves adoption odds.",
+      "stresskit_relevance": "benchmark_context",
+      "verification_status": "not_verified",
+      "uncertainty": {"status": "none"}
+    },
+    {
+      "id": "N39",
+      "timestamp": "00:32:01",
+      "source_line": 26,
+      "kinds": ["critique", "design_requirement"],
+      "statement": "Interpretability currently has little post-training feedback loop; a stronger impact path is misalignment auditing or deeper alignment-relevant understanding.",
+      "stresskit_relevance": "core",
+      "verification_status": "not_verified",
+      "uncertainty": {"status": "none"}
+    },
+    {
+      "id": "N40",
+      "timestamp": "00:32:01",
+      "source_line": 26,
+      "kinds": ["requested_test"],
+      "statement": "Compare post-training interventions using strong evaluations that explicitly measure whether alignment generalizes.",
+      "stresskit_relevance": "core",
+      "verification_status": "not_verified",
+      "uncertainty": {"status": "none"}
+    },
+    {
+      "id": "N41",
+      "timestamp": "00:32:01",
+      "source_line": 26,
+      "kinds": ["success_criterion"],
+      "statement": "A persuasive intervention materially improves agent-safety evaluations while capability evaluations remain equal or improve slightly.",
+      "stresskit_relevance": "core",
+      "verification_status": "not_verified",
+      "uncertainty": {"status": "none"}
+    },
+    {
+      "id": "N42",
+      "timestamp": "00:32:01",
+      "source_line": 26,
+      "kinds": ["design_requirement"],
+      "statement": "Evidence burden should rise with intervention complexity, and large pipeline changes require strong evidence and stakeholder-relevant framing.",
+      "stresskit_relevance": "core",
+      "verification_status": "not_verified",
+      "uncertainty": {"status": "none"}
+    },
+    {
+      "id": "N43",
+      "timestamp": "00:36:01",
+      "source_line": 29,
+      "kinds": ["design_requirement"],
+      "statement": "Projects should identify their theory of change, such as public field influence, reusable open source, or direct internal deployment.",
+      "stresskit_relevance": "out_of_scope",
+      "verification_status": "not_verified",
+      "uncertainty": {"status": "none"}
+    },
+    {
+      "id": "N44",
+      "timestamp": "00:36:01",
+      "source_line": 29,
+      "kinds": ["critique", "empirical_claim"],
+      "statement": "Sparse-autoencoder post-training may yield small gains, but most ideas fail at frontier scale and meaningful production impact remains unobserved at DeepMind.",
+      "stresskit_relevance": "benchmark_context",
+      "verification_status": "not_verified",
+      "uncertainty": {"status": "none"}
+    },
+    {
+      "id": "N45",
+      "timestamp": "00:36:01",
+      "source_line": 29,
+      "kinds": ["empirical_claim"],
+      "statement": "Improving current-model safety usually also increases capability, usefulness, and lab revenue, making dual use difficult to avoid.",
+      "stresskit_relevance": "out_of_scope",
+      "verification_status": "not_verified",
+      "uncertainty": {"status": "none"}
+    },
+    {
+      "id": "N46",
+      "timestamp": "00:36:01",
+      "source_line": 29,
+      "kinds": ["design_requirement"],
+      "statement": "Good empirical safety research needs rich feedback from real models; isolation from production systems weakens research.",
+      "stresskit_relevance": "benchmark_context",
+      "verification_status": "not_verified",
+      "uncertainty": {"status": "none"}
+    },
+    {
+      "id": "N47",
+      "timestamp": "00:40:01",
+      "source_line": 32,
+      "kinds": ["empirical_claim", "design_requirement"],
+      "statement": "Repeated small safety deployments build trust, infrastructure knowledge, and capacity to deliver larger future interventions.",
+      "stresskit_relevance": "out_of_scope",
+      "verification_status": "not_verified",
+      "uncertainty": {"status": "none"}
+    },
+    {
+      "id": "N48",
+      "timestamp": "00:40:01",
+      "source_line": 32,
+      "kinds": ["empirical_claim"],
+      "statement": "Interpretability insights such as superposition may create capability externalities through better architecture design.",
+      "stresskit_relevance": "out_of_scope",
+      "verification_status": "not_verified",
+      "uncertainty": {
+        "status": "partial_inaudible",
+        "note": "Consequences following the architecture-design example are inaudible; registry does not infer them."
+      }
+    }
+  ]
+}

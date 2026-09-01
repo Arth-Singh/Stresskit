@@ -1,0 +1,26 @@
+Candidate ID: thought_anchors_counterfactual_importance_r1_qwen14b
+
+Use exactly this preregistered sentence in the statement field; do not rewrite it:
+
+Under resampling, sentences labelled planning or uncertainty-management have higher counterfactual importance than computation sentences, and the importance ranking identifies a small set of anchor sentences per trace.
+
+Determine only whether the supplied pinned source documents explicitly support every material part of that sentence for DeepSeek-R1-Distill-Qwen-14B on the released MATH rollout dataset. Assess these parts separately:
+
+1. "Under resampling" refers to the paper's counterfactual-importance method, not forced-answer importance, receiver-head attention, or sentence-to-sentence attribution.
+2. Planning and uncertainty-management sentences have higher counterfactual importance than active-computation sentences.
+3. A defined importance ranking is computed separately within each trace.
+4. That ranking identifies a quantitatively defined small set of anchor sentences in each trace, rather than one case study or an aggregate category comparison.
+5. The released data and mapped code support the same Qwen-14B model, solution-type scope, metric, and aggregation described by the sentence.
+
+Set supported=false and list each missing, ambiguous, differently scoped, or merely qualitative part when support is incomplete. In particular, do not infer "small set," "ranking," or "per trace" from words such as "certain," "key," "pivotal," or "outsized" unless the pinned source defines and applies the claimed selection procedure.
+
+Cite exact source quotes only from:
+
+- arXiv:2506.19143v4 PDF or primary TeX
+- pinned repository README.md
+- pinned analyze_rollouts.py
+- pinned plots.py
+- pinned prompts.py
+- pinned uzaymacar/math-rollouts dataset card or revision manifest
+
+Do not cite StressKit-authored inventory or snapshot prose. Do not compute, reproduce, or predict any StressKit verdict.

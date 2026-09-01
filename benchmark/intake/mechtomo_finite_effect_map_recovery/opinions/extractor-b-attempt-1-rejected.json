@@ -1,0 +1,57 @@
+{
+  "artifact": "stresskit_agent_attempt_record",
+  "attempt": 1,
+  "candidate_id": "mechtomo_finite_effect_map_recovery",
+  "completion_content_inspected": true,
+  "critic_called": false,
+  "evidence_quote_checks": [
+    {
+      "document_id": "mechtomo-paper-v1-pdf",
+      "present_in_declared_source_bytes": false,
+      "quote_digest": "sha256:e2036119a3655841e06da3db6c1028b94bda7b87336514c579e8e33889f122a8"
+    },
+    {
+      "document_id": "mechtomo-paper-v1-pdf",
+      "present_in_declared_source_bytes": false,
+      "quote_digest": "sha256:a2a0a9aebcb5bb49f9513175b43f2e0fb164c5ca3fe3842559102df663007344"
+    },
+    {
+      "document_id": "mechtomo-paper-v1-pdf",
+      "present_in_declared_source_bytes": false,
+      "quote_digest": "sha256:d97ff1d3a3b3f84c6a7473db7d8993c2bfe70c30b68ccc1264d435eaf9582e6f"
+    },
+    {
+      "document_id": "mechtomo-paper-v1-pdf",
+      "present_in_declared_source_bytes": false,
+      "quote_digest": "sha256:52b10b47ea18159f1b1f10a46dc22e31c7164c473686f331b0bcf23db13a51c7"
+    }
+  ],
+  "observed_at": "2026-09-01T17:39:41Z",
+  "opinion_id": "mechtomo-extractor-b",
+  "panel_plan_digest": "sha256:d94d9d1532396da94915bb518abf1b86b01ed8f0415c9c3c327ae8705c4570dc",
+  "prompt_digest": "sha256:14c1923def54b641c8dc91bc647cf5179892f944bcd40d34ef27e4b84f3cb4e1",
+  "raw_response_digest": "sha256:233150cc129ae59e5099ebfe06f1b26a6f8b2c3d453b163a61c67d493541ab9c",
+  "reason": "all completion evidence quotes were absent byte-for-byte from their declared source document",
+  "response_id": "gen-1788284381-Z8WrZH0sYjUG6pOaaDgA",
+  "retry_performed": false,
+  "role": "extractor",
+  "route_binding_digest": "sha256:9549b1c990b9cd5dcd89ef01f6e5bddff52979ad32beea3aaf47c9b6ff9b6ac9",
+  "safe_route_metadata": {
+    "available_endpoints": [
+      {
+        "model": "z-ai/glm-5.2-20260616",
+        "provider": "Mistral",
+        "selected": true
+      }
+    ],
+    "endpoint_total_before_filtering": 32,
+    "pipeline": null,
+    "requested_model": "z-ai/glm-5.2",
+    "response_model": "z-ai/glm-5.2",
+    "selected_attempt": 1,
+    "strategy": "direct"
+  },
+  "schema_version": "1.0",
+  "source_bundle_digest": "sha256:4db27bfc13154a653a8ebf074eb6afa1fda8b5a798ebd5f72d342ba8853859b2",
+  "status": "rejected_before_opinion"
+}

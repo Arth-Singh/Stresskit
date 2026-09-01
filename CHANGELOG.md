@@ -1,5 +1,40 @@
 # Changelog
 
+## 1.0.0 — unreleased; external gates pending
+
+- Added versioned `SourceBundle`, `AgentOpinion`, `ClaimRecord`, `AuditSpec`,
+  `ResourcePlan`, `RunAttestation`, `AuditBundle`, and `AuditDecision` artifacts.
+- Added nested `stresskit audit discover|compile|freeze|plan|run|verify|publish`
+  lifecycle with strict abstention gates.
+- Added seven registered deterministic claim profiles, independent-unit
+  Hoeffding inference, and release-wide Holm–Bonferroni verification.
+- Replaced publishable utility summaries with raw label/prediction
+  recomputation, metric direction/bounds, practical margins, held-out splits,
+  nondecomposable-metric policy, and mandatory non-internals baselines.
+- Added signed resource plans, outbound-only worker polling, complete terminal
+  run slots, independent reruns, SHA-256 object closures, and executor-isolation
+  enforcement.
+- Added byte-exact source/model provenance, license records, repository and
+  build code maps, plus separate Ed25519 control/executor trust domains.
+- Added optional FastAPI/PostgreSQL/S3 control plane without Redis or Celery.
+- Replaced grade-sorted v1 publication with a verified claim-level evidence
+  matrix that retains excluded and abstained rows and computes no paper verdict.
+- Added 2,000-trial primary/fresh-seed profile calibration, a 300-case planted
+  compiler evaluation, and adversarial regressions for constant claims, stable
+  nonsense, forged utility, fake IID manifests, dependent/missing slots,
+  signature tampering, prompt injection, and unverified publication rows.
+- Added outcome-blind August pass 3b, flagship gradient-projection candidate
+  protocol, release gates, and protocol-only preprint draft.
+- Added deterministic local-file SourceBundle intake and a typed 68-row
+  pre-freeze qualification ledger. Manual eligibility labels, incomplete gate
+  evidence, mismatched artifact digests, and partial release multiplicity
+  families cannot freeze a release registry.
+- Added optional `stresskit audit opinion` OpenRouter preparation with env-only
+  credentials, pinned model/provider routes, strict local output validation,
+  quote-derived byte anchors, and complete secret-free CAS provenance.
+- Preserved v0.1–v0.3 Stability Cards, diagnostic A–D grades, and frozen
+  calibration artifacts without reinterpretation.
+
 ## 0.3.0
 
 - **`stresskit demo`** — the 30-second first touch: one toy discovery

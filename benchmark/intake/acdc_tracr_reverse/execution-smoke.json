@@ -1,0 +1,77 @@
+{
+  "artifact": "stresskit_execution_smoke_attestation",
+  "schema_version": "1.0",
+  "candidate_id": "acdc_tracr_reverse",
+  "created_at": "2026-09-01T18:13:00Z",
+  "status": "passed_with_portability_note",
+  "outcome_blind": true,
+  "claim_outcome_observed": false,
+  "source": {
+    "repository_commit": "bc99ace817974b5584b7ee203d596a8e2bbcd399",
+    "repository_tree": "e22aed97ac8253e50b0c535bc637796cc71fec98",
+    "source_bundle_digest": "sha256:e87be2879d688fbb5e4118495d49474d54e85fbe1e111c6f18dd8cf440f16ae9"
+  },
+  "build": {
+    "networked_disposable_build": true,
+    "python": "CPython 3.10.20",
+    "upstream_pyproject_digest": "sha256:cbd7f36d8cb9c9c23e0f4e7236a62bc706bde7926a04ee6e2e2ed958063336b7",
+    "upstream_poetry_lock_digest": "sha256:8725dc416df6a82d80dbc4e5238215bb920ca302e8dda4392a2652ad3f92c2e2",
+    "retrieval_only_pyproject_digest": "sha256:7633c85ed5685208c3b49e2c8b539c8b858ee5866fee92c797b27f64f5f33103",
+    "retrieval_only_lock_digest": "sha256:f124729b57de6c3cf7214779dd65d08099fd3f03f07d43c5b39e6fafe077bfa3",
+    "installed_distribution_count": 186,
+    "key_versions": {
+      "jax": "0.4.13",
+      "jaxlib": "0.4.13",
+      "numpy": "1.25.2",
+      "pygraphviz": "1.11",
+      "scipy": "1.9.3",
+      "torch": "1.13.1",
+      "tracr": "1.0.0@git:e75ecdaec12bf2d831a60e54d4270e8fa31fb537",
+      "transformer_lens": "1.6.1"
+    },
+    "system_dependency": "graphviz 15.1.1",
+    "jaxlib_archive_wheel_digest": "sha256:a259bb35429bfbd3b76e43019dfc8f7d6ea94bb217400b78f7d0824ce07a58ac",
+    "retrieval_note": "Upstream lock bytes and versions remain unchanged. Only source metadata was added to fetch the lock-listed arm64 jaxlib wheel from Google's official archive after PyPI removed it. Full default Poetry groups were installed because upstream runtime code imports IPython while declaring it in the development group."
+  },
+  "executor": {
+    "platform": "macOS arm64 CPU",
+    "sandbox": "sandbox-exec",
+    "sandbox_profile_digest": "sha256:5d1f24baffa628b6e76d6448bb433489f5198d0e841deb6b7fa1c0f231a4b983",
+    "network_disabled": true,
+    "credential_environment_cleared": true,
+    "source_inputs_read_only": true,
+    "scratch_write_allowlist": true,
+    "cpu_limit_seconds": 300,
+    "per_file_limit_kib": 524288,
+    "open_file_limit": 256,
+    "isolation_self_test": {
+      "scratch_write": true,
+      "credential_env_absent": true,
+      "readonly_input": true,
+      "network_disabled": true
+    }
+  },
+  "smoke": {
+    "exit_code": 0,
+    "seed": 1729,
+    "device": "cpu",
+    "task": "reverse",
+    "metric": "l2",
+    "validation_shape": [6, 4],
+    "patch_shape": [6, 4],
+    "model_layers": 4,
+    "model_heads": 1,
+    "model_context": 6,
+    "finite_clean_output": true,
+    "tracr_transformerlens_layer_equality_checks": 8,
+    "all_layer_equality_checks_passed": true,
+    "note": "Smoke constructs and cross-checks the deterministic Tracr/TransformerLens model only. It does not instantiate ACDC, recover a graph, read released results, or evaluate the registered claim."
+  },
+  "portability_note": {
+    "pip_check": "torch 1.13.1 is not supported on this platform",
+    "wheel_metadata_tag": "cp310-cp310-macosx_11_0_x86_64",
+    "loaded_extension_architecture": "Mach-O 64-bit bundle arm64",
+    "tensor_execution": "arm64 CPython tensor dot product passed; MPS reported available but smoke used CPU",
+    "disposition": "Numeric CPU smoke accepted, but final execution must declare numeric_with_tolerance and requires an independent rerun on the same darwin-arm64-cpu hardware class. Bitwise reproducibility is not claimed."
+  }
+}

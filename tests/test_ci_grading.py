@@ -60,9 +60,12 @@ def test_checks_carry_ci_and_robust_flags():
                        battery=["seeds", "bootstrap"], n_runs=8)
     c = result.checks["structural_stability"]
     assert c["ci"] is not None
-    assert set(c) >= {"value", "threshold", "passed", "op", "ci", "robust"}
+    assert set(c) >= {
+        "value", "threshold", "passed", "op", "ci", "robust", "state"
+    }
     # a perfectly stable finder is robustly stable
     assert c["passed"] and c["robust"] is True
+    assert c["state"] == "pass"
     assert result.pooled["confidence"] == "high"
 
 
@@ -102,3 +105,61 @@ def test_verify_still_passes_with_ci_fields():
                        n_runs=6)
     out = verify_card_dict(result.card.to_dict())
     assert out["ok"], out["problems"]
+
+
+# ---------------------------------------------------------------------------
+# normative three-state decisions
+# ---------------------------------------------------------------------------
+
+@pytest.mark.parametrize(
+    "op,ci,expected",
+    [
+        (">=", [0.8, 0.9], "pass"),
+        (">=", [0.6, 0.79], "fail"),
+        (">=", [0.7, 0.9], "inconclusive"),
+        ("<=", [0.1, 0.2], "pass"),
+        ("<=", [0.26, 0.4], "fail"),
+        ("<=", [0.1, 0.3], "inconclusive"),
+    ],
+)
+def test_decision_state_uses_entire_interval(op, ci, expected):
+    assert sk.decision_state(0.8, 0.8 if op == ">=" else 0.25, op, ci) == expected
+
+
+def test_decision_state_requires_interval_and_minimum_n():
+    assert sk.decision_state(1.0, 0.8, ">=", None) == "inconclusive"
+    assert sk.decision_state(
+        1.0, 0.8, ">=", [0.9, 1.0], minimum_n_met=False
+    ) == "inconclusive"
+
+
+def test_decision_state_validates_inputs():
+    with pytest.raises(ValueError, match="op must"):
+        sk.decision_state(1.0, 0.8, "==", [0.9, 1.0])
+    with pytest.raises(ValueError, match="ordered"):
+        sk.decision_state(1.0, 0.8, ">=", [1.0, 0.9])
+
+
+def test_confirmatory_verdict_has_no_majority_vote():
+    checks = {
+        "structural": {"state": "pass"},
+        "claim": {"state": "pass"},
+        "specificity": {"state": "fail"},
+    }
+    assert sk.confirmatory_verdict(checks) == "fail"
+    checks["specificity"]["state"] = "inconclusive"
+    assert sk.confirmatory_verdict(checks) == "inconclusive"
+    checks["specificity"]["state"] = "pass"
+    assert sk.confirmatory_verdict(checks) == "pass"
+
+
+def test_legacy_grade_d_when_overlap_is_at_random():
+    from stresskit.battery import grade_checks
+
+    checks = {
+        "structural_stability": {"passed": True},
+        "claim_stability": {"passed": True},
+        "score_stability": {"passed": True},
+        "beats_random": {"passed": False, "value": 1.2},
+    }
+    assert grade_checks(checks) == "D"

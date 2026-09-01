@@ -1,0 +1,269 @@
+{
+  "agent_compiler": {
+    "cases": 300,
+    "metrics": {
+      "unambiguous_compilation_rate": 1.0,
+      "unsupported_final_audits": 0,
+      "unsupported_or_injected_abstention_rate": 1.0
+    },
+    "passed": true,
+    "scope": "Tests deterministic compiler behavior on planted agent outputs. It does not estimate live extractor model recall or provider drift."
+  },
+  "artifact": "stresskit_neel_validation_report",
+  "benchmark": {
+    "candidate_count": 68,
+    "dispositions": {
+      "eligible": 0,
+      "excluded": 15,
+      "pending": 53
+    },
+    "freeze_ready": false,
+    "registered_final_audit_bundles": 0
+  },
+  "calibration": {
+    "observed_maximum_known_invalid_false_pass_rate": 0.0005,
+    "observed_minimum_coverage": 0.9945,
+    "passed": true,
+    "scope": "Calibration covers bounded independent-unit inference shared by all registered reducers. It does not validate claim construction, null construct validity, executor isolation, or external-task choice."
+  },
+  "conclusion": {
+    "flagship_study_completed": false,
+    "forbidden_claim": "StressKit has verified Neel Nanda's empirical claims.",
+    "neel_empirical_claims_verified": false,
+    "registered_august_claim_results_available": false,
+    "registered_external_utility_results_available": false,
+    "safe_claim": "StressKit defensively verifies audit provenance and rejects several known false-pass paths; external scientific usefulness remains unproven.",
+    "verifier_mechanics_demonstrated": true
+  },
+  "double_rejection_panel": {
+    "accepted_opinions": 0,
+    "candidate_id": "acdc_tracr_reverse",
+    "checked_quote_count": 10,
+    "claim_outcome_verified": false,
+    "dependent_slots_not_run": 1,
+    "invalid_quote_count": 3,
+    "publication_state": "abstain",
+    "rejected_incomplete_completion": 1,
+    "rejected_invalid_evidence": 1,
+    "retry_performed": false
+  },
+  "evidence_digests": {
+    "calibration": "sha256:a4a5de91fc9da3d1ede09f043b59bc4393fa6c9e42c029e972b80e0713cda052",
+    "compiler_evaluation": "sha256:2a9736cffd760b04a12ab0e54792bdefca80cb9d247e3385cff4708f484ba942",
+    "cot_panel_authenticated_preflight": "sha256:470c5964cddde4a88f34320a7d441886f831f68aaa9a60a0cc46764c52999ac2",
+    "criteria": "sha256:79c366a4af95554e1231db336508d967e2317c01ad56958a57f99b894182658f",
+    "double_rejection_incomplete_attempt": "sha256:f770e9dc677a507b6e8a888399b8d47cd9dce6563e3d7efa5d89252640d16523",
+    "double_rejection_invalid_attempt": "sha256:bc1caa9a5e1ded3790b346ad97ef2e3cfacf83028665937fa155d1c67dae5456",
+    "double_rejection_panel_decision": "sha256:c8b73e306b245965c58bfff5c41512f4bc0e2492c0f2da69f64f8feec396dbf8",
+    "double_rejection_panel_execution": "sha256:ef385ab09bca6508451d3f849e38b510715672debd7a9b5c5ba285019e6d62e1",
+    "flagship_candidate": "sha256:6dbad4a39c13e68c709587ffadb9444c90c25a67c5b8542fd3803181c5febe40",
+    "flagship_license_audit": "sha256:4535632a8051224a581a0144161a5dd6823b92fc302070c43739a285439212d8",
+    "invalid_panel_decision": "sha256:b873265f7421bf72cac7bd851a77832324853522f665df4016a5d48c7a077f4b",
+    "invalid_panel_execution": "sha256:25672902577b823b51751f24962ad0d216af73d7db414b3d211e42e4d3b34573",
+    "live_decision": "sha256:2e115fe1cdd6865a3cb40366bcd17c5e6d20cd23089261c52a5d46f3376efb06",
+    "proof_selectors": "sha256:b16ed790cc0be9a2738d822941b6f6c0879dc4177135fc1b9980bcca76c153b6",
+    "provider_attestation": "sha256:7e94d659f0a66d4b1a297ff7f9925d2923c0c8b09193e4732b207f2ec5fe4eee",
+    "qualification": "sha256:7833f4a7ed395ad32d5502f28ea15d82b07ba8694252c3006583fb28e7888009",
+    "rejected_agent_attempt": "sha256:94dcb6b8b68edee0e2b23869a1637d76dd6659d29fc15c9d4e350f62383c8c1f",
+    "transcript": "sha256:8c9b7bcf38931810b19d185bc67b4537161b4abb99e96e502d5ae112961a2106",
+    "utility_blind_preflight": "sha256:a4f4993e6c392dce88db6c2d8c6e2debbe39bdcf74d49892332113ca1912fc70",
+    "utility_preregistration": "sha256:d2167b12e3b1cc36ac59b5d89d51fc0148cc83c7a54c6f37927c3c619badfe08"
+  },
+  "external_validation": "not obtained",
+  "invalid_evidence_panel": {
+    "accepted_opinions": 1,
+    "candidate_id": "mechtomo_finite_effect_map_recovery",
+    "checked_quote_count": 4,
+    "claim_outcome_verified": false,
+    "dependent_slots_not_run": 1,
+    "invalid_quote_count": 4,
+    "publication_state": "abstain",
+    "rejected_incomplete_completion": 0,
+    "rejected_invalid_evidence": 1,
+    "retry_performed": false
+  },
+  "live_panel": {
+    "providers": [
+      "xAI",
+      "Mistral",
+      "Google"
+    ],
+    "publication_state": "abstain",
+    "supported_candidates": 0
+  },
+  "proof_suite": {
+    "artifact_digest": "sha256:65726a8c46d1f7f261d4867165f145ab74bb7ffd6251975c1583caa6ff2d8372",
+    "errors": 0,
+    "failures": 0,
+    "selector_count": 43,
+    "selector_manifest_digest": "sha256:b16ed790cc0be9a2738d822941b6f6c0879dc4177135fc1b9980bcca76c153b6",
+    "skipped": 0,
+    "testcases": [
+      "tests.test_agent_evaluation_v1::test_300_case_compiler_gate",
+      "tests.test_agent_evaluation_v1::test_compiler_abstains_without_exact_source_text_bytes",
+      "tests.test_audit_calibration_v1::test_frozen_2000_trial_artifact_recomputes_exactly",
+      "tests.test_audit_calibration_v1::test_small_fresh_seed_calibration_has_required_fields",
+      "tests.test_audit_v1::test_absent_run_slot_is_protocol_deviation",
+      "tests.test_audit_v1::test_all_seven_registered_profiles_exist",
+      "tests.test_audit_v1::test_arbitrary_threshold_profile_digest_cannot_verify",
+      "tests.test_audit_v1::test_cot_trajectory_preserves_order_and_repeated_events",
+      "tests.test_audit_v1::test_every_run_slot_binds_frozen_evaluation_manifest",
+      "tests.test_audit_v1::test_explicit_missing_run_stays_in_denominator",
+      "tests.test_audit_v1::test_external_utility_task_rejects_interpretability_jargon",
+      "tests.test_audit_v1::test_fake_iid_manifest_digest_is_rejected",
+      "tests.test_audit_v1::test_generalization_must_be_disjoint_on_every_registered_axis",
+      "tests.test_audit_v1::test_holm_controls_entire_primary_family",
+      "tests.test_audit_v1::test_label_only_generalization_design_is_rejected",
+      "tests.test_audit_v1::test_malicious_document_instruction_forces_abstention",
+      "tests.test_audit_v1::test_metric_direction_cannot_contradict_registered_metric",
+      "tests.test_audit_v1::test_noninternals_baseline_forbids_internal_input_kinds",
+      "tests.test_audit_v1::test_output_outside_frozen_component_universe_is_rejected",
+      "tests.test_audit_v1::test_plan_and_executor_signing_trust_domains_cannot_overlap",
+      "tests.test_audit_v1::test_publisher_never_turns_unverified_registry_row_into_pass",
+      "tests.test_audit_v1::test_raw_utility_recomputation_rejects_forged_summary",
+      "tests.test_audit_v1::test_stable_data_independent_output_cannot_pass",
+      "tests.test_audit_v1::test_stable_nonsense_cannot_pass",
+      "tests.test_audit_v1::test_tampered_plan_signature_never_verifies",
+      "tests.test_audit_v1::test_utility_bundle_requires_input_manifest_in_digest_closure",
+      "tests.test_audit_v1::test_utility_profile_binds_metric_task_baselines_and_support_state",
+      "tests.test_audit_v1::test_v1_cannot_claim_external_validation_without_evidence_protocol",
+      "tests.test_audit_v1::test_verifier_rejects_generalization_overlap_even_with_recomputed_digest",
+      "tests.test_control_plane_v1::test_state_skips_and_terminal_mutations_are_rejected",
+      "tests.test_neel_validation_v1::test_neel_empirical_items_are_not_marked_verified",
+      "tests.test_neel_validation_v1::test_neel_validation_rejects_failed_calibration",
+      "tests.test_neel_validation_v1::test_neel_validation_rejects_false_invalid_quote_record",
+      "tests.test_neel_validation_v1::test_neel_validation_rejects_generic_abstention_without_exact_panel[0]",
+      "tests.test_neel_validation_v1::test_neel_validation_rejects_generic_abstention_without_exact_panel[2]",
+      "tests.test_neel_validation_v1::test_neel_validation_rejects_generic_abstention_without_exact_panel[3]",
+      "tests.test_neel_validation_v1::test_neel_validation_rejects_generic_abstention_without_exact_panel[4]",
+      "tests.test_qualification_v1::test_agent_panel_fail_rejects_incomplete_or_unbound_evidence[<lambda>-closure roots are not exact]",
+      "tests.test_qualification_v1::test_agent_panel_fail_rejects_incomplete_or_unbound_evidence[<lambda>-embedded provider_attestation]",
+      "tests.test_qualification_v1::test_agent_panel_fail_rejects_incomplete_or_unbound_evidence[<lambda>-provider_attestation digest mismatch]",
+      "tests.test_qualification_v1::test_agent_panel_fail_rejects_incomplete_or_unbound_evidence[<lambda>-rejected_attempt_record digest mismatch]",
+      "tests.test_qualification_v1::test_agent_panel_fail_rejects_nonexistent_forged_digests",
+      "tests.test_qualification_v1::test_agent_panel_fail_requires_resolvable_cas_closure",
+      "tests.test_qualification_v1::test_invalid_extractor_panel_abstains_with_complete_slot_accounting",
+      "tests.test_qualification_v1::test_invalid_extractor_panel_rejects_incomplete_or_false_accounting[<lambda>-complete abstention]",
+      "tests.test_qualification_v1::test_invalid_extractor_panel_rejects_incomplete_or_false_accounting[<lambda>-dependency-failure slot]",
+      "tests.test_qualification_v1::test_invalid_extractor_panel_rejects_incomplete_or_false_accounting[<lambda>-quote check differs]",
+      "tests.test_qualification_v1::test_invalid_extractor_panel_requires_exact_cas_closure",
+      "tests.test_qualification_v1::test_typed_agent_panel_abstention_accepts_self_contained_evidence",
+      "tests.test_utility.TestNonInternalsBaseline::test_an_internals_baseline_never_becomes_the_reference",
+      "tests.test_utility.TestNonInternalsBaseline::test_the_strongest_non_internals_baseline_is_the_reference"
+    ],
+    "tests": 51
+  },
+  "schema_version": "1.0",
+  "scientific_readiness": {
+    "cot_panel": {
+      "candidate_disposition": "pending",
+      "chat_completion_calls": 0,
+      "critic_called": false,
+      "gpu_used": false,
+      "opinions_created": 0,
+      "publication_state": "abstain",
+      "routes_passed": 3,
+      "status": "blocked_awaiting_account_logging_attestation"
+    },
+    "external_utility": {
+      "baseline_count": 4,
+      "claim_outcome_computed": false,
+      "content_rows_read": false,
+      "gpu_used": false,
+      "minimum_independent_units": 200,
+      "minimums_established": false,
+      "preflight_status": "failed_insufficient_metadata",
+      "publication_state": "abstain",
+      "status": "blocked_not_freezable"
+    },
+    "gradient_persona_flagship": {
+      "blocker_count": 7,
+      "experiments_run": false,
+      "freeze_eligible": false,
+      "status": "blocked",
+      "substitution_allowed": false
+    }
+  },
+  "source_criteria_digest": "sha256:79c366a4af95554e1231db336508d967e2317c01ad56958a57f99b894182658f",
+  "themes": [
+    {
+      "criteria": [
+        "N03",
+        "N07",
+        "N11",
+        "N14",
+        "N16"
+      ],
+      "finding": "Adversarial tests demonstrate fail-closed handling of stable nonsense, missing runs, forged evidence, unsafe agent input, and multiplicity.",
+      "limitation": "Software checks and calibrated inference do not establish construct validity or convergence to scientific truth.",
+      "status": "verifier_mechanics_demonstrated",
+      "theme_id": "scientific_integrity"
+    },
+    {
+      "criteria": [
+        "N04",
+        "N05",
+        "N06",
+        "N08",
+        "N09",
+        "N10",
+        "N12",
+        "N13",
+        "N41"
+      ],
+      "finding": "Utility verifier recomputes external-task metrics and comparison against the strongest registered non-internals baseline from raw evidence.",
+      "limitation": "No final external-task utility AuditBundle exists.",
+      "status": "protocol_hardened_benchmark_pending",
+      "theme_id": "external_utility"
+    },
+    {
+      "criteria": [
+        "N17",
+        "N27",
+        "N28",
+        "N32",
+        "N40"
+      ],
+      "finding": "Generalization is a separate primary axis and must use frozen held-out partition bindings rather than a relabeled primary split.",
+      "limitation": "No final held-out claim result exists.",
+      "status": "protocol_hardened_benchmark_pending",
+      "theme_id": "generalization"
+    },
+    {
+      "criteria": [
+        "N19",
+        "N20",
+        "N21",
+        "N22",
+        "N35",
+        "N36"
+      ],
+      "finding": "Registry covers CoT, probes, and steering; ordered CoT trajectories retain event order and multiplicity.",
+      "limitation": "Coverage is designed but no frozen claim in these strata has run.",
+      "status": "protocol_hardened_benchmark_pending",
+      "theme_id": "cot_probe_steering"
+    },
+    {
+      "criteria": [
+        "N16",
+        "N25",
+        "N26"
+      ],
+      "finding": "Planted compiler cases and live panel executions demonstrate provenance binding, unsupported-wording abstention, and rejection of invented quotes.",
+      "limitation": "The small live sample cannot estimate extractor recall, precision, provider drift, or collusion resistance.",
+      "status": "mechanism_demonstrated_live_sample_insufficient",
+      "theme_id": "verifiable_agent_auditing"
+    },
+    {
+      "criteria": [
+        "N31",
+        "N33",
+        "N34"
+      ],
+      "finding": "Study protocol binds residual-stream loss-gradient projections, held-out behavior, non-internals baselines, and falsification controls.",
+      "limitation": "Required licensed persona and misalignment artifacts are unresolved.",
+      "status": "blocked_abstain",
+      "theme_id": "gradient_persona_flagship"
+    }
+  ]
+}

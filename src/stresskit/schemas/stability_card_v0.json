@@ -18,7 +18,8 @@
     "schema_version": {
       "enum": [
         "0.1",
-        "0.2"
+        "0.2",
+        "0.3"
       ]
     },
     "stresskit_version": {
@@ -142,6 +143,28 @@
             "D"
           ]
         },
+        "profile": {
+          "enum": [
+            "diagnostic",
+            "confirmatory"
+          ],
+          "description": "Diagnostic cards localize sensitivity and cannot issue a confirmatory certificate."
+        },
+        "confirmatory_state": {
+          "enum": [
+            "pass",
+            "fail",
+            "inconclusive",
+            "not_applicable"
+          ]
+        },
+        "required_checks": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
         "checks": {
           "type": "object",
           "additionalProperties": {
@@ -190,6 +213,14 @@
                   "null"
                 ],
                 "description": "True when the 95% CI decides the verdict (entirely on the passing side for a pass, failing side for a fail); False when it straddles the threshold; null when no CI exists."
+              },
+              "state": {
+                "enum": [
+                  "pass",
+                  "fail",
+                  "inconclusive"
+                ],
+                "description": "Normative interval-wide state. Schema 0.3 requires this field; older cards may omit it."
               }
             }
           }
@@ -255,6 +286,10 @@
             ]
           },
           "universe": {},
+          "structure_present": {
+            "type": "boolean",
+            "description": "True when the method produced a structural set, including an explicitly empty set; false means structure was not an output."
+          },
           "components": {
             "type": "array",
             "items": {
@@ -265,6 +300,76 @@
             "type": "string",
             "pattern": "^[0-9a-f]{64}$"
           }
+        }
+      }
+    },
+    "utility": {
+      "type": "object",
+      "description": "Optional second axis: what the finding bought on a task stated outside interpretability, against a baseline that never reads model internals. Absent means the question was not answered, not that it passed.",
+      "required": [
+        "task",
+        "metric",
+        "with_method",
+        "baselines",
+        "n",
+        "delta_vs_non_internals"
+      ],
+      "properties": {
+        "task": {
+          "type": "string"
+        },
+        "metric": {
+          "type": "string"
+        },
+        "n": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "with_method": {
+          "type": "number"
+        },
+        "baselines": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "value",
+              "uses_internals"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "value": {
+                "type": "number"
+              },
+              "uses_internals": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "reference_baseline": {
+          "type": "string"
+        },
+        "delta_vs_non_internals": {
+          "type": "number"
+        },
+        "delta_ci95": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "bootstrap": {
+          "type": "object"
+        },
+        "task_phrasing_warning": {
+          "type": "string"
         }
       }
     }

@@ -1,0 +1,99 @@
+{
+  "artifact": "stresskit_source_intake_manifest",
+  "bundle_id": "pyvene-interchange-intervention-ioi-source-v1",
+  "created_at": "2026-09-01T15:34:06Z",
+  "documents": [
+    {
+      "document_id": "pyvene-repository",
+      "expected_digest": "sha256:effb2dfaa65997ef3cd257f2faca8fa517a1f4a67300695412ca2d16b1e46a8f",
+      "expected_extracted_text_digest": "sha256:38e0ceabead82ef616b817c19b12bbf447eea47cc5540ed4f5711dd6ecc9d2fe",
+      "extracted_text_path": "repository-snapshot.txt",
+      "kind": "repository",
+      "license": {
+        "evidence": {
+          "checked_at": "2026-09-01T15:34:06Z",
+          "reviewed_by": "StressKit autonomous intake",
+          "scope": "Pinned repository LICENSE is Apache-2.0 (sha256:c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4); source quotation and redistribution are compatible subject to its terms; no narrower entrypoint header found.",
+          "source": "https://raw.githubusercontent.com/stanfordnlp/pyvene/9e333904dcf9e597ca76170010d17f4d4580de8d/LICENSE"
+        },
+        "identifier": "Apache-2.0",
+        "status": "verified_compatible"
+      },
+      "locator": "https://github.com/stanfordnlp/pyvene/tree/9e333904dcf9e597ca76170010d17f4d4580de8d",
+      "media_type": "application/x-tar",
+      "path": "../../../.stresskit/intake/pyvene_interchange_intervention_ioi/pyvene-9e333904.tar"
+    },
+    {
+      "document_id": "pyvene-ioi-replication-notebook",
+      "expected_digest": "sha256:3976f034f2d12450e9ff06de9b3bab3245852853e05f50e03825efb99114a616",
+      "expected_extracted_text_digest": "sha256:d0ee09e790cdcb1000608339a7efdf85ecbd3b5595a7049667f1379e7f7c11f3",
+      "extracted_text_path": "../../../.stresskit/intake/pyvene_interchange_intervention_ioi/extracted/IOI_Replication.txt",
+      "kind": "repository",
+      "license": {
+        "evidence": {
+          "checked_at": "2026-09-01T15:34:06Z",
+          "reviewed_by": "StressKit autonomous intake",
+          "scope": "Pinned repository LICENSE is Apache-2.0 (sha256:c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4); source quotation and redistribution are compatible subject to its terms; no narrower file header found.",
+          "source": "https://raw.githubusercontent.com/stanfordnlp/pyvene/9e333904dcf9e597ca76170010d17f4d4580de8d/LICENSE"
+        },
+        "identifier": "Apache-2.0",
+        "status": "verified_compatible"
+      },
+      "locator": "https://github.com/stanfordnlp/pyvene/blob/9e333904dcf9e597ca76170010d17f4d4580de8d/tutorials/advanced_tutorials/IOI_Replication.ipynb",
+      "media_type": "application/x-ipynb+json",
+      "path": "../../../.stresskit/intake/pyvene_interchange_intervention_ioi/repo/tutorials/advanced_tutorials/IOI_Replication.ipynb"
+    },
+    {
+      "document_id": "pyvene-ioi-mask-notebook",
+      "expected_digest": "sha256:1f67ae385786559781b3e727c1ecbe89ddcff20fee43117f4480d1554b989ae6",
+      "expected_extracted_text_digest": "sha256:5df537906d17778f0579cf113932506b3148ffddc306728a0e2107a3eea98ffd",
+      "extracted_text_path": "../../../.stresskit/intake/pyvene_interchange_intervention_ioi/extracted/IOI_with_Mask_Intervention.txt",
+      "kind": "repository",
+      "license": {
+        "evidence": {
+          "checked_at": "2026-09-01T15:34:06Z",
+          "reviewed_by": "StressKit autonomous intake",
+          "scope": "Pinned repository LICENSE is Apache-2.0 (sha256:c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4); source quotation and redistribution are compatible subject to its terms; no narrower file header found.",
+          "source": "https://raw.githubusercontent.com/stanfordnlp/pyvene/9e333904dcf9e597ca76170010d17f4d4580de8d/LICENSE"
+        },
+        "identifier": "Apache-2.0",
+        "status": "verified_compatible"
+      },
+      "locator": "https://github.com/stanfordnlp/pyvene/blob/9e333904dcf9e597ca76170010d17f4d4580de8d/tutorials/advanced_tutorials/IOI_with_Mask_Intervention.ipynb",
+      "media_type": "application/x-ipynb+json",
+      "path": "../../../.stresskit/intake/pyvene_interchange_intervention_ioi/repo/tutorials/advanced_tutorials/IOI_with_Mask_Intervention.ipynb"
+    },
+    {
+      "document_id": "pyvene-ioi-utils",
+      "expected_digest": "sha256:a2773a4a34476e0cbd531cb4209d740e9540019291bdce838c60460a4c8fa90c",
+      "expected_extracted_text_digest": "sha256:a2773a4a34476e0cbd531cb4209d740e9540019291bdce838c60460a4c8fa90c",
+      "extracted_text_path": "../../../.stresskit/intake/pyvene_interchange_intervention_ioi/extracted/tutorial_ioi_utils.py.txt",
+      "kind": "repository",
+      "license": {
+        "evidence": {
+          "checked_at": "2026-09-01T15:34:06Z",
+          "reviewed_by": "StressKit autonomous intake",
+          "scope": "Pinned repository LICENSE is Apache-2.0 (sha256:c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4); source quotation and redistribution are compatible subject to its terms; no narrower file header found.",
+          "source": "https://raw.githubusercontent.com/stanfordnlp/pyvene/9e333904dcf9e597ca76170010d17f4d4580de8d/LICENSE"
+        },
+        "identifier": "Apache-2.0",
+        "status": "verified_compatible"
+      },
+      "locator": "https://github.com/stanfordnlp/pyvene/blob/9e333904dcf9e597ca76170010d17f4d4580de8d/tutorials/advanced_tutorials/tutorial_ioi_utils.py",
+      "media_type": "text/x-python; charset=utf-8",
+      "path": "../../../.stresskit/intake/pyvene_interchange_intervention_ioi/repo/tutorials/advanced_tutorials/tutorial_ioi_utils.py"
+    }
+  ],
+  "metadata": {
+    "candidate_id": "pyvene_interchange_intervention_ioi",
+    "extraction_profile": "stresskit_notebook_cell_source_v1",
+    "license_file_digest": "sha256:c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "repository": "https://github.com/stanfordnlp/pyvene",
+    "repository_archive_digest": "sha256:effb2dfaa65997ef3cd257f2faca8fa517a1f4a67300695412ca2d16b1e46a8f",
+    "repository_archive_profile": "git_archive_tar_with_pyvene_prefix_v1",
+    "repository_commit": "9e333904dcf9e597ca76170010d17f4d4580de8d",
+    "repository_tree": "949e5730a01cedc55648c0f568f464844f14bb97"
+  },
+  "outcome_blind": true,
+  "schema_version": "1.0"
+}

@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stresskit.dev/schemas/external_utility_preregistration_v1.json",
+  "title": "StressKit blocked external-utility preregistration candidate v1",
+  "type": "object",
+  "required": [
+    "artifact",
+    "schema_version",
+    "candidate_id",
+    "registered_parent_claim_ids",
+    "status",
+    "ready_to_freeze",
+    "outcome_blind",
+    "publication_state",
+    "source",
+    "external_task",
+    "profile_digest",
+    "metric_spec",
+    "method",
+    "baselines",
+    "splits",
+    "blind_preflight",
+    "controls",
+    "blockers",
+    "outcome_integrity",
+    "proposed_audit_spec"
+  ],
+  "properties": {
+    "artifact": {
+      "const": "stresskit_external_utility_preregistration_candidate"
+    },
+    "schema_version": {"const": "1.0"},
+    "candidate_id": {"type": "string", "minLength": 1},
+    "registered_parent_claim_ids": {
+      "const": ["thought_anchors_counterfactual_importance_r1_qwen14b"]
+    },
+    "status": {"const": "blocked_not_freezable"},
+    "ready_to_freeze": {"const": false},
+    "outcome_blind": {"const": true},
+    "publication_state": {"const": "abstain"},
+    "source": {"type": "object"},
+    "external_task": {"type": "string", "minLength": 1},
+    "profile_digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "metric_spec": {"type": "object"},
+    "method": {"type": "object"},
+    "baselines": {"type": "array", "minItems": 3},
+    "splits": {"type": "object"},
+    "blind_preflight": {"type": "object"},
+    "controls": {"type": "object"},
+    "blockers": {"type": "array", "minItems": 5},
+    "outcome_integrity": {
+      "const": {
+        "final_analysis_run": false,
+        "final_dataset_labels_inspected": false,
+        "final_dataset_predictions_inspected": false,
+        "public_schema_examples_visible": true,
+        "thresholds_from_registered_profile": true,
+        "unrelated_acdc_outcome_exposure_quarantined": true
+      }
+    },
+    "proposed_audit_spec": {"type": "object"}
+  },
+  "additionalProperties": false
+}

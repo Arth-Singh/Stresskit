@@ -1,10 +1,41 @@
 # StressKit
 
-**The stability harness for mechanistic interpretability claims.**
+**Offline-verifiable, claim-level audits for mechanistic interpretability.**
 
-Wrap any discovery method in one call. Get back a graded, machine-readable
-Stability Card that records whether the finding survives seeds, resampling,
-prompt templates, hyperparameters, and null controls.
+Wrap any discovery method in one call. Get back a machine-readable Stability
+Card recording whether the finding survives seeds, resampling, prompt
+templates, hyperparameters, and null controls. Diagnostic grades localize
+fragility; a separate conservative profile supports confirmatory pass/fail/
+inconclusive decisions.
+
+V1 adds an autonomous audit pipeline around that preserved diagnostic core:
+cross-provider claim extraction, frozen joint designs, signed resource plans,
+content-addressed raw runs, deterministic reducers, global multiplicity,
+independent reruns, and a verified evidence board. Agents propose audits;
+agents never compute verdicts.
+
+> **Release status:** protocol code and local constructed-case gates are
+> implemented. Public benchmark results and result-bearing preprint remain
+> blocked by claim-map, licensing, smoke, silent-cohort, independent-review, and
+> author-response gates. See `docs/RELEASE_GATES_V1.md`.
+
+## Validation against Neel Nanda's criteria
+
+Current status: verifier mechanics demonstrated; Neel's empirical claims are
+**not verified**. No final external-utility or August claim result is registered
+yet. Three live panel executions are recorded: one rejected unsupported
+wording; one accepted one extractor, rejected another extractor's four
+invented source quotes, and skipped its critic; the ACDC Tracr-reverse panel
+rejected both extractors (three absent anchors and one truncated completion)
+and skipped its critic. Every panel abstained without retry. See the
+[scoped validation report](docs/NEEL_VALIDATION.md),
+[ACDC evidence](benchmark/intake/acdc_tracr_reverse/README.md), and
+[machine-readable N01-N48 registry](benchmark/neel_criteria_v1.json).
+Thought Anchors CoT execution stopped before provider calls because account
+prompt-logging state was not attestable. Its external-utility metadata preflight
+also could not establish independent problem-cluster counts; no labels,
+outcomes, or GPU were used.
+`external_validation: not obtained`.
 
 [![CI](https://github.com/Arth-Singh/Stresskit/actions/workflows/ci.yml/badge.svg)](https://github.com/Arth-Singh/Stresskit/actions/workflows/ci.yml)
 ![python](https://img.shields.io/badge/python-3.9%2B-blue)
@@ -23,9 +54,9 @@ they were produced:
 - SAEs with **frozen random decoders** match trained SAEs on standard evals ([arXiv:2602.14111](https://arxiv.org/abs/2602.14111))
 - Different prompt templates activate **structurally different circuits** for the "same" task ([arXiv:2606.16920](https://arxiv.org/abs/2606.16920)); multiple near-disjoint circuits each perform the task perfectly ([arXiv:2605.12671](https://arxiv.org/abs/2605.12671))
 
-Each of those papers calls for standard stability reporting. StressKit is that
-standard: the published protocols, as a library, with shared thresholds and a
-common artifact.
+Each of those papers calls for stronger stability reporting. StressKit turns
+those proposals into executable diagnostics plus a conservative confirmatory
+core, with explicit thresholds and a common artifact.
 
 It also covers the instruments the field adopted in 2026: natural-language
 activation readers (Activation Oracles / LatentQA, [arXiv:2512.15674](https://arxiv.org/abs/2512.15674))
@@ -39,6 +70,16 @@ are reliability failures. StressKit tests the instrument, not just the finding.
 ```bash
 pip install git+https://github.com/Arth-Singh/Stresskit.git   # numpy only; imports as `import stresskit`
 ```
+
+Hosted control plane is optional:
+
+```bash
+python -m pip install 'stress-kit[control]'
+```
+
+Public-key signing for standalone audit workers is available through
+`python -m pip install 'stress-kit[audit]'`. CLI plan/run commands default to
+Ed25519; HMAC remains explicit option for private deployments.
 
 <sub>PyPI release as `stress-kit` is pending.</sub>
 
@@ -55,7 +96,80 @@ confident "responsible features" with a claim attached, every run
 tells them apart. `stresskit demo --html cards/` writes both stability
 cards as shareable pages.
 
-## Quickstart
+## Evidence profiles
+
+StressKit has two deliberately separate profiles:
+
+| profile | design | output | valid interpretation |
+|---|---|---|---|
+| `diagnostic` | one-axis-at-a-time battery around one base configuration | legacy A–D grade plus intervals | where a pipeline is fragile; not a confirmatory certificate |
+| `confirmatory` | preregistered IID draws from an explicit specification distribution | `pass`, `fail`, or `inconclusive` | whether one exact registered claim clears every registered gate |
+
+Diagnostic runs cannot claim confirmatory pass. Confirmatory v0.1 requires at
+least 200 independent real runs (and 200 null runs when specificity is tested),
+uses disjoint run pairs, finite-sample Hoeffding intervals, and Bonferroni
+familywise coverage. This is intentionally conservative. It validates stability
+and specificity under the registered design—not scientific truth, mechanism
+uniqueness, or an entire paper/method family.
+
+## Autonomous v1 audit CLI
+
+```bash
+stresskit audit source source-intake.json --cas cas --closure-output source-closure.json -o source.json
+# Set OPENROUTER_API_KEY through your process environment or secret manager.
+stresskit audit opinion source.json \
+  --panel-plan provider-panel.prefreeze.json --opinion-id extractor-a \
+  --source-text paper=paper.txt --cas cas \
+  --closure-output extractor-a-closure.json -o extractor-a.json
+# Repeat with a distinct endpoint provider and model family, then run a critic
+# with two --extractor-opinion arguments.
+stresskit audit discover source.json --opinions extractor-a.json extractor-b.json critic.json
+stresskit audit compile source.json claim-template.json --opinions extractor-a.json extractor-b.json critic.json
+stresskit audit freeze claim.json joint-design.json -o audit-spec.json
+stresskit audit plan audit-spec.json resources.json --signing-key-file control-private.pem --key-id control -o resource-plan.json
+stresskit audit run audit-spec.json resource-plan.json --run-dir runs --cas cas \
+  --closure provenance-closure.json --capabilities executor.json \
+  --signing-key-file worker-private.pem --key-id worker --execution-prefix final -o bundle.json
+stresskit audit verify bundle.json --cas cas \
+  --trusted-plan-key control=control-public.pem \
+  --trusted-executor-key worker=worker-public.pem
+stresskit audit publish release-registry.json bundle.json --cas cas \
+  --trusted-plan-key control=control-public.pem \
+  --trusted-executor-key worker=worker-public.pem \
+  --output-dir public-evidence --agent-only-review
+```
+
+`audit opinion` is optional live preparation; compiler, verifier, and core stay
+offline and NumPy-only. It reads only `OPENROUTER_API_KEY` from process
+environment, sends source text to the fixed OpenRouter chat-completions HTTPS
+endpoint, pins one model and one upstream endpoint provider, disables fallback,
+requires strict structured output, and requests zero-data-retention plus denied
+provider data collection. Model, provider endpoint, selected provider name,
+family, role, seed, temperature, token limit, capabilities, and claim-query path
+and bytes come only from one validated frozen panel row selected by
+`--opinion-id`; no independent routing knobs are accepted. Exact panel and
+binding digests, request, response, selected route, model, prompt, and quote
+bytes enter content-addressed provenance; authorization never does. Merge each
+emitted opinion closure with source closure before execution.
+
+OpenRouter credentials and Hugging Face credentials are unrelated. `HF_TOKEN`
+is reserved for separately authorized artifact retrieval and must never enter
+agent requests, CAS objects, worker environments, or repository files. See
+`.env.example` for empty variable names only.
+
+Supported frozen profiles cover set/graph, categorical, scalar-effect,
+vector/direction, ranked-output, utility, and CoT/trajectory claims. Unknown
+profiles, invalid controls, unsafe execution, prompt injection, agent
+disagreement, or missing evidence force abstention. V1 statuses attach to claims,
+never papers.
+
+Full protocol: `docs/V1_PROTOCOL.md`. Hosted architecture:
+`docs/CONTROL_PLANE_V1.md`. Evidence publisher: `docs/EVIDENCE_BOARD_V1.md`.
+Benchmark candidates become freeze-eligible through the typed gate ledger in
+`benchmark/qualification.prefreeze.json`; GPU ResourcePlans are emitted only
+after that registry freezes.
+
+## Diagnostic quickstart
 
 Wrap your discovery method as `(data, seed, config) -> Finding`, then stress it:
 
@@ -103,6 +217,58 @@ field names remappable):
 print(sk.from_jsonl("sweep.jsonl", null_path="sweep_null.jsonl").to_markdown())
 ```
 
+## Confirmatory quickstart
+
+Freeze specification space, thresholds, null, claim map, seed, and run budget
+before seeing confirmatory outcomes:
+
+```python
+import stresskit as sk
+
+space = sk.SpecificationSpace(
+    axes={
+        "discovery_seed": list(range(20)),
+        "prompt_shard": list(range(10)),
+        "threshold": [0.05, 0.10],
+    }
+)
+manifest = space.sample_manifest(n_runs=200, seed=20260824)
+null_manifest = space.sample_manifest(n_runs=200, seed=20260825)
+
+findings = [run_registered_claim(row["configuration"]) for row in manifest]
+null_findings = [run_registered_null(row["configuration"]) for row in null_manifest]
+
+audit = sk.confirmatory_from_findings(
+    findings,
+    manifest,
+    null_findings=null_findings,
+    null_manifest=null_manifest,
+    claim_id="my_frozen_claim_v1",
+    claim_statement="Registered circuit remains stable and specific.",
+    thresholds={
+        "structural_stability": 0.80,
+        "beats_random": 0.20,
+        "specificity": 0.20,
+    },
+    threshold_justifications={
+        "structural_stability": "Frozen domain-relevant minimum overlap.",
+        "beats_random": "Frozen minimum excess over exact size-matched null.",
+        "specificity": "Frozen minimum real-minus-null overlap difference.",
+    },
+    confidence_level=0.95,
+    minimum_runs=200,
+    seed=20260826,
+)
+
+print(audit.state)                 # pass | fail | inconclusive
+audit.card.save("confirmatory_card.json")
+```
+
+`stresskit verify confirmatory_card.json` recomputes manifest hashes, raw-run
+metrics, pairing seeds, simultaneous intervals, check states, and final verdict.
+Diagnostic OAT or crossed-enumeration manifests are rejected by this profile
+because they estimate different quantities.
+
 **How many runs does a verdict need?** Papers report stability from 5–10
 runs; `verdict_trace` regrades random subsets of your runs at every size and
 reports the n at which the verdict stops being a coin flip — with no new
@@ -136,7 +302,7 @@ It stress-tests one discovery method twice — on a real effect (grade A) and on
 a pure-noise null where the method still returns confident-looking features
 (grade C/D). Only the battery tells them apart.
 
-## Checks
+## Diagnostic checks
 
 | Check | Metric | Default bar | Protocol source |
 |---|---|---|---|
@@ -146,14 +312,15 @@ a pure-noise null where the method still returns confident-looking features
 | **Beats random** | overlap vs. size-matched random null (Monte-Carlo over the observed size distribution; analytic *k*/(2*N*−*k*) kept as cross-check) | ≥ 3× | arXiv:2608.13754, 2602.14111 |
 | **Specificity** | stability on real data vs. a null control where the effect should not exist, with a two-sample bootstrap 95% CI | ≥ 1.5× | arXiv:2606.00033 |
 
-Every check carries a 95% CI. A CI that straddles its bar marks the check
+Every diagnostic check carries a 95% CI. A CI that straddles its bar marks the check
 **undecided in either direction** — the point estimate still grades, but the
 verdict is reported low-confidence and the card says so out loud.
 
 Grades: **A** all applicable checks pass · **B** at least half · **C** at least
 one · **D** none, or indistinguishable from random. Thresholds are configurable
-(`sk.Thresholds`), but the defaults follow the published proposals so a grade
-means the same thing in every paper.
+(`sk.Thresholds`). These grades are compact diagnostics, not calibrated
+confirmatory decisions and not comparable across papers unless design,
+estimand, thresholds, universes, and dependency units match.
 
 Battery axes run one-at-a-time around your base configuration, so run counts
 stay linear and attribution stays legible: `seeds` (finders that ignore their
@@ -182,7 +349,8 @@ stresskit render stability_card.json --html -o card.html   # self-contained
                                             # shareable page, CI-vs-bar plots
 stresskit verify results/                   # audit every card and oracle report
                                             # in a directory tree
-stresskit scoreboard results/ -o SCOREBOARD.md   # one table of every verdict
+stresskit scoreboard results/ -o SCOREBOARD.md   # legacy diagnostic inventory;
+                                                  # v1 uses `audit publish`
 stresskit compare old.json new.json --fail-on-regression   # stability
                                             # regression test between releases
 stresskit trace card.trace.json -o trace.svg     # verdict-trace chart: grade
@@ -198,6 +366,44 @@ Host `badge.json` anywhere public and embed a live badge:
 ```
 
 → ![stability](https://img.shields.io/badge/stability-A%20%C2%B7%20J%3D0.92-brightgreen) / ![stability](https://img.shields.io/badge/stability-D%20%C2%B7%20J%3D0.18-red)
+
+## The second axis: did the finding buy anything?
+
+Stability asks whether a finding survives a different defensible analysis. It
+never asks whether the finding is worth anything, and those come apart: a
+sparse autoencoder that reconstructs the model better is more accurate, not
+more useful. So a card carries a second, independent axis — the method is put
+on a task stated in ordinary language and scored against a baseline that never
+reads model internals.
+
+```python
+import stresskit as sk
+
+utility = sk.utility_block(
+    task="flag support replies that contradict the order record",
+    metric="precision at 50 flags",
+    with_method=0.71,
+    baselines=[
+        sk.Baseline("keyword rules over the reply text", 0.44, uses_internals=False),
+        sk.Baseline("logit lens on the final token", 0.66, uses_internals=True),
+    ],
+    n=400,
+    paired_deltas=per_item_deltas,      # pairs the bootstrap to the items
+)
+result = sk.stress(run, battery=["seeds"], n_runs=20)
+sk.attach_utility(result.card, utility)
+```
+
+Two rules make the axis hard to game. **A baseline that ignores internals is
+mandatory** — comparing against another interpretability method only says which
+internal technique wins, never whether looking inside helped at all; a block
+without one is rejected. And **a task named after the technique is flagged**,
+because "raise SAE reconstruction fidelity" is a claim you cannot lose.
+
+Without an interval the axis reports `inconclusive`, never `pass`. A card that
+never answers it renders **NOT REPORTED ⚠️** — the same treatment every other
+unanswered field gets, so a grade-A card with nothing on this axis is visibly
+half-finished rather than quietly complete.
 
 ## Use it in CI
 
@@ -281,28 +487,28 @@ stresskit report --model gpt2-small --task IOI --method EAP-IG \
 
 Unanswered fields render as **NOT REPORTED ⚠️** — flagged, never hidden.
 
-## Reference batteries
+## Diagnostic reference batteries (not confirmatory)
 
-Published findings, default battery, default thresholds. Full analysis in
+Published findings, legacy diagnostic battery, default thresholds. Full analysis in
 [`references/`](references/README.md); one-table summary in
-[`SCOREBOARD.md`](SCOREBOARD.md). Every card is produced under the
-pre-registered evidence standard of
+[`SCOREBOARD.md`](SCOREBOARD.md). Every card is produced under
 [`references/PROTOCOL.md`](references/PROTOCOL.md), re-verified by CI on
 every push (`stresskit verify references/`), and the scoreboard is
-generated from the cards, so neither can drift from the data.
+generated from the cards, so neither can drift from the stored diagnostic
+artifacts. These rows are not evidence from the new confirmatory profile.
 
-| finding | method | verdict | headline |
+| finding | method | diagnostic grade | headline |
 |---|---|---|---|
 | IOI circuit, GPT-2 small | attribution patching | **A**, low confidence | structural stability *and* specificity CIs straddle their bars at 45 runs; at n = 6 the grade is a literal coin flip (A 47% / B 53% of subsets), settling only at n = 45 |
 | Greater-Than circuit, GPT-2 small | attribution patching | **B**, high confidence | robustly stable (J CI [0.83, 0.94]) yet decisively fails specificity (CI [1.06, 1.23] vs the 1.5× bar) — the null "circuit" is just as stable |
-| IOI across GPT-2 scale (124M–774M) | attribution patching | A / **A certified** / A | no monotone trend: medium is the only card whose every CI clears its bar; large is undecided again — instability is model-idiosyncratic, not cured by scale |
+| IOI across GPT-2 scale (124M–774M) | attribution patching | A / **A, legacy high-confidence label** / A | no monotone trend: medium is the only diagnostic card whose every CI clears its bar; large is undecided again — instability is model-idiosyncratic, not cured by scale |
 | Activation Oracles, Qwen3-8B taboo | upstream `run_verbalizer` | **D** (two mixtures), **C** (one) | consistency 0.94 across captures vs 0.31 across phrasings; ≥89% fabrication even on a null probe that invites abstention |
 | J-lens workspace readouts, Qwen3.5-4B | released pre-fitted lens | **C** | band claim stable (π\* = 0.90); which items hit is not (J = 0.45), and a derangement null is *more* stable than the real finding |
 
 ## Design principles
 
 1. **Wrap, don't replace.** StressKit instruments the pipeline you already have.
-2. **Every metric has a citation.** Defaults follow the published proposals; a shared bar is the point.
+2. **Every confirmatory bar is justified.** Threshold values and estimands freeze before outcomes; diagnostic defaults remain exploratory.
 3. **Cheap by default.** Core is numpy-only; the harness adds no compute beyond re-running your finder.
 4. **Honest degradation.** Skipped axes are noted on the card, never silently dropped.
 
@@ -310,7 +516,7 @@ generated from the cards, so neither can drift from the data.
 
 - Reference cards for the refusal direction and additional model scales
 - Run caching and parallel execution for expensive finders
-- Crossed-grid batteries (full multiverse analysis) with budget caps
+- Confirmatory estimators for full crossed-grid designs (IID profile ships now)
 - Trajectory batteries: stability across long generations and agent rollouts
 - `stresskit verify`: recompute a card from its config hash
 

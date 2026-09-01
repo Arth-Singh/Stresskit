@@ -103,4 +103,5 @@ def edges_to_finding(
         claim=claim,
         score=score,
         universe_size=universe_size or len(edge_scores),
+        structure_present=True,
     )

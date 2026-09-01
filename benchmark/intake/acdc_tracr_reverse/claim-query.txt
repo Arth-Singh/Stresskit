@@ -1,0 +1,23 @@
+Candidate ID: acdc_tracr_reverse
+
+Use exactly this preregistered sentence in the statement field; do not rewrite it:
+
+With zero-activation patching, ACDC perfectly recovers the canonical 15-edge Tracr reverse circuit for every threshold tau > 0.
+
+Determine only whether every material part of that sentence is explicitly supported by supplied pinned sources: zero-activation patching, ACDC, perfect recovery, canonical Tracr reverse circuit, 15 displayed edges, and every positive threshold. Set supported=false and list each missing, ambiguous, or operationally unbounded part when support is incomplete.
+
+Primary locator: arXiv:2304.14997v4, Section 4.1 and Appendix I.2, especially Figure 21b and its caption; Table 3 supplies zero-ablation edge/node AUC. Source TeX: sections/4_roc.tex lines 51-56 and sections/appendix.tex lines 787-806.
+
+Cite exact source quotes only from:
+
+- arXiv:2304.14997v4 PDF/text;
+- arXiv:2304.14997v4 TeX source;
+- acdc/tracr_task/utils.py;
+- acdc/main.py;
+- experiments/launch_spreadsheet.py;
+- notebooks/roc_plot_generator.py;
+- acdc/TLACDCExperiment.py and acdc/acdc_utils.py for code mapping.
+
+Treat the code's 21-point Tracr sweep from 10^-5 through 10^-1 as implementation context, not permission to silently narrow "every threshold tau > 0." Note that get_tracr_reverse_edges() contains 24 hook-level edges while Figure 21b labels a 15-edge displayed canonical circuit; require an explicit deterministic representation reducer before compiling an audit.
+
+Do not inspect released result JSON files. Do not infer external-task utility, held-out model generalization, pretrained-model applicability, causal identity, or a StressKit verdict. Do not treat repository-shipped results as an independent reproduction.

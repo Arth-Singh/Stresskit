@@ -1,0 +1,55 @@
+{
+  "artifact": "stresskit_agent_opinion",
+  "evidence_anchors": [
+    {
+      "document_id": "mechtomo-paper-v1-source",
+      "end": 45096,
+      "locator": "https://arxiv.org/src/2608.19338v1#nt_mi_control_position_v21-v2.tex#stresskit-text-bytes=44927-45096",
+      "quote_digest": "sha256:a2a0a9aebcb5bb49f9513175b43f2e0fb164c5ca3fe3842559102df663007344",
+      "source_digest": "sha256:a156f610419ef63c43d143ebb41d70ac1a97f10e0581d9b3f9f73cf27a4e61a9",
+      "start": 44927,
+      "text_digest": "sha256:30be34601c37edb2aacf1b2a665d83cf866f04acec5c61eecea1fe97119f81dd"
+    },
+    {
+      "document_id": "mechtomo-paper-v1-source",
+      "end": 44597,
+      "locator": "https://arxiv.org/src/2608.19338v1#nt_mi_control_position_v21-v2.tex#stresskit-text-bytes=44522-44597",
+      "quote_digest": "sha256:09d10cf2cdfe9a5045c13624d66ac8d8af8637de34d0c8b6076d1a37c72719e9",
+      "source_digest": "sha256:a156f610419ef63c43d143ebb41d70ac1a97f10e0581d9b3f9f73cf27a4e61a9",
+      "start": 44522,
+      "text_digest": "sha256:30be34601c37edb2aacf1b2a665d83cf866f04acec5c61eecea1fe97119f81dd"
+    },
+    {
+      "document_id": "mechtomo-paper-v1-source",
+      "end": 45420,
+      "locator": "https://arxiv.org/src/2608.19338v1#nt_mi_control_position_v21-v2.tex#stresskit-text-bytes=45224-45420",
+      "quote_digest": "sha256:ec6adf066042424a1fa1c8b3fa4c06bc0956019776f798ce139f5acd39bf5c08",
+      "source_digest": "sha256:a156f610419ef63c43d143ebb41d70ac1a97f10e0581d9b3f9f73cf27a4e61a9",
+      "start": 45224,
+      "text_digest": "sha256:30be34601c37edb2aacf1b2a665d83cf866f04acec5c61eecea1fe97119f81dd"
+    },
+    {
+      "document_id": "mechtomo-paper-v1-source",
+      "end": 46357,
+      "locator": "https://arxiv.org/src/2608.19338v1#nt_mi_control_position_v21-v2.tex#stresskit-text-bytes=46213-46357",
+      "quote_digest": "sha256:6da409e83c96ce5e19e9762933ac92b92c651f0005645c76e111f2138fb2719e",
+      "source_digest": "sha256:a156f610419ef63c43d143ebb41d70ac1a97f10e0581d9b3f9f73cf27a4e61a9",
+      "start": 46213,
+      "text_digest": "sha256:30be34601c37edb2aacf1b2a665d83cf866f04acec5c61eecea1fe97119f81dd"
+    }
+  ],
+  "issues": [],
+  "model": "x-ai/grok-4.6-20260810",
+  "model_digest": "sha256:dac3cc9ae9602dab65af3ab786d28da80ab110c5513950855987442330925e57",
+  "model_family": "grok-4.6",
+  "opinion_id": "mechtomo-extractor-a",
+  "prompt_digest": "sha256:a9d7b65ca613ffc507490ff5a144a07c3d18e1dc02c3942bac0ab74ce683adb1",
+  "prompt_injection_detected": false,
+  "provider": "xAI",
+  "request_digest": "sha256:9e936a8f92e39b05bfbef6dcce1615c44b04b0cf19a2792c6bd3972dd499faf0",
+  "role": "extractor",
+  "schema_version": "1.0",
+  "source_bundle_digest": "sha256:4db27bfc13154a653a8ebf074eb6afa1fda8b5a798ebd5f72d342ba8853859b2",
+  "statement": "Orthogonal matching pursuit recovers the 32-coordinate finite-effect map with Pearson r = 0.989 and held-out R-squared = 0.935.",
+  "supported": true
+}

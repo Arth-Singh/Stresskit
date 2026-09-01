@@ -1,0 +1,167 @@
+{
+  "artifact": "stresskit_source_intake_manifest",
+  "bundle_id": "mechtomo-finite-effect-map-recovery-source-v1",
+  "created_at": "2026-09-01T17:33:51Z",
+  "documents": [
+    {
+      "document_id": "mechtomo-repository",
+      "expected_digest": "sha256:9c0955019722da7b3b71cc9f2571c0f5310d23dd398b886c8f82c1aae4f0f5ec",
+      "expected_extracted_text_digest": "sha256:ffa2eeba3896c493bc0d5613daf6a9b41dd9781802044873c0136c10e95f55d1",
+      "extracted_text_path": "repository-snapshot.txt",
+      "kind": "repository",
+      "license": {
+        "evidence": {
+          "checked_at": "2026-09-01T17:33:51Z",
+          "reviewed_by": "StressKit autonomous intake",
+          "scope": "Pinned repository contains Apache-2.0 software and CC-BY-4.0 paper material. LICENSE, LICENSE-PAPER.md, and NOTICE are digest-bound closure leaves; no narrower source-file header was found for the registered entrypoints.",
+          "source": "https://github.com/kwisatzh/mechanistic-tomography/tree/5c097d2175c632a4a15e359cb4d94ec923168472"
+        },
+        "identifier": "Apache-2.0 AND CC-BY-4.0",
+        "status": "verified_compatible"
+      },
+      "locator": "https://github.com/kwisatzh/mechanistic-tomography/tree/5c097d2175c632a4a15e359cb4d94ec923168472",
+      "media_type": "application/x-tar",
+      "path": "../../../.stresskit/intake/mechtomo_finite_effect_map_recovery/mechanistic-tomography-5c097d2.tar"
+    },
+    {
+      "document_id": "mechtomo-paper-v1-pdf",
+      "expected_digest": "sha256:b3ff771db9b791691de6c3985833ca9ba3f3fc823214b5d57aad4c68f9df05c5",
+      "expected_extracted_text_digest": "sha256:3ca5f8f076082ee109c0ccd54f2e67399b48154cc194132042cce71d967a40d8",
+      "extracted_text_path": "../../../.stresskit/intake/mechtomo_finite_effect_map_recovery/extracted/arxiv-2608.19338v1.txt",
+      "kind": "paper",
+      "license": {
+        "evidence": {
+          "checked_at": "2026-09-01T17:33:51Z",
+          "reviewed_by": "StressKit autonomous intake",
+          "scope": "arXiv links this paper to CC BY 4.0; the pinned repository's LICENSE-PAPER.md independently states that the paper text, manuscript source, PDFs, and original figures use CC BY 4.0.",
+          "source": "https://arxiv.org/abs/2608.19338v1"
+        },
+        "identifier": "CC-BY-4.0",
+        "status": "verified_compatible"
+      },
+      "locator": "https://arxiv.org/pdf/2608.19338v1",
+      "media_type": "application/pdf",
+      "path": "../../../.stresskit/intake/mechtomo_finite_effect_map_recovery/raw/arxiv-2608.19338v1.pdf"
+    },
+    {
+      "document_id": "mechtomo-paper-v1-source",
+      "expected_digest": "sha256:a156f610419ef63c43d143ebb41d70ac1a97f10e0581d9b3f9f73cf27a4e61a9",
+      "expected_extracted_text_digest": "sha256:30be34601c37edb2aacf1b2a665d83cf866f04acec5c61eecea1fe97119f81dd",
+      "extracted_text_path": "../../../.stresskit/intake/mechtomo_finite_effect_map_recovery/extracted/nt_mi_control_position_v21-v2.tex.txt",
+      "kind": "paper",
+      "license": {
+        "evidence": {
+          "checked_at": "2026-09-01T17:33:51Z",
+          "reviewed_by": "StressKit autonomous intake",
+          "scope": "The arXiv source archive is the primary manuscript source for v1. arXiv links the paper to CC BY 4.0 and the pinned repository's LICENSE-PAPER.md expressly covers manuscript source.",
+          "source": "https://arxiv.org/src/2608.19338v1"
+        },
+        "identifier": "CC-BY-4.0",
+        "status": "verified_compatible"
+      },
+      "locator": "https://arxiv.org/src/2608.19338v1#nt_mi_control_position_v21-v2.tex",
+      "media_type": "application/gzip",
+      "path": "../../../.stresskit/intake/mechtomo_finite_effect_map_recovery/raw/arxiv-2608.19338v1-source.tar.gz"
+    },
+    {
+      "document_id": "mechtomo-experiment-map",
+      "expected_digest": "sha256:e2b679e7807e6de6bdf93e0bd4d3a83f84b625bc7895fb5a4e8cc9bd587795cd",
+      "expected_extracted_text_digest": "sha256:e2b679e7807e6de6bdf93e0bd4d3a83f84b625bc7895fb5a4e8cc9bd587795cd",
+      "extracted_text_path": "../../../.stresskit/upstreams/mechanistic_tomography/experiments/README.md",
+      "kind": "repository",
+      "license": {
+        "evidence": {
+          "checked_at": "2026-09-01T17:33:51Z",
+          "reviewed_by": "StressKit autonomous intake",
+          "scope": "Pinned repository LICENSE is Apache-2.0; this experiment guide has no narrower file-level license.",
+          "source": "https://raw.githubusercontent.com/kwisatzh/mechanistic-tomography/5c097d2175c632a4a15e359cb4d94ec923168472/LICENSE"
+        },
+        "identifier": "Apache-2.0",
+        "status": "verified_compatible"
+      },
+      "locator": "https://github.com/kwisatzh/mechanistic-tomography/blob/5c097d2175c632a4a15e359cb4d94ec923168472/experiments/README.md",
+      "media_type": "text/markdown; charset=utf-8",
+      "path": "../../../.stresskit/upstreams/mechanistic_tomography/experiments/README.md"
+    },
+    {
+      "document_id": "mechtomo-hmm-guide",
+      "expected_digest": "sha256:140bda48ced4555607fe0c0d1be0b20bbb84f260e33904c6f0723a14b2a7e365",
+      "expected_extracted_text_digest": "sha256:140bda48ced4555607fe0c0d1be0b20bbb84f260e33904c6f0723a14b2a7e365",
+      "extracted_text_path": "../../../.stresskit/upstreams/mechanistic_tomography/experiments/hmm/README.md",
+      "kind": "repository",
+      "license": {
+        "evidence": {
+          "checked_at": "2026-09-01T17:33:51Z",
+          "reviewed_by": "StressKit autonomous intake",
+          "scope": "Pinned repository LICENSE is Apache-2.0; this HMM experiment guide has no narrower file-level license.",
+          "source": "https://raw.githubusercontent.com/kwisatzh/mechanistic-tomography/5c097d2175c632a4a15e359cb4d94ec923168472/LICENSE"
+        },
+        "identifier": "Apache-2.0",
+        "status": "verified_compatible"
+      },
+      "locator": "https://github.com/kwisatzh/mechanistic-tomography/blob/5c097d2175c632a4a15e359cb4d94ec923168472/experiments/hmm/README.md",
+      "media_type": "text/markdown; charset=utf-8",
+      "path": "../../../.stresskit/upstreams/mechanistic_tomography/experiments/hmm/README.md"
+    },
+    {
+      "document_id": "mechtomo-sparse-reducer",
+      "expected_digest": "sha256:db809578b161a8c43036f541c1f0a59e7408203d0650081d70629958e28d76c3",
+      "expected_extracted_text_digest": "sha256:db809578b161a8c43036f541c1f0a59e7408203d0650081d70629958e28d76c3",
+      "extracted_text_path": "../../../.stresskit/intake/mechtomo_finite_effect_map_recovery/extracted/sparse_tomography_posthoc.py.txt",
+      "kind": "repository",
+      "license": {
+        "evidence": {
+          "checked_at": "2026-09-01T17:33:51Z",
+          "reviewed_by": "StressKit autonomous intake",
+          "scope": "Pinned repository LICENSE is Apache-2.0; reducer source has no narrower file-level license.",
+          "source": "https://raw.githubusercontent.com/kwisatzh/mechanistic-tomography/5c097d2175c632a4a15e359cb4d94ec923168472/LICENSE"
+        },
+        "identifier": "Apache-2.0",
+        "status": "verified_compatible"
+      },
+      "locator": "https://github.com/kwisatzh/mechanistic-tomography/blob/5c097d2175c632a4a15e359cb4d94ec923168472/experiments/hmm/sparse_tomography_posthoc.py",
+      "media_type": "text/x-python; charset=utf-8",
+      "path": "../../../.stresskit/upstreams/mechanistic_tomography/experiments/hmm/sparse_tomography_posthoc.py"
+    },
+    {
+      "document_id": "mechtomo-hmm-requirements",
+      "expected_digest": "sha256:da0e4fd4ae60522747bdc82b56bcf7521df44a9a3b30c1e72480382f03e48dc7",
+      "expected_extracted_text_digest": "sha256:da0e4fd4ae60522747bdc82b56bcf7521df44a9a3b30c1e72480382f03e48dc7",
+      "extracted_text_path": "../../../.stresskit/upstreams/mechanistic_tomography/experiments/hmm/requirements.txt",
+      "kind": "dependency",
+      "license": {
+        "evidence": {
+          "checked_at": "2026-09-01T17:33:51Z",
+          "reviewed_by": "StressKit autonomous intake",
+          "scope": "This file is repository-authored dependency metadata under the repository's Apache-2.0 license. Third-party package licenses and exact versions remain a separate build-manifest gate.",
+          "source": "https://raw.githubusercontent.com/kwisatzh/mechanistic-tomography/5c097d2175c632a4a15e359cb4d94ec923168472/LICENSE"
+        },
+        "identifier": "Apache-2.0",
+        "status": "verified_compatible"
+      },
+      "locator": "https://github.com/kwisatzh/mechanistic-tomography/blob/5c097d2175c632a4a15e359cb4d94ec923168472/experiments/hmm/requirements.txt",
+      "media_type": "text/plain; charset=utf-8",
+      "path": "../../../.stresskit/upstreams/mechanistic_tomography/experiments/hmm/requirements.txt"
+    }
+  ],
+  "metadata": {
+    "artifact_inventory_digest": "sha256:0e1cec96c5c4f0b1ba7d3a538af48f787e50992fd7b7c7eb00ca3af82f0d3aec",
+    "candidate_id": "mechtomo_finite_effect_map_recovery",
+    "claim_query_digest": "sha256:d7558bbb4996e8cec312ebb8bb0fd9bc21e4883848f4a09e8575310cd10fd3d9",
+    "dependency_profile": "upstream_ranges_unlocked",
+    "extraction_profile": "poppler_pdftotext_26.01.0_layout_nopgbrk_utf8_and_primary_tex_byte_identity_v1",
+    "notice_digest": "sha256:d79efb21a7b4e60b3039e4d389cd0bc7d9cfe3f928af33da9230a747fb1f1e4d",
+    "paper_license_digest": "sha256:48e4dc03652e5c1bc771ded0d56b3bcd182b11440566a3a93c1566a0fdcd2391",
+    "paper_version": "arXiv:2608.19338v1",
+    "registered_claim_locator": "Section 5.1 and Figure 2, PDF page 8; Table 2 excluded as a distinct calibration experiment",
+    "released_artifact_license_scope": "unresolved_pending_author_confirmation",
+    "repository": "https://github.com/kwisatzh/mechanistic-tomography",
+    "repository_archive_digest": "sha256:9c0955019722da7b3b71cc9f2571c0f5310d23dd398b886c8f82c1aae4f0f5ec",
+    "repository_archive_profile": "git_archive_tar_with_mechanistic_tomography_prefix_v1",
+    "repository_commit": "5c097d2175c632a4a15e359cb4d94ec923168472",
+    "repository_tree": "261ed565077cb55dc61cc004fd1bd7ef9be01c67",
+    "software_license_digest": "sha256:cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+  },
+  "outcome_blind": true,
+  "schema_version": "1.0"
+}

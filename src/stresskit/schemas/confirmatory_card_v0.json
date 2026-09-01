@@ -1,0 +1,196 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Arth-Singh/Stresskit/blob/main/src/stresskit/schemas/confirmatory_card_v0.json",
+  "title": "StressKit Confirmatory Stability Card",
+  "description": "Machine-verifiable result from preregistered IID specification draws and finite-sample bounded inference.",
+  "type": "object",
+  "required": [
+    "artifact",
+    "schema_version",
+    "stresskit_version",
+    "created_at",
+    "claim",
+    "design",
+    "inference",
+    "thresholds",
+    "metrics",
+    "checks",
+    "verdict",
+    "runs",
+    "null_runs",
+    "provenance"
+  ],
+  "properties": {
+    "artifact": {"const": "stresskit_confirmatory_card"},
+    "schema_version": {"const": "0.1"},
+    "stresskit_version": {"type": "string"},
+    "created_at": {"type": "string", "format": "date-time"},
+    "claim": {
+      "type": "object",
+      "required": ["statement"],
+      "properties": {
+        "claim_id": {"type": ["string", "null"]},
+        "statement": {"type": "string", "minLength": 1},
+        "model": {"type": ["string", "null"]},
+        "task": {"type": ["string", "null"]},
+        "method": {"type": ["string", "null"]}
+      }
+    },
+    "design": {
+      "type": "object",
+      "required": [
+        "profile",
+        "sampling_design",
+        "independent_unit",
+        "n_runs",
+        "n_null_runs",
+        "manifest_sha256"
+      ],
+      "properties": {
+        "profile": {"const": "confirmatory"},
+        "sampling_design": {"const": "iid_specification_sample"},
+        "independent_unit": {"const": "run"},
+        "n_runs": {"type": "integer", "minimum": 2},
+        "n_null_runs": {"type": "integer", "minimum": 0},
+        "manifest_sha256": {"$ref": "#/$defs/sha256"},
+        "null_manifest_sha256": {
+          "oneOf": [
+            {"$ref": "#/$defs/sha256"},
+            {"type": "null"}
+          ]
+        }
+      }
+    },
+    "inference": {
+      "type": "object",
+      "required": [
+        "method",
+        "confidence_level",
+        "familywise_alpha",
+        "minimum_runs",
+        "master_seed",
+        "pairing_seeds"
+      ],
+      "properties": {
+        "method": {"const": "paired_hoeffding_bonferroni_v1"},
+        "confidence_level": {"type": "number", "exclusiveMinimum": 0, "exclusiveMaximum": 1},
+        "familywise_alpha": {"type": "number", "exclusiveMinimum": 0, "exclusiveMaximum": 1},
+        "minimum_runs": {"type": "integer", "minimum": 200},
+        "master_seed": {"type": "integer"},
+        "pairing_seeds": {"type": "object"},
+        "claim_classes": {
+          "type": ["array", "null"],
+          "items": {"type": "string"},
+          "uniqueItems": true
+        }
+      }
+    },
+    "thresholds": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "required": ["value", "justification"],
+        "properties": {
+          "value": {"type": "number"},
+          "justification": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "metrics": {"type": "object"},
+    "checks": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {"$ref": "#/$defs/check"}
+    },
+    "verdict": {
+      "type": "object",
+      "required": ["state", "required_checks"],
+      "properties": {
+        "state": {"enum": ["pass", "fail", "inconclusive"]},
+        "required_checks": {
+          "type": "array",
+          "items": {"type": "string"},
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      }
+    },
+    "runs": {
+      "type": "array",
+      "minItems": 2,
+      "items": {"$ref": "#/$defs/run"}
+    },
+    "null_runs": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/run"}
+    },
+    "provenance": {"type": "object"}
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "run": {
+      "type": "object",
+      "required": [
+        "manifest",
+        "structure_present",
+        "components",
+        "components_sha256",
+        "universe_size"
+      ],
+      "properties": {
+        "manifest": {
+          "type": "object",
+          "required": ["draw_index", "design", "configuration"],
+          "properties": {
+            "draw_index": {"type": "integer", "minimum": 0},
+            "design": {"const": "iid_specification_sample"},
+            "configuration": {"type": "object"}
+          }
+        },
+        "structure_present": {"type": "boolean"},
+        "components": {"type": "array"},
+        "components_sha256": {"$ref": "#/$defs/sha256"},
+        "claim": {"type": ["string", "null"]},
+        "score": {"type": ["number", "null"]},
+        "universe_size": {"type": ["integer", "null"]},
+        "universe": {}
+      }
+    },
+    "check": {
+      "type": "object",
+      "required": [
+        "value",
+        "threshold",
+        "passed",
+        "op",
+        "ci",
+        "state",
+        "metric",
+        "alpha",
+        "minimum_n_met",
+        "estimator"
+      ],
+      "properties": {
+        "value": {"type": "number"},
+        "threshold": {"type": "number"},
+        "passed": {"type": "boolean"},
+        "op": {"const": ">="},
+        "ci": {
+          "type": "array",
+          "items": {"type": "number"},
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "state": {"enum": ["pass", "fail", "inconclusive"]},
+        "metric": {"type": "string"},
+        "alpha": {"type": "number", "exclusiveMinimum": 0, "exclusiveMaximum": 1},
+        "minimum_n_met": {"type": "boolean"},
+        "estimator": {"const": "paired_hoeffding_bonferroni_v1"}
+      }
+    }
+  }
+}

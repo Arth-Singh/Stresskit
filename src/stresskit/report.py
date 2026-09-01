@@ -25,6 +25,10 @@ CHECKLIST_FIELDS: List[Tuple[str, str, str]] = [
     ("metric", "Evaluation metric", "faithfulness/score definition, exactly"),
     ("explainer", "Explainer/scorer models", "for autointerp pipelines: model names + versions"),
     ("stability", "Stability metrics", "Jaccard / flip rate / CV reported (attach a Stability Card)"),
+    ("downstream_task", "Downstream task",
+     "a task the finding was used for, stated without interpretability vocabulary"),
+    ("non_internals_baseline", "Non-internals baseline",
+     "what the same task scores without reading model internals at all"),
     ("card", "Stability Card", "path or URL of the machine-readable card"),
 ]
 

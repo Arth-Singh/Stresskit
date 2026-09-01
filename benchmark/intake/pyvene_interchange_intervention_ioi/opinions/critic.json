@@ -1,0 +1,41 @@
+{
+  "artifact": "stresskit_agent_opinion",
+  "evidence_anchors": [
+    {
+      "document_id": "pyvene-ioi-replication-notebook",
+      "end": 442,
+      "locator": "https://github.com/stanfordnlp/pyvene/blob/9e333904dcf9e597ca76170010d17f4d4580de8d/tutorials/advanced_tutorials/IOI_Replication.ipynb#stresskit-text-bytes=229-442",
+      "quote_digest": "sha256:e43d7405b629d3bb3c7fe64cb51973f302595cd4bd9774d2b76084457e1dfa26",
+      "source_digest": "sha256:3976f034f2d12450e9ff06de9b3bab3245852853e05f50e03825efb99114a616",
+      "start": 229,
+      "text_digest": "sha256:d0ee09e790cdcb1000608339a7efdf85ecbd3b5595a7049667f1379e7f7c11f3"
+    },
+    {
+      "document_id": "pyvene-ioi-mask-notebook",
+      "end": 343,
+      "locator": "https://github.com/stanfordnlp/pyvene/blob/9e333904dcf9e597ca76170010d17f4d4580de8d/tutorials/advanced_tutorials/IOI_with_Mask_Intervention.ipynb#stresskit-text-bytes=233-343",
+      "quote_digest": "sha256:07bb85f1eb9aa7915e1fe6c8e5ff08cc139303e77d3745870422cfee0795e408",
+      "source_digest": "sha256:1f67ae385786559781b3e727c1ecbe89ddcff20fee43117f4480d1554b989ae6",
+      "start": 233,
+      "text_digest": "sha256:5df537906d17778f0579cf113932506b3148ffddc306728a0e2107a3eea98ffd"
+    }
+  ],
+  "issues": [
+    "The term 'serialized interchange interventions' is not explicitly present in the source documents.",
+    "The term 'registered IOI causal effects' is not explicitly present in the source documents.",
+    "The concept of 'equivalence across intervention configurations' is not explicitly present in the source documents."
+  ],
+  "model": "google/gemini-3.1-pro-preview-20260219",
+  "model_digest": "sha256:d9eac03a71ba90f3cb114fd0bbda352b97ab04670152f3c30a78cc3f5c7d8ee9",
+  "model_family": "gemini-3.1",
+  "opinion_id": "pyvene-ioi-critic",
+  "prompt_digest": "sha256:880a096cc4978d3870ae56fac8e9f2b2ad5a2afb84e0d6b8c25fc65babc79749",
+  "prompt_injection_detected": false,
+  "provider": "Google",
+  "request_digest": "sha256:bb1e8fd9b1d12aa9acd8031ff6450f7e418d12e7040d99239e1e346035408804",
+  "role": "critic",
+  "schema_version": "1.0",
+  "source_bundle_digest": "sha256:57dad0ed3635a341cbfdf899f46c6e0031ec72a48b712a563695ad17df2809df",
+  "statement": "Instrument audit: serialized interchange interventions reproduce registered IOI causal effects across equivalent intervention configurations.",
+  "supported": false
+}

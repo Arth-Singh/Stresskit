@@ -47,7 +47,7 @@ class TestCLI:
         path = _make_card(tmp_path)
         assert main(["badge", str(path)]) == 0
         badge = json.loads(capsys.readouterr().out)
-        assert badge["label"] == "stability"
+        assert badge["label"] == "diagnostic stability"
 
     def test_badge_file(self, tmp_path, capsys):
         path = _make_card(tmp_path)

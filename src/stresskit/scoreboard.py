@@ -1,4 +1,4 @@
-"""The stability scoreboard — every graded finding, one table.
+"""Legacy diagnostic stability inventory — every v0.x card in one table.
 
 Scans directories of StressKit artifacts (stability cards and oracle
 reliability reports), extracts each verdict, and renders a deterministic
@@ -6,9 +6,9 @@ markdown scoreboard. The repo's own SCOREBOARD.md is generated from
 ``references/`` by ``stresskit scoreboard`` and kept fresh by CI, so the
 table can never drift from the cards it summarizes.
 
-Determinism matters: no timestamps are emitted and rows sort on stable
-keys, so regenerating from unchanged cards is byte-identical (this is what
-lets CI diff it).
+This compatibility view is not StressKit v1 publication evidence. Determinism
+matters: no timestamps are emitted and rows sort on stable identity keys, never
+grade, so regenerating from unchanged cards is byte-identical.
 """
 
 from __future__ import annotations
@@ -122,8 +122,9 @@ def collect_rows(paths: Sequence[str]) -> List[Dict[str, Any]]:
             rows.append(_row_from_stability_card(d, fp))
         elif kind == "oracle_report":
             rows.append(_row_from_oracle_report(d, fp))
-    rows.sort(key=lambda r: (r["kind"] != "stability card", r["grade"],
-                             r["finding"], r["path"]))
+    rows.sort(key=lambda r: (
+        r["kind"] != "stability card", r["finding"], r["path"]
+    ))
     return rows
 
 
@@ -143,6 +144,9 @@ def scoreboard_markdown(rows: Sequence[Dict[str, Any]],
     """Render collected rows as the scoreboard markdown document."""
     lines = [
         "# Stability Scoreboard",
+        "",
+        "> **Legacy diagnostic inventory.** Not a StressKit v1 evidence board;",
+        "> use `stresskit audit publish` for verified claim-level publication.",
         "",
         "Every finding graded by StressKit's reference batteries, under the",
         "default thresholds and the protocol in",

@@ -1,0 +1,125 @@
+{
+  "artifact": "stresskit_upstream_artifact_inventory",
+  "schema_version": "1.0",
+  "candidate_id": "thought_anchors_counterfactual_importance_r1_qwen14b",
+  "created_at": "2026-09-01T18:05:45Z",
+  "outcome_blind": true,
+  "repository": {
+    "url": "https://github.com/interp-reasoning/thought-anchors",
+    "commit": "b53ed8c75d3f6112f68adfaec9a13d4d708c442e",
+    "tree": "b7a5383cedd85a32f437b928654010bb0de3dd2c",
+    "archive_digest": "sha256:796f6bf17b0dd701cc82c0938b313d7733b1070ee9557eb0f9e2f6cc0310e383",
+    "archive_size": 7864320,
+    "tracked_files": 97
+  },
+  "paper": {
+    "arxiv_id": "2506.19143v4",
+    "pdf_digest": "sha256:7b2d6a4146d06fb7c6d1ca3a88a965bffe71c937f206d1ebed2c35692648d737",
+    "pdf_size": 23147147,
+    "pdf_pages": 34,
+    "pdf_text_digest": "sha256:fb461a4c931f3064c95e62617f50b1e5f117f174da3d6dd0e099f1d32cc0deab",
+    "source_archive_digest": "sha256:7081cadf9bda4c0f59d387f97794bf82219a5fd65ee977ec47589be8b45dcc84",
+    "source_archive_size": 21238392,
+    "primary_tex": "iclr2026_conference.tex",
+    "primary_tex_digest": "sha256:ca43d50d57e5e57e140a5c958b63687e4d01590190251d9173393371f0817889",
+    "primary_tex_size": 121363,
+    "locator": "arXiv:2506.19143v4, Section 2.4 and Figure 2 on PDF pages 3-4; Sections 3.1-3.3 and Figure 3 on PDF page 5; primary TeX lines 225-233 and 237-290",
+    "registry_locator_correction": "Figure 2 is a single-trace case study. The category-level counterfactual-importance comparison is Section 3.3 and Figure 3. The frozen statement is unchanged for independent panel review."
+  },
+  "rollout_dataset": {
+    "repository": "uzaymacar/math-rollouts",
+    "revision": "a3a2fe1eb6d52e6ef81860baff018a8df2eb8ae2",
+    "last_modified": "2025-08-25T00:21:28.000Z",
+    "private": false,
+    "gated": false,
+    "disabled": false,
+    "card_digest": "sha256:885187b4b95dcdb6099018676827e2272fd58ab1788f08187b1c5b39b2ae68ef",
+    "card_size": 9246,
+    "revision_api_digest": "sha256:22e42adc4702a96dc59d5c19f07cd5e586e1579a347c9fbdba8e81b1391190c3",
+    "revision_api_size": 5989115,
+    "snapshot_file_count": 29030,
+    "snapshot_logical_bytes": 110985134374,
+    "dataset_uncompressed_bytes": 91382189873,
+    "dataset_download_bytes": 19607697104,
+    "card_license": "MIT",
+    "standalone_license_file": null,
+    "license_evidence": "The exact-revision README YAML and Dataset Details both declare MIT. The revision contains no separate LICENSE file.",
+    "selected_cpu_subset": {
+      "selection": "DeepSeek-R1-Distill-Qwen-14B temperature_0.6_top_p_0.95; correct_base_solution and incorrect_base_solution chunks_labeled.json files consumed by plots.py:collect_tag_data",
+      "manifest_digest": "sha256:6e303125f586de09c75227c30ddd4b45f57c3ed55f107e5185eba5243d2e0166",
+      "path_list_digest": "sha256:49fa13b2526a2e28fc0d17d0ab67ec82e68d74e9a37dc069b588a7f1962dd038",
+      "archive_digest": "sha256:51c8bf8276234eaee69347d0db253a2527e0fd01b404fe625fa73e5e4d47cfb5",
+      "archive_size": 4339200,
+      "file_count": 40,
+      "source_bytes": 4306713,
+      "chunk_rows_schema_checked": 6474,
+      "verification": "Every downloaded byte count and Git blob ID matches the exact-revision Hugging Face manifest. No category means or StressKit outcomes were computed."
+    }
+  },
+  "code_map": {
+    "rollout_generator": {
+      "path": "generate_rollouts.py",
+      "digest": "sha256:6d3fcdce2a47a2ce5d113173135ef348a7a705b2bb0e9eaaa89e832f8ce502a5",
+      "scope": "upstream generation provenance; not required by the released-metric CPU path"
+    },
+    "metric_and_label_pipeline": {
+      "path": "analyze_rollouts.py",
+      "digest": "sha256:9dc5beabe101b590e4e8d8f46fbce91118bfd2d345a4ef203cd35e2535f9335f",
+      "label_lines": "506-551",
+      "importance_lines": "553-1018"
+    },
+    "category_reducer": {
+      "path": "plots.py",
+      "digest": "sha256:f79a2a828d3a8ad0fc06286103c9edfe39c4abf908d31e08f634542e4c6a018c",
+      "input_lines": "116-289",
+      "aggregation_lines": "291-410",
+      "plot_lines": "415-557",
+      "orchestration_lines": "2185-2211"
+    },
+    "labeler_prompt": {
+      "path": "prompts.py",
+      "digest": "sha256:6378020e96cf0e2e53694b143edcdd0a37bbb318b97c0e2cf2ffc5ebf5170b70",
+      "dag_prompt_lines": "138-212"
+    },
+    "excluded_from_registered_entrypoint": {
+      "path": "step_attribution.py",
+      "digest": "sha256:23b29910dd25b17b3b3c8faba7c9c0827becd1b9ac681a6ef97128ac9f94aa7f",
+      "reason": "Computes sentence-to-sentence effects and optional top-N visualization, not the final-answer category-level counterfactual-importance comparison in Figure 3."
+    }
+  },
+  "dependencies": {
+    "requirements_path": "requirements.txt",
+    "requirements_digest": "sha256:318e10d8a4fe6ff8f8c6978f2c700b805992f317afcca891d8afbee4240308eb",
+    "lock_status": "unresolved_no_exact_dependency_lock",
+    "cpu_subset_reader": [
+      "numpy>=1.24.0",
+      "pandas>=2.0.0",
+      "matplotlib>=3.7.0",
+      "seaborn>=0.12.0",
+      "scikit-learn>=1.3.0",
+      "tqdm>=4.65.0"
+    ]
+  },
+  "licenses": {
+    "repository_code": {
+      "identifier": "MIT",
+      "license_digest": "sha256:17825c3bd82610363b7c1e2bf16311f4a1c9578674ea844da72bfaa8a87977d6",
+      "status": "verified_compatible"
+    },
+    "paper": {
+      "identifier": "CC-BY-4.0",
+      "source": "https://arxiv.org/abs/2506.19143v4",
+      "status": "verified_compatible"
+    },
+    "rollout_dataset": {
+      "identifier": "MIT",
+      "source": "https://huggingface.co/datasets/uzaymacar/math-rollouts/blob/a3a2fe1eb6d52e6ef81860baff018a8df2eb8ae2/README.md",
+      "scope_note": "Exact-revision dataset card declaration; no standalone license file is present.",
+      "status": "verified_compatible"
+    },
+    "model_execution": {
+      "status": "not_in_source_scope",
+      "reason": "This intake freezes released metrics for CPU post-hoc analysis and does not download or execute model weights. Any later regeneration run must separately pin model revision and dependency closure before freeze."
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "artifact": "stresskit_agent_attempt_record",
+  "attempt": 1,
+  "candidate_id": "acdc_tracr_reverse",
+  "completion_content_inspected": false,
+  "completion_content_human_inspected": false,
+  "critic_called": false,
+  "evidence_quote_checks": [],
+  "finish_reason": "length",
+  "native_finish_reason": "length",
+  "observed_at": "2026-09-01T18:14:41Z",
+  "opinion_id": "acdc-tracr-reverse-extractor-b",
+  "panel_plan_digest": "sha256:ced0898f193f098395091ff009f827a2eb6ecd7a758625b25185ddac3d345e4c",
+  "prompt_digest": "sha256:34eda83b2d9a904d6e4e1836b3da423db150dda582e14b4b93821f42f8bb0ad7",
+  "raw_response_digest": "sha256:e1656ea69da3130e94247c60d064d9778b0cb032f3daae40b82cd19e8b3284bb",
+  "reason": "completion reached the frozen max-token limit and did not finish cleanly",
+  "response_id": "gen-1788286481-lla0FWwJxsEEVNj3R2dH",
+  "retry_performed": false,
+  "role": "extractor",
+  "route_binding_digest": "sha256:5bb6100458c882c9016f0b8fdc88997be499859f5ade8630dd3d841fec126b7f",
+  "safe_route_metadata": {
+    "available_endpoints": [
+      {
+        "model": "z-ai/glm-5.2-20260616",
+        "provider": "Mistral",
+        "selected": true
+      }
+    ],
+    "endpoint_total_before_filtering": 34,
+    "pipeline": null,
+    "requested_model": "z-ai/glm-5.2",
+    "response_model": "z-ai/glm-5.2",
+    "selected_attempt": 1,
+    "strategy": "direct"
+  },
+  "schema_version": "1.0",
+  "source_bundle_digest": "sha256:e87be2879d688fbb5e4118495d49474d54e85fbe1e111c6f18dd8cf440f16ae9",
+  "status": "rejected_before_opinion"
+}

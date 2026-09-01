@@ -1,0 +1,200 @@
+[
+  {
+    "digest": "sha256:9c0955019722da7b3b71cc9f2571c0f5310d23dd398b886c8f82c1aae4f0f5ec",
+    "media_type": "application/x-tar",
+    "role": "source:repository",
+    "size": 41830400
+  },
+  {
+    "digest": "sha256:ffa2eeba3896c493bc0d5613daf6a9b41dd9781802044873c0136c10e95f55d1",
+    "media_type": "text/plain; charset=utf-8",
+    "role": "extracted_text",
+    "size": 1754
+  },
+  {
+    "digest": "sha256:acea2b1cc5007d6bb723af9090299ba9da45c2c8829a55f0a0fcb825e9ef6a52",
+    "media_type": "application/json",
+    "role": "license_evidence",
+    "size": 603
+  },
+  {
+    "digest": "sha256:b3ff771db9b791691de6c3985833ca9ba3f3fc823214b5d57aad4c68f9df05c5",
+    "media_type": "application/pdf",
+    "role": "source:paper",
+    "size": 1609631
+  },
+  {
+    "digest": "sha256:3ca5f8f076082ee109c0ccd54f2e67399b48154cc194132042cce71d967a40d8",
+    "media_type": "text/plain; charset=utf-8",
+    "role": "extracted_text",
+    "size": 159365
+  },
+  {
+    "digest": "sha256:639adc48f546f04af10c051d85e2f9bad4317a989dc182dfb64a4a0245d58764",
+    "media_type": "application/json",
+    "role": "license_evidence",
+    "size": 488
+  },
+  {
+    "digest": "sha256:a156f610419ef63c43d143ebb41d70ac1a97f10e0581d9b3f9f73cf27a4e61a9",
+    "media_type": "application/gzip",
+    "role": "source:paper",
+    "size": 1104057
+  },
+  {
+    "digest": "sha256:30be34601c37edb2aacf1b2a665d83cf866f04acec5c61eecea1fe97119f81dd",
+    "media_type": "text/plain; charset=utf-8",
+    "role": "extracted_text",
+    "size": 123281
+  },
+  {
+    "digest": "sha256:92a62abcf21f6eadd86c464e75f05be78e1704a68659c46ef63a28f7dda84be1",
+    "media_type": "application/json",
+    "role": "license_evidence",
+    "size": 492
+  },
+  {
+    "digest": "sha256:e2b679e7807e6de6bdf93e0bd4d3a83f84b625bc7895fb5a4e8cc9bd587795cd",
+    "media_type": "text/markdown; charset=utf-8",
+    "role": "source:repository",
+    "size": 3881
+  },
+  {
+    "digest": "sha256:15e83e8dca7b2da3317338d6c5b17b0dd035ffa4cdcd1eeebab2fdbba3eeab65",
+    "media_type": "application/json",
+    "role": "license_evidence",
+    "size": 489
+  },
+  {
+    "digest": "sha256:140bda48ced4555607fe0c0d1be0b20bbb84f260e33904c6f0723a14b2a7e365",
+    "media_type": "text/markdown; charset=utf-8",
+    "role": "source:repository",
+    "size": 8141
+  },
+  {
+    "digest": "sha256:07e38ced5bc45e3c42184758202a96f9012570756549318919ac6a20010a7c87",
+    "media_type": "application/json",
+    "role": "license_evidence",
+    "size": 488
+  },
+  {
+    "digest": "sha256:db809578b161a8c43036f541c1f0a59e7408203d0650081d70629958e28d76c3",
+    "media_type": "text/x-python; charset=utf-8",
+    "role": "source:repository",
+    "size": 15021
+  },
+  {
+    "digest": "sha256:0716332715856d895f81dd5906e8c7507a192239d5b432e6449c36d6f507f3c6",
+    "media_type": "application/json",
+    "role": "license_evidence",
+    "size": 482
+  },
+  {
+    "digest": "sha256:da0e4fd4ae60522747bdc82b56bcf7521df44a9a3b30c1e72480382f03e48dc7",
+    "media_type": "text/plain; charset=utf-8",
+    "role": "source:dependency",
+    "size": 62
+  },
+  {
+    "digest": "sha256:850e4993e188a9166c797ee77e57cf679512e8c03b1c3db8c5538abf7b3c3689",
+    "media_type": "application/json",
+    "role": "license_evidence",
+    "size": 575
+  },
+  {
+    "digest": "sha256:0e1cec96c5c4f0b1ba7d3a538af48f787e50992fd7b7c7eb00ca3af82f0d3aec",
+    "media_type": "application/octet-stream",
+    "role": "closure_input",
+    "size": 5655
+  },
+  {
+    "digest": "sha256:15096074eb36d6a9fba855fa366abe0b28b7646d1899cb1d46a4ac23bb05d4bc",
+    "media_type": "application/octet-stream",
+    "role": "closure_input",
+    "size": 384
+  },
+  {
+    "digest": "sha256:212e1876e7f79e123d5867191de6bcd78b3cf364a1c2ad96a0d4c21972d75cdc",
+    "media_type": "application/octet-stream",
+    "role": "closure_input",
+    "size": 4882
+  },
+  {
+    "digest": "sha256:3836f7b1cc1815430c0fa042323ff2922ab2d536d764709e7e5e5ffdbac51b5d",
+    "media_type": "application/octet-stream",
+    "role": "closure_input",
+    "size": 648
+  },
+  {
+    "digest": "sha256:3f69529a4833de87813b4b562ddc00c558e3ce2283de21bb77f544496ca03b3b",
+    "media_type": "application/octet-stream",
+    "role": "closure_input",
+    "size": 34641
+  },
+  {
+    "digest": "sha256:48e4dc03652e5c1bc771ded0d56b3bcd182b11440566a3a93c1566a0fdcd2391",
+    "media_type": "application/octet-stream",
+    "role": "closure_input",
+    "size": 269
+  },
+  {
+    "digest": "sha256:4d8689f8615cd2e78972f46dc022ae6b11d02eb2a4430bbae6cc013b0f299983",
+    "media_type": "application/octet-stream",
+    "role": "closure_input",
+    "size": 1833033
+  },
+  {
+    "digest": "sha256:a59abe984e70a904185d8c5a3e295bcdf89d70f2da9a1fde1959b1061e0dc8bd",
+    "media_type": "application/octet-stream",
+    "role": "closure_input",
+    "size": 65664
+  },
+  {
+    "digest": "sha256:cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "media_type": "application/octet-stream",
+    "role": "closure_input",
+    "size": 11358
+  },
+  {
+    "digest": "sha256:d7558bbb4996e8cec312ebb8bb0fd9bc21e4883848f4a09e8575310cd10fd3d9",
+    "media_type": "application/octet-stream",
+    "role": "closure_input",
+    "size": 1546
+  },
+  {
+    "digest": "sha256:d79efb21a7b4e60b3039e4d389cd0bc7d9cfe3f928af33da9230a747fb1f1e4d",
+    "media_type": "application/octet-stream",
+    "role": "closure_input",
+    "size": 200
+  },
+  {
+    "digest": "sha256:e53aa11056e971022201d4f48342514261a60a057995d75c6dd3e798707a7db0",
+    "media_type": "application/octet-stream",
+    "role": "closure_input",
+    "size": 19652
+  },
+  {
+    "digest": "sha256:f54e519eb6432fe2ee7c20ca13dec2dccdd7c7a61beede8a6d8109bdb38c3f25",
+    "media_type": "application/octet-stream",
+    "role": "closure_input",
+    "size": 956
+  },
+  {
+    "digest": "sha256:fe9b58ac7738b3a78367df35ab9ca816e5d44695f9ba57ec1dee88571b4393c2",
+    "media_type": "application/octet-stream",
+    "role": "closure_input",
+    "size": 11141
+  },
+  {
+    "digest": "sha256:a318c614e5cc2e8a596e1798dab3b238fd63e9a3e18e3f9ddaa3896020f12fce",
+    "media_type": "application/json",
+    "role": "source_intake_manifest",
+    "size": 8803
+  },
+  {
+    "digest": "sha256:79cfe48ad882cb8b3cbe0035029086846b4ba0a0c307c40fd2f1b24546aa4174",
+    "media_type": "application/json",
+    "role": "source_bundle",
+    "size": 5689
+  }
+]

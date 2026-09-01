@@ -22,6 +22,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 import os
 import random
 import statistics
@@ -76,6 +77,7 @@ def _cache_load(path: str) -> Optional[Finding]:
         score=d["score"],
         universe_size=d["universe_size"],
         meta=d.get("meta", {}),
+        structure_present=d.get("structure_present"),
     )
 
 
@@ -91,6 +93,7 @@ def _cache_store(path: str, finding: Finding) -> None:
                 "score": finding.score,
                 "universe_size": finding.universe_size,
                 "meta": finding.meta,
+                "structure_present": finding.has_structure(),
             },
             f, default=str,
         )
@@ -210,6 +213,12 @@ def _summarize(findings: Sequence[Finding], claim_equiv=None,
 
     out: Dict[str, Any] = {
         "n_runs": len(findings),
+        "n_structured_runs": len(struct_f),
+        "n_empty_findings": sum(f.size == 0 for f in struct_f),
+        "empty_finding_rate": (
+            sum(f.size == 0 for f in struct_f) / len(struct_f)
+            if struct_f else None
+        ),
         "mean_pairwise_jaccard": M.mean_pairwise_jaccard(structured),
         "min_pairwise_jaccard": (
             min(M.pairwise_jaccard(structured)) if len(structured) >= 2 else None
@@ -593,7 +602,7 @@ def _analyze(
     pooled["expected_random_jaccard"] = random_null
     pooled["expected_random_jaccard_analytic"] = (
         M.expected_random_jaccard(pooled["median_size"], universe)
-        if universe and pooled["median_size"] else None
+        if universe and pooled["median_size"] is not None else None
     )
     if random_null and pooled["mean_pairwise_jaccard"] is not None and random_null > 0:
         pooled["jaccard_vs_random"] = pooled["mean_pairwise_jaccard"] / random_null
@@ -1041,7 +1050,77 @@ def make_check(
             robust = ci[1] <= threshold if passed else ci[0] > threshold
     return {"value": value, "threshold": threshold, "passed": passed,
             "op": op, "ci": list(ci) if ci is not None else None,
-            "robust": robust, "description": description}
+            "robust": robust,
+            "state": decision_state(value, threshold, op, ci),
+            "description": description}
+
+
+def decision_state(
+    value: float,
+    threshold: float,
+    op: str,
+    ci: Optional[Sequence[float]],
+    *,
+    minimum_n_met: bool = True,
+) -> str:
+    """Normative three-state decision from a confidence interval.
+
+    ``pass`` and ``fail`` require the entire interval to lie on the
+    corresponding side of the registered boundary.  An unavailable or
+    boundary-crossing interval, or an unmet calibrated sample-size rule, is
+    ``inconclusive``.  ``value`` remains an explicit argument so callers bind
+    the state to the same estimate recorded on the check; interval position,
+    not point-estimate position, determines the state.
+    """
+    if op not in (">=", "<="):
+        raise ValueError(f"op must be '>=' or '<=', got {op!r}")
+    if not minimum_n_met or ci is None or len(ci) != 2:
+        return "inconclusive"
+    lo, hi = float(ci[0]), float(ci[1])
+    if not (math.isfinite(value) and math.isfinite(threshold)
+            and math.isfinite(lo) and math.isfinite(hi)):
+        return "inconclusive"
+    if lo > hi:
+        raise ValueError(f"confidence interval must be ordered, got {ci!r}")
+    if op == ">=":
+        if lo >= threshold:
+            return "pass"
+        if hi < threshold:
+            return "fail"
+    else:
+        if hi <= threshold:
+            return "pass"
+        if lo > threshold:
+            return "fail"
+    return "inconclusive"
+
+
+def confirmatory_verdict(
+    checks: Mapping[str, Mapping[str, Any]],
+    *,
+    required: Optional[Sequence[str]] = None,
+) -> str:
+    """Combine required three-state checks without majority voting.
+
+    Any required failure fails the audit.  If none fail but at least one is
+    unavailable or inconclusive, the audit is inconclusive.  Only unanimous
+    required passes produce a pass.  This is the normative confirmatory
+    decision; :func:`grade_checks` remains the legacy descriptive grade.
+    """
+    names = list(checks) if required is None else list(required)
+    if not names:
+        raise ValueError("confirmatory verdict requires at least one check")
+    states = []
+    for name in names:
+        check = checks.get(name)
+        state = check.get("state") if check is not None else None
+        states.append(state if state in ("pass", "fail", "inconclusive")
+                      else "inconclusive")
+    if "fail" in states:
+        return "fail"
+    if all(state == "pass" for state in states):
+        return "pass"
+    return "inconclusive"
 
 
 def grade_checks(checks: Dict[str, Any]) -> str:
@@ -1051,10 +1130,10 @@ def grade_checks(checks: Dict[str, Any]) -> str:
     total = len(checks)
     br = checks.get("beats_random")
     at_random = br is not None and br["value"] is not None and br["value"] <= 1.5
+    if at_random:
+        return "D"
     if passed == total:
         return "A"
-    if at_random and passed == 0:
-        return "D"
     if passed * 2 >= total:
         return "B"
     if passed >= 1:

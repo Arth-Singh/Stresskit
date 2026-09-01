@@ -1,0 +1,80 @@
+{
+  "artifact": "stresskit_flagship_candidate",
+  "schema_version": "1.0",
+  "study_id": "gradient-projection-behavior-v1",
+  "status": "abstain",
+  "publication_state": "abstain",
+  "reason": "freeze remains blocked: exact paper-used persona probe tensors are unpublished, training-data provenance and evaluation/output rights are incomplete, and final held-out model and behavior objects are not selected",
+  "substitution_allowed": false,
+  "license_audit": {
+    "path": "benchmark/flagship/license-audit.v1.json",
+    "sha256": "4535632a8051224a581a0144161a5dd6823b92fc302070c43739a285439212d8",
+    "audited_at": "2026-09-01T18:02:20Z",
+    "status": "blocked",
+    "experiments_run": false,
+    "author_request": {
+      "path": "benchmark/flagship/AUTHOR_ARTIFACT_REQUEST.md",
+      "sha256": "4dd9ec83db1c7a57323adac819dd8c252f4f44c335782e51ee8c7959d2f7d36c",
+      "status": "draft_not_sent"
+    }
+  },
+  "layers": {
+    "stream": "residual",
+    "relative_depths": [0.25, 0.5, 0.75],
+    "resolution_rule": "nearest layer after model revision freezes"
+  },
+  "independent_unit": "fine-tuning seed nested within model and dataset",
+  "primary_signal": "per-example loss-gradient dot product with unit-normalized frozen probe",
+  "held_out_targets": ["behavior dataset", "training seed", "model family"],
+  "non_internals_baselines": [
+    "text-only ratings",
+    "text-only embeddings",
+    "loss",
+    "gradient norm",
+    "output-only predictions"
+  ],
+  "controls": [
+    "random probes",
+    "label permutation",
+    "benign matched fine-tunes",
+    "held-out models",
+    "matched compute"
+  ],
+  "verified_license_inputs": [
+    {
+      "object": "Persona Vectors source and published trait JSON files",
+      "revision": "b8e0f044fe2410a6fad579f38324f03f13b4e917",
+      "license": "Apache-2.0",
+      "license_sha256": "bb57d93dde8ac629c48b014e77ceb996314c08f6475f665f69dda361940d9fd4"
+    },
+    {
+      "object": "Emergent Misalignment repository source",
+      "revision": "80c11967c07a328e7d7d43d13ce6847ae44dbcc9",
+      "license": "MIT",
+      "license_sha256": "4fb4678d1be0540c650e39f75eabca626c5727f1a3468aaf7dc844247e1291c2"
+    },
+    {
+      "object": "Qwen/Qwen2.5-7B-Instruct",
+      "revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+      "license": "Apache-2.0",
+      "license_sha256": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e"
+    },
+    {
+      "object": "Qwen/Qwen2.5-Coder-32B-Instruct",
+      "revision": "381fc969f78efac66bc87ff7ddeadb7e73c218a7",
+      "license": "Apache-2.0",
+      "license_sha256": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e"
+    }
+  ],
+  "unresolved_inputs": [
+    "exact paper-used persona probe tensor digests, generation metadata, and artifact licenses",
+    "member-level source revisions, provenance, attribution, and compatible licenses for the Persona Vectors fine-tuning archive",
+    "file-scoped licenses for Emergent Misalignment training data, evaluation definitions, judge-derived labels, and behavioral outputs",
+    "redistribution rights and raw provenance for Persona Vectors and Emergent Misalignment model outputs and proprietary-judge scores",
+    "exact final and held-out model-family selections and compatibility decision for every custom license",
+    "explicit license for the official emergent-misalignment/Qwen-Coder-Insecure checkpoint if it is selected",
+    "content-addressed independent held-out behavior sets, negative-control behaviors, deterministic reducer, and pilot/final partition"
+  ],
+  "multiplicity": "release-wide Holm-Bonferroni",
+  "external_validation": "not obtained"
+}

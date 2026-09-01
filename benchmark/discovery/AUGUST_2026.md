@@ -5,7 +5,8 @@ arXiv between 2026-08-01 and 2026-08-31. This is provenance evidence for
 discovery pass 3 of the StressKit benchmark registry. It records what exists,
 not whether any method works: no paper here has been run, scored, or graded.
 
-Machine-readable frame: `august-2026-frame.json`.
+Machine-readable frame: `august-2026-frame.json`. Outcome-blind pass 3b
+addendum: `august-2026-pass3b.json`.
 
 ## How the frame was built
 
@@ -24,12 +25,29 @@ Machine-readable frame: `august-2026-frame.json`.
    mechanistic-interpretability term. Tier B (50) matched only `linear probe`
    or `superposition`, which are used across many fields with no interpretive
    intent; Tier B is retained as a separate stratum and is not part of the
-   code census.
+   original code census.
 5. **Code detection.** Each Tier-A paper's arXiv HTML rendering was scanned for
    repository URLs. Every URL found was checked against the GitHub API for
    existence, license, creation date and HEAD commit. Each link was then
    classified from the sentence around it as an **authored release** (the
    paper's own artifact) or a **cited dependency** (a library the paper uses).
+
+## Pass 3b addendum
+
+Pass 3b queried six terms omitted from pass 3: `chain of thought`, `reasoning
+trace`, `persona`, `introspection`, `evaluation awareness`, and `model organism`.
+After the same date and category filters, these queries produced 363 unique
+rows: 10 already in Tier A, 3 promoted from Tier B, and 350 new broad candidates.
+Every new row remains subject to manual interpretability-scope review.
+
+All 47 Tier-B rows remaining after promotion received the same
+repository-context and license audit. Across omitted-term and retained-Tier-B
+ledgers, 18 rows had a licensed authored repository and 18 had an authored
+repository without a resolved license; 350 exposed dependency links only, 10
+exposed Hugging Face references without authored source, and 4 require fetch
+review. These are code dispositions, not claim eligibility or outcomes. Machine
+ledgers store each arXiv ID, inclusion/exclusion disposition, link-set digests,
+and public repository license result.
 
 ## Code availability, Tier A (n = 108)
 

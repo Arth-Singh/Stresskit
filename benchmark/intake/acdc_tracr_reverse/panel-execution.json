@@ -1,0 +1,38 @@
+{
+  "artifact": "stresskit_agent_panel_execution",
+  "schema_version": "1.0",
+  "candidate_id": "acdc_tracr_reverse",
+  "outcome_blind": true,
+  "source_bundle_digest": "sha256:e87be2879d688fbb5e4118495d49474d54e85fbe1e111c6f18dd8cf440f16ae9",
+  "panel_plan_digest": "sha256:ced0898f193f098395091ff009f827a2eb6ecd7a758625b25185ddac3d345e4c",
+  "status": "abstain",
+  "publication_state": "abstain",
+  "retry_policy": "no_retry",
+  "complete_slots": true,
+  "slots": [
+    {
+      "opinion_id": "acdc-tracr-reverse-extractor-a",
+      "role": "extractor",
+      "status": "rejected_invalid_evidence",
+      "attempt_digest": "sha256:6bd8541836f31bbe1ca2080b02fb7952747877d742ed2a7e5dc6f78815198f09",
+      "raw_response_digest": "sha256:51deaf117043dff9369c3c265c6d0c9628bcb26fd5a6bbfafee365b3c49a6782"
+    },
+    {
+      "opinion_id": "acdc-tracr-reverse-extractor-b",
+      "role": "extractor",
+      "status": "rejected_incomplete_completion",
+      "attempt_digest": "sha256:3d1eff72381a33f6a72ee19dd917b8b6e3033765e2b95e35708fb31fa0b8f03a",
+      "raw_response_digest": "sha256:e1656ea69da3130e94247c60d064d9778b0cb032f3daae40b82cd19e8b3284bb"
+    },
+    {
+      "opinion_id": "acdc-tracr-reverse-critic",
+      "role": "critic",
+      "status": "not_run_dependency_failure",
+      "depends_on": [
+        "acdc-tracr-reverse-extractor-a",
+        "acdc-tracr-reverse-extractor-b"
+      ],
+      "reason": "Critic requires two accepted extractor opinions; both extractors were rejected before AgentOpinion construction."
+    }
+  ]
+}

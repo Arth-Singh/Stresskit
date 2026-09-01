@@ -1,0 +1,126 @@
+{
+  "artifact": "stresskit_source_bundle",
+  "bundle_id": "mechtomo-finite-effect-map-recovery-source-v1",
+  "created_at": "2026-09-01T17:33:51Z",
+  "documents": [
+    {
+      "content_size": 41830400,
+      "document_id": "mechtomo-repository",
+      "extracted_text_digest": "sha256:ffa2eeba3896c493bc0d5613daf6a9b41dd9781802044873c0136c10e95f55d1",
+      "kind": "repository",
+      "license": {
+        "evidence_digest": "sha256:acea2b1cc5007d6bb723af9090299ba9da45c2c8829a55f0a0fcb825e9ef6a52",
+        "identifier": "Apache-2.0 AND CC-BY-4.0",
+        "status": "verified_compatible"
+      },
+      "locator": "https://github.com/kwisatzh/mechanistic-tomography/tree/5c097d2175c632a4a15e359cb4d94ec923168472",
+      "media_type": "application/x-tar",
+      "source_digest": "sha256:9c0955019722da7b3b71cc9f2571c0f5310d23dd398b886c8f82c1aae4f0f5ec"
+    },
+    {
+      "content_size": 1609631,
+      "document_id": "mechtomo-paper-v1-pdf",
+      "extracted_text_digest": "sha256:3ca5f8f076082ee109c0ccd54f2e67399b48154cc194132042cce71d967a40d8",
+      "kind": "paper",
+      "license": {
+        "evidence_digest": "sha256:639adc48f546f04af10c051d85e2f9bad4317a989dc182dfb64a4a0245d58764",
+        "identifier": "CC-BY-4.0",
+        "status": "verified_compatible"
+      },
+      "locator": "https://arxiv.org/pdf/2608.19338v1",
+      "media_type": "application/pdf",
+      "source_digest": "sha256:b3ff771db9b791691de6c3985833ca9ba3f3fc823214b5d57aad4c68f9df05c5"
+    },
+    {
+      "content_size": 1104057,
+      "document_id": "mechtomo-paper-v1-source",
+      "extracted_text_digest": "sha256:30be34601c37edb2aacf1b2a665d83cf866f04acec5c61eecea1fe97119f81dd",
+      "kind": "paper",
+      "license": {
+        "evidence_digest": "sha256:92a62abcf21f6eadd86c464e75f05be78e1704a68659c46ef63a28f7dda84be1",
+        "identifier": "CC-BY-4.0",
+        "status": "verified_compatible"
+      },
+      "locator": "https://arxiv.org/src/2608.19338v1#nt_mi_control_position_v21-v2.tex",
+      "media_type": "application/gzip",
+      "source_digest": "sha256:a156f610419ef63c43d143ebb41d70ac1a97f10e0581d9b3f9f73cf27a4e61a9"
+    },
+    {
+      "content_size": 3881,
+      "document_id": "mechtomo-experiment-map",
+      "extracted_text_digest": "sha256:e2b679e7807e6de6bdf93e0bd4d3a83f84b625bc7895fb5a4e8cc9bd587795cd",
+      "kind": "repository",
+      "license": {
+        "evidence_digest": "sha256:15e83e8dca7b2da3317338d6c5b17b0dd035ffa4cdcd1eeebab2fdbba3eeab65",
+        "identifier": "Apache-2.0",
+        "status": "verified_compatible"
+      },
+      "locator": "https://github.com/kwisatzh/mechanistic-tomography/blob/5c097d2175c632a4a15e359cb4d94ec923168472/experiments/README.md",
+      "media_type": "text/markdown; charset=utf-8",
+      "source_digest": "sha256:e2b679e7807e6de6bdf93e0bd4d3a83f84b625bc7895fb5a4e8cc9bd587795cd"
+    },
+    {
+      "content_size": 8141,
+      "document_id": "mechtomo-hmm-guide",
+      "extracted_text_digest": "sha256:140bda48ced4555607fe0c0d1be0b20bbb84f260e33904c6f0723a14b2a7e365",
+      "kind": "repository",
+      "license": {
+        "evidence_digest": "sha256:07e38ced5bc45e3c42184758202a96f9012570756549318919ac6a20010a7c87",
+        "identifier": "Apache-2.0",
+        "status": "verified_compatible"
+      },
+      "locator": "https://github.com/kwisatzh/mechanistic-tomography/blob/5c097d2175c632a4a15e359cb4d94ec923168472/experiments/hmm/README.md",
+      "media_type": "text/markdown; charset=utf-8",
+      "source_digest": "sha256:140bda48ced4555607fe0c0d1be0b20bbb84f260e33904c6f0723a14b2a7e365"
+    },
+    {
+      "content_size": 15021,
+      "document_id": "mechtomo-sparse-reducer",
+      "extracted_text_digest": "sha256:db809578b161a8c43036f541c1f0a59e7408203d0650081d70629958e28d76c3",
+      "kind": "repository",
+      "license": {
+        "evidence_digest": "sha256:0716332715856d895f81dd5906e8c7507a192239d5b432e6449c36d6f507f3c6",
+        "identifier": "Apache-2.0",
+        "status": "verified_compatible"
+      },
+      "locator": "https://github.com/kwisatzh/mechanistic-tomography/blob/5c097d2175c632a4a15e359cb4d94ec923168472/experiments/hmm/sparse_tomography_posthoc.py",
+      "media_type": "text/x-python; charset=utf-8",
+      "source_digest": "sha256:db809578b161a8c43036f541c1f0a59e7408203d0650081d70629958e28d76c3"
+    },
+    {
+      "content_size": 62,
+      "document_id": "mechtomo-hmm-requirements",
+      "extracted_text_digest": "sha256:da0e4fd4ae60522747bdc82b56bcf7521df44a9a3b30c1e72480382f03e48dc7",
+      "kind": "dependency",
+      "license": {
+        "evidence_digest": "sha256:850e4993e188a9166c797ee77e57cf679512e8c03b1c3db8c5538abf7b3c3689",
+        "identifier": "Apache-2.0",
+        "status": "verified_compatible"
+      },
+      "locator": "https://github.com/kwisatzh/mechanistic-tomography/blob/5c097d2175c632a4a15e359cb4d94ec923168472/experiments/hmm/requirements.txt",
+      "media_type": "text/plain; charset=utf-8",
+      "source_digest": "sha256:da0e4fd4ae60522747bdc82b56bcf7521df44a9a3b30c1e72480382f03e48dc7"
+    }
+  ],
+  "metadata": {
+    "artifact_inventory_digest": "sha256:0e1cec96c5c4f0b1ba7d3a538af48f787e50992fd7b7c7eb00ca3af82f0d3aec",
+    "candidate_id": "mechtomo_finite_effect_map_recovery",
+    "claim_query_digest": "sha256:d7558bbb4996e8cec312ebb8bb0fd9bc21e4883848f4a09e8575310cd10fd3d9",
+    "dependency_profile": "upstream_ranges_unlocked",
+    "extraction_profile": "poppler_pdftotext_26.01.0_layout_nopgbrk_utf8_and_primary_tex_byte_identity_v1",
+    "intake_manifest_digest": "sha256:a318c614e5cc2e8a596e1798dab3b238fd63e9a3e18e3f9ddaa3896020f12fce",
+    "notice_digest": "sha256:d79efb21a7b4e60b3039e4d389cd0bc7d9cfe3f928af33da9230a747fb1f1e4d",
+    "outcome_blind": true,
+    "paper_license_digest": "sha256:48e4dc03652e5c1bc771ded0d56b3bcd182b11440566a3a93c1566a0fdcd2391",
+    "paper_version": "arXiv:2608.19338v1",
+    "registered_claim_locator": "Section 5.1 and Figure 2, PDF page 8; Table 2 excluded as a distinct calibration experiment",
+    "released_artifact_license_scope": "unresolved_pending_author_confirmation",
+    "repository": "https://github.com/kwisatzh/mechanistic-tomography",
+    "repository_archive_digest": "sha256:9c0955019722da7b3b71cc9f2571c0f5310d23dd398b886c8f82c1aae4f0f5ec",
+    "repository_archive_profile": "git_archive_tar_with_mechanistic_tomography_prefix_v1",
+    "repository_commit": "5c097d2175c632a4a15e359cb4d94ec923168472",
+    "repository_tree": "261ed565077cb55dc61cc004fd1bd7ef9be01c67",
+    "software_license_digest": "sha256:cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+  },
+  "schema_version": "1.0"
+}

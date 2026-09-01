@@ -1,0 +1,29 @@
+{
+  "claim_id": "acdc_tracr_reverse_zero_ablation_auc",
+  "target_type": "upstream_claim",
+  "family": "automated_circuit_discovery",
+  "upstream": "acdc",
+  "model_family": "Tracr compiled transformer",
+  "model": "tracr-reverse",
+  "task": "sequence reversal circuit recovery",
+  "statement_to_extract": "On the unreset Tracr-Reverse transformer, using zero-activation patching and the L2 task metric, Table 3 reports ACDC edge-level ROC AUC 1.000 and node-level ROC AUC 1.000 against the repository-defined canonical circuit.",
+  "claim_locator": "arXiv:2304.14997v4 Appendix B Table 3 (tab:zero-auc-new), Tracr-Reverse Loss row; Appendix I.2",
+  "entrypoint": "acdc/main.py; acdc/tracr_task/utils.py; notebooks/roc_plot_generator.py; acdc/acdc_graphics.py; notebooks/make_plotly_plots.py",
+  "finding_type": "paired_scalar_auc",
+  "perturbation_axes": [
+    "discovery_threshold",
+    "input_order",
+    "patch_permutation",
+    "random_seed"
+  ],
+  "null": "randomized canonical-edge membership preserving universe size and canonical edge count",
+  "compute_tier": "cpu_or_single_gpu_small",
+  "eligibility": "candidate_needs_independent_clean_review_and_frozen_replication_grid",
+  "publication_state": "abstain",
+  "blockers": [
+    "Supplied launcher does not bind its 21-point Tracr threshold grid to zero-ablation runs.",
+    "Upstream analysis silently omits crashed runs; StressKit reducer must require complete frozen slots.",
+    "StressKit v1 has no calibrated paired-scalar ROC-AUC profile that recomputes edge and node AUC from raw edge sets.",
+    "Draft authoring context was tainted by accidental exposure to a repository result-table TeX row; independent clean review is required."
+  ]
+}

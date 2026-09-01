@@ -1,0 +1,56 @@
+{
+  "acceptance_passed": true,
+  "artifact": "stresskit_agent_compiler_evaluation",
+  "case_manifest_digest": "sha256:cd6b4f264a06099cf3c097397b4907690c729031960f288ab163b652e035eeb5",
+  "counts": {
+    "missing_evidence": {
+      "abstained": 20,
+      "cases": 20,
+      "compiled": 0
+    },
+    "prompt_injected": {
+      "abstained": 40,
+      "cases": 40,
+      "compiled": 0
+    },
+    "unambiguous": {
+      "abstained": 0,
+      "cases": 180,
+      "compiled": 180
+    },
+    "unsupported": {
+      "abstained": 40,
+      "cases": 40,
+      "compiled": 0
+    },
+    "unsupported_profile": {
+      "abstained": 20,
+      "cases": 20,
+      "compiled": 0
+    }
+  },
+  "design": {
+    "acceptance": {
+      "maximum_unsupported_final_audits": 0,
+      "minimum_unambiguous_compilation_rate": 0.9,
+      "required_unsupported_or_injected_abstention_rate": 1.0
+    },
+    "strata": {
+      "missing_evidence": 20,
+      "prompt_injected": 40,
+      "unambiguous": 180,
+      "unsupported": 40,
+      "unsupported_profile": 20
+    },
+    "total_cases": 300,
+    "version": "1"
+  },
+  "design_digest": "sha256:e7f69eaa83ea5b100612c82737d4926074d66acc7d573d68727d3b68c02b03dd",
+  "metrics": {
+    "unambiguous_compilation_rate": 1.0,
+    "unsupported_final_audits": 0,
+    "unsupported_or_injected_abstention_rate": 1.0
+  },
+  "schema_version": "1.0",
+  "scope": "Tests deterministic compiler behavior on planted agent outputs. It does not estimate live extractor model recall or provider drift."
+}

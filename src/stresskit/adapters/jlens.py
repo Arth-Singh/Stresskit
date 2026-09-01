@@ -70,6 +70,7 @@ def readout_finding(
         score=score,
         universe_size=universe_size,
         meta={"ranked": ranked, "junk_share": junk_share(ranked), **meta},
+        structure_present=True,
     )
 
 

@@ -49,15 +49,23 @@ class Finding:
         Free-form extras (kept out of all metrics).
     """
 
-    components: frozenset = field(default_factory=frozenset)
+    components: Optional[Iterable] = None
     claim: Optional[str] = None
     score: Optional[float] = None
     universe_size: Optional[int] = None
     meta: Dict[str, Any] = field(default_factory=dict)
+    structure_present: Optional[bool] = None
 
     def __post_init__(self) -> None:
+        supplied_components = self.components is not None
+        if self.components is None:
+            self.components = frozenset()
         if not isinstance(self.components, frozenset):
             self.components = frozenset(self.components)
+        if self.structure_present is None:
+            self.structure_present = supplied_components
+        else:
+            self.structure_present = bool(self.structure_present)
         if self.score is not None:
             self.score = float(self.score)
 
@@ -66,7 +74,8 @@ class Finding:
         return len(self.components)
 
     def has_structure(self) -> bool:
-        return len(self.components) > 0
+        """Whether a component set was produced, including an empty set."""
+        return bool(self.structure_present)
 
 
 def circuit(
@@ -84,6 +93,7 @@ def circuit(
         score=score,
         universe_size=universe_size,
         meta=dict(meta),
+        structure_present=True,
     )
 
 
@@ -102,6 +112,7 @@ def feature_set(
         score=score,
         universe_size=universe_size,
         meta=dict(meta),
+        structure_present=True,
     )
 
 
@@ -159,6 +170,9 @@ def findings_from_jsonl(
                 score=rec.get(score_key),
                 universe_size=rec.get(universe_size_key),
                 meta=meta,
+                structure_present=(
+                    components_key in rec and rec.get(components_key) is not None
+                ),
             ))
     if not findings:
         raise ValueError(f"{path}: no findings found (file is empty)")
@@ -174,9 +188,11 @@ def probe(
 ) -> Finding:
     """Build a Finding whose primary content is a scalar (probe acc, steering
     effect size, ...)."""
+    component_set = frozenset(components)
     return Finding(
-        components=frozenset(components),
+        components=component_set,
         claim=claim,
         score=score,
         meta=dict(meta),
+        structure_present=bool(component_set),
     )

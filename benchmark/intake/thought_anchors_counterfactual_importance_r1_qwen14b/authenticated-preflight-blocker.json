@@ -1,0 +1,153 @@
+{
+  "artifact": "stresskit_openrouter_authenticated_preflight_blocker",
+  "schema_version": "1.0",
+  "candidate_id": "thought_anchors_counterfactual_importance_r1_qwen14b",
+  "source_bundle_digest": "sha256:9a27e09f02489ba7fbc12340d9a2c7d57037c38c319e362db3e6a8b326488cd3",
+  "panel_plan_digest": "sha256:05c958a1e5041373fd35b637d0d5804b1a12454efa54fb895887b8d891c37a7d",
+  "observed_at": "2026-09-02T03:33:02+09:00",
+  "outcome_blind": true,
+  "status": "blocked_awaiting_account_logging_attestation",
+  "gate_publication_state": "abstain",
+  "candidate_disposition": "pending",
+  "candidate_permanently_excluded": false,
+  "credential": {
+    "source": "environment:OPENROUTER_API_KEY",
+    "serialized": false,
+    "authenticated_catalog_access": true,
+    "workspace_settings_access": false
+  },
+  "frozen_constraints": {
+    "account_prompt_logging": "must_not_be_opted_in",
+    "allow_fallbacks": false,
+    "data_collection": "deny",
+    "no_plugins_or_tools": true,
+    "require_parameters": true,
+    "router_pipeline": "must_be_empty",
+    "selected_attempt": 1,
+    "zdr": true
+  },
+  "catalog_requests": [
+    {
+      "method": "GET",
+      "endpoint": "https://openrouter.ai/api/v1/models",
+      "http_status": 200,
+      "response_digest": "sha256:728b80dcefb231278cbbba3827aad41883f6da7a896540dd5af6f7d324fa1518",
+      "response_size": 694875
+    },
+    {
+      "method": "GET",
+      "endpoint": "https://openrouter.ai/api/v1/endpoints/zdr",
+      "http_status": 200,
+      "response_digest": "sha256:2b84b708b262bb31141523e37aef792961b899ec81a87f9da0ccbc066d0e6685",
+      "response_size": 970476
+    },
+    {
+      "method": "GET",
+      "endpoint": "https://openrouter.ai/api/v1/models/x-ai/grok-4.6/endpoints",
+      "http_status": 200,
+      "response_digest": "sha256:96341ee43674eb5d40ac772659ae6a3dd9dda28fdfeedd55dace4949718a85d0",
+      "response_size": 6765
+    },
+    {
+      "method": "GET",
+      "endpoint": "https://openrouter.ai/api/v1/models/z-ai/glm-5.2/endpoints",
+      "http_status": 200,
+      "response_digest": "sha256:e61b0dcec5034f1d3f7f8643534dad3ae5aa817166262c106002848e6f5267f3",
+      "response_size": 41740
+    },
+    {
+      "method": "GET",
+      "endpoint": "https://openrouter.ai/api/v1/models/google/gemini-3.1-pro-preview/endpoints",
+      "http_status": 200,
+      "response_digest": "sha256:da317d8dfe5475fe6a239cb599f9ff2067f1226e8263771946e06cda3afdcb71",
+      "response_size": 9547
+    }
+  ],
+  "route_checks": [
+    {
+      "opinion_id": "thought-anchors-extractor-a",
+      "role": "extractor",
+      "model_request_id": "x-ai/grok-4.6",
+      "canonical_slug": "x-ai/grok-4.6-20260810",
+      "provider_endpoint": "xai/zdr",
+      "provider_name": "xAI",
+      "context_length": 500000,
+      "endpoint_status": 0,
+      "required_parameters": [
+        "max_tokens",
+        "response_format",
+        "seed",
+        "structured_outputs",
+        "temperature"
+      ],
+      "zdr_listed": true,
+      "result": "pass"
+    },
+    {
+      "opinion_id": "thought-anchors-extractor-b",
+      "role": "extractor",
+      "model_request_id": "z-ai/glm-5.2",
+      "canonical_slug": "z-ai/glm-5.2-20260616",
+      "provider_endpoint": "mistral/zdr",
+      "provider_name": "Mistral",
+      "context_length": 1048576,
+      "endpoint_status": 0,
+      "required_parameters": [
+        "max_tokens",
+        "response_format",
+        "seed",
+        "structured_outputs",
+        "temperature"
+      ],
+      "zdr_listed": true,
+      "result": "pass"
+    },
+    {
+      "opinion_id": "thought-anchors-critic",
+      "role": "critic",
+      "model_request_id": "google/gemini-3.1-pro-preview",
+      "canonical_slug": "google/gemini-3.1-pro-preview-20260219",
+      "provider_endpoint": "google-vertex/global/priority",
+      "provider_name": "Google",
+      "context_length": 1048576,
+      "endpoint_status": 0,
+      "required_parameters": [
+        "max_tokens",
+        "response_format",
+        "seed",
+        "structured_outputs",
+        "temperature"
+      ],
+      "zdr_listed": true,
+      "result": "pass"
+    }
+  ],
+  "account_prompt_logging_check": {
+    "required": "must_not_be_opted_in",
+    "observed": "unverified",
+    "method": "authenticated GET https://openrouter.ai/api/v1/workspaces?limit=100",
+    "http_status": 401,
+    "response_digest": "sha256:262109a2a3a61f8cfad39c987d3072377e6c25fc0c1aa6c3b7f907e9514136b8",
+    "response_size": 57,
+    "reason": "The supplied inference credential cannot read workspace logging settings. Provider documentation says prompt logging is opt-in and off by default, but that is not affirmative evidence for this account."
+  },
+  "official_policy_sources": [
+    "https://openrouter.ai/docs/guides/privacy/data-collection",
+    "https://openrouter.ai/docs/guides/features/input-output-logging",
+    "https://openrouter.ai/docs/guides/features/zdr",
+    "https://openrouter.ai/docs/guides/routing/provider-selection"
+  ],
+  "execution_accounting": {
+    "chat_completion_calls": 0,
+    "opinion_slots_started": [],
+    "critic_called": false,
+    "retry_performed": false,
+    "gpu_calls": 0,
+    "source_or_claim_outcomes_inspected": false
+  },
+  "decision": {
+    "reason": "A mandatory frozen privacy constraint is not affirmatively verified, so no source text may be sent to a provider.",
+    "next_required_evidence": "Account/workspace attestation showing private input/output logging and data-discount logging disabled for the supplied key scope, from an authenticated management API response or reviewed dashboard export.",
+    "after_attestation": "Re-run fresh catalog preflight, then execute each frozen panel slot at most once with no retry; run critic only after two accepted extractor opinions."
+  }
+}

@@ -5,12 +5,16 @@ claim held up under a perturbation battery: what was varied, what stayed
 the same, and a letter grade. It is designed to be attached to papers,
 README files, and model/SAE releases, and rendered as a shields.io badge.
 
-Schema: src/stresskit/schemas/stability_card_v0.json (version 0.2).
+Schema: src/stresskit/schemas/stability_card_v0.json (version 0.3).
 
 Since schema 0.2 a card carries its per-run records (sizes, claims,
 scores, components or their SHA-256 digests), making it a self-contained,
 recomputable artifact: ``stresskit verify`` re-derives the pooled metrics,
 checks, grade, and confidence from the card alone.
+
+Schema 0.3 records interval-derived three-state checks and labels cards from
+the current one-at-a-time battery as diagnostic. Diagnostic grades are
+descriptive summaries, not confirmatory certificates.
 """
 
 from __future__ import annotations
@@ -22,7 +26,8 @@ import platform
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional
 
-SCHEMA_VERSION = "0.2"
+SCHEMA_VERSION = "0.3"
+SUPPORTED_SCHEMA_VERSIONS = ("0.1", "0.2", "0.3")
 GRADE_ORDER = ("A", "B", "C", "D")
 
 # Per-run components are embedded on the card (making it a self-contained,
@@ -77,6 +82,7 @@ class StabilityCard:
     created_at: str = ""
     notes: List[str] = field(default_factory=list)
     runs: List[Dict[str, Any]] = field(default_factory=list)
+    utility: Optional[Dict[str, Any]] = None
 
     # ------------------------------------------------------------------ build
     @classmethod
@@ -96,6 +102,7 @@ class StabilityCard:
         notes: List[str],
         wall_seconds: float,
         claim_equiv_used: bool = False,
+        utility: Optional[Dict[str, Any]] = None,
     ) -> "StabilityCard":
         from . import __version__
 
@@ -116,6 +123,7 @@ class StabilityCard:
                 "claim": f.claim,
                 "score": f.score,
                 "universe": f.meta.get("universe"),
+                "structure_present": f.has_structure(),
             }
             if f.has_structure():
                 row["components_sha256"] = _components_digest(f.components)
@@ -125,6 +133,7 @@ class StabilityCard:
 
         return cls(
             runs=run_rows,
+            utility=utility,
             stresskit_version=__version__,
             created_at=_dt.datetime.now(_dt.timezone.utc).isoformat(timespec="seconds"),
             claim={
@@ -133,7 +142,9 @@ class StabilityCard:
                 "model": model,
                 "task": task,
                 "method": method,
-                "base_size": result.base.size or None,
+                "base_size": (
+                    result.base.size if result.base.has_structure() else None
+                ),
                 "universe_size": result.base.universe_size,
             },
             battery={
@@ -155,6 +166,9 @@ class StabilityCard:
             },
             verdict={
                 "grade": result.grade,
+                "profile": "diagnostic",
+                "confirmatory_state": "not_applicable",
+                "required_checks": [],
                 "checks": result.checks,
                 "thresholds": {
                     "jaccard": thresholds.jaccard,
@@ -182,6 +196,7 @@ class StabilityCard:
             "metrics": self.metrics,
             "verdict": self.verdict,
             "provenance": self.provenance,
+            **({"utility": self.utility} if self.utility is not None else {}),
             "notes": self.notes,
             "runs": self.runs,
         }
@@ -198,6 +213,7 @@ class StabilityCard:
             metrics=d["metrics"],
             verdict=d["verdict"],
             provenance=d["provenance"],
+            utility=d.get("utility"),
             notes=list(d.get("notes", [])),
             runs=list(d.get("runs", [])),
         )
@@ -235,12 +251,66 @@ class StabilityCard:
             detail = f"CV={cv:.2f}"
         else:
             detail = "n/a"
+        label = (
+            "diagnostic stability"
+            if self.verdict.get("profile") == "diagnostic"
+            else "stability"
+        )
         return {
             "schemaVersion": 1,
-            "label": "stability",
+            "label": label,
             "message": f"{self.grade} · {detail}",
             "color": _GRADE_COLORS.get(self.grade, "lightgrey"),
         }
+
+    def _utility_lines(self) -> List[str]:
+        """Render the downstream-utility axis, or say it was never answered.
+
+        Stability says a finding is reproducible under other defensible
+        analyses; it never says the finding is worth anything. That question
+        gets its own section so an unanswered one is visible.
+        """
+        from .utility import utility_check
+
+        lines = ["## Downstream utility", ""]
+        if self.utility is None:
+            lines += [
+                "**NOT REPORTED** ⚠️ — no task outside interpretability, and no "
+                "baseline that ignores model internals. A stable finding can "
+                "still buy nothing.",
+                "",
+            ]
+            return lines
+        u = self.utility
+        result = utility_check(u)
+        mark = {"pass": "✅ pass", "fail": "❌ fail",
+                "inconclusive": "⚠️ inconclusive"}.get(result["state"], "—")
+        lines.append(f"> **Task:** {u.get('task')}")
+        lines.append(f"> metric: {u.get('metric')} · n = {u.get('n')}")
+        lines.append("")
+        lines.append("| approach | uses internals | value |")
+        lines.append("|---|---|---|")
+        lines.append(f"| **this finding** | yes | {_fmt(u.get('with_method'))} |")
+        for b in u.get("baselines", []):
+            lines.append(
+                f"| {b.get('name')} | {'yes' if b.get('uses_internals') else 'no'} | "
+                f"{_fmt(b.get('value'))} |"
+            )
+        lines.append("")
+        ci = u.get("delta_ci95")
+        ci_str = f" (95% CI [{_fmt(ci[0])}, {_fmt(ci[1])}])" if ci else ""
+        lines.append(
+            f"Margin over the best non-internals baseline "
+            f"(*{u.get('reference_baseline')}*): "
+            f"**{_fmt(u.get('delta_vs_non_internals'))}**{ci_str} — {mark}"
+        )
+        for key in ("reason", "task_phrasing_warning"):
+            note = result.get(key) if key == "reason" else u.get(key)
+            if note:
+                lines.append("")
+                lines.append(f"> ⚠️ {note}")
+        lines.append("")
+        return lines
 
     def to_markdown(self) -> str:
         pooled = self.metrics.get("pooled", {})
@@ -249,8 +319,20 @@ class StabilityCard:
         lines: List[str] = []
         confidence = pooled.get("confidence")
         conf_str = f" ({confidence} confidence)" if confidence else ""
-        lines.append(f"# {emoji} Stability Card — grade **{self.grade}**{conf_str}")
+        profile = self.verdict.get("profile")
+        diagnostic = profile == "diagnostic"
+        title_prefix = "Diagnostic " if diagnostic else ""
+        lines.append(
+            f"# {emoji} {title_prefix}Stability Card — descriptive grade "
+            f"**{self.grade}**{conf_str}"
+        )
         lines.append("")
+        if diagnostic:
+            lines.append(
+                "> **Diagnostic OAT profile:** this localizes sensitivity; it "
+                "does not issue a confirmatory verdict or certificate."
+            )
+            lines.append("")
         lines.append(f"> **Claim:** {self.claim.get('statement')}")
         ctx = " · ".join(
             f"{k}: {v}" for k, v in (
@@ -272,19 +354,25 @@ class StabilityCard:
 
         lines.append("## Checks")
         lines.append("")
-        lines.append("| check | value | 95% CI | threshold | pass |")
+        lines.append("| check | value | 95% CI | threshold | state |")
         lines.append("|---|---|---|---|---|")
         for name, c in checks.items():
             op = c.get("op") or ("≤" if name == "score_stability" else "≥")
             op = {">=": "≥", "<=": "≤"}.get(op, op)
             ci = c.get("ci")
             ci_str = f"[{_fmt(ci[0])}, {_fmt(ci[1])}]" if ci else "—"
-            # ⚠ marks a verdict the CI does not actually resolve
-            straddle = c.get("robust") is False
-            if c.get("passed"):
-                mark = "⚠️" if straddle else "✅"
-            else:
-                mark = "❌⚠️" if straddle else "❌"
+            state = c.get("state")
+            if state is None:  # legacy card rendering
+                straddle = c.get("robust") is False
+                state = (
+                    "inconclusive" if straddle
+                    else "pass" if c.get("passed") else "fail"
+                )
+            mark = {
+                "pass": "✅ pass",
+                "fail": "❌ fail",
+                "inconclusive": "⚠️ inconclusive",
+            }.get(state, "—")
             lines.append(
                 f"| {name.replace('_', ' ')} | {_fmt(c.get('value'))} | {ci_str} | "
                 f"{op} {_fmt(c.get('threshold'))} | {mark} |"
@@ -299,12 +387,17 @@ class StabilityCard:
             )
             lines.append("")
 
+        lines.extend(self._utility_lines())
+
         lines.append("## Pooled metrics")
         lines.append("")
         lines.append("| metric | value |")
         lines.append("|---|---|")
         for key, label in (
             ("n_runs", "runs"),
+            ("n_structured_runs", "structured runs"),
+            ("n_empty_findings", "empty structural findings"),
+            ("empty_finding_rate", "empty structural finding rate"),
             ("mean_pairwise_jaccard", "mean pairwise Jaccard"),
             ("mean_pairwise_jaccard_all_sizes", "Jaccard incl. size-mismatched runs"),
             ("min_pairwise_jaccard", "min pairwise Jaccard"),
@@ -382,9 +475,56 @@ def validate_card_dict(d: Dict[str, Any]) -> None:
     missing = [k for k in _REQUIRED_TOP_LEVEL if k not in d]
     if missing:
         raise ValueError(f"Stability Card missing required fields: {missing}")
+    version = str(d.get("schema_version"))
+    if version not in SUPPORTED_SCHEMA_VERSIONS:
+        raise ValueError(
+            "Stability Card schema_version must be one of "
+            f"{SUPPORTED_SCHEMA_VERSIONS}, got {version!r}"
+        )
     grade = d.get("verdict", {}).get("grade")
     if grade not in GRADE_ORDER:
         raise ValueError(f"Stability Card verdict.grade must be one of {GRADE_ORDER}, got {grade!r}")
+    if "utility" in d:
+        from .utility import validate_utility_block
+
+        validate_utility_block(d["utility"])
+    if _schema_at_least(version, "0.3"):
+        verdict = d.get("verdict", {})
+        profile = verdict.get("profile")
+        if profile not in ("diagnostic", "confirmatory"):
+            raise ValueError(
+                "schema 0.3 verdict.profile must be 'diagnostic' or "
+                f"'confirmatory', got {profile!r}"
+            )
+        overall = verdict.get("confirmatory_state")
+        if overall not in ("pass", "fail", "inconclusive", "not_applicable"):
+            raise ValueError(
+                "schema 0.3 verdict.confirmatory_state has invalid value "
+                f"{overall!r}"
+            )
+        required = verdict.get("required_checks")
+        if not isinstance(required, list) or not all(
+                isinstance(name, str) for name in required):
+            raise ValueError(
+                "schema 0.3 verdict.required_checks must be a list of strings"
+            )
+        checks = verdict.get("checks")
+        if not isinstance(checks, dict):
+            raise ValueError("Stability Card verdict.checks must be an object")
+        for name, check in checks.items():
+            state = check.get("state") if isinstance(check, dict) else None
+            if state not in ("pass", "fail", "inconclusive"):
+                raise ValueError(
+                    f"schema 0.3 check {name!r} has invalid or missing state "
+                    f"{state!r}"
+                )
+
+
+def _schema_at_least(version: str, minimum: str) -> bool:
+    """Compare supported ``major.minor`` schema versions numerically."""
+    return tuple(int(part) for part in version.split(".")) >= tuple(
+        int(part) for part in minimum.split(".")
+    )
 
 
 # check name -> (pooled metric it must equal, comparison direction)
@@ -426,9 +566,13 @@ def _verify_runs(d: Dict[str, Any], pooled: Dict[str, Any],
     structured = [
         r for r in runs
         if r.get("components") is not None
+        and r.get("structure_present", r.get("size", 0) > 0)
         and r.get("universe") == base.get("universe")
     ]
-    if len(structured) >= 2 and base.get("size"):
+    base_has_structure = base.get(
+        "structure_present", base.get("size", 0) > 0
+    )
+    if len(structured) >= 2 and base_has_structure:
         sets = [frozenset(r["components"]) for r in structured]
         base_size = base["size"]
         comparable = [
@@ -480,9 +624,15 @@ def verify_card_dict(d: Dict[str, Any]) -> Dict[str, Any]:
        records, and every run's components match their SHA-256 digest.
     3. **specificity** — the ratio re-derives from the null-control block.
 
-    Returns ``{"ok": bool, "problems": [str], "recomputed_grade": str}``.
+    Returns the legacy descriptive grade plus any recomputable normative
+    confirmatory state. A diagnostic card's confirmatory state is always
+    ``not_applicable``.
     """
-    from .battery import grade_checks, make_check  # deferred: circular import
+    from .battery import (  # deferred: circular import
+        confirmatory_verdict,
+        grade_checks,
+        make_check,
+    )
 
     validate_card_dict(d)
     checks = d.get("verdict", {}).get("checks", {})
@@ -491,7 +641,9 @@ def verify_card_dict(d: Dict[str, Any]) -> Dict[str, Any]:
     recomputed: Dict[str, Any] = {}
     # schema 0.1 cards predate the symmetric robust semantics and carry no
     # runs; only their point-estimate layer is verifiable
-    strict = str(d.get("schema_version", "0.1")) >= "0.2"
+    version = str(d.get("schema_version", "0.1"))
+    strict = _schema_at_least(version, "0.2")
+    stateful = _schema_at_least(version, "0.3")
 
     for name, c in checks.items():
         src, default_op = _CHECK_SOURCES.get(name, (None, None))
@@ -514,6 +666,11 @@ def verify_card_dict(d: Dict[str, Any]) -> Dict[str, Any]:
             problems.append(
                 f"{name}: stored robust={c.get('robust')} but the CI "
                 f"{c.get('ci')} implies {fresh['robust']}"
+            )
+        if (stateful or "state" in c) and c.get("state") != fresh["state"]:
+            problems.append(
+                f"{name}: stored state={c.get('state')!r} but the CI "
+                f"{c.get('ci')} implies {fresh['state']!r}"
             )
         if src is not None:
             pv = pooled.get(src)
@@ -556,9 +713,48 @@ def verify_card_dict(d: Dict[str, Any]) -> Dict[str, Any]:
         regrade = "D"
         problems.append("no recomputable checks on the card")
 
+    profile = d.get("verdict", {}).get("profile")
+    stored_overall = d.get("verdict", {}).get("confirmatory_state")
+    if stateful and profile == "diagnostic":
+        recomputed_overall: Optional[str] = "not_applicable"
+        if stored_overall != recomputed_overall:
+            problems.append(
+                "confirmatory_state: diagnostic profile must store "
+                "'not_applicable'"
+            )
+        if d.get("verdict", {}).get("required_checks"):
+            problems.append("diagnostic profile cannot declare required_checks")
+    elif stateful and profile == "confirmatory":
+        required = d.get("verdict", {}).get("required_checks") or []
+        missing_required = [name for name in required if name not in recomputed]
+        if not required:
+            problems.append("confirmatory profile requires required_checks")
+            recomputed_overall = "inconclusive"
+        elif missing_required:
+            problems.append(
+                f"confirmatory required checks missing: {missing_required}"
+            )
+            recomputed_overall = "inconclusive"
+        else:
+            recomputed_overall = confirmatory_verdict(
+                recomputed, required=required
+            )
+        if stored_overall != recomputed_overall:
+            problems.append(
+                f"confirmatory_state: stored {stored_overall!r}, "
+                f"recomputed {recomputed_overall!r}"
+            )
+    else:
+        recomputed_overall = None
+
     _verify_runs(d, pooled, problems)
 
-    return {"ok": not problems, "problems": problems, "recomputed_grade": regrade}
+    return {
+        "ok": not problems,
+        "problems": problems,
+        "recomputed_grade": regrade,
+        "recomputed_confirmatory_state": recomputed_overall,
+    }
 
 
 # check name -> the metrics key it must equal (oracle reliability reports)
@@ -674,6 +870,11 @@ def verify_oracle_report_dict(d: Dict[str, Any]) -> Dict[str, Any]:
                 f"{name}: stored robust={c.get('robust')} but the CI "
                 f"{c.get('ci')} implies {fresh['robust']}"
             )
+        if "state" in c and c.get("state") != fresh["state"]:
+            problems.append(
+                f"{name}: stored state={c.get('state')!r} but the CI "
+                f"{c.get('ci')} implies {fresh['state']!r}"
+            )
         if src is not None:
             mv = metrics.get(src)
             if mv is not None and abs(mv - value) > 1e-9:
@@ -709,13 +910,17 @@ def verify_oracle_report_dict(d: Dict[str, Any]) -> Dict[str, Any]:
 def classify_artifact_dict(d: Any) -> str:
     """Identify a loaded JSON object as a verifiable StressKit artifact.
 
-    Returns ``"stability_card"``, ``"oracle_report"``, or ``"unknown"``
+    Returns ``"stability_card"``, ``"confirmatory_card"``,
+    ``"oracle_report"``, or ``"unknown"``
     (badges, traces, raw dumps, and anything not produced by StressKit).
     """
     if not isinstance(d, dict):
         return "unknown"
     if d.get("artifact") == ORACLE_ARTIFACT:
         return "oracle_report"
+    from .confirmatory import CONFIRMATORY_ARTIFACT
+    if d.get("artifact") == CONFIRMATORY_ARTIFACT:
+        return "confirmatory_card"
     if all(k in d for k in ("schema_version", "claim", "battery",
                             "metrics", "verdict")):
         return "stability_card"
@@ -734,10 +939,13 @@ def verify_artifact_dict(d: Dict[str, Any]) -> Dict[str, Any]:
         result = verify_card_dict(d)
     elif kind == "oracle_report":
         result = verify_oracle_report_dict(d)
+    elif kind == "confirmatory_card":
+        from .confirmatory import verify_confirmatory_card_dict
+        result = verify_confirmatory_card_dict(d)
     else:
         raise ValueError(
             "not a verifiable StressKit artifact (expected a stability card "
-            "or an oracle reliability report)")
+            "confirmatory card, or oracle reliability report)")
     result["kind"] = kind
     return result
 

@@ -1,0 +1,36 @@
+{
+  "artifact": "stresskit_agent_attempt_record",
+  "schema_version": "1.0",
+  "candidate_id": "pyvene_interchange_intervention_ioi",
+  "opinion_id": "pyvene-ioi-extractor-a",
+  "role": "extractor",
+  "attempt": 1,
+  "observed_at": "2026-09-01T16:36:30Z",
+  "outcome_blind": true,
+  "status": "rejected_before_opinion",
+  "reason": "router_metadata_shape_incompatible_with_prefreeze_validator",
+  "source_bundle_digest": "sha256:57dad0ed3635a341cbfdf899f46c6e0031ec72a48b712a563695ad17df2809df",
+  "panel_plan_digest": "sha256:fd7aabe8416146a62c1bc10e59808445cc8eb3e045235683eb20da304d64c244",
+  "route_binding_digest": "sha256:a7a06b71d4d028d6725f1774679889b0af35578f9537f3b999a74273328fad33",
+  "prompt_digest": "sha256:fbd1f58dc07d6bc9c815182e6682922405e7fe74cebdde49e3be0730ebbf39ef",
+  "raw_response_digest": "sha256:57f55532afa5cecf33cd718120ee2e398470e2518a02dcd833ce5b480ca840a2",
+  "response_id": "gen-1788280521-1GZI4aXY4DM3NbOfDOHC",
+  "safe_route_metadata": {
+    "response_model": "x-ai/grok-4.6",
+    "requested_model": "x-ai/grok-4.6",
+    "strategy": "direct",
+    "selected_attempt": 1,
+    "pipeline": null,
+    "endpoint_total_before_filtering": 5,
+    "available_endpoints": [
+      {
+        "provider": "xAI",
+        "model": "x-ai/grok-4.6-20260810",
+        "selected": true
+      }
+    ]
+  },
+  "completion_content_inspected": false,
+  "retry_performed_automatically": false,
+  "resolution": "accept documented null-or-absent empty pipeline and distinguish endpoint inventory count from the single available selected endpoint; retain exact request model, canonical deployment, provider, direct route, and first-attempt checks"
+}

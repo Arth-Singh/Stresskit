@@ -135,6 +135,16 @@ class TestValidation:
         with pytest.raises(ValueError, match="Nothing to grade"):
             sk.stress(empty, DATA, n_runs=2)
 
+    def test_explicit_empty_circuit_is_structural_and_reported(self):
+        empty = lambda d, s, c: sk.circuit([], universe_size=100)
+        result = sk.stress(empty, DATA, battery=["seeds"], n_runs=4)
+        assert result.pooled["mean_pairwise_jaccard"] == 1.0
+        assert result.pooled["empty_finding_rate"] == 1.0
+        assert result.pooled["expected_random_jaccard"] == 1.0
+        assert result.checks["beats_random"]["passed"] is False
+        assert result.grade == "D"
+        assert sk.verify_card_dict(result.card.to_dict())["ok"]
+
 
 class TestThresholds:
     def test_custom_thresholds_change_verdict(self):

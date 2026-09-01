@@ -1,0 +1,755 @@
+{
+  "accepted_opinion": {
+    "artifact": "stresskit_agent_opinion",
+    "evidence_anchors": [
+      {
+        "document_id": "mechtomo-paper-v1-source",
+        "end": 45096,
+        "locator": "https://arxiv.org/src/2608.19338v1#nt_mi_control_position_v21-v2.tex#stresskit-text-bytes=44927-45096",
+        "quote_digest": "sha256:a2a0a9aebcb5bb49f9513175b43f2e0fb164c5ca3fe3842559102df663007344",
+        "source_digest": "sha256:a156f610419ef63c43d143ebb41d70ac1a97f10e0581d9b3f9f73cf27a4e61a9",
+        "start": 44927,
+        "text_digest": "sha256:30be34601c37edb2aacf1b2a665d83cf866f04acec5c61eecea1fe97119f81dd"
+      },
+      {
+        "document_id": "mechtomo-paper-v1-source",
+        "end": 44597,
+        "locator": "https://arxiv.org/src/2608.19338v1#nt_mi_control_position_v21-v2.tex#stresskit-text-bytes=44522-44597",
+        "quote_digest": "sha256:09d10cf2cdfe9a5045c13624d66ac8d8af8637de34d0c8b6076d1a37c72719e9",
+        "source_digest": "sha256:a156f610419ef63c43d143ebb41d70ac1a97f10e0581d9b3f9f73cf27a4e61a9",
+        "start": 44522,
+        "text_digest": "sha256:30be34601c37edb2aacf1b2a665d83cf866f04acec5c61eecea1fe97119f81dd"
+      },
+      {
+        "document_id": "mechtomo-paper-v1-source",
+        "end": 45420,
+        "locator": "https://arxiv.org/src/2608.19338v1#nt_mi_control_position_v21-v2.tex#stresskit-text-bytes=45224-45420",
+        "quote_digest": "sha256:ec6adf066042424a1fa1c8b3fa4c06bc0956019776f798ce139f5acd39bf5c08",
+        "source_digest": "sha256:a156f610419ef63c43d143ebb41d70ac1a97f10e0581d9b3f9f73cf27a4e61a9",
+        "start": 45224,
+        "text_digest": "sha256:30be34601c37edb2aacf1b2a665d83cf866f04acec5c61eecea1fe97119f81dd"
+      },
+      {
+        "document_id": "mechtomo-paper-v1-source",
+        "end": 46357,
+        "locator": "https://arxiv.org/src/2608.19338v1#nt_mi_control_position_v21-v2.tex#stresskit-text-bytes=46213-46357",
+        "quote_digest": "sha256:6da409e83c96ce5e19e9762933ac92b92c651f0005645c76e111f2138fb2719e",
+        "source_digest": "sha256:a156f610419ef63c43d143ebb41d70ac1a97f10e0581d9b3f9f73cf27a4e61a9",
+        "start": 46213,
+        "text_digest": "sha256:30be34601c37edb2aacf1b2a665d83cf866f04acec5c61eecea1fe97119f81dd"
+      }
+    ],
+    "issues": [],
+    "model": "x-ai/grok-4.6-20260810",
+    "model_digest": "sha256:dac3cc9ae9602dab65af3ab786d28da80ab110c5513950855987442330925e57",
+    "model_family": "grok-4.6",
+    "opinion_id": "mechtomo-extractor-a",
+    "prompt_digest": "sha256:a9d7b65ca613ffc507490ff5a144a07c3d18e1dc02c3942bac0ab74ce683adb1",
+    "prompt_injection_detected": false,
+    "provider": "xAI",
+    "request_digest": "sha256:9e936a8f92e39b05bfbef6dcce1615c44b04b0cf19a2792c6bd3972dd499faf0",
+    "role": "extractor",
+    "schema_version": "1.0",
+    "source_bundle_digest": "sha256:4db27bfc13154a653a8ebf074eb6afa1fda8b5a798ebd5f72d342ba8853859b2",
+    "statement": "Orthogonal matching pursuit recovers the 32-coordinate finite-effect map with Pearson r = 0.989 and held-out R-squared = 0.935.",
+    "supported": true
+  },
+  "accepted_opinion_closure_digest": "sha256:47dcf0491845becaf388b30280dbee5deafe0737f4d39988b5149f2aaa519015",
+  "accepted_opinion_digest": "sha256:f527f59ff4e83aee6426c16a310d2d706bdfd008f32efa9ef93c6ebe5ab1c792",
+  "artifact": "stresskit_agent_panel_execution_abstention",
+  "claim_id": "mechtomo_finite_effect_map_recovery",
+  "discovery_decision": {
+    "artifact": "stresskit_claim_candidates",
+    "candidates": [],
+    "panel_execution_digest": "sha256:c0b442bc93f9fcb20f433b0c72e2ec1f6a150fe5fe59066d2416c2c0b2fa47aa",
+    "problems": [
+      "opinion 'mechtomo-extractor-a' was accepted, but one extractor cannot satisfy the frozen three-slot panel",
+      "opinion 'mechtomo-extractor-b' was rejected before AgentOpinion construction because all four evidence quotes were absent byte-for-byte from the declared source document",
+      "opinion 'mechtomo-critic' was not run because its two-accepted-extractor dependency was unsatisfied",
+      "frozen no-retry policy preserved the invalid extractor attempt and forced abstention"
+    ],
+    "publication_state": "abstain",
+    "schema_version": "1.0",
+    "source_bundle_digest": "sha256:4db27bfc13154a653a8ebf074eb6afa1fda8b5a798ebd5f72d342ba8853859b2"
+  },
+  "discovery_decision_digest": "sha256:cdac5e48ccf65074e938df65f8e4f391ce9114bc6f3d74070456164cef743c29",
+  "outcome_blind": true,
+  "panel_closure": [
+    {
+      "digest": "sha256:0716332715856d895f81dd5906e8c7507a192239d5b432e6449c36d6f507f3c6",
+      "media_type": "application/json",
+      "role": "license_evidence",
+      "size": 482
+    },
+    {
+      "digest": "sha256:07e38ced5bc45e3c42184758202a96f9012570756549318919ac6a20010a7c87",
+      "media_type": "application/json",
+      "role": "license_evidence",
+      "size": 488
+    },
+    {
+      "digest": "sha256:09d10cf2cdfe9a5045c13624d66ac8d8af8637de34d0c8b6076d1a37c72719e9",
+      "media_type": "text/plain; charset=utf-8",
+      "role": "agent_evidence_quote",
+      "size": 75
+    },
+    {
+      "digest": "sha256:140bda48ced4555607fe0c0d1be0b20bbb84f260e33904c6f0723a14b2a7e365",
+      "media_type": "text/plain; charset=utf-8",
+      "role": "extracted_text",
+      "size": 8141
+    },
+    {
+      "digest": "sha256:14c1923def54b641c8dc91bc647cf5179892f944bcd40d34ef27e4b84f3cb4e1",
+      "media_type": "application/json",
+      "role": "agent_prompt",
+      "size": 329431
+    },
+    {
+      "digest": "sha256:15096074eb36d6a9fba855fa366abe0b28b7646d1899cb1d46a4ac23bb05d4bc",
+      "media_type": "application/octet-stream",
+      "role": "digest_closure",
+      "size": 384
+    },
+    {
+      "digest": "sha256:15e83e8dca7b2da3317338d6c5b17b0dd035ffa4cdcd1eeebab2fdbba3eeab65",
+      "media_type": "application/json",
+      "role": "license_evidence",
+      "size": 489
+    },
+    {
+      "digest": "sha256:212e1876e7f79e123d5867191de6bcd78b3cf364a1c2ad96a0d4c21972d75cdc",
+      "media_type": "application/octet-stream",
+      "role": "digest_closure",
+      "size": 4882
+    },
+    {
+      "digest": "sha256:233150cc129ae59e5099ebfe06f1b26a6f8b2c3d453b163a61c67d493541ab9c",
+      "media_type": "application/json",
+      "role": "digest_closure",
+      "size": 6317
+    },
+    {
+      "digest": "sha256:30be34601c37edb2aacf1b2a665d83cf866f04acec5c61eecea1fe97119f81dd",
+      "media_type": "text/plain; charset=utf-8",
+      "role": "extracted_text",
+      "size": 123281
+    },
+    {
+      "digest": "sha256:3836f7b1cc1815430c0fa042323ff2922ab2d536d764709e7e5e5ffdbac51b5d",
+      "media_type": "application/json",
+      "role": "digest_closure",
+      "size": 648
+    },
+    {
+      "digest": "sha256:384f4193db3460769d13dceb408786526d06956d4406c719a39422e8c7273663",
+      "media_type": "text/plain; charset=utf-8",
+      "role": "extracted_text",
+      "size": 1754
+    },
+    {
+      "digest": "sha256:3bb796d628f79b5b97f5b7aa0ba71994b8020dfeaf17dc6140bcd537ca2846b3",
+      "media_type": "application/json",
+      "role": "agent_raw_response",
+      "size": 29254
+    },
+    {
+      "digest": "sha256:3ca5f8f076082ee109c0ccd54f2e67399b48154cc194132042cce71d967a40d8",
+      "media_type": "text/plain; charset=utf-8",
+      "role": "extracted_text",
+      "size": 159365
+    },
+    {
+      "digest": "sha256:3f69529a4833de87813b4b562ddc00c558e3ce2283de21bb77f544496ca03b3b",
+      "media_type": "application/octet-stream",
+      "role": "digest_closure",
+      "size": 34641
+    },
+    {
+      "digest": "sha256:47dcf0491845becaf388b30280dbee5deafe0737f4d39988b5149f2aaa519015",
+      "media_type": "application/json",
+      "role": "digest_closure",
+      "size": 6997
+    },
+    {
+      "digest": "sha256:48e4dc03652e5c1bc771ded0d56b3bcd182b11440566a3a93c1566a0fdcd2391",
+      "media_type": "application/octet-stream",
+      "role": "digest_closure",
+      "size": 269
+    },
+    {
+      "digest": "sha256:4d710a117cb16e547161ba844be83b6697336fd4665449cd683fb7c1a34cc87c",
+      "media_type": "application/json",
+      "role": "digest_closure",
+      "size": 5251
+    },
+    {
+      "digest": "sha256:4d8689f8615cd2e78972f46dc022ae6b11d02eb2a4430bbae6cc013b0f299983",
+      "media_type": "application/octet-stream",
+      "role": "digest_closure",
+      "size": 1833033
+    },
+    {
+      "digest": "sha256:4db27bfc13154a653a8ebf074eb6afa1fda8b5a798ebd5f72d342ba8853859b2",
+      "media_type": "application/json",
+      "role": "source_bundle",
+      "size": 5689
+    },
+    {
+      "digest": "sha256:52b10b47ea18159f1b1f10a46dc22e31c7164c473686f331b0bcf23db13a51c7",
+      "media_type": "application/octet-stream",
+      "role": "digest_closure",
+      "size": 154
+    },
+    {
+      "digest": "sha256:639adc48f546f04af10c051d85e2f9bad4317a989dc182dfb64a4a0245d58764",
+      "media_type": "application/json",
+      "role": "license_evidence",
+      "size": 488
+    },
+    {
+      "digest": "sha256:6da409e83c96ce5e19e9762933ac92b92c651f0005645c76e111f2138fb2719e",
+      "media_type": "text/plain; charset=utf-8",
+      "role": "agent_evidence_quote",
+      "size": 144
+    },
+    {
+      "digest": "sha256:850e4993e188a9166c797ee77e57cf679512e8c03b1c3db8c5538abf7b3c3689",
+      "media_type": "application/json",
+      "role": "license_evidence",
+      "size": 575
+    },
+    {
+      "digest": "sha256:92a62abcf21f6eadd86c464e75f05be78e1704a68659c46ef63a28f7dda84be1",
+      "media_type": "application/json",
+      "role": "license_evidence",
+      "size": 492
+    },
+    {
+      "digest": "sha256:9549b1c990b9cd5dcd89ef01f6e5bddff52979ad32beea3aaf47c9b6ff9b6ac9",
+      "media_type": "application/json",
+      "role": "agent_route_binding",
+      "size": 1487
+    },
+    {
+      "digest": "sha256:9c0955019722da7b3b71cc9f2571c0f5310d23dd398b886c8f82c1aae4f0f5ec",
+      "media_type": "application/octet-stream",
+      "role": "digest_closure",
+      "size": 41830400
+    },
+    {
+      "digest": "sha256:9e936a8f92e39b05bfbef6dcce1615c44b04b0cf19a2792c6bd3972dd499faf0",
+      "media_type": "application/json",
+      "role": "agent_request",
+      "size": 330939
+    },
+    {
+      "digest": "sha256:a156f610419ef63c43d143ebb41d70ac1a97f10e0581d9b3f9f73cf27a4e61a9",
+      "media_type": "application/octet-stream",
+      "role": "digest_closure",
+      "size": 1104057
+    },
+    {
+      "digest": "sha256:a2a0a9aebcb5bb49f9513175b43f2e0fb164c5ca3fe3842559102df663007344",
+      "media_type": "text/plain; charset=utf-8",
+      "role": "agent_evidence_quote",
+      "size": 169
+    },
+    {
+      "digest": "sha256:a59abe984e70a904185d8c5a3e295bcdf89d70f2da9a1fde1959b1061e0dc8bd",
+      "media_type": "application/octet-stream",
+      "role": "digest_closure",
+      "size": 65664
+    },
+    {
+      "digest": "sha256:a9d7b65ca613ffc507490ff5a144a07c3d18e1dc02c3942bac0ab74ce683adb1",
+      "media_type": "application/json",
+      "role": "agent_prompt",
+      "size": 329431
+    },
+    {
+      "digest": "sha256:acea2b1cc5007d6bb723af9090299ba9da45c2c8829a55f0a0fcb825e9ef6a52",
+      "media_type": "application/json",
+      "role": "license_evidence",
+      "size": 603
+    },
+    {
+      "digest": "sha256:b3ff771db9b791691de6c3985833ca9ba3f3fc823214b5d57aad4c68f9df05c5",
+      "media_type": "application/octet-stream",
+      "role": "digest_closure",
+      "size": 1609631
+    },
+    {
+      "digest": "sha256:c0b442bc93f9fcb20f433b0c72e2ec1f6a150fe5fe59066d2416c2c0b2fa47aa",
+      "media_type": "application/json",
+      "role": "digest_closure",
+      "size": 1248
+    },
+    {
+      "digest": "sha256:cdac5e48ccf65074e938df65f8e4f391ce9114bc6f3d74070456164cef743c29",
+      "media_type": "application/json",
+      "role": "digest_closure",
+      "size": 788
+    },
+    {
+      "digest": "sha256:cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "media_type": "application/octet-stream",
+      "role": "digest_closure",
+      "size": 11358
+    },
+    {
+      "digest": "sha256:d53ec6f7b454deaad2dd7aafa0344489c6ab27d845e15a44eee69944ec9ea0fd",
+      "media_type": "application/json",
+      "role": "digest_closure",
+      "size": 5632
+    },
+    {
+      "digest": "sha256:d7558bbb4996e8cec312ebb8bb0fd9bc21e4883848f4a09e8575310cd10fd3d9",
+      "media_type": "text/plain; charset=utf-8",
+      "role": "agent_claim_query",
+      "size": 1546
+    },
+    {
+      "digest": "sha256:d79efb21a7b4e60b3039e4d389cd0bc7d9cfe3f928af33da9230a747fb1f1e4d",
+      "media_type": "application/octet-stream",
+      "role": "digest_closure",
+      "size": 200
+    },
+    {
+      "digest": "sha256:d94d9d1532396da94915bb518abf1b86b01ed8f0415c9c3c327ae8705c4570dc",
+      "media_type": "application/json",
+      "role": "agent_panel_plan",
+      "size": 2521
+    },
+    {
+      "digest": "sha256:d97ff1d3a3b3f84c6a7473db7d8993c2bfe70c30b68ccc1264d435eaf9582e6f",
+      "media_type": "application/octet-stream",
+      "role": "digest_closure",
+      "size": 196
+    },
+    {
+      "digest": "sha256:da0e4fd4ae60522747bdc82b56bcf7521df44a9a3b30c1e72480382f03e48dc7",
+      "media_type": "text/plain; charset=utf-8",
+      "role": "extracted_text",
+      "size": 62
+    },
+    {
+      "digest": "sha256:dac3cc9ae9602dab65af3ab786d28da80ab110c5513950855987442330925e57",
+      "media_type": "application/json",
+      "role": "agent_model",
+      "size": 975
+    },
+    {
+      "digest": "sha256:db809578b161a8c43036f541c1f0a59e7408203d0650081d70629958e28d76c3",
+      "media_type": "text/plain; charset=utf-8",
+      "role": "extracted_text",
+      "size": 15021
+    },
+    {
+      "digest": "sha256:df74e079674f5836574cb349e8509a11ab5b9b56e5e68a1366eeacbad381c8d4",
+      "media_type": "application/json",
+      "role": "digest_closure",
+      "size": 8803
+    },
+    {
+      "digest": "sha256:e2036119a3655841e06da3db6c1028b94bda7b87336514c579e8e33889f122a8",
+      "media_type": "application/octet-stream",
+      "role": "digest_closure",
+      "size": 253
+    },
+    {
+      "digest": "sha256:e2b679e7807e6de6bdf93e0bd4d3a83f84b625bc7895fb5a4e8cc9bd587795cd",
+      "media_type": "text/plain; charset=utf-8",
+      "role": "extracted_text",
+      "size": 3881
+    },
+    {
+      "digest": "sha256:e47f45dfca038b51c20a8ef59edc29407ac988e3c4f99f26b97c7390f23c40e8",
+      "media_type": "application/json",
+      "role": "agent_route_binding",
+      "size": 1478
+    },
+    {
+      "digest": "sha256:e53aa11056e971022201d4f48342514261a60a057995d75c6dd3e798707a7db0",
+      "media_type": "application/octet-stream",
+      "role": "digest_closure",
+      "size": 19652
+    },
+    {
+      "digest": "sha256:e9c5bbe08213006f216938c02b553e66f58dfcb37ab9ff49359714248b404000",
+      "media_type": "application/json",
+      "role": "digest_closure",
+      "size": 1956
+    },
+    {
+      "digest": "sha256:ec6adf066042424a1fa1c8b3fa4c06bc0956019776f798ce139f5acd39bf5c08",
+      "media_type": "text/plain; charset=utf-8",
+      "role": "agent_evidence_quote",
+      "size": 196
+    },
+    {
+      "digest": "sha256:f527f59ff4e83aee6426c16a310d2d706bdfd008f32efa9ef93c6ebe5ab1c792",
+      "media_type": "application/json",
+      "role": "agent_opinion",
+      "size": 2585
+    },
+    {
+      "digest": "sha256:f54e519eb6432fe2ee7c20ca13dec2dccdd7c7a61beede8a6d8109bdb38c3f25",
+      "media_type": "application/json",
+      "role": "digest_closure",
+      "size": 956
+    },
+    {
+      "digest": "sha256:fe9b58ac7738b3a78367df35ab9ca816e5d44695f9ba57ec1dee88571b4393c2",
+      "media_type": "application/octet-stream",
+      "role": "digest_closure",
+      "size": 11141
+    }
+  ],
+  "panel_closure_digest": "sha256:1d44f45173c4c1b8b6d1d0e299f7a9de3b4746a14585b88ccbadc96fe64a9df9",
+  "panel_closure_roots": [
+    "sha256:4d710a117cb16e547161ba844be83b6697336fd4665449cd683fb7c1a34cc87c",
+    "sha256:cdac5e48ccf65074e938df65f8e4f391ce9114bc6f3d74070456164cef743c29"
+  ],
+  "panel_execution": {
+    "artifact": "stresskit_agent_panel_execution",
+    "candidate_id": "mechtomo_finite_effect_map_recovery",
+    "complete_slots": true,
+    "outcome_blind": true,
+    "panel_plan_digest": "sha256:d94d9d1532396da94915bb518abf1b86b01ed8f0415c9c3c327ae8705c4570dc",
+    "publication_state": "abstain",
+    "retry_policy": "no_retry",
+    "schema_version": "1.0",
+    "slots": [
+      {
+        "closure_digest": "sha256:47dcf0491845becaf388b30280dbee5deafe0737f4d39988b5149f2aaa519015",
+        "opinion_digest": "sha256:f527f59ff4e83aee6426c16a310d2d706bdfd008f32efa9ef93c6ebe5ab1c792",
+        "opinion_id": "mechtomo-extractor-a",
+        "role": "extractor",
+        "status": "accepted"
+      },
+      {
+        "attempt_digest": "sha256:e9c5bbe08213006f216938c02b553e66f58dfcb37ab9ff49359714248b404000",
+        "opinion_id": "mechtomo-extractor-b",
+        "raw_response_digest": "sha256:233150cc129ae59e5099ebfe06f1b26a6f8b2c3d453b163a61c67d493541ab9c",
+        "role": "extractor",
+        "status": "rejected_invalid_evidence"
+      },
+      {
+        "depends_on": [
+          "mechtomo-extractor-a",
+          "mechtomo-extractor-b"
+        ],
+        "opinion_id": "mechtomo-critic",
+        "reason": "Critic requires two accepted extractor opinions; extractor B was rejected before AgentOpinion construction.",
+        "role": "critic",
+        "status": "not_run_dependency_failure"
+      }
+    ],
+    "source_bundle_digest": "sha256:4db27bfc13154a653a8ebf074eb6afa1fda8b5a798ebd5f72d342ba8853859b2",
+    "status": "abstain"
+  },
+  "panel_execution_digest": "sha256:c0b442bc93f9fcb20f433b0c72e2ec1f6a150fe5fe59066d2416c2c0b2fa47aa",
+  "panel_plan": {
+    "artifact": "stresskit_agent_panel_plan",
+    "candidate_id": "mechtomo_finite_effect_map_recovery",
+    "catalog_observed_at": "2026-09-01T17:37:36Z",
+    "catalog_sources": [
+      "https://openrouter.ai/api/v1/models",
+      "https://openrouter.ai/api/v1/endpoints/zdr",
+      "https://openrouter.ai/api/v1/models/x-ai/grok-4.6/endpoints",
+      "https://openrouter.ai/api/v1/models/z-ai/glm-5.2/endpoints",
+      "https://openrouter.ai/api/v1/models/google/gemini-3.1-pro-preview/endpoints"
+    ],
+    "claim_query": "claim-query.txt",
+    "claim_query_digest": "sha256:d7558bbb4996e8cec312ebb8bb0fd9bc21e4883848f4a09e8575310cd10fd3d9",
+    "constraints": {
+      "account_prompt_logging": "must_not_be_opted_in",
+      "allow_fallbacks": false,
+      "data_collection": "deny",
+      "no_plugins_or_tools": true,
+      "require_parameters": true,
+      "router_pipeline": "must_be_empty",
+      "selected_attempt": 1,
+      "zdr": true
+    },
+    "outcome_blind": true,
+    "requests": [
+      {
+        "catalog": {
+          "canonical_slug": "x-ai/grok-4.6-20260810",
+          "context_length": 500000,
+          "endpoint_name": "xAI | x-ai/grok-4.6-20260810",
+          "endpoint_status": 0,
+          "required_parameters": [
+            "max_tokens",
+            "response_format",
+            "seed",
+            "structured_outputs",
+            "temperature"
+          ],
+          "zdr_listed": true
+        },
+        "model_family": "grok-4.6",
+        "model_request_id": "x-ai/grok-4.6",
+        "opinion_id": "mechtomo-extractor-a",
+        "provider_endpoint": "xai/zdr",
+        "provider_name": "xAI",
+        "request_parameters": {
+          "max_tokens": 2048,
+          "seed": 173201,
+          "temperature": 0
+        },
+        "role": "extractor"
+      },
+      {
+        "catalog": {
+          "canonical_slug": "z-ai/glm-5.2-20260616",
+          "context_length": 1048576,
+          "endpoint_name": "Mistral | z-ai/glm-5.2-20260616",
+          "endpoint_status": 0,
+          "required_parameters": [
+            "max_tokens",
+            "response_format",
+            "seed",
+            "structured_outputs",
+            "temperature"
+          ],
+          "zdr_listed": true
+        },
+        "model_family": "glm-5.2",
+        "model_request_id": "z-ai/glm-5.2",
+        "opinion_id": "mechtomo-extractor-b",
+        "provider_endpoint": "mistral/zdr",
+        "provider_name": "Mistral",
+        "request_parameters": {
+          "max_tokens": 2048,
+          "seed": 173202,
+          "temperature": 0
+        },
+        "role": "extractor"
+      },
+      {
+        "catalog": {
+          "canonical_slug": "google/gemini-3.1-pro-preview-20260219",
+          "context_length": 1048576,
+          "endpoint_name": "Google | google/gemini-3.1-pro-preview-20260219",
+          "endpoint_status": 0,
+          "required_parameters": [
+            "max_tokens",
+            "response_format",
+            "seed",
+            "structured_outputs",
+            "temperature"
+          ],
+          "zdr_listed": true
+        },
+        "model_family": "gemini-3.1",
+        "model_request_id": "google/gemini-3.1-pro-preview",
+        "opinion_id": "mechtomo-critic",
+        "provider_endpoint": "google-vertex/global/priority",
+        "provider_name": "Google",
+        "request_parameters": {
+          "max_tokens": 2048,
+          "seed": 173203,
+          "temperature": 0
+        },
+        "role": "critic"
+      }
+    ],
+    "schema_version": "1.0",
+    "status": "prefrozen_awaiting_authenticated_preflight",
+    "transport": "openrouter"
+  },
+  "panel_plan_digest": "sha256:d94d9d1532396da94915bb518abf1b86b01ed8f0415c9c3c327ae8705c4570dc",
+  "prompt_injection_detected": false,
+  "publication_state": "abstain",
+  "reason": "invalid_evidence_anchor",
+  "rejected_attempt_record": {
+    "artifact": "stresskit_agent_attempt_record",
+    "attempt": 1,
+    "candidate_id": "mechtomo_finite_effect_map_recovery",
+    "completion_content_inspected": true,
+    "critic_called": false,
+    "evidence_quote_checks": [
+      {
+        "document_id": "mechtomo-paper-v1-pdf",
+        "present_in_declared_source_bytes": false,
+        "quote_digest": "sha256:e2036119a3655841e06da3db6c1028b94bda7b87336514c579e8e33889f122a8"
+      },
+      {
+        "document_id": "mechtomo-paper-v1-pdf",
+        "present_in_declared_source_bytes": false,
+        "quote_digest": "sha256:a2a0a9aebcb5bb49f9513175b43f2e0fb164c5ca3fe3842559102df663007344"
+      },
+      {
+        "document_id": "mechtomo-paper-v1-pdf",
+        "present_in_declared_source_bytes": false,
+        "quote_digest": "sha256:d97ff1d3a3b3f84c6a7473db7d8993c2bfe70c30b68ccc1264d435eaf9582e6f"
+      },
+      {
+        "document_id": "mechtomo-paper-v1-pdf",
+        "present_in_declared_source_bytes": false,
+        "quote_digest": "sha256:52b10b47ea18159f1b1f10a46dc22e31c7164c473686f331b0bcf23db13a51c7"
+      }
+    ],
+    "observed_at": "2026-09-01T17:39:41Z",
+    "opinion_id": "mechtomo-extractor-b",
+    "panel_plan_digest": "sha256:d94d9d1532396da94915bb518abf1b86b01ed8f0415c9c3c327ae8705c4570dc",
+    "prompt_digest": "sha256:14c1923def54b641c8dc91bc647cf5179892f944bcd40d34ef27e4b84f3cb4e1",
+    "raw_response_digest": "sha256:233150cc129ae59e5099ebfe06f1b26a6f8b2c3d453b163a61c67d493541ab9c",
+    "reason": "all completion evidence quotes were absent byte-for-byte from their declared source document",
+    "response_id": "gen-1788284381-Z8WrZH0sYjUG6pOaaDgA",
+    "retry_performed": false,
+    "role": "extractor",
+    "route_binding_digest": "sha256:9549b1c990b9cd5dcd89ef01f6e5bddff52979ad32beea3aaf47c9b6ff9b6ac9",
+    "safe_route_metadata": {
+      "available_endpoints": [
+        {
+          "model": "z-ai/glm-5.2-20260616",
+          "provider": "Mistral",
+          "selected": true
+        }
+      ],
+      "endpoint_total_before_filtering": 32,
+      "pipeline": null,
+      "requested_model": "z-ai/glm-5.2",
+      "response_model": "z-ai/glm-5.2",
+      "selected_attempt": 1,
+      "strategy": "direct"
+    },
+    "schema_version": "1.0",
+    "source_bundle_digest": "sha256:4db27bfc13154a653a8ebf074eb6afa1fda8b5a798ebd5f72d342ba8853859b2",
+    "status": "rejected_before_opinion"
+  },
+  "rejected_attempt_record_digest": "sha256:e9c5bbe08213006f216938c02b553e66f58dfcb37ab9ff49359714248b404000",
+  "schema_version": "1.0",
+  "source_bundle": {
+    "artifact": "stresskit_source_bundle",
+    "bundle_id": "mechtomo-finite-effect-map-recovery-source-v1",
+    "created_at": "2026-09-01T17:33:51Z",
+    "documents": [
+      {
+        "content_size": 41830400,
+        "document_id": "mechtomo-repository",
+        "extracted_text_digest": "sha256:384f4193db3460769d13dceb408786526d06956d4406c719a39422e8c7273663",
+        "kind": "repository",
+        "license": {
+          "evidence_digest": "sha256:acea2b1cc5007d6bb723af9090299ba9da45c2c8829a55f0a0fcb825e9ef6a52",
+          "identifier": "Apache-2.0 AND CC-BY-4.0",
+          "status": "verified_compatible"
+        },
+        "locator": "https://github.com/kwisatzh/mechanistic-tomography/tree/5c097d2175c632a4a15e359cb4d94ec923168472",
+        "media_type": "application/x-tar",
+        "source_digest": "sha256:9c0955019722da7b3b71cc9f2571c0f5310d23dd398b886c8f82c1aae4f0f5ec"
+      },
+      {
+        "content_size": 1609631,
+        "document_id": "mechtomo-paper-v1-pdf",
+        "extracted_text_digest": "sha256:3ca5f8f076082ee109c0ccd54f2e67399b48154cc194132042cce71d967a40d8",
+        "kind": "paper",
+        "license": {
+          "evidence_digest": "sha256:639adc48f546f04af10c051d85e2f9bad4317a989dc182dfb64a4a0245d58764",
+          "identifier": "CC-BY-4.0",
+          "status": "verified_compatible"
+        },
+        "locator": "https://arxiv.org/pdf/2608.19338v1",
+        "media_type": "application/pdf",
+        "source_digest": "sha256:b3ff771db9b791691de6c3985833ca9ba3f3fc823214b5d57aad4c68f9df05c5"
+      },
+      {
+        "content_size": 1104057,
+        "document_id": "mechtomo-paper-v1-source",
+        "extracted_text_digest": "sha256:30be34601c37edb2aacf1b2a665d83cf866f04acec5c61eecea1fe97119f81dd",
+        "kind": "paper",
+        "license": {
+          "evidence_digest": "sha256:92a62abcf21f6eadd86c464e75f05be78e1704a68659c46ef63a28f7dda84be1",
+          "identifier": "CC-BY-4.0",
+          "status": "verified_compatible"
+        },
+        "locator": "https://arxiv.org/src/2608.19338v1#nt_mi_control_position_v21-v2.tex",
+        "media_type": "application/gzip",
+        "source_digest": "sha256:a156f610419ef63c43d143ebb41d70ac1a97f10e0581d9b3f9f73cf27a4e61a9"
+      },
+      {
+        "content_size": 3881,
+        "document_id": "mechtomo-experiment-map",
+        "extracted_text_digest": "sha256:e2b679e7807e6de6bdf93e0bd4d3a83f84b625bc7895fb5a4e8cc9bd587795cd",
+        "kind": "repository",
+        "license": {
+          "evidence_digest": "sha256:15e83e8dca7b2da3317338d6c5b17b0dd035ffa4cdcd1eeebab2fdbba3eeab65",
+          "identifier": "Apache-2.0",
+          "status": "verified_compatible"
+        },
+        "locator": "https://github.com/kwisatzh/mechanistic-tomography/blob/5c097d2175c632a4a15e359cb4d94ec923168472/experiments/README.md",
+        "media_type": "text/markdown; charset=utf-8",
+        "source_digest": "sha256:e2b679e7807e6de6bdf93e0bd4d3a83f84b625bc7895fb5a4e8cc9bd587795cd"
+      },
+      {
+        "content_size": 8141,
+        "document_id": "mechtomo-hmm-guide",
+        "extracted_text_digest": "sha256:140bda48ced4555607fe0c0d1be0b20bbb84f260e33904c6f0723a14b2a7e365",
+        "kind": "repository",
+        "license": {
+          "evidence_digest": "sha256:07e38ced5bc45e3c42184758202a96f9012570756549318919ac6a20010a7c87",
+          "identifier": "Apache-2.0",
+          "status": "verified_compatible"
+        },
+        "locator": "https://github.com/kwisatzh/mechanistic-tomography/blob/5c097d2175c632a4a15e359cb4d94ec923168472/experiments/hmm/README.md",
+        "media_type": "text/markdown; charset=utf-8",
+        "source_digest": "sha256:140bda48ced4555607fe0c0d1be0b20bbb84f260e33904c6f0723a14b2a7e365"
+      },
+      {
+        "content_size": 15021,
+        "document_id": "mechtomo-sparse-reducer",
+        "extracted_text_digest": "sha256:db809578b161a8c43036f541c1f0a59e7408203d0650081d70629958e28d76c3",
+        "kind": "repository",
+        "license": {
+          "evidence_digest": "sha256:0716332715856d895f81dd5906e8c7507a192239d5b432e6449c36d6f507f3c6",
+          "identifier": "Apache-2.0",
+          "status": "verified_compatible"
+        },
+        "locator": "https://github.com/kwisatzh/mechanistic-tomography/blob/5c097d2175c632a4a15e359cb4d94ec923168472/experiments/hmm/sparse_tomography_posthoc.py",
+        "media_type": "text/x-python; charset=utf-8",
+        "source_digest": "sha256:db809578b161a8c43036f541c1f0a59e7408203d0650081d70629958e28d76c3"
+      },
+      {
+        "content_size": 62,
+        "document_id": "mechtomo-hmm-requirements",
+        "extracted_text_digest": "sha256:da0e4fd4ae60522747bdc82b56bcf7521df44a9a3b30c1e72480382f03e48dc7",
+        "kind": "dependency",
+        "license": {
+          "evidence_digest": "sha256:850e4993e188a9166c797ee77e57cf679512e8c03b1c3db8c5538abf7b3c3689",
+          "identifier": "Apache-2.0",
+          "status": "verified_compatible"
+        },
+        "locator": "https://github.com/kwisatzh/mechanistic-tomography/blob/5c097d2175c632a4a15e359cb4d94ec923168472/experiments/hmm/requirements.txt",
+        "media_type": "text/plain; charset=utf-8",
+        "source_digest": "sha256:da0e4fd4ae60522747bdc82b56bcf7521df44a9a3b30c1e72480382f03e48dc7"
+      }
+    ],
+    "metadata": {
+      "artifact_inventory_digest": "sha256:d53ec6f7b454deaad2dd7aafa0344489c6ab27d845e15a44eee69944ec9ea0fd",
+      "candidate_id": "mechtomo_finite_effect_map_recovery",
+      "claim_query_digest": "sha256:d7558bbb4996e8cec312ebb8bb0fd9bc21e4883848f4a09e8575310cd10fd3d9",
+      "dependency_profile": "upstream_ranges_unlocked",
+      "extraction_profile": "poppler_pdftotext_26.01.0_layout_nopgbrk_utf8_and_primary_tex_byte_identity_v1",
+      "intake_manifest_digest": "sha256:df74e079674f5836574cb349e8509a11ab5b9b56e5e68a1366eeacbad381c8d4",
+      "notice_digest": "sha256:d79efb21a7b4e60b3039e4d389cd0bc7d9cfe3f928af33da9230a747fb1f1e4d",
+      "outcome_blind": true,
+      "paper_license_digest": "sha256:48e4dc03652e5c1bc771ded0d56b3bcd182b11440566a3a93c1566a0fdcd2391",
+      "paper_version": "arXiv:2608.19338v1",
+      "registered_claim_locator": "Section 5.1 and Figure 2, PDF page 8; Table 2 excluded as a distinct calibration experiment",
+      "released_artifact_license_scope": "unresolved_pending_author_confirmation",
+      "repository": "https://github.com/kwisatzh/mechanistic-tomography",
+      "repository_archive_digest": "sha256:9c0955019722da7b3b71cc9f2571c0f5310d23dd398b886c8f82c1aae4f0f5ec",
+      "repository_archive_profile": "git_archive_tar_with_mechanistic_tomography_prefix_v1",
+      "repository_commit": "5c097d2175c632a4a15e359cb4d94ec923168472",
+      "repository_tree": "261ed565077cb55dc61cc004fd1bd7ef9be01c67",
+      "software_license_digest": "sha256:cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    "schema_version": "1.0"
+  },
+  "source_bundle_digest": "sha256:4db27bfc13154a653a8ebf074eb6afa1fda8b5a798ebd5f72d342ba8853859b2",
+  "source_closure_digest": "sha256:4d710a117cb16e547161ba844be83b6697336fd4665449cd683fb7c1a34cc87c"
+}

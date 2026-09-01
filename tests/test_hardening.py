@@ -74,7 +74,7 @@ def test_borderline_fail_lowers_confidence():
         pytest.skip("finder did not land on a straddling fail this seed")
     assert result.pooled["confidence"] == "low"
     assert "structural_stability" in result.pooled["borderline_checks"]
-    assert "❌⚠️" in result.card.to_markdown()
+    assert "⚠️ inconclusive" in result.card.to_markdown()
     assert any("fail" in n for n in result.card.notes if "underpowered" in n)
 
 
@@ -108,7 +108,9 @@ def make_card_dict():
 
 def test_card_embeds_runs_with_hashes():
     d = make_card_dict()
-    assert d["schema_version"] == "0.2"
+    assert d["schema_version"] == "0.3"
+    assert d["verdict"]["profile"] == "diagnostic"
+    assert d["verdict"]["confirmatory_state"] == "not_applicable"
     assert d["battery"]["components_embedded"] is True
     assert len(d["runs"]) == 11
     base = d["runs"][0]
@@ -144,6 +146,24 @@ def test_verify_catches_tampered_robust_flag():
     out = verify_card_dict(d)
     assert not out["ok"]
     assert any("robust" in p for p in out["problems"])
+
+
+def test_verify_catches_tampered_three_state_decision():
+    d = make_card_dict()
+    name, check = next(iter(d["verdict"]["checks"].items()))
+    check["state"] = "fail" if check["state"] != "fail" else "pass"
+    out = verify_card_dict(d)
+    assert not out["ok"]
+    assert any(name in p and "state" in p for p in out["problems"])
+
+
+def test_diagnostic_card_cannot_claim_confirmatory_pass():
+    d = make_card_dict()
+    d["verdict"]["confirmatory_state"] = "pass"
+    out = verify_card_dict(d)
+    assert not out["ok"]
+    assert out["recomputed_confirmatory_state"] == "not_applicable"
+    assert any("confirmatory_state" in p for p in out["problems"])
 
 
 def test_verify_catches_tampered_confidence():

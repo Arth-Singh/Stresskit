@@ -1,0 +1,48 @@
+{
+  "artifact": "stresskit_utility_blind_metadata_preflight",
+  "candidate_id": "thought_anchors_solution_outcome_external_utility_v1",
+  "claim_outcome_computed": false,
+  "cluster_identifier_available_in_allowed_metadata": false,
+  "content_rows_read": false,
+  "gpu_used": false,
+  "independent_unit": "MATH problem_id cluster",
+  "inputs": {
+    "allowed_fields_read": [
+      "rfilename"
+    ],
+    "revision_manifest_digest": "sha256:22e42adc4702a96dc59d5c19f07cd5e586e1579a347c9fbdba8e81b1391190c3",
+    "selected_path_list_digest": "sha256:49fa13b2526a2e28fc0d17d0ab67ec82e68d74e9a37dc069b588a7f1962dd038"
+  },
+  "labels_read": false,
+  "minimum_unique_problem_clusters_per_partition": 200,
+  "minimums_established": false,
+  "next_action": "obtain a separately licensed label-blind problem-ID manifest for both model families; otherwise retain abstention",
+  "observed": {
+    "duplicate_cluster_count": null,
+    "partition_cluster_counts": {
+      "generalization": null,
+      "primary": null,
+      "train": null
+    },
+    "revision_metadata_row_count": 29030,
+    "revision_model_file_counts": {
+      "deepseek-r1-distill-llama-8b": 15298,
+      "deepseek-r1-distill-qwen-14b": 13547
+    },
+    "selected_metadata_row_count": 40,
+    "selected_model_file_counts": {
+      "deepseek-r1-distill-llama-8b": 0,
+      "deepseek-r1-distill-qwen-14b": 40
+    }
+  },
+  "outcome_blind": true,
+  "path_values_emitted": false,
+  "predictions_read": false,
+  "preregistration_digest": "sha256:b8d3bf6ac14ea463956a7838bef41d2c50342d58266e02c14b01219ea72a808d",
+  "publication_state": "abstain",
+  "reason_code": "problem_cluster_identifier_absent_from_registered_metadata_contract",
+  "rollout_dataset_revision": "a3a2fe1eb6d52e6ef81860baff018a8df2eb8ae2",
+  "schema_version": "1.0",
+  "source_bundle_digest": "sha256:9a27e09f02489ba7fbc12340d9a2c7d57037c38c319e362db3e6a8b326488cd3",
+  "status": "failed_insufficient_metadata"
+}

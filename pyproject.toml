@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "stress-kit"
-version = "0.3.0"
-description = "Stability and sanity-check harness for mechanistic interpretability claims. pytest + codecov for interp findings."
+version = "1.0.0.dev0"
+description = "Offline-verifiable, claim-level audit protocol for mechanistic interpretability evidence."
 readme = "README.md"
 license = { text = "MIT" }
 requires-python = ">=3.9"
@@ -30,9 +30,18 @@ dependencies = ["numpy>=1.22"]
 [project.optional-dependencies]
 full = ["scipy>=1.8"]
 dev = ["pytest>=7", "scipy>=1.8"]
+audit = ["cryptography>=42"]
+control = [
+    "fastapi>=0.110",
+    "uvicorn>=0.29",
+    "psycopg[binary]>=3.1",
+    "boto3>=1.34",
+    "cryptography>=42",
+]
 
 [project.scripts]
 stresskit = "stresskit.cli:main"
+stresskit-control-plane = "stresskit.control_cli:main"
 
 [project.urls]
 Homepage = "https://github.com/Arth-Singh/Stresskit"

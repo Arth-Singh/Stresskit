@@ -1,0 +1,24 @@
+{
+  "schema_version": "0.1",
+  "jaccard": [
+    {"left": [], "right": [], "numerator": 1, "denominator": 1},
+    {"left": [1], "right": [2], "numerator": 0, "denominator": 1},
+    {"left": [1, 2], "right": [2, 3], "numerator": 1, "denominator": 3},
+    {"left": [1, 2, 3], "right": [1, 2, 3], "numerator": 1, "denominator": 1}
+  ],
+  "random_jaccard": [
+    {"universe_size": 3, "left_size": 1, "right_size": 1, "numerator": 1, "denominator": 3},
+    {"universe_size": 3, "left_size": 1, "right_size": 2, "numerator": 1, "denominator": 3},
+    {"universe_size": 5, "left_size": 2, "right_size": 2, "numerator": 3, "denominator": 10},
+    {"universe_size": 10, "left_size": 2, "right_size": 3, "numerator": 29, "denominator": 180},
+    {"universe_size": 20, "left_size": 4, "right_size": 4, "numerator": 999, "denominator": 8075},
+    {"universe_size": 144, "left_size": 15, "right_size": 15, "numerator": 2584850149088656364382653, "denominator": 45638295405532475996009088}
+  ],
+  "decisions": [
+    {"value": 0.9, "threshold": 0.8, "op": ">=", "ci": [0.81, 0.95], "minimum_n_met": true, "state": "pass"},
+    {"value": 0.7, "threshold": 0.8, "op": ">=", "ci": [0.6, 0.79], "minimum_n_met": true, "state": "fail"},
+    {"value": 0.8, "threshold": 0.8, "op": ">=", "ci": [0.7, 0.9], "minimum_n_met": true, "state": "inconclusive"},
+    {"value": 0.1, "threshold": 0.2, "op": "<=", "ci": [0.05, 0.2], "minimum_n_met": true, "state": "pass"},
+    {"value": 0.1, "threshold": 0.2, "op": "<=", "ci": [0.05, 0.1], "minimum_n_met": false, "state": "inconclusive"}
+  ]
+}

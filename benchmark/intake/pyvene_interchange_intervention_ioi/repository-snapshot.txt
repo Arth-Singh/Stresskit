@@ -1,0 +1,13 @@
+StressKit repository snapshot v1
+repository: https://github.com/stanfordnlp/pyvene
+commit: 9e333904dcf9e597ca76170010d17f4d4580de8d
+tree: 949e5730a01cedc55648c0f568f464844f14bb97
+archive_profile: git archive --format=tar --prefix=pyvene/ <commit>
+archive_digest: sha256:effb2dfaa65997ef3cd257f2faca8fa517a1f4a67300695412ca2d16b1e46a8f
+tracked_files: 148
+license: Apache-2.0
+license_digest: sha256:c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4
+entrypoint tutorials/advanced_tutorials/IOI_Replication.ipynb: sha256:3976f034f2d12450e9ff06de9b3bab3245852853e05f50e03825efb99114a616
+entrypoint tutorials/advanced_tutorials/IOI_with_Mask_Intervention.ipynb: sha256:1f67ae385786559781b3e727c1ecbe89ddcff20fee43117f4480d1554b989ae6
+entrypoint tutorials/advanced_tutorials/tutorial_ioi_utils.py: sha256:a2773a4a34476e0cbd531cb4209d740e9540019291bdce838c60460a4c8fa90c
+purpose: code-map closure only; not claim evidence

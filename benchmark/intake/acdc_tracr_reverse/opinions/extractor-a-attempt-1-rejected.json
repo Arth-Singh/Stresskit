@@ -1,0 +1,88 @@
+{
+  "artifact": "stresskit_agent_attempt_record",
+  "attempt": 1,
+  "candidate_id": "acdc_tracr_reverse",
+  "completion_content_inspected": true,
+  "completion_content_human_inspected": false,
+  "critic_called": false,
+  "evidence_quote_checks": [
+    {
+      "document_id": "acdc-paper-v4-pdf",
+      "present_in_declared_source_bytes": false,
+      "quote_digest": "sha256:d2d4261ed1fac15616e1194e61f3ea8fbc0b7efd285cc2e552f6b9088e6926e8"
+    },
+    {
+      "document_id": "acdc-paper-v4-pdf",
+      "present_in_declared_source_bytes": false,
+      "quote_digest": "sha256:499a54e0374a984e5450d004b6ecbf83761f914704cfa331fdc678321e254542"
+    },
+    {
+      "document_id": "acdc-paper-v4-pdf",
+      "present_in_declared_source_bytes": true,
+      "quote_digest": "sha256:25b9b13996f997a19638632334694c746e79dee850b3f6dc124d49d585e2c030"
+    },
+    {
+      "document_id": "acdc-paper-v4-pdf",
+      "present_in_declared_source_bytes": true,
+      "quote_digest": "sha256:882128df7553c691e3ba6916c03dd729a4c68aace3afff67c0133f4fe1ac77ab"
+    },
+    {
+      "document_id": "acdc-paper-v4-pdf",
+      "present_in_declared_source_bytes": false,
+      "quote_digest": "sha256:bfbb7e6d5ee81d64a97197317e32f96e3a15b17e3a1a28e97c8c1e1caf5fb224"
+    },
+    {
+      "document_id": "acdc-paper-v4-pdf",
+      "present_in_declared_source_bytes": true,
+      "quote_digest": "sha256:5a8b8fedd5bf101ad768d46dcaadcb70701931e63951a40751234e8ccb3b2c1b"
+    },
+    {
+      "document_id": "acdc-paper-v4-source",
+      "present_in_declared_source_bytes": true,
+      "quote_digest": "sha256:302e85a81f3f709a242234778953f13c0b20355cb0bc6363b4895c1cbbe0ca13"
+    },
+    {
+      "document_id": "acdc-tracr-utils",
+      "present_in_declared_source_bytes": true,
+      "quote_digest": "sha256:440f7dacd47c65cbd53c567c1a952d682e13d3a6cdcb2046897ba511711b24e4"
+    },
+    {
+      "document_id": "acdc-tracr-utils",
+      "present_in_declared_source_bytes": true,
+      "quote_digest": "sha256:20b68192b7873cc36db842190715621986e5b2099a7b2d865eddc8606028187d"
+    },
+    {
+      "document_id": "acdc-sweep-launcher",
+      "present_in_declared_source_bytes": true,
+      "quote_digest": "sha256:bd41b43855d47f3773fa96c55bfad9a22c030cedfa675cd8b8cfbf1bf6f9c0ce"
+    }
+  ],
+  "observed_at": "2026-09-01T18:12:37Z",
+  "opinion_id": "acdc-tracr-reverse-extractor-a",
+  "panel_plan_digest": "sha256:ced0898f193f098395091ff009f827a2eb6ecd7a758625b25185ddac3d345e4c",
+  "prompt_digest": "sha256:44f8dfe410c3980cf90be916137f3a90ea41949e33e42c9e40e7acb755a035e8",
+  "raw_response_digest": "sha256:51deaf117043dff9369c3c265c6d0c9628bcb26fd5a6bbfafee365b3c49a6782",
+  "reason": "three of ten completion evidence quotes were absent byte-for-byte from their declared source document",
+  "response_id": "gen-1788286357-qpu3lNqoHJ3inO1219zq",
+  "retry_performed": false,
+  "role": "extractor",
+  "route_binding_digest": "sha256:389d07978cd4d98a9a6819784524c2f72218c3a05e617cad1db709e19b230f01",
+  "safe_route_metadata": {
+    "available_endpoints": [
+      {
+        "model": "x-ai/grok-4.6-20260810",
+        "provider": "xAI",
+        "selected": true
+      }
+    ],
+    "endpoint_total_before_filtering": 5,
+    "pipeline": null,
+    "requested_model": "x-ai/grok-4.6",
+    "response_model": "x-ai/grok-4.6",
+    "selected_attempt": 1,
+    "strategy": "direct"
+  },
+  "schema_version": "1.0",
+  "source_bundle_digest": "sha256:e87be2879d688fbb5e4118495d49474d54e85fbe1e111c6f18dd8cf440f16ae9",
+  "status": "rejected_before_opinion"
+}

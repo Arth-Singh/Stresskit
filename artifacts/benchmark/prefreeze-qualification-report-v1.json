@@ -1,0 +1,68 @@
+{
+  "artifact": "stresskit_prefreeze_report",
+  "backward_extension_required": false,
+  "breadth": {
+    "eligible_claims": 0,
+    "method_families": 0,
+    "minimums": {
+      "eligible_claims": 20,
+      "method_families": 6,
+      "model_families": 3
+    },
+    "model_families": 0,
+    "strata": 0
+  },
+  "candidate_registry_digest": "sha256:da813fd08f029592b08ed19bb53bc6884f05174cf5c80c8efd27e7dc85ba22b4",
+  "dispositions": {
+    "eligible": 0,
+    "excluded": 15,
+    "pending": 53
+  },
+  "freeze_ready": false,
+  "gate_counts": {
+    "agent_panel": {
+      "fail": 3,
+      "pass": 0,
+      "pending": 65
+    },
+    "audit_spec": {
+      "fail": 0,
+      "pass": 0,
+      "pending": 68
+    },
+    "claim_record": {
+      "fail": 0,
+      "pass": 0,
+      "pending": 68
+    },
+    "execution_smoke": {
+      "fail": 0,
+      "pass": 0,
+      "pending": 68
+    },
+    "license_closure": {
+      "fail": 12,
+      "pass": 0,
+      "pending": 56
+    },
+    "protocol_review": {
+      "fail": 0,
+      "pass": 0,
+      "pending": 68
+    },
+    "resource_estimate": {
+      "fail": 0,
+      "pass": 0,
+      "pending": 68
+    },
+    "source_bundle": {
+      "fail": 0,
+      "pass": 0,
+      "pending": 68
+    }
+  },
+  "outcome_blind": true,
+  "qualification_digest": "sha256:60a6a10f014075af32fbf73d58aad75d8ded92d6d8f1616c8078c7de0c045951",
+  "schema_version": "1.0",
+  "status": "qualification_in_progress"
+}

@@ -1,0 +1,15 @@
+{
+  "artifact": "stresskit_claim_candidates",
+  "candidates": [],
+  "problems": [
+    "opinion 'pyvene-ioi-extractor-a' marks claim unsupported",
+    "opinion 'pyvene-ioi-extractor-a' reports issues: serialized interchange interventions not explicitly present; registered IOI causal effects not explicitly present; equivalence across intervention configurations not explicitly present",
+    "opinion 'pyvene-ioi-extractor-b' marks claim unsupported",
+    "opinion 'pyvene-ioi-extractor-b' reports issues: The term 'serialized interchange interventions' is not found in any source document. The documents mention 'masked interchange intervention' and 'path patching' but never 'serialized interchange interventions'.; The term 'registered IOI causal effects' is not supported. The documents say 'replicate some results of the original IOI paper' and 'verification of their results', but do not use the term 'registered' in this context.; No source document explicitly discusses 'equivalence across intervention configurations.' The documents present different intervention configurations (path patching, masked intervention, DAS) but do not state or demonstrate that they are equivalent across configurations.",
+    "opinion 'pyvene-ioi-critic' marks claim unsupported",
+    "opinion 'pyvene-ioi-critic' reports issues: The term 'serialized interchange interventions' is not explicitly present in the source documents.; The term 'registered IOI causal effects' is not explicitly present in the source documents.; The concept of 'equivalence across intervention configurations' is not explicitly present in the source documents."
+  ],
+  "publication_state": "abstain",
+  "schema_version": "1.0",
+  "source_bundle_digest": "sha256:57dad0ed3635a341cbfdf899f46c6e0031ec72a48b712a563695ad17df2809df"
+}

@@ -65,7 +65,8 @@ class TestRenders:
         result = make_result()
         md = result.to_markdown()
         assert "Stability Card" in md
-        assert "grade **A**" in md
+        assert "descriptive grade **A**" in md
+        assert "does not issue a confirmatory verdict" in md
         assert "toy-model" in md
         assert "mean pairwise Jaccard" in md
         assert "| structural stability |" in md
@@ -74,7 +75,7 @@ class TestRenders:
         result = make_result()
         badge = result.card.badge_dict()
         assert badge["schemaVersion"] == 1
-        assert badge["label"] == "stability"
+        assert badge["label"] == "diagnostic stability"
         assert badge["message"].startswith("A · J=")
         assert badge["color"] == "brightgreen"
 

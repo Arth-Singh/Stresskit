@@ -1,0 +1,441 @@
+{
+  "artifact": "stresskit_external_utility_preregistration_candidate",
+  "schema_version": "1.0",
+  "candidate_id": "thought_anchors_solution_outcome_external_utility_v1",
+  "registered_parent_claim_ids": [
+    "thought_anchors_counterfactual_importance_r1_qwen14b"
+  ],
+  "status": "blocked_not_freezable",
+  "ready_to_freeze": false,
+  "outcome_blind": true,
+  "publication_state": "abstain",
+  "source": {
+    "code": {
+      "repository": "https://github.com/interp-reasoning/thought-anchors",
+      "revision": "b53ed8c75d3f6112f68adfaec9a13d4d708c442e",
+      "tree": "b7a5383cedd85a32f437b928654010bb0de3dd2c",
+      "archive_digest": "sha256:4e33a1396b3637becd3e23224a54990042f0f9a53838213adb12a3fd636d435b",
+      "license": "MIT",
+      "license_status": "verified_compatible",
+      "license_digest": "sha256:17825c3bd82610363b7c1e2bf16311f4a1c9578674ea844da72bfaa8a87977d6"
+    },
+    "rollout_dataset": {
+      "repository": "https://huggingface.co/datasets/uzaymacar/math-rollouts",
+      "revision": "a3a2fe1eb6d52e6ef81860baff018a8df2eb8ae2",
+      "card_digest": "sha256:885187b4b95dcdb6099018676827e2272fd58ab1788f08187b1c5b39b2ae68ef",
+      "license": "MIT",
+      "license_status": "declared_compatible",
+      "public": true,
+      "gated": false,
+      "content_rows_inspected": false
+    },
+    "task_dataset": {
+      "canonical_repository": "https://huggingface.co/datasets/hendrycks/competition_math",
+      "canonical_revision": "71b758ecc688b2822d07ffa7f8393299f1dc7cac",
+      "license": "MIT",
+      "canonical_license_status": "verified_compatible",
+      "used_mirror_repository": "https://huggingface.co/datasets/fdyrd/MATH",
+      "used_mirror_revision": "11d27b338663d59f1c2b8e9ebe0938c310cf28ac",
+      "mirror_equivalence_status": "unresolved"
+    }
+  },
+  "external_task": "predict whether a generated mathematical solution ends with the correct answer",
+  "profile_digest": "sha256:a5fa5e0a5c79fdb69d1397f88b64f84ae41346cde41bbe3318897ac7e1837a1f",
+  "metric_spec": {
+    "name": "accuracy",
+    "direction": "higher",
+    "bounds": [0.0, 1.0],
+    "independent_unit": "MATH problem_id cluster",
+    "practical_margin": 0.02,
+    "generalization_split": "held_out_model_family_and_problem_ids_v1",
+    "nondecomposable_policy": "mean_over_independent_units",
+    "minimum_independent_units": 200,
+    "positive_label": true
+  },
+  "method": {
+    "name": "label_free_rollout_change_summary",
+    "uses_internals": false,
+    "allowed_input_kinds": [
+      "metadata",
+      "model_output",
+      "output_probability"
+    ],
+    "access_policy": {
+      "model_internals": "forbidden",
+      "mounted_inputs": "manifest_only",
+      "network": "disabled"
+    },
+    "feature_allowlist": [
+      "chunk_count",
+      "chunk_position",
+      "counterfactual_importance_kl",
+      "different_trajectories_fraction",
+      "function_tag_histogram",
+      "overdeterminedness",
+      "resampling_importance_kl"
+    ],
+    "forbidden_features": [
+      "accuracy",
+      "answer",
+      "counterfactual_importance_accuracy",
+      "filename",
+      "forced_importance_accuracy",
+      "full_cot",
+      "gt_answer",
+      "is_correct",
+      "path",
+      "resampling_importance_accuracy",
+      "solution_type_directory"
+    ],
+    "target_access": "sealed_until_final_evaluation",
+    "implementation": {
+      "algorithm": "fixed_l2_logistic_regression",
+      "feature_aggregation": "per-problem mean standard-deviation minimum maximum and quartiles plus normalized function-tag histogram",
+      "feature_standardization": "training-only mean and population standard deviation; zero-variance columns map to zero",
+      "l2_penalty": 1.0,
+      "max_iterations": 200,
+      "optimizer": "deterministic_newton_with_cholesky_jitter_1e-12",
+      "prediction_threshold": 0.5,
+      "version": "1"
+    },
+    "implementation_digest": "sha256:3e778eaa55eed0157f9027f5bf1853a47ab4b278549333332863771873303122",
+    "input_manifest_template": {
+      "artifact": "stresskit_utility_input_manifest_template",
+      "schema_version": "1.0",
+      "allowed_input_kinds": [
+        "metadata",
+        "model_output",
+        "output_probability"
+      ],
+      "required_logical_objects": [
+        "sealed_partition_membership",
+        "label_free_chunk_metrics",
+        "model_family_metadata"
+      ],
+      "forbidden_fields": [
+        "answer",
+        "correct_or_incorrect_path_component",
+        "ground_truth_answer",
+        "is_correct",
+        "solution_type_directory"
+      ]
+    },
+    "input_manifest_template_digest": "sha256:c9494ab88905965dc979df11ae9bdfd4e4919f6db330913fafd164974c7fa2e8"
+  },
+  "baselines": [
+    {
+      "name": "hashed_problem_solution_text_logistic_v1",
+      "uses_internals": false,
+      "allowed_input_kinds": [
+        "input_text",
+        "model_output"
+      ],
+      "access_policy": {
+        "model_internals": "forbidden",
+        "mounted_inputs": "manifest_only",
+        "network": "disabled"
+      },
+      "implementation": {
+        "algorithm": "character_ngram_hashing_logistic_regression",
+        "hash_bins": 262144,
+        "l2_penalty": 1.0,
+        "max_iterations": 200,
+        "ngram_lengths": [3, 4, 5],
+        "normalization": "lowercase_unicode_nfkc",
+        "prediction_threshold": 0.5,
+        "version": "1"
+      },
+      "implementation_digest": "sha256:2a5164712670fe3c23ec45ab5c2ebf8bd6abcdfc6b72e8d6652574d490a33b85",
+      "input_manifest_template": {
+        "artifact": "stresskit_utility_input_manifest_template",
+        "schema_version": "1.0",
+        "allowed_input_kinds": [
+          "input_text",
+          "model_output"
+        ],
+        "required_logical_objects": [
+          "problem_text_without_answer_key",
+          "generated_solution_text_without_path"
+        ],
+        "forbidden_fields": [
+          "ground_truth_answer",
+          "is_correct",
+          "solution_type_directory"
+        ]
+      },
+      "input_manifest_template_digest": "sha256:fbf413a5d15f95853788f0021c0aadf1ddd343701497b6e9295664074af3fff3"
+    },
+    {
+      "name": "minilm_problem_solution_embedding_logistic_v1",
+      "uses_internals": false,
+      "allowed_input_kinds": [
+        "input_text",
+        "model_output"
+      ],
+      "access_policy": {
+        "model_internals": "forbidden",
+        "mounted_inputs": "manifest_only",
+        "network": "disabled"
+      },
+      "implementation": {
+        "algorithm": "frozen_text_embedding_plus_l2_logistic_regression",
+        "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+        "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+        "embedding_license": "Apache-2.0",
+        "l2_penalty": 1.0,
+        "max_iterations": 200,
+        "pooling": "published_sentence_transformers_mean_pooling",
+        "prediction_threshold": 0.5,
+        "version": "1"
+      },
+      "implementation_digest": "sha256:37ec9bbdfecf2da332d365ff822144c0c86e9311839e92a1df08c260d2f78b51",
+      "input_manifest_template": {
+        "artifact": "stresskit_utility_input_manifest_template",
+        "schema_version": "1.0",
+        "allowed_input_kinds": [
+          "input_text",
+          "model_output"
+        ],
+        "required_logical_objects": [
+          "pinned_minilm_weight_closure",
+          "problem_text_without_answer_key",
+          "generated_solution_text_without_path"
+        ],
+        "forbidden_fields": [
+          "ground_truth_answer",
+          "is_correct",
+          "solution_type_directory"
+        ]
+      },
+      "input_manifest_template_digest": "sha256:da4f7fe3e9427fc018e73a70b8f80a2d16d45ef15f333f6f345adf322e88059c"
+    },
+    {
+      "name": "rollout_output_statistics_logistic_v1",
+      "uses_internals": false,
+      "allowed_input_kinds": [
+        "metadata",
+        "model_output",
+        "output_probability"
+      ],
+      "access_policy": {
+        "model_internals": "forbidden",
+        "mounted_inputs": "manifest_only",
+        "network": "disabled"
+      },
+      "implementation": {
+        "algorithm": "fixed_rollout_statistics_l2_logistic_regression",
+        "features": [
+          "answer_string_agreement",
+          "completion_length_quantiles",
+          "output_entropy_quantiles",
+          "trajectory_text_diversity"
+        ],
+        "l2_penalty": 1.0,
+        "max_iterations": 200,
+        "prediction_threshold": 0.5,
+        "version": "1"
+      },
+      "implementation_digest": "sha256:b87826aa3268d13db76d0b87d4ecde297a991dd53932bd60d93d3b32529d5679",
+      "input_manifest_template": {
+        "artifact": "stresskit_utility_input_manifest_template",
+        "schema_version": "1.0",
+        "allowed_input_kinds": [
+          "metadata",
+          "model_output",
+          "output_probability"
+        ],
+        "required_logical_objects": [
+          "resampled_completion_text_without_correctness",
+          "resampled_output_probabilities",
+          "model_family_metadata"
+        ],
+        "forbidden_fields": [
+          "ground_truth_answer",
+          "is_correct",
+          "solution_type_directory"
+        ]
+      },
+      "input_manifest_template_digest": "sha256:bcdf0e073675fe6517723d8791fbcc526c4db25e622870a6039f5b18f8ad7ec0"
+    },
+    {
+      "name": "problem_metadata_prior_logistic_v1",
+      "uses_internals": false,
+      "allowed_input_kinds": [
+        "metadata"
+      ],
+      "access_policy": {
+        "model_internals": "forbidden",
+        "mounted_inputs": "manifest_only",
+        "network": "disabled"
+      },
+      "implementation": {
+        "algorithm": "one_hot_metadata_l2_logistic_regression",
+        "features": [
+          "model_family",
+          "problem_level",
+          "problem_type"
+        ],
+        "l2_penalty": 1.0,
+        "max_iterations": 200,
+        "prediction_threshold": 0.5,
+        "unknown_category": "all_zero",
+        "version": "1"
+      },
+      "implementation_digest": "sha256:37a04e77d7d867ba8ef23b455df82663b16296f3d81715e0d7e7c0a9337eacaa",
+      "input_manifest_template": {
+        "artifact": "stresskit_utility_input_manifest_template",
+        "schema_version": "1.0",
+        "allowed_input_kinds": [
+          "metadata"
+        ],
+        "required_logical_objects": [
+          "model_family_metadata",
+          "problem_level",
+          "problem_type"
+        ],
+        "forbidden_fields": [
+          "correct_or_incorrect_path_component",
+          "is_correct",
+          "solution_type_directory"
+        ]
+      },
+      "input_manifest_template_digest": "sha256:891b4b8da10e27f906d5d81baf55bf4d29381640537999b15af2a7f1c90286e5"
+    }
+  ],
+  "splits": {
+    "held_out_axes": [
+      "model",
+      "unit"
+    ],
+    "unit_key": "math_problem_id",
+    "cluster_policy": "same_problem_is_one_unit_across_all_rows",
+    "assignment_rule": {
+      "algorithm": "sha256_first_byte",
+      "salt_payload": {
+        "candidate_id": "thought_anchors_solution_outcome_external_utility_v1",
+        "dataset_revision": "a3a2fe1eb6d52e6ef81860baff018a8df2eb8ae2",
+        "version": "1"
+      },
+      "salt_digest": "sha256:9be18066e242424f49a93e5641b3f8f418fb368e03b542648375e3e2b8dae6c5",
+      "label_blind": true
+    },
+    "partitions": {
+      "train": {
+        "hash_bucket_inclusive": [0, 127],
+        "model_families": [
+          "deepseek-r1-distill-qwen-14b"
+        ],
+        "minimum_unique_problem_clusters": 200
+      },
+      "primary": {
+        "hash_bucket_inclusive": [128, 191],
+        "model_families": [
+          "deepseek-r1-distill-qwen-14b"
+        ],
+        "minimum_unique_problem_clusters": 200
+      },
+      "generalization": {
+        "hash_bucket_inclusive": [192, 255],
+        "model_families": [
+          "deepseek-r1-distill-llama-8b"
+        ],
+        "minimum_unique_problem_clusters": 200
+      }
+    }
+  },
+  "blind_preflight": {
+    "status": "not_run",
+    "allowed_dataset_columns": [
+      "extension",
+      "filename",
+      "path",
+      "size_bytes"
+    ],
+    "forbidden_dataset_columns": [
+      "content"
+    ],
+    "reads_content": false,
+    "reads_labels": false,
+    "reads_predictions": false,
+    "label_bearing_path_components": "ignored_without_logging",
+    "emits": [
+      "partition_cluster_counts",
+      "duplicate_cluster_count"
+    ]
+  },
+  "controls": {
+    "known_truth_positive": {
+      "control_id": "balanced_synthetic_label_copy_pipeline_v1",
+      "independent_units": 200,
+      "expected_state": "pass",
+      "separate_from_final_data": true
+    },
+    "label_randomization_negative": {
+      "control_id": "problem_cluster_label_permutation_v1",
+      "permutation_unit": "math_problem_id",
+      "expected_state": "fail",
+      "seed": 741993,
+      "separate_from_final_data": true
+    }
+  },
+  "blockers": [
+    {
+      "code": "current_utility_v1_requires_internal_method",
+      "detail": "The registered utility verifier requires uses_internals=true, while the released counterfactual rollout method is black-box.",
+      "resolution": "Version the utility evidence schema for behavioral methods or switch to a whitebox Thought Anchors method after separate calibration."
+    },
+    {
+      "code": "independent_cluster_cardinality_unverified",
+      "detail": "No content-blind manifest yet proves at least 200 disjoint MATH problem clusters in each evaluation partition.",
+      "resolution": "Run the frozen path-only cardinality preflight; abstain if any partition has fewer than 200 unique problem IDs."
+    },
+    {
+      "code": "rollout_independence_unattested",
+      "detail": "Released generation code does not send or persist per-rollout seeds, so repeated rollouts cannot count as independent units.",
+      "resolution": "Keep math_problem_id as the only independent unit; never promote rollout or sentence counts to n."
+    },
+    {
+      "code": "underlying_math_mirror_equivalence_unresolved",
+      "detail": "Generation code names fdyrd/MATH, whose dataset card has no license field, while the canonical competition_math dataset declares MIT.",
+      "resolution": "Verify content-addressed problem equivalence and license chain without opening outcome fields, or abstain."
+    },
+    {
+      "code": "whitebox_features_not_released",
+      "detail": "Public rollout files do not include receiver-head attention features needed by the registered internals-based Thought Anchors claim.",
+      "resolution": "Acquire a compatible GPU executor after freeze and create attested attention features, or remain abstained."
+    },
+    {
+      "code": "label_derived_feature_leakage_guard",
+      "detail": "Published accuracy-based importance fields are derived from correctness and cannot predict that same target.",
+      "resolution": "Use only the frozen KL/diversity allowlist; reject path, answers, correctness, and every accuracy-derived field."
+    }
+  ],
+  "outcome_integrity": {
+    "final_analysis_run": false,
+    "final_dataset_labels_inspected": false,
+    "final_dataset_predictions_inspected": false,
+    "public_schema_examples_visible": true,
+    "thresholds_from_registered_profile": true,
+    "unrelated_acdc_outcome_exposure_quarantined": true
+  },
+  "proposed_audit_spec": {
+    "frozen": false,
+    "audit_spec_digest": null,
+    "profile_id": "utility_v1",
+    "evaluation_manifest_status": "pending_blind_materialization",
+    "held_out_axes": [
+      "model",
+      "unit"
+    ],
+    "joint_specification": {
+      "specification_id": "fixed_label_free_kl_features_v1",
+      "weight": 1.0,
+      "tuning": "none_after_freeze"
+    },
+    "stopping_rule": "fixed_complete_manifest_only",
+    "multiplicity_family": "pending_global_release_family",
+    "reproducibility_level": "numeric_with_tolerance",
+    "hardware_class": "cpu_x86_64_or_arm64_declared",
+    "external_validation": "not obtained"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "artifact": "stresskit_agent_opinion",
+  "evidence_anchors": [
+    {
+      "document_id": "pyvene-ioi-mask-notebook",
+      "end": 343,
+      "locator": "https://github.com/stanfordnlp/pyvene/blob/9e333904dcf9e597ca76170010d17f4d4580de8d/tutorials/advanced_tutorials/IOI_with_Mask_Intervention.ipynb#stresskit-text-bytes=233-343",
+      "quote_digest": "sha256:07bb85f1eb9aa7915e1fe6c8e5ff08cc139303e77d3745870422cfee0795e408",
+      "source_digest": "sha256:1f67ae385786559781b3e727c1ecbe89ddcff20fee43117f4480d1554b989ae6",
+      "start": 233,
+      "text_digest": "sha256:5df537906d17778f0579cf113932506b3148ffddc306728a0e2107a3eea98ffd"
+    },
+    {
+      "document_id": "pyvene-ioi-replication-notebook",
+      "end": 442,
+      "locator": "https://github.com/stanfordnlp/pyvene/blob/9e333904dcf9e597ca76170010d17f4d4580de8d/tutorials/advanced_tutorials/IOI_Replication.ipynb#stresskit-text-bytes=229-442",
+      "quote_digest": "sha256:e43d7405b629d3bb3c7fe64cb51973f302595cd4bd9774d2b76084457e1dfa26",
+      "source_digest": "sha256:3976f034f2d12450e9ff06de9b3bab3245852853e05f50e03825efb99114a616",
+      "start": 229,
+      "text_digest": "sha256:d0ee09e790cdcb1000608339a7efdf85ecbd3b5595a7049667f1379e7f7c11f3"
+    },
+    {
+      "document_id": "pyvene-ioi-replication-notebook",
+      "end": 2019,
+      "locator": "https://github.com/stanfordnlp/pyvene/blob/9e333904dcf9e597ca76170010d17f4d4580de8d/tutorials/advanced_tutorials/IOI_Replication.ipynb#stresskit-text-bytes=1953-2019",
+      "quote_digest": "sha256:dadc70830a7e0d1a728f979bd811e0c0e98994ec9603daa35ecc0256ecbf8a31",
+      "source_digest": "sha256:3976f034f2d12450e9ff06de9b3bab3245852853e05f50e03825efb99114a616",
+      "start": 1953,
+      "text_digest": "sha256:d0ee09e790cdcb1000608339a7efdf85ecbd3b5595a7049667f1379e7f7c11f3"
+    }
+  ],
+  "issues": [
+    "serialized interchange interventions not explicitly present",
+    "registered IOI causal effects not explicitly present",
+    "equivalence across intervention configurations not explicitly present"
+  ],
+  "model": "x-ai/grok-4.6-20260810",
+  "model_digest": "sha256:aa060114a3060ad024534e2fe5881eb1cb792e2cd14558f4064e4cd6a2636bfb",
+  "model_family": "grok-4.6",
+  "opinion_id": "pyvene-ioi-extractor-a",
+  "prompt_digest": "sha256:fbd1f58dc07d6bc9c815182e6682922405e7fe74cebdde49e3be0730ebbf39ef",
+  "prompt_injection_detected": false,
+  "provider": "xAI",
+  "request_digest": "sha256:42d6f07f04be96a6f80d2d948810a3bf644bd31addc73bfcfada8567e4b4de6c",
+  "role": "extractor",
+  "schema_version": "1.0",
+  "source_bundle_digest": "sha256:57dad0ed3635a341cbfdf899f46c6e0031ec72a48b712a563695ad17df2809df",
+  "statement": "Instrument audit: serialized interchange interventions reproduce registered IOI causal effects across equivalent intervention configurations.",
+  "supported": false
+}

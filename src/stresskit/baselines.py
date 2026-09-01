@@ -39,6 +39,7 @@ def random_findings(
                 components=comps,
                 claim=claim_fn(comps) if claim_fn else None,
                 universe_size=universe_size,
+                structure_present=True,
             )
         )
     return out
@@ -75,9 +76,12 @@ def empirical_random_jaccard(
     approximation that assumes one shared size k), this draws one random
     subset per observed size and averages the mean pairwise Jaccard over
     ``repeats`` draws — exact in expectation and honest about heterogeneous
-    finding sizes. Returns None if fewer than two positive sizes.
+    finding sizes, including the registered empty-set convention. Returns None
+    if fewer than two sizes are supplied.
     """
-    sizes = [min(int(s), int(universe_size)) for s in sizes if s and s > 0]
+    if any(int(s) < 0 for s in sizes):
+        raise ValueError("finding sizes must be nonnegative")
+    sizes = [min(int(s), int(universe_size)) for s in sizes]
     if len(sizes) < 2 or not universe_size or universe_size <= 0:
         return None
     rng = random.Random(seed)
