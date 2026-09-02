@@ -15,6 +15,13 @@ checks, grade, and confidence from the card alone.
 Schema 0.3 records interval-derived three-state checks and labels cards from
 the current one-at-a-time battery as diagnostic. Diagnostic grades are
 descriptive summaries, not confirmatory certificates.
+
+Schema 0.4 adds direction-valued findings: a card whose runs produced
+directions instead of component sets carries ``battery.structure_kind ==
+"direction"`` and a ``directions`` block holding the pairwise |cosine| matrix
+over the graded runs, so the structural metric, its bootstrap CI, and the
+grade still re-derive from the card alone without embedding raw
+high-dimensional vectors. Cards at 0.1-0.3 load and verify unchanged.
 """
 
 from __future__ import annotations
@@ -26,8 +33,8 @@ import platform
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional
 
-SCHEMA_VERSION = "0.3"
-SUPPORTED_SCHEMA_VERSIONS = ("0.1", "0.2", "0.3")
+SCHEMA_VERSION = "0.4"
+SUPPORTED_SCHEMA_VERSIONS = ("0.1", "0.2", "0.3", "0.4")
 GRADE_ORDER = ("A", "B", "C", "D")
 
 # Per-run components are embedded on the card (making it a self-contained,
@@ -38,6 +45,17 @@ MAX_EMBED_COMPONENTS = 20_000
 
 def _components_digest(components) -> str:
     payload = json.dumps(sorted(str(c) for c in components))
+    return hashlib.sha256(payload.encode()).hexdigest()
+
+
+def _vector_digest(vector) -> str:
+    """SHA-256 of a direction's stored (unit-normalized) coordinates.
+
+    The card embeds the pairwise |cosine| matrix, not the vectors, so this is
+    what ties the matrix to the actual directions: an auditor holding the raw
+    vectors re-normalizes them, hashes, and gets these digests back.
+    """
+    payload = json.dumps([float(x) for x in vector])
     return hashlib.sha256(payload.encode()).hexdigest()
 
 _GRADE_COLORS = {
@@ -83,6 +101,7 @@ class StabilityCard:
     notes: List[str] = field(default_factory=list)
     runs: List[Dict[str, Any]] = field(default_factory=list)
     utility: Optional[Dict[str, Any]] = None
+    directions: Optional[Dict[str, Any]] = None
 
     # ------------------------------------------------------------------ build
     @classmethod
@@ -103,6 +122,7 @@ class StabilityCard:
         wall_seconds: float,
         claim_equiv_used: bool = False,
         utility: Optional[Dict[str, Any]] = None,
+        directions: Optional[Dict[str, Any]] = None,
     ) -> "StabilityCard":
         from . import __version__
 
@@ -129,11 +149,16 @@ class StabilityCard:
                 row["components_sha256"] = _components_digest(f.components)
                 if embed:
                     row["components"] = sorted(str(c) for c in f.components)
+            if f.has_direction():
+                row["direction_dim"] = f.dim
+                row["direction_sha256"] = _vector_digest(f.vector)
             run_rows.append(row)
 
+        structure_kind = getattr(result, "structure_kind", "set")
         return cls(
             runs=run_rows,
             utility=utility,
+            directions=directions,
             stresskit_version=__version__,
             created_at=_dt.datetime.now(_dt.timezone.utc).isoformat(timespec="seconds"),
             claim={
@@ -154,6 +179,8 @@ class StabilityCard:
                 "base_config": base_config,
                 "claim_equiv_used": claim_equiv_used,
                 "components_embedded": embed,
+                **({"structure_kind": structure_kind}
+                   if structure_kind == "direction" else {}),
             },
             metrics={
                 "pooled": result.pooled,
@@ -175,6 +202,8 @@ class StabilityCard:
                     "modal_share": thresholds.modal_share,
                     "score_cv": thresholds.score_cv,
                     "random_margin": thresholds.random_margin,
+                    **({"cosine": thresholds.cosine}
+                       if structure_kind == "direction" else {}),
                 },
             },
             provenance={
@@ -197,6 +226,8 @@ class StabilityCard:
             "verdict": self.verdict,
             "provenance": self.provenance,
             **({"utility": self.utility} if self.utility is not None else {}),
+            **({"directions": self.directions}
+               if self.directions is not None else {}),
             "notes": self.notes,
             "runs": self.runs,
         }
@@ -214,6 +245,7 @@ class StabilityCard:
             verdict=d["verdict"],
             provenance=d["provenance"],
             utility=d.get("utility"),
+            directions=d.get("directions"),
             notes=list(d.get("notes", [])),
             runs=list(d.get("runs", [])),
         )
@@ -315,6 +347,9 @@ class StabilityCard:
     def to_markdown(self) -> str:
         pooled = self.metrics.get("pooled", {})
         checks = self.verdict.get("checks", {})
+        direction_valued = (
+            self.battery.get("structure_kind", "set") == "direction"
+        )
         emoji = _GRADE_EMOJI.get(self.grade, "")
         lines: List[str] = []
         confidence = pooled.get("confidence")
@@ -403,6 +438,13 @@ class StabilityCard:
             ("min_pairwise_jaccard", "min pairwise Jaccard"),
             ("expected_random_jaccard", "random-null Jaccard"),
             ("jaccard_vs_random", "overlap vs random (×)"),
+            ("n_direction_runs", "direction runs"),
+            ("direction_dim", "direction dimension d"),
+            ("mean_pairwise_abs_cosine", "mean pairwise \\|cos\\|"),
+            ("min_pairwise_abs_cosine", "min pairwise \\|cos\\|"),
+            ("mean_pairwise_abs_cosine_axis_balanced", "\\|cos\\| axis-balanced"),
+            ("expected_random_abs_cosine", "random-null \\|cos\\| in R^d"),
+            ("abs_cosine_vs_random", "direction overlap vs random (×)"),
             ("flip_rate", "claim flip rate"),
             ("modal_share", "modal claim share π*"),
             ("n_claim_classes", "distinct claims"),
@@ -410,10 +452,14 @@ class StabilityCard:
             ("score_cv", "score CV"),
             ("median_size", "median finding size"),
         ):
+            if direction_valued and key in ("n_structured_runs",
+                                            "n_empty_findings"):
+                continue
             if key in pooled and pooled[key] is not None:
                 lines.append(f"| {label} | {_fmt(pooled[key])} |")
         for key, label in (
             ("mean_pairwise_jaccard_ci95", "Jaccard 95% CI (bootstrap)"),
+            ("mean_pairwise_abs_cosine_ci95", "\\|cos\\| 95% CI (bootstrap)"),
             ("flip_rate_ci95", "flip rate 95% CI (bootstrap)"),
         ):
             ci = pooled.get(key)
@@ -421,10 +467,15 @@ class StabilityCard:
                 lines.append(f"| {label} | [{_fmt(ci[0])}, {_fmt(ci[1])}] |")
         null_control = self.metrics.get("null_control")
         if null_control:
-            nj = null_control.get("mean_pairwise_jaccard")
+            if direction_valued:
+                struct_label = "\\|cos\\|"
+                nj = null_control.get("mean_pairwise_abs_cosine")
+            else:
+                struct_label = "Jaccard"
+                nj = null_control.get("mean_pairwise_jaccard")
             nf = null_control.get("flip_rate")
             lines.append(
-                f"| null-control (specificity) | Jaccard {_fmt(nj)} · "
+                f"| null-control (specificity) | {struct_label} {_fmt(nj)} · "
                 f"flip {_fmt(nf)} on {null_control.get('n_runs')} null runs |"
             )
         claim_counts = pooled.get("claim_counts") or {}
@@ -441,12 +492,16 @@ class StabilityCard:
         if per_axis:
             lines.append("## Per-axis breakdown")
             lines.append("")
-            lines.append("| axis | runs | Jaccard | flip rate | π* | score CV |")
+            struct_col = "\\|cos\\|" if direction_valued else "Jaccard"
+            struct_key = ("mean_pairwise_abs_cosine" if direction_valued
+                          else "mean_pairwise_jaccard")
+            lines.append(
+                f"| axis | runs | {struct_col} | flip rate | π* | score CV |")
             lines.append("|---|---|---|---|---|---|")
             for axis, m in per_axis.items():
                 lines.append(
                     f"| {axis} | {m.get('n_runs')} | "
-                    f"{_fmt(m.get('mean_pairwise_jaccard'))} | "
+                    f"{_fmt(m.get(struct_key))} | "
                     f"{_fmt(m.get('flip_rate'))} | "
                     f"{_fmt(m.get('modal_share'))} | "
                     f"{_fmt(m.get('score_cv'))} |"
@@ -488,6 +543,8 @@ def validate_card_dict(d: Dict[str, Any]) -> None:
         from .utility import validate_utility_block
 
         validate_utility_block(d["utility"])
+    if "directions" in d:
+        _validate_directions_block(d["directions"])
     if _schema_at_least(version, "0.3"):
         verdict = d.get("verdict", {})
         profile = verdict.get("profile")
@@ -520,6 +577,48 @@ def validate_card_dict(d: Dict[str, Any]) -> None:
                 )
 
 
+def _validate_directions_block(block: Any) -> None:
+    """Structural validation of the direction-valued extension (schema 0.4)."""
+    if not isinstance(block, dict):
+        raise ValueError("Stability Card 'directions' must be an object")
+    dim = block.get("dim")
+    if not isinstance(dim, int) or isinstance(dim, bool) or dim < 1:
+        raise ValueError(
+            f"directions.dim must be a positive integer, got {dim!r}"
+        )
+    for key in ("abs_cosine", "null_abs_cosine"):
+        matrix = block.get(key)
+        if matrix is None:
+            continue
+        if not isinstance(matrix, list) or not matrix:
+            raise ValueError(f"directions.{key} must be a nonempty matrix")
+        n = len(matrix)
+        for row in matrix:
+            if not isinstance(row, list) or len(row) != n:
+                raise ValueError(
+                    f"directions.{key} must be square, got a {n}-row matrix "
+                    "with a mismatched row"
+                )
+            if not all(isinstance(v, (int, float)) and not isinstance(v, bool)
+                       for v in row):
+                raise ValueError(f"directions.{key} must contain only numbers")
+    order = block.get("order")
+    if order is not None and (
+        not isinstance(order, list)
+        or not all(isinstance(x, str) for x in order)
+    ):
+        raise ValueError("directions.order must be a list of strings")
+
+
+def _card_structure_kind(d: Dict[str, Any]) -> str:
+    """``"direction"`` for a schema-0.4 direction card, ``"set"`` otherwise.
+
+    Cards written before 0.4 carry no marker and are set-valued by
+    construction, so the absent key is the answer, not a missing field.
+    """
+    return d.get("battery", {}).get("structure_kind", "set")
+
+
 def _schema_at_least(version: str, minimum: str) -> bool:
     """Compare supported ``major.minor`` schema versions numerically."""
     return tuple(int(part) for part in version.split(".")) >= tuple(
@@ -533,6 +632,16 @@ _CHECK_SOURCES = {
     "claim_stability": ("modal_share", ">="),
     "score_stability": ("score_cv", "<="),
     "beats_random": ("jaccard_vs_random", ">="),
+    "specificity": (None, ">="),
+}
+
+# same, for direction-valued cards: |cosine| replaces Jaccard everywhere the
+# structural metric appears, claims and scores are graded identically
+_DIRECTION_CHECK_SOURCES = {
+    "structural_stability": ("mean_pairwise_abs_cosine", ">="),
+    "claim_stability": ("modal_share", ">="),
+    "score_stability": ("score_cv", "<="),
+    "beats_random": ("abs_cosine_vs_random", ">="),
     "specificity": (None, ">="),
 }
 
@@ -610,6 +719,145 @@ def _verify_runs(d: Dict[str, Any], pooled: Dict[str, Any],
             )
 
 
+def _verify_directions(d: Dict[str, Any], pooled: Dict[str, Any],
+                       problems: List[str]) -> None:
+    """Recompute a direction card's structural evidence from its own matrix.
+
+    The card embeds the pairwise |cosine| matrix over exactly the runs that
+    were graded, so everything the structural verdict rests on is
+    recomputable offline: the mean, the minimum, and the bootstrap CI, which
+    resamples runs and is therefore a function of the matrix and the recorded
+    seed alone. When a null control was run its matrix is embedded too, so
+    the specificity ratio and its interval recompute as well.
+
+    The matrix is not self-authenticating — it is a summary, not the
+    directions. What ties it to real vectors is the per-run SHA-256 of each
+    unit direction, which an auditor holding the raw vectors re-derives.
+    """
+    from . import metrics as M
+
+    block = d.get("directions")
+    runs = d.get("runs") or []
+    direction_runs = [r for r in runs if r.get("direction_sha256")]
+    if _card_structure_kind(d) == "direction":
+        if "structural_stability" in d.get("verdict", {}).get("checks", {}) \
+                and not block:
+            problems.append(
+                "direction card grades structural_stability but carries no "
+                "'directions' block to recompute it from"
+            )
+        if not direction_runs:
+            problems.append(
+                "direction card carries no per-run direction digests"
+            )
+    if not block:
+        return
+
+    dim = block.get("dim")
+    bad_dim = [r.get("variant") for r in direction_runs
+               if r.get("direction_dim") != dim]
+    if bad_dim:
+        problems.append(
+            f"runs {bad_dim} record a direction dimension other than "
+            f"directions.dim ({dim})"
+        )
+
+    matrix = block.get("abs_cosine")
+    if matrix is None:
+        return
+    n = len(matrix)
+    order = block.get("order")
+    if order is not None and len(order) != n:
+        problems.append(
+            f"directions.order names {len(order)} runs but the matrix is {n}x{n}"
+        )
+    if len(direction_runs) < n:
+        problems.append(
+            f"directions matrix covers {n} runs but only "
+            f"{len(direction_runs)} runs carry a direction digest"
+        )
+    for i in range(n):
+        if abs(matrix[i][i] - 1.0) > 1e-9:
+            problems.append(
+                f"directions matrix diagonal [{i}][{i}] is {matrix[i][i]}, "
+                "not 1.0 — a direction is not parallel to itself"
+            )
+        for j in range(n):
+            if not (-1e-9 <= matrix[i][j] <= 1.0 + 1e-9):
+                problems.append(
+                    f"directions matrix [{i}][{j}] = {matrix[i][j]} is "
+                    "outside [0, 1]; |cosine| cannot be"
+                )
+            elif abs(matrix[i][j] - matrix[j][i]) > 1e-9:
+                problems.append(
+                    f"directions matrix is not symmetric at [{i}][{j}]"
+                )
+
+    pairs = [matrix[i][j] for i in range(n) for j in range(i + 1, n)]
+    if not pairs:
+        return
+    for key, expected in (
+        ("mean_pairwise_abs_cosine", sum(pairs) / len(pairs)),
+        ("min_pairwise_abs_cosine", min(pairs)),
+    ):
+        stored = pooled.get(key)
+        if stored is not None and abs(expected - stored) > 1e-9:
+            problems.append(
+                f"pooled {key} {stored} does not recompute from the card's "
+                f"direction matrix ({expected})"
+            )
+
+    boot = block.get("bootstrap") or {}
+    if not all(k in boot for k in ("n_boot", "alpha", "seed")):
+        return
+    stored_ci = pooled.get("mean_pairwise_abs_cosine_ci95")
+    if stored_ci is not None:
+        fresh = M.bootstrap_ci_pairwise(
+            range(n), lambda a, b: matrix[a][b],
+            n_boot=boot["n_boot"], seed=boot["seed"], alpha=boot["alpha"],
+        )
+        if fresh is None or any(
+                abs(a - b) > 1e-9 for a, b in zip(fresh, stored_ci)):
+            problems.append(
+                f"pooled mean_pairwise_abs_cosine_ci95 {stored_ci} does not "
+                f"recompute from the direction matrix at seed "
+                f"{boot['seed']} ({fresh})"
+            )
+
+    null_matrix = block.get("null_abs_cosine")
+    if not null_matrix:
+        return
+    m = len(null_matrix)
+    null_pairs = [null_matrix[i][j] for i in range(m) for j in range(i + 1, m)]
+    null_control = d.get("metrics", {}).get("null_control") or {}
+    stored_null = null_control.get("mean_pairwise_abs_cosine")
+    if null_pairs and stored_null is not None:
+        expected_null = sum(null_pairs) / len(null_pairs)
+        if abs(expected_null - stored_null) > 1e-9:
+            problems.append(
+                f"null-control mean_pairwise_abs_cosine {stored_null} does "
+                f"not recompute from the card's null matrix ({expected_null})"
+            )
+    stored_spec_ci = pooled.get("specificity_ci95")
+    if stored_spec_ci is not None:
+        def pair(a, b):
+            grid = matrix if a[0] == "real" else null_matrix
+            return grid[a[1]][b[1]]
+
+        fresh_spec = M.bootstrap_ci_ratio_pairwise(
+            [("real", i) for i in range(n)],
+            [("null", i) for i in range(m)],
+            pair, n_boot=boot["n_boot"], seed=boot["seed"],
+            alpha=boot["alpha"],
+        )
+        if fresh_spec is None or any(
+                abs(a - b) > 1e-9 for a, b in zip(fresh_spec, stored_spec_ci)):
+            problems.append(
+                f"pooled specificity_ci95 {stored_spec_ci} does not recompute "
+                f"from the card's direction matrices ({fresh_spec})"
+            )
+
+
 def verify_card_dict(d: Dict[str, Any]) -> Dict[str, Any]:
     """Auditor mode: re-derive a card's verdict from its own contents.
 
@@ -623,6 +871,9 @@ def verify_card_dict(d: Dict[str, Any]) -> Dict[str, Any]:
        modal share, and score CV recompute from the card's own per-run
        records, and every run's components match their SHA-256 digest.
     3. **specificity** — the ratio re-derives from the null-control block.
+    4. **directions** (schema >= 0.4) — for a direction-valued card, the
+       pooled |cosine|, its bootstrap CI, and the specificity interval
+       recompute from the embedded pairwise |cosine| matrices.
 
     Returns the legacy descriptive grade plus any recomputable normative
     confirmatory state. A diagnostic card's confirmatory state is always
@@ -637,6 +888,11 @@ def verify_card_dict(d: Dict[str, Any]) -> Dict[str, Any]:
     validate_card_dict(d)
     checks = d.get("verdict", {}).get("checks", {})
     pooled = d.get("metrics", {}).get("pooled", {})
+    kind = _card_structure_kind(d)
+    sources = (_DIRECTION_CHECK_SOURCES if kind == "direction"
+               else _CHECK_SOURCES)
+    structural_metric = ("mean_pairwise_abs_cosine" if kind == "direction"
+                         else "mean_pairwise_jaccard")
     problems: List[str] = []
     recomputed: Dict[str, Any] = {}
     # schema 0.1 cards predate the symmetric robust semantics and carry no
@@ -646,7 +902,7 @@ def verify_card_dict(d: Dict[str, Any]) -> Dict[str, Any]:
     stateful = _schema_at_least(version, "0.3")
 
     for name, c in checks.items():
-        src, default_op = _CHECK_SOURCES.get(name, (None, None))
+        src, default_op = sources.get(name, (None, None))
         op = c.get("op") or default_op
         if op is None:
             problems.append(f"unknown check {name!r}")
@@ -678,8 +934,8 @@ def verify_card_dict(d: Dict[str, Any]) -> Dict[str, Any]:
                 problems.append(f"{name}: value {value} != pooled {src} {pv}")
         elif name == "specificity":
             null_control = d.get("metrics", {}).get("null_control") or {}
-            nj = null_control.get("mean_pairwise_jaccard")
-            j = pooled.get("mean_pairwise_jaccard")
+            nj = null_control.get(structural_metric)
+            j = pooled.get(structural_metric)
             if nj is not None and j is not None:
                 expected = j / nj if nj > 1e-9 else float("inf")
                 if abs(expected - value) > 1e-9:
@@ -748,6 +1004,7 @@ def verify_card_dict(d: Dict[str, Any]) -> Dict[str, Any]:
         recomputed_overall = None
 
     _verify_runs(d, pooled, problems)
+    _verify_directions(d, pooled, problems)
 
     return {
         "ok": not problems,

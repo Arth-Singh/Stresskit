@@ -108,7 +108,15 @@ def _cmd_verify(args: argparse.Namespace) -> int:
             print(f"FAILED: {path} — not a verifiable StressKit artifact")
             n_fail += 1
             continue
-        result = verify_artifact_dict(d)
+        try:
+            result = verify_artifact_dict(d)
+        except ValueError as e:
+            # One unverifiable artifact must not abort the batch: an auditor
+            # running `stresskit verify` over a directory needs a verdict for
+            # every other card in it. Counted as a failure, never skipped.
+            print(f"FAILED: {path} — cannot be verified ({e})")
+            n_fail += 1
+            continue
         checks = (d.get("verdict", {}).get("checks")
                   if kind == "stability_card" else d.get("checks")) or {}
         if result["ok"]:

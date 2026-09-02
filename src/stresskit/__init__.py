@@ -17,7 +17,9 @@ interpretability claims.
 
 __version__ = "1.0.0.dev0"
 
-from .finding import Finding, circuit, feature_set, probe, findings_from_jsonl
+from .finding import (
+    Finding, circuit, direction, feature_set, probe, findings_from_jsonl,
+)
 from .battery import (
     stress, from_findings, from_jsonl, verdict_trace, verdict_trace_markdown,
     decision_state, confirmatory_verdict,
@@ -60,6 +62,7 @@ __all__ = [
     "__version__",
     "Finding",
     "circuit",
+    "direction",
     "feature_set",
     "probe",
     "stress",

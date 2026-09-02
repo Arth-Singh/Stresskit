@@ -19,7 +19,8 @@
       "enum": [
         "0.1",
         "0.2",
-        "0.3"
+        "0.3",
+        "0.4"
       ]
     },
     "stresskit_version": {
@@ -105,6 +106,13 @@
         },
         "components_embedded": {
           "type": "boolean"
+        },
+        "structure_kind": {
+          "enum": [
+            "set",
+            "direction"
+          ],
+          "description": "Structural kind of the graded findings. Absent means 'set' (every card before schema 0.4). Direction cards grade mean pairwise |cosine| instead of Jaccard and carry a 'directions' block."
         }
       }
     },
@@ -299,6 +307,15 @@
           "components_sha256": {
             "type": "string",
             "pattern": "^[0-9a-f]{64}$"
+          },
+          "direction_dim": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "direction_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "description": "SHA-256 of this run's unit-normalized direction. The card embeds the pairwise |cosine| matrix rather than the vectors, so this is what ties the matrix to the directions an auditor holds."
           }
         }
       }
@@ -370,6 +387,69 @@
         },
         "task_phrasing_warning": {
           "type": "string"
+        }
+      }
+    },
+    "directions": {
+      "type": "object",
+      "description": "Direction-valued structural evidence (schema 0.4). The pairwise |cosine| matrix over exactly the runs that were graded, which is quadratic in run count rather than linear in model width and still makes the structural metric, its bootstrap CI, and the grade recomputable offline.",
+      "required": [
+        "dim"
+      ],
+      "properties": {
+        "dim": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "order": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Run variants indexing the matrix, in matrix order."
+        },
+        "embedded": {
+          "type": "boolean",
+          "description": "False when the battery exceeded the pair cap and only per-run dimensions and digests were kept."
+        },
+        "abs_cosine": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            }
+          },
+          "description": "Symmetric |cosine| matrix with a unit diagonal over the graded runs."
+        },
+        "null_abs_cosine": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            }
+          },
+          "description": "Same, over the null-control runs, so specificity and its interval recompute too."
+        },
+        "bootstrap": {
+          "type": "object",
+          "description": "Parameters the stored intervals were drawn with, so verification is not hostage to a future change of defaults.",
+          "properties": {
+            "n_boot": {
+              "type": "integer"
+            },
+            "alpha": {
+              "type": "number"
+            },
+            "seed": {
+              "type": "integer"
+            }
+          }
         }
       }
     }
@@ -555,6 +635,67 @@
           "items": {
             "type": "string"
           }
+        },
+        "mean_pairwise_abs_cosine": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "min_pairwise_abs_cosine": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "mean_pairwise_abs_cosine_axis_balanced": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "expected_random_abs_cosine": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "abs_cosine_vs_random": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "n_direction_runs": {
+          "type": "integer"
+        },
+        "direction_dim": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "mean_pairwise_abs_cosine_ci95": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "abs_cosine_vs_random_ci95": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
         }
       }
     }

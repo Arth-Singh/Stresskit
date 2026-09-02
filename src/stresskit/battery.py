@@ -40,6 +40,12 @@ FindingFn = Callable[[Any, int, Dict[str, Any]], Finding]
 DEFAULT_BATTERY: Tuple[str, ...] = ("seeds", "bootstrap")
 KNOWN_AXES = ("seeds", "bootstrap", "templates", "hyperparams")
 
+# The pairwise |cosine| matrix of a direction battery is embedded on the card
+# (making the structural metric, its CI, and the grade recomputable offline)
+# up to this many pairs; beyond that only per-run dimensions and SHA-256
+# digests are kept.
+MAX_EMBED_DIRECTION_PAIRS = 20_000
+
 
 # --------------------------------------------------------------------------
 # Run cache: skip finder calls whose (axis, variant, seed, config) already
@@ -78,6 +84,7 @@ def _cache_load(path: str) -> Optional[Finding]:
         universe_size=d["universe_size"],
         meta=d.get("meta", {}),
         structure_present=d.get("structure_present"),
+        vector=d.get("vector"),
     )
 
 
@@ -94,6 +101,8 @@ def _cache_store(path: str, finding: Finding) -> None:
                 "universe_size": finding.universe_size,
                 "meta": finding.meta,
                 "structure_present": finding.has_structure(),
+                **({"vector": list(finding.vector)}
+                   if finding.has_direction() else {}),
             },
             f, default=str,
         )
@@ -111,6 +120,19 @@ class Thresholds:
     ``specificity_ratio`` is the required degradation factor on null-control
     data (Adebayo-style sanity check: a method as stable on null data as on
     real data is finding its own artifacts, not the model's structure).
+
+    ``cosine`` is the structural bar for direction-valued findings (mean
+    pairwise |cosine|), and it is a separate policy from ``jaccard`` even
+    though it carries the same number. It is separate because the two grade
+    different quantities and must be revisable independently. It is 0.8
+    because |cos| is the direct analogue of Jaccard here — the fraction of
+    one unit direction recovered by projecting it onto the other, as Jaccard
+    is the fraction of a set shared — so the registered structural bar of
+    arXiv:2510.00845 transfers unchanged rather than inventing a second
+    number. A second
+    reading of the same bar: at |cos| = 0.8 the residual disagreement
+    ‖a − b‖ = √(2 − 2·0.8) ≈ 0.63 is already 63% of the direction's own
+    length. The value was fixed by this analogy, not calibrated on any card.
     """
 
     jaccard: float = 0.8
@@ -118,6 +140,7 @@ class Thresholds:
     score_cv: float = 0.25
     random_margin: float = 3.0
     specificity_ratio: float = 1.5
+    cosine: float = 0.8
 
 
 @dataclass
@@ -140,6 +163,7 @@ class StressResult:
     null_summary: Optional[Dict[str, Any]] = None
     null_runs: Optional[List[RunRecord]] = None
     card: StabilityCard = None  # type: ignore[assignment]
+    structure_kind: str = "set"
 
     def to_markdown(self) -> str:
         return self.card.to_markdown()
@@ -156,11 +180,16 @@ class StressResult:
         )
 
     def __repr__(self) -> str:  # pragma: no cover - cosmetic
-        j = self.pooled.get("mean_pairwise_jaccard")
         f = self.pooled.get("flip_rate")
+        if self.structure_kind == "direction":
+            label = "abs_cosine"
+            j = self.pooled.get("mean_pairwise_abs_cosine")
+        else:
+            label = "jaccard"
+            j = self.pooled.get("mean_pairwise_jaccard")
         return (
             f"StressResult(grade={self.grade!r}, runs={len(self.runs)}, "
-            f"jaccard={j if j is None else round(j, 3)}, "
+            f"{label}={j if j is None else round(j, 3)}, "
             f"flip_rate={f if f is None else round(f, 3)})"
         )
 
@@ -179,6 +208,41 @@ def _universe_of(f: Finding) -> Any:
     return f.meta.get("universe")
 
 
+def _structure_kind(findings: Sequence[Finding], what: str) -> str:
+    """The one structural kind a group of findings shares: ``"set"``,
+    ``"direction"``, or ``"none"``.
+
+    Sets are compared with Jaccard and directions with |cosine|; the two are
+    not commensurable, so a group carrying both is a modelling error, not a
+    number to average. Directions must also agree on dimension — vectors of
+    different length live in different spaces and have no cosine at all.
+    Findings that are purely claim- or score-valued carry no structure and
+    join either group.
+    """
+    kinds = sorted({f.kind for f in findings} - {"none"})
+    if len(kinds) > 1:
+        counts = ", ".join(
+            f"{k}: {sum(1 for f in findings if f.kind == k)}" for k in kinds
+        )
+        raise ValueError(
+            f"{what} mixes structural kinds ({counts}). Set-valued findings "
+            "are compared with Jaccard and direction-valued findings with "
+            "|cosine|; there is no meaningful overlap between the two. Grade "
+            "them as separate batteries."
+        )
+    kind = kinds[0] if kinds else "none"
+    if kind == "direction":
+        dims = sorted({f.dim for f in findings if f.has_direction()})
+        if len(dims) > 1:
+            raise ValueError(
+                f"{what} mixes direction dimensions {dims}. Cosine is "
+                "undefined between vectors of different length — these runs "
+                "produced directions in different spaces (different models, "
+                "or a changed residual width), so they cannot be pooled."
+            )
+    return kind
+
+
 def _summarize(findings: Sequence[Finding], claim_equiv=None,
                universe: Any = _UNSET) -> Dict[str, Any]:
     """Structural / claim / score summary for one group of findings.
@@ -191,12 +255,17 @@ def _summarize(findings: Sequence[Finding], claim_equiv=None,
     """
     if universe is _UNSET:
         struct_f = [f for f in findings if f.has_structure()]
+        dir_f = [f for f in findings if f.has_direction()]
         n_cross_universe = 0
     else:
         struct_f = [f for f in findings
                     if f.has_structure() and _universe_of(f) == universe]
+        dir_f = [f for f in findings
+                 if f.has_direction() and _universe_of(f) == universe]
         n_cross_universe = sum(
-            1 for f in findings if f.has_structure()) - len(struct_f)
+            1 for f in findings
+            if f.has_structure() or f.has_direction()
+        ) - len(struct_f) - len(dir_f)
     structured = [f.components for f in struct_f]
     labels = [f.claim for f in findings if f.claim is not None]
     scores = [f.score for f in findings if f.score is not None]
@@ -237,9 +306,29 @@ def _summarize(findings: Sequence[Finding], claim_equiv=None,
         "score_cv": M.coefficient_of_variation(scores),
         "median_size": (statistics.median(sizes) if sizes else None),
     }
+    if dir_f:
+        pc = M.pairwise_abs_cosine([f.vector for f in dir_f])
+        out["n_direction_runs"] = len(dir_f)
+        out["direction_dim"] = dir_f[0].dim
+        out["mean_pairwise_abs_cosine"] = (sum(pc) / len(pc)) if pc else None
+        out["min_pairwise_abs_cosine"] = min(pc) if pc else None
     if universe is not _UNSET and n_cross_universe:
         out["n_cross_universe_excluded"] = n_cross_universe
     return out
+
+
+def _direction_summary_keys(pooled: Mapping[str, Any]) -> Dict[str, Any]:
+    """The direction-valued entries of a summary, empty for a set battery.
+
+    Kept conditional so a set-valued card's null-control block is byte-for-byte
+    what it has always been.
+    """
+    return {
+        k: pooled[k] for k in
+        ("n_direction_runs", "direction_dim",
+         "mean_pairwise_abs_cosine", "min_pairwise_abs_cosine")
+        if k in pooled
+    }
 
 
 def _resolve_universe(findings: Sequence[Finding]) -> Optional[int]:
@@ -432,6 +521,7 @@ def stress(
     # --- null-control (specificity) --------------------------------------------
     null_summary: Optional[Dict[str, Any]] = None
     null_components: Optional[List[frozenset]] = None
+    null_vectors: Optional[List[Tuple[float, ...]]] = None
     null_runs: Optional[List[RunRecord]] = None
     if null_data is not None:
         null_axes = tuple(ax for ax in battery if ax in ("seeds", "bootstrap")) or ("seeds",)
@@ -456,18 +546,30 @@ def stress(
                     "modal_share", "score_mean", "score_cv", "median_size",
                 )
             }
+            null_summary.update(_direction_summary_keys(null_result.pooled))
             null_components = _graded_components(
+                [r.finding for r in null_result.runs], null_result.base
+            )
+            null_vectors = _graded_vectors(
                 [r.finding for r in null_result.runs], null_result.base
             )
             null_runs = null_result.runs
         except (ValueError, TypeError) as e:
             notes.append(f"null control skipped: finder failed on null_data ({e})")
+    if null_runs is not None:
+        # outside the try: a finder that returns a set on real data and a
+        # direction on null data is a bug to surface, not a null to skip
+        _structure_kind(
+            [r.finding for r in runs] + [r.finding for r in null_runs],
+            "the real runs and the null control together",
+        )
 
     result = _analyze(
         runs, base,
         thresholds=thresholds, claim_equiv=claim_equiv, notes=notes,
         seed=seed, battery=battery, n_runs=n_runs, base_config=base_config,
         null_summary=null_summary, null_components=null_components,
+        null_vectors=null_vectors,
         claim_statement=claim_statement,
         model=model, task=task, method=method, t0=t0,
     )
@@ -494,6 +596,37 @@ def _graded_components(
     return structs
 
 
+def _abs_cosine_matrix(
+    vectors: Sequence[Sequence[float]]
+) -> List[List[float]]:
+    """Full symmetric |cosine| matrix with a unit diagonal.
+
+    The card embeds this instead of the raw high-dimensional vectors: it is
+    quadratic in run count rather than linear in model width, and everything
+    the verdict rests on — the mean, the minimum, and the bootstrap CI, which
+    resamples runs — is a function of it alone.
+    """
+    n = len(vectors)
+    matrix = [[1.0] * n for _ in range(n)]
+    for i in range(n):
+        for j in range(i + 1, n):
+            v = M.abs_cosine(vectors[i], vectors[j])
+            matrix[i][j] = matrix[j][i] = v
+    return matrix
+
+
+def _graded_vectors(
+    findings: Sequence[Finding], base: Finding
+) -> List[Tuple[float, ...]]:
+    """Direction vectors that structural grading actually uses: findings that
+    carry a direction and share the base run's universe label. Directions
+    have no size, so the 2x size guard of ``_graded_components`` has no
+    analogue here."""
+    bu = _universe_of(base)
+    return [f.vector for f in findings
+            if f.has_direction() and _universe_of(f) == bu]
+
+
 def _analyze(
     runs: List[RunRecord],
     base: Finding,
@@ -507,6 +640,7 @@ def _analyze(
     base_config: Dict[str, Any],
     null_summary: Optional[Dict[str, Any]],
     null_components: Optional[List[frozenset]] = None,
+    null_vectors: Optional[List[Tuple[float, ...]]] = None,
     claim_statement: Optional[str],
     model: Optional[str],
     task: Optional[str],
@@ -519,6 +653,7 @@ def _analyze(
     (post-hoc mode over findings the caller already has).
     """
     # --- metrics --------------------------------------------------------------
+    kind = _structure_kind([r.finding for r in runs], "this battery")
     axis_names = sorted({r.axis for r in runs} - {"base"})
     axis_metrics: Dict[str, Dict[str, Any]] = {}
     score_groups: Dict[str, List[float]] = {}
@@ -626,6 +761,70 @@ def _analyze(
             "pooled number; read the per-axis breakdown before citing it"
         )
 
+    # --- direction-valued structure ------------------------------------------
+    # Directions are graded with mean pairwise |cosine| instead of Jaccard.
+    # The random null is the exact analytic E[|cos|] between independent
+    # uniform unit vectors in R^d (metrics.expected_random_abs_cosine), which
+    # is the expectation of the mean-pairwise statistic at any run count;
+    # baselines.empirical_random_abs_cosine is its Monte-Carlo form and is
+    # reported as the cross-check, the reverse of the Jaccard case where the
+    # closed form is the approximation.
+    graded_vectors: List[Tuple[float, ...]] = []
+    cosines: List[List[float]] = []
+    null_cosines: List[List[float]] = []
+    directions_block: Optional[Dict[str, Any]] = None
+    if kind == "direction":
+        graded_vectors = _graded_vectors(all_findings, base)
+        # Every interval below resamples runs, so it is a function of the
+        # pairwise matrix alone. Building it once and indexing into it keeps
+        # the bootstrap independent of model width — recomputing a 4096-dim
+        # cosine inside 500 replicates costs minutes for the same numbers —
+        # and is exactly what an auditor recomputes from the card.
+        cosines = _abs_cosine_matrix(graded_vectors)
+        null_cosines = (_abs_cosine_matrix(null_vectors)
+                        if null_vectors else [])
+        pooled["mean_pairwise_abs_cosine_ci95"] = M.bootstrap_ci_pairwise(
+            range(len(cosines)), lambda a, b: cosines[a][b], seed=seed
+        )
+        dim = len(graded_vectors[0]) if graded_vectors else None
+        random_cos = (
+            M.expected_random_abs_cosine(dim) if dim is not None else None
+        )
+        pooled["expected_random_abs_cosine"] = random_cos
+        ac = pooled.get("mean_pairwise_abs_cosine")
+        if random_cos and ac is not None and random_cos > 0:
+            pooled["abs_cosine_vs_random"] = ac / random_cos
+        else:
+            pooled["abs_cosine_vs_random"] = None
+        axis_cs = [m["mean_pairwise_abs_cosine"] for m in axis_metrics.values()
+                   if m.get("mean_pairwise_abs_cosine") is not None]
+        pooled["mean_pairwise_abs_cosine_axis_balanced"] = (
+            sum(axis_cs) / len(axis_cs) if axis_cs else None
+        )
+        bc = pooled["mean_pairwise_abs_cosine_axis_balanced"]
+        if ac is not None and bc is not None and abs(ac - bc) > 0.1:
+            notes.append(
+                f"pooled |cos| ({ac:.3f}) and axis-balanced |cos| ({bc:.3f}) "
+                "diverge by more than 0.1 — per-axis run counts are shaping "
+                "the pooled number; read the per-axis breakdown before citing it"
+            )
+        if len(graded_vectors) >= 2:
+            n_pairs = len(graded_vectors) * (len(graded_vectors) - 1) // 2
+            directions_block = {
+                "dim": dim,
+                "order": [
+                    r.variant for r in runs
+                    if r.finding.has_direction()
+                    and _universe_of(r.finding) == base_universe
+                ],
+                "bootstrap": {"n_boot": 500, "alpha": 0.05, "seed": seed},
+                "embedded": n_pairs <= MAX_EMBED_DIRECTION_PAIRS,
+            }
+            if directions_block["embedded"]:
+                directions_block["abs_cosine"] = cosines
+                if len(null_cosines) >= 2:
+                    directions_block["null_abs_cosine"] = null_cosines
+
     # --- checks & grade ----------------------------------------------------------
     _mk = make_check
     checks: Dict[str, Any] = {}
@@ -635,6 +834,11 @@ def _analyze(
             j, thresholds.jaccard, ">=",
             "mean pairwise Jaccard across all perturbed runs",
             ci=pooled.get("mean_pairwise_jaccard_ci95"))
+    elif pooled.get("mean_pairwise_abs_cosine") is not None:
+        checks["structural_stability"] = _mk(
+            pooled["mean_pairwise_abs_cosine"], thresholds.cosine, ">=",
+            "mean pairwise |cosine| across all perturbed runs",
+            ci=pooled.get("mean_pairwise_abs_cosine_ci95"))
     ms = pooled["modal_share"]
     if ms is not None and pooled["n_runs"] >= 2 and pooled["n_claim_classes"] >= 1:
         checks["claim_stability"] = _mk(
@@ -660,6 +864,39 @@ def _analyze(
             vr, thresholds.random_margin, ">=",
             "structural overlap vs size-matched random null (×)",
             ci=vr_ci)
+    if kind == "direction":
+        ac = pooled.get("mean_pairwise_abs_cosine")
+        cvr = pooled.get("abs_cosine_vs_random")
+        if cvr is not None:
+            # The null is an exact expectation over a fully known
+            # distribution (independent uniform unit vectors), so it enters
+            # as a constant and the ratio inherits the |cos| bootstrap.
+            null_cos = pooled.get("expected_random_abs_cosine")
+            aci = pooled.get("mean_pairwise_abs_cosine_ci95")
+            cvr_ci = ([aci[0] / null_cos, aci[1] / null_cos]
+                      if aci and null_cos else None)
+            pooled["abs_cosine_vs_random_ci95"] = cvr_ci
+            checks["beats_random"] = _mk(
+                cvr, thresholds.random_margin, ">=",
+                "direction overlap vs random unit vectors in R^d (×)",
+                ci=cvr_ci)
+        if null_summary is not None and ac is not None:
+            null_ac = null_summary.get("mean_pairwise_abs_cosine")
+            if null_ac is not None:
+                ratio = (ac / null_ac) if null_ac > 1e-9 else float("inf")
+                spec_ci = (M.bootstrap_ci_ratio_pairwise(
+                    [("real", i) for i in range(len(cosines))],
+                    [("null", i) for i in range(len(null_cosines))],
+                    lambda a, b: (cosines if a[0] == "real"
+                                  else null_cosines)[a[1]][b[1]],
+                    seed=seed)
+                    if null_cosines else None)
+                pooled["specificity_ci95"] = spec_ci
+                checks["specificity"] = _mk(
+                    ratio, thresholds.specificity_ratio, ">=",
+                    "direction stability on real vs null-control data (×)",
+                    ci=spec_ci)
+
     if null_summary is not None and j is not None:
         null_j = null_summary.get("mean_pairwise_jaccard")
         if null_j is not None:
@@ -718,9 +955,11 @@ def _analyze(
         checks=checks,
         grade=grade,
         null_summary=null_summary,
+        structure_kind=kind,
     )
     result.card = StabilityCard.from_stress(
         result,
+        directions=directions_block,
         battery=list(battery),
         n_runs=len(runs),
         seed=seed,
@@ -809,10 +1048,15 @@ def from_findings(
 
     null_summary: Optional[Dict[str, Any]] = None
     null_components: Optional[List[frozenset]] = None
+    null_vectors: Optional[List[Tuple[float, ...]]] = None
     if null_findings is not None:
         null_findings = list(null_findings)
         if len(null_findings) < 2:
             raise ValueError("null_findings needs >= 2 findings for a stability estimate")
+        _structure_kind(
+            list(findings) + null_findings,
+            "the supplied findings and null_findings together",
+        )
         null_pooled = _summarize(
             null_findings, claim_equiv, universe=_universe_of(null_findings[0])
         )
@@ -825,14 +1069,16 @@ def from_findings(
             "score_cv": null_pooled["score_cv"],
             "median_size": null_pooled["median_size"],
         }
+        null_summary.update(_direction_summary_keys(null_pooled))
         null_components = _graded_components(null_findings, null_findings[0])
+        null_vectors = _graded_vectors(null_findings, null_findings[0])
 
     return _analyze(
         runs, base,
         thresholds=thresholds, claim_equiv=claim_equiv, notes=notes,
         seed=seed, battery=sorted(set(axes)), n_runs=len(findings),
         base_config={}, null_summary=null_summary,
-        null_components=null_components,
+        null_components=null_components, null_vectors=null_vectors,
         claim_statement=claim_statement, model=model, task=task,
         method=method, t0=t0,
     )

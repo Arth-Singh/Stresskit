@@ -108,7 +108,7 @@ def make_card_dict():
 
 def test_card_embeds_runs_with_hashes():
     d = make_card_dict()
-    assert d["schema_version"] == "0.3"
+    assert d["schema_version"] == "0.4"
     assert d["verdict"]["profile"] == "diagnostic"
     assert d["verdict"]["confirmatory_state"] == "not_applicable"
     assert d["battery"]["components_embedded"] is True

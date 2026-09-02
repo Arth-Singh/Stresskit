@@ -192,6 +192,98 @@ def exact_expected_core_noise_jaccard(
 
 
 # --------------------------------------------------------------------------
+# Structural stability — directions
+#
+# The set family above grades a finding whose identity is a set of parts. A
+# direction (refusal direction, persona/steering vector, probe weights) has
+# no such set, and set proxies for it — top-k logit-lens readout tokens, top-k
+# coordinates — bound the structural check far below 1 even for two runs that
+# recovered the same direction. These are the direction-native analogues:
+# |cosine| plays the role of Jaccard, and E[|cos|] between independent uniform
+# random unit vectors plays the role of the size-matched random null.
+# --------------------------------------------------------------------------
+
+def cosine_similarity(a: Sequence[float], b: Sequence[float]) -> float:
+    """Signed cosine similarity of two nonzero vectors of equal length."""
+    if len(a) != len(b):
+        raise ValueError(
+            f"cosine similarity needs equal dimensions, got {len(a)} and {len(b)}"
+        )
+    if not a:
+        raise ValueError("cosine similarity is undefined for empty vectors")
+    # math.hypot rather than sqrt(sum of squares), and normalizing before the
+    # dot product rather than dividing after it: probe weights and gradient
+    # directions can be small enough that squaring underflows, and a vector
+    # whose coordinates square to zero still has a perfectly good direction.
+    na, nb = math.hypot(*a), math.hypot(*b)
+    if na == 0.0 or nb == 0.0:
+        raise ValueError("cosine similarity is undefined for a zero vector")
+    dot = math.fsum((x / na) * (y / nb) for x, y in zip(a, b))
+    return max(-1.0, min(1.0, dot))
+
+
+def abs_cosine(a: Sequence[float], b: Sequence[float]) -> float:
+    """|cosine| — the pair kernel structural stability grades directions with.
+
+    The absolute value is not cosmetic. A difference-in-means direction
+    points from whichever class the extraction happened to label positive to
+    the other; swapping the label convention (harmful − harmless vs harmless
+    − harmful) negates the vector without changing the object, and probe
+    weights, PCA components and SVD singular vectors carry the same sign
+    gauge. Grading signed cosine would score a pure convention flip as a
+    total structural failure. |cos| is the cosine of the angle between the
+    two *lines*, which is what "the same direction" means.
+    """
+    return abs(cosine_similarity(a, b))
+
+
+def pairwise_abs_cosine(vectors: Sequence[Sequence[float]]) -> List[float]:
+    """All unordered pairwise |cosine| similarities."""
+    return [abs_cosine(a, b) for a, b in itertools.combinations(vectors, 2)]
+
+
+def mean_pairwise_abs_cosine(
+    vectors: Sequence[Sequence[float]],
+) -> Optional[float]:
+    """Mean pairwise |cosine|; None if fewer than two vectors.
+
+    The direction-valued analogue of :func:`mean_pairwise_jaccard`: 1.0 means
+    every run recovered the same line, and the size-matched null is
+    :func:`expected_random_abs_cosine` for the dimension in play (about
+    0.0125 in R^4096, so the bar is nowhere near chance).
+    """
+    pc = pairwise_abs_cosine(vectors)
+    if not pc:
+        return None
+    return sum(pc) / len(pc)
+
+
+def expected_random_abs_cosine(dim: int) -> Optional[float]:
+    """Exact E[|cos|] between two independent uniform random unit vectors.
+
+    For unit vectors uniform on S^(d−1) the cosine has density proportional
+    to (1 − x²)^((d−3)/2) on [−1, 1], so
+
+        E[|cos|] = 2·Γ(d/2) / ((d−1)·√π·Γ((d−1)/2)),
+
+    which decays like the familiar √(2/(πd)) — the concentration-of-measure
+    statement that random directions in high dimension are near-orthogonal.
+    This is the analytic size-matched null for directions, the counterpart of
+    :func:`expected_random_jaccard`; ``baselines.empirical_random_abs_cosine``
+    is its Monte-Carlo form. Returns None for a nonpositive dimension, and
+    1.0 in R^1 where every unit vector is ±1.
+    """
+    d = int(dim)
+    if d <= 0:
+        return None
+    if d == 1:
+        return 1.0
+    return 2.0 * math.exp(
+        math.lgamma(d / 2.0) - math.lgamma((d - 1) / 2.0)
+    ) / ((d - 1) * math.sqrt(math.pi))
+
+
+# --------------------------------------------------------------------------
 # Claim stability
 # --------------------------------------------------------------------------
 
