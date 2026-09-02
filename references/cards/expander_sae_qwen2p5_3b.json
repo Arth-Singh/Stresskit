@@ -1,0 +1,912 @@
+{
+  "schema_version": "0.4",
+  "stresskit_version": "1.0.0.dev0",
+  "created_at": "2026-09-02T09:30:13+00:00",
+  "claim": {
+    "statement": "Qwen2.5-3B with d=7 uses 293x fewer learned decoder values than the full dense decoder while retaining 84% of dense CE-loss recovered",
+    "base_claim_label": "retains >= 0.80; expander CE-recovered >= 0.80",
+    "model": "Qwen/Qwen2.5-3B",
+    "task": "layer-12 residual-stream TopK SAEs (k=64, n=16384) trained on 200k pile-uncopyrighted tokens; CE-loss recovered on 100 sequences",
+    "method": "Expander SAE (left-7-regular tied support) vs dense warm-tied SAE, upstream classes and training loop at the pinned commit",
+    "base_size": null,
+    "universe_size": null
+  },
+  "battery": {
+    "axes": [
+      "seeds",
+      "bootstrap",
+      "templates",
+      "hyperparams"
+    ],
+    "n_runs_total": 69,
+    "seed": 0,
+    "base_config": {
+      "d": 7,
+      "k": 64,
+      "n": 16384,
+      "steps": 5000,
+      "dense_arch": "dense_warmtied",
+      "layer": 12,
+      "denominator": "zero",
+      "eval_set": "upstream"
+    },
+    "claim_equiv_used": false,
+    "components_embedded": true
+  },
+  "metrics": {
+    "pooled": {
+      "n_runs": 69,
+      "n_structured_runs": 0,
+      "n_empty_findings": 0,
+      "empty_finding_rate": null,
+      "mean_pairwise_jaccard": null,
+      "min_pairwise_jaccard": null,
+      "flip_rate": 0.21483375959079287,
+      "modal_share": 0.8840579710144928,
+      "n_claim_classes": 3,
+      "claim_counts": {
+        "retains >= 0.80; expander CE-recovered >= 0.80": 61,
+        "retains >= 0.80; expander CE-recovered < 0.80": 4,
+        "retains 0.60-0.80; expander CE-recovered < 0.80": 4
+      },
+      "score_mean": 0.857328480585556,
+      "score_std": 0.03953441227865384,
+      "score_cv": 0.046113494621865134,
+      "median_size": null,
+      "variance_shares": {
+        "bootstrap": 0.04303626109074537,
+        "hyperparams": 0.7924446535729714,
+        "seeds": 0.07416368403367034,
+        "templates": 0.09035540130261283
+      },
+      "variance_absolute": {
+        "bootstrap": 0.00038962896249342875,
+        "hyperparams": 0.0071744008512741805,
+        "seeds": 0.0006714412110243328,
+        "templates": 0.0008180329882975134
+      },
+      "mean_pairwise_jaccard_ci95": null,
+      "flip_rate_ci95": [
+        0.08699434536755112,
+        0.3320363164721141
+      ],
+      "modal_share_ci95": [
+        0.8115942028985508,
+        0.9565217391304348
+      ],
+      "score_cv_ci95": [
+        0.03223776724681248,
+        0.059469194101836764
+      ],
+      "expected_random_jaccard": null,
+      "expected_random_jaccard_analytic": null,
+      "jaccard_vs_random": null,
+      "mean_pairwise_jaccard_axis_balanced": null,
+      "confidence": "high",
+      "borderline_checks": []
+    },
+    "per_axis": {
+      "bootstrap": {
+        "n_runs": 31,
+        "n_structured_runs": 0,
+        "n_empty_findings": 0,
+        "empty_finding_rate": null,
+        "mean_pairwise_jaccard": null,
+        "min_pairwise_jaccard": null,
+        "flip_rate": 0.06451612903225812,
+        "modal_share": 0.967741935483871,
+        "n_claim_classes": 2,
+        "claim_counts": {
+          "retains >= 0.80; expander CE-recovered >= 0.80": 30,
+          "retains >= 0.80; expander CE-recovered < 0.80": 1
+        },
+        "score_mean": 0.8728542210939143,
+        "score_std": 0.019739021315491524,
+        "score_cv": 0.022614339071137645,
+        "median_size": null
+      },
+      "hyperparams": {
+        "n_runs": 8,
+        "n_structured_runs": 0,
+        "n_empty_findings": 0,
+        "empty_finding_rate": null,
+        "mean_pairwise_jaccard": null,
+        "min_pairwise_jaccard": null,
+        "flip_rate": 0.4285714285714286,
+        "modal_share": 0.75,
+        "n_claim_classes": 2,
+        "claim_counts": {
+          "retains >= 0.80; expander CE-recovered >= 0.80": 6,
+          "retains 0.60-0.80; expander CE-recovered < 0.80": 2
+        },
+        "score_mean": 0.8446361986937975,
+        "score_std": 0.08470183499354769,
+        "score_cv": 0.10028203281428896,
+        "median_size": null
+      },
+      "seeds": {
+        "n_runs": 31,
+        "n_structured_runs": 0,
+        "n_empty_findings": 0,
+        "empty_finding_rate": null,
+        "mean_pairwise_jaccard": null,
+        "min_pairwise_jaccard": null,
+        "flip_rate": 0.2924731182795699,
+        "modal_share": 0.8387096774193549,
+        "n_claim_classes": 3,
+        "claim_counts": {
+          "retains >= 0.80; expander CE-recovered >= 0.80": 26,
+          "retains >= 0.80; expander CE-recovered < 0.80": 3,
+          "retains 0.60-0.80; expander CE-recovered < 0.80": 2
+        },
+        "score_mean": 0.8430119200350037,
+        "score_std": 0.02591218267580585,
+        "score_cv": 0.030737623110631603,
+        "median_size": null
+      },
+      "templates": {
+        "n_runs": 2,
+        "n_structured_runs": 0,
+        "n_empty_findings": 0,
+        "empty_finding_rate": null,
+        "mean_pairwise_jaccard": null,
+        "min_pairwise_jaccard": null,
+        "flip_rate": 0.0,
+        "modal_share": 1.0,
+        "n_claim_classes": 1,
+        "claim_counts": {
+          "retains >= 0.80; expander CE-recovered >= 0.80": 2
+        },
+        "score_mean": 0.8790786321156414,
+        "score_std": 0.028601275990723096,
+        "score_cv": 0.03253551496512845,
+        "median_size": null
+      }
+    }
+  },
+  "verdict": {
+    "grade": "A",
+    "profile": "diagnostic",
+    "confirmatory_state": "not_applicable",
+    "required_checks": [],
+    "checks": {
+      "claim_stability": {
+        "value": 0.8840579710144928,
+        "threshold": 0.8,
+        "passed": true,
+        "op": ">=",
+        "ci": [
+          0.8115942028985508,
+          0.9565217391304348
+        ],
+        "robust": true,
+        "state": "pass",
+        "description": "modal claim share \u03c0* (filability at \u03b1=0.2)"
+      },
+      "score_stability": {
+        "value": 0.046113494621865134,
+        "threshold": 0.25,
+        "passed": true,
+        "op": "<=",
+        "ci": [
+          0.03223776724681248,
+          0.059469194101836764
+        ],
+        "robust": true,
+        "state": "pass",
+        "description": "coefficient of variation of the quality score"
+      }
+    },
+    "thresholds": {
+      "jaccard": 0.8,
+      "modal_share": 0.8,
+      "score_cv": 0.25,
+      "random_margin": 3.0
+    }
+  },
+  "provenance": {
+    "python": "3.12.3",
+    "platform": "Linux-6.11.0-1016-nvidia-x86_64-with-glibc2.39",
+    "wall_seconds": 2.759
+  },
+  "notes": [
+    "upstream: rodrgo/expander-sae@598f59a (MIT); SAE classes and training loop imported unmodified; the Modal orchestration is replaced by a local driver that follows experiments/scaling_qwen2_5_3b.py stage by stage; file hashes scaling_qwen2_5_3b.py 8ccc61adf149, expander.py 6678e40dc160, dense.py 42c5eb3df18b, training.py 0c6619878406, qwen2_5_3b_replication.json dab2ac7024ba",
+    "data: monology/pile-uncopyrighted at revision 3be90335b66f, first 6000 documents cached (sha256 d51839c0a70e); base corpus = the first 2400 documents, extracted in order and truncated to 200000 training + 5000 test tokens (upstream's 205k tokens end near document 1680; the rest is slack for the bootstrap axis); the 'later slice' corpus starts at document 2500; held-out evaluation uses documents from 5000 on, which no training corpus in this battery touches",
+    "reproduction: shipped layer-12 CE-recovered (0.833, 0.827, 0.825) (expander d=7) and (0.983, 0.983, 0.982) (dense warm-tied), ratio 0.842; base run here 0.831 and 0.978, ratio 0.850 (bf16 on a different GPU and torch; exact byte reproduction is not expected)",
+    "denominators in the base run: CE_clean 2.290, CE_zero-ablated 15.987 nats/token, so 'CE recovered' is measured against a 13.7-nat collapse; the mean-ablation and held-out runs in the hyperparams axis show what the same dictionaries retain under the other convention and on text they were not trained on",
+    "evaluation overlap in the upstream protocol: the 100 CE-evaluation sequences are the first 100 documents of the stream, and the training pool is the first ~205k tokens of the same stream, so upstream's CE recovered is measured on training text; the 'eval_set=held-out' run is the same protocol on unseen documents",
+    "no null control: the finding has no component set, so no specificity ratio can be formed; the substantive comparison is between measurement conventions, reported per run in the manifest"
+  ],
+  "runs": [
+    {
+      "axis": "base",
+      "variant": "base",
+      "seed": 0,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.8504773561249183,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=1",
+      "seed": 1,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.8577478457193853,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=2",
+      "seed": 2,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.8868999083946745,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=3",
+      "seed": 3,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.8908997570866694,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=4",
+      "seed": 4,
+      "size": 0,
+      "claim": "retains 0.60-0.80; expander CE-recovered < 0.80",
+      "score": 0.7996168325282828,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=5",
+      "seed": 5,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.8183319095678454,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=6",
+      "seed": 6,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.8612046776736731,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=7",
+      "seed": 7,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered < 0.80",
+      "score": 0.8115846554343796,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=8",
+      "seed": 8,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.8228648331920794,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=9",
+      "seed": 9,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.823104810148297,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=10",
+      "seed": 10,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.8262115835173206,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=11",
+      "seed": 11,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.8543885897140544,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=12",
+      "seed": 12,
+      "size": 0,
+      "claim": "retains 0.60-0.80; expander CE-recovered < 0.80",
+      "score": 0.7995458243886193,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=13",
+      "seed": 13,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.8257624001993988,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=14",
+      "seed": 14,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.8688334662199358,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=15",
+      "seed": 15,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.8586268116143114,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=16",
+      "seed": 16,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.8441434812284736,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=17",
+      "seed": 17,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.8581534952303755,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=18",
+      "seed": 18,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.8444495507587104,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=19",
+      "seed": 19,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered < 0.80",
+      "score": 0.8012420683357245,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=20",
+      "seed": 20,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.8583178532109724,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=21",
+      "seed": 21,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.8205138049060737,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=22",
+      "seed": 22,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.8499941866685853,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=23",
+      "seed": 23,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.8422600629191251,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=24",
+      "seed": 24,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.8499016547641188,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=25",
+      "seed": 25,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.8337224943922826,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=26",
+      "seed": 26,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.8814730795714296,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=27",
+      "seed": 27,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.8675671058193587,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=28",
+      "seed": 28,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.8877170025662507,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=29",
+      "seed": 29,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.8242177283784975,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=30",
+      "seed": 30,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered < 0.80",
+      "score": 0.81359469081129,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=1",
+      "seed": 0,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered < 0.80",
+      "score": 0.8224013670136935,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=2",
+      "seed": 0,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.8930258906062487,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=3",
+      "seed": 0,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.8457517797821931,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=4",
+      "seed": 0,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.89398862735593,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=5",
+      "seed": 0,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.8657448859469774,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=6",
+      "seed": 0,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.8848485469035574,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=7",
+      "seed": 0,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.8491064168428977,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=8",
+      "seed": 0,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.8819096814243588,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=9",
+      "seed": 0,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.892002344807938,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=10",
+      "seed": 0,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.8912570297392907,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=11",
+      "seed": 0,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.890550661365025,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=12",
+      "seed": 0,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.8842374776617731,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=13",
+      "seed": 0,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.8919783681627569,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=14",
+      "seed": 0,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.8418257683048912,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=15",
+      "seed": 0,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.8887992325407726,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=16",
+      "seed": 0,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.8847917136439053,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=17",
+      "seed": 0,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.8553199293968653,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=18",
+      "seed": 0,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.8619187531392917,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=19",
+      "seed": 0,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.8727374070832079,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=20",
+      "seed": 0,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.8983863018330782,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=21",
+      "seed": 0,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.8786565296980001,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=22",
+      "seed": 0,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.8629979376691693,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=23",
+      "seed": 0,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.8752118054249473,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=24",
+      "seed": 0,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.8551133266259939,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=25",
+      "seed": 0,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.8639126920264728,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=26",
+      "seed": 0,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.88679411687286,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=27",
+      "seed": 0,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.8379905045662885,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=28",
+      "seed": 0,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.8906463650244613,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=29",
+      "seed": 0,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.8927001358633812,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=30",
+      "seed": 0,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.8733979004601997,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "templates",
+      "variant": "template=pile-later-slice",
+      "seed": 0,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.9076799081063645,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "k=32",
+      "seed": 0,
+      "size": 0,
+      "claim": "retains 0.60-0.80; expander CE-recovered < 0.80",
+      "score": 0.6642552178809509,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "k=128",
+      "seed": 0,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.9463388396335197,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "steps=15000",
+      "seed": 0,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.905643058405612,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "dense_arch=dense_tied",
+      "seed": 0,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.847889377156655,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "layer=24",
+      "seed": 0,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.9156125180305719,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "denominator=mean",
+      "seed": 0,
+      "size": 0,
+      "claim": "retains 0.60-0.80; expander CE-recovered < 0.80",
+      "score": 0.7700576084984441,
+      "universe": null,
+      "structure_present": false
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "eval_set=held-out",
+      "seed": 0,
+      "size": 0,
+      "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+      "score": 0.8568156138197076,
+      "universe": null,
+      "structure_present": false
+    }
+  ]
+}

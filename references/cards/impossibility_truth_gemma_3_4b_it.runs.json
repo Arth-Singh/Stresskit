@@ -1,0 +1,3096 @@
+{
+ "real": [
+  {
+   "axis": "base",
+   "variant": "base",
+   "seed": 0,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "both probes decode held-out families; double dissociation; near-orthogonal (|cos|<0.2)",
+   "score": 0.9352,
+   "size": 29,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 60,
+    "auc_impossibility_in_axis": 0.9704,
+    "auc_truth_in_axis": 0.9778,
+    "auc_impossibility_false_vs_true": 0.4222,
+    "auc_impossibility_impossible_vs_false": 0.9778,
+    "auc_truth_impossible_vs_false": 0.2,
+    "auc_truth_impossible_vs_true": 0.9778,
+    "auc_truth_impossible_vs_possible": 0.5481,
+    "ba_impossibility": 0.9667,
+    "ba_truth": 0.9333,
+    "cos_standardized": 0.0168,
+    "cos_raw": 0.0306,
+    "abs_cos": 0.0168,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 14,
+    "n_selected_truth": 15,
+    "direction_sha256_16": {
+     "impossibility": "80f970839c4a3de8",
+     "truth": "de72a295ec209d36"
+    },
+    "run_digest": "529ee315456946b2"
+   }
+  },
+  {
+   "axis": "seeds",
+   "variant": "seed=1",
+   "seed": 1,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "both probes decode held-out families; double dissociation; near-orthogonal (|cos|<0.2)",
+   "score": 0.9241,
+   "size": 30,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 60,
+    "auc_impossibility_in_axis": 0.9704,
+    "auc_truth_in_axis": 0.9778,
+    "auc_impossibility_false_vs_true": 0.4,
+    "auc_impossibility_impossible_vs_false": 0.9778,
+    "auc_truth_impossible_vs_false": 0.1778,
+    "auc_truth_impossible_vs_true": 0.9333,
+    "auc_truth_impossible_vs_possible": 0.5111,
+    "ba_impossibility": 0.9667,
+    "ba_truth": 0.9,
+    "cos_standardized": 0.0168,
+    "cos_raw": 0.0306,
+    "abs_cos": 0.0168,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 14,
+    "n_selected_truth": 16,
+    "direction_sha256_16": {
+     "impossibility": "80f970839c4a3de8",
+     "truth": "de72a295ec209d36"
+    },
+    "run_digest": "ce951508fca6576b"
+   }
+  },
+  {
+   "axis": "seeds",
+   "variant": "seed=2",
+   "seed": 2,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "both probes decode held-out families; double dissociation; near-orthogonal (|cos|<0.2)",
+   "score": 0.9463,
+   "size": 27,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 60,
+    "auc_impossibility_in_axis": 0.9704,
+    "auc_truth_in_axis": 0.9778,
+    "auc_impossibility_false_vs_true": 0.4444,
+    "auc_impossibility_impossible_vs_false": 0.9778,
+    "auc_truth_impossible_vs_false": 0.1333,
+    "auc_truth_impossible_vs_true": 0.9556,
+    "auc_truth_impossible_vs_possible": 0.5333,
+    "ba_impossibility": 0.9333,
+    "ba_truth": 0.9,
+    "cos_standardized": 0.0168,
+    "cos_raw": 0.0306,
+    "abs_cos": 0.0168,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 13,
+    "n_selected_truth": 14,
+    "direction_sha256_16": {
+     "impossibility": "80f970839c4a3de8",
+     "truth": "de72a295ec209d36"
+    },
+    "run_digest": "e8b5a593e618eaf9"
+   }
+  },
+  {
+   "axis": "seeds",
+   "variant": "seed=3",
+   "seed": 3,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "both probes decode held-out families; double dissociation; near-orthogonal (|cos|<0.2)",
+   "score": 0.9352,
+   "size": 26,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 60,
+    "auc_impossibility_in_axis": 0.9926,
+    "auc_truth_in_axis": 0.9556,
+    "auc_impossibility_false_vs_true": 0.4222,
+    "auc_impossibility_impossible_vs_false": 1.0,
+    "auc_truth_impossible_vs_false": 0.2444,
+    "auc_truth_impossible_vs_true": 1.0,
+    "auc_truth_impossible_vs_possible": 0.563,
+    "ba_impossibility": 0.9667,
+    "ba_truth": 0.9,
+    "cos_standardized": 0.0168,
+    "cos_raw": 0.0306,
+    "abs_cos": 0.0168,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 14,
+    "n_selected_truth": 12,
+    "direction_sha256_16": {
+     "impossibility": "80f970839c4a3de8",
+     "truth": "de72a295ec209d36"
+    },
+    "run_digest": "2e9952a3a02d3ff4"
+   }
+  },
+  {
+   "axis": "seeds",
+   "variant": "seed=4",
+   "seed": 4,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "both probes decode held-out families; double dissociation; near-orthogonal (|cos|<0.2)",
+   "score": 0.9796,
+   "size": 29,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 60,
+    "auc_impossibility_in_axis": 0.9926,
+    "auc_truth_in_axis": 1.0,
+    "auc_impossibility_false_vs_true": 0.4667,
+    "auc_impossibility_impossible_vs_false": 1.0,
+    "auc_truth_impossible_vs_false": 0.1556,
+    "auc_truth_impossible_vs_true": 0.9111,
+    "auc_truth_impossible_vs_possible": 0.5259,
+    "ba_impossibility": 0.9333,
+    "ba_truth": 0.9,
+    "cos_standardized": 0.0168,
+    "cos_raw": 0.0306,
+    "abs_cos": 0.0168,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 13,
+    "n_selected_truth": 16,
+    "direction_sha256_16": {
+     "impossibility": "80f970839c4a3de8",
+     "truth": "de72a295ec209d36"
+    },
+    "run_digest": "f9c79260b51c03b7"
+   }
+  },
+  {
+   "axis": "seeds",
+   "variant": "seed=5",
+   "seed": 5,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "both probes decode held-out families; double dissociation; near-orthogonal (|cos|<0.2)",
+   "score": 0.9352,
+   "size": 30,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 60,
+    "auc_impossibility_in_axis": 0.9926,
+    "auc_truth_in_axis": 0.9778,
+    "auc_impossibility_false_vs_true": 0.4,
+    "auc_impossibility_impossible_vs_false": 1.0,
+    "auc_truth_impossible_vs_false": 0.1556,
+    "auc_truth_impossible_vs_true": 0.9333,
+    "auc_truth_impossible_vs_possible": 0.5407,
+    "ba_impossibility": 0.9667,
+    "ba_truth": 0.9,
+    "cos_standardized": 0.0168,
+    "cos_raw": 0.0306,
+    "abs_cos": 0.0168,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 14,
+    "n_selected_truth": 16,
+    "direction_sha256_16": {
+     "impossibility": "80f970839c4a3de8",
+     "truth": "de72a295ec209d36"
+    },
+    "run_digest": "fd1e8b51fa157213"
+   }
+  },
+  {
+   "axis": "seeds",
+   "variant": "seed=6",
+   "seed": 6,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "both probes decode held-out families; double dissociation; near-orthogonal (|cos|<0.2)",
+   "score": 0.9685,
+   "size": 30,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 60,
+    "auc_impossibility_in_axis": 0.9926,
+    "auc_truth_in_axis": 1.0,
+    "auc_impossibility_false_vs_true": 0.4444,
+    "auc_impossibility_impossible_vs_false": 1.0,
+    "auc_truth_impossible_vs_false": 0.1111,
+    "auc_truth_impossible_vs_true": 0.9111,
+    "auc_truth_impossible_vs_possible": 0.5037,
+    "ba_impossibility": 0.9667,
+    "ba_truth": 0.9,
+    "cos_standardized": 0.0168,
+    "cos_raw": 0.0306,
+    "abs_cos": 0.0168,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 14,
+    "n_selected_truth": 16,
+    "direction_sha256_16": {
+     "impossibility": "80f970839c4a3de8",
+     "truth": "de72a295ec209d36"
+    },
+    "run_digest": "161deffec5af24d5"
+   }
+  },
+  {
+   "axis": "seeds",
+   "variant": "seed=7",
+   "seed": 7,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "both probes decode held-out families; double dissociation; near-orthogonal (|cos|<0.2)",
+   "score": 0.9685,
+   "size": 28,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 60,
+    "auc_impossibility_in_axis": 0.9926,
+    "auc_truth_in_axis": 0.9778,
+    "auc_impossibility_false_vs_true": 0.4667,
+    "auc_impossibility_impossible_vs_false": 1.0,
+    "auc_truth_impossible_vs_false": 0.1556,
+    "auc_truth_impossible_vs_true": 0.9333,
+    "auc_truth_impossible_vs_possible": 0.5481,
+    "ba_impossibility": 0.9667,
+    "ba_truth": 0.9,
+    "cos_standardized": 0.0168,
+    "cos_raw": 0.0306,
+    "abs_cos": 0.0168,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 14,
+    "n_selected_truth": 14,
+    "direction_sha256_16": {
+     "impossibility": "80f970839c4a3de8",
+     "truth": "de72a295ec209d36"
+    },
+    "run_digest": "912fa66cce44528f"
+   }
+  },
+  {
+   "axis": "seeds",
+   "variant": "seed=8",
+   "seed": 8,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "both probes decode held-out families; double dissociation; near-orthogonal (|cos|<0.2)",
+   "score": 0.9352,
+   "size": 30,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 60,
+    "auc_impossibility_in_axis": 0.9926,
+    "auc_truth_in_axis": 0.9778,
+    "auc_impossibility_false_vs_true": 0.4,
+    "auc_impossibility_impossible_vs_false": 1.0,
+    "auc_truth_impossible_vs_false": 0.2,
+    "auc_truth_impossible_vs_true": 0.9333,
+    "auc_truth_impossible_vs_possible": 0.563,
+    "ba_impossibility": 0.9667,
+    "ba_truth": 0.9,
+    "cos_standardized": 0.0168,
+    "cos_raw": 0.0306,
+    "abs_cos": 0.0168,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 14,
+    "n_selected_truth": 16,
+    "direction_sha256_16": {
+     "impossibility": "80f970839c4a3de8",
+     "truth": "de72a295ec209d36"
+    },
+    "run_digest": "384ca48fd07ffeaf"
+   }
+  },
+  {
+   "axis": "seeds",
+   "variant": "seed=9",
+   "seed": 9,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "both probes decode held-out families; double dissociation; near-orthogonal (|cos|<0.2)",
+   "score": 0.9574,
+   "size": 27,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 60,
+    "auc_impossibility_in_axis": 0.9926,
+    "auc_truth_in_axis": 0.9333,
+    "auc_impossibility_false_vs_true": 0.5111,
+    "auc_impossibility_impossible_vs_false": 1.0,
+    "auc_truth_impossible_vs_false": 0.2222,
+    "auc_truth_impossible_vs_true": 0.9778,
+    "auc_truth_impossible_vs_possible": 0.5704,
+    "ba_impossibility": 0.9667,
+    "ba_truth": 0.8667,
+    "cos_standardized": 0.0168,
+    "cos_raw": 0.0306,
+    "abs_cos": 0.0168,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 14,
+    "n_selected_truth": 13,
+    "direction_sha256_16": {
+     "impossibility": "80f970839c4a3de8",
+     "truth": "de72a295ec209d36"
+    },
+    "run_digest": "433951cc615c4de7"
+   }
+  },
+  {
+   "axis": "seeds",
+   "variant": "seed=10",
+   "seed": 10,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "both probes decode held-out families; double dissociation; near-orthogonal (|cos|<0.2)",
+   "score": 0.9389,
+   "size": 30,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 60,
+    "auc_impossibility_in_axis": 0.9556,
+    "auc_truth_in_axis": 1.0,
+    "auc_impossibility_false_vs_true": 0.4222,
+    "auc_impossibility_impossible_vs_false": 0.9556,
+    "auc_truth_impossible_vs_false": 0.1556,
+    "auc_truth_impossible_vs_true": 0.9333,
+    "auc_truth_impossible_vs_possible": 0.5259,
+    "ba_impossibility": 0.9667,
+    "ba_truth": 0.9,
+    "cos_standardized": 0.0168,
+    "cos_raw": 0.0306,
+    "abs_cos": 0.0168,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 14,
+    "n_selected_truth": 16,
+    "direction_sha256_16": {
+     "impossibility": "80f970839c4a3de8",
+     "truth": "de72a295ec209d36"
+    },
+    "run_digest": "001c814ebac59e46"
+   }
+  },
+  {
+   "axis": "seeds",
+   "variant": "seed=11",
+   "seed": 11,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "both probes decode held-out families; double dissociation; near-orthogonal (|cos|<0.2)",
+   "score": 0.9389,
+   "size": 28,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 60,
+    "auc_impossibility_in_axis": 0.9778,
+    "auc_truth_in_axis": 0.9778,
+    "auc_impossibility_false_vs_true": 0.4222,
+    "auc_impossibility_impossible_vs_false": 0.9778,
+    "auc_truth_impossible_vs_false": 0.2222,
+    "auc_truth_impossible_vs_true": 0.9111,
+    "auc_truth_impossible_vs_possible": 0.5407,
+    "ba_impossibility": 0.9667,
+    "ba_truth": 0.9,
+    "cos_standardized": 0.0168,
+    "cos_raw": 0.0306,
+    "abs_cos": 0.0168,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 14,
+    "n_selected_truth": 14,
+    "direction_sha256_16": {
+     "impossibility": "80f970839c4a3de8",
+     "truth": "de72a295ec209d36"
+    },
+    "run_digest": "1800fe70e4892124"
+   }
+  },
+  {
+   "axis": "seeds",
+   "variant": "seed=12",
+   "seed": 12,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "both probes decode held-out families; double dissociation; near-orthogonal (|cos|<0.2)",
+   "score": 0.9352,
+   "size": 28,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 60,
+    "auc_impossibility_in_axis": 0.9704,
+    "auc_truth_in_axis": 0.9778,
+    "auc_impossibility_false_vs_true": 0.4222,
+    "auc_impossibility_impossible_vs_false": 0.9778,
+    "auc_truth_impossible_vs_false": 0.2,
+    "auc_truth_impossible_vs_true": 0.9778,
+    "auc_truth_impossible_vs_possible": 0.5407,
+    "ba_impossibility": 0.9667,
+    "ba_truth": 0.9,
+    "cos_standardized": 0.0168,
+    "cos_raw": 0.0306,
+    "abs_cos": 0.0168,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 14,
+    "n_selected_truth": 14,
+    "direction_sha256_16": {
+     "impossibility": "80f970839c4a3de8",
+     "truth": "de72a295ec209d36"
+    },
+    "run_digest": "0e2eaec762486b96"
+   }
+  },
+  {
+   "axis": "seeds",
+   "variant": "seed=13",
+   "seed": 13,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "both probes decode held-out families; double dissociation; near-orthogonal (|cos|<0.2)",
+   "score": 0.9352,
+   "size": 30,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 60,
+    "auc_impossibility_in_axis": 0.9704,
+    "auc_truth_in_axis": 1.0,
+    "auc_impossibility_false_vs_true": 0.4,
+    "auc_impossibility_impossible_vs_false": 0.9556,
+    "auc_truth_impossible_vs_false": 0.1778,
+    "auc_truth_impossible_vs_true": 0.9556,
+    "auc_truth_impossible_vs_possible": 0.5556,
+    "ba_impossibility": 0.9667,
+    "ba_truth": 0.9,
+    "cos_standardized": 0.0168,
+    "cos_raw": 0.0306,
+    "abs_cos": 0.0168,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 14,
+    "n_selected_truth": 16,
+    "direction_sha256_16": {
+     "impossibility": "80f970839c4a3de8",
+     "truth": "de72a295ec209d36"
+    },
+    "run_digest": "914492a82bc2682b"
+   }
+  },
+  {
+   "axis": "seeds",
+   "variant": "seed=14",
+   "seed": 14,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "both probes decode held-out families; double dissociation; near-orthogonal (|cos|<0.2)",
+   "score": 0.9056,
+   "size": 30,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 60,
+    "auc_impossibility_in_axis": 0.9556,
+    "auc_truth_in_axis": 1.0,
+    "auc_impossibility_false_vs_true": 0.3556,
+    "auc_impossibility_impossible_vs_false": 0.9556,
+    "auc_truth_impossible_vs_false": 0.1333,
+    "auc_truth_impossible_vs_true": 0.9333,
+    "auc_truth_impossible_vs_possible": 0.5037,
+    "ba_impossibility": 0.9667,
+    "ba_truth": 0.9,
+    "cos_standardized": 0.0168,
+    "cos_raw": 0.0306,
+    "abs_cos": 0.0168,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 14,
+    "n_selected_truth": 16,
+    "direction_sha256_16": {
+     "impossibility": "80f970839c4a3de8",
+     "truth": "de72a295ec209d36"
+    },
+    "run_digest": "9588af14b45b686a"
+   }
+  },
+  {
+   "axis": "seeds",
+   "variant": "seed=15",
+   "seed": 15,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "both probes decode held-out families; double dissociation; near-orthogonal (|cos|<0.2)",
+   "score": 0.9389,
+   "size": 30,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 60,
+    "auc_impossibility_in_axis": 0.9778,
+    "auc_truth_in_axis": 1.0,
+    "auc_impossibility_false_vs_true": 0.4,
+    "auc_impossibility_impossible_vs_false": 0.9778,
+    "auc_truth_impossible_vs_false": 0.1556,
+    "auc_truth_impossible_vs_true": 0.9778,
+    "auc_truth_impossible_vs_possible": 0.5407,
+    "ba_impossibility": 0.9667,
+    "ba_truth": 0.9,
+    "cos_standardized": 0.0168,
+    "cos_raw": 0.0306,
+    "abs_cos": 0.0168,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 14,
+    "n_selected_truth": 16,
+    "direction_sha256_16": {
+     "impossibility": "80f970839c4a3de8",
+     "truth": "de72a295ec209d36"
+    },
+    "run_digest": "80979f91e4b1c715"
+   }
+  },
+  {
+   "axis": "seeds",
+   "variant": "seed=16",
+   "seed": 16,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "both probes decode held-out families; double dissociation; near-orthogonal (|cos|<0.2)",
+   "score": 0.9611,
+   "size": 29,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 60,
+    "auc_impossibility_in_axis": 0.9778,
+    "auc_truth_in_axis": 1.0,
+    "auc_impossibility_false_vs_true": 0.4444,
+    "auc_impossibility_impossible_vs_false": 1.0,
+    "auc_truth_impossible_vs_false": 0.1556,
+    "auc_truth_impossible_vs_true": 0.9333,
+    "auc_truth_impossible_vs_possible": 0.5481,
+    "ba_impossibility": 0.9333,
+    "ba_truth": 0.9,
+    "cos_standardized": 0.0168,
+    "cos_raw": 0.0306,
+    "abs_cos": 0.0168,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 13,
+    "n_selected_truth": 16,
+    "direction_sha256_16": {
+     "impossibility": "80f970839c4a3de8",
+     "truth": "de72a295ec209d36"
+    },
+    "run_digest": "367e90724c1f641e"
+   }
+  },
+  {
+   "axis": "bootstrap",
+   "variant": "resample=1",
+   "seed": 0,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "both probes decode held-out families; double dissociation; near-orthogonal (|cos|<0.2)",
+   "score": 0.9019,
+   "size": 30,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 37,
+    "auc_impossibility_in_axis": 0.9704,
+    "auc_truth_in_axis": 0.9778,
+    "auc_impossibility_false_vs_true": 0.3556,
+    "auc_impossibility_impossible_vs_false": 0.9778,
+    "auc_truth_impossible_vs_false": 0.3333,
+    "auc_truth_impossible_vs_true": 1.0,
+    "auc_truth_impossible_vs_possible": 0.7037,
+    "ba_impossibility": 0.9111,
+    "ba_truth": 0.8667,
+    "cos_standardized": 0.1143,
+    "cos_raw": 0.1176,
+    "abs_cos": 0.1143,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 15,
+    "n_selected_truth": 15,
+    "direction_sha256_16": {
+     "impossibility": "e46526f5a7b1f240",
+     "truth": "e5dbc19940688fe3"
+    },
+    "run_digest": "8aa480082983188c"
+   }
+  },
+  {
+   "axis": "bootstrap",
+   "variant": "resample=2",
+   "seed": 0,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "both probes decode held-out families; double dissociation; near-orthogonal (|cos|<0.2)",
+   "score": 0.9389,
+   "size": 25,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 40,
+    "auc_impossibility_in_axis": 0.9778,
+    "auc_truth_in_axis": 0.9556,
+    "auc_impossibility_false_vs_true": 0.4444,
+    "auc_impossibility_impossible_vs_false": 0.9778,
+    "auc_truth_impossible_vs_false": 0.2667,
+    "auc_truth_impossible_vs_true": 1.0,
+    "auc_truth_impossible_vs_possible": 0.6444,
+    "ba_impossibility": 0.9333,
+    "ba_truth": 0.9,
+    "cos_standardized": 0.0941,
+    "cos_raw": 0.1023,
+    "abs_cos": 0.0941,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 13,
+    "n_selected_truth": 12,
+    "direction_sha256_16": {
+     "impossibility": "cef922837a73553b",
+     "truth": "d639a3c258b1cb2d"
+    },
+    "run_digest": "d3fb6f1e1b486ed3"
+   }
+  },
+  {
+   "axis": "bootstrap",
+   "variant": "resample=3",
+   "seed": 0,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "both probes decode held-out families; double dissociation; near-orthogonal (|cos|<0.2)",
+   "score": 0.9315,
+   "size": 26,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 37,
+    "auc_impossibility_in_axis": 0.9407,
+    "auc_truth_in_axis": 0.9778,
+    "auc_impossibility_false_vs_true": 0.4444,
+    "auc_impossibility_impossible_vs_false": 0.9556,
+    "auc_truth_impossible_vs_false": 0.2889,
+    "auc_truth_impossible_vs_true": 0.9556,
+    "auc_truth_impossible_vs_possible": 0.5778,
+    "ba_impossibility": 0.9333,
+    "ba_truth": 0.9333,
+    "cos_standardized": 0.0008,
+    "cos_raw": -0.0055,
+    "abs_cos": 0.0008,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 13,
+    "n_selected_truth": 13,
+    "direction_sha256_16": {
+     "impossibility": "9bec9ebd99b53048",
+     "truth": "48f92b857f6fdc87"
+    },
+    "run_digest": "6cfa11fccf95722a"
+   }
+  },
+  {
+   "axis": "bootstrap",
+   "variant": "resample=4",
+   "seed": 0,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "both probes decode held-out families; double dissociation; near-orthogonal (|cos|<0.2)",
+   "score": 0.9685,
+   "size": 27,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 35,
+    "auc_impossibility_in_axis": 0.9704,
+    "auc_truth_in_axis": 0.9778,
+    "auc_impossibility_false_vs_true": 0.4889,
+    "auc_impossibility_impossible_vs_false": 0.9778,
+    "auc_truth_impossible_vs_false": 0.2,
+    "auc_truth_impossible_vs_true": 0.9556,
+    "auc_truth_impossible_vs_possible": 0.5037,
+    "ba_impossibility": 0.9333,
+    "ba_truth": 0.9,
+    "cos_standardized": 0.0011,
+    "cos_raw": -0.0032,
+    "abs_cos": 0.0011,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 13,
+    "n_selected_truth": 14,
+    "direction_sha256_16": {
+     "impossibility": "49742fe31c89d801",
+     "truth": "08ab8c1d98d555d1"
+    },
+    "run_digest": "387e9454556261b8"
+   }
+  },
+  {
+   "axis": "bootstrap",
+   "variant": "resample=5",
+   "seed": 0,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "both probes decode held-out families; double dissociation; near-orthogonal (|cos|<0.2)",
+   "score": 0.9019,
+   "size": 25,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 37,
+    "auc_impossibility_in_axis": 0.9704,
+    "auc_truth_in_axis": 0.9333,
+    "auc_impossibility_false_vs_true": 0.4,
+    "auc_impossibility_impossible_vs_false": 0.9778,
+    "auc_truth_impossible_vs_false": 0.2222,
+    "auc_truth_impossible_vs_true": 0.9333,
+    "auc_truth_impossible_vs_possible": 0.6148,
+    "ba_impossibility": 0.9667,
+    "ba_truth": 0.8667,
+    "cos_standardized": 0.0099,
+    "cos_raw": 0.0403,
+    "abs_cos": 0.0099,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 14,
+    "n_selected_truth": 11,
+    "direction_sha256_16": {
+     "impossibility": "b925f6453844ed36",
+     "truth": "c5cb9729f363fa05"
+    },
+    "run_digest": "6316ac9522838f8f"
+   }
+  },
+  {
+   "axis": "bootstrap",
+   "variant": "resample=6",
+   "seed": 0,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "both probes decode held-out families; double dissociation; near-orthogonal (|cos|<0.2)",
+   "score": 0.9611,
+   "size": 28,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 38,
+    "auc_impossibility_in_axis": 0.9778,
+    "auc_truth_in_axis": 0.9556,
+    "auc_impossibility_false_vs_true": 0.4889,
+    "auc_impossibility_impossible_vs_false": 0.9778,
+    "auc_truth_impossible_vs_false": 0.2444,
+    "auc_truth_impossible_vs_true": 1.0,
+    "auc_truth_impossible_vs_possible": 0.6148,
+    "ba_impossibility": 0.9667,
+    "ba_truth": 0.9,
+    "cos_standardized": 0.0887,
+    "cos_raw": 0.0422,
+    "abs_cos": 0.0887,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 14,
+    "n_selected_truth": 14,
+    "direction_sha256_16": {
+     "impossibility": "577df0864897a225",
+     "truth": "7b203f1a252ba912"
+    },
+    "run_digest": "d370dcaa805be425"
+   }
+  },
+  {
+   "axis": "bootstrap",
+   "variant": "resample=7",
+   "seed": 0,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "both probes decode held-out families; truth probe impossibility-blind only; near-orthogonal (|cos|<0.2)",
+   "score": 0.8796,
+   "size": 27,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 37,
+    "auc_impossibility_in_axis": 0.9704,
+    "auc_truth_in_axis": 0.9556,
+    "auc_impossibility_false_vs_true": 0.3333,
+    "auc_impossibility_impossible_vs_false": 0.9778,
+    "auc_truth_impossible_vs_false": 0.2222,
+    "auc_truth_impossible_vs_true": 0.8444,
+    "auc_truth_impossible_vs_possible": 0.4815,
+    "ba_impossibility": 0.9333,
+    "ba_truth": 0.9,
+    "cos_standardized": -0.1194,
+    "cos_raw": -0.158,
+    "abs_cos": 0.1194,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 13,
+    "n_selected_truth": 14,
+    "direction_sha256_16": {
+     "impossibility": "9bca95e44792fd71",
+     "truth": "b61f41b240f5ac87"
+    },
+    "run_digest": "cc371f774b4365fe"
+   }
+  },
+  {
+   "axis": "bootstrap",
+   "variant": "resample=8",
+   "seed": 0,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "both probes decode held-out families; double dissociation; near-orthogonal (|cos|<0.2)",
+   "score": 0.9019,
+   "size": 23,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 40,
+    "auc_impossibility_in_axis": 0.9704,
+    "auc_truth_in_axis": 0.9333,
+    "auc_impossibility_false_vs_true": 0.4,
+    "auc_impossibility_impossible_vs_false": 0.9778,
+    "auc_truth_impossible_vs_false": 0.2667,
+    "auc_truth_impossible_vs_true": 0.9333,
+    "auc_truth_impossible_vs_possible": 0.6444,
+    "ba_impossibility": 0.9,
+    "ba_truth": 0.8667,
+    "cos_standardized": 0.0617,
+    "cos_raw": 0.0589,
+    "abs_cos": 0.0617,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 12,
+    "n_selected_truth": 11,
+    "direction_sha256_16": {
+     "impossibility": "c24c94b654b1f7cb",
+     "truth": "b623ab29df6e8239"
+    },
+    "run_digest": "8b302946be6f608f"
+   }
+  },
+  {
+   "axis": "bootstrap",
+   "variant": "resample=9",
+   "seed": 0,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "both probes decode held-out families; double dissociation; near-orthogonal (|cos|<0.2)",
+   "score": 0.9611,
+   "size": 24,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 36,
+    "auc_impossibility_in_axis": 0.9778,
+    "auc_truth_in_axis": 0.9778,
+    "auc_impossibility_false_vs_true": 0.4667,
+    "auc_impossibility_impossible_vs_false": 0.9778,
+    "auc_truth_impossible_vs_false": 0.2889,
+    "auc_truth_impossible_vs_true": 0.9778,
+    "auc_truth_impossible_vs_possible": 0.6519,
+    "ba_impossibility": 0.9,
+    "ba_truth": 0.9,
+    "cos_standardized": 0.1125,
+    "cos_raw": 0.0665,
+    "abs_cos": 0.1125,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 12,
+    "n_selected_truth": 12,
+    "direction_sha256_16": {
+     "impossibility": "273ae9cb78c3606f",
+     "truth": "0b3047ab6ac6d24a"
+    },
+    "run_digest": "7a3dd5eb614afc95"
+   }
+  },
+  {
+   "axis": "bootstrap",
+   "variant": "resample=10",
+   "seed": 0,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "both probes decode held-out families; double dissociation; near-orthogonal (|cos|<0.2)",
+   "score": 0.9352,
+   "size": 26,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 34,
+    "auc_impossibility_in_axis": 0.9704,
+    "auc_truth_in_axis": 0.9778,
+    "auc_impossibility_false_vs_true": 0.4222,
+    "auc_impossibility_impossible_vs_false": 0.9778,
+    "auc_truth_impossible_vs_false": 0.2444,
+    "auc_truth_impossible_vs_true": 0.9111,
+    "auc_truth_impossible_vs_possible": 0.5926,
+    "ba_impossibility": 0.9333,
+    "ba_truth": 0.9333,
+    "cos_standardized": -0.0798,
+    "cos_raw": -0.1152,
+    "abs_cos": 0.0798,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 13,
+    "n_selected_truth": 13,
+    "direction_sha256_16": {
+     "impossibility": "5e54204833e5b85c",
+     "truth": "d600549a9121f062"
+    },
+    "run_digest": "71997e99c66a95ac"
+   }
+  },
+  {
+   "axis": "bootstrap",
+   "variant": "resample=11",
+   "seed": 0,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "both probes decode held-out families; double dissociation; near-orthogonal (|cos|<0.2)",
+   "score": 0.9426,
+   "size": 25,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 40,
+    "auc_impossibility_in_axis": 0.963,
+    "auc_truth_in_axis": 0.9778,
+    "auc_impossibility_false_vs_true": 0.4444,
+    "auc_impossibility_impossible_vs_false": 0.9778,
+    "auc_truth_impossible_vs_false": 0.2444,
+    "auc_truth_impossible_vs_true": 1.0,
+    "auc_truth_impossible_vs_possible": 0.7037,
+    "ba_impossibility": 0.9333,
+    "ba_truth": 0.9,
+    "cos_standardized": 0.1347,
+    "cos_raw": 0.23,
+    "abs_cos": 0.1347,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 13,
+    "n_selected_truth": 12,
+    "direction_sha256_16": {
+     "impossibility": "e7d6ca4ee3be8c1f",
+     "truth": "d2f4bbc81bc227c3"
+    },
+    "run_digest": "bd327752527f6360"
+   }
+  },
+  {
+   "axis": "bootstrap",
+   "variant": "resample=12",
+   "seed": 0,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "both probes decode held-out families; double dissociation; near-orthogonal (|cos|<0.2)",
+   "score": 0.9352,
+   "size": 26,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 41,
+    "auc_impossibility_in_axis": 0.9704,
+    "auc_truth_in_axis": 0.9778,
+    "auc_impossibility_false_vs_true": 0.4222,
+    "auc_impossibility_impossible_vs_false": 0.9778,
+    "auc_truth_impossible_vs_false": 0.2667,
+    "auc_truth_impossible_vs_true": 1.0,
+    "auc_truth_impossible_vs_possible": 0.5704,
+    "ba_impossibility": 0.9,
+    "ba_truth": 0.9,
+    "cos_standardized": -0.006,
+    "cos_raw": 0.0268,
+    "abs_cos": 0.006,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 12,
+    "n_selected_truth": 14,
+    "direction_sha256_16": {
+     "impossibility": "272ad0bb45391839",
+     "truth": "8584c83fa285ed85"
+    },
+    "run_digest": "8fc0972949d3280a"
+   }
+  },
+  {
+   "axis": "bootstrap",
+   "variant": "resample=13",
+   "seed": 0,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "both probes decode held-out families; double dissociation; near-orthogonal (|cos|<0.2)",
+   "score": 0.9241,
+   "size": 25,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 44,
+    "auc_impossibility_in_axis": 0.9704,
+    "auc_truth_in_axis": 0.9778,
+    "auc_impossibility_false_vs_true": 0.4,
+    "auc_impossibility_impossible_vs_false": 0.9778,
+    "auc_truth_impossible_vs_false": 0.2889,
+    "auc_truth_impossible_vs_true": 1.0,
+    "auc_truth_impossible_vs_possible": 0.6593,
+    "ba_impossibility": 0.9333,
+    "ba_truth": 0.9,
+    "cos_standardized": 0.0896,
+    "cos_raw": 0.0777,
+    "abs_cos": 0.0896,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 13,
+    "n_selected_truth": 12,
+    "direction_sha256_16": {
+     "impossibility": "eeef7bd8ae072e32",
+     "truth": "dd37be8373931a8a"
+    },
+    "run_digest": "b00938d9e8c5daa3"
+   }
+  },
+  {
+   "axis": "bootstrap",
+   "variant": "resample=14",
+   "seed": 0,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "both probes decode held-out families; truth probe impossibility-blind only; near-orthogonal (|cos|<0.2)",
+   "score": 0.8352,
+   "size": 27,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 36,
+    "auc_impossibility_in_axis": 0.9704,
+    "auc_truth_in_axis": 0.9556,
+    "auc_impossibility_false_vs_true": 0.7556,
+    "auc_impossibility_impossible_vs_false": 1.0,
+    "auc_truth_impossible_vs_false": 0.1778,
+    "auc_truth_impossible_vs_true": 1.0,
+    "auc_truth_impossible_vs_possible": 0.6,
+    "ba_impossibility": 0.9333,
+    "ba_truth": 0.9,
+    "cos_standardized": 0.0554,
+    "cos_raw": -0.032,
+    "abs_cos": 0.0554,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 13,
+    "n_selected_truth": 14,
+    "direction_sha256_16": {
+     "impossibility": "4775d1fcd088701b",
+     "truth": "1946fffcf8bcbfb1"
+    },
+    "run_digest": "de87875bfaba2e23"
+   }
+  },
+  {
+   "axis": "bootstrap",
+   "variant": "resample=15",
+   "seed": 0,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "both probes decode held-out families; double dissociation; near-orthogonal (|cos|<0.2)",
+   "score": 0.9685,
+   "size": 29,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 39,
+    "auc_impossibility_in_axis": 0.9704,
+    "auc_truth_in_axis": 0.9778,
+    "auc_impossibility_false_vs_true": 0.4889,
+    "auc_impossibility_impossible_vs_false": 0.9778,
+    "auc_truth_impossible_vs_false": 0.2222,
+    "auc_truth_impossible_vs_true": 0.9778,
+    "auc_truth_impossible_vs_possible": 0.5852,
+    "ba_impossibility": 0.9556,
+    "ba_truth": 0.9,
+    "cos_standardized": 0.039,
+    "cos_raw": 0.0098,
+    "abs_cos": 0.039,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 15,
+    "n_selected_truth": 14,
+    "direction_sha256_16": {
+     "impossibility": "622b22c13ccfe4d8",
+     "truth": "8a742f937aa354f1"
+    },
+    "run_digest": "02200efcf7b5012e"
+   }
+  },
+  {
+   "axis": "bootstrap",
+   "variant": "resample=16",
+   "seed": 0,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "both probes decode held-out families; truth probe impossibility-blind only; oblique (|cos|>=0.2)",
+   "score": 0.8907,
+   "size": 29,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 39,
+    "auc_impossibility_in_axis": 0.9704,
+    "auc_truth_in_axis": 0.9778,
+    "auc_impossibility_false_vs_true": 0.3333,
+    "auc_impossibility_impossible_vs_false": 0.9778,
+    "auc_truth_impossible_vs_false": 0.1556,
+    "auc_truth_impossible_vs_true": 0.8,
+    "auc_truth_impossible_vs_possible": 0.4444,
+    "ba_impossibility": 0.9333,
+    "ba_truth": 0.9,
+    "cos_standardized": -0.2052,
+    "cos_raw": -0.1762,
+    "abs_cos": 0.2052,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 13,
+    "n_selected_truth": 16,
+    "direction_sha256_16": {
+     "impossibility": "64701f39ac521558",
+     "truth": "5ff1867781d12d87"
+    },
+    "run_digest": "3d7b253999997f39"
+   }
+  },
+  {
+   "axis": "templates",
+   "variant": "template=paraphrased-instruction",
+   "seed": 0,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "both probes decode held-out families; double dissociation; near-orthogonal (|cos|<0.2)",
+   "score": 0.9167,
+   "size": 30,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "paraphrased-instruction",
+    "n_train": 60,
+    "n_train_unique": 60,
+    "auc_impossibility_in_axis": 0.9778,
+    "auc_truth_in_axis": 0.9556,
+    "auc_impossibility_false_vs_true": 0.6,
+    "auc_impossibility_impossible_vs_false": 0.9778,
+    "auc_truth_impossible_vs_false": 0.2222,
+    "auc_truth_impossible_vs_true": 0.9778,
+    "auc_truth_impossible_vs_possible": 0.6296,
+    "ba_impossibility": 0.9667,
+    "ba_truth": 0.9,
+    "cos_standardized": 0.0874,
+    "cos_raw": -0.0046,
+    "abs_cos": 0.0874,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 14,
+    "n_selected_truth": 16,
+    "direction_sha256_16": {
+     "impossibility": "b03d1f57ccc58c3f",
+     "truth": "5bca3b6d7fe0ecee"
+    },
+    "run_digest": "5509283dc1616a8b"
+   }
+  },
+  {
+   "axis": "templates",
+   "variant": "template=bare-statement",
+   "seed": 0,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "both probes decode held-out families; double dissociation; near-orthogonal (|cos|<0.2)",
+   "score": 0.8722,
+   "size": 28,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "bare-statement",
+    "n_train": 60,
+    "n_train_unique": 60,
+    "auc_impossibility_in_axis": 0.9556,
+    "auc_truth_in_axis": 0.9333,
+    "auc_impossibility_false_vs_true": 0.6444,
+    "auc_impossibility_impossible_vs_false": 0.9556,
+    "auc_truth_impossible_vs_false": 0.0889,
+    "auc_truth_impossible_vs_true": 0.8889,
+    "auc_truth_impossible_vs_possible": 0.6222,
+    "ba_impossibility": 0.9333,
+    "ba_truth": 0.9333,
+    "cos_standardized": 0.073,
+    "cos_raw": 0.0815,
+    "abs_cos": 0.073,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 13,
+    "n_selected_truth": 15,
+    "direction_sha256_16": {
+     "impossibility": "59e8dba79171ae0e",
+     "truth": "d5ef6b70396d306c"
+    },
+    "run_digest": "fbab4f0eb3ea636d"
+   }
+  },
+  {
+   "axis": "hyperparams",
+   "variant": "depth=12",
+   "seed": 0,
+   "config": {
+    "depth": 12,
+    "C": 0.1
+   },
+   "claim": "both probes decode held-out families; double dissociation; near-orthogonal (|cos|<0.2)",
+   "score": 0.813,
+   "size": 31,
+   "meta": {
+    "depth": 12,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 60,
+    "auc_impossibility_in_axis": 0.9481,
+    "auc_truth_in_axis": 0.8,
+    "auc_impossibility_false_vs_true": 0.3778,
+    "auc_impossibility_impossible_vs_false": 1.0,
+    "auc_truth_impossible_vs_false": 0.3556,
+    "auc_truth_impossible_vs_true": 0.7778,
+    "auc_truth_impossible_vs_possible": 0.4667,
+    "ba_impossibility": 0.8667,
+    "ba_truth": 0.7,
+    "cos_standardized": 0.0495,
+    "cos_raw": 0.0466,
+    "abs_cos": 0.0495,
+    "dissociation_two_sided": true,
+    "n_selected_impossibility": 15,
+    "n_selected_truth": 16,
+    "direction_sha256_16": {
+     "impossibility": "f9c63b7ff5b131a1",
+     "truth": "778ddf0eac988613"
+    },
+    "run_digest": "1e5d061966e2a01f"
+   }
+  },
+  {
+   "axis": "hyperparams",
+   "variant": "depth=20",
+   "seed": 0,
+   "config": {
+    "depth": 20,
+    "C": 0.1
+   },
+   "claim": "both probes decode held-out families; double dissociation; near-orthogonal (|cos|<0.2)",
+   "score": 0.913,
+   "size": 27,
+   "meta": {
+    "depth": 20,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 60,
+    "auc_impossibility_in_axis": 0.9704,
+    "auc_truth_in_axis": 0.9778,
+    "auc_impossibility_false_vs_true": 0.6222,
+    "auc_impossibility_impossible_vs_false": 0.9778,
+    "auc_truth_impossible_vs_false": 0.3333,
+    "auc_truth_impossible_vs_true": 1.0,
+    "auc_truth_impossible_vs_possible": 0.6889,
+    "ba_impossibility": 0.9,
+    "ba_truth": 0.9333,
+    "cos_standardized": 0.0097,
+    "cos_raw": 0.1175,
+    "abs_cos": 0.0097,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 12,
+    "n_selected_truth": 15,
+    "direction_sha256_16": {
+     "impossibility": "090a8640930c7082",
+     "truth": "6bfee4fa103d3342"
+    },
+    "run_digest": "b49e5e7e3fdb10f9"
+   }
+  },
+  {
+   "axis": "hyperparams",
+   "variant": "C=0.01",
+   "seed": 0,
+   "config": {
+    "depth": 16,
+    "C": 0.01
+   },
+   "claim": "both probes decode held-out families; double dissociation; near-orthogonal (|cos|<0.2)",
+   "score": 0.9352,
+   "size": 27,
+   "meta": {
+    "depth": 16,
+    "C": 0.01,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 60,
+    "auc_impossibility_in_axis": 0.9704,
+    "auc_truth_in_axis": 0.9778,
+    "auc_impossibility_false_vs_true": 0.4222,
+    "auc_impossibility_impossible_vs_false": 0.9778,
+    "auc_truth_impossible_vs_false": 0.2,
+    "auc_truth_impossible_vs_true": 0.9778,
+    "auc_truth_impossible_vs_possible": 0.5556,
+    "ba_impossibility": 0.9667,
+    "ba_truth": 0.9333,
+    "cos_standardized": -0.0231,
+    "cos_raw": -0.0206,
+    "abs_cos": 0.0231,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 14,
+    "n_selected_truth": 13,
+    "direction_sha256_16": {
+     "impossibility": "4ce8be95d4e04b72",
+     "truth": "20c531ea7ffd41d1"
+    },
+    "run_digest": "9a035e44c7225e8f"
+   }
+  },
+  {
+   "axis": "hyperparams",
+   "variant": "C=1.0",
+   "seed": 0,
+   "config": {
+    "depth": 16,
+    "C": 1.0
+   },
+   "claim": "both probes decode held-out families; double dissociation; near-orthogonal (|cos|<0.2)",
+   "score": 0.9389,
+   "size": 30,
+   "meta": {
+    "depth": 16,
+    "C": 1.0,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 60,
+    "auc_impossibility_in_axis": 0.9778,
+    "auc_truth_in_axis": 0.9778,
+    "auc_impossibility_false_vs_true": 0.4222,
+    "auc_impossibility_impossible_vs_false": 0.9778,
+    "auc_truth_impossible_vs_false": 0.2,
+    "auc_truth_impossible_vs_true": 0.9556,
+    "auc_truth_impossible_vs_possible": 0.5407,
+    "ba_impossibility": 0.9667,
+    "ba_truth": 0.9,
+    "cos_standardized": 0.037,
+    "cos_raw": 0.0485,
+    "abs_cos": 0.037,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 14,
+    "n_selected_truth": 16,
+    "direction_sha256_16": {
+     "impossibility": "7e736b3d1396e4f8",
+     "truth": "e1263cc97b76aaea"
+    },
+    "run_digest": "ff9626de635ecea0"
+   }
+  }
+ ],
+ "null": [
+  {
+   "axis": "base",
+   "variant": "base",
+   "seed": 1516,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "neither probe decodes; truth probe impossibility-blind only; near-orthogonal (|cos|<0.2)",
+   "score": 0.5167,
+   "size": 32,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 60,
+    "auc_impossibility_in_axis": 0.5111,
+    "auc_truth_in_axis": 0.7333,
+    "auc_impossibility_false_vs_true": 0.2889,
+    "auc_impossibility_impossible_vs_false": 0.5556,
+    "auc_truth_impossible_vs_false": 0.3333,
+    "auc_truth_impossible_vs_true": 0.4667,
+    "auc_truth_impossible_vs_possible": 0.2963,
+    "ba_impossibility": 0.5,
+    "ba_truth": 0.6333,
+    "cos_standardized": 0.0737,
+    "cos_raw": 0.1556,
+    "abs_cos": 0.0737,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 16,
+    "n_selected_truth": 16,
+    "direction_sha256_16": {
+     "impossibility": "bd9ff01e7f1b68de",
+     "truth": "efcf2ac370222d8e"
+    },
+    "run_digest": "41fecd2491a083b3"
+   }
+  },
+  {
+   "axis": "seeds",
+   "variant": "seed=1517",
+   "seed": 1517,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "only the truth probe decodes; truth probe impossibility-blind only; near-orthogonal (|cos|<0.2)",
+   "score": 0.5944,
+   "size": 37,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 60,
+    "auc_impossibility_in_axis": 0.6,
+    "auc_truth_in_axis": 0.8,
+    "auc_impossibility_false_vs_true": 0.2889,
+    "auc_impossibility_impossible_vs_false": 0.6222,
+    "auc_truth_impossible_vs_false": 0.2222,
+    "auc_truth_impossible_vs_true": 0.4667,
+    "auc_truth_impossible_vs_possible": 0.2741,
+    "ba_impossibility": 0.5556,
+    "ba_truth": 0.7,
+    "cos_standardized": 0.0737,
+    "cos_raw": 0.1556,
+    "abs_cos": 0.0737,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 19,
+    "n_selected_truth": 18,
+    "direction_sha256_16": {
+     "impossibility": "bd9ff01e7f1b68de",
+     "truth": "efcf2ac370222d8e"
+    },
+    "run_digest": "47eead77c7bf027a"
+   }
+  },
+  {
+   "axis": "seeds",
+   "variant": "seed=1518",
+   "seed": 1518,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "neither probe decodes; truth probe impossibility-blind only; near-orthogonal (|cos|<0.2)",
+   "score": 0.5056,
+   "size": 33,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 60,
+    "auc_impossibility_in_axis": 0.5778,
+    "auc_truth_in_axis": 0.7778,
+    "auc_impossibility_false_vs_true": 0.1556,
+    "auc_impossibility_impossible_vs_false": 0.7333,
+    "auc_truth_impossible_vs_false": 0.1778,
+    "auc_truth_impossible_vs_true": 0.4889,
+    "auc_truth_impossible_vs_possible": 0.237,
+    "ba_impossibility": 0.5778,
+    "ba_truth": 0.7,
+    "cos_standardized": 0.0737,
+    "cos_raw": 0.1556,
+    "abs_cos": 0.0737,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 17,
+    "n_selected_truth": 16,
+    "direction_sha256_16": {
+     "impossibility": "bd9ff01e7f1b68de",
+     "truth": "efcf2ac370222d8e"
+    },
+    "run_digest": "ea683ad6522ad8c8"
+   }
+  },
+  {
+   "axis": "seeds",
+   "variant": "seed=1519",
+   "seed": 1519,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "neither probe decodes; truth probe impossibility-blind only; near-orthogonal (|cos|<0.2)",
+   "score": 0.487,
+   "size": 34,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 60,
+    "auc_impossibility_in_axis": 0.6519,
+    "auc_truth_in_axis": 0.6222,
+    "auc_impossibility_false_vs_true": 0.2,
+    "auc_impossibility_impossible_vs_false": 0.7333,
+    "auc_truth_impossible_vs_false": 0.3111,
+    "auc_truth_impossible_vs_true": 0.3778,
+    "auc_truth_impossible_vs_possible": 0.2519,
+    "ba_impossibility": 0.6222,
+    "ba_truth": 0.5333,
+    "cos_standardized": 0.0737,
+    "cos_raw": 0.1556,
+    "abs_cos": 0.0737,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 17,
+    "n_selected_truth": 17,
+    "direction_sha256_16": {
+     "impossibility": "bd9ff01e7f1b68de",
+     "truth": "efcf2ac370222d8e"
+    },
+    "run_digest": "8ae949e907f0f81c"
+   }
+  },
+  {
+   "axis": "seeds",
+   "variant": "seed=1520",
+   "seed": 1520,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "neither probe decodes; truth probe impossibility-blind only; near-orthogonal (|cos|<0.2)",
+   "score": 0.5278,
+   "size": 29,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 60,
+    "auc_impossibility_in_axis": 0.5556,
+    "auc_truth_in_axis": 0.7556,
+    "auc_impossibility_false_vs_true": 0.2444,
+    "auc_impossibility_impossible_vs_false": 0.6,
+    "auc_truth_impossible_vs_false": 0.2444,
+    "auc_truth_impossible_vs_true": 0.5111,
+    "auc_truth_impossible_vs_possible": 0.2667,
+    "ba_impossibility": 0.5333,
+    "ba_truth": 0.7,
+    "cos_standardized": 0.0737,
+    "cos_raw": 0.1556,
+    "abs_cos": 0.0737,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 13,
+    "n_selected_truth": 16,
+    "direction_sha256_16": {
+     "impossibility": "bd9ff01e7f1b68de",
+     "truth": "efcf2ac370222d8e"
+    },
+    "run_digest": "4712e1fad656fb59"
+   }
+  },
+  {
+   "axis": "seeds",
+   "variant": "seed=1521",
+   "seed": 1521,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "neither probe decodes; truth probe impossibility-blind only; near-orthogonal (|cos|<0.2)",
+   "score": 0.4463,
+   "size": 26,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 60,
+    "auc_impossibility_in_axis": 0.5704,
+    "auc_truth_in_axis": 0.6222,
+    "auc_impossibility_false_vs_true": 0.2,
+    "auc_impossibility_impossible_vs_false": 0.6222,
+    "auc_truth_impossible_vs_false": 0.3333,
+    "auc_truth_impossible_vs_true": 0.5333,
+    "auc_truth_impossible_vs_possible": 0.3333,
+    "ba_impossibility": 0.5889,
+    "ba_truth": 0.7,
+    "cos_standardized": 0.0737,
+    "cos_raw": 0.1556,
+    "abs_cos": 0.0737,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 16,
+    "n_selected_truth": 10,
+    "direction_sha256_16": {
+     "impossibility": "bd9ff01e7f1b68de",
+     "truth": "efcf2ac370222d8e"
+    },
+    "run_digest": "edb0534c914190a8"
+   }
+  },
+  {
+   "axis": "seeds",
+   "variant": "seed=1522",
+   "seed": 1522,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "neither probe decodes; truth probe impossibility-blind only; near-orthogonal (|cos|<0.2)",
+   "score": 0.4907,
+   "size": 27,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 60,
+    "auc_impossibility_in_axis": 0.5259,
+    "auc_truth_in_axis": 0.6667,
+    "auc_impossibility_false_vs_true": 0.2889,
+    "auc_impossibility_impossible_vs_false": 0.5556,
+    "auc_truth_impossible_vs_false": 0.2667,
+    "auc_truth_impossible_vs_true": 0.4889,
+    "auc_truth_impossible_vs_possible": 0.2815,
+    "ba_impossibility": 0.5444,
+    "ba_truth": 0.6,
+    "cos_standardized": 0.0737,
+    "cos_raw": 0.1556,
+    "abs_cos": 0.0737,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 12,
+    "n_selected_truth": 15,
+    "direction_sha256_16": {
+     "impossibility": "bd9ff01e7f1b68de",
+     "truth": "efcf2ac370222d8e"
+    },
+    "run_digest": "2d32a8f17150e380"
+   }
+  },
+  {
+   "axis": "seeds",
+   "variant": "seed=1523",
+   "seed": 1523,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "neither probe decodes; truth probe impossibility-blind only; near-orthogonal (|cos|<0.2)",
+   "score": 0.5056,
+   "size": 28,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 60,
+    "auc_impossibility_in_axis": 0.5333,
+    "auc_truth_in_axis": 0.7778,
+    "auc_impossibility_false_vs_true": 0.2,
+    "auc_impossibility_impossible_vs_false": 0.6,
+    "auc_truth_impossible_vs_false": 0.1778,
+    "auc_truth_impossible_vs_true": 0.4,
+    "auc_truth_impossible_vs_possible": 0.1926,
+    "ba_impossibility": 0.5222,
+    "ba_truth": 0.6333,
+    "cos_standardized": 0.0737,
+    "cos_raw": 0.1556,
+    "abs_cos": 0.0737,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 14,
+    "n_selected_truth": 14,
+    "direction_sha256_16": {
+     "impossibility": "bd9ff01e7f1b68de",
+     "truth": "efcf2ac370222d8e"
+    },
+    "run_digest": "9b157cd844c0b6bb"
+   }
+  },
+  {
+   "axis": "seeds",
+   "variant": "seed=1524",
+   "seed": 1524,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "neither probe decodes; truth probe impossibility-blind only; near-orthogonal (|cos|<0.2)",
+   "score": 0.4685,
+   "size": 22,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 60,
+    "auc_impossibility_in_axis": 0.5926,
+    "auc_truth_in_axis": 0.6889,
+    "auc_impossibility_false_vs_true": 0.1556,
+    "auc_impossibility_impossible_vs_false": 0.7778,
+    "auc_truth_impossible_vs_false": 0.4444,
+    "auc_truth_impossible_vs_true": 0.5333,
+    "auc_truth_impossible_vs_possible": 0.4,
+    "ba_impossibility": 0.5667,
+    "ba_truth": 0.6333,
+    "cos_standardized": 0.0737,
+    "cos_raw": 0.1556,
+    "abs_cos": 0.0737,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 10,
+    "n_selected_truth": 12,
+    "direction_sha256_16": {
+     "impossibility": "bd9ff01e7f1b68de",
+     "truth": "efcf2ac370222d8e"
+    },
+    "run_digest": "5e1483a61ff4b5f4"
+   }
+  },
+  {
+   "axis": "seeds",
+   "variant": "seed=1525",
+   "seed": 1525,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "neither probe decodes; truth probe impossibility-blind only; near-orthogonal (|cos|<0.2)",
+   "score": 0.513,
+   "size": 32,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 60,
+    "auc_impossibility_in_axis": 0.6148,
+    "auc_truth_in_axis": 0.7333,
+    "auc_impossibility_false_vs_true": 0.1778,
+    "auc_impossibility_impossible_vs_false": 0.7556,
+    "auc_truth_impossible_vs_false": 0.2444,
+    "auc_truth_impossible_vs_true": 0.3556,
+    "auc_truth_impossible_vs_possible": 0.237,
+    "ba_impossibility": 0.5111,
+    "ba_truth": 0.6667,
+    "cos_standardized": 0.0737,
+    "cos_raw": 0.1556,
+    "abs_cos": 0.0737,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 15,
+    "n_selected_truth": 17,
+    "direction_sha256_16": {
+     "impossibility": "bd9ff01e7f1b68de",
+     "truth": "efcf2ac370222d8e"
+    },
+    "run_digest": "bc58756674430454"
+   }
+  },
+  {
+   "axis": "seeds",
+   "variant": "seed=1526",
+   "seed": 1526,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "only the truth probe decodes; truth probe impossibility-blind only; near-orthogonal (|cos|<0.2)",
+   "score": 0.55,
+   "size": 30,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 60,
+    "auc_impossibility_in_axis": 0.6444,
+    "auc_truth_in_axis": 0.8222,
+    "auc_impossibility_false_vs_true": 0.1333,
+    "auc_impossibility_impossible_vs_false": 0.7556,
+    "auc_truth_impossible_vs_false": 0.2667,
+    "auc_truth_impossible_vs_true": 0.4444,
+    "auc_truth_impossible_vs_possible": 0.2667,
+    "ba_impossibility": 0.5556,
+    "ba_truth": 0.6667,
+    "cos_standardized": 0.0737,
+    "cos_raw": 0.1556,
+    "abs_cos": 0.0737,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 15,
+    "n_selected_truth": 15,
+    "direction_sha256_16": {
+     "impossibility": "bd9ff01e7f1b68de",
+     "truth": "efcf2ac370222d8e"
+    },
+    "run_digest": "66074a7327c52baa"
+   }
+  },
+  {
+   "axis": "seeds",
+   "variant": "seed=1527",
+   "seed": 1527,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "only the truth probe decodes; truth probe impossibility-blind only; near-orthogonal (|cos|<0.2)",
+   "score": 0.5352,
+   "size": 29,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 60,
+    "auc_impossibility_in_axis": 0.5259,
+    "auc_truth_in_axis": 0.8222,
+    "auc_impossibility_false_vs_true": 0.2222,
+    "auc_impossibility_impossible_vs_false": 0.6222,
+    "auc_truth_impossible_vs_false": 0.2444,
+    "auc_truth_impossible_vs_true": 0.4667,
+    "auc_truth_impossible_vs_possible": 0.2593,
+    "ba_impossibility": 0.5,
+    "ba_truth": 0.6,
+    "cos_standardized": 0.0737,
+    "cos_raw": 0.1556,
+    "abs_cos": 0.0737,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 12,
+    "n_selected_truth": 17,
+    "direction_sha256_16": {
+     "impossibility": "bd9ff01e7f1b68de",
+     "truth": "efcf2ac370222d8e"
+    },
+    "run_digest": "347c2139fbb3d7c4"
+   }
+  },
+  {
+   "axis": "seeds",
+   "variant": "seed=1528",
+   "seed": 1528,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "only the truth probe decodes; truth probe impossibility-blind only; near-orthogonal (|cos|<0.2)",
+   "score": 0.5352,
+   "size": 26,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 60,
+    "auc_impossibility_in_axis": 0.5259,
+    "auc_truth_in_axis": 0.8,
+    "auc_impossibility_false_vs_true": 0.2444,
+    "auc_impossibility_impossible_vs_false": 0.6222,
+    "auc_truth_impossible_vs_false": 0.2222,
+    "auc_truth_impossible_vs_true": 0.5111,
+    "auc_truth_impossible_vs_possible": 0.2963,
+    "ba_impossibility": 0.5,
+    "ba_truth": 0.7,
+    "cos_standardized": 0.0737,
+    "cos_raw": 0.1556,
+    "abs_cos": 0.0737,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 12,
+    "n_selected_truth": 14,
+    "direction_sha256_16": {
+     "impossibility": "bd9ff01e7f1b68de",
+     "truth": "efcf2ac370222d8e"
+    },
+    "run_digest": "d8ec1b91d90cdb0e"
+   }
+  },
+  {
+   "axis": "seeds",
+   "variant": "seed=1529",
+   "seed": 1529,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "neither probe decodes; truth probe impossibility-blind only; near-orthogonal (|cos|<0.2)",
+   "score": 0.5352,
+   "size": 35,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 60,
+    "auc_impossibility_in_axis": 0.5926,
+    "auc_truth_in_axis": 0.7333,
+    "auc_impossibility_false_vs_true": 0.2444,
+    "auc_impossibility_impossible_vs_false": 0.7333,
+    "auc_truth_impossible_vs_false": 0.2889,
+    "auc_truth_impossible_vs_true": 0.3556,
+    "auc_truth_impossible_vs_possible": 0.2593,
+    "ba_impossibility": 0.5556,
+    "ba_truth": 0.6333,
+    "cos_standardized": 0.0737,
+    "cos_raw": 0.1556,
+    "abs_cos": 0.0737,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 15,
+    "n_selected_truth": 20,
+    "direction_sha256_16": {
+     "impossibility": "bd9ff01e7f1b68de",
+     "truth": "efcf2ac370222d8e"
+    },
+    "run_digest": "6e21ad7d8d5c3187"
+   }
+  },
+  {
+   "axis": "seeds",
+   "variant": "seed=1530",
+   "seed": 1530,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "only the truth probe decodes; truth probe impossibility-blind only; near-orthogonal (|cos|<0.2)",
+   "score": 0.5315,
+   "size": 28,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 60,
+    "auc_impossibility_in_axis": 0.5185,
+    "auc_truth_in_axis": 0.8,
+    "auc_impossibility_false_vs_true": 0.2444,
+    "auc_impossibility_impossible_vs_false": 0.6222,
+    "auc_truth_impossible_vs_false": 0.1333,
+    "auc_truth_impossible_vs_true": 0.4,
+    "auc_truth_impossible_vs_possible": 0.1778,
+    "ba_impossibility": 0.4889,
+    "ba_truth": 0.7333,
+    "cos_standardized": 0.0737,
+    "cos_raw": 0.1556,
+    "abs_cos": 0.0737,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 13,
+    "n_selected_truth": 15,
+    "direction_sha256_16": {
+     "impossibility": "bd9ff01e7f1b68de",
+     "truth": "efcf2ac370222d8e"
+    },
+    "run_digest": "92c023fbc90a978a"
+   }
+  },
+  {
+   "axis": "seeds",
+   "variant": "seed=1531",
+   "seed": 1531,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "neither probe decodes; truth probe impossibility-blind only; near-orthogonal (|cos|<0.2)",
+   "score": 0.5167,
+   "size": 33,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 60,
+    "auc_impossibility_in_axis": 0.5333,
+    "auc_truth_in_axis": 0.7556,
+    "auc_impossibility_false_vs_true": 0.2444,
+    "auc_impossibility_impossible_vs_false": 0.6889,
+    "auc_truth_impossible_vs_false": 0.2444,
+    "auc_truth_impossible_vs_true": 0.4,
+    "auc_truth_impossible_vs_possible": 0.2296,
+    "ba_impossibility": 0.5,
+    "ba_truth": 0.6667,
+    "cos_standardized": 0.0737,
+    "cos_raw": 0.1556,
+    "abs_cos": 0.0737,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 16,
+    "n_selected_truth": 17,
+    "direction_sha256_16": {
+     "impossibility": "bd9ff01e7f1b68de",
+     "truth": "efcf2ac370222d8e"
+    },
+    "run_digest": "6f3561f86763827c"
+   }
+  },
+  {
+   "axis": "seeds",
+   "variant": "seed=1532",
+   "seed": 1532,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "neither probe decodes; truth probe impossibility-blind only; near-orthogonal (|cos|<0.2)",
+   "score": 0.4574,
+   "size": 28,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 60,
+    "auc_impossibility_in_axis": 0.5259,
+    "auc_truth_in_axis": 0.6444,
+    "auc_impossibility_false_vs_true": 0.2444,
+    "auc_impossibility_impossible_vs_false": 0.6,
+    "auc_truth_impossible_vs_false": 0.2889,
+    "auc_truth_impossible_vs_true": 0.4444,
+    "auc_truth_impossible_vs_possible": 0.2815,
+    "ba_impossibility": 0.4667,
+    "ba_truth": 0.6667,
+    "cos_standardized": 0.0737,
+    "cos_raw": 0.1556,
+    "abs_cos": 0.0737,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 15,
+    "n_selected_truth": 13,
+    "direction_sha256_16": {
+     "impossibility": "bd9ff01e7f1b68de",
+     "truth": "efcf2ac370222d8e"
+    },
+    "run_digest": "f56921ea1e1c6b1f"
+   }
+  },
+  {
+   "axis": "bootstrap",
+   "variant": "resample=1",
+   "seed": 1516,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "neither probe decodes; truth probe impossibility-blind only; near-orthogonal (|cos|<0.2)",
+   "score": 0.5278,
+   "size": 38,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 37,
+    "auc_impossibility_in_axis": 0.6889,
+    "auc_truth_in_axis": 0.6222,
+    "auc_impossibility_false_vs_true": 0.2444,
+    "auc_impossibility_impossible_vs_false": 0.6889,
+    "auc_truth_impossible_vs_false": 0.3556,
+    "auc_truth_impossible_vs_true": 0.4,
+    "auc_truth_impossible_vs_possible": 0.2815,
+    "ba_impossibility": 0.6111,
+    "ba_truth": 0.5,
+    "cos_standardized": 0.0159,
+    "cos_raw": 0.0699,
+    "abs_cos": 0.0159,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 22,
+    "n_selected_truth": 16,
+    "direction_sha256_16": {
+     "impossibility": "286a350d818eb445",
+     "truth": "334fd6e5841f04e9"
+    },
+    "run_digest": "d7c6dc441ab124b5"
+   }
+  },
+  {
+   "axis": "bootstrap",
+   "variant": "resample=2",
+   "seed": 1516,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "neither probe decodes; truth probe impossibility-blind only; near-orthogonal (|cos|<0.2)",
+   "score": 0.5241,
+   "size": 38,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 35,
+    "auc_impossibility_in_axis": 0.7481,
+    "auc_truth_in_axis": 0.6222,
+    "auc_impossibility_false_vs_true": 0.1778,
+    "auc_impossibility_impossible_vs_false": 0.8,
+    "auc_truth_impossible_vs_false": 0.4,
+    "auc_truth_impossible_vs_true": 0.4889,
+    "auc_truth_impossible_vs_possible": 0.3852,
+    "ba_impossibility": 0.7444,
+    "ba_truth": 0.5667,
+    "cos_standardized": -0.0102,
+    "cos_raw": 0.0457,
+    "abs_cos": 0.0102,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 18,
+    "n_selected_truth": 20,
+    "direction_sha256_16": {
+     "impossibility": "578303a6f4a7bef9",
+     "truth": "8607be44316a379d"
+    },
+    "run_digest": "678778bba2d07d37"
+   }
+  },
+  {
+   "axis": "bootstrap",
+   "variant": "resample=3",
+   "seed": 1516,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "neither probe decodes; truth probe impossibility-blind only; near-orthogonal (|cos|<0.2)",
+   "score": 0.387,
+   "size": 34,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 35,
+    "auc_impossibility_in_axis": 0.4519,
+    "auc_truth_in_axis": 0.5111,
+    "auc_impossibility_false_vs_true": 0.3111,
+    "auc_impossibility_impossible_vs_false": 0.5111,
+    "auc_truth_impossible_vs_false": 0.2,
+    "auc_truth_impossible_vs_true": 0.1778,
+    "auc_truth_impossible_vs_possible": 0.1333,
+    "ba_impossibility": 0.5444,
+    "ba_truth": 0.4333,
+    "cos_standardized": -0.0008,
+    "cos_raw": 0.0212,
+    "abs_cos": 0.0008,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 12,
+    "n_selected_truth": 22,
+    "direction_sha256_16": {
+     "impossibility": "e7946ff066fc8d76",
+     "truth": "96ec865334ce9e56"
+    },
+    "run_digest": "de34aeb680cc5f7a"
+   }
+  },
+  {
+   "axis": "bootstrap",
+   "variant": "resample=4",
+   "seed": 1516,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "neither probe decodes; truth probe impossibility-blind only; near-orthogonal (|cos|<0.2)",
+   "score": 0.3315,
+   "size": 41,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 40,
+    "auc_impossibility_in_axis": 0.5185,
+    "auc_truth_in_axis": 0.4667,
+    "auc_impossibility_false_vs_true": 0.1778,
+    "auc_impossibility_impossible_vs_false": 0.6,
+    "auc_truth_impossible_vs_false": 0.3556,
+    "auc_truth_impossible_vs_true": 0.3333,
+    "auc_truth_impossible_vs_possible": 0.2593,
+    "ba_impossibility": 0.5333,
+    "ba_truth": 0.5,
+    "cos_standardized": 0.0426,
+    "cos_raw": 0.0849,
+    "abs_cos": 0.0426,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 17,
+    "n_selected_truth": 24,
+    "direction_sha256_16": {
+     "impossibility": "aff6728e3dcc3230",
+     "truth": "432b32a8d9332e72"
+    },
+    "run_digest": "96aed298bb9f43f4"
+   }
+  },
+  {
+   "axis": "bootstrap",
+   "variant": "resample=5",
+   "seed": 1516,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "only the truth probe decodes; truth probe impossibility-blind only; near-orthogonal (|cos|<0.2)",
+   "score": 0.6944,
+   "size": 28,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 36,
+    "auc_impossibility_in_axis": 0.7333,
+    "auc_truth_in_axis": 0.9556,
+    "auc_impossibility_false_vs_true": 0.2,
+    "auc_impossibility_impossible_vs_false": 0.8222,
+    "auc_truth_impossible_vs_false": 0.2,
+    "auc_truth_impossible_vs_true": 0.5111,
+    "auc_truth_impossible_vs_possible": 0.2963,
+    "ba_impossibility": 0.5,
+    "ba_truth": 0.9,
+    "cos_standardized": -0.0092,
+    "cos_raw": 0.048,
+    "abs_cos": 0.0092,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 12,
+    "n_selected_truth": 16,
+    "direction_sha256_16": {
+     "impossibility": "a0affb6dd2302a66",
+     "truth": "fc21a8e0d5a1870d"
+    },
+    "run_digest": "531739d9abc8e371"
+   }
+  },
+  {
+   "axis": "bootstrap",
+   "variant": "resample=6",
+   "seed": 1516,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "neither probe decodes; truth probe impossibility-blind only; near-orthogonal (|cos|<0.2)",
+   "score": 0.4759,
+   "size": 45,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 35,
+    "auc_impossibility_in_axis": 0.5852,
+    "auc_truth_in_axis": 0.6667,
+    "auc_impossibility_false_vs_true": 0.2,
+    "auc_impossibility_impossible_vs_false": 0.7556,
+    "auc_truth_impossible_vs_false": 0.2667,
+    "auc_truth_impossible_vs_true": 0.4,
+    "auc_truth_impossible_vs_possible": 0.2889,
+    "ba_impossibility": 0.5556,
+    "ba_truth": 0.5667,
+    "cos_standardized": -0.0472,
+    "cos_raw": -0.0434,
+    "abs_cos": 0.0472,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 19,
+    "n_selected_truth": 26,
+    "direction_sha256_16": {
+     "impossibility": "c5c513add59eeea2",
+     "truth": "f71f8d7b23e2b9fb"
+    },
+    "run_digest": "cb508a2fd65ae213"
+   }
+  },
+  {
+   "axis": "bootstrap",
+   "variant": "resample=7",
+   "seed": 1516,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "neither probe decodes; truth probe impossibility-blind only; near-orthogonal (|cos|<0.2)",
+   "score": 0.2204,
+   "size": 37,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 36,
+    "auc_impossibility_in_axis": 0.4963,
+    "auc_truth_in_axis": 0.2222,
+    "auc_impossibility_false_vs_true": 0.2222,
+    "auc_impossibility_impossible_vs_false": 0.6444,
+    "auc_truth_impossible_vs_false": 0.3556,
+    "auc_truth_impossible_vs_true": 0.1111,
+    "auc_truth_impossible_vs_possible": 0.2148,
+    "ba_impossibility": 0.4222,
+    "ba_truth": 0.3,
+    "cos_standardized": 0.0507,
+    "cos_raw": 0.1136,
+    "abs_cos": 0.0507,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 19,
+    "n_selected_truth": 18,
+    "direction_sha256_16": {
+     "impossibility": "ae84338226f12782",
+     "truth": "b5795cf7313c21cf"
+    },
+    "run_digest": "7d51d9974401c918"
+   }
+  },
+  {
+   "axis": "bootstrap",
+   "variant": "resample=8",
+   "seed": 1516,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "neither probe decodes; truth probe impossibility-blind only; near-orthogonal (|cos|<0.2)",
+   "score": 0.4204,
+   "size": 34,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 37,
+    "auc_impossibility_in_axis": 0.6074,
+    "auc_truth_in_axis": 0.6,
+    "auc_impossibility_false_vs_true": 0.1333,
+    "auc_impossibility_impossible_vs_false": 0.8222,
+    "auc_truth_impossible_vs_false": 0.3333,
+    "auc_truth_impossible_vs_true": 0.4,
+    "auc_truth_impossible_vs_possible": 0.2667,
+    "ba_impossibility": 0.5556,
+    "ba_truth": 0.4667,
+    "cos_standardized": 0.0253,
+    "cos_raw": 0.1337,
+    "abs_cos": 0.0253,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 15,
+    "n_selected_truth": 19,
+    "direction_sha256_16": {
+     "impossibility": "e90347b3e7882a9d",
+     "truth": "73f1c8e8936de6af"
+    },
+    "run_digest": "0c4cbed5d9d7b59f"
+   }
+  },
+  {
+   "axis": "bootstrap",
+   "variant": "resample=9",
+   "seed": 1516,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "neither probe decodes; truth probe impossibility-blind only; near-orthogonal (|cos|<0.2)",
+   "score": 0.4944,
+   "size": 20,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 37,
+    "auc_impossibility_in_axis": 0.6,
+    "auc_truth_in_axis": 0.7111,
+    "auc_impossibility_false_vs_true": 0.1778,
+    "auc_impossibility_impossible_vs_false": 0.8444,
+    "auc_truth_impossible_vs_false": 0.3778,
+    "auc_truth_impossible_vs_true": 0.4444,
+    "auc_truth_impossible_vs_possible": 0.3185,
+    "ba_impossibility": 0.4667,
+    "ba_truth": 0.6,
+    "cos_standardized": 0.0076,
+    "cos_raw": 0.0606,
+    "abs_cos": 0.0076,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 11,
+    "n_selected_truth": 9,
+    "direction_sha256_16": {
+     "impossibility": "dd90a2b2a9ab2639",
+     "truth": "dfffbf7c1c014c11"
+    },
+    "run_digest": "d77f82b917951c65"
+   }
+  },
+  {
+   "axis": "bootstrap",
+   "variant": "resample=10",
+   "seed": 1516,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "neither probe decodes; truth probe impossibility-blind only; near-orthogonal (|cos|<0.2)",
+   "score": 0.4315,
+   "size": 30,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 35,
+    "auc_impossibility_in_axis": 0.4519,
+    "auc_truth_in_axis": 0.6889,
+    "auc_impossibility_false_vs_true": 0.2222,
+    "auc_impossibility_impossible_vs_false": 0.6667,
+    "auc_truth_impossible_vs_false": 0.3778,
+    "auc_truth_impossible_vs_true": 0.3778,
+    "auc_truth_impossible_vs_possible": 0.2963,
+    "ba_impossibility": 0.5111,
+    "ba_truth": 0.6,
+    "cos_standardized": 0.0894,
+    "cos_raw": 0.1153,
+    "abs_cos": 0.0894,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 11,
+    "n_selected_truth": 19,
+    "direction_sha256_16": {
+     "impossibility": "3c5b4a039007c15e",
+     "truth": "f839e20d5d88f604"
+    },
+    "run_digest": "b9e93128b2b6a4bc"
+   }
+  },
+  {
+   "axis": "bootstrap",
+   "variant": "resample=11",
+   "seed": 1516,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "only the truth probe decodes; truth probe impossibility-blind only; near-orthogonal (|cos|<0.2)",
+   "score": 0.6352,
+   "size": 29,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 37,
+    "auc_impossibility_in_axis": 0.5704,
+    "auc_truth_in_axis": 0.8889,
+    "auc_impossibility_false_vs_true": 0.3111,
+    "auc_impossibility_impossible_vs_false": 0.5556,
+    "auc_truth_impossible_vs_false": 0.2444,
+    "auc_truth_impossible_vs_true": 0.5778,
+    "auc_truth_impossible_vs_possible": 0.3037,
+    "ba_impossibility": 0.4,
+    "ba_truth": 0.8333,
+    "cos_standardized": -0.0066,
+    "cos_raw": 0.0294,
+    "abs_cos": 0.0066,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 17,
+    "n_selected_truth": 12,
+    "direction_sha256_16": {
+     "impossibility": "f4b4bb524d5da576",
+     "truth": "099e799c21a6dafb"
+    },
+    "run_digest": "e1a543a6518640c5"
+   }
+  },
+  {
+   "axis": "bootstrap",
+   "variant": "resample=12",
+   "seed": 1516,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "neither probe decodes; truth probe impossibility-blind only; near-orthogonal (|cos|<0.2)",
+   "score": 0.4648,
+   "size": 29,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 40,
+    "auc_impossibility_in_axis": 0.563,
+    "auc_truth_in_axis": 0.7111,
+    "auc_impossibility_false_vs_true": 0.1556,
+    "auc_impossibility_impossible_vs_false": 0.7333,
+    "auc_truth_impossible_vs_false": 0.3778,
+    "auc_truth_impossible_vs_true": 0.4222,
+    "auc_truth_impossible_vs_possible": 0.2963,
+    "ba_impossibility": 0.5,
+    "ba_truth": 0.6,
+    "cos_standardized": 0.0276,
+    "cos_raw": 0.1634,
+    "abs_cos": 0.0276,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 12,
+    "n_selected_truth": 17,
+    "direction_sha256_16": {
+     "impossibility": "3625150726843bce",
+     "truth": "bd4f3ffbbb9f9955"
+    },
+    "run_digest": "d75a1887b4c0957d"
+   }
+  },
+  {
+   "axis": "bootstrap",
+   "variant": "resample=13",
+   "seed": 1516,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "neither probe decodes; truth probe impossibility-blind only; near-orthogonal (|cos|<0.2)",
+   "score": 0.2111,
+   "size": 19,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 39,
+    "auc_impossibility_in_axis": 0.6222,
+    "auc_truth_in_axis": 0.1556,
+    "auc_impossibility_false_vs_true": 0.2222,
+    "auc_impossibility_impossible_vs_false": 0.7333,
+    "auc_truth_impossible_vs_false": 0.5778,
+    "auc_truth_impossible_vs_true": 0.2222,
+    "auc_truth_impossible_vs_possible": 0.4148,
+    "ba_impossibility": 0.4667,
+    "ba_truth": 0.3,
+    "cos_standardized": 0.0748,
+    "cos_raw": 0.1331,
+    "abs_cos": 0.0748,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 7,
+    "n_selected_truth": 12,
+    "direction_sha256_16": {
+     "impossibility": "06ea7fe1408f5222",
+     "truth": "9b0fa27faa4ef050"
+    },
+    "run_digest": "599fc6e015de866f"
+   }
+  },
+  {
+   "axis": "bootstrap",
+   "variant": "resample=14",
+   "seed": 1516,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "only the truth probe decodes; truth probe impossibility-blind only; near-orthogonal (|cos|<0.2)",
+   "score": 0.4611,
+   "size": 30,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 39,
+    "auc_impossibility_in_axis": 0.5111,
+    "auc_truth_in_axis": 0.8,
+    "auc_impossibility_false_vs_true": 0.1111,
+    "auc_impossibility_impossible_vs_false": 0.8,
+    "auc_truth_impossible_vs_false": 0.2667,
+    "auc_truth_impossible_vs_true": 0.4,
+    "auc_truth_impossible_vs_possible": 0.3111,
+    "ba_impossibility": 0.4444,
+    "ba_truth": 0.6667,
+    "cos_standardized": 0.0804,
+    "cos_raw": 0.0748,
+    "abs_cos": 0.0804,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 13,
+    "n_selected_truth": 17,
+    "direction_sha256_16": {
+     "impossibility": "393d3cb1887a9ceb",
+     "truth": "7640c4f4d57dd176"
+    },
+    "run_digest": "6f047f2cdd46de0c"
+   }
+  },
+  {
+   "axis": "bootstrap",
+   "variant": "resample=15",
+   "seed": 1516,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "neither probe decodes; truth probe impossibility-blind only; near-orthogonal (|cos|<0.2)",
+   "score": 0.5278,
+   "size": 29,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 37,
+    "auc_impossibility_in_axis": 0.5778,
+    "auc_truth_in_axis": 0.6889,
+    "auc_impossibility_false_vs_true": 0.2889,
+    "auc_impossibility_impossible_vs_false": 0.7111,
+    "auc_truth_impossible_vs_false": 0.1111,
+    "auc_truth_impossible_vs_true": 0.2222,
+    "auc_truth_impossible_vs_possible": 0.1111,
+    "ba_impossibility": 0.5889,
+    "ba_truth": 0.6,
+    "cos_standardized": 0.0339,
+    "cos_raw": 0.0874,
+    "abs_cos": 0.0339,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 16,
+    "n_selected_truth": 13,
+    "direction_sha256_16": {
+     "impossibility": "85cf7fd7f3957848",
+     "truth": "12bb569c0e55f87b"
+    },
+    "run_digest": "acf269c3411d705d"
+   }
+  },
+  {
+   "axis": "bootstrap",
+   "variant": "resample=16",
+   "seed": 1516,
+   "config": {
+    "depth": 16,
+    "C": 0.1
+   },
+   "claim": "only the truth probe decodes; truth probe impossibility-blind only; near-orthogonal (|cos|<0.2)",
+   "score": 0.4389,
+   "size": 25,
+   "meta": {
+    "depth": 16,
+    "C": 0.1,
+    "template": "upstream",
+    "n_train": 60,
+    "n_train_unique": 37,
+    "auc_impossibility_in_axis": 0.4444,
+    "auc_truth_in_axis": 0.8,
+    "auc_impossibility_false_vs_true": 0.1333,
+    "auc_impossibility_impossible_vs_false": 0.5333,
+    "auc_truth_impossible_vs_false": 0.1778,
+    "auc_truth_impossible_vs_true": 0.4444,
+    "auc_truth_impossible_vs_possible": 0.2222,
+    "ba_impossibility": 0.4111,
+    "ba_truth": 0.7333,
+    "cos_standardized": -0.076,
+    "cos_raw": 0.0686,
+    "abs_cos": 0.076,
+    "dissociation_two_sided": false,
+    "n_selected_impossibility": 12,
+    "n_selected_truth": 13,
+    "direction_sha256_16": {
+     "impossibility": "80ce717d823af92e",
+     "truth": "d94c328646b41bfe"
+    },
+    "run_digest": "91fac816c49db783"
+   }
+  }
+ ],
+ "depth_curve": [
+  {
+   "depth": 0,
+   "ba_impossibility": 0.5,
+   "ba_truth": 0.5,
+   "auc_impossibility_false_vs_true": 0.5,
+   "auc_truth_impossible_vs_false": 0.5,
+   "cos_standardized": null
+  },
+  {
+   "depth": 1,
+   "ba_impossibility": 0.7444,
+   "ba_truth": 0.6667,
+   "auc_impossibility_false_vs_true": 0.4,
+   "auc_truth_impossible_vs_false": 0.4222,
+   "cos_standardized": -0.0423
+  },
+  {
+   "depth": 2,
+   "ba_impossibility": 0.6556,
+   "ba_truth": 0.6333,
+   "auc_impossibility_false_vs_true": 0.2444,
+   "auc_truth_impossible_vs_false": 0.4444,
+   "cos_standardized": -0.1167
+  },
+  {
+   "depth": 3,
+   "ba_impossibility": 0.6667,
+   "ba_truth": 0.6333,
+   "auc_impossibility_false_vs_true": 0.3111,
+   "auc_truth_impossible_vs_false": 0.4889,
+   "cos_standardized": -0.0942
+  },
+  {
+   "depth": 4,
+   "ba_impossibility": 0.6,
+   "ba_truth": 0.6333,
+   "auc_impossibility_false_vs_true": 0.2889,
+   "auc_truth_impossible_vs_false": 0.4889,
+   "cos_standardized": -0.1413
+  },
+  {
+   "depth": 5,
+   "ba_impossibility": 0.7778,
+   "ba_truth": 0.7,
+   "auc_impossibility_false_vs_true": 0.3556,
+   "auc_truth_impossible_vs_false": 0.4222,
+   "cos_standardized": 0.0058
+  },
+  {
+   "depth": 6,
+   "ba_impossibility": 0.8111,
+   "ba_truth": 0.6667,
+   "auc_impossibility_false_vs_true": 0.3111,
+   "auc_truth_impossible_vs_false": 0.4444,
+   "cos_standardized": -0.0287
+  },
+  {
+   "depth": 7,
+   "ba_impossibility": 0.8222,
+   "ba_truth": 0.7333,
+   "auc_impossibility_false_vs_true": 0.4222,
+   "auc_truth_impossible_vs_false": 0.4,
+   "cos_standardized": -0.0016
+  },
+  {
+   "depth": 8,
+   "ba_impossibility": 0.8333,
+   "ba_truth": 0.7,
+   "auc_impossibility_false_vs_true": 0.3778,
+   "auc_truth_impossible_vs_false": 0.4,
+   "cos_standardized": 0.022
+  },
+  {
+   "depth": 9,
+   "ba_impossibility": 0.8667,
+   "ba_truth": 0.7667,
+   "auc_impossibility_false_vs_true": 0.2667,
+   "auc_truth_impossible_vs_false": 0.2444,
+   "cos_standardized": -0.0041
+  },
+  {
+   "depth": 10,
+   "ba_impossibility": 0.8889,
+   "ba_truth": 0.6667,
+   "auc_impossibility_false_vs_true": 0.4,
+   "auc_truth_impossible_vs_false": 0.3111,
+   "cos_standardized": 0.0723
+  },
+  {
+   "depth": 11,
+   "ba_impossibility": 0.9222,
+   "ba_truth": 0.6667,
+   "auc_impossibility_false_vs_true": 0.3778,
+   "auc_truth_impossible_vs_false": 0.3333,
+   "cos_standardized": 0.108
+  },
+  {
+   "depth": 12,
+   "ba_impossibility": 0.8667,
+   "ba_truth": 0.7,
+   "auc_impossibility_false_vs_true": 0.3778,
+   "auc_truth_impossible_vs_false": 0.3556,
+   "cos_standardized": 0.0495
+  },
+  {
+   "depth": 13,
+   "ba_impossibility": 0.8889,
+   "ba_truth": 0.8333,
+   "auc_impossibility_false_vs_true": 0.3778,
+   "auc_truth_impossible_vs_false": 0.2889,
+   "cos_standardized": 0.0199
+  },
+  {
+   "depth": 14,
+   "ba_impossibility": 0.8889,
+   "ba_truth": 0.8333,
+   "auc_impossibility_false_vs_true": 0.4222,
+   "auc_truth_impossible_vs_false": 0.3556,
+   "cos_standardized": 0.063
+  },
+  {
+   "depth": 15,
+   "ba_impossibility": 0.9667,
+   "ba_truth": 0.9,
+   "auc_impossibility_false_vs_true": 0.5111,
+   "auc_truth_impossible_vs_false": 0.2444,
+   "cos_standardized": 0.0847
+  },
+  {
+   "depth": 16,
+   "ba_impossibility": 0.9667,
+   "ba_truth": 0.9333,
+   "auc_impossibility_false_vs_true": 0.4222,
+   "auc_truth_impossible_vs_false": 0.2,
+   "cos_standardized": 0.0168
+  },
+  {
+   "depth": 17,
+   "ba_impossibility": 0.9667,
+   "ba_truth": 0.9,
+   "auc_impossibility_false_vs_true": 0.4667,
+   "auc_truth_impossible_vs_false": 0.1778,
+   "cos_standardized": 0.036
+  },
+  {
+   "depth": 18,
+   "ba_impossibility": 0.9333,
+   "ba_truth": 0.9333,
+   "auc_impossibility_false_vs_true": 0.5333,
+   "auc_truth_impossible_vs_false": 0.3111,
+   "cos_standardized": 0.0044
+  },
+  {
+   "depth": 19,
+   "ba_impossibility": 0.9,
+   "ba_truth": 0.9333,
+   "auc_impossibility_false_vs_true": 0.5778,
+   "auc_truth_impossible_vs_false": 0.3333,
+   "cos_standardized": -0.0007
+  },
+  {
+   "depth": 20,
+   "ba_impossibility": 0.9,
+   "ba_truth": 0.9333,
+   "auc_impossibility_false_vs_true": 0.6222,
+   "auc_truth_impossible_vs_false": 0.3333,
+   "cos_standardized": 0.0097
+  },
+  {
+   "depth": 21,
+   "ba_impossibility": 0.9222,
+   "ba_truth": 0.9333,
+   "auc_impossibility_false_vs_true": 0.7333,
+   "auc_truth_impossible_vs_false": 0.1778,
+   "cos_standardized": -0.1042
+  },
+  {
+   "depth": 22,
+   "ba_impossibility": 0.9222,
+   "ba_truth": 0.9333,
+   "auc_impossibility_false_vs_true": 0.6889,
+   "auc_truth_impossible_vs_false": 0.1778,
+   "cos_standardized": -0.0696
+  },
+  {
+   "depth": 23,
+   "ba_impossibility": 0.9222,
+   "ba_truth": 0.9333,
+   "auc_impossibility_false_vs_true": 0.7333,
+   "auc_truth_impossible_vs_false": 0.2222,
+   "cos_standardized": -0.0677
+  },
+  {
+   "depth": 24,
+   "ba_impossibility": 0.8889,
+   "ba_truth": 0.9333,
+   "auc_impossibility_false_vs_true": 0.7333,
+   "auc_truth_impossible_vs_false": 0.1778,
+   "cos_standardized": -0.0418
+  },
+  {
+   "depth": 25,
+   "ba_impossibility": 0.8889,
+   "ba_truth": 0.9333,
+   "auc_impossibility_false_vs_true": 0.7333,
+   "auc_truth_impossible_vs_false": 0.1778,
+   "cos_standardized": -0.061
+  },
+  {
+   "depth": 26,
+   "ba_impossibility": 0.8889,
+   "ba_truth": 0.9333,
+   "auc_impossibility_false_vs_true": 0.7333,
+   "auc_truth_impossible_vs_false": 0.1778,
+   "cos_standardized": -0.0544
+  },
+  {
+   "depth": 27,
+   "ba_impossibility": 0.8889,
+   "ba_truth": 0.9333,
+   "auc_impossibility_false_vs_true": 0.7111,
+   "auc_truth_impossible_vs_false": 0.1111,
+   "cos_standardized": -0.0736
+  },
+  {
+   "depth": 28,
+   "ba_impossibility": 0.8889,
+   "ba_truth": 0.9333,
+   "auc_impossibility_false_vs_true": 0.7111,
+   "auc_truth_impossible_vs_false": 0.1111,
+   "cos_standardized": -0.045
+  },
+  {
+   "depth": 29,
+   "ba_impossibility": 0.8889,
+   "ba_truth": 0.9333,
+   "auc_impossibility_false_vs_true": 0.6889,
+   "auc_truth_impossible_vs_false": 0.1111,
+   "cos_standardized": -0.0679
+  },
+  {
+   "depth": 30,
+   "ba_impossibility": 0.8889,
+   "ba_truth": 0.9333,
+   "auc_impossibility_false_vs_true": 0.7111,
+   "auc_truth_impossible_vs_false": 0.1333,
+   "cos_standardized": -0.069
+  },
+  {
+   "depth": 31,
+   "ba_impossibility": 0.8889,
+   "ba_truth": 0.9333,
+   "auc_impossibility_false_vs_true": 0.7111,
+   "auc_truth_impossible_vs_false": 0.1556,
+   "cos_standardized": -0.0403
+  },
+  {
+   "depth": 32,
+   "ba_impossibility": 0.8889,
+   "ba_truth": 0.9333,
+   "auc_impossibility_false_vs_true": 0.7333,
+   "auc_truth_impossible_vs_false": 0.2222,
+   "cos_standardized": -0.018
+  },
+  {
+   "depth": 33,
+   "ba_impossibility": 0.9222,
+   "ba_truth": 0.9333,
+   "auc_impossibility_false_vs_true": 0.7556,
+   "auc_truth_impossible_vs_false": 0.2444,
+   "cos_standardized": -0.0069
+  },
+  {
+   "depth": 34,
+   "ba_impossibility": 0.9222,
+   "ba_truth": 0.9333,
+   "auc_impossibility_false_vs_true": 0.7333,
+   "auc_truth_impossible_vs_false": 0.2444,
+   "cos_standardized": -0.0105
+  }
+ ]
+}

@@ -1,0 +1,71 @@
+{
+ "components": [
+  "L10H10",
+  "L10H2",
+  "L10H6",
+  "L11H1",
+  "L11H10",
+  "L11H2",
+  "L1H10",
+  "L5H9"
+ ],
+ "universe_size": 141,
+ "claim": "CoAx AUC >=0.90; beats AtP*",
+ "score": 0.9389097744360901,
+ "meta": {
+  "config": {
+   "position_mode": "last",
+   "top_r": 0,
+   "ablation_mode": "zero",
+   "feature_mode": "fisher_centered",
+   "freeze_ln": "none",
+   "primaries": "documented"
+  },
+  "n_prompts": 96,
+  "prompt_seed": 1,
+  "n_unique_prompts": 58,
+  "template": "When {IO} and {S} went to the {place}, {S} gave a {obj} to",
+  "first_prompt": "When James and Peter went to the station, Peter gave a ring to",
+  "primaries": [
+   [
+    9,
+    9
+   ],
+   [
+    10,
+    0
+   ],
+   [
+    9,
+    6
+   ]
+  ],
+  "primaries_documented": [
+   true,
+   true,
+   true
+  ],
+  "auc": {
+   "coax": 0.9389097744360901,
+   "single": 0.5977443609022557,
+   "conditional": 0.7509398496240601,
+   "atp": 0.6221804511278195,
+   "eap_ig": 0.7415413533834587,
+   "atp_star": 0.831766917293233,
+   "conditional_grad": 0.6804511278195489
+  },
+  "average_precision": 0.5946153343782654,
+  "precision_at_8": 0.5,
+  "top8": [
+   "L11H2",
+   "L10H2",
+   "L10H6",
+   "L11H10",
+   "L11H1",
+   "L5H9",
+   "L1H10",
+   "L10H10"
+  ],
+  "wall_secs": 107.6
+ }
+}

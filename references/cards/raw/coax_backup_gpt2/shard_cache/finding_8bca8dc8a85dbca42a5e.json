@@ -1,0 +1,71 @@
+{
+ "components": [
+  "L10H10",
+  "L10H2",
+  "L10H6",
+  "L11H1",
+  "L11H10",
+  "L11H2",
+  "L1H10",
+  "L5H9"
+ ],
+ "universe_size": 141,
+ "claim": "CoAx AUC >=0.90; beats AtP*",
+ "score": 0.9351503759398496,
+ "meta": {
+  "config": {
+   "position_mode": "last",
+   "top_r": 0,
+   "ablation_mode": "zero",
+   "feature_mode": "fisher_centered",
+   "freeze_ln": "none",
+   "primaries": "documented"
+  },
+  "n_prompts": 96,
+  "prompt_seed": 1,
+  "n_unique_prompts": 60,
+  "template": "When {IO} and {S} went to the {place}, {S} gave a {obj} to",
+  "first_prompt": "When Martin and Emma went to the school, Emma gave a note to",
+  "primaries": [
+   [
+    9,
+    9
+   ],
+   [
+    10,
+    0
+   ],
+   [
+    9,
+    6
+   ]
+  ],
+  "primaries_documented": [
+   true,
+   true,
+   true
+  ],
+  "auc": {
+   "coax": 0.9351503759398496,
+   "single": 0.6024436090225564,
+   "conditional": 0.7481203007518797,
+   "atp": 0.6343984962406014,
+   "eap_ig": 0.630639097744361,
+   "atp_star": 0.8468045112781957,
+   "conditional_grad": 0.650375939849624
+  },
+  "average_precision": 0.5596509971509971,
+  "precision_at_8": 0.5,
+  "top8": [
+   "L11H2",
+   "L10H2",
+   "L11H10",
+   "L10H6",
+   "L5H9",
+   "L1H10",
+   "L11H1",
+   "L10H10"
+  ],
+  "wall_secs": 110.7
+ }
+}

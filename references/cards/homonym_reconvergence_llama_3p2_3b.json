@@ -1,0 +1,896 @@
+{
+  "schema_version": "0.3",
+  "stresskit_version": "1.0.0.dev0",
+  "created_at": "2026-09-01T22:03:38+00:00",
+  "claim": {
+    "statement": "Homonym and polyseme representations become maximally distinct in middle layers and partially reconverge in late layers, while the KL divergence between their next-token predictions peaks in the final layers.",
+    "base_claim_label": "middle peak; late reconvergence; KL peak final",
+    "model": "unsloth/Llama-3.2-3B",
+    "task": "layer-wise logit-lens profile of homonym pairs (upstream Experiment 1 stimuli; activation distance, logit distance, KL divergence)",
+    "method": "upstream per-layer distance/KL profile; top-k activation-distance band, reconvergence ratio, fixed-threshold profile label",
+    "base_size": 6,
+    "universe_size": 28
+  },
+  "battery": {
+    "axes": [
+      "seeds",
+      "bootstrap",
+      "templates",
+      "hyperparams"
+    ],
+    "n_runs_total": 32,
+    "seed": 0,
+    "base_config": {
+      "metric": "activation",
+      "lens": "raw",
+      "agg": "mean",
+      "k": 6
+    },
+    "claim_equiv_used": false,
+    "components_embedded": true
+  },
+  "metrics": {
+    "pooled": {
+      "n_runs": 32,
+      "n_structured_runs": 32,
+      "n_empty_findings": 0,
+      "empty_finding_rate": 0.0,
+      "mean_pairwise_jaccard": 0.9300435227854582,
+      "min_pairwise_jaccard": 0.3333333333333333,
+      "flip_rate": 0.17943548387096775,
+      "modal_share": 0.90625,
+      "n_claim_classes": 3,
+      "claim_counts": {
+        "middle peak; late reconvergence; KL peak final": 29,
+        "early peak; late reconvergence; KL peak final": 2,
+        "middle peak; late reconvergence; KL peak late": 1
+      },
+      "score_mean": 0.71196875,
+      "score_std": 0.04021817404405004,
+      "score_cv": 0.05648867881357157,
+      "median_size": 6.0,
+      "variance_shares": {
+        "bootstrap": 0.0036490454666034495,
+        "hyperparams": 0.9266977904938273,
+        "seeds": 0.0012058984095011586,
+        "templates": 0.06844726563006813
+      },
+      "variance_absolute": {
+        "bootstrap": 2.6846863905325332e-05,
+        "hyperparams": 0.006817928055555554,
+        "seeds": 8.87207100591715e-06,
+        "templates": 0.0005035822222222223
+      },
+      "mean_pairwise_jaccard_ci95": [
+        0.8367768595041308,
+        1.0
+      ],
+      "flip_rate_ci95": [
+        0.0,
+        0.38381742738589214
+      ],
+      "modal_share_ci95": [
+        0.78125,
+        1.0
+      ],
+      "score_cv_ci95": [
+        0.005089455060671839,
+        0.09472195930124366
+      ],
+      "expected_random_jaccard": 0.12770780493587952,
+      "expected_random_jaccard_analytic": 0.12,
+      "jaccard_vs_random": 7.282589527338766,
+      "mean_pairwise_jaccard_axis_balanced": 0.85,
+      "jaccard_vs_random_ci95": [
+        6.5522765810928,
+        7.83037497592326
+      ],
+      "specificity_ci95": [
+        0.841807909604519,
+        1.0
+      ],
+      "confidence": "low",
+      "borderline_checks": [
+        "claim_stability"
+      ]
+    },
+    "per_axis": {
+      "bootstrap": {
+        "n_runs": 13,
+        "n_structured_runs": 13,
+        "n_empty_findings": 0,
+        "empty_finding_rate": 0.0,
+        "mean_pairwise_jaccard": 1.0,
+        "min_pairwise_jaccard": 1.0,
+        "flip_rate": 0.0,
+        "modal_share": 1.0,
+        "n_claim_classes": 1,
+        "claim_counts": {
+          "middle peak; late reconvergence; KL peak final": 13
+        },
+        "score_mean": 0.7171076923076923,
+        "score_std": 0.005181395941763699,
+        "score_cv": 0.00722540839729341,
+        "median_size": 6
+      },
+      "hyperparams": {
+        "n_runs": 6,
+        "n_structured_runs": 6,
+        "n_empty_findings": 0,
+        "empty_finding_rate": 0.0,
+        "mean_pairwise_jaccard": 0.8444444444444444,
+        "min_pairwise_jaccard": 0.5714285714285714,
+        "flip_rate": 0.6,
+        "modal_share": 0.6666666666666666,
+        "n_claim_classes": 3,
+        "claim_counts": {
+          "middle peak; late reconvergence; KL peak final": 4,
+          "middle peak; late reconvergence; KL peak late": 1,
+          "early peak; late reconvergence; KL peak final": 1
+        },
+        "score_mean": 0.6785833333333334,
+        "score_std": 0.08257074576116867,
+        "score_cv": 0.12168106952401128,
+        "median_size": 6.0
+      },
+      "seeds": {
+        "n_runs": 13,
+        "n_structured_runs": 13,
+        "n_empty_findings": 0,
+        "empty_finding_rate": 0.0,
+        "mean_pairwise_jaccard": 1.0,
+        "min_pairwise_jaccard": 1.0,
+        "flip_rate": 0.0,
+        "modal_share": 1.0,
+        "n_claim_classes": 1,
+        "claim_counts": {
+          "middle peak; late reconvergence; KL peak final": 13
+        },
+        "score_mean": 0.7193153846153847,
+        "score_std": 0.0029786021899403,
+        "score_cv": 0.0041408848658686034,
+        "median_size": 6
+      },
+      "templates": {
+        "n_runs": 3,
+        "n_structured_runs": 3,
+        "n_empty_findings": 0,
+        "empty_finding_rate": 0.0,
+        "mean_pairwise_jaccard": 0.5555555555555555,
+        "min_pairwise_jaccard": 0.3333333333333333,
+        "flip_rate": 0.6666666666666667,
+        "modal_share": 0.6666666666666666,
+        "n_claim_classes": 2,
+        "claim_counts": {
+          "middle peak; late reconvergence; KL peak final": 2,
+          "early peak; late reconvergence; KL peak final": 1
+        },
+        "score_mean": 0.7333666666666666,
+        "score_std": 0.02244063774098727,
+        "score_cv": 0.03059947876140258,
+        "median_size": 6
+      }
+    },
+    "null_control": {
+      "n_runs": 25,
+      "mean_pairwise_jaccard": 1.0,
+      "flip_rate": 0.0,
+      "modal_share": 1.0,
+      "score_mean": 0.6642959999999999,
+      "score_cv": 0.00459258121196098,
+      "median_size": 6
+    }
+  },
+  "verdict": {
+    "grade": "B",
+    "profile": "diagnostic",
+    "confirmatory_state": "not_applicable",
+    "required_checks": [],
+    "checks": {
+      "structural_stability": {
+        "value": 0.9300435227854582,
+        "threshold": 0.8,
+        "passed": true,
+        "op": ">=",
+        "ci": [
+          0.8367768595041308,
+          1.0
+        ],
+        "robust": true,
+        "state": "pass",
+        "description": "mean pairwise Jaccard across all perturbed runs"
+      },
+      "claim_stability": {
+        "value": 0.90625,
+        "threshold": 0.8,
+        "passed": true,
+        "op": ">=",
+        "ci": [
+          0.78125,
+          1.0
+        ],
+        "robust": false,
+        "state": "inconclusive",
+        "description": "modal claim share \u03c0* (filability at \u03b1=0.2)"
+      },
+      "score_stability": {
+        "value": 0.05648867881357157,
+        "threshold": 0.25,
+        "passed": true,
+        "op": "<=",
+        "ci": [
+          0.005089455060671839,
+          0.09472195930124366
+        ],
+        "robust": true,
+        "state": "pass",
+        "description": "coefficient of variation of the quality score"
+      },
+      "beats_random": {
+        "value": 7.282589527338766,
+        "threshold": 3.0,
+        "passed": true,
+        "op": ">=",
+        "ci": [
+          6.5522765810928,
+          7.83037497592326
+        ],
+        "robust": true,
+        "state": "pass",
+        "description": "structural overlap vs size-matched random null (\u00d7)"
+      },
+      "specificity": {
+        "value": 0.9300435227854582,
+        "threshold": 1.5,
+        "passed": false,
+        "op": ">=",
+        "ci": [
+          0.841807909604519,
+          1.0
+        ],
+        "robust": true,
+        "state": "fail",
+        "description": "structural stability on real vs null-control data (\u00d7)"
+      }
+    },
+    "thresholds": {
+      "jaccard": 0.8,
+      "modal_share": 0.8,
+      "score_cv": 0.25,
+      "random_margin": 3.0
+    }
+  },
+  "provenance": {
+    "python": "3.12.3",
+    "platform": "Linux-6.11.0-1016-nvidia-x86_64-with-glibc2.39",
+    "wall_seconds": 192.349
+  },
+  "notes": [
+    "underpowered verdict: the 95% CI straddles the bar for claim_stability (pass) at n_runs=12 \u2014 these verdict components are not decided by the data. Treat the grade as provisional and raise n_runs (or widen the battery) before reporting it.",
+    "scope: unsloth/Llama-3.2-3B (HF revision d4446454d87d51aa42e1fb174f25acc5f8762331) in float16, 28 post-block residual layers read at the target-word token, one sentence per forward pass, no chat template; the paper's models are gpt2, meta-llama/Llama-3.2-3B and Qwen/Qwen2.5-32B via TransformerLens 2.1.6 \u2014 this card grades the profile on the model named here only, with the TransformerLens conventions the upstream inherits (fold_ln, center_unembed, center_writing_weights for LayerNorm models) reproduced on plain Hugging Face weights",
+    "data: upstream stimulus files at scoki211/Divergent_LLM_Predictions_Convergent_Reps_amb_words@dd08338 (MIT), SHA-256 verified; upstream tokenisation validation reproduced: homonyms 166/190 words -> 451 context pairs (failures {'inconsistent_tokenization': 22, 'not_found': 2}); polysemes 94/97 words -> 116 pairs (failures {'inconsistent_tokenization': 2, 'not_found': 1}); paper Table 1 reports 166 homonyms and 94 polysemes for this model; the paper's KL > 0.5 stimulus screen is not part of the released Experiment-1 entrypoint and is not applied",
+    "representation (fixed before running): band = top-6 layers by activation distance (k = max(3, round(0.2 L))); score r = mean activation distance over the final band [25, 26, 27] / peak; label = majority manuscript layer group of the band (early <= 6, middle <= 16, late above) + 'late reconvergence' iff r <= 0.9 + KL argmax in the final band -> 'final'; the paper's claim is the label 'middle peak; late reconvergence; KL peak final'; each finder call subsamples 75% of the items with its seed",
+    "base run (subsampled): activation-distance peak at layer 6 (0.633), band [5, 6, 7, 8, 9, 10], final-band mean 0.457, r = 0.721, KL argmax layer 27, label 'middle peak; late reconvergence; KL peak final' (339 items, 158 words)",
+    "the base activation-distance peak (layer 6) falls in the manuscript's 'early' group while the band majority is 'middle': the peak sits on a group boundary, so the zone label rests on the band's majority \u2014 see the single-run axes for the variants that relabel it",
+    "full homonym set, base configuration: activation-distance peak layer 6 (0.623), final-band mean 0.448, KL argmax layer 27; per-(word, layer) activation distance by manuscript group: early mean 0.450 / median 0.483; middle mean 0.534 / median 0.546; late mean 0.466 / median 0.482 (paper: GPT-2 means 0.069/0.215/0.167, Llama-3.2-3B medians 0.48/0.55/0.48, Qwen2.5-32B medians 0.38/0.63/0.42 for early/middle/late)",
+    "null control (graded): the homonym items with sentence B re-paired to a different word (seeded derangement, seed 0x5ec, 451 items, same sentences, same read positions, same finder) \u2014 the effect under test (one surface form, two senses) is absent while everything else is held fixed. Fair because the finder's output is a stable top-k band on any smooth depth profile, so the specificity ratio asks whether band stability is diagnostic of the ambiguity effect; it does NOT test whether the null recovers the same band or label \u2014 see the next notes. Conservative direction: different-word pairs are far apart at every depth, so their profile is shaped by the global geometry (anisotropy), not by sense resolution",
+    "null base run (permuted pairs): activation-distance peak at layer 2 (0.852), band [0, 1, 2, 3, 4, 5], final-band mean 0.565, r = 0.664, KL argmax layer 27, label 'early peak; late reconvergence; KL peak final' (339 items, 161 words)",
+    "null claim distribution: 'early peak; late reconvergence; KL peak final' x25; Jaccard between the real and null base bands 0.091; full permuted set: peak layer 2, final-band mean / peak 0.666, KL argmax layer 27",
+    "alternative null (reported, not graded): the upstream sequence-order control set (280 matched tokens from 56 reordered sentence pairs) through the same finder \u2014 null Jaccard 0.857, specificity ratio 1.085 (95% CI [0.973, 1.171]), fail at >= 1.5; null claim distribution: 'middle peak; late reconvergence; KL peak final' x25; Jaccard between the real and sequence-order base bands 0.714",
+    "sequence-order null base run: activation-distance peak at layer 10 (0.261), band [6, 7, 8, 9, 10, 11], final-band mean 0.187, r = 0.715, KL argmax layer 27, label 'middle peak; late reconvergence; KL peak final' (210 items, 138 words)",
+    "label components of the real base run that the null base runs also produce \u2014 permuted pairs: 'late reconvergence', 'KL peak final'; sequence-order control: 'middle peak', 'late reconvergence', 'KL peak final'. A component the finder also returns without the ambiguity effect is not evidence of that effect on this model",
+    "magnitude comparison the paper does make for this control (its Figure 4, Llama-3.2-3B, medians early/middle/late homonym 0.483/0.546/0.482 vs sequence-order 0.113/0.223/0.190): here homonym early mean 0.450 / median 0.483; middle mean 0.534 / median 0.546; late mean 0.466 / median 0.482; sequence-order early mean 0.138 / median 0.113; middle mean 0.219 / median 0.223; late mean 0.188 / median 0.190. The graded finder is magnitude-blind: a control with the same profile shape at lower magnitude reproduces the label",
+    "single-run axes: template=polysemes: 'middle peak; late reconvergence; KL peak final', band [5, 6, 7, 8, 9, 10], r = 0.765, KL argmax 27; template=next-token-position: 'early peak; late reconvergence; KL peak final', band [2, 3, 4, 5, 6, 7], r = 0.715, KL argmax 27; metric=logit: 'middle peak; late reconvergence; KL peak final', band [5, 6, 7, 8, 9, 10], r = 0.495, KL argmax 27; lens=normed: 'middle peak; late reconvergence; KL peak late', band [5, 6, 7, 8, 9, 10], r = 0.721, KL argmax 24; agg=median: 'middle peak; late reconvergence; KL peak final', band [5, 6, 7, 8, 9, 10], r = 0.693, KL argmax 27; k=4: 'early peak; late reconvergence; KL peak final', band [5, 6, 7, 8], r = 0.721, KL argmax 27; k=7: 'middle peak; late reconvergence; KL peak final', band [4, 5, 6, 7, 8, 9, 10], r = 0.721, KL argmax 27",
+    "full polyseme set, base configuration: peak layer 7, final-band mean / peak 0.759, KL argmax layer 27",
+    "the 'lens=normed' hyperparameter applies the model's final norm before unembedding (the standard logit lens); the upstream raw projection lets the growing residual norm sharpen late-layer softmaxes, so the final-layer KL peak under 'raw' partly measures norm growth \u2014 compare the two KL argmax values above"
+  ],
+  "runs": [
+    {
+      "axis": "base",
+      "variant": "base",
+      "seed": 0,
+      "size": 6,
+      "claim": "middle peak; late reconvergence; KL peak final",
+      "score": 0.7207,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "7068ac7e76987723377cda42a40796b47a9f0eaed2dc6c39f927ebaa394673b9",
+      "components": [
+        "10",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=1",
+      "seed": 1,
+      "size": 6,
+      "claim": "middle peak; late reconvergence; KL peak final",
+      "score": 0.7189,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "7068ac7e76987723377cda42a40796b47a9f0eaed2dc6c39f927ebaa394673b9",
+      "components": [
+        "10",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=2",
+      "seed": 2,
+      "size": 6,
+      "claim": "middle peak; late reconvergence; KL peak final",
+      "score": 0.714,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "7068ac7e76987723377cda42a40796b47a9f0eaed2dc6c39f927ebaa394673b9",
+      "components": [
+        "10",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=3",
+      "seed": 3,
+      "size": 6,
+      "claim": "middle peak; late reconvergence; KL peak final",
+      "score": 0.72,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "7068ac7e76987723377cda42a40796b47a9f0eaed2dc6c39f927ebaa394673b9",
+      "components": [
+        "10",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=4",
+      "seed": 4,
+      "size": 6,
+      "claim": "middle peak; late reconvergence; KL peak final",
+      "score": 0.7167,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "7068ac7e76987723377cda42a40796b47a9f0eaed2dc6c39f927ebaa394673b9",
+      "components": [
+        "10",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=5",
+      "seed": 5,
+      "size": 6,
+      "claim": "middle peak; late reconvergence; KL peak final",
+      "score": 0.7173,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "7068ac7e76987723377cda42a40796b47a9f0eaed2dc6c39f927ebaa394673b9",
+      "components": [
+        "10",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=6",
+      "seed": 6,
+      "size": 6,
+      "claim": "middle peak; late reconvergence; KL peak final",
+      "score": 0.7213,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "7068ac7e76987723377cda42a40796b47a9f0eaed2dc6c39f927ebaa394673b9",
+      "components": [
+        "10",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=7",
+      "seed": 7,
+      "size": 6,
+      "claim": "middle peak; late reconvergence; KL peak final",
+      "score": 0.724,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "7068ac7e76987723377cda42a40796b47a9f0eaed2dc6c39f927ebaa394673b9",
+      "components": [
+        "10",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=8",
+      "seed": 8,
+      "size": 6,
+      "claim": "middle peak; late reconvergence; KL peak final",
+      "score": 0.7209,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "7068ac7e76987723377cda42a40796b47a9f0eaed2dc6c39f927ebaa394673b9",
+      "components": [
+        "10",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=9",
+      "seed": 9,
+      "size": 6,
+      "claim": "middle peak; late reconvergence; KL peak final",
+      "score": 0.7186,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "7068ac7e76987723377cda42a40796b47a9f0eaed2dc6c39f927ebaa394673b9",
+      "components": [
+        "10",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=10",
+      "seed": 10,
+      "size": 6,
+      "claim": "middle peak; late reconvergence; KL peak final",
+      "score": 0.7165,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "7068ac7e76987723377cda42a40796b47a9f0eaed2dc6c39f927ebaa394673b9",
+      "components": [
+        "10",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=11",
+      "seed": 11,
+      "size": 6,
+      "claim": "middle peak; late reconvergence; KL peak final",
+      "score": 0.725,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "7068ac7e76987723377cda42a40796b47a9f0eaed2dc6c39f927ebaa394673b9",
+      "components": [
+        "10",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=12",
+      "seed": 12,
+      "size": 6,
+      "claim": "middle peak; late reconvergence; KL peak final",
+      "score": 0.7172,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "7068ac7e76987723377cda42a40796b47a9f0eaed2dc6c39f927ebaa394673b9",
+      "components": [
+        "10",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=1",
+      "seed": 0,
+      "size": 6,
+      "claim": "middle peak; late reconvergence; KL peak final",
+      "score": 0.7127,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "7068ac7e76987723377cda42a40796b47a9f0eaed2dc6c39f927ebaa394673b9",
+      "components": [
+        "10",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=2",
+      "seed": 0,
+      "size": 6,
+      "claim": "middle peak; late reconvergence; KL peak final",
+      "score": 0.7052,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "7068ac7e76987723377cda42a40796b47a9f0eaed2dc6c39f927ebaa394673b9",
+      "components": [
+        "10",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=3",
+      "seed": 0,
+      "size": 6,
+      "claim": "middle peak; late reconvergence; KL peak final",
+      "score": 0.7208,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "7068ac7e76987723377cda42a40796b47a9f0eaed2dc6c39f927ebaa394673b9",
+      "components": [
+        "10",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=4",
+      "seed": 0,
+      "size": 6,
+      "claim": "middle peak; late reconvergence; KL peak final",
+      "score": 0.7219,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "7068ac7e76987723377cda42a40796b47a9f0eaed2dc6c39f927ebaa394673b9",
+      "components": [
+        "10",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=5",
+      "seed": 0,
+      "size": 6,
+      "claim": "middle peak; late reconvergence; KL peak final",
+      "score": 0.7196,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "7068ac7e76987723377cda42a40796b47a9f0eaed2dc6c39f927ebaa394673b9",
+      "components": [
+        "10",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=6",
+      "seed": 0,
+      "size": 6,
+      "claim": "middle peak; late reconvergence; KL peak final",
+      "score": 0.7181,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "7068ac7e76987723377cda42a40796b47a9f0eaed2dc6c39f927ebaa394673b9",
+      "components": [
+        "10",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=7",
+      "seed": 0,
+      "size": 6,
+      "claim": "middle peak; late reconvergence; KL peak final",
+      "score": 0.7239,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "7068ac7e76987723377cda42a40796b47a9f0eaed2dc6c39f927ebaa394673b9",
+      "components": [
+        "10",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=8",
+      "seed": 0,
+      "size": 6,
+      "claim": "middle peak; late reconvergence; KL peak final",
+      "score": 0.7187,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "7068ac7e76987723377cda42a40796b47a9f0eaed2dc6c39f927ebaa394673b9",
+      "components": [
+        "10",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=9",
+      "seed": 0,
+      "size": 6,
+      "claim": "middle peak; late reconvergence; KL peak final",
+      "score": 0.7186,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "7068ac7e76987723377cda42a40796b47a9f0eaed2dc6c39f927ebaa394673b9",
+      "components": [
+        "10",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=10",
+      "seed": 0,
+      "size": 6,
+      "claim": "middle peak; late reconvergence; KL peak final",
+      "score": 0.7146,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "7068ac7e76987723377cda42a40796b47a9f0eaed2dc6c39f927ebaa394673b9",
+      "components": [
+        "10",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=11",
+      "seed": 0,
+      "size": 6,
+      "claim": "middle peak; late reconvergence; KL peak final",
+      "score": 0.7189,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "7068ac7e76987723377cda42a40796b47a9f0eaed2dc6c39f927ebaa394673b9",
+      "components": [
+        "10",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=12",
+      "seed": 0,
+      "size": 6,
+      "claim": "middle peak; late reconvergence; KL peak final",
+      "score": 0.7087,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "7068ac7e76987723377cda42a40796b47a9f0eaed2dc6c39f927ebaa394673b9",
+      "components": [
+        "10",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ]
+    },
+    {
+      "axis": "templates",
+      "variant": "template=polysemes",
+      "seed": 0,
+      "size": 6,
+      "claim": "middle peak; late reconvergence; KL peak final",
+      "score": 0.7649,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "7068ac7e76987723377cda42a40796b47a9f0eaed2dc6c39f927ebaa394673b9",
+      "components": [
+        "10",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ]
+    },
+    {
+      "axis": "templates",
+      "variant": "template=next-token-position",
+      "seed": 0,
+      "size": 6,
+      "claim": "early peak; late reconvergence; KL peak final",
+      "score": 0.7145,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "5a1afcfb4902e399e08802d6d4820fe1f797ba0fee15b077108b3b154b381619",
+      "components": [
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "metric=logit",
+      "seed": 0,
+      "size": 6,
+      "claim": "middle peak; late reconvergence; KL peak final",
+      "score": 0.4953,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "7068ac7e76987723377cda42a40796b47a9f0eaed2dc6c39f927ebaa394673b9",
+      "components": [
+        "10",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "lens=normed",
+      "seed": 0,
+      "size": 6,
+      "claim": "middle peak; late reconvergence; KL peak late",
+      "score": 0.7207,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "7068ac7e76987723377cda42a40796b47a9f0eaed2dc6c39f927ebaa394673b9",
+      "components": [
+        "10",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "agg=median",
+      "seed": 0,
+      "size": 6,
+      "claim": "middle peak; late reconvergence; KL peak final",
+      "score": 0.6934,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "7068ac7e76987723377cda42a40796b47a9f0eaed2dc6c39f927ebaa394673b9",
+      "components": [
+        "10",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "k=4",
+      "seed": 0,
+      "size": 4,
+      "claim": "early peak; late reconvergence; KL peak final",
+      "score": 0.7207,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "c19cd44076cea01dd06eb165c8e879de45b09806bbbef2dc297a8def4916e52a",
+      "components": [
+        "5",
+        "6",
+        "7",
+        "8"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "k=7",
+      "seed": 0,
+      "size": 7,
+      "claim": "middle peak; late reconvergence; KL peak final",
+      "score": 0.7207,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "e865c21f5460a0fdc5d0407292fce159cb80f08b71910c805bb9574bb166df4f",
+      "components": [
+        "10",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ]
+    }
+  ]
+}

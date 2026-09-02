@@ -1,0 +1,71 @@
+{
+ "components": [
+  "L10H10",
+  "L10H2",
+  "L10H6",
+  "L11H1",
+  "L11H10",
+  "L11H2",
+  "L1H10",
+  "L5H9"
+ ],
+ "universe_size": 141,
+ "claim": "CoAx AUC >=0.90; beats AtP*",
+ "score": 0.9454887218045113,
+ "meta": {
+  "config": {
+   "position_mode": "last",
+   "top_r": 0,
+   "ablation_mode": "zero",
+   "feature_mode": "fisher_centered",
+   "freeze_ln": "none",
+   "primaries": "documented"
+  },
+  "n_prompts": 96,
+  "prompt_seed": 23,
+  "n_unique_prompts": 96,
+  "template": "When {IO} and {S} went to the {place}, {S} gave a {obj} to",
+  "first_prompt": "When Lucy and John went to the station, John gave a ball to",
+  "primaries": [
+   [
+    9,
+    9
+   ],
+   [
+    10,
+    0
+   ],
+   [
+    9,
+    6
+   ]
+  ],
+  "primaries_documented": [
+   true,
+   true,
+   true
+  ],
+  "auc": {
+   "coax": 0.9454887218045113,
+   "single": 0.606203007518797,
+   "conditional": 0.7518796992481203,
+   "atp": 0.5742481203007519,
+   "eap_ig": 0.7255639097744361,
+   "atp_star": 0.8110902255639098,
+   "conditional_grad": 0.625
+  },
+  "average_precision": 0.5674498746867167,
+  "precision_at_8": 0.5,
+  "top8": [
+   "L11H2",
+   "L10H2",
+   "L11H10",
+   "L1H10",
+   "L10H6",
+   "L5H9",
+   "L10H10",
+   "L11H1"
+  ],
+  "wall_secs": 107.3
+ }
+}

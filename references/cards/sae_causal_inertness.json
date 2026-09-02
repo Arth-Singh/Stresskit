@@ -1,0 +1,939 @@
+{
+  "schema_version": "0.4",
+  "stresskit_version": "1.0.0.dev0",
+  "created_at": "2026-09-01T23:26:42+00:00",
+  "claim": {
+    "statement": "Our central result is causal: subjecting every recovered feature to ablation and steering, we find up to 77% of features passing a recovery bar (cosine >= 0.90) in a degraded SAE -- and 9% in a well-trained one -- are causally inert: the matched atom never fires when the feature is present, including matches at cosine ~1.000.",
+    "base_claim_label": "inert in both; degraded >= well-trained",
+    "model": "Elhage et al. (2022) toy bottleneck model trained by the released harness (32 features, 8 hidden dims, sparsity 0.95, seed 0) with two TopK SAEs on its hidden activations (d_sae 128, k=4 well-trained and k=13 degraded); mohamed-bal/sae-causal-audit@3915d95",
+    "task": "census of causally inert pairs among cosine-recovered (ground-truth direction, decoder atom) matches",
+    "method": "signed cosine matching against W_dec, then per-pair fired_frac / ablation / steering measurement through encode+decode, upstream sae_causal_audit.run_audit",
+    "base_size": 8,
+    "universe_size": 64
+  },
+  "battery": {
+    "axes": [
+      "seeds",
+      "bootstrap",
+      "templates",
+      "hyperparams"
+    ],
+    "n_runs_total": 33,
+    "seed": 0,
+    "base_config": {
+      "toy_steps": 4000,
+      "sae_steps": 4000,
+      "d_sae": 128,
+      "k_good": 4,
+      "k_bad": 13,
+      "n_samples": 500,
+      "cosine_bar": 0.9,
+      "well_represented_norm": 0.1
+    },
+    "claim_equiv_used": false,
+    "components_embedded": true
+  },
+  "metrics": {
+    "pooled": {
+      "n_runs": 33,
+      "n_structured_runs": 33,
+      "n_empty_findings": 0,
+      "empty_finding_rate": 0.0,
+      "mean_pairwise_jaccard": 0.33199305584302685,
+      "min_pairwise_jaccard": 0.0,
+      "flip_rate": 0.2765151515151515,
+      "modal_share": 0.8484848484848485,
+      "n_claim_classes": 3,
+      "claim_counts": {
+        "inert in both; degraded >= well-trained": 28,
+        "inert in degraded only; degraded >= well-trained": 3,
+        "inert in both; well-trained > degraded": 2
+      },
+      "score_mean": 0.1920501515151515,
+      "score_std": 0.07437237928934949,
+      "score_cv": 0.387254988879725,
+      "median_size": 6,
+      "variance_shares": {
+        "bootstrap": 0.3179317871040821,
+        "hyperparams": 0.024100290020428634,
+        "seeds": 0.1368963115091598,
+        "templates": 0.5210716113663295
+      },
+      "variance_absolute": {
+        "bootstrap": 0.004979919679775149,
+        "hyperparams": 0.00037749452375999997,
+        "seeds": 0.002144273279443787,
+        "templates": 0.008161797207039998
+      },
+      "mean_pairwise_jaccard_all_sizes": 0.27914050462930806,
+      "n_size_mismatched_excluded": 4,
+      "mean_pairwise_jaccard_ci95": [
+        0.25904182053811614,
+        0.42273244561706114
+      ],
+      "flip_rate_ci95": [
+        0.11923076923076924,
+        0.46732673267326735
+      ],
+      "modal_share_ci95": [
+        0.7272727272727273,
+        0.9393939393939394
+      ],
+      "score_cv_ci95": [
+        0.25249751166540707,
+        0.5015985371943311
+      ],
+      "expected_random_jaccard": 0.06092593437716275,
+      "expected_random_jaccard_analytic": 0.04918032786885246,
+      "jaccard_vs_random": 5.449125388669786,
+      "mean_pairwise_jaccard_axis_balanced": 0.4405751579365833,
+      "jaccard_vs_random_ci95": [
+        4.251749656140102,
+        6.9384647102846335
+      ],
+      "specificity_ci95": [
+        0.4698125405154691,
+        0.8557131378198665
+      ],
+      "confidence": "low",
+      "borderline_checks": [
+        "claim_stability"
+      ]
+    },
+    "per_axis": {
+      "bootstrap": {
+        "n_runs": 13,
+        "n_structured_runs": 13,
+        "n_empty_findings": 0,
+        "empty_finding_rate": 0.0,
+        "mean_pairwise_jaccard": 0.5210622710622711,
+        "min_pairwise_jaccard": 0.0,
+        "flip_rate": 0.41025641025641024,
+        "modal_share": 0.7692307692307693,
+        "n_claim_classes": 3,
+        "claim_counts": {
+          "inert in both; degraded >= well-trained": 10,
+          "inert in both; well-trained > degraded": 2,
+          "inert in degraded only; degraded >= well-trained": 1
+        },
+        "score_mean": 0.2164863846153846,
+        "score_std": 0.07056854596613954,
+        "score_cv": 0.32597221340969534,
+        "median_size": 6
+      },
+      "hyperparams": {
+        "n_runs": 5,
+        "n_structured_runs": 5,
+        "n_empty_findings": 0,
+        "empty_finding_rate": 0.0,
+        "mean_pairwise_jaccard": 0.6390476190476191,
+        "min_pairwise_jaccard": 0.35714285714285715,
+        "flip_rate": 0.0,
+        "modal_share": 1.0,
+        "n_claim_classes": 1,
+        "claim_counts": {
+          "inert in both; degraded >= well-trained": 5
+        },
+        "score_mean": 0.20602079999999998,
+        "score_std": 0.019429218300281666,
+        "score_cv": 0.09430707142328186,
+        "median_size": 8
+      },
+      "seeds": {
+        "n_runs": 13,
+        "n_structured_runs": 13,
+        "n_empty_findings": 0,
+        "empty_finding_rate": 0.0,
+        "mean_pairwise_jaccard": 0.24607963052533188,
+        "min_pairwise_jaccard": 0.0,
+        "flip_rate": 0.0,
+        "modal_share": 1.0,
+        "n_claim_classes": 1,
+        "claim_counts": {
+          "inert in both; degraded >= well-trained": 13
+        },
+        "score_mean": 0.1965863076923077,
+        "score_std": 0.04630629848566809,
+        "score_cv": 0.2355520027271972,
+        "median_size": 8
+      },
+      "templates": {
+        "n_runs": 5,
+        "n_structured_runs": 5,
+        "n_empty_findings": 0,
+        "empty_finding_rate": 0.0,
+        "mean_pairwise_jaccard": 0.35611111111111116,
+        "min_pairwise_jaccard": 0.1,
+        "flip_rate": 0.6,
+        "modal_share": 0.6,
+        "n_claim_classes": 2,
+        "claim_counts": {
+          "inert in both; degraded >= well-trained": 3,
+          "inert in degraded only; degraded >= well-trained": 2
+        },
+        "score_mean": 0.1045944,
+        "score_std": 0.09034266548558327,
+        "score_cv": 0.8637428532080423,
+        "median_size": 2
+      }
+    },
+    "null_control": {
+      "n_runs": 25,
+      "mean_pairwise_jaccard": 0.523453742465678,
+      "flip_rate": 0.15333333333333332,
+      "modal_share": 0.92,
+      "score_mean": 0.9192545200000001,
+      "score_cv": 0.05196863792079049,
+      "median_size": 32
+    }
+  },
+  "verdict": {
+    "grade": "C",
+    "profile": "diagnostic",
+    "confirmatory_state": "not_applicable",
+    "required_checks": [],
+    "checks": {
+      "structural_stability": {
+        "value": 0.33199305584302685,
+        "threshold": 0.8,
+        "passed": false,
+        "op": ">=",
+        "ci": [
+          0.25904182053811614,
+          0.42273244561706114
+        ],
+        "robust": true,
+        "state": "fail",
+        "description": "mean pairwise Jaccard across all perturbed runs"
+      },
+      "claim_stability": {
+        "value": 0.8484848484848485,
+        "threshold": 0.8,
+        "passed": true,
+        "op": ">=",
+        "ci": [
+          0.7272727272727273,
+          0.9393939393939394
+        ],
+        "robust": false,
+        "state": "inconclusive",
+        "description": "modal claim share \u03c0* (filability at \u03b1=0.2)"
+      },
+      "score_stability": {
+        "value": 0.387254988879725,
+        "threshold": 0.25,
+        "passed": false,
+        "op": "<=",
+        "ci": [
+          0.25249751166540707,
+          0.5015985371943311
+        ],
+        "robust": true,
+        "state": "fail",
+        "description": "coefficient of variation of the quality score"
+      },
+      "beats_random": {
+        "value": 5.449125388669786,
+        "threshold": 3.0,
+        "passed": true,
+        "op": ">=",
+        "ci": [
+          4.251749656140102,
+          6.9384647102846335
+        ],
+        "robust": true,
+        "state": "pass",
+        "description": "structural overlap vs size-matched random null (\u00d7)"
+      },
+      "specificity": {
+        "value": 0.6342357096908045,
+        "threshold": 1.5,
+        "passed": false,
+        "op": ">=",
+        "ci": [
+          0.4698125405154691,
+          0.8557131378198665
+        ],
+        "robust": true,
+        "state": "fail",
+        "description": "structural stability on real vs null-control data (\u00d7)"
+      }
+    },
+    "thresholds": {
+      "jaccard": 0.8,
+      "modal_share": 0.8,
+      "score_cv": 0.25,
+      "random_margin": 3.0
+    }
+  },
+  "provenance": {
+    "python": "3.12.3",
+    "platform": "Linux-6.11.0-1016-nvidia-x86_64-with-glibc2.39",
+    "wall_seconds": 571.295
+  },
+  "notes": [
+    "structural stability graded on 29 size-comparable runs; 4 run(s) with >2x size difference excluded (pooled-over-all value kept as mean_pairwise_jaccard_all_sizes)",
+    "pooled Jaccard (0.332) and axis-balanced Jaccard (0.441) diverge by more than 0.1 \u2014 per-axis run counts are shaping the pooled number; read the per-axis breakdown before citing it",
+    "underpowered verdict: the 95% CI straddles the bar for claim_stability (pass) at n_runs=12 \u2014 these verdict components are not decided by the data. Treat the grade as provisional and raise n_runs (or widen the battery) before reporting it.",
+    "scope: graded artifact = the released toy-regime pipeline (Elhage-style bottleneck model at ToyConfig(seed=0), two TopK SAEs at k=4 and k=13, d_sae 128) audited by upstream's own run_audit; usage mode = the known-ground-truth toy regime that the paper's Table 5 census is computed in. The battery does NOT test the real-model regime (GPT-2-small, 83 concepts, gpt2-small-res-jb), the superposition phase-diagram or TopK-versus-L1 reproductions, the ablation/steering specificity medians, or the read-inert versus write-inert taxonomy; and the 77% in the claim sentence is the originating write-up's figure, which the released instrument does not recompute -- Table 5's own degraded-SAE census is 17%",
+    "data: no external dataset; every number is regenerated on CPU from mohamed-bal/sae-causal-audit@3915d95 (MIT), each imported source file SHA-256 verified against this runner before import. torch 2.13.0+cu130; upstream guarantees byte-exact results only inside its pinned CI environment (ubuntu-24.04, torch==2.13.0+cpu) and semantic agreement within rtol=1e-4 elsewhere",
+    "finding representation pre-registered before any run: components = recovered-and-inert (SAE, feature) pairs over a universe of 64 pairs; score = pooled inert rate among recovered pairs; claim = presence of inertness in each SAE plus which SAE has the higher rate, both read directly off the claim sentence with no free threshold",
+    "null control: the feature-to-probe pairing permuted once by a derangement (seed 0x5ec), so every matched atom is asked whether it fires for a ground-truth feature it was not matched to, while matching, the readout dimension and the recovery bar stay untouched. Direction: the null is strict rather than conservative. Inertness is the absence of an effect, so breaking the pairing pushes the census toward saturation -- a large, near-identical set every run, which inflates null Jaccard and therefore depresses the specificity ratio. Read a specificity failure here as 'the identity of the inert pairs is not more stable than a saturated census', not as evidence that the real census is random; StressKit's separate beats-random check already carries the size-matched random comparison",
+    "inert rate by eligibility cohort (not graded): all-32-features (n=1): pooled inert rate 0.233 median, good 0.130, degraded 0.350; all-32-in-context (n=1): pooled inert rate 0.047 median, good 0.043, degraded 0.050; in-context-dense-background (n=1): pooled inert rate 0.024 median, good 0.000, degraded 0.053; in-context-presentation (n=1): pooled inert rate 0.024 median, good 0.000, degraded 0.053; released-22-well-represented (n=29): pooled inert rate 0.216 median, good 0.091, degraded 0.316",
+    "presentation regime (not graded, and the largest single effect in this battery): with the feature presented in isolation as upstream does (n=30, census 7.0 pairs on average, pooled inert rate 0.208); with the same feature presented inside a sparse background, which is how upstream's own real-model regime defines feature-ON (n=3, census 1.3 pairs on average, pooled inert rate 0.032). Most of the census is specific to the isolation regime: an atom that never wins the TopK competition for a feature presented alone can still win it when the feature arrives in company. This is a statement about the scope of the measurement, not about whether the isolated-regime census is correct -- it is upstream's declared regime and it reproduces there",
+    "per-SAE inert rates by axis (not graded; the claim sentence quotes 9% for the well-trained SAE and up to 77% for the degraded one): seeds (n=12): good 0.110+/-0.039, degraded 0.312+/-0.114, census size 5-11; bootstrap (n=12): good 0.108+/-0.073, degraded 0.345+/-0.131, census size 2-8; templates (n=4): good 0.043+/-0.053, degraded 0.126+/-0.129, census size 1-10; hyperparams (n=4): good 0.102+/-0.020, degraded 0.349+/-0.020, census size 6-10",
+    "inert-pair geometry (not graded): across 33 real runs with a non-empty census, 29/33 contain at least one inert pair at cosine >= 0.999 (largest inert cosine 0.9921 on average, min over runs 0.9327), which is the existential reading the claim sentence makes; the census is not confined to those pairs, and its lowest inert cosine is 0.9353 on average (min 0.8881); 0 run(s) produced an empty census",
+    "null-control census: over 25 null runs the census holds 28.4 pairs on average (range 16-40, real base 8), pooled inert rate 0.919+/-0.048, and shares 5.0 pairs with the real base census; claims: `inert in both; well-trained > degraded` x23, `inert in both; degraded >= well-trained` x2",
+    "specificity basis: the null base run selected 32 pairs, so StressKit's 2x size guard grades null Jaccard on 25/25 null runs = 0.523; over all 25 null runs the null Jaccard is 0.523 and the real/null ratio would be 0.63x",
+    "post-hoc regrade (verdict-trace mode, from_findings at bootstrap seed 0): grade C, low confidence vs the card's low; every check has the same state as on the card -- a check whose CI end sits at its bar is decided by the bootstrap seed, not by the data",
+    "released census, run 1 (Linux 6.11 x86_64, CPython 3.12.3, torch 2.13.0+cu130 run CPU-only, numpy 2.5.2, outside Docker): good_k4 recovered 22, causally inert 2 -- both exactly the released values; bad_k13 recovered 19 (released 18 +/-1, within) and causally inert 6 (released 3 +/-1, OUTSIDE by 2). scripts/verify_results_tolerance.py exits 1 with DRIFT bad_k13.recovered_inert expected=3.0 got=6.0.",
+    "released census, run 2 (macOS-15.5-arm64, CPython 3.12.12, torch 2.13.0 arm64 build, numpy 2.5.2, outside Docker): good_k4 recovered 22 and causally inert 3 against a released 2 (+1); bad_k13 recovered 17 and causally inert 3, i.e. exactly the value run 1 missed. Re-running in the same environment reproduces summary.json byte-for-byte, so the pipeline is deterministic within an environment and divergent across environments. NEITHER run used upstream's pinned wheel (torch==2.13.0+cpu on ubuntu-24.04); a run inside the published Docker image is the outstanding check and is not claimed here.",
+    "the paper predicts this, names the mechanism, and bounds it -- credit where due. Section 8 documents that byte-exact cross-platform reproduction is unavailable because the torch 2.13.0+cpu wheels for different platforms are different binaries with different MKL versions; Table 5 annotates the degraded-SAE census as '3 (17%); 4 in +/-1 band'; Section 9 scopes the repository's two guarantees explicitly (byte-exact only inside the pinned CI environment, semantic -- continuous metrics within rtol 1e-4 and boundary-sensitive counts within +/-1 -- on any platform); and Section 9 reports the same flip we observed, one feature at cosine 0.924 sitting close enough to both the recovery bar and the TopK selection boundary that different BLAS builds resolve it differently.",
+    "measured against that stated standard: run 2's deviation (+1 on good_k4.recovered_inert) is INSIDE the paper's +/-1 semantic guarantee and is therefore a reproduction success by the paper's own criterion. It trips the gate only because expected_results.json encodes atol=1 for the two bad_k13 counts and bare integers for good_k4, so the machine-readable file is stricter than the prose promises for that SAE. That is a spec/gate mismatch in the artifact, not a scientific failure, and the honest headline is that the released tolerance file does not implement the +/-1 band the paper documents. Run 1's deviation (+3 on bad_k13.recovered_inert) does exceed the band, but it used a CUDA-built wheel rather than the pinned CPU wheel, so it does not by itself establish that the band is too narrow.",
+    "abstract versus Table 5, denominators: the abstract reads 'up to 77% of features passing a standard recovery bar (cosine >= 0.90) in a degraded SAE ... are causally inert'. The 77% is 17 inert of 22 MATCHED pairs, computed in the Section 6.3 pre-instrument experiment with no recovery bar applied; the bar-conditioned quantity is the Table 5 census, 3 inert of 18 recovered = 17%. So the abstract attaches the cosine >= 0.90 bar to a figure computed without it. The paper's body is not hiding this -- it states '17 of 22 pairs (77%)' with its denominator, and Table 5 prints 17% -- but the two numbers differ by a factor of four and only the smaller one is conditioned as the abstract describes. For the well-trained SAE the denominators coincide (recovered = matched = 22) and 9% is unchanged between the two sections."
+  ],
+  "runs": [
+    {
+      "axis": "base",
+      "variant": "base",
+      "seed": 0,
+      "size": 8,
+      "claim": "inert in both; degraded >= well-trained",
+      "score": 0.195122,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "b666d4c653533c6c80180f62b4d71b0071e3435f5e4526cd15f270b4f0e62da1",
+      "components": [
+        "bad_k13:f10",
+        "bad_k13:f2",
+        "bad_k13:f5",
+        "bad_k13:f7",
+        "bad_k13:f8",
+        "bad_k13:f9",
+        "good_k4:f5",
+        "good_k4:f8"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=1",
+      "seed": 1,
+      "size": 10,
+      "claim": "inert in both; degraded >= well-trained",
+      "score": 0.238095,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "69a47c0ddcf24b4029f5b5a087f82f05a36b096994c4a487ce1783235e20730d",
+      "components": [
+        "bad_k13:f1",
+        "bad_k13:f11",
+        "bad_k13:f15",
+        "bad_k13:f3",
+        "bad_k13:f4",
+        "good_k4:f1",
+        "good_k4:f16",
+        "good_k4:f2",
+        "good_k4:f5",
+        "good_k4:f8"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=2",
+      "seed": 2,
+      "size": 8,
+      "claim": "inert in both; degraded >= well-trained",
+      "score": 0.216216,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "f7c0e236495d93073c526f224e72059cd1ec875da161bb45b969cea746a88c88",
+      "components": [
+        "bad_k13:f0",
+        "bad_k13:f14",
+        "bad_k13:f18",
+        "bad_k13:f4",
+        "bad_k13:f6",
+        "bad_k13:f8",
+        "good_k4:f0",
+        "good_k4:f1"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=3",
+      "seed": 3,
+      "size": 7,
+      "claim": "inert in both; degraded >= well-trained",
+      "score": 0.175,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "d0ee1c892234d69f3e1fb98d220eaf46d29d6196bf1ef0614888d6e7d5f356d3",
+      "components": [
+        "bad_k13:f2",
+        "bad_k13:f5",
+        "bad_k13:f6",
+        "bad_k13:f8",
+        "good_k4:f0",
+        "good_k4:f1",
+        "good_k4:f5"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=4",
+      "seed": 4,
+      "size": 8,
+      "claim": "inert in both; degraded >= well-trained",
+      "score": 0.181818,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a280d93cd4b9aec08354d38518d61fa0a97a530c030b68cec4a609a67fbce1e7",
+      "components": [
+        "bad_k13:f0",
+        "bad_k13:f13",
+        "bad_k13:f22",
+        "bad_k13:f4",
+        "bad_k13:f8",
+        "bad_k13:f9",
+        "good_k4:f1",
+        "good_k4:f5"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=5",
+      "seed": 5,
+      "size": 7,
+      "claim": "inert in both; degraded >= well-trained",
+      "score": 0.179487,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "962520625bb9b23067323bf2e0f6947bb0084f3266497a00eaef7e1a61fed3b9",
+      "components": [
+        "bad_k13:f1",
+        "bad_k13:f2",
+        "bad_k13:f22",
+        "bad_k13:f5",
+        "bad_k13:f6",
+        "good_k4:f0",
+        "good_k4:f8"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=6",
+      "seed": 6,
+      "size": 9,
+      "claim": "inert in both; degraded >= well-trained",
+      "score": 0.257143,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "208595244f5ed5d1d289b415d7f9847d7aa9662c23539486c8470f222113bffe",
+      "components": [
+        "bad_k13:f13",
+        "bad_k13:f2",
+        "bad_k13:f5",
+        "bad_k13:f6",
+        "bad_k13:f7",
+        "bad_k13:f8",
+        "bad_k13:f9",
+        "good_k4:f0",
+        "good_k4:f1"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=7",
+      "seed": 7,
+      "size": 7,
+      "claim": "inert in both; degraded >= well-trained",
+      "score": 0.184211,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "e70d8580aaceba89ccec9138ce458f0a6124c1fbfa4b9164f23b510b1fa388eb",
+      "components": [
+        "bad_k13:f0",
+        "bad_k13:f13",
+        "bad_k13:f14",
+        "bad_k13:f4",
+        "bad_k13:f8",
+        "good_k4:f1",
+        "good_k4:f5"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=8",
+      "seed": 8,
+      "size": 10,
+      "claim": "inert in both; degraded >= well-trained",
+      "score": 0.25,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "cc4e356a1d482d188a833eaa3b1e0c8457827131ff25102cb93bd7e649162e42",
+      "components": [
+        "bad_k13:f0",
+        "bad_k13:f18",
+        "bad_k13:f19",
+        "bad_k13:f22",
+        "bad_k13:f3",
+        "bad_k13:f4",
+        "bad_k13:f7",
+        "bad_k13:f8",
+        "good_k4:f1",
+        "good_k4:f8"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=9",
+      "seed": 9,
+      "size": 6,
+      "claim": "inert in both; degraded >= well-trained",
+      "score": 0.15,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "dfe7b818ff03ba8743ea459f697476ff92c7e7d59bf9bebda15f6d9452e10ae6",
+      "components": [
+        "bad_k13:f0",
+        "bad_k13:f22",
+        "bad_k13:f4",
+        "bad_k13:f8",
+        "good_k4:f0",
+        "good_k4:f5"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=10",
+      "seed": 10,
+      "size": 5,
+      "claim": "inert in both; degraded >= well-trained",
+      "score": 0.131579,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "f88991ad0b496cbc435270d7eaf5b5b811773b17bf666c1118e421da0cd0f08f",
+      "components": [
+        "bad_k13:f1",
+        "bad_k13:f4",
+        "bad_k13:f5",
+        "good_k4:f0",
+        "good_k4:f8"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=11",
+      "seed": 11,
+      "size": 11,
+      "claim": "inert in both; degraded >= well-trained",
+      "score": 0.275,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a72bd9808a6816d3e8e2e84f9bef0568bc8b8aa40de7febd22463232a016ce81",
+      "components": [
+        "bad_k13:f1",
+        "bad_k13:f11",
+        "bad_k13:f16",
+        "bad_k13:f2",
+        "bad_k13:f22",
+        "bad_k13:f5",
+        "bad_k13:f7",
+        "bad_k13:f9",
+        "good_k4:f0",
+        "good_k4:f1",
+        "good_k4:f4"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=12",
+      "seed": 12,
+      "size": 5,
+      "claim": "inert in both; degraded >= well-trained",
+      "score": 0.121951,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "63b53fe671391ca87af59750df2566a56af76a2dc6b441efa5968ad0a131d169",
+      "components": [
+        "bad_k13:f0",
+        "bad_k13:f1",
+        "bad_k13:f2",
+        "good_k4:f0",
+        "good_k4:f1"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=1",
+      "seed": 0,
+      "size": 5,
+      "claim": "inert in both; well-trained > degraded",
+      "score": 0.157895,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "bd3dd2c261441cc4a3078ed6c8426fc59e4ad2a3c57a964510a7fdb93c1e8990",
+      "components": [
+        "bad_k13:f10",
+        "bad_k13:f5",
+        "bad_k13:f8",
+        "good_k4:f5",
+        "good_k4:f8"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=2",
+      "seed": 0,
+      "size": 6,
+      "claim": "inert in both; degraded >= well-trained",
+      "score": 0.15,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "58082759422bdafd442786fb5eba62efa8821b11319c76e149aeb4bbefee838d",
+      "components": [
+        "bad_k13:f10",
+        "bad_k13:f2",
+        "bad_k13:f7",
+        "bad_k13:f8",
+        "bad_k13:f9",
+        "good_k4:f5"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=3",
+      "seed": 0,
+      "size": 5,
+      "claim": "inert in both; degraded >= well-trained",
+      "score": 0.225,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "ec73d83ccc19453bbe1277efc2ec73350799311f90554bf4bdf0ceafd852007a",
+      "components": [
+        "bad_k13:f2",
+        "bad_k13:f5",
+        "bad_k13:f7",
+        "bad_k13:f9",
+        "good_k4:f8"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=4",
+      "seed": 0,
+      "size": 7,
+      "claim": "inert in both; degraded >= well-trained",
+      "score": 0.372093,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "044175b6855f99b29c71f554a43449ad9c499d9aa04894cf49911957eee4ee27",
+      "components": [
+        "bad_k13:f10",
+        "bad_k13:f5",
+        "bad_k13:f7",
+        "bad_k13:f8",
+        "bad_k13:f9",
+        "good_k4:f5",
+        "good_k4:f8"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=5",
+      "seed": 0,
+      "size": 2,
+      "claim": "inert in degraded only; degraded >= well-trained",
+      "score": 0.078947,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "1419c5c4ace3c8129d30f7cccaddcbdc6c3461547ce0b67e1df31abe30fefefb",
+      "components": [
+        "bad_k13:f10",
+        "bad_k13:f7"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=6",
+      "seed": 0,
+      "size": 6,
+      "claim": "inert in both; degraded >= well-trained",
+      "score": 0.238095,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "e796c35b2ed40a380d27f8c32b4c0023eafc6fd1af69134e2ef897bad0b9609f",
+      "components": [
+        "bad_k13:f2",
+        "bad_k13:f5",
+        "bad_k13:f7",
+        "bad_k13:f9",
+        "good_k4:f5",
+        "good_k4:f8"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=7",
+      "seed": 0,
+      "size": 6,
+      "claim": "inert in both; degraded >= well-trained",
+      "score": 0.232558,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "66a22409f55b6cf59ec77096fb1f13b439dcf742de0f1e15e3f50605f2b1d3b7",
+      "components": [
+        "bad_k13:f2",
+        "bad_k13:f5",
+        "bad_k13:f7",
+        "bad_k13:f8",
+        "bad_k13:f9",
+        "good_k4:f8"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=8",
+      "seed": 0,
+      "size": 8,
+      "claim": "inert in both; degraded >= well-trained",
+      "score": 0.285714,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "b666d4c653533c6c80180f62b4d71b0071e3435f5e4526cd15f270b4f0e62da1",
+      "components": [
+        "bad_k13:f10",
+        "bad_k13:f2",
+        "bad_k13:f5",
+        "bad_k13:f7",
+        "bad_k13:f8",
+        "bad_k13:f9",
+        "good_k4:f5",
+        "good_k4:f8"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=9",
+      "seed": 0,
+      "size": 5,
+      "claim": "inert in both; degraded >= well-trained",
+      "score": 0.261905,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "2477bc1cae15725e281405b0b7db456dc5eb852efe861484303ce0a1632f3b20",
+      "components": [
+        "bad_k13:f2",
+        "bad_k13:f7",
+        "bad_k13:f8",
+        "good_k4:f5",
+        "good_k4:f8"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=10",
+      "seed": 0,
+      "size": 5,
+      "claim": "inert in both; degraded >= well-trained",
+      "score": 0.232558,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "28fb2ab1e32df0c6435d1861cda98ffc859192fc629571def2ca3e2cff27eb5e",
+      "components": [
+        "bad_k13:f2",
+        "bad_k13:f5",
+        "bad_k13:f8",
+        "bad_k13:f9",
+        "good_k4:f8"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=11",
+      "seed": 0,
+      "size": 4,
+      "claim": "inert in both; well-trained > degraded",
+      "score": 0.146341,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "611d05c59a4407db6226e5300f2666ff0774a850751c2d13f2cd3dde73aeb283",
+      "components": [
+        "bad_k13:f2",
+        "bad_k13:f9",
+        "good_k4:f5",
+        "good_k4:f8"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=12",
+      "seed": 0,
+      "size": 6,
+      "claim": "inert in both; degraded >= well-trained",
+      "score": 0.238095,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "b93e1427629b9b7f47afada8610085967efa48e4519f28088a83e7d6efcdc95f",
+      "components": [
+        "bad_k13:f10",
+        "bad_k13:f2",
+        "bad_k13:f5",
+        "bad_k13:f7",
+        "bad_k13:f8",
+        "good_k4:f8"
+      ]
+    },
+    {
+      "axis": "templates",
+      "variant": "template=in-context-presentation",
+      "seed": 0,
+      "size": 1,
+      "claim": "inert in degraded only; degraded >= well-trained",
+      "score": 0.02439,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "b663380ddcda9d09998ca6c2ff3063bd0857e590024f44bda76bff6894392f74",
+      "components": [
+        "bad_k13:f7"
+      ]
+    },
+    {
+      "axis": "templates",
+      "variant": "template=in-context-dense-background",
+      "seed": 0,
+      "size": 1,
+      "claim": "inert in degraded only; degraded >= well-trained",
+      "score": 0.02439,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "b663380ddcda9d09998ca6c2ff3063bd0857e590024f44bda76bff6894392f74",
+      "components": [
+        "bad_k13:f7"
+      ]
+    },
+    {
+      "axis": "templates",
+      "variant": "template=all-32-features",
+      "seed": 0,
+      "size": 10,
+      "claim": "inert in both; degraded >= well-trained",
+      "score": 0.232558,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "5b906d2be754d31222d06dae155e0192247d98c8dd9b276b5222dd42abb98929",
+      "components": [
+        "bad_k13:f10",
+        "bad_k13:f2",
+        "bad_k13:f29",
+        "bad_k13:f5",
+        "bad_k13:f7",
+        "bad_k13:f8",
+        "bad_k13:f9",
+        "good_k4:f31",
+        "good_k4:f5",
+        "good_k4:f8"
+      ]
+    },
+    {
+      "axis": "templates",
+      "variant": "template=all-32-in-context",
+      "seed": 0,
+      "size": 2,
+      "claim": "inert in both; degraded >= well-trained",
+      "score": 0.046512,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "8803c6167d4b2682f808a3c6897833b0215465b1ee4f0d440cb6bbbc5bf57968",
+      "components": [
+        "bad_k13:f7",
+        "good_k4:f31"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "cosine_bar=0.85",
+      "seed": 0,
+      "size": 10,
+      "claim": "inert in both; degraded >= well-trained",
+      "score": 0.227273,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "890eb9d81f845a90ba8f1fddcdc74909834797bdd5942af1af7519fca9acc803",
+      "components": [
+        "bad_k13:f10",
+        "bad_k13:f13",
+        "bad_k13:f14",
+        "bad_k13:f2",
+        "bad_k13:f5",
+        "bad_k13:f7",
+        "bad_k13:f8",
+        "bad_k13:f9",
+        "good_k4:f5",
+        "good_k4:f8"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "cosine_bar=0.95",
+      "seed": 0,
+      "size": 6,
+      "claim": "inert in both; degraded >= well-trained",
+      "score": 0.181818,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "4a96b4dc4a0b08a49b49870381944832ba5600c62db098476a599db16ca6de51",
+      "components": [
+        "bad_k13:f2",
+        "bad_k13:f5",
+        "bad_k13:f8",
+        "bad_k13:f9",
+        "good_k4:f5",
+        "good_k4:f8"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "n_samples=200",
+      "seed": 0,
+      "size": 8,
+      "claim": "inert in both; degraded >= well-trained",
+      "score": 0.195122,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "b666d4c653533c6c80180f62b4d71b0071e3435f5e4526cd15f270b4f0e62da1",
+      "components": [
+        "bad_k13:f10",
+        "bad_k13:f2",
+        "bad_k13:f5",
+        "bad_k13:f7",
+        "bad_k13:f8",
+        "bad_k13:f9",
+        "good_k4:f5",
+        "good_k4:f8"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "sae_steps=2000",
+      "seed": 0,
+      "size": 9,
+      "claim": "inert in both; degraded >= well-trained",
+      "score": 0.230769,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "4da6df3040316cb222a89384960983e92f160763d4cf4860c8d6330f7e5eef2f",
+      "components": [
+        "bad_k13:f1",
+        "bad_k13:f18",
+        "bad_k13:f19",
+        "bad_k13:f2",
+        "bad_k13:f5",
+        "bad_k13:f8",
+        "good_k4:f4",
+        "good_k4:f5",
+        "good_k4:f8"
+      ]
+    }
+  ]
+}

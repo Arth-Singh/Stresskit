@@ -1,0 +1,71 @@
+{
+ "components": [
+  "L0H0",
+  "L10H1",
+  "L10H2",
+  "L11H4",
+  "L8H10",
+  "L8H2",
+  "L8H3",
+  "L8H6"
+ ],
+ "universe_size": 141,
+ "claim": "CoAx AUC 0.80-0.90; beats AtP*",
+ "score": 0.8994360902255639,
+ "meta": {
+  "config": {
+   "position_mode": "last",
+   "top_r": 0,
+   "ablation_mode": "zero",
+   "feature_mode": "l2_uncentered",
+   "freeze_ln": "none",
+   "primaries": "documented"
+  },
+  "n_prompts": 96,
+  "prompt_seed": 1,
+  "n_unique_prompts": 96,
+  "template": "When {IO} and {S} went to the {place}, {S} gave a {obj} to",
+  "first_prompt": "When Anna and Paul went to the library, Paul gave a drink to",
+  "primaries": [
+   [
+    9,
+    9
+   ],
+   [
+    10,
+    0
+   ],
+   [
+    9,
+    6
+   ]
+  ],
+  "primaries_documented": [
+   true,
+   true,
+   true
+  ],
+  "auc": {
+   "coax": 0.8994360902255639,
+   "single": 0.38627819548872183,
+   "conditional": 0.5939849624060151,
+   "atp": 0.6400375939849624,
+   "eap_ig": 0.6748120300751879,
+   "atp_star": 0.8449248120300752,
+   "conditional_grad": 0.6992481203007519
+  },
+  "average_precision": 0.329868959077884,
+  "precision_at_8": 0.25,
+  "top8": [
+   "L0H0",
+   "L10H2",
+   "L10H1",
+   "L11H4",
+   "L8H6",
+   "L8H10",
+   "L8H3",
+   "L8H2"
+  ],
+  "wall_secs": 109.4
+ }
+}

@@ -1,0 +1,71 @@
+{
+ "components": [
+  "L10H10",
+  "L10H2",
+  "L10H6",
+  "L11H1",
+  "L11H10",
+  "L11H2",
+  "L11H6",
+  "L9H8"
+ ],
+ "universe_size": 141,
+ "claim": "CoAx AUC >=0.90; beats AtP*",
+ "score": 0.956766917293233,
+ "meta": {
+  "config": {
+   "position_mode": "last",
+   "top_r": 0,
+   "ablation_mode": "zero",
+   "feature_mode": "fisher_centered",
+   "freeze_ln": "none",
+   "primaries": "documented"
+  },
+  "n_prompts": 96,
+  "prompt_seed": 1517,
+  "n_unique_prompts": 65,
+  "template": "When {IO} and {S} went to the {place}, {X} gave a {obj} to",
+  "first_prompt": "When Mark and Mary went to the park, Anna gave a snack to",
+  "primaries": [
+   [
+    9,
+    9
+   ],
+   [
+    10,
+    0
+   ],
+   [
+    9,
+    6
+   ]
+  ],
+  "primaries_documented": [
+   true,
+   true,
+   true
+  ],
+  "auc": {
+   "coax": 0.956766917293233,
+   "single": 0.549812030075188,
+   "conditional": 0.6766917293233083,
+   "atp": 0.31954887218045114,
+   "eap_ig": 0.4642857142857143,
+   "atp_star": 0.575187969924812,
+   "conditional_grad": 0.41823308270676696
+  },
+  "average_precision": 0.7026237651237651,
+  "precision_at_8": 0.5,
+  "top8": [
+   "L11H2",
+   "L10H2",
+   "L10H10",
+   "L10H6",
+   "L9H8",
+   "L11H6",
+   "L11H1",
+   "L11H10"
+  ],
+  "wall_secs": 62.7
+ }
+}

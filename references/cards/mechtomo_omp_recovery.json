@@ -1,0 +1,1222 @@
+{
+  "schema_version": "0.3",
+  "stresskit_version": "1.0.0.dev0",
+  "created_at": "2026-09-01T21:44:35+00:00",
+  "claim": {
+    "statement": "Orthogonal matching pursuit recovers the 32-coordinate finite-effect map with Pearson r = 0.989 and held-out R-squared = 0.935.",
+    "base_claim_label": "recovered; sparse support (k<=8)",
+    "model": "released HMM observer checkpoint experiments/hmm/frozen/model.pt (4-layer, d_model 96, seed 7; kwisatzh/mechanistic-tomography@5c097d2)",
+    "task": "recover the 32-coordinate (layer x time-bin) finite-effect map on the implied belief z1 from 12 aggregate signed-mask interventions (epsilon 0.6, density 0.30)",
+    "method": "orthogonal matching pursuit with validation-selected support size, upstream sparse_tomography_posthoc.py",
+    "base_size": 4,
+    "universe_size": 32
+  },
+  "battery": {
+    "axes": [
+      "seeds",
+      "bootstrap",
+      "templates",
+      "hyperparams"
+    ],
+    "n_runs_total": 57,
+    "seed": 7,
+    "base_config": {
+      "n_train": 12,
+      "n_val": 64,
+      "holdout_frac": 0.25,
+      "k_grid": "1,2,3,4,5,6,8,10,12,16",
+      "refit_ridge": 1e-10
+    },
+    "claim_equiv_used": false,
+    "components_embedded": true
+  },
+  "metrics": {
+    "pooled": {
+      "n_runs": 57,
+      "n_structured_runs": 57,
+      "n_empty_findings": 0,
+      "empty_finding_rate": 0.0,
+      "mean_pairwise_jaccard": 0.4014136291059374,
+      "min_pairwise_jaccard": 0.0,
+      "flip_rate": 0.4605263157894737,
+      "modal_share": 0.6842105263157895,
+      "n_claim_classes": 4,
+      "claim_counts": {
+        "not recovered; sparse support (k<=8)": 39,
+        "recovered; sparse support (k<=8)": 16,
+        "predictive-only; dense support (k>8)": 1,
+        "not recovered; dense support (k>8)": 1
+      },
+      "score_mean": 0.35154145594635267,
+      "score_std": 0.5924256036756073,
+      "score_cv": 1.6852225922567008,
+      "median_size": 3,
+      "variance_shares": {
+        "bootstrap": 0.1837755359523586,
+        "hyperparams": 0.4595713273355361,
+        "seeds": 0.07187301935984303,
+        "templates": 0.2847801173522623
+      },
+      "variance_absolute": {
+        "bootstrap": 0.37998898483230875,
+        "hyperparams": 0.950246403729918,
+        "seeds": 0.148610398668404,
+        "templates": 0.5888341292671554
+      },
+      "mean_pairwise_jaccard_all_sizes": 0.26627726735809387,
+      "n_size_mismatched_excluded": 17,
+      "mean_pairwise_jaccard_ci95": [
+        0.3168283432681345,
+        0.5109482038429407
+      ],
+      "flip_rate_ci95": [
+        0.3463758819756254,
+        0.5684277530235519
+      ],
+      "modal_share_ci95": [
+        0.5614035087719298,
+        0.7894736842105263
+      ],
+      "score_cv_ci95": [
+        0.9004479248058218,
+        3.9019741648677058
+      ],
+      "expected_random_jaccard": 0.06980184455857547,
+      "expected_random_jaccard_analytic": 0.04918032786885246,
+      "jaccard_vs_random": 5.750759620243044,
+      "mean_pairwise_jaccard_axis_balanced": 0.36909446109446126,
+      "jaccard_vs_random_ci95": [
+        4.5389680641213195,
+        7.319981399834919
+      ],
+      "specificity_ci95": null,
+      "confidence": "high",
+      "borderline_checks": []
+    },
+    "per_axis": {
+      "bootstrap": {
+        "n_runs": 25,
+        "n_structured_runs": 25,
+        "n_empty_findings": 0,
+        "empty_finding_rate": 0.0,
+        "mean_pairwise_jaccard": 0.2632504995004998,
+        "min_pairwise_jaccard": 0.0,
+        "flip_rate": 0.4966666666666667,
+        "modal_share": 0.68,
+        "n_claim_classes": 4,
+        "claim_counts": {
+          "not recovered; sparse support (k<=8)": 17,
+          "recovered; sparse support (k<=8)": 6,
+          "predictive-only; dense support (k>8)": 1,
+          "not recovered; dense support (k>8)": 1
+        },
+        "score_mean": 0.3526193992802179,
+        "score_std": 0.6164324657513658,
+        "score_cv": 1.748152447113388,
+        "median_size": 4
+      },
+      "hyperparams": {
+        "n_runs": 5,
+        "n_structured_runs": 5,
+        "n_empty_findings": 0,
+        "empty_finding_rate": 0.0,
+        "mean_pairwise_jaccard": 0.51,
+        "min_pairwise_jaccard": 0.1,
+        "flip_rate": 0.6,
+        "modal_share": 0.6,
+        "n_claim_classes": 2,
+        "claim_counts": {
+          "recovered; sparse support (k<=8)": 3,
+          "not recovered; sparse support (k<=8)": 2
+        },
+        "score_mean": 0.4384782970864303,
+        "score_std": 0.9748058287320188,
+        "score_cv": 2.2231563915690695,
+        "median_size": 4
+      },
+      "seeds": {
+        "n_runs": 25,
+        "n_structured_runs": 25,
+        "n_empty_findings": 0,
+        "empty_finding_rate": 0.0,
+        "mean_pairwise_jaccard": 0.2531273448773451,
+        "min_pairwise_jaccard": 0.0,
+        "flip_rate": 0.42000000000000004,
+        "modal_share": 0.72,
+        "n_claim_classes": 2,
+        "claim_counts": {
+          "not recovered; sparse support (k<=8)": 18,
+          "recovered; sparse support (k<=8)": 7
+        },
+        "score_mean": 0.40656995651965244,
+        "score_std": 0.3855001928253785,
+        "score_cv": 0.9481767814950304,
+        "median_size": 2
+      },
+      "templates": {
+        "n_runs": 5,
+        "n_structured_runs": 5,
+        "n_empty_findings": 0,
+        "empty_finding_rate": 0.0,
+        "mean_pairwise_jaccard": 0.45,
+        "min_pairwise_jaccard": 0.0,
+        "flip_rate": 0.6,
+        "modal_share": 0.6,
+        "n_claim_classes": 2,
+        "claim_counts": {
+          "recovered; sparse support (k<=8)": 3,
+          "not recovered; sparse support (k<=8)": 2
+        },
+        "score_mean": 0.3339759876163471,
+        "score_std": 0.7673552822957274,
+        "score_cv": 2.297636089865305,
+        "median_size": 4
+      }
+    },
+    "null_control": {
+      "n_runs": 49,
+      "mean_pairwise_jaccard": 0.13223443223443224,
+      "flip_rate": 0.04081632653061229,
+      "modal_share": 0.9795918367346939,
+      "score_mean": -0.684202751060417,
+      "score_cv": 0.7550072988466338,
+      "median_size": 1
+    }
+  },
+  "verdict": {
+    "grade": "C",
+    "profile": "diagnostic",
+    "confirmatory_state": "not_applicable",
+    "required_checks": [],
+    "checks": {
+      "structural_stability": {
+        "value": 0.4014136291059374,
+        "threshold": 0.8,
+        "passed": false,
+        "op": ">=",
+        "ci": [
+          0.3168283432681345,
+          0.5109482038429407
+        ],
+        "robust": true,
+        "state": "fail",
+        "description": "mean pairwise Jaccard across all perturbed runs"
+      },
+      "claim_stability": {
+        "value": 0.6842105263157895,
+        "threshold": 0.8,
+        "passed": false,
+        "op": ">=",
+        "ci": [
+          0.5614035087719298,
+          0.7894736842105263
+        ],
+        "robust": true,
+        "state": "fail",
+        "description": "modal claim share \u03c0* (filability at \u03b1=0.2)"
+      },
+      "score_stability": {
+        "value": 1.6852225922567008,
+        "threshold": 0.25,
+        "passed": false,
+        "op": "<=",
+        "ci": [
+          0.9004479248058218,
+          3.9019741648677058
+        ],
+        "robust": true,
+        "state": "fail",
+        "description": "coefficient of variation of the quality score"
+      },
+      "beats_random": {
+        "value": 5.750759620243044,
+        "threshold": 3.0,
+        "passed": true,
+        "op": ">=",
+        "ci": [
+          4.5389680641213195,
+          7.319981399834919
+        ],
+        "robust": true,
+        "state": "pass",
+        "description": "structural overlap vs size-matched random null (\u00d7)"
+      },
+      "specificity": {
+        "value": 3.035621073294208,
+        "threshold": 1.5,
+        "passed": true,
+        "op": ">=",
+        "ci": null,
+        "robust": null,
+        "state": "inconclusive",
+        "description": "structural stability on real vs null-control data (\u00d7)"
+      }
+    },
+    "thresholds": {
+      "jaccard": 0.8,
+      "modal_share": 0.8,
+      "score_cv": 0.25,
+      "random_margin": 3.0
+    }
+  },
+  "provenance": {
+    "python": "3.11.15",
+    "platform": "macOS-15.5-arm64-arm-64bit",
+    "wall_seconds": 0.45
+  },
+  "notes": [
+    "structural stability graded on 40 size-comparable runs; 17 run(s) with >2x size difference excluded (pooled-over-all value kept as mean_pairwise_jaccard_all_sizes)",
+    "scope: graded artifact = the released measurement pool nt_mi_set1_v2 (256 signed-mask aggregate measurements on the released seed-7 HMM observer, epsilon 0.6, density 0.30) reduced by the upstream OMP post-hoc script at n_train=12 with validation-selected support size; usage mode = forward-only aggregate recovery on the fixed 4-layer x 8-bin coordinate basis, scored against upstream's own coordinate-patching reference on the same evaluation batch. The battery does NOT test the Section 5.2 attribution-patching calibration, the Qwen-2.5-7B experiment, designed (non-random) measurement optimality, other coordinate bases or intervention sizes, or any pretrained model",
+    "data: kwisatzh/mechanistic-tomography@5c097d2 (Apache-2.0 code; the checkpoint and frozen numeric artifacts carry no explicit file-level license, per the intake inventory), every file SHA-256 verified against the frozen intake inventory; the checkpoint is loaded with weights_only=True after verification",
+    "claim label thresholds pre-registered from upstream's own summary: held-out R^2 >= 0.9 and Pearson r >= 0.95 (sparse_recovery_summary.json threshold_crossings); sparse = k <= 8; score = held-out R^2",
+    "upstream row: the base run (seed 7, released pool, n_train=12) selects k=4 {L0B7, L1B7, L2B7, L3B7} with Pearson r = 0.988606 and held-out R^2 = 0.934714; the released sparse_recovery_sample_efficiency.csv row has k=4, r = 0.988606, R^2 = 0.934714 -- reproduced to 1e-9",
+    "null control: the released pool with responses permuted once (seed 0x5ec), so each response is paired with a design independent of the one that produced it -- the registry's declared null (random measurement designs at matched budget) realized as a re-pairing, run through the same finder on the same seeds/bootstrap axes. Direction: on permuted data OMP still returns a support of validation-selected size, so null Jaccard sits at the size-matched random level rather than zero; a real-data Jaccard near that level would mean the split, not the measurements, picks the coordinates",
+    "templates: pools re-measured on CPU from the released checkpoint with the upstream generator at instrument seed 7 (same directions and evaluation batch for all four): the released design re-measured, two fresh signed designs (design seeds 11, 12), and one Bernoulli-mask design (seed 11; upstream's second mask family). Their reference map is the CPU re-measured coordinate-patching map",
+    "budget: the reported 12-measurement model additionally uses 64 validation measurements to choose its support size (and 64 held-out to score it); the n_val=12 hyperparameter run tests selection at a budget matched to the training count, and n_train=8 lies below the budget the claim is made at (upstream's own curve fails there too), so read the hyperparams row of the per-axis table before the pooled one",
+    "instrument transfer (not graded): the upstream generator re-run on CPU (torch 2.13.0) from the released checkpoint regenerates the released masks bit-identically from numpy seed 7; re-measuring the released design gives responses with Pearson r = 0.9974 to the released (MPS) responses, mean |diff| 0.079 (response sd 1.058), and a reference map with r = 0.9973 (same top-4 coordinates); the template pools inherit this CPU evaluation batch",
+    "support identity (not graded): 9/56 perturbed real runs select exactly the base support {L0B7, L1B7, L2B7, L3B7} (bootstrap 1/24, hyperparams 2/4, seeds 4/24, templates 2/4); coordinates selected in at least half of the perturbed real runs: L0B7 (39/56), L2B7 (35/56), L1B7 (30/56)",
+    "null-control supports: 30 distinct supports across 49 null runs (most common {L1B1} x5); median size 1; held-out R^2 mean -0.684, max -0.099; claims: `not recovered; sparse support (k<=8)` x48, `not recovered; dense support (k>8)` x1",
+    "recovery by axis (label 'recovered' = held-out R^2 >= 0.9 and r >= 0.95): seeds 6/24 recovered (median held-out R^2 0.27); bootstrap 5/24 recovered (median held-out R^2 0.58); templates 2/4 recovered (median held-out R^2 0.29); hyperparams 2/4 recovered (median held-out R^2 0.91). Bootstrap resamples measurements with replacement, so a training measurement's duplicate can sit in the held-out set; that biases held-out R^2 upward, not downward",
+    "specificity basis: the null base run selected k=5, so StressKit's 2x size guard grades null Jaccard on 3/49 null runs (sizes [5, 6, 10]) = 0.132, too few for a CI (state inconclusive); over all 49 null runs the null Jaccard is 0.037 and the real/null ratio would be 10.9x, so the graded 3.04x is the conservative (harsher) reading",
+    "post-hoc regrade (verdict-trace mode, from_findings at bootstrap seed 0): grade C, low confidence vs the card's high; checks that differ -- claim_stability: card fail (CI [0.561, 0.789], value 0.684) vs post-hoc inconclusive (CI [0.544, 0.807], value 0.684) -- a check whose CI end sits at its bar is decided by the bootstrap seed, not by the data"
+  ],
+  "runs": [
+    {
+      "axis": "base",
+      "variant": "base",
+      "seed": 7,
+      "size": 4,
+      "claim": "recovered; sparse support (k<=8)",
+      "score": 0.9347141098561826,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "400b88f428bcc5ed432801149543714eb869c768af7490e184f704dfb18461da",
+      "components": [
+        "L0B7",
+        "L1B7",
+        "L2B7",
+        "L3B7"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=8",
+      "seed": 8,
+      "size": 3,
+      "claim": "not recovered; sparse support (k<=8)",
+      "score": 0.060408296123470984,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "5e19227028195fe23832234d9b59880cb5db626f047af4c8d7676772713054e1",
+      "components": [
+        "L1B0",
+        "L2B7",
+        "L3B7"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=9",
+      "seed": 9,
+      "size": 3,
+      "claim": "not recovered; sparse support (k<=8)",
+      "score": 0.4875392645768154,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "0649a9a45ffa9e098f03aae847ce9220db4ac70e3e6570b1855692989e599f34",
+      "components": [
+        "L0B5",
+        "L1B7",
+        "L2B7"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=10",
+      "seed": 10,
+      "size": 4,
+      "claim": "recovered; sparse support (k<=8)",
+      "score": 0.9561299829207285,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "400b88f428bcc5ed432801149543714eb869c768af7490e184f704dfb18461da",
+      "components": [
+        "L0B7",
+        "L1B7",
+        "L2B7",
+        "L3B7"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=11",
+      "seed": 11,
+      "size": 3,
+      "claim": "not recovered; sparse support (k<=8)",
+      "score": 0.3859494703720602,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "73b3f98ae0e8d65143f53b8b63e0bf52fd52828ded0e0efce342eaa97225096d",
+      "components": [
+        "L0B4",
+        "L1B7",
+        "L2B7"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=12",
+      "seed": 12,
+      "size": 3,
+      "claim": "not recovered; sparse support (k<=8)",
+      "score": 0.3120761816487413,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "66da32f28c7f2188c2114b1618981be24e6a005e3381053b67d5199b85fb5b29",
+      "components": [
+        "L0B7",
+        "L1B5",
+        "L1B7"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=13",
+      "seed": 13,
+      "size": 2,
+      "claim": "not recovered; sparse support (k<=8)",
+      "score": 0.5868513112694285,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "cf25f8b897b36b10fc7921b18ee583e16affb4fe721b6b4996ad390e12119386",
+      "components": [
+        "L0B7",
+        "L2B7"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=14",
+      "seed": 14,
+      "size": 2,
+      "claim": "not recovered; sparse support (k<=8)",
+      "score": 0.2954237017703887,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "cf25f8b897b36b10fc7921b18ee583e16affb4fe721b6b4996ad390e12119386",
+      "components": [
+        "L0B7",
+        "L2B7"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=15",
+      "seed": 15,
+      "size": 2,
+      "claim": "not recovered; sparse support (k<=8)",
+      "score": 0.2317471557320646,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "3edca0fe30cb312b0dd0a9615970fc4a01cc216be672b574449f412f2950bb08",
+      "components": [
+        "L0B7",
+        "L2B6"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=16",
+      "seed": 16,
+      "size": 4,
+      "claim": "recovered; sparse support (k<=8)",
+      "score": 0.9622555172939213,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "400b88f428bcc5ed432801149543714eb869c768af7490e184f704dfb18461da",
+      "components": [
+        "L0B7",
+        "L1B7",
+        "L2B7",
+        "L3B7"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=17",
+      "seed": 17,
+      "size": 2,
+      "claim": "not recovered; sparse support (k<=8)",
+      "score": 0.09102412065662824,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "65918a94a53f912634527e840342247ac994109012d4cf780b328707f45f6b2b",
+      "components": [
+        "L0B7",
+        "L2B1"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=18",
+      "seed": 18,
+      "size": 4,
+      "claim": "recovered; sparse support (k<=8)",
+      "score": 0.9520242905062302,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "400b88f428bcc5ed432801149543714eb869c768af7490e184f704dfb18461da",
+      "components": [
+        "L0B7",
+        "L1B7",
+        "L2B7",
+        "L3B7"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=19",
+      "seed": 19,
+      "size": 1,
+      "claim": "not recovered; sparse support (k<=8)",
+      "score": 0.0918544715970756,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "b5c5d10723485c2ffb3057da7e1b28219d709d7f363f520040d0d85bff6becc0",
+      "components": [
+        "L2B7"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=20",
+      "seed": 20,
+      "size": 1,
+      "claim": "not recovered; sparse support (k<=8)",
+      "score": -0.3969769380165946,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "0c52b779b8eb48aeaa9af88c3575b4d1f44e19c2148a895df06b134fb08229a3",
+      "components": [
+        "L0B1"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=21",
+      "seed": 21,
+      "size": 1,
+      "claim": "not recovered; sparse support (k<=8)",
+      "score": 0.38057475144538444,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "4f14db10d429fc700b46494771e49d6ef884d909653221df1a505f767758ca02",
+      "components": [
+        "L0B7"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=22",
+      "seed": 22,
+      "size": 1,
+      "claim": "not recovered; sparse support (k<=8)",
+      "score": 0.20013622221954264,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "b5c5d10723485c2ffb3057da7e1b28219d709d7f363f520040d0d85bff6becc0",
+      "components": [
+        "L2B7"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=23",
+      "seed": 23,
+      "size": 5,
+      "claim": "recovered; sparse support (k<=8)",
+      "score": 0.9661738417352845,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "7a068787ca04ef74f57b220cba3484bd17244eb27f4c5142d52a16d6a659fe8e",
+      "components": [
+        "L0B7",
+        "L1B3",
+        "L1B7",
+        "L2B7",
+        "L3B7"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=24",
+      "seed": 24,
+      "size": 1,
+      "claim": "not recovered; sparse support (k<=8)",
+      "score": 0.01260680150219362,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "5d551f4a01e9d5e07ff4fd8e85441bbd6ff4b5ace304351e3d70fb300b454f18",
+      "components": [
+        "L2B6"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=25",
+      "seed": 25,
+      "size": 1,
+      "claim": "not recovered; sparse support (k<=8)",
+      "score": 0.25333445717421865,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "6fbd0b574db1ea8e34258c35c890f42f2e583a0fbf80af55d363230247e3c0e9",
+      "components": [
+        "L1B7"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=26",
+      "seed": 26,
+      "size": 8,
+      "claim": "not recovered; sparse support (k<=8)",
+      "score": 0.06525210968243877,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "798109a80b05ac9a4abd886fd2f2deca344ad4452a10f24004659532f197f036",
+      "components": [
+        "L0B1",
+        "L0B7",
+        "L1B4",
+        "L1B7",
+        "L2B0",
+        "L2B3",
+        "L2B4",
+        "L3B7"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=27",
+      "seed": 27,
+      "size": 1,
+      "claim": "not recovered; sparse support (k<=8)",
+      "score": 0.02427772266960404,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "b738ab8059ff9cfe88651d6fbf21c5825264d920b0a94556ec84fd582aea41ea",
+      "components": [
+        "L3B7"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=28",
+      "seed": 28,
+      "size": 4,
+      "claim": "recovered; sparse support (k<=8)",
+      "score": 0.9595033696771107,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "400b88f428bcc5ed432801149543714eb869c768af7490e184f704dfb18461da",
+      "components": [
+        "L0B7",
+        "L1B7",
+        "L2B7",
+        "L3B7"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=29",
+      "seed": 29,
+      "size": 6,
+      "claim": "recovered; sparse support (k<=8)",
+      "score": 0.9422307466661174,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "e30d2bdf4b47272d3e32b643272079e9d38cfff919695d0062c849fe96a1c245",
+      "components": [
+        "L0B6",
+        "L0B7",
+        "L1B7",
+        "L2B6",
+        "L2B7",
+        "L3B7"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=30",
+      "seed": 30,
+      "size": 1,
+      "claim": "not recovered; sparse support (k<=8)",
+      "score": 0.22013885647876985,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "b5c5d10723485c2ffb3057da7e1b28219d709d7f363f520040d0d85bff6becc0",
+      "components": [
+        "L2B7"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=31",
+      "seed": 31,
+      "size": 1,
+      "claim": "not recovered; sparse support (k<=8)",
+      "score": 0.1889990974335083,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "4f14db10d429fc700b46494771e49d6ef884d909653221df1a505f767758ca02",
+      "components": [
+        "L0B7"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=1",
+      "seed": 7,
+      "size": 3,
+      "claim": "not recovered; sparse support (k<=8)",
+      "score": 0.6583170081132024,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "f04160aa1da15d7c7db1909d52446c65274d241ba0dc5061824997268ba2b484",
+      "components": [
+        "L0B7",
+        "L2B3",
+        "L2B7"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=2",
+      "seed": 7,
+      "size": 5,
+      "claim": "recovered; sparse support (k<=8)",
+      "score": 0.9490390137672237,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "d3d2baf64ee73f5d733b93e322bb9b7aef855ae70547628d3048b81762e8855d",
+      "components": [
+        "L0B6",
+        "L0B7",
+        "L1B7",
+        "L2B7",
+        "L3B7"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=3",
+      "seed": 7,
+      "size": 4,
+      "claim": "not recovered; sparse support (k<=8)",
+      "score": -0.04662423981022901,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "1fabbdf3cb667284a942f97ffc5fa34ffe88b7c03a299106bb9087d4c0980489",
+      "components": [
+        "L0B7",
+        "L2B3",
+        "L2B7",
+        "L3B2"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=4",
+      "seed": 7,
+      "size": 10,
+      "claim": "predictive-only; dense support (k>8)",
+      "score": 0.9155649010592245,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "5e4c6b8ba2a6e07d0a7773a8e095f7d5c6c0a9dc66410587bb79259143d39abd",
+      "components": [
+        "L0B3",
+        "L0B7",
+        "L1B2",
+        "L1B7",
+        "L2B1",
+        "L2B7",
+        "L3B0",
+        "L3B2",
+        "L3B4",
+        "L3B7"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=5",
+      "seed": 7,
+      "size": 8,
+      "claim": "not recovered; sparse support (k<=8)",
+      "score": 0.5860927189368696,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "6f1d6418949dd2d9cdda4d61976cd6dcf9b5367c3293d3332209421c70e99fd2",
+      "components": [
+        "L0B7",
+        "L1B1",
+        "L1B3",
+        "L1B7",
+        "L2B6",
+        "L2B7",
+        "L3B1",
+        "L3B2"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=6",
+      "seed": 7,
+      "size": 5,
+      "claim": "not recovered; sparse support (k<=8)",
+      "score": -0.3609296700408615,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "9d68137b1c6f1291be7600a14a59f0021a455c1ca6db4546aabc86b1d61fc5d0",
+      "components": [
+        "L0B5",
+        "L0B7",
+        "L1B7",
+        "L2B3",
+        "L3B4"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=7",
+      "seed": 7,
+      "size": 5,
+      "claim": "not recovered; sparse support (k<=8)",
+      "score": -1.5190982869758396,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "bad2a6dd7988029ad5d412719d29a147b6378811b2b4151e3358f637fdb0423f",
+      "components": [
+        "L0B4",
+        "L1B0",
+        "L1B5",
+        "L2B7",
+        "L3B6"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=8",
+      "seed": 7,
+      "size": 3,
+      "claim": "not recovered; sparse support (k<=8)",
+      "score": 0.70190438609141,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "98d9c8a6eb6273e66f71897c511d0d34c4a4dfc2a6b64e790c4128f90009104c",
+      "components": [
+        "L0B7",
+        "L1B7",
+        "L2B7"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=9",
+      "seed": 7,
+      "size": 1,
+      "claim": "not recovered; sparse support (k<=8)",
+      "score": -0.3259809555417972,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "f79201c998d85fecd87e51489b34f9b941186db76ed8088822fa25462b489aa3",
+      "components": [
+        "L0B0"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=10",
+      "seed": 7,
+      "size": 6,
+      "claim": "not recovered; sparse support (k<=8)",
+      "score": 0.8964992009212535,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "fae40853892df95ce685c41a8019056a79333f0fcd6dd3dad3a9b36135563745",
+      "components": [
+        "L0B7",
+        "L1B1",
+        "L1B7",
+        "L2B7",
+        "L3B0",
+        "L3B7"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=11",
+      "seed": 7,
+      "size": 2,
+      "claim": "not recovered; sparse support (k<=8)",
+      "score": 0.6429245505431681,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "cf25f8b897b36b10fc7921b18ee583e16affb4fe721b6b4996ad390e12119386",
+      "components": [
+        "L0B7",
+        "L2B7"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=12",
+      "seed": 7,
+      "size": 3,
+      "claim": "not recovered; sparse support (k<=8)",
+      "score": 0.7958613220158951,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "98d9c8a6eb6273e66f71897c511d0d34c4a4dfc2a6b64e790c4128f90009104c",
+      "components": [
+        "L0B7",
+        "L1B7",
+        "L2B7"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=13",
+      "seed": 7,
+      "size": 1,
+      "claim": "not recovered; sparse support (k<=8)",
+      "score": -0.2609292677365942,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "4f14db10d429fc700b46494771e49d6ef884d909653221df1a505f767758ca02",
+      "components": [
+        "L0B7"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=14",
+      "seed": 7,
+      "size": 4,
+      "claim": "not recovered; sparse support (k<=8)",
+      "score": 0.13267995904893048,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "5184043489e75d6f8999580a2a2dfd6657d57d477d0d5dd5d8b27926c41a395e",
+      "components": [
+        "L1B7",
+        "L2B6",
+        "L2B7",
+        "L3B5"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=15",
+      "seed": 7,
+      "size": 5,
+      "claim": "recovered; sparse support (k<=8)",
+      "score": 0.9585413154885303,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "5fae88dbbfa82bf532bc6c9babf77f4915da5f9221bf831353be7b149a7c7bc8",
+      "components": [
+        "L0B4",
+        "L0B7",
+        "L1B7",
+        "L2B7",
+        "L3B7"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=16",
+      "seed": 7,
+      "size": 4,
+      "claim": "recovered; sparse support (k<=8)",
+      "score": 0.9594476369201191,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "400b88f428bcc5ed432801149543714eb869c768af7490e184f704dfb18461da",
+      "components": [
+        "L0B7",
+        "L1B7",
+        "L2B7",
+        "L3B7"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=17",
+      "seed": 7,
+      "size": 3,
+      "claim": "not recovered; sparse support (k<=8)",
+      "score": 0.5712278333139351,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "b1af8bcb58e9a78f365d556fac44c6b3004efab55fb48a3b348044ce8d90c52f",
+      "components": [
+        "L0B7",
+        "L2B0",
+        "L2B7"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=18",
+      "seed": 7,
+      "size": 2,
+      "claim": "not recovered; sparse support (k<=8)",
+      "score": 0.10792935465771669,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "8aacf23c5b664ee42983c19903f56cc0214eb3e0c3401cc65e7b1e33235b5316",
+      "components": [
+        "L0B7",
+        "L3B6"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=19",
+      "seed": 7,
+      "size": 5,
+      "claim": "recovered; sparse support (k<=8)",
+      "score": 0.9624525816628965,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "70eca68bb843b9fa50ea687eda26f0fac4a03ed15feb74a732cd1d9140198f50",
+      "components": [
+        "L0B7",
+        "L1B7",
+        "L2B7",
+        "L3B0",
+        "L3B7"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=20",
+      "seed": 7,
+      "size": 1,
+      "claim": "not recovered; sparse support (k<=8)",
+      "score": 0.24533468676000458,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "4f14db10d429fc700b46494771e49d6ef884d909653221df1a505f767758ca02",
+      "components": [
+        "L0B7"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=21",
+      "seed": 7,
+      "size": 1,
+      "claim": "not recovered; sparse support (k<=8)",
+      "score": -0.2901408736821285,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "893d5ec0cef280cd4f1a062ef1c570bb81110c433f04dcb3a932bc6b83f9a5a4",
+      "components": [
+        "L3B1"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=22",
+      "seed": 7,
+      "size": 1,
+      "claim": "not recovered; sparse support (k<=8)",
+      "score": -0.012582295061444926,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "6fbd0b574db1ea8e34258c35c890f42f2e583a0fbf80af55d363230247e3c0e9",
+      "components": [
+        "L1B7"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=23",
+      "seed": 7,
+      "size": 10,
+      "claim": "not recovered; dense support (k>8)",
+      "score": -0.3287440773739483,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "0836028f422bd1f4895c2093ca78371030987745b614641f563e23d0b8ce0286",
+      "components": [
+        "L0B5",
+        "L0B7",
+        "L1B0",
+        "L1B6",
+        "L2B0",
+        "L2B4",
+        "L2B6",
+        "L3B2",
+        "L3B3",
+        "L3B5"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=24",
+      "seed": 7,
+      "size": 6,
+      "claim": "recovered; sparse support (k<=8)",
+      "score": 0.9419840690717279,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "767bf993337681cb1219f2ceb3787e351e89eeaf5f891e2c2474a76e8c44dbf3",
+      "components": [
+        "L0B7",
+        "L1B7",
+        "L2B6",
+        "L2B7",
+        "L3B5",
+        "L3B7"
+      ]
+    },
+    {
+      "axis": "templates",
+      "variant": "template=released-design-cpu-remeasured",
+      "seed": 7,
+      "size": 4,
+      "claim": "recovered; sparse support (k<=8)",
+      "score": 0.9464339171208717,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "400b88f428bcc5ed432801149543714eb869c768af7490e184f704dfb18461da",
+      "components": [
+        "L0B7",
+        "L1B7",
+        "L2B7",
+        "L3B7"
+      ]
+    },
+    {
+      "axis": "templates",
+      "variant": "template=fresh-signed-design-11",
+      "seed": 7,
+      "size": 1,
+      "claim": "not recovered; sparse support (k<=8)",
+      "score": -0.8142652999896016,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "7c6bc28eb8b3bb67cfc7943c834443c2cf6068b41be4f5f15c5e3b06af69826d",
+      "components": [
+        "L0B6"
+      ]
+    },
+    {
+      "axis": "templates",
+      "variant": "template=fresh-signed-design-12",
+      "seed": 7,
+      "size": 2,
+      "claim": "not recovered; sparse support (k<=8)",
+      "score": -0.3646890647663592,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "9ed6c88a6bd31a2c8bf46c9a23bc9633e9ab5f2c31f9e70c1e12636ac5ba4d89",
+      "components": [
+        "L1B7",
+        "L3B7"
+      ]
+    },
+    {
+      "axis": "templates",
+      "variant": "template=bernoulli-design-11",
+      "seed": 7,
+      "size": 4,
+      "claim": "recovered; sparse support (k<=8)",
+      "score": 0.9676862758606419,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "400b88f428bcc5ed432801149543714eb869c768af7490e184f704dfb18461da",
+      "components": [
+        "L0B7",
+        "L1B7",
+        "L2B7",
+        "L3B7"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "n_train=8",
+      "seed": 7,
+      "size": 3,
+      "claim": "not recovered; sparse support (k<=8)",
+      "score": -1.5103951377654923,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "0dcaab71b907221c89297fde0e78eb8abb60bd0357c2ce309dc08207f8723761",
+      "components": [
+        "L0B7",
+        "L1B4",
+        "L3B0"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "n_train=16",
+      "seed": 7,
+      "size": 4,
+      "claim": "recovered; sparse support (k<=8)",
+      "score": 0.9571278074016307,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "400b88f428bcc5ed432801149543714eb869c768af7490e184f704dfb18461da",
+      "components": [
+        "L0B7",
+        "L1B7",
+        "L2B7",
+        "L3B7"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "n_val=12",
+      "seed": 7,
+      "size": 8,
+      "claim": "not recovered; sparse support (k<=8)",
+      "score": 0.8762305960836478,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "637caff77e908ceacd052d637e895bf3161eb5115d088ba47af6686cd83d74c9",
+      "components": [
+        "L0B3",
+        "L0B5",
+        "L0B7",
+        "L1B7",
+        "L2B1",
+        "L2B7",
+        "L3B2",
+        "L3B7"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "k_grid=4",
+      "seed": 7,
+      "size": 4,
+      "claim": "recovered; sparse support (k<=8)",
+      "score": 0.9347141098561826,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "400b88f428bcc5ed432801149543714eb869c768af7490e184f704dfb18461da",
+      "components": [
+        "L0B7",
+        "L1B7",
+        "L2B7",
+        "L3B7"
+      ]
+    }
+  ]
+}

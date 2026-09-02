@@ -1,0 +1,45 @@
+{
+ "components": null,
+ "universe_size": null,
+ "claim": "retains >= 0.80; expander CE-recovered >= 0.80",
+ "score": 0.8337224943922826,
+ "meta": {
+  "config": {
+   "d": 7,
+   "k": 64,
+   "n": 16384,
+   "steps": 5000,
+   "dense_arch": "dense_warmtied",
+   "layer": 12,
+   "denominator": "zero",
+   "eval_set": "upstream"
+  },
+  "ce_clean": 2.2902368195240017,
+  "ce_ablated": 15.98654461193441,
+  "denominator_nats": 13.696307792410408,
+  "n_train_docs": 2400,
+  "n_unique_train_docs": 2400,
+  "decoder_value_ratio": 292.57142857142856,
+  "expander": {
+   "arch": "expander_tied",
+   "d": 7,
+   "ce_reconstructed": 4.762355635007068,
+   "ce_recovered": 0.8195047268977882,
+   "rel_err": 0.7896750569343567,
+   "dead_frac": 0.2911376953125,
+   "train_secs": 40.2,
+   "learned_decoder_values": 114688
+  },
+  "dense": {
+   "arch": "dense_warmtied",
+   "d": 2048,
+   "ce_reconstructed": 2.523804848496839,
+   "ce_recovered": 0.982946642809658,
+   "rel_err": 0.48642441630363464,
+   "dead_frac": 0.08984375,
+   "train_secs": 31.9,
+   "learned_decoder_values": 33554432
+  },
+  "wall_secs": 117.4
+ }
+}

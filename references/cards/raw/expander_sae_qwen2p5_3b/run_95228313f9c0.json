@@ -1,0 +1,39 @@
+{
+ "config": {
+  "d": 7,
+  "k": 64,
+  "n": 16384,
+  "steps": 5000,
+  "dense_arch": "dense_warmtied",
+  "layer": 12,
+  "denominator": "zero",
+  "eval_set": "upstream"
+ },
+ "ce_clean": 2.2902368195240017,
+ "ce_ablated": 15.98654461193441,
+ "denominator_nats": 13.696307792410408,
+ "n_train_docs": 2400,
+ "n_unique_train_docs": 1509,
+ "decoder_value_ratio": 292.57142857142856,
+ "expander": {
+  "arch": "expander_tied",
+  "d": 7,
+  "ce_reconstructed": 4.287458067513999,
+  "ce_recovered": 0.8541781275464088,
+  "rel_err": 0.7375677824020386,
+  "dead_frac": 0.3076171875,
+  "train_secs": 40.0,
+  "learned_decoder_values": 114688
+ },
+ "dense": {
+  "arch": "dense_warmtied",
+  "d": 2048,
+  "ce_reconstructed": 2.671800853709041,
+  "ce_recovered": 0.9721411025534576,
+  "rel_err": 0.45228850841522217,
+  "dead_frac": 0.08953857421875,
+  "train_secs": 31.6,
+  "learned_decoder_values": 33554432
+ },
+ "wall_secs": 117.0
+}

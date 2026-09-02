@@ -1,0 +1,71 @@
+{
+ "components": [
+  "L0H10",
+  "L10H10",
+  "L10H2",
+  "L10H6",
+  "L11H1",
+  "L11H2",
+  "L11H6",
+  "L9H8"
+ ],
+ "universe_size": 141,
+ "claim": "CoAx AUC >=0.90; beats AtP*",
+ "score": 0.9511278195488722,
+ "meta": {
+  "config": {
+   "position_mode": "last",
+   "top_r": 0,
+   "ablation_mode": "zero",
+   "feature_mode": "fisher_centered",
+   "freeze_ln": "none",
+   "primaries": "documented"
+  },
+  "n_prompts": 96,
+  "prompt_seed": 1517,
+  "n_unique_prompts": 61,
+  "template": "When {IO} and {S} went to the {place}, {X} gave a {obj} to",
+  "first_prompt": "When James and Emma went to the market, Sid gave a book to",
+  "primaries": [
+   [
+    9,
+    9
+   ],
+   [
+    10,
+    0
+   ],
+   [
+    9,
+    6
+   ]
+  ],
+  "primaries_documented": [
+   true,
+   true,
+   true
+  ],
+  "auc": {
+   "coax": 0.9511278195488722,
+   "single": 0.5451127819548872,
+   "conditional": 0.6757518796992482,
+   "atp": 0.450187969924812,
+   "eap_ig": 0.6024436090225563,
+   "atp_star": 0.6983082706766918,
+   "conditional_grad": 0.506578947368421
+  },
+  "average_precision": 0.6346565934065934,
+  "precision_at_8": 0.5,
+  "top8": [
+   "L11H2",
+   "L10H2",
+   "L0H10",
+   "L10H10",
+   "L10H6",
+   "L9H8",
+   "L11H6",
+   "L11H1"
+  ],
+  "wall_secs": 107.6
+ }
+}

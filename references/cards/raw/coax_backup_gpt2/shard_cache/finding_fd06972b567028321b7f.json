@@ -1,0 +1,71 @@
+{
+ "components": [
+  "L10H10",
+  "L10H2",
+  "L10H6",
+  "L11H1",
+  "L11H2",
+  "L11H6",
+  "L5H1",
+  "L9H8"
+ ],
+ "universe_size": 141,
+ "claim": "CoAx AUC >=0.90; beats AtP*",
+ "score": 0.9605263157894737,
+ "meta": {
+  "config": {
+   "position_mode": "last",
+   "top_r": 0,
+   "ablation_mode": "zero",
+   "feature_mode": "fisher_centered",
+   "freeze_ln": "none",
+   "primaries": "documented"
+  },
+  "n_prompts": 96,
+  "prompt_seed": 1533,
+  "n_unique_prompts": 96,
+  "template": "When {IO} and {S} went to the {place}, {X} gave a {obj} to",
+  "first_prompt": "When Anna and John went to the park, Tom gave a book to",
+  "primaries": [
+   [
+    9,
+    9
+   ],
+   [
+    10,
+    0
+   ],
+   [
+    9,
+    6
+   ]
+  ],
+  "primaries_documented": [
+   true,
+   true,
+   true
+  ],
+  "auc": {
+   "coax": 0.9605263157894737,
+   "single": 0.5413533834586466,
+   "conditional": 0.6738721804511278,
+   "atp": 0.48214285714285715,
+   "eap_ig": 0.493421052631579,
+   "atp_star": 0.6992481203007519,
+   "conditional_grad": 0.5770676691729323
+  },
+  "average_precision": 0.700219298245614,
+  "precision_at_8": 0.5,
+  "top8": [
+   "L11H2",
+   "L10H2",
+   "L10H10",
+   "L10H6",
+   "L11H6",
+   "L9H8",
+   "L5H1",
+   "L11H1"
+  ],
+  "wall_secs": 56.7
+ }
+}

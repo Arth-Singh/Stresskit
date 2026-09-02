@@ -1,0 +1,71 @@
+{
+ "components": [
+  "L0H10",
+  "L10H10",
+  "L10H2",
+  "L10H6",
+  "L11H1",
+  "L11H2",
+  "L11H6",
+  "L9H8"
+ ],
+ "universe_size": 141,
+ "claim": "CoAx AUC >=0.90; beats AtP*",
+ "score": 0.9614661654135339,
+ "meta": {
+  "config": {
+   "position_mode": "last",
+   "top_r": 0,
+   "ablation_mode": "zero",
+   "feature_mode": "fisher_centered",
+   "freeze_ln": "none",
+   "primaries": "documented"
+  },
+  "n_prompts": 96,
+  "prompt_seed": 1527,
+  "n_unique_prompts": 96,
+  "template": "When {IO} and {S} went to the {place}, {X} gave a {obj} to",
+  "first_prompt": "When Tom and John went to the office, Dan gave a note to",
+  "primaries": [
+   [
+    9,
+    9
+   ],
+   [
+    10,
+    0
+   ],
+   [
+    9,
+    6
+   ]
+  ],
+  "primaries_documented": [
+   true,
+   true,
+   true
+  ],
+  "auc": {
+   "coax": 0.9614661654135339,
+   "single": 0.5460526315789473,
+   "conditional": 0.6776315789473684,
+   "atp": 0.41823308270676696,
+   "eap_ig": 0.4407894736842106,
+   "atp_star": 0.625,
+   "conditional_grad": 0.6343984962406015
+  },
+  "average_precision": 0.7103877402790446,
+  "precision_at_8": 0.5,
+  "top8": [
+   "L11H2",
+   "L10H2",
+   "L10H10",
+   "L10H6",
+   "L11H6",
+   "L0H10",
+   "L11H1",
+   "L9H8"
+  ],
+  "wall_secs": 104.5
+ }
+}

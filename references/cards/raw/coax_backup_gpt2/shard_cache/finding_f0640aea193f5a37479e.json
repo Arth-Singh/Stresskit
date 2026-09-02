@@ -1,0 +1,71 @@
+{
+ "components": [
+  "L10H1",
+  "L10H10",
+  "L10H2",
+  "L10H6",
+  "L11H1",
+  "L11H2",
+  "L11H6",
+  "L9H8"
+ ],
+ "universe_size": 141,
+ "claim": "CoAx AUC >=0.90; beats AtP*",
+ "score": 0.9605263157894737,
+ "meta": {
+  "config": {
+   "position_mode": "last",
+   "top_r": 0,
+   "ablation_mode": "zero",
+   "feature_mode": "fisher_centered",
+   "freeze_ln": "none",
+   "primaries": "documented"
+  },
+  "n_prompts": 96,
+  "prompt_seed": 1547,
+  "n_unique_prompts": 96,
+  "template": "When {IO} and {S} went to the {place}, {X} gave a {obj} to",
+  "first_prompt": "When Mark and John went to the library, Peter gave a kiss to",
+  "primaries": [
+   [
+    9,
+    9
+   ],
+   [
+    10,
+    0
+   ],
+   [
+    9,
+    6
+   ]
+  ],
+  "primaries_documented": [
+   true,
+   true,
+   true
+  ],
+  "auc": {
+   "coax": 0.9605263157894737,
+   "single": 0.5422932330827068,
+   "conditional": 0.6766917293233082,
+   "atp": 0.37875939849624063,
+   "eap_ig": 0.443609022556391,
+   "atp_star": 0.6607142857142857,
+   "conditional_grad": 0.4257518796992481
+  },
+  "average_precision": 0.7139079670329671,
+  "precision_at_8": 0.625,
+  "top8": [
+   "L11H2",
+   "L10H2",
+   "L10H10",
+   "L10H6",
+   "L11H6",
+   "L11H1",
+   "L9H8",
+   "L10H1"
+  ],
+  "wall_secs": 106.8
+ }
+}

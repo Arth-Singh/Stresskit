@@ -1,0 +1,911 @@
+{
+  "schema_version": "0.4",
+  "stresskit_version": "1.0.0.dev0",
+  "created_at": "2026-09-02T07:31:12+00:00",
+  "claim": {
+    "statement": "CIF certifies high-fidelity claims for GPT-2 Small IOI circuits, and its betting confidence sequence reduces certification cost 10-30x relative to the Hoeffding sequence",
+    "base_claim_label": "name-movers certified F0<=0.95; @0.8:<10x; @0.9:10-30x+",
+    "model": "gpt2",
+    "task": "IOI head-output patching, 200 prompts of one template, nested circuits of 3/7/9/11/13 heads (upstream E2)",
+    "method": "CIF anytime-valid confidence sequences (Hoeffding and betting) on clipped normalised logit-difference recovery",
+    "base_size": 5,
+    "universe_size": 20
+  },
+  "battery": {
+    "axes": [
+      "seeds",
+      "bootstrap",
+      "templates",
+      "hyperparams"
+    ],
+    "n_runs_total": 36,
+    "seed": 0,
+    "base_config": {
+      "sampling": "iid",
+      "delta": 0.05,
+      "alpha": 0.3,
+      "n_max": 2000,
+      "metric": "logit_diff"
+    },
+    "claim_equiv_used": false,
+    "components_embedded": true
+  },
+  "metrics": {
+    "pooled": {
+      "n_runs": 36,
+      "n_structured_runs": 36,
+      "n_empty_findings": 0,
+      "empty_finding_rate": 0.0,
+      "mean_pairwise_jaccard": 0.5692428823381204,
+      "min_pairwise_jaccard": 0.0,
+      "flip_rate": 0.5968253968253968,
+      "modal_share": 0.6111111111111112,
+      "n_claim_classes": 7,
+      "claim_counts": {
+        "name-movers certified F0<=0.95; @0.8:<10x; @0.9:10-30x+": 22,
+        "name-movers certified F0<=0.9; @0.8:<10x; @0.9:10-30x+": 7,
+        "name-movers certified F0<=0.95; @0.8:<10x; @0.9:10-30x": 2,
+        "name-movers certified F0<=none; @0.8:n/a; @0.9:n/a": 2,
+        "name-movers certified F0<=0.8; @0.8:10-30x; @0.9:n/a": 1,
+        "name-movers certified F0<=0.9; @0.8:10-30x; @0.9:<10x+": 1,
+        "name-movers certified F0<=0.9; @0.8:<10x; @0.9:<10x+": 1
+      },
+      "score_mean": 0.9412449090636156,
+      "score_std": 0.0420711582701191,
+      "score_cv": 0.04469735545446191,
+      "median_size": 5.0,
+      "variance_shares": {
+        "bootstrap": 0.0035795758900859466,
+        "hyperparams": 0.622212872134806,
+        "seeds": 0.0001662716708770672,
+        "templates": 0.37404128030423095
+      },
+      "variance_absolute": {
+        "bootstrap": 2.375998191871758e-05,
+        "hyperparams": 0.004130033011022812,
+        "seeds": 1.1036536212504275e-06,
+        "templates": 0.002482756150385491
+      },
+      "mean_pairwise_jaccard_ci95": [
+        0.4157767758266082,
+        0.7154813608396702
+      ],
+      "flip_rate_ci95": [
+        0.40362438220757824,
+        0.7446808510638298
+      ],
+      "modal_share_ci95": [
+        0.4722222222222222,
+        0.7777777777777778
+      ],
+      "score_cv_ci95": [
+        0.012748518491145017,
+        0.06542403545713704
+      ],
+      "expected_random_jaccard": 0.15470405013857394,
+      "expected_random_jaccard_analytic": 0.14285714285714285,
+      "jaccard_vs_random": 3.6795603077503736,
+      "mean_pairwise_jaccard_axis_balanced": 0.648277417027417,
+      "jaccard_vs_random_ci95": [
+        2.687562319500893,
+        4.624839234646979
+      ],
+      "confidence": "low",
+      "borderline_checks": [
+        "beats_random"
+      ]
+    },
+    "per_axis": {
+      "bootstrap": {
+        "n_runs": 11,
+        "n_structured_runs": 11,
+        "n_empty_findings": 0,
+        "empty_finding_rate": 0.0,
+        "mean_pairwise_jaccard": 0.9393939393939393,
+        "min_pairwise_jaccard": 0.6666666666666666,
+        "flip_rate": 0.32727272727272727,
+        "modal_share": 0.8181818181818182,
+        "n_claim_classes": 2,
+        "claim_counts": {
+          "name-movers certified F0<=0.95; @0.8:<10x; @0.9:10-30x+": 9,
+          "name-movers certified F0<=0.95; @0.8:<10x; @0.9:10-30x": 2
+        },
+        "score_mean": 0.9602773240998111,
+        "score_std": 0.004874421188071213,
+        "score_cv": 0.005076055703638136,
+        "median_size": 5
+      },
+      "hyperparams": {
+        "n_runs": 5,
+        "n_structured_runs": 5,
+        "n_empty_findings": 0,
+        "empty_finding_rate": 0.0,
+        "mean_pairwise_jaccard": 0.21071428571428572,
+        "min_pairwise_jaccard": 0.0,
+        "flip_rate": 0.9,
+        "modal_share": 0.4,
+        "n_claim_classes": 4,
+        "claim_counts": {
+          "name-movers certified F0<=0.95; @0.8:<10x; @0.9:10-30x+": 2,
+          "name-movers certified F0<=0.9; @0.8:<10x; @0.9:10-30x+": 1,
+          "name-movers certified F0<=none; @0.8:n/a; @0.9:n/a": 1,
+          "name-movers certified F0<=0.9; @0.8:<10x; @0.9:<10x+": 1
+        },
+        "score_mean": 0.9158853636103315,
+        "score_std": 0.064265332886579,
+        "score_cv": 0.07016744173446694,
+        "median_size": 5
+      },
+      "seeds": {
+        "n_runs": 11,
+        "n_structured_runs": 11,
+        "n_empty_findings": 0,
+        "empty_finding_rate": 0.0,
+        "mean_pairwise_jaccard": 1.0,
+        "min_pairwise_jaccard": 1.0,
+        "flip_rate": 0.0,
+        "modal_share": 1.0,
+        "n_claim_classes": 1,
+        "claim_counts": {
+          "name-movers certified F0<=0.95; @0.8:<10x; @0.9:10-30x+": 11
+        },
+        "score_mean": 0.9576835340524004,
+        "score_std": 0.0010505491998238005,
+        "score_cv": 0.0010969690534183487,
+        "median_size": 5
+      },
+      "templates": {
+        "n_runs": 12,
+        "n_structured_runs": 12,
+        "n_empty_findings": 0,
+        "empty_finding_rate": 0.0,
+        "mean_pairwise_jaccard": 0.443001443001443,
+        "min_pairwise_jaccard": 0.0,
+        "flip_rate": 0.7272727272727273,
+        "modal_share": 0.5,
+        "n_claim_classes": 5,
+        "claim_counts": {
+          "name-movers certified F0<=0.9; @0.8:<10x; @0.9:10-30x+": 6,
+          "name-movers certified F0<=0.95; @0.8:<10x; @0.9:10-30x+": 3,
+          "name-movers certified F0<=0.8; @0.8:10-30x; @0.9:n/a": 1,
+          "name-movers certified F0<=none; @0.8:n/a; @0.9:n/a": 1,
+          "name-movers certified F0<=0.9; @0.8:10-30x; @0.9:<10x+": 1
+        },
+        "score_mean": 0.9236203397779179,
+        "score_std": 0.04982726312357012,
+        "score_cv": 0.0539477759179177,
+        "median_size": 5.0
+      }
+    }
+  },
+  "verdict": {
+    "grade": "B",
+    "profile": "diagnostic",
+    "confirmatory_state": "not_applicable",
+    "required_checks": [],
+    "checks": {
+      "structural_stability": {
+        "value": 0.5692428823381204,
+        "threshold": 0.8,
+        "passed": false,
+        "op": ">=",
+        "ci": [
+          0.4157767758266082,
+          0.7154813608396702
+        ],
+        "robust": true,
+        "state": "fail",
+        "description": "mean pairwise Jaccard across all perturbed runs"
+      },
+      "claim_stability": {
+        "value": 0.6111111111111112,
+        "threshold": 0.8,
+        "passed": false,
+        "op": ">=",
+        "ci": [
+          0.4722222222222222,
+          0.7777777777777778
+        ],
+        "robust": true,
+        "state": "fail",
+        "description": "modal claim share \u03c0* (filability at \u03b1=0.2)"
+      },
+      "score_stability": {
+        "value": 0.04469735545446191,
+        "threshold": 0.25,
+        "passed": true,
+        "op": "<=",
+        "ci": [
+          0.012748518491145017,
+          0.06542403545713704
+        ],
+        "robust": true,
+        "state": "pass",
+        "description": "coefficient of variation of the quality score"
+      },
+      "beats_random": {
+        "value": 3.6795603077503736,
+        "threshold": 3.0,
+        "passed": true,
+        "op": ">=",
+        "ci": [
+          2.687562319500893,
+          4.624839234646979
+        ],
+        "robust": false,
+        "state": "inconclusive",
+        "description": "structural overlap vs size-matched random null (\u00d7)"
+      }
+    },
+    "thresholds": {
+      "jaccard": 0.8,
+      "modal_share": 0.8,
+      "score_cv": 0.25,
+      "random_margin": 3.0
+    }
+  },
+  "provenance": {
+    "python": "3.12.3",
+    "platform": "Linux-6.11.0-1016-nvidia-x86_64-with-glibc2.39",
+    "wall_seconds": 214.561
+  },
+  "notes": [
+    "underpowered verdict: the 95% CI straddles the bar for beats_random (pass) at n_runs=10 \u2014 these verdict components are not decided by the data. Treat the grade as provisional and raise n_runs (or widen the battery) before reporting it.",
+    "upstream: AsiaeeLab/certified-interventional-fidelity@4b8359f (MIT); sampling code imported unmodified; file hashes e2_gpt2_patching.py 58397de92eeb, cif.py 4c9824c9d46b, e2_completeness.csv eb2dc5bf064f",
+    "reproduction: the base run (seed 0, upstream template) reproduces 30 of 30 shipped i.i.d. certification rows exactly",
+    "cost ratio (Hoeffding draws / betting draws to certify) in the base run: 3 heads @F0=0.8: 7.2x; 3 heads @F0=0.9: >=18.2x; 3 heads @F0=0.95: >=2.4x; 7 heads @F0=0.8: 6.6x; 7 heads @F0=0.9: >=16.9x; 7 heads @F0=0.95: >=1.3x; 9 heads @F0=0.8: 6.9x; 9 heads @F0=0.9: 19.0x; 9 heads @F0=0.95: >=4.8x; 11 heads @F0=0.8: 6.9x; 11 heads @F0=0.9: 18.8x; 11 heads @F0=0.95: >=5.4x; 13 heads @F0=0.8: 6.8x; 13 heads @F0=0.9: 18.4x; 13 heads @F0=0.95: >=5.6x. The abstract's 10-30x is reached only at F0=0.9, and only for the circuits Hoeffding certifies at all within 2000 draws; at F0=0.8 the ratio is 6.6-7.2x, and at F0=0.95 Hoeffding never certifies, so the ratio there is a censored lower bound.",
+    "exact population means the sequences are estimating (the 200 prompts are the whole population, sampled with replacement): 3 heads 0.9628, 7 heads 0.9577, 9 heads 0.9690, 11 heads 0.9695, 13 heads 0.9707. E2 simulates a streaming certificate on a finite pool whose mean is computable exactly; the certificate demonstrates the machinery and adds no information about the circuit beyond those 200 effects.",
+    "templates: the upstream repository ships one IOI template; the eleven alternatives are constructed here from the IOI paper's template family, with the same names, the same prompt seed, and the same IO-replacement corruption, and are labelled as such",
+    "no null control: the null outcome of a certification procedure (nothing certified) is itself a stable profile, so the specificity check is undefined for this class of claim"
+  ],
+  "runs": [
+    {
+      "axis": "base",
+      "variant": "base",
+      "seed": 0,
+      "size": 5,
+      "claim": "name-movers certified F0<=0.95; @0.8:<10x; @0.9:10-30x+",
+      "score": 0.9585412029236116,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "6e3173d9af480ff2e4356fbb66377b9e2a3caeae0d38006101e51960a70f7380",
+      "components": [
+        "L11:0.95",
+        "L13:0.95",
+        "L3:0.95",
+        "L7:0.95",
+        "L9:0.95"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=1",
+      "seed": 1,
+      "size": 5,
+      "claim": "name-movers certified F0<=0.95; @0.8:<10x; @0.9:10-30x+",
+      "score": 0.9576432465599981,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "6e3173d9af480ff2e4356fbb66377b9e2a3caeae0d38006101e51960a70f7380",
+      "components": [
+        "L11:0.95",
+        "L13:0.95",
+        "L3:0.95",
+        "L7:0.95",
+        "L9:0.95"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=2",
+      "seed": 2,
+      "size": 5,
+      "claim": "name-movers certified F0<=0.95; @0.8:<10x; @0.9:10-30x+",
+      "score": 0.9562359050176761,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "6e3173d9af480ff2e4356fbb66377b9e2a3caeae0d38006101e51960a70f7380",
+      "components": [
+        "L11:0.95",
+        "L13:0.95",
+        "L3:0.95",
+        "L7:0.95",
+        "L9:0.95"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=3",
+      "seed": 3,
+      "size": 5,
+      "claim": "name-movers certified F0<=0.95; @0.8:<10x; @0.9:10-30x+",
+      "score": 0.9580068023843911,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "6e3173d9af480ff2e4356fbb66377b9e2a3caeae0d38006101e51960a70f7380",
+      "components": [
+        "L11:0.95",
+        "L13:0.95",
+        "L3:0.95",
+        "L7:0.95",
+        "L9:0.95"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=4",
+      "seed": 4,
+      "size": 5,
+      "claim": "name-movers certified F0<=0.95; @0.8:<10x; @0.9:10-30x+",
+      "score": 0.9581852224029264,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "6e3173d9af480ff2e4356fbb66377b9e2a3caeae0d38006101e51960a70f7380",
+      "components": [
+        "L11:0.95",
+        "L13:0.95",
+        "L3:0.95",
+        "L7:0.95",
+        "L9:0.95"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=5",
+      "seed": 5,
+      "size": 5,
+      "claim": "name-movers certified F0<=0.95; @0.8:<10x; @0.9:10-30x+",
+      "score": 0.9559047379932074,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "6e3173d9af480ff2e4356fbb66377b9e2a3caeae0d38006101e51960a70f7380",
+      "components": [
+        "L11:0.95",
+        "L13:0.95",
+        "L3:0.95",
+        "L7:0.95",
+        "L9:0.95"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=6",
+      "seed": 6,
+      "size": 5,
+      "claim": "name-movers certified F0<=0.95; @0.8:<10x; @0.9:10-30x+",
+      "score": 0.9594520741603092,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "6e3173d9af480ff2e4356fbb66377b9e2a3caeae0d38006101e51960a70f7380",
+      "components": [
+        "L11:0.95",
+        "L13:0.95",
+        "L3:0.95",
+        "L7:0.95",
+        "L9:0.95"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=7",
+      "seed": 7,
+      "size": 5,
+      "claim": "name-movers certified F0<=0.95; @0.8:<10x; @0.9:10-30x+",
+      "score": 0.9581518419722495,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "6e3173d9af480ff2e4356fbb66377b9e2a3caeae0d38006101e51960a70f7380",
+      "components": [
+        "L11:0.95",
+        "L13:0.95",
+        "L3:0.95",
+        "L7:0.95",
+        "L9:0.95"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=8",
+      "seed": 8,
+      "size": 5,
+      "claim": "name-movers certified F0<=0.95; @0.8:<10x; @0.9:10-30x+",
+      "score": 0.9573096705921212,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "6e3173d9af480ff2e4356fbb66377b9e2a3caeae0d38006101e51960a70f7380",
+      "components": [
+        "L11:0.95",
+        "L13:0.95",
+        "L3:0.95",
+        "L7:0.95",
+        "L9:0.95"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=9",
+      "seed": 9,
+      "size": 5,
+      "claim": "name-movers certified F0<=0.95; @0.8:<10x; @0.9:10-30x+",
+      "score": 0.9564807603638539,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "6e3173d9af480ff2e4356fbb66377b9e2a3caeae0d38006101e51960a70f7380",
+      "components": [
+        "L11:0.95",
+        "L13:0.95",
+        "L3:0.95",
+        "L7:0.95",
+        "L9:0.95"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=10",
+      "seed": 10,
+      "size": 5,
+      "claim": "name-movers certified F0<=0.95; @0.8:<10x; @0.9:10-30x+",
+      "score": 0.9586074102060596,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "6e3173d9af480ff2e4356fbb66377b9e2a3caeae0d38006101e51960a70f7380",
+      "components": [
+        "L11:0.95",
+        "L13:0.95",
+        "L3:0.95",
+        "L7:0.95",
+        "L9:0.95"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=1",
+      "seed": 0,
+      "size": 5,
+      "claim": "name-movers certified F0<=0.95; @0.8:<10x; @0.9:10-30x",
+      "score": 0.969277743435113,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "6e3173d9af480ff2e4356fbb66377b9e2a3caeae0d38006101e51960a70f7380",
+      "components": [
+        "L11:0.95",
+        "L13:0.95",
+        "L3:0.95",
+        "L7:0.95",
+        "L9:0.95"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=2",
+      "seed": 0,
+      "size": 5,
+      "claim": "name-movers certified F0<=0.95; @0.8:<10x; @0.9:10-30x+",
+      "score": 0.9614681785998602,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "6e3173d9af480ff2e4356fbb66377b9e2a3caeae0d38006101e51960a70f7380",
+      "components": [
+        "L11:0.95",
+        "L13:0.95",
+        "L3:0.95",
+        "L7:0.95",
+        "L9:0.95"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=3",
+      "seed": 0,
+      "size": 5,
+      "claim": "name-movers certified F0<=0.95; @0.8:<10x; @0.9:10-30x+",
+      "score": 0.9600048926601766,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "6e3173d9af480ff2e4356fbb66377b9e2a3caeae0d38006101e51960a70f7380",
+      "components": [
+        "L11:0.95",
+        "L13:0.95",
+        "L3:0.95",
+        "L7:0.95",
+        "L9:0.95"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=4",
+      "seed": 0,
+      "size": 5,
+      "claim": "name-movers certified F0<=0.95; @0.8:<10x; @0.9:10-30x+",
+      "score": 0.9631768246118984,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "6e3173d9af480ff2e4356fbb66377b9e2a3caeae0d38006101e51960a70f7380",
+      "components": [
+        "L11:0.95",
+        "L13:0.95",
+        "L3:0.95",
+        "L7:0.95",
+        "L9:0.95"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=5",
+      "seed": 0,
+      "size": 5,
+      "claim": "name-movers certified F0<=0.95; @0.8:<10x; @0.9:10-30x+",
+      "score": 0.9525369020694399,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "adaf93bcd67c0a031411e44aac2576f64f9f47dc83739987af9b384b6c6a4c4a",
+      "components": [
+        "L11:0.95",
+        "L13:0.95",
+        "L3:0.95",
+        "L7:0.9",
+        "L9:0.95"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=6",
+      "seed": 0,
+      "size": 5,
+      "claim": "name-movers certified F0<=0.95; @0.8:<10x; @0.9:10-30x+",
+      "score": 0.9613984703950889,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "6e3173d9af480ff2e4356fbb66377b9e2a3caeae0d38006101e51960a70f7380",
+      "components": [
+        "L11:0.95",
+        "L13:0.95",
+        "L3:0.95",
+        "L7:0.95",
+        "L9:0.95"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=7",
+      "seed": 0,
+      "size": 5,
+      "claim": "name-movers certified F0<=0.95; @0.8:<10x; @0.9:10-30x+",
+      "score": 0.9564600994839537,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "6e3173d9af480ff2e4356fbb66377b9e2a3caeae0d38006101e51960a70f7380",
+      "components": [
+        "L11:0.95",
+        "L13:0.95",
+        "L3:0.95",
+        "L7:0.95",
+        "L9:0.95"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=8",
+      "seed": 0,
+      "size": 5,
+      "claim": "name-movers certified F0<=0.95; @0.8:<10x; @0.9:10-30x",
+      "score": 0.9678574933796688,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "6e3173d9af480ff2e4356fbb66377b9e2a3caeae0d38006101e51960a70f7380",
+      "components": [
+        "L11:0.95",
+        "L13:0.95",
+        "L3:0.95",
+        "L7:0.95",
+        "L9:0.95"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=9",
+      "seed": 0,
+      "size": 5,
+      "claim": "name-movers certified F0<=0.95; @0.8:<10x; @0.9:10-30x+",
+      "score": 0.9566142502649724,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "6e3173d9af480ff2e4356fbb66377b9e2a3caeae0d38006101e51960a70f7380",
+      "components": [
+        "L11:0.95",
+        "L13:0.95",
+        "L3:0.95",
+        "L7:0.95",
+        "L9:0.95"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=10",
+      "seed": 0,
+      "size": 5,
+      "claim": "name-movers certified F0<=0.95; @0.8:<10x; @0.9:10-30x+",
+      "score": 0.9557145072741398,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "6e3173d9af480ff2e4356fbb66377b9e2a3caeae0d38006101e51960a70f7380",
+      "components": [
+        "L11:0.95",
+        "L13:0.95",
+        "L3:0.95",
+        "L7:0.95",
+        "L9:0.95"
+      ]
+    },
+    {
+      "axis": "templates",
+      "variant": "template=argument",
+      "seed": 0,
+      "size": 5,
+      "claim": "name-movers certified F0<=0.8; @0.8:10-30x; @0.9:n/a",
+      "score": 0.8947428391405832,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "13ce8f6a80e2b010b7414e5b1e76fd815dfb5b36b0d2c15ff79161ce6cfae227",
+      "components": [
+        "L11:0.9",
+        "L13:0.9",
+        "L3:0.8",
+        "L7:0.8",
+        "L9:0.9"
+      ]
+    },
+    {
+      "axis": "templates",
+      "variant": "template=garden",
+      "seed": 0,
+      "size": 5,
+      "claim": "name-movers certified F0<=0.9; @0.8:<10x; @0.9:10-30x+",
+      "score": 0.9471049886004616,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "da92a0967abc03fe031f163b3130e8ce69d54ee03c9057dcdee4dd66f1becff8",
+      "components": [
+        "L11:0.95",
+        "L13:0.95",
+        "L3:0.9",
+        "L7:0.9",
+        "L9:0.95"
+      ]
+    },
+    {
+      "axis": "templates",
+      "variant": "template=lunch",
+      "seed": 0,
+      "size": 5,
+      "claim": "name-movers certified F0<=0.9; @0.8:<10x; @0.9:10-30x+",
+      "score": 0.9409573811913756,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "da92a0967abc03fe031f163b3130e8ce69d54ee03c9057dcdee4dd66f1becff8",
+      "components": [
+        "L11:0.95",
+        "L13:0.95",
+        "L3:0.9",
+        "L7:0.9",
+        "L9:0.95"
+      ]
+    },
+    {
+      "axis": "templates",
+      "variant": "template=working",
+      "seed": 0,
+      "size": 5,
+      "claim": "name-movers certified F0<=0.95; @0.8:<10x; @0.9:10-30x+",
+      "score": 0.9546030420083813,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "adaf93bcd67c0a031411e44aac2576f64f9f47dc83739987af9b384b6c6a4c4a",
+      "components": [
+        "L11:0.95",
+        "L13:0.95",
+        "L3:0.95",
+        "L7:0.9",
+        "L9:0.95"
+      ]
+    },
+    {
+      "axis": "templates",
+      "variant": "template=fun",
+      "seed": 0,
+      "size": 5,
+      "claim": "name-movers certified F0<=0.9; @0.8:<10x; @0.9:10-30x+",
+      "score": 0.9396430912528233,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "da92a0967abc03fe031f163b3130e8ce69d54ee03c9057dcdee4dd66f1becff8",
+      "components": [
+        "L11:0.95",
+        "L13:0.95",
+        "L3:0.9",
+        "L7:0.9",
+        "L9:0.95"
+      ]
+    },
+    {
+      "axis": "templates",
+      "variant": "template=argument-2",
+      "seed": 0,
+      "size": 5,
+      "claim": "name-movers certified F0<=0.9; @0.8:10-30x; @0.9:<10x+",
+      "score": 0.9007253329564712,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "d8022dd5d3f0b51061cdacb21813fb87df9910c09a0eaaf0e147ba005e20cc9c",
+      "components": [
+        "L11:0.9",
+        "L13:0.9",
+        "L3:0.9",
+        "L7:0.8",
+        "L9:0.9"
+      ]
+    },
+    {
+      "axis": "templates",
+      "variant": "template=restaurant",
+      "seed": 0,
+      "size": 5,
+      "claim": "name-movers certified F0<=0.95; @0.8:<10x; @0.9:10-30x+",
+      "score": 0.9509849422722341,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "adaf93bcd67c0a031411e44aac2576f64f9f47dc83739987af9b384b6c6a4c4a",
+      "components": [
+        "L11:0.95",
+        "L13:0.95",
+        "L3:0.95",
+        "L7:0.9",
+        "L9:0.95"
+      ]
+    },
+    {
+      "axis": "templates",
+      "variant": "template=commuting",
+      "seed": 0,
+      "size": 5,
+      "claim": "name-movers certified F0<=none; @0.8:n/a; @0.9:n/a",
+      "score": 0.7706552580088817,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "38e6bc937a0cd58d641d0552a186f0d00da29ec796d1da2660bfe448c0228eb8",
+      "components": [
+        "L11:0.8",
+        "L13:0.8",
+        "L3:none",
+        "L7:none",
+        "L9:0.8"
+      ]
+    },
+    {
+      "axis": "templates",
+      "variant": "template=thinking",
+      "seed": 0,
+      "size": 5,
+      "claim": "name-movers certified F0<=0.9; @0.8:<10x; @0.9:10-30x+",
+      "score": 0.940277150831856,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "da92a0967abc03fe031f163b3130e8ce69d54ee03c9057dcdee4dd66f1becff8",
+      "components": [
+        "L11:0.95",
+        "L13:0.95",
+        "L3:0.9",
+        "L7:0.9",
+        "L9:0.95"
+      ]
+    },
+    {
+      "axis": "templates",
+      "variant": "template=friends",
+      "seed": 0,
+      "size": 5,
+      "claim": "name-movers certified F0<=0.9; @0.8:<10x; @0.9:10-30x+",
+      "score": 0.9434349738478935,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "da92a0967abc03fe031f163b3130e8ce69d54ee03c9057dcdee4dd66f1becff8",
+      "components": [
+        "L11:0.95",
+        "L13:0.95",
+        "L3:0.9",
+        "L7:0.9",
+        "L9:0.95"
+      ]
+    },
+    {
+      "axis": "templates",
+      "variant": "template=store-then",
+      "seed": 0,
+      "size": 5,
+      "claim": "name-movers certified F0<=0.9; @0.8:<10x; @0.9:10-30x+",
+      "score": 0.9417738743004418,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "da92a0967abc03fe031f163b3130e8ce69d54ee03c9057dcdee4dd66f1becff8",
+      "components": [
+        "L11:0.95",
+        "L13:0.95",
+        "L3:0.9",
+        "L7:0.9",
+        "L9:0.95"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "delta=0.01",
+      "seed": 0,
+      "size": 5,
+      "claim": "name-movers certified F0<=0.95; @0.8:<10x; @0.9:10-30x+",
+      "score": 0.956731774173023,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "6e3173d9af480ff2e4356fbb66377b9e2a3caeae0d38006101e51960a70f7380",
+      "components": [
+        "L11:0.95",
+        "L13:0.95",
+        "L3:0.95",
+        "L7:0.95",
+        "L9:0.95"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "n_max=500",
+      "seed": 0,
+      "size": 5,
+      "claim": "name-movers certified F0<=0.9; @0.8:<10x; @0.9:<10x+",
+      "score": 0.9454411811031596,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "da92a0967abc03fe031f163b3130e8ce69d54ee03c9057dcdee4dd66f1becff8",
+      "components": [
+        "L11:0.95",
+        "L13:0.95",
+        "L3:0.9",
+        "L7:0.9",
+        "L9:0.95"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "sampling=adaptive",
+      "seed": 0,
+      "size": 5,
+      "claim": "name-movers certified F0<=0.9; @0.8:<10x; @0.9:10-30x+",
+      "score": 0.9297040574140469,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "16729bfdd2bbe4ef79102dc4654fa53436529b10ba15d44dc3ca9cfc3f5a6d03",
+      "components": [
+        "L11:0.9",
+        "L13:0.9",
+        "L3:0.9",
+        "L7:0.9",
+        "L9:0.9"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "metric=prob",
+      "seed": 0,
+      "size": 5,
+      "claim": "name-movers certified F0<=none; @0.8:n/a; @0.9:n/a",
+      "score": 0.789008602437816,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "38e6bc937a0cd58d641d0552a186f0d00da29ec796d1da2660bfe448c0228eb8",
+      "components": [
+        "L11:0.8",
+        "L13:0.8",
+        "L3:none",
+        "L7:none",
+        "L9:0.8"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1272 @@
+{
+  "schema_version": "0.4",
+  "stresskit_version": "1.0.0.dev0",
+  "created_at": "2026-09-02T10:31:28+00:00",
+  "claim": {
+    "statement": "We find that different LLMs represent these subtypes differently, with either more aligned or more distinct representations",
+    "base_claim_label": "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85",
+    "model": "meta-llama/Llama-3.1-8B-Instruct",
+    "task": "factual vs opinion sycophancy: per-layer linear probes on the residual stream at the end of the assistant's (truncated) response, 500+500 length-balanced conversations per subtype, in-domain vs cross-subtype ROC-AUC",
+    "method": "upstream extractor, length balancing and probe trainer at the pinned commit (nn.Linear, Adam, 100 epochs, best-validation checkpoint, 80/10/10 split); transfer = each subtype's probe on the other subtype's held-out split",
+    "base_size": 8,
+    "universe_size": 32
+  },
+  "battery": {
+    "axes": [
+      "seeds",
+      "bootstrap",
+      "hyperparams"
+    ],
+    "n_runs_total": 48,
+    "seed": 42,
+    "base_config": {
+      "epochs": 100,
+      "batch_size": 100,
+      "lr": 0.001,
+      "weight_decay": 0.0,
+      "length_balance": "upstream",
+      "layer": "final-index"
+    },
+    "claim_equiv_used": false,
+    "components_embedded": true
+  },
+  "metrics": {
+    "pooled": {
+      "n_runs": 48,
+      "n_structured_runs": 48,
+      "n_empty_findings": 0,
+      "empty_finding_rate": 0.0,
+      "mean_pairwise_jaccard": 0.509323340174404,
+      "min_pairwise_jaccard": 0.06666666666666667,
+      "flip_rate": 0.04166666666666663,
+      "modal_share": 0.9791666666666666,
+      "n_claim_classes": 2,
+      "claim_counts": {
+        "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85": 47,
+        "Llama: shared (transfer drop < 0.15); in-domain >=0.85": 1
+      },
+      "score_mean": 0.22855744634073535,
+      "score_std": 0.05141999786627015,
+      "score_cv": 0.2249762529706111,
+      "median_size": 8.0,
+      "variance_shares": {
+        "bootstrap": 0.49633885586202797,
+        "hyperparams": 0.37182499973206246,
+        "seeds": 0.13183614440590957
+      },
+      "variance_absolute": {
+        "bootstrap": 0.003346177541693396,
+        "hyperparams": 0.002506740000000001,
+        "seeds": 0.0008888023582766445
+      },
+      "mean_pairwise_jaccard_ci95": [
+        0.4719822512738035,
+        0.5494475921483272
+      ],
+      "flip_rate_ci95": [
+        0.0,
+        0.12250453720508167
+      ],
+      "modal_share_ci95": [
+        0.9375,
+        1.0
+      ],
+      "score_cv_ci95": [
+        0.18602094539674205,
+        0.2573829359758846
+      ],
+      "expected_random_jaccard": 0.14970964358730315,
+      "expected_random_jaccard_analytic": 0.14285714285714285,
+      "jaccard_vs_random": 3.4020743618789804,
+      "mean_pairwise_jaccard_axis_balanced": 0.567278541564256,
+      "jaccard_vs_random_ci95": [
+        3.152650957976312,
+        3.670088171894664
+      ],
+      "specificity_ci95": [
+        3.0431132329400277,
+        3.731023035610359
+      ],
+      "confidence": "low",
+      "borderline_checks": [
+        "score_stability"
+      ]
+    },
+    "per_axis": {
+      "bootstrap": {
+        "n_runs": 21,
+        "n_structured_runs": 21,
+        "n_empty_findings": 0,
+        "empty_finding_rate": 0.0,
+        "mean_pairwise_jaccard": 0.4403733832305261,
+        "min_pairwise_jaccard": 0.06666666666666667,
+        "flip_rate": 0.0,
+        "modal_share": 1.0,
+        "n_claim_classes": 1,
+        "claim_counts": {
+          "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85": 21
+        },
+        "score_mean": 0.24917892496929986,
+        "score_std": 0.057846154078671434,
+        "score_cv": 0.23214705692224324,
+        "median_size": 8
+      },
+      "hyperparams": {
+        "n_runs": 8,
+        "n_structured_runs": 8,
+        "n_empty_findings": 0,
+        "empty_finding_rate": 0.0,
+        "mean_pairwise_jaccard": 0.6711399711399711,
+        "min_pairwise_jaccard": 0.45454545454545453,
+        "flip_rate": 0.25,
+        "modal_share": 0.875,
+        "n_claim_classes": 2,
+        "claim_counts": {
+          "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85": 7,
+          "Llama: shared (transfer drop < 0.15); in-domain >=0.85": 1
+        },
+        "score_mean": 0.2269,
+        "score_std": 0.05006735463353342,
+        "score_cv": 0.22065823990098468,
+        "median_size": 8.0
+      },
+      "seeds": {
+        "n_runs": 21,
+        "n_structured_runs": 21,
+        "n_empty_findings": 0,
+        "empty_finding_rate": 0.0,
+        "mean_pairwise_jaccard": 0.5903222703222704,
+        "min_pairwise_jaccard": 0.3333333333333333,
+        "flip_rate": 0.0,
+        "modal_share": 1.0,
+        "n_claim_classes": 1,
+        "claim_counts": {
+          "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85": 21
+        },
+        "score_mean": 0.2076952380952381,
+        "score_std": 0.029812788502195573,
+        "score_cv": 0.14354103048104067,
+        "median_size": 8
+      }
+    },
+    "null_control": {
+      "n_runs": 41,
+      "mean_pairwise_jaccard": 0.1505734915491013,
+      "flip_rate": 0.33048780487804874,
+      "modal_share": 0.8048780487804879,
+      "score_mean": -0.014984393570353147,
+      "score_cv": 10.579647997978661,
+      "median_size": 8
+    }
+  },
+  "verdict": {
+    "grade": "B",
+    "profile": "diagnostic",
+    "confirmatory_state": "not_applicable",
+    "required_checks": [],
+    "checks": {
+      "structural_stability": {
+        "value": 0.509323340174404,
+        "threshold": 0.8,
+        "passed": false,
+        "op": ">=",
+        "ci": [
+          0.4719822512738035,
+          0.5494475921483272
+        ],
+        "robust": true,
+        "state": "fail",
+        "description": "mean pairwise Jaccard across all perturbed runs"
+      },
+      "claim_stability": {
+        "value": 0.9791666666666666,
+        "threshold": 0.8,
+        "passed": true,
+        "op": ">=",
+        "ci": [
+          0.9375,
+          1.0
+        ],
+        "robust": true,
+        "state": "pass",
+        "description": "modal claim share \u03c0* (filability at \u03b1=0.2)"
+      },
+      "score_stability": {
+        "value": 0.2249762529706111,
+        "threshold": 0.25,
+        "passed": true,
+        "op": "<=",
+        "ci": [
+          0.18602094539674205,
+          0.2573829359758846
+        ],
+        "robust": false,
+        "state": "inconclusive",
+        "description": "coefficient of variation of the quality score"
+      },
+      "beats_random": {
+        "value": 3.4020743618789804,
+        "threshold": 3.0,
+        "passed": true,
+        "op": ">=",
+        "ci": [
+          3.152650957976312,
+          3.670088171894664
+        ],
+        "robust": true,
+        "state": "pass",
+        "description": "structural overlap vs size-matched random null (\u00d7)"
+      },
+      "specificity": {
+        "value": 3.3825564841093962,
+        "threshold": 1.5,
+        "passed": true,
+        "op": ">=",
+        "ci": [
+          3.0431132329400277,
+          3.731023035610359
+        ],
+        "robust": true,
+        "state": "pass",
+        "description": "structural stability on real vs null-control data (\u00d7)"
+      }
+    },
+    "thresholds": {
+      "jaccard": 0.8,
+      "modal_share": 0.8,
+      "score_cv": 0.25,
+      "random_margin": 3.0
+    }
+  },
+  "provenance": {
+    "python": "3.12.3",
+    "platform": "Linux-6.11.0-1016-nvidia-x86_64-with-glibc2.39",
+    "wall_seconds": 1.863
+  },
+  "notes": [
+    "underpowered verdict: the 95% CI straddles the bar for score_stability (pass) at n_runs=20 \u2014 these verdict components are not decided by the data. Treat the grade as provisional and raise n_runs (or widen the battery) before reporting it.",
+    "upstream: antbaez/dissociating-sycophancy@47e02ef (MIT); ActivationExtractor, ConversationSample, parse_conversation, load_model, equalize_mean_lengths and LinearProbeTrainer imported unmodified; huggingface_hub.login, which two upstream modules call at import time, is a no-op here (the model is loaded from the local cache); file hashes generate_responses.py 21c3d6d52915, linear_probes.py ec9bb4a62982, process_lengths.py feef1b74fd99, factual_prompts_with_responses.json 7fd298a06001, opinion_prompts_with_responses.json 5add09cc7c81",
+    "activations: regenerated with the upstream extractor (the released cache antbaez/sycophancy-mech is private); it hooks every decoder layer and stacks them in sorted() order of the module names, i.e. lexicographically, so probe index i is decoder layer [0, 1, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 2, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 3, 30, 31, 4, 5, 6, 7, 8, 9][i]: index 31 (the paper's 'final layer') is decoder layer 9 and decoder layer 31 is index 25. The hook reads position -2 of the left-padded full conversation (the eot_positions the extractor computes are unused); tokens read for the first conversations: factual -2='.' -1='<|eot_id|>'; factual -2='.' -1='<|eot_id|>'; factual -2='.' -1='<|eot_id|>'; opinion -2='.' -1='<|eot_id|>'; opinion -2='.' -1='<|eot_id|>'; opinion -2='.' -1='<|eot_id|>'. Chat template date string: '26 Jul 2024'; extraction batch 25 (upstream 100), torch.bfloat16, model revision 0e9e39f249a16976918f6564b8830bc894c89659",
+    "reproduction (Tables 1-2, final layer, mean of seeds 42-46 -> seeds [42, 43, 44, 45, 46] here): factual->factual 0.91 -> 0.928, opinion->opinion 0.92 -> 0.938, factual->opinion 0.7 -> 0.738, opinion->factual 0.61 -> 0.711 at probe index 31 (decoder layer 9); layer-averaged (upstream avg_auc): ff 0.913, fo 0.699, oo 0.919, of 0.612; at decoder layer 31 (index 25): ff 0.910, fo 0.692, oo 0.916, of 0.460. Base run (seed 42): in-domain 0.950, drop 0.219, layers with drop >= 0.15: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 17, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]; samples {'factual': {'pool': 1200, 'syc': 500, 'non_syc': 500, 'mean_len_syc': 122.208, 'mean_len_non_syc': 122.254}, 'opinion': {'pool': 1200, 'syc': 500, 'non_syc': 500, 'mean_len_syc': 128.722, 'mean_len_non_syc': 128.746}}",
+    "epochs=30: at index 31 (L9) ff 0.925, fo 0.812, oo 0.900, of 0.618, drop 0.197; layer-averaged drop 0.260; top-8 ['L4', 'L1', 'L2', 'L5', 'L3', 'L28', 'L29', 'L31']",
+    "lr=0.0001: at index 31 (L9) ff 0.899, fo 0.691, oo 0.909, of 0.576, drop 0.270; layer-averaged drop 0.307; top-8 ['L4', 'L2', 'L6', 'L0', 'L5', 'L22', 'L29', 'L1']",
+    "weight_decay=0.01: at index 31 (L9) ff 0.944, fo 0.725, oo 0.928, of 0.652, drop 0.248; layer-averaged drop 0.270; top-8 ['L4', 'L2', 'L0', 'L6', 'L5', 'L1', 'L28', 'L30']",
+    "batch_size=20: at index 31 (L9) ff 0.972, fo 0.768, oo 0.934, of 0.708, drop 0.215; layer-averaged drop 0.261; top-8 ['L1', 'L0', 'L2', 'L4', 'L6', 'L28', 'L5', 'L26']",
+    "length_balance=off: at index 31 (L9) ff 0.945, fo 0.767, oo 0.950, of 0.629, drop 0.250; layer-averaged drop 0.281; top-8 ['L2', 'L1', 'L5', 'L4', 'L0', 'L30', 'L27', 'L28']",
+    "layer=true-final: at index 25 (L31) ff 0.897, fo 0.662, oo 0.839, of 0.483, drop 0.296; layer-averaged drop 0.264; top-8 ['L2', 'L0', 'L1', 'L4', 'L5', 'L6', 'L28', 'L22']",
+    "layer=best-in-domain: at index 4 (L12) ff 0.988, fo 0.823, oo 0.969, of 0.894, drop 0.120; layer-averaged drop 0.264; top-8 ['L2', 'L0', 'L1', 'L4', 'L5', 'L6', 'L28', 'L22']",
+    "DEVIATIONS: the combined factual+opinion probe is not trained (the claim compares the two subtypes); the transfer AUC is computed by applying the trained probe to the other subtype's held-out split exactly as upstream evaluate_probes_on_all_datasets does, but inline, because that function reads probes and pickles from fixed relative paths; activations are extracted for the 1200-conversation pool per subtype rather than all 3000, in batches of 25 rather than 100 (bf16 padding differs), and the chat template stamps the extraction date into the system header as it did upstream",
+    "bootstrap: the pool is resampled with replacement and duplicates are collapsed before training, so each bootstrap run uses the ~63% distinct conversations of its resample and balances to 5/6 of each class; the templates axis is not run (the conversations are fixed artifacts generated, labelled and truncated with closed models)",
+    "null control: the same pool through upstream's shuffle_labels=True path, which permutes the training and validation labels and leaves the test labels intact, so every probe is fitted to noise and both in-domain and transfer AUC sit near chance"
+  ],
+  "runs": [
+    {
+      "axis": "base",
+      "variant": "base",
+      "seed": 42,
+      "size": 8,
+      "claim": "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85",
+      "score": 0.21939999999999998,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "7c03957ad96fc3af17f99057e37456a38a892c3faff51ce5796b38581cb1b222",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L22",
+        "L28",
+        "L4",
+        "L5",
+        "L6"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=43",
+      "seed": 43,
+      "size": 8,
+      "claim": "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85",
+      "score": 0.22619999999999996,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "be2192778fbbf5585327c6dfdfd077ba5de2d747d5b814a336905024c435b3ab",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L28",
+        "L3",
+        "L4",
+        "L5",
+        "L6"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=44",
+      "seed": 44,
+      "size": 8,
+      "claim": "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85",
+      "score": 0.18239999999999995,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "fdb2d3a540e1874d0233793f340b526f11efd59423a5db026426e14ba29f901d",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L3",
+        "L31",
+        "L4",
+        "L5",
+        "L7"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=45",
+      "seed": 45,
+      "size": 8,
+      "claim": "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85",
+      "score": 0.19500000000000006,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "e904d37e6bddd48bdc7a5af853529842f75be1047b039602a7497607c2b01d48",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L28",
+        "L3",
+        "L31",
+        "L4",
+        "L5"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=46",
+      "seed": 46,
+      "size": 8,
+      "claim": "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85",
+      "score": 0.21840000000000004,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "e3e4b53699cdb98b41bd65c95677846f5e51e69095d4c4388a5747b7befa41f2",
+      "components": [
+        "L0",
+        "L1",
+        "L29",
+        "L3",
+        "L31",
+        "L4",
+        "L5",
+        "L6"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=47",
+      "seed": 47,
+      "size": 8,
+      "claim": "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85",
+      "score": 0.24640000000000006,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "8288e72e3ebdad3c18202d52794154bbd39c8fbe43c0242c8057845353bec9b9",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L3",
+        "L31",
+        "L4",
+        "L5",
+        "L6"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=48",
+      "seed": 48,
+      "size": 8,
+      "claim": "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85",
+      "score": 0.20199999999999996,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "d3c5934f363fab047c13de975a1afad443d08313fc03d6219482332669232428",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L27",
+        "L3",
+        "L4",
+        "L5",
+        "L7"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=49",
+      "seed": 49,
+      "size": 8,
+      "claim": "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85",
+      "score": 0.17159999999999997,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "e85aee6bc8fb04660cf141efa7e00d8a75e845addc82b9615aaf12844e4657de",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L26",
+        "L3",
+        "L31",
+        "L4",
+        "L5"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=50",
+      "seed": 50,
+      "size": 8,
+      "claim": "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85",
+      "score": 0.20299999999999996,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "267597e3c4493b5f4706c5ab07156c9c370480b4582c594e8c1f023037c7f8c7",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L3",
+        "L30",
+        "L4",
+        "L5",
+        "L6"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=51",
+      "seed": 51,
+      "size": 8,
+      "claim": "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85",
+      "score": 0.19299999999999995,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "ffae44cd8fbf91af72bc8a183b6dc67e6eee40162ed0e6c053f4a6c43121e488",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L25",
+        "L26",
+        "L3",
+        "L4",
+        "L5"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=52",
+      "seed": 52,
+      "size": 8,
+      "claim": "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85",
+      "score": 0.2128,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "6d8ebac88dfe1ecccf4895a090c1bb9dd9d8bcd30f1bfdf5af9d5a255df68919",
+      "components": [
+        "L1",
+        "L2",
+        "L25",
+        "L29",
+        "L3",
+        "L31",
+        "L4",
+        "L5"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=53",
+      "seed": 53,
+      "size": 8,
+      "claim": "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85",
+      "score": 0.18179999999999996,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "9edcb3956fbcd397fa61c7559c37a5e42e90b7eef2d0a169da7f5c576c5176ff",
+      "components": [
+        "L1",
+        "L2",
+        "L23",
+        "L25",
+        "L29",
+        "L3",
+        "L4",
+        "L6"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=54",
+      "seed": 54,
+      "size": 8,
+      "claim": "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85",
+      "score": 0.19879999999999998,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "1e70203044fe11044d57f58373c8070f8dcccf5c23f98302da21d32ba97e34b5",
+      "components": [
+        "L1",
+        "L2",
+        "L27",
+        "L29",
+        "L3",
+        "L31",
+        "L4",
+        "L5"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=55",
+      "seed": 55,
+      "size": 8,
+      "claim": "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85",
+      "score": 0.2526,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "8bb950363c631a2dae53d946dcb67903d7d5e34c09c8a9feb873a2e8b6bf1616",
+      "components": [
+        "L0",
+        "L2",
+        "L3",
+        "L30",
+        "L31",
+        "L4",
+        "L5",
+        "L6"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=56",
+      "seed": 56,
+      "size": 8,
+      "claim": "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85",
+      "score": 0.16959999999999997,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "b89bb53549a81b799fe4226ea3bca46099657c6972f0604d2f0a44f63ca1bd5c",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L29",
+        "L3",
+        "L31",
+        "L4",
+        "L6"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=57",
+      "seed": 57,
+      "size": 8,
+      "claim": "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85",
+      "score": 0.19419999999999998,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "5aae7483696925482de00438d3519160dda402dcd2e51768d725c316983c4665",
+      "components": [
+        "L1",
+        "L2",
+        "L23",
+        "L29",
+        "L3",
+        "L4",
+        "L5",
+        "L6"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=58",
+      "seed": 58,
+      "size": 8,
+      "claim": "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85",
+      "score": 0.2926,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "071070a9cac4d069cae93764edd8d8416622349682032466c96d3c8e957cf0df",
+      "components": [
+        "L1",
+        "L2",
+        "L3",
+        "L30",
+        "L31",
+        "L4",
+        "L5",
+        "L6"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=59",
+      "seed": 59,
+      "size": 8,
+      "claim": "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85",
+      "score": 0.17940000000000006,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "060f1783784591392d4b11274aae839cc05703a6393eb902e5feae4b872994df",
+      "components": [
+        "L1",
+        "L2",
+        "L29",
+        "L3",
+        "L30",
+        "L4",
+        "L5",
+        "L7"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=60",
+      "seed": 60,
+      "size": 8,
+      "claim": "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85",
+      "score": 0.22359999999999997,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "48b0445eaec7ea2ff22d4250bc61574b381839d2cf318bda76716ad860e598c7",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L29",
+        "L3",
+        "L31",
+        "L4",
+        "L5"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=61",
+      "seed": 61,
+      "size": 8,
+      "claim": "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85",
+      "score": 0.22559999999999997,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "8288e72e3ebdad3c18202d52794154bbd39c8fbe43c0242c8057845353bec9b9",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L3",
+        "L31",
+        "L4",
+        "L5",
+        "L6"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=62",
+      "seed": 62,
+      "size": 8,
+      "claim": "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85",
+      "score": 0.17319999999999997,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "4002d262b1e6cb28a5ca1dd4ae770dbf3c73f99b389e89c3f554db51b8f9653c",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L28",
+        "L29",
+        "L3",
+        "L4",
+        "L5"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=1",
+      "seed": 42,
+      "size": 8,
+      "claim": "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85",
+      "score": 0.27512424404865987,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "4f61fbd99058b8c85d81c57352cad31620ddace6c37b9d5156212fc3b74fa379",
+      "components": [
+        "L1",
+        "L2",
+        "L28",
+        "L29",
+        "L3",
+        "L31",
+        "L4",
+        "L5"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=2",
+      "seed": 42,
+      "size": 8,
+      "claim": "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85",
+      "score": 0.16588551296715137,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "ea1a2dae33251f833d260251ff90b17f8712c5277506e98785b18ad3f39918a6",
+      "components": [
+        "L0",
+        "L1",
+        "L3",
+        "L30",
+        "L31",
+        "L4",
+        "L6",
+        "L7"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=3",
+      "seed": 42,
+      "size": 8,
+      "claim": "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85",
+      "score": 0.300208674098944,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "caa6f161bf5d6b068703131bd1b6f868815e08ecafdbf87b5dca1ee3fcb5c5ff",
+      "components": [
+        "L1",
+        "L2",
+        "L22",
+        "L3",
+        "L31",
+        "L4",
+        "L5",
+        "L6"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=4",
+      "seed": 42,
+      "size": 8,
+      "claim": "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85",
+      "score": 0.30038154699965314,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "8288e72e3ebdad3c18202d52794154bbd39c8fbe43c0242c8057845353bec9b9",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L3",
+        "L31",
+        "L4",
+        "L5",
+        "L6"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=5",
+      "seed": 42,
+      "size": 8,
+      "claim": "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85",
+      "score": 0.33652722475918007,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "071070a9cac4d069cae93764edd8d8416622349682032466c96d3c8e957cf0df",
+      "components": [
+        "L1",
+        "L2",
+        "L3",
+        "L30",
+        "L31",
+        "L4",
+        "L5",
+        "L6"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=6",
+      "seed": 42,
+      "size": 8,
+      "claim": "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85",
+      "score": 0.24411420395421435,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "57e67a45d8597cdd9422b2ff4df2da2ca97c9a2a742042ca90e9c227ec9b6b40",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L29",
+        "L3",
+        "L4",
+        "L5",
+        "L7"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=7",
+      "seed": 42,
+      "size": 8,
+      "claim": "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85",
+      "score": 0.28955078125,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a40f5e34691d14a6bd38e0c9a6b83dc129312a5052a4d96bb25ba3a264eafbc8",
+      "components": [
+        "L0",
+        "L26",
+        "L27",
+        "L29",
+        "L3",
+        "L4",
+        "L5",
+        "L6"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=8",
+      "seed": 42,
+      "size": 8,
+      "claim": "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85",
+      "score": 0.2578125,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a71a57a31824f3fb75229f07a6d60c8bd23fd4da387604915cadc3c0e8546535",
+      "components": [
+        "L2",
+        "L23",
+        "L24",
+        "L26",
+        "L28",
+        "L3",
+        "L4",
+        "L7"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=9",
+      "seed": 42,
+      "size": 8,
+      "claim": "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85",
+      "score": 0.20044270833333333,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "9859259bf4758864296aa0ced77dc9a40e40576fcb9c74409d18bdabb5d6df03",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L29",
+        "L30",
+        "L31",
+        "L5",
+        "L6"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=10",
+      "seed": 42,
+      "size": 8,
+      "claim": "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85",
+      "score": 0.2900325520833333,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "c93d89742f437fa7706ff705610393f33c461b5848147d689fe7feb59579d0b1",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L24",
+        "L3",
+        "L30",
+        "L4",
+        "L5"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=11",
+      "seed": 42,
+      "size": 8,
+      "claim": "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85",
+      "score": 0.20211490309573366,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a71e6df99df8d133ca9fa30da98b0198c264d9934a0df075a6ac0369d07c03ce",
+      "components": [
+        "L0",
+        "L1",
+        "L19",
+        "L2",
+        "L25",
+        "L3",
+        "L30",
+        "L4"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=12",
+      "seed": 42,
+      "size": 8,
+      "claim": "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85",
+      "score": 0.291015625,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "f349e8e0ec64729a80133c263f3697f905a89284881abe1dbf8c75d8a422a084",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L25",
+        "L27",
+        "L29",
+        "L31",
+        "L4"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=13",
+      "seed": 42,
+      "size": 8,
+      "claim": "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85",
+      "score": 0.2207488537330905,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "301da7ed0f68e957dbc91a5349968dd6762ad7cd5a7febb913457e118ec7274e",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L24",
+        "L26",
+        "L3",
+        "L4",
+        "L5"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=14",
+      "seed": 42,
+      "size": 8,
+      "claim": "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85",
+      "score": 0.33234735494146017,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "c6f0516919bcd9877cbaa87b280efa83e469a39450becbd48a9bd8171d1ad622",
+      "components": [
+        "L1",
+        "L2",
+        "L27",
+        "L3",
+        "L31",
+        "L4",
+        "L5",
+        "L7"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=15",
+      "seed": 42,
+      "size": 8,
+      "claim": "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85",
+      "score": 0.17140196166103022,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "39bad03b4ae703911c3c0c6584fb84e31e50d85600396597633168e6a7e14266",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L27",
+        "L28",
+        "L3",
+        "L30",
+        "L31"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=16",
+      "seed": 42,
+      "size": 8,
+      "claim": "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85",
+      "score": 0.22779311101716965,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "e4cdbdbaa856e1ca6c3b451c88ee0dfaea1dc11d6f19dbc01c9fcb01c56e114e",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L25",
+        "L27",
+        "L3",
+        "L30",
+        "L7"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=17",
+      "seed": 42,
+      "size": 8,
+      "claim": "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85",
+      "score": 0.1514200958448117,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "3a281815d1073dc86771ac35c38b3fda7d26baf67ee98aca554b079dc190e29d",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L29",
+        "L30",
+        "L31",
+        "L4",
+        "L5"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=18",
+      "seed": 42,
+      "size": 8,
+      "claim": "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85",
+      "score": 0.17771464646464646,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "5fa321ec755a3b8403e55a82811f9c5979e5964438b2df2faeb2265cb7965649",
+      "components": [
+        "L1",
+        "L2",
+        "L21",
+        "L27",
+        "L28",
+        "L3",
+        "L4",
+        "L5"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=19",
+      "seed": 42,
+      "size": 8,
+      "claim": "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85",
+      "score": 0.22998046875,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "1e70203044fe11044d57f58373c8070f8dcccf5c23f98302da21d32ba97e34b5",
+      "components": [
+        "L1",
+        "L2",
+        "L27",
+        "L29",
+        "L3",
+        "L31",
+        "L4",
+        "L5"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=20",
+      "seed": 42,
+      "size": 8,
+      "claim": "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85",
+      "score": 0.3487404553528856,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "d0ba90faef80074c66823d8ccc0c822766683a6453f80829edccc0685fd5e567",
+      "components": [
+        "L1",
+        "L2",
+        "L22",
+        "L29",
+        "L3",
+        "L30",
+        "L4",
+        "L5"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "epochs=30",
+      "seed": 42,
+      "size": 8,
+      "claim": "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85",
+      "score": 0.19719999999999993,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "4f61fbd99058b8c85d81c57352cad31620ddace6c37b9d5156212fc3b74fa379",
+      "components": [
+        "L1",
+        "L2",
+        "L28",
+        "L29",
+        "L3",
+        "L31",
+        "L4",
+        "L5"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "lr=0.0001",
+      "seed": 42,
+      "size": 8,
+      "claim": "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85",
+      "score": 0.2704,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "6881e3c8d9cf1d6a91701445f84561d7afd98f529385231244398c01344b7e93",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L22",
+        "L29",
+        "L4",
+        "L5",
+        "L6"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "weight_decay=0.01",
+      "seed": 42,
+      "size": 8,
+      "claim": "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85",
+      "score": 0.24760000000000004,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "bc1c80c1488543a1a3da97a8f9a3ad746a59edd8831569a1f3a7c28de72a95ee",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L28",
+        "L30",
+        "L4",
+        "L5",
+        "L6"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "batch_size=20",
+      "seed": 42,
+      "size": 8,
+      "claim": "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85",
+      "score": 0.21539999999999998,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "241611567feaa62d10adbc7db4e5f1beb1461b78e9f844a37654fefb59822c71",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L26",
+        "L28",
+        "L4",
+        "L5",
+        "L6"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "length_balance=off",
+      "seed": 42,
+      "size": 8,
+      "claim": "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85",
+      "score": 0.2496,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "0e583837e1ae9311865926cf76defda866663fff76a31996b599c054e1c828ad",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L27",
+        "L28",
+        "L30",
+        "L4",
+        "L5"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "layer=true-final",
+      "seed": 42,
+      "size": 8,
+      "claim": "Llama: distinct (transfer drop >= 0.15); in-domain >=0.85",
+      "score": 0.2956,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "7c03957ad96fc3af17f99057e37456a38a892c3faff51ce5796b38581cb1b222",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L22",
+        "L28",
+        "L4",
+        "L5",
+        "L6"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "layer=best-in-domain",
+      "seed": 42,
+      "size": 8,
+      "claim": "Llama: shared (transfer drop < 0.15); in-domain >=0.85",
+      "score": 0.12,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "7c03957ad96fc3af17f99057e37456a38a892c3faff51ce5796b38581cb1b222",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L22",
+        "L28",
+        "L4",
+        "L5",
+        "L6"
+      ]
+    }
+  ]
+}

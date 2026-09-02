@@ -1,0 +1,71 @@
+{
+ "components": [
+  "L10H10",
+  "L10H2",
+  "L10H6",
+  "L11H1",
+  "L11H10",
+  "L11H2",
+  "L11H6",
+  "L9H8"
+ ],
+ "universe_size": 141,
+ "claim": "CoAx AUC >=0.90; beats AtP*",
+ "score": 0.9539473684210527,
+ "meta": {
+  "config": {
+   "position_mode": "last",
+   "top_r": 0,
+   "ablation_mode": "zero",
+   "feature_mode": "fisher_centered",
+   "freeze_ln": "none",
+   "primaries": "documented"
+  },
+  "n_prompts": 96,
+  "prompt_seed": 1517,
+  "n_unique_prompts": 67,
+  "template": "When {IO} and {S} went to the {place}, {X} gave a {obj} to",
+  "first_prompt": "When Tom and Mary went to the market, Emma gave a book to",
+  "primaries": [
+   [
+    9,
+    9
+   ],
+   [
+    10,
+    0
+   ],
+   [
+    9,
+    6
+   ]
+  ],
+  "primaries_documented": [
+   true,
+   true,
+   true
+  ],
+  "auc": {
+   "coax": 0.9539473684210527,
+   "single": 0.5488721804511278,
+   "conditional": 0.6757518796992481,
+   "atp": 0.4078947368421053,
+   "eap_ig": 0.5084586466165414,
+   "atp_star": 0.7095864661654135,
+   "conditional_grad": 0.5404135338345865
+  },
+  "average_precision": 0.6923649267399268,
+  "precision_at_8": 0.5,
+  "top8": [
+   "L11H2",
+   "L10H2",
+   "L10H10",
+   "L10H6",
+   "L11H6",
+   "L9H8",
+   "L11H10",
+   "L11H1"
+  ],
+  "wall_secs": 56.9
+ }
+}

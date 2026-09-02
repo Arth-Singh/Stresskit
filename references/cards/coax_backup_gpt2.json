@@ -1,0 +1,1775 @@
+{
+  "schema_version": "0.4",
+  "stresskit_version": "1.0.0.dev0",
+  "created_at": "2026-09-02T09:50:04+00:00",
+  "claim": {
+    "statement": "On the GPT-2-small IOI circuit, CoAx raises backup-head recovery from 0.33 to 0.91 ROC-AUC, outperforming all baselines, including self-repair-aware gradient scores (best 0.82)",
+    "base_claim_label": "CoAx AUC >=0.90; beats AtP*",
+    "model": "gpt2",
+    "task": "IOI backup-name-mover recovery: rank 141 candidate heads against the 8 documented backups after ablating the 3 documented name movers",
+    "method": "conditional co-ablation compensation score (Fisher energy of ablating a head given the primaries ablated, minus unconditional), upstream code at the pinned commit",
+    "base_size": 8,
+    "universe_size": 141
+  },
+  "battery": {
+    "axes": [
+      "seeds",
+      "bootstrap",
+      "templates",
+      "hyperparams"
+    ],
+    "n_runs_total": 71,
+    "seed": 1,
+    "base_config": {
+      "position_mode": "last",
+      "top_r": 0,
+      "ablation_mode": "zero",
+      "feature_mode": "fisher_centered",
+      "freeze_ln": "none",
+      "primaries": "documented"
+    },
+    "claim_equiv_used": false,
+    "components_embedded": true
+  },
+  "metrics": {
+    "pooled": {
+      "n_runs": 71,
+      "n_structured_runs": 71,
+      "n_empty_findings": 0,
+      "empty_finding_rate": 0.0,
+      "mean_pairwise_jaccard": 0.7868583908825357,
+      "min_pairwise_jaccard": 0.0,
+      "flip_rate": 0.1360160965794769,
+      "modal_share": 0.9295774647887324,
+      "n_claim_classes": 4,
+      "claim_counts": {
+        "CoAx AUC >=0.90; beats AtP*": 66,
+        "CoAx AUC <0.80; does not beat AtP*": 2,
+        "CoAx AUC 0.80-0.90; beats AtP*": 2,
+        "CoAx AUC 0.80-0.90; does not beat AtP*": 1
+      },
+      "score_mean": 0.9191067457375834,
+      "score_std": 0.10240143814012623,
+      "score_cv": 0.11141408613854645,
+      "median_size": 8,
+      "variance_shares": {
+        "bootstrap": 0.00040973728929098453,
+        "hyperparams": 0.9735262116434966,
+        "seeds": 0.0007653588068526919,
+        "templates": 0.025298692260359575
+      },
+      "variance_absolute": {
+        "bootstrap": 2.9981315513283187e-05,
+        "hyperparams": 0.07123490410707219,
+        "seeds": 5.600286932348145e-05,
+        "templates": 0.0018511570573520287
+      },
+      "mean_pairwise_jaccard_ci95": [
+        0.6913899797715588,
+        0.8694054331600107
+      ],
+      "flip_rate_ci95": [
+        0.02871205906480722,
+        0.25824847250509164
+      ],
+      "modal_share_ci95": [
+        0.8591549295774648,
+        0.9859154929577465
+      ],
+      "score_cv_ci95": [
+        0.012596820650658588,
+        0.18699830191380246
+      ],
+      "expected_random_jaccard": 0.031076573594078623,
+      "expected_random_jaccard_analytic": 0.029197080291970802,
+      "jaccard_vs_random": 25.31998543856408,
+      "mean_pairwise_jaccard_axis_balanced": 0.6744632807881655,
+      "jaccard_vs_random_ci95": [
+        22.247947563411472,
+        27.976232016957898
+      ],
+      "specificity_ci95": [
+        0.8323451478529353,
+        1.048693547922444
+      ],
+      "confidence": "low",
+      "borderline_checks": [
+        "structural_stability"
+      ]
+    },
+    "per_axis": {
+      "bootstrap": {
+        "n_runs": 31,
+        "n_structured_runs": 31,
+        "n_empty_findings": 0,
+        "empty_finding_rate": 0.0,
+        "mean_pairwise_jaccard": 0.9458064516129032,
+        "min_pairwise_jaccard": 0.6,
+        "flip_rate": 0.0,
+        "modal_share": 1.0,
+        "n_claim_classes": 1,
+        "claim_counts": {
+          "CoAx AUC >=0.90; beats AtP*": 31
+        },
+        "score_mean": 0.9396980354111084,
+        "score_std": 0.005475519656916884,
+        "score_cv": 0.005826892736368656,
+        "median_size": 8
+      },
+      "hyperparams": {
+        "n_runs": 8,
+        "n_structured_runs": 8,
+        "n_empty_findings": 0,
+        "empty_finding_rate": 0.0,
+        "mean_pairwise_jaccard": 0.3009855224140939,
+        "min_pairwise_jaccard": 0.0,
+        "flip_rate": 0.6071428571428572,
+        "modal_share": 0.625,
+        "n_claim_classes": 3,
+        "claim_counts": {
+          "CoAx AUC >=0.90; beats AtP*": 5,
+          "CoAx AUC <0.80; does not beat AtP*": 2,
+          "CoAx AUC 0.80-0.90; beats AtP*": 1
+        },
+        "score_mean": 0.7857142857142857,
+        "score_std": 0.2668986776045775,
+        "score_cv": 0.33968922604218954,
+        "median_size": 8.0
+      },
+      "seeds": {
+        "n_runs": 31,
+        "n_structured_runs": 31,
+        "n_empty_findings": 0,
+        "empty_finding_rate": 0.0,
+        "mean_pairwise_jaccard": 0.8699163679808841,
+        "min_pairwise_jaccard": 0.6,
+        "flip_rate": 0.0,
+        "modal_share": 1.0,
+        "n_claim_classes": 1,
+        "claim_counts": {
+          "CoAx AUC >=0.90; beats AtP*": 31
+        },
+        "score_mean": 0.9372422992966286,
+        "score_std": 0.007483506485831455,
+        "score_cv": 0.007984601731534733,
+        "median_size": 8
+      },
+      "templates": {
+        "n_runs": 4,
+        "n_structured_runs": 4,
+        "n_empty_findings": 0,
+        "empty_finding_rate": 0.0,
+        "mean_pairwise_jaccard": 0.5811447811447811,
+        "min_pairwise_jaccard": 0.45454545454545453,
+        "flip_rate": 0.8333333333333334,
+        "modal_share": 0.5,
+        "n_claim_classes": 3,
+        "claim_counts": {
+          "CoAx AUC >=0.90; beats AtP*": 2,
+          "CoAx AUC 0.80-0.90; beats AtP*": 1,
+          "CoAx AUC 0.80-0.90; does not beat AtP*": 1
+        },
+        "score_mean": 0.9048402255639098,
+        "score_std": 0.04302507475126602,
+        "score_cv": 0.047549913825340996,
+        "median_size": 8.0
+      }
+    },
+    "null_control": {
+      "n_runs": 61,
+      "mean_pairwise_jaccard": 0.8300182149362477,
+      "flip_rate": 0.0,
+      "modal_share": 1.0,
+      "score_mean": 0.9547331443362504,
+      "score_cv": 0.007045179049149986,
+      "median_size": 8
+    }
+  },
+  "verdict": {
+    "grade": "B",
+    "profile": "diagnostic",
+    "confirmatory_state": "not_applicable",
+    "required_checks": [],
+    "checks": {
+      "structural_stability": {
+        "value": 0.7868583908825357,
+        "threshold": 0.8,
+        "passed": false,
+        "op": ">=",
+        "ci": [
+          0.6913899797715588,
+          0.8694054331600107
+        ],
+        "robust": false,
+        "state": "inconclusive",
+        "description": "mean pairwise Jaccard across all perturbed runs"
+      },
+      "claim_stability": {
+        "value": 0.9295774647887324,
+        "threshold": 0.8,
+        "passed": true,
+        "op": ">=",
+        "ci": [
+          0.8591549295774648,
+          0.9859154929577465
+        ],
+        "robust": true,
+        "state": "pass",
+        "description": "modal claim share \u03c0* (filability at \u03b1=0.2)"
+      },
+      "score_stability": {
+        "value": 0.11141408613854645,
+        "threshold": 0.25,
+        "passed": true,
+        "op": "<=",
+        "ci": [
+          0.012596820650658588,
+          0.18699830191380246
+        ],
+        "robust": true,
+        "state": "pass",
+        "description": "coefficient of variation of the quality score"
+      },
+      "beats_random": {
+        "value": 25.31998543856408,
+        "threshold": 3.0,
+        "passed": true,
+        "op": ">=",
+        "ci": [
+          22.247947563411472,
+          27.976232016957898
+        ],
+        "robust": true,
+        "state": "pass",
+        "description": "structural overlap vs size-matched random null (\u00d7)"
+      },
+      "specificity": {
+        "value": 0.9480013531305129,
+        "threshold": 1.5,
+        "passed": false,
+        "op": ">=",
+        "ci": [
+          0.8323451478529353,
+          1.048693547922444
+        ],
+        "robust": true,
+        "state": "fail",
+        "description": "structural stability on real vs null-control data (\u00d7)"
+      }
+    },
+    "thresholds": {
+      "jaccard": 0.8,
+      "modal_share": 0.8,
+      "score_cv": 0.25,
+      "random_margin": 3.0
+    }
+  },
+  "provenance": {
+    "python": "3.12.3",
+    "platform": "Linux-6.11.0-1016-nvidia-x86_64-with-glibc2.39",
+    "wall_seconds": 2.902
+  },
+  "notes": [
+    "pooled Jaccard (0.787) and axis-balanced Jaccard (0.674) diverge by more than 0.1 \u2014 per-axis run counts are shaping the pooled number; read the per-axis breakdown before citing it",
+    "underpowered verdict: the 95% CI straddles the bar for structural_stability (fail) at n_runs=30 \u2014 these verdict components are not decided by the data. Treat the grade as provisional and raise n_runs (or widen the battery) before reporting it.",
+    "upstream: GongZhiren/Conditional-Co-Ablation@1c04682 (MIT); CoAblation, baselines and circuit labels imported unmodified; file hashes coablation.py b44a389d2301, circuits.py c4121bcd457f, baselines.py 2b38be453a15, backup_recovery_full.py 2a8c6c7b4061",
+    "reproduction: base run (seed 1, 96 prompts, last position, full vocabulary) CoAx 0.945, single-ablation 0.599, AtP* 0.845, EAP-IG 0.675, AtP 0.640, conditional attribution 0.699; precision@8 0.50, average precision 0.575. arXiv v1 abstract: CoAx 0.91, single 0.33, best baseline 0.82; released results/reference_metrics.json: {\"schema_version\": 1, \"release\": \"2.0.0\", \"description\": \"Machine-readable values for the principal paper results and their reproduction commands.\", \"model\": {\"key\": \"gpt2-small\", \"checkpoint\": \"gpt2\", \"dtype\": \"float32\"}, \"headline_backup_recovery\": {\"command\": \"make headline\", \"num_prompts\": 96, \"",
+    "templates: upstream hard-codes one IOI template; the three alternatives use the same 16 names, 8 places, 8 objects and the same seed, and are labelled as such",
+    "primaries=atp-top3: primaries selected label-free = ['L1H3', 'L1H10', 'L5H9'] (documented name movers: [False, False, False]); CoAx AUC 0.276, AtP* 0.843",
+    "primaries=energy-top3: primaries selected label-free = ['L0H0', 'L0H7', 'L0H10'] (documented name movers: [False, False, False]); CoAx AUC 0.378, AtP* 0.828",
+    "null control: the same prompt seed with a third name as the giver ('... {X} gave a {obj} to'), so no name is repeated and the indirect-object task is not posed; labels unchanged; the finder still ranks candidates against the documented backups"
+  ],
+  "runs": [
+    {
+      "axis": "base",
+      "variant": "base",
+      "seed": 1,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9445488721804511,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a9fdf5fd193e8eb637ce213ec350e4cd4f068355a822739dae4f15b925154902",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H10",
+        "L11H2",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=2",
+      "seed": 2,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9417293233082706,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a9fdf5fd193e8eb637ce213ec350e4cd4f068355a822739dae4f15b925154902",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H10",
+        "L11H2",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=3",
+      "seed": 3,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9332706766917293,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a9fdf5fd193e8eb637ce213ec350e4cd4f068355a822739dae4f15b925154902",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H10",
+        "L11H2",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=4",
+      "seed": 4,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9276315789473684,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "0b170044e42471e6685495bd83e9e090bd403a27c901bbbe38a5a0f9d143b077",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H10",
+        "L11H2",
+        "L11H6",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=5",
+      "seed": 5,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9116541353383458,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "27c016df9e26620ede05057bbf9d7b86fd9510300f90fbe63fcf94eb38d563a0",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L11H10",
+        "L11H2",
+        "L1H10",
+        "L1H3",
+        "L2H3",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=6",
+      "seed": 6,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9398496240601504,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a9fdf5fd193e8eb637ce213ec350e4cd4f068355a822739dae4f15b925154902",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H10",
+        "L11H2",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=7",
+      "seed": 7,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9483082706766917,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a9fdf5fd193e8eb637ce213ec350e4cd4f068355a822739dae4f15b925154902",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H10",
+        "L11H2",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=8",
+      "seed": 8,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9426691729323309,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a9fdf5fd193e8eb637ce213ec350e4cd4f068355a822739dae4f15b925154902",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H10",
+        "L11H2",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=9",
+      "seed": 9,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9351503759398496,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "0b170044e42471e6685495bd83e9e090bd403a27c901bbbe38a5a0f9d143b077",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H10",
+        "L11H2",
+        "L11H6",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=10",
+      "seed": 10,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9426691729323309,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "0b170044e42471e6685495bd83e9e090bd403a27c901bbbe38a5a0f9d143b077",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H10",
+        "L11H2",
+        "L11H6",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=11",
+      "seed": 11,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9389097744360902,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a9fdf5fd193e8eb637ce213ec350e4cd4f068355a822739dae4f15b925154902",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H10",
+        "L11H2",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=12",
+      "seed": 12,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9501879699248121,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a9fdf5fd193e8eb637ce213ec350e4cd4f068355a822739dae4f15b925154902",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H10",
+        "L11H2",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=13",
+      "seed": 13,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9332706766917294,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a9fdf5fd193e8eb637ce213ec350e4cd4f068355a822739dae4f15b925154902",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H10",
+        "L11H2",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=14",
+      "seed": 14,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.931390977443609,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "ea06dd5ba5e09a99f07e28f9a299f78238fae8166dbd154620cd9a10b5f85e52",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H10",
+        "L11H2",
+        "L1H10",
+        "L2H3",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=15",
+      "seed": 15,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9436090225563909,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "0b170044e42471e6685495bd83e9e090bd403a27c901bbbe38a5a0f9d143b077",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H10",
+        "L11H2",
+        "L11H6",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=16",
+      "seed": 16,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9379699248120301,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a9fdf5fd193e8eb637ce213ec350e4cd4f068355a822739dae4f15b925154902",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H10",
+        "L11H2",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=17",
+      "seed": 17,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9389097744360902,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "0b170044e42471e6685495bd83e9e090bd403a27c901bbbe38a5a0f9d143b077",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H10",
+        "L11H2",
+        "L11H6",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=18",
+      "seed": 18,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9323308270676691,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a9fdf5fd193e8eb637ce213ec350e4cd4f068355a822739dae4f15b925154902",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H10",
+        "L11H2",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=19",
+      "seed": 19,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9360902255639098,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a9fdf5fd193e8eb637ce213ec350e4cd4f068355a822739dae4f15b925154902",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H10",
+        "L11H2",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=20",
+      "seed": 20,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9426691729323309,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "0b170044e42471e6685495bd83e9e090bd403a27c901bbbe38a5a0f9d143b077",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H10",
+        "L11H2",
+        "L11H6",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=21",
+      "seed": 21,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9342105263157895,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "0b170044e42471e6685495bd83e9e090bd403a27c901bbbe38a5a0f9d143b077",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H10",
+        "L11H2",
+        "L11H6",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=22",
+      "seed": 22,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9342105263157895,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "0b170044e42471e6685495bd83e9e090bd403a27c901bbbe38a5a0f9d143b077",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H10",
+        "L11H2",
+        "L11H6",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=23",
+      "seed": 23,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9454887218045113,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a9fdf5fd193e8eb637ce213ec350e4cd4f068355a822739dae4f15b925154902",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H10",
+        "L11H2",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=24",
+      "seed": 24,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9285714285714285,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a9fdf5fd193e8eb637ce213ec350e4cd4f068355a822739dae4f15b925154902",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H10",
+        "L11H2",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=25",
+      "seed": 25,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.943609022556391,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a9fdf5fd193e8eb637ce213ec350e4cd4f068355a822739dae4f15b925154902",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H10",
+        "L11H2",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=26",
+      "seed": 26,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9342105263157895,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a9fdf5fd193e8eb637ce213ec350e4cd4f068355a822739dae4f15b925154902",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H10",
+        "L11H2",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=27",
+      "seed": 27,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.931390977443609,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "0b170044e42471e6685495bd83e9e090bd403a27c901bbbe38a5a0f9d143b077",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H10",
+        "L11H2",
+        "L11H6",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=28",
+      "seed": 28,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9417293233082706,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a9fdf5fd193e8eb637ce213ec350e4cd4f068355a822739dae4f15b925154902",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H10",
+        "L11H2",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=29",
+      "seed": 29,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9342105263157895,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a9fdf5fd193e8eb637ce213ec350e4cd4f068355a822739dae4f15b925154902",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H10",
+        "L11H2",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=30",
+      "seed": 30,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9295112781954887,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a9fdf5fd193e8eb637ce213ec350e4cd4f068355a822739dae4f15b925154902",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H10",
+        "L11H2",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=31",
+      "seed": 31,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9445488721804511,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "0b170044e42471e6685495bd83e9e090bd403a27c901bbbe38a5a0f9d143b077",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H10",
+        "L11H2",
+        "L11H6",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=1",
+      "seed": 1,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9323308270676691,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a9fdf5fd193e8eb637ce213ec350e4cd4f068355a822739dae4f15b925154902",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H10",
+        "L11H2",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=2",
+      "seed": 1,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9454887218045113,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a9fdf5fd193e8eb637ce213ec350e4cd4f068355a822739dae4f15b925154902",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H10",
+        "L11H2",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=3",
+      "seed": 1,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9379699248120301,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "0b170044e42471e6685495bd83e9e090bd403a27c901bbbe38a5a0f9d143b077",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H10",
+        "L11H2",
+        "L11H6",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=4",
+      "seed": 1,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.943609022556391,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a9fdf5fd193e8eb637ce213ec350e4cd4f068355a822739dae4f15b925154902",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H10",
+        "L11H2",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=5",
+      "seed": 1,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.943609022556391,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "0b170044e42471e6685495bd83e9e090bd403a27c901bbbe38a5a0f9d143b077",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H10",
+        "L11H2",
+        "L11H6",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=6",
+      "seed": 1,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9360902255639098,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a9fdf5fd193e8eb637ce213ec350e4cd4f068355a822739dae4f15b925154902",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H10",
+        "L11H2",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=7",
+      "seed": 1,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.93703007518797,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a9fdf5fd193e8eb637ce213ec350e4cd4f068355a822739dae4f15b925154902",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H10",
+        "L11H2",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=8",
+      "seed": 1,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9436090225563909,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a9fdf5fd193e8eb637ce213ec350e4cd4f068355a822739dae4f15b925154902",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H10",
+        "L11H2",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=9",
+      "seed": 1,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9257518796992481,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a9fdf5fd193e8eb637ce213ec350e4cd4f068355a822739dae4f15b925154902",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H10",
+        "L11H2",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=10",
+      "seed": 1,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.944548872180451,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a9fdf5fd193e8eb637ce213ec350e4cd4f068355a822739dae4f15b925154902",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H10",
+        "L11H2",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=11",
+      "seed": 1,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.944548872180451,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a9fdf5fd193e8eb637ce213ec350e4cd4f068355a822739dae4f15b925154902",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H10",
+        "L11H2",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=12",
+      "seed": 1,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9389097744360901,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a9fdf5fd193e8eb637ce213ec350e4cd4f068355a822739dae4f15b925154902",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H10",
+        "L11H2",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=13",
+      "seed": 1,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9295112781954886,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a9fdf5fd193e8eb637ce213ec350e4cd4f068355a822739dae4f15b925154902",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H10",
+        "L11H2",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=14",
+      "seed": 1,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9454887218045114,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a9fdf5fd193e8eb637ce213ec350e4cd4f068355a822739dae4f15b925154902",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H10",
+        "L11H2",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=15",
+      "seed": 1,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9266917293233082,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a9fdf5fd193e8eb637ce213ec350e4cd4f068355a822739dae4f15b925154902",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H10",
+        "L11H2",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=16",
+      "seed": 1,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9464285714285715,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a9fdf5fd193e8eb637ce213ec350e4cd4f068355a822739dae4f15b925154902",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H10",
+        "L11H2",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=17",
+      "seed": 1,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9417293233082706,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "0b170044e42471e6685495bd83e9e090bd403a27c901bbbe38a5a0f9d143b077",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H10",
+        "L11H2",
+        "L11H6",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=18",
+      "seed": 1,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9417293233082706,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a9fdf5fd193e8eb637ce213ec350e4cd4f068355a822739dae4f15b925154902",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H10",
+        "L11H2",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=19",
+      "seed": 1,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9436090225563909,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a9fdf5fd193e8eb637ce213ec350e4cd4f068355a822739dae4f15b925154902",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H10",
+        "L11H2",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=20",
+      "seed": 1,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9351503759398496,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a9fdf5fd193e8eb637ce213ec350e4cd4f068355a822739dae4f15b925154902",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H10",
+        "L11H2",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=21",
+      "seed": 1,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9370300751879699,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a9fdf5fd193e8eb637ce213ec350e4cd4f068355a822739dae4f15b925154902",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H10",
+        "L11H2",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=22",
+      "seed": 1,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9389097744360901,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a9fdf5fd193e8eb637ce213ec350e4cd4f068355a822739dae4f15b925154902",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H10",
+        "L11H2",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=23",
+      "seed": 1,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9417293233082706,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a9fdf5fd193e8eb637ce213ec350e4cd4f068355a822739dae4f15b925154902",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H10",
+        "L11H2",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=24",
+      "seed": 1,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9351503759398496,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a9fdf5fd193e8eb637ce213ec350e4cd4f068355a822739dae4f15b925154902",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H10",
+        "L11H2",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=25",
+      "seed": 1,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9407894736842105,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a9fdf5fd193e8eb637ce213ec350e4cd4f068355a822739dae4f15b925154902",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H10",
+        "L11H2",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=26",
+      "seed": 1,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9389097744360902,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "e4650f918a9d49f211dad3de05985e20e3c03695197490c622191f92637e02eb",
+      "components": [
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H10",
+        "L11H2",
+        "L1H10",
+        "L5H1",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=27",
+      "seed": 1,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9398496240601504,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a9fdf5fd193e8eb637ce213ec350e4cd4f068355a822739dae4f15b925154902",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H10",
+        "L11H2",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=28",
+      "seed": 1,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9407894736842105,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a9fdf5fd193e8eb637ce213ec350e4cd4f068355a822739dae4f15b925154902",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H10",
+        "L11H2",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=29",
+      "seed": 1,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9407894736842105,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a9fdf5fd193e8eb637ce213ec350e4cd4f068355a822739dae4f15b925154902",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H10",
+        "L11H2",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=30",
+      "seed": 1,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9483082706766918,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a9fdf5fd193e8eb637ce213ec350e4cd4f068355a822739dae4f15b925154902",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H10",
+        "L11H2",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "templates",
+      "variant": "template=afterwards",
+      "seed": 1,
+      "size": 8,
+      "claim": "CoAx AUC 0.80-0.90; beats AtP*",
+      "score": 0.8815789473684211,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "fed11d84e4f6b15de2f21d8a1b751749263b54980759889fcadb33e46493adff",
+      "components": [
+        "L0H10",
+        "L0H9",
+        "L10H2",
+        "L10H6",
+        "L11H10",
+        "L11H2",
+        "L1H3",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "templates",
+      "variant": "template=friends",
+      "seed": 1,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9473684210526315,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "ecc58d1bcb95a1a6e3daeb63d95310d0916543628feaca0a683a1fc80ab1fbf5",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H10",
+        "L11H2",
+        "L1H3",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "templates",
+      "variant": "template=argument",
+      "seed": 1,
+      "size": 8,
+      "claim": "CoAx AUC 0.80-0.90; does not beat AtP*",
+      "score": 0.8458646616541352,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "3aa514a8487881c23a96e1aa1dc53244d61f05aefa4cd25d6a56646b36b78b28",
+      "components": [
+        "L0H9",
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H10",
+        "L11H2",
+        "L11H6",
+        "L1H3"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "position_mode=all",
+      "seed": 1,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9219924812030075,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "317390025c9fff758fef786ee1a68ee3b505697d90a2ce3e93588118294b913c",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H2",
+        "L11H6",
+        "L1H10",
+        "L5H1"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "ablation_mode=mean",
+      "seed": 1,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9445488721804511,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a9fdf5fd193e8eb637ce213ec350e4cd4f068355a822739dae4f15b925154902",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H10",
+        "L11H2",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "feature_mode=l2_uncentered",
+      "seed": 1,
+      "size": 8,
+      "claim": "CoAx AUC 0.80-0.90; beats AtP*",
+      "score": 0.8994360902255639,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a5c25f714ff572ab90609964b177caf3ddd2804fb4d9389c1ddd39dd7c7b809b",
+      "components": [
+        "L0H0",
+        "L10H1",
+        "L10H2",
+        "L11H4",
+        "L8H10",
+        "L8H2",
+        "L8H3",
+        "L8H6"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "freeze_ln=full",
+      "seed": 1,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9821428571428571,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "c564db345e6ec315aff1cbe1dfa13e5d36665d7b5f748350754310bedfb2b7e8",
+      "components": [
+        "L10H1",
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H2",
+        "L11H6",
+        "L1H10"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "top_r=192",
+      "seed": 1,
+      "size": 8,
+      "claim": "CoAx AUC >=0.90; beats AtP*",
+      "score": 0.9389097744360902,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a9fdf5fd193e8eb637ce213ec350e4cd4f068355a822739dae4f15b925154902",
+      "components": [
+        "L10H10",
+        "L10H2",
+        "L10H6",
+        "L11H1",
+        "L11H10",
+        "L11H2",
+        "L1H10",
+        "L5H9"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "primaries=atp-top3",
+      "seed": 1,
+      "size": 8,
+      "claim": "CoAx AUC <0.80; does not beat AtP*",
+      "score": 0.27631578947368424,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "fdfb1afbdcf6c331ee5027322b2e8e2b0dd7367e4559fde18c94e14dd6ae795a",
+      "components": [
+        "L0H9",
+        "L2H0",
+        "L2H11",
+        "L2H4",
+        "L2H5",
+        "L2H9",
+        "L5H0",
+        "L6H3"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "primaries=energy-top3",
+      "seed": 1,
+      "size": 8,
+      "claim": "CoAx AUC <0.80; does not beat AtP*",
+      "score": 0.3778195488721805,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a5ff9e55cc791a4d9eb054290e40d86facfe24dba26831011a7d5c7d6887e480",
+      "components": [
+        "L0H9",
+        "L1H10",
+        "L1H11",
+        "L2H10",
+        "L2H4",
+        "L2H9",
+        "L3H6",
+        "L5H1"
+      ]
+    }
+  ]
+}

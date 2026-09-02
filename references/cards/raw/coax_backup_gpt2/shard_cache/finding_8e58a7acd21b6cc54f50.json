@@ -1,0 +1,71 @@
+{
+ "components": [
+  "L0H10",
+  "L10H10",
+  "L10H2",
+  "L10H6",
+  "L11H1",
+  "L11H2",
+  "L11H6",
+  "L9H8"
+ ],
+ "universe_size": 141,
+ "claim": "CoAx AUC >=0.90; beats AtP*",
+ "score": 0.9539473684210527,
+ "meta": {
+  "config": {
+   "position_mode": "last",
+   "top_r": 0,
+   "ablation_mode": "zero",
+   "feature_mode": "fisher_centered",
+   "freeze_ln": "none",
+   "primaries": "documented"
+  },
+  "n_prompts": 96,
+  "prompt_seed": 1532,
+  "n_unique_prompts": 96,
+  "template": "When {IO} and {S} went to the {place}, {X} gave a {obj} to",
+  "first_prompt": "When John and Peter went to the park, David gave a snack to",
+  "primaries": [
+   [
+    9,
+    9
+   ],
+   [
+    10,
+    0
+   ],
+   [
+    9,
+    6
+   ]
+  ],
+  "primaries_documented": [
+   true,
+   true,
+   true
+  ],
+  "auc": {
+   "coax": 0.9539473684210527,
+   "single": 0.543233082706767,
+   "conditional": 0.6682330827067668,
+   "atp": 0.5046992481203008,
+   "eap_ig": 0.5159774436090225,
+   "atp_star": 0.7396616541353384,
+   "conditional_grad": 0.7048872180451128
+  },
+  "average_precision": 0.6661519438693352,
+  "precision_at_8": 0.5,
+  "top8": [
+   "L11H2",
+   "L10H2",
+   "L10H10",
+   "L0H10",
+   "L10H6",
+   "L11H1",
+   "L11H6",
+   "L9H8"
+  ],
+  "wall_secs": 105.6
+ }
+}

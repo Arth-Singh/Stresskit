@@ -1,0 +1,71 @@
+{
+ "components": [
+  "L0H10",
+  "L10H10",
+  "L10H2",
+  "L10H6",
+  "L11H1",
+  "L11H2",
+  "L11H6",
+  "L9H8"
+ ],
+ "universe_size": 141,
+ "claim": "CoAx AUC >=0.90; beats AtP*",
+ "score": 0.9624060150375939,
+ "meta": {
+  "config": {
+   "position_mode": "last",
+   "top_r": 0,
+   "ablation_mode": "zero",
+   "feature_mode": "fisher_centered",
+   "freeze_ln": "none",
+   "primaries": "documented"
+  },
+  "n_prompts": 96,
+  "prompt_seed": 1522,
+  "n_unique_prompts": 96,
+  "template": "When {IO} and {S} went to the {place}, {X} gave a {obj} to",
+  "first_prompt": "When Lucy and Mark went to the office, Kate gave a kiss to",
+  "primaries": [
+   [
+    9,
+    9
+   ],
+   [
+    10,
+    0
+   ],
+   [
+    9,
+    6
+   ]
+  ],
+  "primaries_documented": [
+   true,
+   true,
+   true
+  ],
+  "auc": {
+   "coax": 0.9624060150375939,
+   "single": 0.5545112781954887,
+   "conditional": 0.6785714285714286,
+   "atp": 0.4539473684210526,
+   "eap_ig": 0.5103383458646616,
+   "atp_star": 0.6964285714285714,
+   "conditional_grad": 0.6240601503759399
+  },
+  "average_precision": 0.7131893837156995,
+  "precision_at_8": 0.5,
+  "top8": [
+   "L11H2",
+   "L10H2",
+   "L10H10",
+   "L10H6",
+   "L11H6",
+   "L11H1",
+   "L9H8",
+   "L0H10"
+  ],
+  "wall_secs": 103.2
+ }
+}

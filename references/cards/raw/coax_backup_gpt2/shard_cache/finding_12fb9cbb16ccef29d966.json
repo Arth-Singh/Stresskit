@@ -1,0 +1,71 @@
+{
+ "components": [
+  "L10H10",
+  "L10H2",
+  "L10H6",
+  "L11H10",
+  "L11H2",
+  "L11H6",
+  "L1H10",
+  "L5H9"
+ ],
+ "universe_size": 141,
+ "claim": "CoAx AUC >=0.90; beats AtP*",
+ "score": 0.9389097744360902,
+ "meta": {
+  "config": {
+   "position_mode": "last",
+   "top_r": 0,
+   "ablation_mode": "zero",
+   "feature_mode": "fisher_centered",
+   "freeze_ln": "none",
+   "primaries": "documented"
+  },
+  "n_prompts": 96,
+  "prompt_seed": 17,
+  "n_unique_prompts": 96,
+  "template": "When {IO} and {S} went to the {place}, {S} gave a {obj} to",
+  "first_prompt": "When Sarah and Lucy went to the park, Lucy gave a ring to",
+  "primaries": [
+   [
+    9,
+    9
+   ],
+   [
+    10,
+    0
+   ],
+   [
+    9,
+    6
+   ]
+  ],
+  "primaries_documented": [
+   true,
+   true,
+   true
+  ],
+  "auc": {
+   "coax": 0.9389097744360902,
+   "single": 0.6071428571428572,
+   "conditional": 0.7697368421052632,
+   "atp": 0.6137218045112782,
+   "eap_ig": 0.6644736842105263,
+   "atp_star": 0.8402255639097744,
+   "conditional_grad": 0.6240601503759399
+  },
+  "average_precision": 0.5502428529602443,
+  "precision_at_8": 0.5,
+  "top8": [
+   "L11H2",
+   "L10H2",
+   "L11H10",
+   "L5H9",
+   "L10H6",
+   "L1H10",
+   "L10H10",
+   "L11H6"
+  ],
+  "wall_secs": 112.4
+ }
+}
