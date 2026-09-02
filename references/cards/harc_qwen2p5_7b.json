@@ -1,0 +1,1370 @@
+{
+  "schema_version": "0.4",
+  "stresskit_version": "1.0.0.dev0",
+  "created_at": "2026-09-02T13:34:50+00:00",
+  "claim": {
+    "statement": "aligned LLMs encode harmfulness and refusal as separable directions in the residual stream at prompt-side token positions; HARC pairs the two directions across both prompt and response positions",
+    "base_claim_label": "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band",
+    "model": "Qwen/Qwen2.5-7B-Instruct with the released HARC LoRA adapter (microsoft/HARC/adapters/harc_qwen2.5_7b)",
+    "task": "per-layer cosine between the harmfulness direction (t_inst) and the refusal direction (t_post), base model vs HARC adapter, prompt and response side; cells ranked by the coupling gain",
+    "method": "upstream difference-of-means extraction (main/directions.py, main/extract_paper_method.py) on cached residuals, both models, layer selection from main/layers.py",
+    "base_size": 8,
+    "universe_size": 56
+  },
+  "battery": {
+    "axes": [
+      "seeds",
+      "bootstrap",
+      "templates",
+      "hyperparams"
+    ],
+    "n_runs_total": 51,
+    "seed": 0,
+    "base_config": {
+      "estimator": "diffmeans",
+      "harm_position": "t_inst",
+      "response_window": 32,
+      "n_extract": 300,
+      "top_k": 8,
+      "drop_truncated": false
+    },
+    "claim_equiv_used": false,
+    "components_embedded": true
+  },
+  "metrics": {
+    "pooled": {
+      "n_runs": 51,
+      "n_structured_runs": 51,
+      "n_empty_findings": 0,
+      "empty_finding_rate": 0.0,
+      "mean_pairwise_jaccard": 0.7594939278330282,
+      "min_pairwise_jaccard": 0.23076923076923078,
+      "flip_rate": 0.11450980392156862,
+      "modal_share": 0.9411764705882353,
+      "n_claim_classes": 3,
+      "claim_counts": {
+        "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band": 48,
+        "base: no late decoupling; HARC couples neither; prompt gain peaks upstream of band": 2,
+        "base: no late decoupling; HARC couples neither; prompt gain peaks in/after band": 1
+      },
+      "score_mean": 0.15150000279534143,
+      "score_std": 0.05756151563333471,
+      "score_cv": 0.37994399056938305,
+      "median_size": 8,
+      "variance_shares": {
+        "bootstrap": 0.00032933867735503354,
+        "hyperparams": 0.042506761321225446,
+        "seeds": 0.00010349918953644208,
+        "templates": 0.9570604008118831
+      },
+      "variance_absolute": {
+        "bootstrap": 7.791622212775192e-06,
+        "hyperparams": 0.0010056414520258643,
+        "seeds": 2.4486239838967597e-06,
+        "templates": 0.022642506303304753
+      },
+      "mean_pairwise_jaccard_ci95": [
+        0.701258279112961,
+        0.8228093585980026
+      ],
+      "flip_rate_ci95": [
+        0.0,
+        0.22257806244995998
+      ],
+      "modal_share_ci95": [
+        0.8823529411764706,
+        1.0
+      ],
+      "score_cv_ci95": [
+        0.056328816994474236,
+        0.6285213708879794
+      ],
+      "expected_random_jaccard": 0.08139643845024626,
+      "expected_random_jaccard_analytic": 0.07692307692307693,
+      "jaccard_vs_random": 9.330800490702924,
+      "mean_pairwise_jaccard_axis_balanced": 0.6895439595807242,
+      "jaccard_vs_random_ci95": [
+        8.615343526874417,
+        10.108665369934418
+      ],
+      "specificity_ci95": [
+        1.6592873046443795,
+        2.56550216685421
+      ],
+      "confidence": "low",
+      "borderline_checks": [
+        "structural_stability",
+        "score_stability"
+      ]
+    },
+    "per_axis": {
+      "bootstrap": {
+        "n_runs": 21,
+        "n_structured_runs": 21,
+        "n_empty_findings": 0,
+        "empty_finding_rate": 0.0,
+        "mean_pairwise_jaccard": 0.8256084656084656,
+        "min_pairwise_jaccard": 0.6,
+        "flip_rate": 0.0,
+        "modal_share": 1.0,
+        "n_claim_classes": 1,
+        "claim_counts": {
+          "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band": 21
+        },
+        "score_mean": 0.16498498681670296,
+        "score_std": 0.002791347741284699,
+        "score_cv": 0.016918798462467768,
+        "median_size": 8
+      },
+      "hyperparams": {
+        "n_runs": 8,
+        "n_structured_runs": 8,
+        "n_empty_findings": 0,
+        "empty_finding_rate": 0.0,
+        "mean_pairwise_jaccard": 0.59095047109753,
+        "min_pairwise_jaccard": 0.25,
+        "flip_rate": 0.25,
+        "modal_share": 0.875,
+        "n_claim_classes": 2,
+        "claim_counts": {
+          "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band": 7,
+          "base: no late decoupling; HARC couples neither; prompt gain peaks in/after band": 1
+        },
+        "score_mean": 0.14575261956500404,
+        "score_std": 0.03171185034061974,
+        "score_cv": 0.21757310733256913,
+        "median_size": 8.0
+      },
+      "seeds": {
+        "n_runs": 21,
+        "n_structured_runs": 21,
+        "n_empty_findings": 0,
+        "empty_finding_rate": 0.0,
+        "mean_pairwise_jaccard": 0.8664550264550264,
+        "min_pairwise_jaccard": 0.6,
+        "flip_rate": 0.0,
+        "modal_share": 1.0,
+        "n_claim_classes": 1,
+        "claim_counts": {
+          "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band": 21
+        },
+        "score_mean": 0.16554571761702402,
+        "score_std": 0.0015648079702943617,
+        "score_cv": 0.009452421921987812,
+        "median_size": 8
+      },
+      "templates": {
+        "n_runs": 4,
+        "n_structured_runs": 4,
+        "n_empty_findings": 0,
+        "empty_finding_rate": 0.0,
+        "mean_pairwise_jaccard": 0.47516187516187514,
+        "min_pairwise_jaccard": 0.23076923076923078,
+        "flip_rate": 0.6666666666666667,
+        "modal_share": 0.5,
+        "n_claim_classes": 2,
+        "claim_counts": {
+          "base: no late decoupling; HARC couples neither; prompt gain peaks upstream of band": 2,
+          "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band": 2
+        },
+        "score_mean": 0.026713175817965163,
+        "score_std": 0.1504742712336722,
+        "score_cv": 5.63296076284854,
+        "median_size": 8.0
+      }
+    },
+    "null_control": {
+      "n_runs": 41,
+      "mean_pairwise_jaccard": 0.3637308490967028,
+      "flip_rate": 0.5414634146341464,
+      "modal_share": 0.6341463414634146,
+      "score_mean": 0.05923902585530235,
+      "score_cv": 0.5954218865052703,
+      "median_size": 8
+    }
+  },
+  "verdict": {
+    "grade": "B",
+    "profile": "diagnostic",
+    "confirmatory_state": "not_applicable",
+    "required_checks": [],
+    "checks": {
+      "structural_stability": {
+        "value": 0.7594939278330282,
+        "threshold": 0.8,
+        "passed": false,
+        "op": ">=",
+        "ci": [
+          0.701258279112961,
+          0.8228093585980026
+        ],
+        "robust": false,
+        "state": "inconclusive",
+        "description": "mean pairwise Jaccard across all perturbed runs"
+      },
+      "claim_stability": {
+        "value": 0.9411764705882353,
+        "threshold": 0.8,
+        "passed": true,
+        "op": ">=",
+        "ci": [
+          0.8823529411764706,
+          1.0
+        ],
+        "robust": true,
+        "state": "pass",
+        "description": "modal claim share \u03c0* (filability at \u03b1=0.2)"
+      },
+      "score_stability": {
+        "value": 0.37994399056938305,
+        "threshold": 0.25,
+        "passed": false,
+        "op": "<=",
+        "ci": [
+          0.056328816994474236,
+          0.6285213708879794
+        ],
+        "robust": false,
+        "state": "inconclusive",
+        "description": "coefficient of variation of the quality score"
+      },
+      "beats_random": {
+        "value": 9.330800490702924,
+        "threshold": 3.0,
+        "passed": true,
+        "op": ">=",
+        "ci": [
+          8.615343526874417,
+          10.108665369934418
+        ],
+        "robust": true,
+        "state": "pass",
+        "description": "structural overlap vs size-matched random null (\u00d7)"
+      },
+      "specificity": {
+        "value": 2.0880657489436825,
+        "threshold": 1.5,
+        "passed": true,
+        "op": ">=",
+        "ci": [
+          1.6592873046443795,
+          2.56550216685421
+        ],
+        "robust": true,
+        "state": "pass",
+        "description": "structural stability on real vs null-control data (\u00d7)"
+      }
+    },
+    "thresholds": {
+      "jaccard": 0.8,
+      "modal_share": 0.8,
+      "score_cv": 0.25,
+      "random_margin": 3.0
+    }
+  },
+  "provenance": {
+    "python": "3.12.3",
+    "platform": "Linux-6.11.0-1016-nvidia-x86_64-with-glibc2.39",
+    "wall_seconds": 325.399
+  },
+  "notes": [
+    "underpowered verdict: the 95% CI straddles the bar for score_stability (fail), structural_stability (fail) at n_runs=20 \u2014 these verdict components are not decided by the data. Treat the grade as provisional and raise n_runs (or widen the battery) before reporting it.",
+    "upstream: microsoft/HARC@c3565e5 (MIT); collectors, template rendering, pool loaders and layer selection imported unmodified or mirrored and checked against the upstream collectors on 16 prompts (max abs diff 0.00e+00 chat, 0.00e+00 raw); adapter microsoft/HARC/adapters/harc_qwen2.5_7b as released; file hashes directions.py baf5d0ab5059, extract_paper_method.py ebd804a6ee62, data.py 3a85dffea605, layers.py 07ad55c93783",
+    "base run (advbench_alpaca/raw, upstream's exact extraction split of 300+300 rows): base cos(v_harm, v_ref) prompt side L1:+0.13 L2:+0.09 L3:+0.08 L4:+0.11 L5:+0.10 L6:+0.06 L7:+0.05 L8:+0.08 L9:+0.07 L10:+0.06 L11:+0.05 L12:+0.06 L13:+0.07 L14:+0.15 L15:+0.17 L16:+0.17 L17:+0.16 L18:+0.15 L19:+0.17 L20:+0.13 L21:+0.07 L22:+0.06 L23:+0.14 L24:+0.11 L25:+0.10 L26:+0.07 L27:+0.07 L28:+0.26; peak at L28, mean +0.07 over L7-L14 vs +0.12 over L18-L24 (paper Figure 1: peak near L12, drop through L20-L28 on Llama)",
+    "HARC coupling gain, prompt side L1:+0.01 L2:-0.00 L3:-0.00 L4:+0.01 L5:+0.00 L6:+0.02 L7:+0.01 L8:+0.02 L9:+0.02 L10:+0.03 L11:+0.05 L12:+0.04 L13:+0.09 L14:-0.00 L15:+0.18 L16:+0.09 L17:+0.21 L18:+0.24 L19:+0.21 L20:+0.21 L21:+0.22 L22:+0.19 L23:+0.13 L24:+0.11 L25:+0.10 L26:+0.08 L27:+0.07 L28:-0.02; response side L1:-0.00 L2:-0.00 L3:-0.02 L4:-0.01 L5:-0.01 L6:+0.02 L7:+0.01 L8:+0.03 L9:+0.01 L10:+0.02 L11:+0.08 L12:+0.09 L13:+0.03 L14:+0.21 L15:+0.05 L16:+0.36 L17:+0.36 L18:+0.38 L19:+0.22 L20:+0.08 L21:+0.09 L22:+0.06 L23:+0.05 L24:+0.05 L25:+0.03 L26:+0.03 L27:+0.07 L28:+0.17; band L21-L24 mean +0.16 prompt / +0.06 response; gain peaks at L18 (prompt) and L18 (response); paper Figure 3: alignment rises inside the trained band, peaks at L27 on Llama, stays elevated downstream; cells with gain >= 0.1: 15 of 56",
+    "upstream layer selection (k=2, band [4, n-4]) on the base run's own directions: base [21, 22], HARC [13, 15]; the paper trains L21-L24",
+    "reproduction, Table 1 over-refusal on the 250 XSTest safe prompts (hard refusal string match on 64 greedy tokens): base 0.040 vs 0.091 shipped, HARC 0.044 vs 0.026 shipped",
+    "behavioural baseline (same judge): refusal on the 100 held-out Circuit Breakers harmful prompts base 0.74 / HARC 0.94; on 100 held-out UltraChat prompts base 0.01 / HARC 0.01",
+    "measurement: prompts longer than upstream's 256-token limit are right-truncated by the upstream tokenizer call, which removes the assistant header that t_post is meant to read: cb_ultrachat/chat 89 of 800, cb_ultrachat/raw 87 of 800, advbench_alpaca/chat 0 of 800, advbench_alpaca/raw 0 of 800; the drop_truncated hyperparameter excludes them",
+    "scope: the paper's jailbreak analysis (Figure 2, Figure 4) and Table 1's attack success rates need PAIR/PAP/DeepInception/CodeAttack runs and a GPT-4o judge and are not run; the paper text extracts from AdvBench + UltraChat for both models while the released configs use Circuit Breakers + UltraChat (Llama) and AdvBench + Alpaca (Qwen), followed here",
+    "template=cb_ultrachat-chat: band gain -0.05 prompt / +0.06 response, prompt peak L17, base mid/late +0.33/+0.49, threshold set 6",
+    "template=cb_ultrachat-raw: band gain -0.18 prompt / +0.06 response, prompt peak L15, base mid/late +0.14/+0.43, threshold set 7",
+    "template=advbench_alpaca-chat: band gain +0.18 prompt / +0.06 response, prompt peak L18, base mid/late +0.09/+0.20, threshold set 18",
+    "estimator=probe: band gain +0.10 prompt / +0.08 response, prompt peak L18, base mid/late +0.10/+0.19, threshold set 13",
+    "harm_position=mean_content: band gain +0.08 prompt / +0.06 response, prompt peak L23, base mid/late -0.02/+0.13, threshold set 7",
+    "response_window=8: band gain +0.16 prompt / +0.02 response, prompt peak L18, base mid/late +0.07/+0.12, threshold set 14",
+    "n_extract=100: band gain +0.17 prompt / +0.06 response, prompt peak L18, base mid/late +0.06/+0.13, threshold set 15",
+    "top_k=4: band gain +0.16 prompt / +0.06 response, prompt peak L18, base mid/late +0.07/+0.12, threshold set 15",
+    "top_k=16: band gain +0.16 prompt / +0.06 response, prompt peak L18, base mid/late +0.07/+0.12, threshold set 15",
+    "drop_truncated=True: band gain +0.16 prompt / +0.06 response, prompt peak L18, base mid/late +0.07/+0.12, threshold set 15",
+    "null control (labels permuted inside the extraction split): band gain -0.01 to +0.14 over 41 runs, threshold set size 0-12",
+    "deviations: the response-side final slot (residual leaving the last block) is collected here, upstream stores zeros for it; pools carry 400 rows per class so the validation rows are upstream's own; probe directions are logistic-regression weights fitted on the same residuals (not an upstream code path)"
+  ],
+  "runs": [
+    {
+      "axis": "base",
+      "variant": "base",
+      "seed": 0,
+      "size": 8,
+      "claim": "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band",
+      "score": 0.16250610344591537,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "c24ed5d4fdf79ed1a074e10856361f61641e05238d4262630a941bbb4ab3355c",
+      "components": [
+        "L14:response",
+        "L16:response",
+        "L17:response",
+        "L18:prompt",
+        "L18:response",
+        "L19:response",
+        "L20:prompt",
+        "L21:prompt"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=1",
+      "seed": 1,
+      "size": 8,
+      "claim": "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band",
+      "score": 0.1650961526567554,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "c24ed5d4fdf79ed1a074e10856361f61641e05238d4262630a941bbb4ab3355c",
+      "components": [
+        "L14:response",
+        "L16:response",
+        "L17:response",
+        "L18:prompt",
+        "L18:response",
+        "L19:response",
+        "L20:prompt",
+        "L21:prompt"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=2",
+      "seed": 2,
+      "size": 8,
+      "claim": "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band",
+      "score": 0.1642416199625737,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "c24ed5d4fdf79ed1a074e10856361f61641e05238d4262630a941bbb4ab3355c",
+      "components": [
+        "L14:response",
+        "L16:response",
+        "L17:response",
+        "L18:prompt",
+        "L18:response",
+        "L19:response",
+        "L20:prompt",
+        "L21:prompt"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=3",
+      "seed": 3,
+      "size": 8,
+      "claim": "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band",
+      "score": 0.16253250382057574,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "c24ed5d4fdf79ed1a074e10856361f61641e05238d4262630a941bbb4ab3355c",
+      "components": [
+        "L14:response",
+        "L16:response",
+        "L17:response",
+        "L18:prompt",
+        "L18:response",
+        "L19:response",
+        "L20:prompt",
+        "L21:prompt"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=4",
+      "seed": 4,
+      "size": 8,
+      "claim": "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band",
+      "score": 0.16809994967101188,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "c24ed5d4fdf79ed1a074e10856361f61641e05238d4262630a941bbb4ab3355c",
+      "components": [
+        "L14:response",
+        "L16:response",
+        "L17:response",
+        "L18:prompt",
+        "L18:response",
+        "L19:response",
+        "L20:prompt",
+        "L21:prompt"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=5",
+      "seed": 5,
+      "size": 8,
+      "claim": "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band",
+      "score": 0.16537668635392838,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "83709f734366a0a1dc360a3cb9959811d9b3b64df3c6538b73a7b7b279bf16a2",
+      "components": [
+        "L16:response",
+        "L17:response",
+        "L18:prompt",
+        "L18:response",
+        "L19:prompt",
+        "L19:response",
+        "L20:prompt",
+        "L21:prompt"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=6",
+      "seed": 6,
+      "size": 8,
+      "claim": "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band",
+      "score": 0.16460354109831626,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "83709f734366a0a1dc360a3cb9959811d9b3b64df3c6538b73a7b7b279bf16a2",
+      "components": [
+        "L16:response",
+        "L17:response",
+        "L18:prompt",
+        "L18:response",
+        "L19:prompt",
+        "L19:response",
+        "L20:prompt",
+        "L21:prompt"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=7",
+      "seed": 7,
+      "size": 8,
+      "claim": "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band",
+      "score": 0.16666020815109892,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "83709f734366a0a1dc360a3cb9959811d9b3b64df3c6538b73a7b7b279bf16a2",
+      "components": [
+        "L16:response",
+        "L17:response",
+        "L18:prompt",
+        "L18:response",
+        "L19:prompt",
+        "L19:response",
+        "L20:prompt",
+        "L21:prompt"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=8",
+      "seed": 8,
+      "size": 8,
+      "claim": "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band",
+      "score": 0.16614060406022213,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "83709f734366a0a1dc360a3cb9959811d9b3b64df3c6538b73a7b7b279bf16a2",
+      "components": [
+        "L16:response",
+        "L17:response",
+        "L18:prompt",
+        "L18:response",
+        "L19:prompt",
+        "L19:response",
+        "L20:prompt",
+        "L21:prompt"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=9",
+      "seed": 9,
+      "size": 8,
+      "claim": "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band",
+      "score": 0.1655417832211874,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "83709f734366a0a1dc360a3cb9959811d9b3b64df3c6538b73a7b7b279bf16a2",
+      "components": [
+        "L16:response",
+        "L17:response",
+        "L18:prompt",
+        "L18:response",
+        "L19:prompt",
+        "L19:response",
+        "L20:prompt",
+        "L21:prompt"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=10",
+      "seed": 10,
+      "size": 8,
+      "claim": "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band",
+      "score": 0.16595878877332848,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "83709f734366a0a1dc360a3cb9959811d9b3b64df3c6538b73a7b7b279bf16a2",
+      "components": [
+        "L16:response",
+        "L17:response",
+        "L18:prompt",
+        "L18:response",
+        "L19:prompt",
+        "L19:response",
+        "L20:prompt",
+        "L21:prompt"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=11",
+      "seed": 11,
+      "size": 8,
+      "claim": "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band",
+      "score": 0.1668149142354703,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "83709f734366a0a1dc360a3cb9959811d9b3b64df3c6538b73a7b7b279bf16a2",
+      "components": [
+        "L16:response",
+        "L17:response",
+        "L18:prompt",
+        "L18:response",
+        "L19:prompt",
+        "L19:response",
+        "L20:prompt",
+        "L21:prompt"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=12",
+      "seed": 12,
+      "size": 8,
+      "claim": "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band",
+      "score": 0.16581981815408206,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "c24ed5d4fdf79ed1a074e10856361f61641e05238d4262630a941bbb4ab3355c",
+      "components": [
+        "L14:response",
+        "L16:response",
+        "L17:response",
+        "L18:prompt",
+        "L18:response",
+        "L19:response",
+        "L20:prompt",
+        "L21:prompt"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=13",
+      "seed": 13,
+      "size": 8,
+      "claim": "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band",
+      "score": 0.16605404060349327,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "c24ed5d4fdf79ed1a074e10856361f61641e05238d4262630a941bbb4ab3355c",
+      "components": [
+        "L14:response",
+        "L16:response",
+        "L17:response",
+        "L18:prompt",
+        "L18:response",
+        "L19:response",
+        "L20:prompt",
+        "L21:prompt"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=14",
+      "seed": 14,
+      "size": 8,
+      "claim": "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band",
+      "score": 0.16859951237208531,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "83709f734366a0a1dc360a3cb9959811d9b3b64df3c6538b73a7b7b279bf16a2",
+      "components": [
+        "L16:response",
+        "L17:response",
+        "L18:prompt",
+        "L18:response",
+        "L19:prompt",
+        "L19:response",
+        "L20:prompt",
+        "L21:prompt"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=15",
+      "seed": 15,
+      "size": 8,
+      "claim": "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band",
+      "score": 0.16687677592620836,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "83709f734366a0a1dc360a3cb9959811d9b3b64df3c6538b73a7b7b279bf16a2",
+      "components": [
+        "L16:response",
+        "L17:response",
+        "L18:prompt",
+        "L18:response",
+        "L19:prompt",
+        "L19:response",
+        "L20:prompt",
+        "L21:prompt"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=16",
+      "seed": 16,
+      "size": 8,
+      "claim": "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band",
+      "score": 0.16353759691344222,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "c24ed5d4fdf79ed1a074e10856361f61641e05238d4262630a941bbb4ab3355c",
+      "components": [
+        "L14:response",
+        "L16:response",
+        "L17:response",
+        "L18:prompt",
+        "L18:response",
+        "L19:response",
+        "L20:prompt",
+        "L21:prompt"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=17",
+      "seed": 17,
+      "size": 8,
+      "claim": "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band",
+      "score": 0.16681759012830155,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "83709f734366a0a1dc360a3cb9959811d9b3b64df3c6538b73a7b7b279bf16a2",
+      "components": [
+        "L16:response",
+        "L17:response",
+        "L18:prompt",
+        "L18:response",
+        "L19:prompt",
+        "L19:response",
+        "L20:prompt",
+        "L21:prompt"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=18",
+      "seed": 18,
+      "size": 8,
+      "claim": "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band",
+      "score": 0.16575270031983697,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "c24ed5d4fdf79ed1a074e10856361f61641e05238d4262630a941bbb4ab3355c",
+      "components": [
+        "L14:response",
+        "L16:response",
+        "L17:response",
+        "L18:prompt",
+        "L18:response",
+        "L19:response",
+        "L20:prompt",
+        "L21:prompt"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=19",
+      "seed": 19,
+      "size": 8,
+      "claim": "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band",
+      "score": 0.16374601831991067,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "b0e5ff46917a533d1917f72d1dd7d7cb5739a1e31094eb6c07151a181fd9a711",
+      "components": [
+        "L16:response",
+        "L17:prompt",
+        "L17:response",
+        "L18:prompt",
+        "L18:response",
+        "L19:prompt",
+        "L20:prompt",
+        "L21:prompt"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=20",
+      "seed": 20,
+      "size": 8,
+      "claim": "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band",
+      "score": 0.16568316176976036,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "83709f734366a0a1dc360a3cb9959811d9b3b64df3c6538b73a7b7b279bf16a2",
+      "components": [
+        "L16:response",
+        "L17:response",
+        "L18:prompt",
+        "L18:response",
+        "L19:prompt",
+        "L19:response",
+        "L20:prompt",
+        "L21:prompt"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=1",
+      "seed": 0,
+      "size": 8,
+      "claim": "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band",
+      "score": 0.1585686327305162,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "171a7e2fa2565250be7943888d7b45b7a17223cbbb98e01041550e09a18fc5a8",
+      "components": [
+        "L14:response",
+        "L16:response",
+        "L17:prompt",
+        "L17:response",
+        "L18:prompt",
+        "L18:response",
+        "L19:response",
+        "L21:prompt"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=2",
+      "seed": 0,
+      "size": 8,
+      "claim": "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band",
+      "score": 0.16169974854512176,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "c24ed5d4fdf79ed1a074e10856361f61641e05238d4262630a941bbb4ab3355c",
+      "components": [
+        "L14:response",
+        "L16:response",
+        "L17:response",
+        "L18:prompt",
+        "L18:response",
+        "L19:response",
+        "L20:prompt",
+        "L21:prompt"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=3",
+      "seed": 0,
+      "size": 8,
+      "claim": "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band",
+      "score": 0.16411093685334285,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "c24ed5d4fdf79ed1a074e10856361f61641e05238d4262630a941bbb4ab3355c",
+      "components": [
+        "L14:response",
+        "L16:response",
+        "L17:response",
+        "L18:prompt",
+        "L18:response",
+        "L19:response",
+        "L20:prompt",
+        "L21:prompt"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=4",
+      "seed": 0,
+      "size": 8,
+      "claim": "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band",
+      "score": 0.16617089477719113,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "83709f734366a0a1dc360a3cb9959811d9b3b64df3c6538b73a7b7b279bf16a2",
+      "components": [
+        "L16:response",
+        "L17:response",
+        "L18:prompt",
+        "L18:response",
+        "L19:prompt",
+        "L19:response",
+        "L20:prompt",
+        "L21:prompt"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=5",
+      "seed": 0,
+      "size": 8,
+      "claim": "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band",
+      "score": 0.16524836435505535,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "83709f734366a0a1dc360a3cb9959811d9b3b64df3c6538b73a7b7b279bf16a2",
+      "components": [
+        "L16:response",
+        "L17:response",
+        "L18:prompt",
+        "L18:response",
+        "L19:prompt",
+        "L19:response",
+        "L20:prompt",
+        "L21:prompt"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=6",
+      "seed": 0,
+      "size": 8,
+      "claim": "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band",
+      "score": 0.16322048691958438,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "83709f734366a0a1dc360a3cb9959811d9b3b64df3c6538b73a7b7b279bf16a2",
+      "components": [
+        "L16:response",
+        "L17:response",
+        "L18:prompt",
+        "L18:response",
+        "L19:prompt",
+        "L19:response",
+        "L20:prompt",
+        "L21:prompt"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=7",
+      "seed": 0,
+      "size": 8,
+      "claim": "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band",
+      "score": 0.16514781139703003,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "b0e5ff46917a533d1917f72d1dd7d7cb5739a1e31094eb6c07151a181fd9a711",
+      "components": [
+        "L16:response",
+        "L17:prompt",
+        "L17:response",
+        "L18:prompt",
+        "L18:response",
+        "L19:prompt",
+        "L20:prompt",
+        "L21:prompt"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=8",
+      "seed": 0,
+      "size": 8,
+      "claim": "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band",
+      "score": 0.17071603391834325,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "c24ed5d4fdf79ed1a074e10856361f61641e05238d4262630a941bbb4ab3355c",
+      "components": [
+        "L14:response",
+        "L16:response",
+        "L17:response",
+        "L18:prompt",
+        "L18:response",
+        "L19:response",
+        "L20:prompt",
+        "L21:prompt"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=9",
+      "seed": 0,
+      "size": 8,
+      "claim": "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band",
+      "score": 0.16688946428689566,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "c24ed5d4fdf79ed1a074e10856361f61641e05238d4262630a941bbb4ab3355c",
+      "components": [
+        "L14:response",
+        "L16:response",
+        "L17:response",
+        "L18:prompt",
+        "L18:response",
+        "L19:response",
+        "L20:prompt",
+        "L21:prompt"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=10",
+      "seed": 0,
+      "size": 8,
+      "claim": "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band",
+      "score": 0.16453913366476297,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "c24ed5d4fdf79ed1a074e10856361f61641e05238d4262630a941bbb4ab3355c",
+      "components": [
+        "L14:response",
+        "L16:response",
+        "L17:response",
+        "L18:prompt",
+        "L18:response",
+        "L19:response",
+        "L20:prompt",
+        "L21:prompt"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=11",
+      "seed": 0,
+      "size": 8,
+      "claim": "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band",
+      "score": 0.1597078181328135,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "080c9f040b6af0cbce7ad1f9eddf25cbb51777ca0ade3c7f3f5daf2daf43caa2",
+      "components": [
+        "L16:response",
+        "L17:prompt",
+        "L17:response",
+        "L18:prompt",
+        "L18:response",
+        "L19:prompt",
+        "L19:response",
+        "L21:prompt"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=12",
+      "seed": 0,
+      "size": 8,
+      "claim": "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band",
+      "score": 0.1671015638788082,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "c24ed5d4fdf79ed1a074e10856361f61641e05238d4262630a941bbb4ab3355c",
+      "components": [
+        "L14:response",
+        "L16:response",
+        "L17:response",
+        "L18:prompt",
+        "L18:response",
+        "L19:response",
+        "L20:prompt",
+        "L21:prompt"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=13",
+      "seed": 0,
+      "size": 8,
+      "claim": "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band",
+      "score": 0.16432077608485285,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "83709f734366a0a1dc360a3cb9959811d9b3b64df3c6538b73a7b7b279bf16a2",
+      "components": [
+        "L16:response",
+        "L17:response",
+        "L18:prompt",
+        "L18:response",
+        "L19:prompt",
+        "L19:response",
+        "L20:prompt",
+        "L21:prompt"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=14",
+      "seed": 0,
+      "size": 8,
+      "claim": "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band",
+      "score": 0.1675053048969814,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "c24ed5d4fdf79ed1a074e10856361f61641e05238d4262630a941bbb4ab3355c",
+      "components": [
+        "L14:response",
+        "L16:response",
+        "L17:response",
+        "L18:prompt",
+        "L18:response",
+        "L19:response",
+        "L20:prompt",
+        "L21:prompt"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=15",
+      "seed": 0,
+      "size": 8,
+      "claim": "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band",
+      "score": 0.16520347183429338,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "c24ed5d4fdf79ed1a074e10856361f61641e05238d4262630a941bbb4ab3355c",
+      "components": [
+        "L14:response",
+        "L16:response",
+        "L17:response",
+        "L18:prompt",
+        "L18:response",
+        "L19:response",
+        "L20:prompt",
+        "L21:prompt"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=16",
+      "seed": 0,
+      "size": 8,
+      "claim": "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band",
+      "score": 0.16964263317681075,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "83709f734366a0a1dc360a3cb9959811d9b3b64df3c6538b73a7b7b279bf16a2",
+      "components": [
+        "L16:response",
+        "L17:response",
+        "L18:prompt",
+        "L18:response",
+        "L19:prompt",
+        "L19:response",
+        "L20:prompt",
+        "L21:prompt"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=17",
+      "seed": 0,
+      "size": 8,
+      "claim": "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band",
+      "score": 0.16496872620535677,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "5b9467f621d4c443b6f9fcd34efe8e244454b90450fa3447524fa3a0854acd52",
+      "components": [
+        "L14:response",
+        "L16:response",
+        "L17:response",
+        "L18:prompt",
+        "L18:response",
+        "L19:prompt",
+        "L20:prompt",
+        "L21:prompt"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=18",
+      "seed": 0,
+      "size": 8,
+      "claim": "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band",
+      "score": 0.16607733255783605,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "c24ed5d4fdf79ed1a074e10856361f61641e05238d4262630a941bbb4ab3355c",
+      "components": [
+        "L14:response",
+        "L16:response",
+        "L17:response",
+        "L18:prompt",
+        "L18:response",
+        "L19:response",
+        "L20:prompt",
+        "L21:prompt"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=19",
+      "seed": 0,
+      "size": 8,
+      "claim": "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band",
+      "score": 0.16518386446811678,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "83709f734366a0a1dc360a3cb9959811d9b3b64df3c6538b73a7b7b279bf16a2",
+      "components": [
+        "L16:response",
+        "L17:response",
+        "L18:prompt",
+        "L18:response",
+        "L19:prompt",
+        "L19:response",
+        "L20:prompt",
+        "L21:prompt"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=20",
+      "seed": 0,
+      "size": 8,
+      "claim": "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band",
+      "score": 0.1661556210211332,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "c24ed5d4fdf79ed1a074e10856361f61641e05238d4262630a941bbb4ab3355c",
+      "components": [
+        "L14:response",
+        "L16:response",
+        "L17:response",
+        "L18:prompt",
+        "L18:response",
+        "L19:response",
+        "L20:prompt",
+        "L21:prompt"
+      ]
+    },
+    {
+      "axis": "templates",
+      "variant": "template=cb_ultrachat-chat",
+      "seed": 0,
+      "size": 8,
+      "claim": "base: no late decoupling; HARC couples neither; prompt gain peaks upstream of band",
+      "score": -0.052533754931235285,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "24ae585b01fea0e81cd46e56e850718126c78f776370c6a242570943b2c77c1b",
+      "components": [
+        "L12:response",
+        "L14:response",
+        "L16:response",
+        "L17:prompt",
+        "L17:response",
+        "L18:response",
+        "L19:response",
+        "L28:response"
+      ]
+    },
+    {
+      "axis": "templates",
+      "variant": "template=cb_ultrachat-raw",
+      "seed": 0,
+      "size": 8,
+      "claim": "base: no late decoupling; HARC couples neither; prompt gain peaks upstream of band",
+      "score": -0.1807964052500335,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "7affbc12d024aa2db82fa7bd218ea5be1b9df5dbfec291ad510e27c36b9be3fb",
+      "components": [
+        "L12:response",
+        "L14:response",
+        "L15:prompt",
+        "L16:response",
+        "L17:response",
+        "L18:response",
+        "L19:response",
+        "L28:response"
+      ]
+    },
+    {
+      "axis": "templates",
+      "variant": "template=advbench_alpaca-chat",
+      "seed": 0,
+      "size": 8,
+      "claim": "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band",
+      "score": 0.17767676000721405,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "b0e5ff46917a533d1917f72d1dd7d7cb5739a1e31094eb6c07151a181fd9a711",
+      "components": [
+        "L16:response",
+        "L17:prompt",
+        "L17:response",
+        "L18:prompt",
+        "L18:response",
+        "L19:prompt",
+        "L20:prompt",
+        "L21:prompt"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "estimator=probe",
+      "seed": 0,
+      "size": 8,
+      "claim": "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band",
+      "score": 0.10307316757495236,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "9717672ffe82d7678982ea772aed4979db10791e37025e74f3939c1be34f91ff",
+      "components": [
+        "L16:response",
+        "L17:prompt",
+        "L17:response",
+        "L18:prompt",
+        "L18:response",
+        "L19:prompt",
+        "L19:response",
+        "L20:prompt"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "harm_position=mean_content",
+      "seed": 0,
+      "size": 8,
+      "claim": "base: no late decoupling; HARC couples neither; prompt gain peaks in/after band",
+      "score": 0.08062114125350016,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "9c65d9b54896f7f1bda32c1bbff8f88d1b65620a762b0b5d1aee0c7dd1a46be8",
+      "components": [
+        "L12:response",
+        "L14:response",
+        "L16:response",
+        "L17:response",
+        "L18:response",
+        "L19:response",
+        "L23:prompt",
+        "L28:response"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "response_window=8",
+      "seed": 0,
+      "size": 8,
+      "claim": "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band",
+      "score": 0.16250610344591537,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "c24ed5d4fdf79ed1a074e10856361f61641e05238d4262630a941bbb4ab3355c",
+      "components": [
+        "L14:response",
+        "L16:response",
+        "L17:response",
+        "L18:prompt",
+        "L18:response",
+        "L19:response",
+        "L20:prompt",
+        "L21:prompt"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "n_extract=100",
+      "seed": 0,
+      "size": 8,
+      "claim": "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band",
+      "score": 0.169796130462003,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "c24ed5d4fdf79ed1a074e10856361f61641e05238d4262630a941bbb4ab3355c",
+      "components": [
+        "L14:response",
+        "L16:response",
+        "L17:response",
+        "L18:prompt",
+        "L18:response",
+        "L19:response",
+        "L20:prompt",
+        "L21:prompt"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "top_k=4",
+      "seed": 0,
+      "size": 4,
+      "claim": "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band",
+      "score": 0.16250610344591537,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "4abe4c41c7e8f4cbcb298fa66494b4b249d4faf434cb1c954c87309a05d0896c",
+      "components": [
+        "L16:response",
+        "L17:response",
+        "L18:prompt",
+        "L18:response"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "top_k=16",
+      "seed": 0,
+      "size": 16,
+      "claim": "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band",
+      "score": 0.16250610344591537,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "f628a21c3f8a76d8ca119d63a21ecdca1885b98a5ab08a44bc28741a0a1ff36a",
+      "components": [
+        "L14:response",
+        "L15:prompt",
+        "L16:response",
+        "L17:prompt",
+        "L17:response",
+        "L18:prompt",
+        "L18:response",
+        "L19:prompt",
+        "L19:response",
+        "L20:prompt",
+        "L21:prompt",
+        "L22:prompt",
+        "L23:prompt",
+        "L24:prompt",
+        "L25:prompt",
+        "L28:response"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "drop_truncated=True",
+      "seed": 0,
+      "size": 8,
+      "claim": "base: no late decoupling; HARC couples prompt only; prompt gain peaks upstream of band",
+      "score": 0.16250610344591537,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "c24ed5d4fdf79ed1a074e10856361f61641e05238d4262630a941bbb4ab3355c",
+      "components": [
+        "L14:response",
+        "L16:response",
+        "L17:response",
+        "L18:prompt",
+        "L18:response",
+        "L19:response",
+        "L20:prompt",
+        "L21:prompt"
+      ]
+    }
+  ]
+}

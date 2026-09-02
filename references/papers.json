@@ -2,6 +2,15 @@
   "_comment": "Paper registry for the leaderboard: one entry per audited paper, newest audit first. Card paths are relative to this directory and every graded card under references/ must appear in exactly one entry (stresskit scoreboard / site fail otherwise). Free-text fields are rendered verbatim in the scoreboard and on the site.",
   "papers": [
     {
+      "title": "HARC: coupling harmfulness and refusal directions, released adapters",
+      "arxiv": "2607.00572",
+      "models": "Llama-3.1-8B-Instruct and Qwen2.5-7B-Instruct, each with the released HARC LoRA",
+      "cards": ["cards/harc_llama3p1_8b.json", "cards/harc_qwen2p5_7b.json"],
+      "reproduced": "Figure 1's base profile on Llama, yes (peak L12, cos 0.42 over L8-16 vs 0.12 over L20-28) and upstream's layer selection lands in the paper's trained bands; Table 1's over-refusal direction, no: under a hard-refusal string match the Llama adapter refuses 29 of 250 XSTest safe prompts against 17 for the base (paper 0.035 vs 0.109), Qwen 11 vs 10",
+      "result": "the coupling gain is real (band +0.55 on Llama, 9.6x random) but not localised: 41 of 64 cells gain >= 0.10, the gain starts eight layers upstream of the trained band, and permuted-label directions gain +0.28 at the same layers (specificity 1.15x, undecided); on Qwen the gain peaks at L18, upstream of the paper's L21-24 band, and disappears in band under the Circuit Breakers / UltraChat pools",
+      "audited": "2026-09-02"
+    },
+    {
       "title": "Cultural awareness is represented but not decoded (FolkMotif)",
       "arxiv": "2608.02486",
       "models": "Llama-3.1-8B-Instruct",

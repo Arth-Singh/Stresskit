@@ -109,6 +109,19 @@
   Diff Mining's pooled Jaccard (0.92) diverges from its axis-balanced value
   (0.81) because the two large axes sit at 0.97 while the hyperparameter axis
   is 0.43; the harness note and the README say so.
+- Added the HARC card (arXiv:2607.00572, `references/run_harc_card.py`): the
+  released Llama-3.1-8B-Instruct and Qwen2.5-7B-Instruct LoRA adapters
+  audited with upstream's direction extraction, residuals cached once per
+  (model, pool, template) so the 51-run battery and 41 null runs are a CPU
+  pass. Both cards grade B, low confidence. Figure 1's base profile
+  reproduces on Llama and upstream's layer selection lands inside the paper's
+  trained bands, but the coupling gain is a plateau over 41 of 64 cells that
+  starts eight layers upstream of the band, permuted-label directions gain
+  +0.28 at the same layers (specificity undecided), and under a hard-refusal
+  string match the Llama adapter refuses more XSTest safe prompts than the
+  base (29 vs 17 of 250) where Table 1 reports the opposite. On Qwen the gain
+  peaks at L18, upstream of the paper's L21-24 band, and disappears in band
+  under the Circuit Breakers / UltraChat pools.
 - `references/make_summary_figs.py` draws three figures from the stored cards
   and traces (no model is run): check outcomes over all graded cards, the
   run count at which each verdict settles, and the sensitivity of the

@@ -15,8 +15,8 @@ conservative profile supports confirmatory pass/fail/inconclusive decisions.
 
 ## What it has found so far
 
-17 papers, 43 graded cards, audited between 2026-08-21 and 2026-09-02; 12 of
-the 17 are July/August 2026 arXiv papers that ship licensed code, run through
+18 papers, 45 graded cards, audited between 2026-08-21 and 2026-09-02; 13 of
+the 18 are July/August 2026 arXiv papers that ship licensed code, run through
 their own released code at a pinned commit. The leaderboard below is the
 human-written summary; the generated version (one row per paper, one grade
 badge per card, driven by [`references/papers.json`](references/papers.json))
@@ -26,6 +26,7 @@ low-confidence grade: at least one check's 95% CI straddles its bar.
 
 | paper | model(s) | grade | what the battery found |
 |---|---|---|---|
+| HARC, coupling harmfulness and refusal directions, released adapters ([2607.00572](https://arxiv.org/abs/2607.00572)) | Llama-3.1-8B-Instruct + LoRA, Qwen2.5-7B-Instruct + LoRA | **B** ×2† | Figure 1's base profile reproduces on Llama and the coupling gain is real (band +0.55, 9.6x random), but it is a plateau over 41 of 64 cells that starts eight layers upstream of the trained band, and permuted-label directions gain +0.28 at the same layers (specificity undecided); with a hard-refusal string match the Llama adapter refuses more XSTest safe prompts than the base (29 vs 17 of 250) where Table 1 reports the opposite; on Qwen the gain peaks at L18, upstream of the paper's L21–24 band, and vanishes in band under the Circuit Breakers/UltraChat pools |
 | FolkMotif, cultural awareness represented but not decoded ([2608.02486](https://arxiv.org/abs/2608.02486)) | Llama-3.1-8B-Instruct | **A** | reproduces exactly; the claim never flips, but the Preserved cell count moves 5–83 with the aggregation rule and template |
 | Diff Mining, logit differences reveal finetuning objectives ([2608.26462](https://arxiv.org/abs/2608.26462)) | gemma-3-1b-it × cake_bake LoRA | **A** | top-100 token set stable across 60 seeds, 60 resamples and two corpora (J 0.88–0.97; the hyperparameter axis alone is J 0.43); a scrambled adapter returns garbage |
 | Dissociating the internal representations of sycophancy ([2607.07003](https://arxiv.org/abs/2607.07003)) | Llama-3.1-8B-Instruct | **B** | the released extractor's lexicographic layer order makes the paper's "final layer" decoder layer 9 of 32; at the best in-domain layer (L12) the probes transfer and "distinct" becomes "shared" |
