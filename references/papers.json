@@ -6,7 +6,7 @@
       "arxiv": "2608.03913",
       "models": "GPT-2 small, layer-8 mlp.c_proj (the Qwen2.5 and Qwen3.5-27B surfaces not run)",
       "cards": ["cards/swd_gpt2.json"],
-      "reproduced": "KL and output cosine yes (0.001871 -> 0.001884, 0.9814 -> 0.9815); CE delta 0.000889 -> 0.001423 on a different 16-block calibration draw, inside the released grid's own 0.0009-0.0027 spread; the greater-than 48-vs-384-unit headline is being reproduced separately",
+      "reproduced": "KL and output cosine yes (0.001871 -> 0.001884, 0.9814 -> 0.9815); CE delta 0.000889 -> 0.001423 on a different 16-block calibration draw, inside the released grid's own 0.0009-0.0027 spread; the greater-than headline reproduces: 48 units at sufficiency 0.9 against the Transcoder's 384 (released SWD 48; edges 75,611 vs released 75,327), while necessity costs come out 2-3x the released ones (64 vs 24 units at 0.9)",
       "result": "the released one-unit sufficiency cells for IOI and docstring are a denominator artifact (mean-ablating the whole projection raises the IOI margin, so sufficiency swings from -5.6 to +1.7 across k); SWD's unit and edge advantage on gendered-pronoun reproduces in 20 of 22 runs (32-64 units vs the Transcoder's 128) and survives random-token calibration; the 'matched to TC-12k within 0.001' bucket flips in 10 of 22 runs",
       "audited": "2026-09-03"
     },

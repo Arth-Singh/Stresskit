@@ -1707,9 +1707,13 @@ per run on shared GPUs).
   calibration blocks (upstream drew from FineWeb-Edu files 000–012, here
   file 000), inside the released grid's own spread of 0.0009–0.0027 over
   1k–32k tokens; dense CE 3.2448 → 3.2320 because the held-out block set
-  differs. The greater-than reproduction (the paper's 48-vs-384-unit
-  headline) is a separate run still in progress and will be added to the
-  card as a note.
+  differs. The greater-than family, run once on the base blocks outside the
+  battery (3.8 hours through the upstream per-prompt loop), reproduces the
+  paper's unit headline exactly: sufficiency at 0.9 and 0.95 with 48 units
+  and 75,611 edges against the released SWD's 48 and 75,327 and the
+  Transcoder's 384 and 512 units; at 0.8 it needs 48 units where the
+  released run needs 24, and the necessity targets cost 48, 64 and 96 units
+  against the released 24, 24 and 32.
 - The released frontier says IOI and docstring reach sufficiency ≥ 0.9 with
   one unit for every method. That is a denominator artifact: in the base run
   mean-ablating the whole projection raises the IOI margin (full 3.170,

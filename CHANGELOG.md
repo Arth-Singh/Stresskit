@@ -132,7 +132,9 @@
   denominator artifact of a layer that barely carries those tasks, while the
   unit and edge advantage on gendered-pronoun reproduces in 20 of 22 runs and
   survives a random-token calibration null. Grade C, low confidence at 6
-  runs per axis; the greater-than reproduction is still running.
+  runs per axis; the greater-than headline (48 units against the
+  Transcoder's 384 at sufficiency 0.9) reproduces exactly in a separate
+  3.8-hour run recorded on the card.
 - Added the HARC card (arXiv:2607.00572, `references/run_harc_card.py`): the
   released Llama-3.1-8B-Instruct and Qwen2.5-7B-Instruct LoRA adapters
   audited with upstream's direction extraction, residuals cached once per
