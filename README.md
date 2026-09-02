@@ -1,45 +1,72 @@
 # StressKit
 
-**Offline-verifiable, claim-level audits for mechanistic interpretability.**
+**Offline-verifiable, claim-level stability audits for mechanistic interpretability.**
 
-Wrap any discovery method in one call. Get back a machine-readable Stability
+Wrap a discovery method in one call. Get back a machine-readable Stability
 Card recording whether the finding survives seeds, resampling, prompt
-templates, hyperparameters, and null controls. Diagnostic grades localize
-fragility; a separate conservative profile supports confirmatory pass/fail/
-inconclusive decisions.
-
-V1 adds an autonomous audit pipeline around that preserved diagnostic core:
-cross-provider claim extraction, frozen joint designs, signed resource plans,
-content-addressed raw runs, deterministic reducers, global multiplicity,
-independent reruns, and a verified evidence board. Agents propose audits;
-agents never compute verdicts.
-
-> **Release status:** protocol code and local constructed-case gates are
-> implemented. Public benchmark results and result-bearing preprint remain
-> blocked by claim-map, licensing, smoke, silent-cohort, independent-review, and
-> author-response gates. See `docs/RELEASE_GATES_V1.md`.
-
-## Validation against Neel Nanda's criteria
-
-Current status: verifier mechanics demonstrated; Neel's empirical claims are
-**not verified**. No final external-utility or August claim result is registered
-yet. Three live panel executions are recorded: one rejected unsupported
-wording; one accepted one extractor, rejected another extractor's four
-invented source quotes, and skipped its critic; the ACDC Tracr-reverse panel
-rejected both extractors (three absent anchors and one truncated completion)
-and skipped its critic. Every panel abstained without retry. See the
-[scoped validation report](docs/NEEL_VALIDATION.md),
-[ACDC evidence](benchmark/intake/acdc_tracr_reverse/README.md), and
-[machine-readable N01-N48 registry](benchmark/neel_criteria_v1.json).
-Thought Anchors CoT execution stopped before provider calls because account
-prompt-logging state was not attestable. Its external-utility metadata preflight
-also could not establish independent problem-cluster counts; no labels,
-outcomes, or GPU were used.
-`external_validation: not obtained`.
+templates, hyperparameters and null controls, graded A–D under pre-registered
+checks, and re-derivable offline from its own recorded metrics with
+`stresskit verify`. Diagnostic grades localize fragility; a separate
+conservative profile supports confirmatory pass/fail/inconclusive decisions.
 
 [![CI](https://github.com/Arth-Singh/Stresskit/actions/workflows/ci.yml/badge.svg)](https://github.com/Arth-Singh/Stresskit/actions/workflows/ci.yml)
 ![python](https://img.shields.io/badge/python-3.9%2B-blue)
 ![license](https://img.shields.io/badge/license-MIT-green)
+
+## What it has found so far
+
+17 papers, 43 graded cards, audited between 2026-08-21 and 2026-09-02; 12 of
+the 17 are July/August 2026 arXiv papers that ship licensed code, run through
+their own released code at a pinned commit. The leaderboard below is the
+human-written summary; the generated version (one row per paper, one grade
+badge per card, driven by [`references/papers.json`](references/papers.json))
+is [`SCOREBOARD.md`](SCOREBOARD.md), and the per-paper conclusions with the
+numbers behind every phrase are in [`RESULTS.md`](RESULTS.md). † marks a
+low-confidence grade: at least one check's 95% CI straddles its bar.
+
+| paper | model(s) | grade | what the battery found |
+|---|---|---|---|
+| FolkMotif, cultural awareness represented but not decoded ([2608.02486](https://arxiv.org/abs/2608.02486)) | Llama-3.1-8B-Instruct | **A** | reproduces exactly; the claim never flips, but the Preserved cell count moves 5–83 with the aggregation rule and template |
+| Diff Mining, logit differences reveal finetuning objectives ([2608.26462](https://arxiv.org/abs/2608.26462)) | gemma-3-1b-it × cake_bake LoRA | **A**† | top-100 token set stable across seeds, resamples and corpora (J 0.88–0.97); a scrambled adapter returns garbage |
+| Dissociating the internal representations of sycophancy ([2607.07003](https://arxiv.org/abs/2607.07003)) | Llama-3.1-8B-Instruct | **B**† | the released extractor's lexicographic layer order makes the paper's "final layer" decoder layer 9 of 32; at the best in-domain layer (L12) the probes transfer and "distinct" becomes "shared" |
+| The Communication Map of a Transformer ([2608.22007](https://arxiv.org/abs/2608.22007)) | GPT-2 ×3, GPT-Neo-125m, Pythia ×3 | **B**† | all 21 Table 2 shares reproduce; the abstract's 70–89% holds only pooled per model, 4 of 21 per-channel entries fall outside |
+| Expander sparse autoencoders ([2607.01799](https://arxiv.org/abs/2607.01799)) | Qwen2.5-3B, layer 12 | **A** | CE-recovered ratio 0.80–0.90 over 30 seeds and 30 resamples; k=32 gives 0.66, a mean-ablation denominator 0.77 |
+| CoAx conditional co-ablation, backup heads ([2607.01940](https://arxiv.org/abs/2607.01940)) | GPT-2 small, IOI | **B**† | the no-IOI null recovers the same heads at 0.93–0.97 AUC, so the backup structure is task-general; label-free primaries collapse CoAx to 0.28 / 0.38 while AtP\* stays 0.83 |
+| Activation Model Scanner, Tier-1 safety scan ([2608.05578](https://arxiv.org/abs/2608.05578)) | 14 models of Table I | **C**† | Table I reproduces to two decimals and is a padding artifact: the extractor reads pad-token activations for the 10 right-padded tokenizers; with batch size 1 every model scores σ 4.5–6.7 and nothing is flagged |
+| Certified Interventional Fidelity ([2607.08349](https://arxiv.org/abs/2607.08349)) | GPT-2 small, IOI | **B**† | 30 of 30 shipped rows reproduce; the certified level depends on the prompt template, and the "10–30x" saving is 6.6–7.2x at F0 = 0.8 |
+| Refusal is mediated by a single direction ([2406.11717](https://arxiv.org/abs/2406.11717)) | Llama-3.1-8B, Qwen2.5-7B, Qwen3.5-4B/9B, gemma-4-E4B/12B | **A** to **C** | the causal effect holds on every model (specificity 4–1293x); which direction gets selected is unstable (J 0.18–0.39); two measurement artifacts in the raw completions |
+| SAE causal inertness ([2607.12166](https://arxiv.org/abs/2607.12166)) | toy bottleneck model, TopK SAEs | **C**† | the inert-pair census is unstable (J 0.33); the abstract's headline uses a different denominator than its own sentence |
+| Homonym reconvergence profiles ([2608.01816](https://arxiv.org/abs/2608.01816)) | gpt2, Llama-3.2-3B, Qwen2.5-7B | **B** ×3† | the profile label recurs in 28–32 of 32 runs, but the paper's own sequence-order control produces the same label (specificity 0.88–1.08x) |
+| Truth vs impossibility probes ([2608.12852](https://arxiv.org/abs/2608.12852)) | gemma-3-4b-it | **A** | the double dissociation survives resampling, re-splitting and hyperparameters; specificity 1.84x |
+| Mechanistic tomography, OMP recovery ([2608.19338](https://arxiv.org/abs/2608.19338)) | released HMM observer checkpoint | **C** | bit-exact reproduction; four bin-7 coordinates are real and specific, the support beyond them is not stable (J 0.40) |
+| Jacobian-lens readouts ([anthropics/jacobian-lens](https://github.com/anthropics/jacobian-lens)) | Qwen3.5-0.8B/4B/27B, Qwen3.6-27B | **C** / **B**† | the mid-to-late-band claim is stable (π\* 0.90); which items hit is not (J 0.45–0.49), and a deranged-target null hits more consistently than the real targets |
+| Activation oracles ([2512.15674](https://arxiv.org/abs/2512.15674)) | Qwen3-8B taboo, three released mixtures | **D**, **D**, **C** | accuracy 0.09–0.45 with null hallucination near 0.9; the instrument is prompt-dominated |
+| IOI circuit under attribution patching ([2211.00593](https://arxiv.org/abs/2211.00593)) | GPT-2 small / medium / large | **A** ×3 (two †) | J 0.83–0.95, specificity 1.5–2.3x; no monotone trend with scale, small and large stay undecided after 45 runs |
+| Greater-than circuit under attribution patching ([2305.00586](https://arxiv.org/abs/2305.00586)) | GPT-2 small | **B** | J 0.89 but specificity 1.15x: the head set is nearly as stable on the corrupted null |
+
+How every row is produced ([`references/PROTOCOL.md`](references/PROTOCOL.md)):
+the runner imports the paper's released code unmodified at a pinned commit;
+the finding representation, the claim buckets and the battery are fixed
+before the first battery run and recorded in the runner's docstring; the
+released number, where the paper ships one, is reproduced before anything is
+perturbed and the shipped value sits next to ours on the card; a null control (label shuffle, scrambled
+adapter, corrupted task, deranged targets) goes through the same code path,
+so a "stable" finding also has to beat a finding that cannot be real; every
+grade re-derives from the card's own metrics in CI. Grades measure the
+reliability of a result under defensible variation, not the value of a paper.
+
+## What has not been done
+
+The autonomous v1 audit protocol (cross-provider claim extraction, frozen
+designs, signed resource plans, evidence board; see
+[below](#autonomous-v1-audit-cli)) is protocol code with local gates only. Its
+three live panel executions all abstained, so it has produced no empirical
+result, and nothing in the leaderboard comes from it; the scoped record is
+[`docs/NEEL_VALIDATION.md`](docs/NEEL_VALIDATION.md) and the release gates are
+[`docs/RELEASE_GATES_V1.md`](docs/RELEASE_GATES_V1.md). No card is confirmatory
+evidence in the sense of the conservative profile below; all 43 are diagnostic.
+Several targets were out of budget on shared GPUs and are listed with reasons
+at the end of [`RESULTS.md`](RESULTS.md).
 
 ---
 
@@ -489,25 +516,19 @@ Unanswered fields render as **NOT REPORTED ⚠️** — flagged, never hidden.
 
 ## Diagnostic reference batteries (not confirmatory)
 
-Published findings, legacy diagnostic battery, default thresholds. Full analysis in
-[`references/`](references/README.md); the paper leaderboard (one row per
-audited paper, one grade per card, driven by
+Published findings, diagnostic battery, default thresholds. Full analysis of
+every card in [`references/README.md`](references/README.md); the paper
+leaderboard (one row per audited paper, one grade per card, driven by
 [`references/papers.json`](references/papers.json)) and the per-finding table
 in [`SCOREBOARD.md`](SCOREBOARD.md); per-paper conclusions (what reproduced,
 what survived the battery, what is still running) in [`RESULTS.md`](RESULTS.md).
-Every card is produced under
-[`references/PROTOCOL.md`](references/PROTOCOL.md), re-verified by CI on
-every push (`stresskit verify references/`), and the scoreboard is
-generated from the cards, so neither can drift from the stored diagnostic
-artifacts. These rows are not evidence from the new confirmatory profile.
-
-| finding | method | diagnostic grade | headline |
-|---|---|---|---|
-| IOI circuit, GPT-2 small | attribution patching | **A**, low confidence | structural stability *and* specificity CIs straddle their bars at 45 runs; at n = 6 the grade is a literal coin flip (A 47% / B 53% of subsets), settling only at n = 45 |
-| Greater-Than circuit, GPT-2 small | attribution patching | **B**, high confidence | robustly stable (J CI [0.83, 0.94]) yet decisively fails specificity (CI [1.06, 1.23] vs the 1.5× bar) — the null "circuit" is just as stable |
-| IOI across GPT-2 scale (124M–774M) | attribution patching | A / **A, legacy high-confidence label** / A | no monotone trend: medium is the only diagnostic card whose every CI clears its bar; large is undecided again — instability is model-idiosyncratic, not cured by scale |
-| Activation Oracles, Qwen3-8B taboo | upstream `run_verbalizer` | **D** (two mixtures), **C** (one) | consistency 0.94 across captures vs 0.31 across phrasings; ≥89% fabrication even on a null probe that invites abstention |
-| J-lens workspace readouts, Qwen3.5-4B | released pre-fitted lens | **C** | band claim stable (π\* = 0.90); which items hit is not (J = 0.45), and a derangement null is *more* stable than the real finding |
+Every card is produced under [`references/PROTOCOL.md`](references/PROTOCOL.md),
+re-verified by CI on every push (`stresskit verify references/`), and the
+scoreboard is generated from the cards, so neither can drift from the stored
+diagnostic artifacts. Runners live next to the cards
+(`references/run_*_card.py`) and shard across GPUs with
+`references/battery_shards.py`. These rows are not evidence from the
+confirmatory profile.
 
 ## Design principles
 
@@ -518,11 +539,14 @@ artifacts. These rows are not evidence from the new confirmatory profile.
 
 ## Roadmap
 
-- Reference cards for the refusal direction and additional model scales
-- Run caching and parallel execution for expensive finders
+- Raise every low-confidence grade to a decided one (run counts are being
+  increased card by card; the freshness test keeps the scoreboard in step)
+- The remaining licensed July/August 2026 releases (queue in
+  [`RESULTS.md`](RESULTS.md) and [`references/TARGETS.md`](references/TARGETS.md))
 - Confirmatory estimators for full crossed-grid designs (IID profile ships now)
 - Trajectory batteries: stability across long generations and agent rollouts
-- `stresskit verify`: recompute a card from its config hash
+- A public leaderboard page (the site builds from the registry today; hosting
+  is pending)
 
 ## New: which lens transport is actually better? (2026-08-31)
 

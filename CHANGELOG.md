@@ -92,6 +92,16 @@
   the one-line result, above the per-finding table. A graded card that no
   registry entry claims, a registered path that is not a card, or a card
   listed twice is an error, so the leaderboard cannot silently drop a card.
+- README front door rewritten around the results: the paper leaderboard (17
+  papers, 43 cards) and the method notes now open the file, and the v1
+  autonomous-protocol status moved into a "What has not been done" section
+  that states it has produced no empirical result. The stale five-row
+  reference table and roadmap were replaced. `RESULTS.md` gained a "Sanity
+  checks that changed a headline" section listing the checks (raw-completion
+  reading, vacuous passes, the CoAx seed axis, AMS padding, the sycophancy
+  layer order, FolkMotif's two runs, Communication Map aggregation, the
+  homonym control, the CoAx task-general null) that moved a number during
+  these audits.
 - `stresskit verify` over a directory no longer aborts when one artifact cannot
   be parsed — an unsupported `schema_version` (a card written by a newer
   StressKit) is now reported as a failure for that file and the remaining cards

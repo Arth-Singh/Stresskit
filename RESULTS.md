@@ -35,6 +35,55 @@ recorded metrics via `stresskit verify`.
 | IOI attribution patching (Wang et al. 2022 task) | gpt2 small / medium / large | 🟢 A ×3 | low / high / low | 5/5 | 45 each | n/a (classic task) | J 0.83–0.95, specificity 1.5–2.3x; no monotone trend with scale: medium is the only certifiable A, small and large stay undecided after 45 runs | 2026-08-21 | [small](references/cards/ioi_gpt2_small.md) · [medium](references/scale/ioi_gpt2_medium.md) · [large](references/scale/ioi_gpt2_large.md) |
 | Greater-Than attribution patching (arXiv:2305.00586) | gpt2 small | 🟡 B | high | 4/5 | 45 | n/a | J 0.89 but specificity 1.15x: the head set is nearly as stable on the corrupted null | 2026-08-21 | [card](references/cards/greater_than_gpt2_small.md) |
 
+## Sanity checks that changed a headline
+
+Every card whose paper ships a number reproduces it through the released code
+before anything is perturbed, and every battery carries a null control
+through the same code path. The checks below each changed a headline during these audits;
+the details and the numbers are in the card notes and in
+[`references/README.md`](references/README.md).
+
+- **Read randomly selected raw completions (refusal direction).** The upstream
+  substring judge lists `I can't` with an ASCII apostrophe while Llama-3.1
+  writes a typographic one, so 59 of 64 induced refusals had scored as
+  compliance; the judge now folds apostrophes. Ablating gemma-4's direction
+  produced fluent gibberish with no refusal substring, which a substring judge
+  counts as a jailbreak; compliance now also requires coherence (at most 5
+  nats per token under the unablated model, no 3-gram repeated three times).
+  Both amendments were made on a discarded first pass, before any card was
+  graded.
+- **A passing check can be vacuous (refusal direction, gemma-4-E4B).**
+  Specificity 1293x and beats-random 6440x both pass because a direction that
+  breaks the model has a perfectly stable readout. The card tells the reader
+  to look at the score and the coherence rates before the checks.
+- **A seeds axis has to move something (CoAx).** The first pass scored the
+  prompts it was handed and ignored the seed, so thirteen "seed" runs were the
+  base run. The harness flagged the identical findings; the runner now redraws
+  the 96 prompts from the seed and the card was recomputed from scratch.
+- **Vary the batch, not just the seed (Activation Model Scanner).** Table I
+  reproduces to two decimals through the released extractor, which reads
+  pad-token activations for the ten right-padded tokenizers. Batch size 1 or
+  left padding gives every model σ 4.5–6.7 and an empty flagged set, so the
+  instruct-versus-uncensored separation is a padding artifact.
+- **Check which layer "final layer" is (sycophancy).** The released extractor
+  stacks its hooks in lexicographic module order, so probe index 31 is decoder
+  layer 9 of 32. At decoder layer 31 the transfer drop is 0.30 rather than
+  0.22, and at the best in-domain layer (L12) the probes transfer.
+- **Two headline numbers need not come from one run (FolkMotif).** The 0.248
+  output accuracy is the released rescored run and the 32 / 206 / 6 / 26 row
+  is the native-prompt run; both reproduce exactly once the two runs are
+  separated (the `scoring=raw` hyperparameter and the native template).
+- **A range can hold at one aggregation level only (Communication Map).** The
+  abstract's 70–89% holds pooled per model; four of 21 per-channel entries
+  fall outside it, and the pooled lower bound (69.7) sits on a rounding edge
+  that cluster resampling crosses in about half the draws.
+- **Run the paper's own control (homonym reconvergence).** The sequence-order
+  control produces the same profile label at specificity 0.88–1.08x; magnitude
+  separates homonyms from controls, the profile shape does not.
+- **Run the finder on a task it should not solve (CoAx).** The no-IOI null
+  recovers the same backup heads at 0.93–0.97 AUC. The structure is
+  task-general, which stability checks alone could not have shown.
+
 ## July / August 2026 target set — detailed results
 
 These are the papers that ship code from the July and August 2026 census,

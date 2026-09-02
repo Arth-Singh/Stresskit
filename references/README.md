@@ -3,6 +3,29 @@
 Stability cards and reliability reports for published findings, produced with
 the default battery and thresholds. Each battery has a runner script in this
 directory; artifacts (JSON card, markdown render, badge) live in `cards/`.
+Sections are in the order the batteries were run; the newest work is at the
+bottom. Per-paper conclusions are summarised in [`../RESULTS.md`](../RESULTS.md)
+and the generated leaderboard is [`../SCOREBOARD.md`](../SCOREBOARD.md).
+
+Contents, newest first:
+
+- [Diff Mining, judge-free token-set battery (arXiv:2608.26462)](#august-2026--diff-mining-judge-free-token-set-battery-arxiv260826462)
+- [Dissociating the internal representations of sycophancy (arXiv:2607.07003)](#july-2026--dissociating-the-internal-representations-of-sycophancy-arxiv260707003)
+- [The Communication Map of a Transformer (arXiv:2608.22007)](#august-2026--the-communication-map-of-a-transformer-arxiv260822007)
+- [CoAx backup-head recovery on GPT-2 small (arXiv:2607.01940)](#july-2026--coax-backup-head-recovery-on-gpt-2-small-arxiv260701940)
+- [Expander SAEs on Qwen2.5-3B (arXiv:2607.01799)](#july-2026--expander-saes-on-qwen25-3b-arxiv260701799)
+- [FolkMotif: cultural awareness represented but not decoded (arXiv:2608.02486)](#august-2026--folkmotif-cultural-awareness-represented-but-not-decoded-arxiv260802486)
+- [Activation Model Scanner, Tier-1 safety scan (arXiv:2608.05578)](#august-2026--activation-model-scanner-tier-1-safety-scan-arxiv260805578)
+- [Certified Interventional Fidelity on GPT-2 IOI circuits (arXiv:2607.08349)](#july-2026--certified-interventional-fidelity-on-gpt-2-ioi-circuits-arxiv260708349)
+- [SAE causal inertness (arXiv:2607.12166)](#july-2026--sae-causal-inertness-arxiv260712166)
+- [The refusal direction across six models and three families (arXiv:2406.11717)](#the-refusal-direction-across-six-models-and-three-families-arxiv240611717)
+- [August 2026 papers audited within the month of release: Mechanistic Tomography, truth vs impossibility probes, homonym reconvergence](#august-2026-papers--claims-audited-within-the-month-of-release)
+- [Jacobian-lens readouts / Qwen3.5-4B](#jacobian-lens-readouts--qwen35-4b--workspace-hit-criterion) (scale sweep and lens baselines in [`h200-results/`](h200-results/README.md))
+- [Activation Oracles / Qwen3-8B taboo](#activation-oracles--qwen3-8b-taboo--oracle-reliability)
+- [IOI across GPT-2 scale](#ioi-across-gpt-2-scale--does-stability-improve-with-model-size)
+- [GPT-2 small / Greater-Than](#gpt-2-small--greater-than--attribution-patching)
+- [GPT-2 small / IOI](#gpt-2-small--ioi--attribution-patching)
+
 
 ## GPT-2 small / IOI — attribution patching
 
@@ -20,7 +43,7 @@ random-answer null control. 45 runs.
 | beats random | 14.7× | [13.8, 15.4] | ✅ |
 | specificity (null control) | 1.54× | [1.41, 1.70] | ⚠️ CI straddles the 1.5× bar |
 
-This is the tool's sharpest result. The most-cited circuit in
+This was the tool's first result. The most-cited circuit in
 interpretability lands a point-estimate **A**, but two of its five checks —
 structural stability and specificity — have CIs straddling their bars after
 45 runs, so StressKit marks the grade **low-confidence** and refuses to
