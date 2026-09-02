@@ -1,0 +1,2995 @@
+{
+ "schema_version": "0.1",
+ "frame_id": "july-2026",
+ "status": "candidate_frame_not_frozen",
+ "outcome_blind": true,
+ "generated": "2026-09-01T22:41:23+00:00",
+ "window": {
+  "submitted_from": "2026-07-01",
+  "submitted_to": "2026-07-31",
+  "source": "arXiv API"
+ },
+ "query": {
+  "endpoint": "http://export.arxiv.org/api/query",
+  "field": "all",
+  "terms": {
+   "mechanistic interpretability": 41,
+   "sparse autoencoder": 31,
+   "activation patching": 15,
+   "activation steering": 29,
+   "steering vector": 17,
+   "circuit discovery": 3,
+   "logit lens": 4,
+   "linear probe": 67,
+   "attribution graph": 11,
+   "transcoder": 3,
+   "crosscoder": 0,
+   "causal tracing": 3,
+   "refusal direction": 8,
+   "model diffing": 0,
+   "superposition": 22,
+   "chain of thought": 171,
+   "reasoning trace": 83,
+   "persona": 97,
+   "introspection": 9,
+   "evaluation awareness": 4,
+   "model organism": 13
+  },
+  "category_filter": [
+   "cs.AI",
+   "cs.CL",
+   "cs.CR",
+   "cs.CV",
+   "cs.CY",
+   "cs.IR",
+   "cs.LG",
+   "cs.MA",
+   "cs.NE",
+   "cs.SE",
+   "stat.ML"
+  ],
+  "tier_a_rule": "matched >=1 narrow mechanistic-interpretability term",
+  "tier_b_rule": "matched only broad terms ('linear probe', 'superposition', or one of the six pass-3b terms); retained as a separate stratum, not scored",
+  "narrow_terms": [
+   "mechanistic interpretability",
+   "sparse autoencoder",
+   "activation patching",
+   "activation steering",
+   "steering vector",
+   "circuit discovery",
+   "logit lens",
+   "attribution graph",
+   "transcoder",
+   "crosscoder",
+   "causal tracing",
+   "refusal direction",
+   "model diffing"
+  ],
+  "broad_terms": [
+   "chain of thought",
+   "evaluation awareness",
+   "introspection",
+   "linear probe",
+   "model organism",
+   "persona",
+   "reasoning trace",
+   "superposition"
+  ],
+  "pagination_rule": "this endpoint reports at most 100 totalResults per query, so any window returning 100 rows is halved on a day boundary and re-queried until every sub-window is under the cap",
+  "signal_rule": "a matched term must appear as a case-insensitive substring of the title or abstract; terms matched only through other indexed metadata (comments, journal reference) are dropped"
+ },
+ "code_detection": {
+  "method": "arXiv HTML (v1/v2) full-text scan for repository URLs, then GitHub API existence/license/HEAD checks, then sentence-context classification of each link as an authored release or a cited dependency",
+  "authored_release_rule": "release language in the sentence around the link, or a repository whose name shares a content word with the paper title, with no dependency language",
+  "known_limitation": "papers with no arXiv HTML rendering, or code linked only from a PDF figure or an external project page, can be undercounted",
+  "chrome_exclusion": "arXiv's HTML renderer links github.com/arXiv/html_feedback and github.com/brucemiller/LaTeXML on every page; both are page furniture and are excluded before classification"
+ },
+ "counts": {
+  "arxiv_hits_unique": 685,
+  "after_category_filter": 537,
+  "with_interpretability_signal": 358,
+  "tier_a": 102,
+  "tier_b": 256,
+  "tier_b_matched_pass3b_terms_only": 199,
+  "by_code_status": {
+   "no_repo_hf_links_only": 13,
+   "no_public_code_found": 38,
+   "public_repo": 29,
+   "dependency_links_only": 20,
+   "authored_repo_not_found": 1,
+   "code_promised_not_released": 1
+  },
+  "public_repo_with_spdx_license": 13,
+  "public_repo_without_license": 16
+ },
+ "coverage": {
+  "arxiv_query_truncations": [],
+  "github_rate_limit_events": 0,
+  "tier_a_papers_audited": 102,
+  "tier_a_papers_unaudited": 0,
+  "tier_b_papers_audited": 0
+ },
+ "papers": [
+  {
+   "arxiv_id": "2608.06400",
+   "title": "Beyond Routing Weights: Faithful Response-Level Interpretation of Mixture-of-Experts Reward Models via Contribution Contrast",
+   "published": "2026-07-31",
+   "matched_terms": [
+    "sparse autoencoder"
+   ],
+   "html_source": "html",
+   "code": {
+    "huggingface_refs": [
+     "Qwen/Qwen3-Embedding-8B",
+     "Ray2333/GRM-Llama3.2-3B-rewardmodel-ft",
+     "datasets/hendrydong/preference_700K",
+     "datasets/stanfordnlp/SHP"
+    ],
+    "status": "no_repo_hf_links_only"
+   }
+  },
+  {
+   "arxiv_id": "2608.00218",
+   "title": "A Few Neurons Reveal When LLMs Misuse Tools: Sparse Detection and Selective Steering for Reliable Tool Use",
+   "published": "2026-07-31",
+   "matched_terms": [
+    "activation steering"
+   ],
+   "html_source": "html",
+   "code": {
+    "huggingface_refs": [
+     "datasets/glaiveai/glaive-function-calling-v2"
+    ],
+    "status": "no_repo_hf_links_only"
+   }
+  },
+  {
+   "arxiv_id": "2608.00207",
+   "title": "Bridging the English-Arabic Medical Knowledge Gap: Targeted Low-Rank Adaptation via Causal Layer Selection",
+   "published": "2026-07-31",
+   "matched_terms": [
+    "activation patching"
+   ],
+   "html_source": "html",
+   "code": {
+    "huggingface_refs": [
+     "mistralai/Mistral-Small-3.2-24B-Instruct-2506",
+     "silma-ai/SILMA-9B-Instruct-v1.0"
+    ],
+    "status": "no_repo_hf_links_only"
+   }
+  },
+  {
+   "arxiv_id": "2607.29484",
+   "title": "Evidence-Type Competition: When Can Interventional Data Teach Language Models Causal Direction?",
+   "published": "2026-07-31",
+   "matched_terms": [
+    "activation patching"
+   ],
+   "html_source": "html",
+   "code": {
+    "status": "no_public_code_found"
+   }
+  },
+  {
+   "arxiv_id": "2607.29062",
+   "title": "On the Generalization of Steering Vectors for Chain-of-Thought Faithfulness",
+   "published": "2026-07-31",
+   "matched_terms": [
+    "activation steering",
+    "steering vector",
+    "chain of thought"
+   ],
+   "html_source": "html",
+   "code": {
+    "head_commit_at_discovery": "b96e1d4ed020c2112c32a472a8c90acce99e36e0",
+    "last_push_at_discovery": "2026-08-01",
+    "license_spdx": "MIT",
+    "license_status": "found",
+    "other_authored_repos": [],
+    "repo_created_at": "2026-07-07",
+    "repository": "https://github.com/xocelyk/steering-vectors-for-faithfulness",
+    "status": "public_repo"
+   }
+  },
+  {
+   "arxiv_id": "2607.28906",
+   "title": "Token-Level Diagnosis of Sycophancy in LLMs with Attribution-Guided Steering",
+   "published": "2026-07-31",
+   "matched_terms": [
+    "activation steering",
+    "steering vector"
+   ],
+   "html_source": "html",
+   "code": {
+    "status": "no_public_code_found"
+   }
+  },
+  {
+   "arxiv_id": "2607.28607",
+   "title": "Inducing language models to assert their own consciousness restores human beliefs and values",
+   "published": "2026-07-30",
+   "matched_terms": [
+    "refusal direction"
+   ],
+   "html_source": "html",
+   "code": {
+    "status": "no_public_code_found"
+   }
+  },
+  {
+   "arxiv_id": "2607.28386",
+   "title": "Explaining Image Similarity with Automatically Extracted Concept Activation Vectors",
+   "published": "2026-07-30",
+   "matched_terms": [
+    "sparse autoencoder"
+   ],
+   "html_source": "html",
+   "code": {
+    "status": "no_public_code_found"
+   }
+  },
+  {
+   "arxiv_id": "2607.27910",
+   "title": "A Cross-Architecture Audit of Direction-Based Inference-Time Defences in Vision-Language Models",
+   "published": "2026-07-30",
+   "matched_terms": [
+    "refusal direction"
+   ],
+   "html_source": "html",
+   "code": {
+    "status": "no_public_code_found"
+   }
+  },
+  {
+   "arxiv_id": "2607.27574",
+   "title": "Policy Gradient Steering: Interventions from Behavioral Objectives",
+   "published": "2026-07-30",
+   "matched_terms": [
+    "activation steering"
+   ],
+   "html_source": "html",
+   "code": {
+    "cited_repositories": [
+     "https://github.com/LeelaChessZero/lc0",
+     "https://github.com/Xmaster6y/lczerolens",
+     "https://github.com/astral-sh/uv",
+     "https://github.com/facebookresearch/hydra"
+    ],
+    "status": "dependency_links_only"
+   }
+  },
+  {
+   "arxiv_id": "2607.27404",
+   "title": "ECG-InterpBench: Benchmarking the Interpretability of ECG Foundation Models with Matched-Scale Sparse Autoencoders",
+   "published": "2026-07-29",
+   "matched_terms": [
+    "sparse autoencoder"
+   ],
+   "html_source": "html",
+   "code": {
+    "head_commit_at_discovery": "de4e19d9ee8786eadef9d6530a01d585f933e8fc",
+    "last_push_at_discovery": "2026-07-29",
+    "license_spdx": "MIT",
+    "license_status": "found",
+    "other_authored_repos": [],
+    "repo_created_at": "2026-07-27",
+    "repository": "https://github.com/JayDuan123/2027-kdd-ECG-InterpBench",
+    "status": "public_repo"
+   }
+  },
+  {
+   "arxiv_id": "2607.26411",
+   "title": "Do Unified Multimodal Models Think in One Space? A Lens Through Cross-Branch Steering",
+   "published": "2026-07-29",
+   "matched_terms": [
+    "steering vector"
+   ],
+   "html_source": "html",
+   "code": {
+    "status": "no_public_code_found"
+   }
+  },
+  {
+   "arxiv_id": "2608.11227",
+   "title": "Forecasting Side Effects of Activation Steering",
+   "published": "2026-07-28",
+   "matched_terms": [
+    "activation steering"
+   ],
+   "html_source": "html",
+   "code": {
+    "status": "no_public_code_found"
+   }
+  },
+  {
+   "arxiv_id": "2608.02632",
+   "title": "LLMs Can Annotate Attribution Graphs",
+   "published": "2026-07-28",
+   "matched_terms": [
+    "attribution graph"
+   ],
+   "html_source": "html",
+   "code": {
+    "cited_repositories": [
+     "https://github.com/decoderesearch/circuit-tracer",
+     "https://github.com/maxh119Z/circuit-tracer-automation"
+    ],
+    "status": "dependency_links_only"
+   }
+  },
+  {
+   "arxiv_id": "2607.26326",
+   "title": "Seeing or Knowing? Visual Context Sensitivity in Multimodal Large Language Models",
+   "published": "2026-07-28",
+   "matched_terms": [
+    "activation patching",
+    "steering vector"
+   ],
+   "html_source": "html",
+   "code": {
+    "authored_repositories": [
+     {
+      "http_code": 404,
+      "repository": "https://github.com/jiaangli/visual-context-sensitivity",
+      "status": "not_found"
+     }
+    ],
+    "status": "authored_repo_not_found"
+   }
+  },
+  {
+   "arxiv_id": "2607.25907",
+   "title": "Minimizing Targeted Activations: Input-Only Suppression of Evaluation-Awareness Latents in Large Language Models",
+   "published": "2026-07-28",
+   "matched_terms": [
+    "activation steering"
+   ],
+   "html_source": "html",
+   "code": {
+    "status": "no_public_code_found"
+   }
+  },
+  {
+   "arxiv_id": "2607.25459",
+   "title": "Emergent Latent-State Computation under Stochastic Volatility",
+   "published": "2026-07-28",
+   "matched_terms": [
+    "mechanistic interpretability"
+   ],
+   "html_source": "html",
+   "code": {
+    "cited_repositories": [
+     "https://github.com/LuluWangGitHubt/SVTransformer"
+    ],
+    "status": "dependency_links_only"
+   }
+  },
+  {
+   "arxiv_id": "2607.25270",
+   "title": "Where Steering Signals Come From: Activation Source Selection in Activation Steering",
+   "published": "2026-07-28",
+   "matched_terms": [
+    "activation steering"
+   ],
+   "html_source": "html",
+   "code": {
+    "status": "no_public_code_found"
+   }
+  },
+  {
+   "arxiv_id": "2607.25244",
+   "title": "CADENCE: A Cardiac Atom Dictionary for Interpretable Neural Concept Extraction from ECG Foundation Models",
+   "published": "2026-07-28",
+   "matched_terms": [
+    "sparse autoencoder"
+   ],
+   "html_source": "html",
+   "code": {
+    "cited_repositories": [
+     "https://github.com/JayDuan123/2027-KDD-Ai4s-track-CADENCE"
+    ],
+    "status": "dependency_links_only"
+   }
+  },
+  {
+   "arxiv_id": "2607.25132",
+   "title": "Interpretable GOHR Agents via Sparse Autoencoders",
+   "published": "2026-07-27",
+   "matched_terms": [
+    "sparse autoencoder"
+   ],
+   "html_source": "html",
+   "code": {
+    "status": "no_public_code_found"
+   }
+  },
+  {
+   "arxiv_id": "2607.24706",
+   "title": "SADe: Sparse-Atom Support Decontamination for Few-Shot Segmentation with Weak Support Annotations",
+   "published": "2026-07-27",
+   "matched_terms": [
+    "sparse autoencoder"
+   ],
+   "html_source": "html",
+   "code": {
+    "status": "no_public_code_found"
+   }
+  },
+  {
+   "arxiv_id": "2607.24645",
+   "title": "Sparse Autoencoders Encode Both Concepts and Functions: The Downstream Geometry of Feature Effects",
+   "published": "2026-07-27",
+   "matched_terms": [
+    "sparse autoencoder"
+   ],
+   "html_source": "html",
+   "code": {
+    "cited_repositories": [
+     "https://github.com/UKPLab/FEGA"
+    ],
+    "status": "dependency_links_only"
+   }
+  },
+  {
+   "arxiv_id": "2607.24425",
+   "title": "Context Is King: How In-Context Specification Shapes the Geometry of Concepts",
+   "published": "2026-07-27",
+   "matched_terms": [
+    "activation patching"
+   ],
+   "html_source": "html",
+   "code": {
+    "head_commit_at_discovery": "411c6075ab559170651defa840f761d8721f277a",
+    "last_push_at_discovery": "2026-07-26",
+    "license_spdx": null,
+    "license_status": "not_found",
+    "other_authored_repos": [],
+    "repo_created_at": "2026-07-21",
+    "repository": "https://github.com/eladd-ai/context-is-king",
+    "status": "public_repo"
+   }
+  },
+  {
+   "arxiv_id": "2607.24236",
+   "title": "CAGE: Cognitive Attribution Graphs for Faithful Inline Citation Generation in Long-Form Question Answering",
+   "published": "2026-07-27",
+   "matched_terms": [
+    "attribution graph"
+   ],
+   "html_source": "html",
+   "code": {
+    "huggingface_refs": [
+     "google/t5_xxl_true_nli_mixture"
+    ],
+    "status": "no_repo_hf_links_only"
+   }
+  },
+  {
+   "arxiv_id": "2607.23496",
+   "title": "Do LLMs Know Their Vulnerable Scenarios?",
+   "published": "2026-07-26",
+   "matched_terms": [
+    "mechanistic interpretability",
+    "sparse autoencoder",
+    "refusal direction"
+   ],
+   "html_source": "html",
+   "code": {
+    "status": "no_public_code_found"
+   }
+  },
+  {
+   "arxiv_id": "2607.23289",
+   "title": "Continuous surrogates versus threshold Boolean networks for modeling Arabidopsis ISR gene regulation",
+   "published": "2026-07-25",
+   "matched_terms": [
+    "mechanistic interpretability"
+   ],
+   "html_source": "html",
+   "code": {
+    "head_commit_at_discovery": "0ee6fce49d5def88c026276abd6234c42341343d",
+    "last_push_at_discovery": "2026-04-25",
+    "license_spdx": "MIT",
+    "license_status": "found",
+    "other_authored_repos": [],
+    "repo_created_at": "2026-04-25",
+    "repository": "https://github.com/gruzh/CS_vs_TBN_ISR",
+    "status": "public_repo"
+   }
+  },
+  {
+   "arxiv_id": "2607.23083",
+   "title": "LoRA for Gender-Inclusive Rewriting and Activation Steering for Counter-Narrative Generation",
+   "published": "2026-07-25",
+   "matched_terms": [
+    "activation steering"
+   ],
+   "html_source": "html",
+   "code": {
+    "head_commit_at_discovery": "afabb952348390f9ffe22297a0c17da8d59f983f",
+    "last_push_at_discovery": "2026-03-05",
+    "license_spdx": null,
+    "license_status": "not_found",
+    "other_authored_repos": [],
+    "repo_created_at": "2026-03-05",
+    "repository": "https://github.com/manojbalaji1/IHLC-Gender-Inclusive",
+    "status": "public_repo"
+   }
+  },
+  {
+   "arxiv_id": "2607.23054",
+   "title": "Through the Bottleneck: How Multi-head Latent Attention Separates Content from Position in Language Models",
+   "published": "2026-07-25",
+   "matched_terms": [
+    "mechanistic interpretability"
+   ],
+   "html_source": "html",
+   "code": {
+    "head_commit_at_discovery": "83af99c0b1d9a914b17825453a41eb8a99ac0eff",
+    "last_push_at_discovery": "2026-07-25",
+    "license_spdx": "Apache-2.0",
+    "license_status": "found",
+    "other_authored_repos": [],
+    "repo_created_at": "2025-12-25",
+    "repository": "https://github.com/Dhruvil-sr24/Small-Language-Model-From-Scratch",
+    "status": "public_repo"
+   }
+  },
+  {
+   "arxiv_id": "2607.22013",
+   "title": "Visual Saliency Steering Distillation for Multimodal Chain-of-Thought Reasoning",
+   "published": "2026-07-24",
+   "matched_terms": [
+    "steering vector"
+   ],
+   "html_source": "html",
+   "code": {
+    "head_commit_at_discovery": "0ee6eb0dffac86e852b4e48e18495e4766c88350",
+    "last_push_at_discovery": "2025-12-18",
+    "license_spdx": null,
+    "license_status": "not_found",
+    "other_authored_repos": [],
+    "repo_created_at": "2025-08-24",
+    "repository": "https://github.com/BGWH123/VSSD",
+    "status": "public_repo"
+   }
+  },
+  {
+   "arxiv_id": "2607.21300",
+   "title": "Unlearning Under Imbalance: Benchmarking Fairness in Multimodal LLM Unlearning",
+   "published": "2026-07-23",
+   "matched_terms": [
+    "activation steering"
+   ],
+   "html_source": "html",
+   "code": {
+    "status": "no_public_code_found"
+   }
+  },
+  {
+   "arxiv_id": "2607.20995",
+   "title": "Where Animacy Lives in Large Language Models: Tracing the Circuits of the Animacy Concept",
+   "published": "2026-07-23",
+   "matched_terms": [
+    "circuit discovery"
+   ],
+   "html_source": "html",
+   "code": {
+    "head_commit_at_discovery": "ece768e1c8f9211c4ca9aee04f6515a3bab279a6",
+    "last_push_at_discovery": "2026-07-20",
+    "license_spdx": null,
+    "license_status": "not_found",
+    "other_authored_repos": [],
+    "repo_created_at": "2026-07-20",
+    "repository": "https://github.com/SamuelePunzo/animacy-circuit",
+    "status": "public_repo"
+   }
+  },
+  {
+   "arxiv_id": "2607.20803",
+   "title": "The Geometry of Personality: Activation Steering with Jungian Cognitive Functions",
+   "published": "2026-07-23",
+   "matched_terms": [
+    "activation steering",
+    "steering vector"
+   ],
+   "html_source": "abs",
+   "code": {
+    "huggingface_refs": [
+     "docs/hub/spaces",
+     "huggingface"
+    ],
+    "status": "no_repo_hf_links_only"
+   }
+  },
+  {
+   "arxiv_id": "2607.20778",
+   "title": "Toward Mechanistic Interpretability of an AI Foundation Model Fine-Tuned for Atmospheric Chemistry",
+   "published": "2026-07-22",
+   "matched_terms": [
+    "mechanistic interpretability",
+    "sparse autoencoder"
+   ],
+   "html_source": "html",
+   "code": {
+    "huggingface_refs": [
+     "hujason/aurorascope"
+    ],
+    "status": "no_repo_hf_links_only"
+   }
+  },
+  {
+   "arxiv_id": "2607.20652",
+   "title": "Scaling Interpretable Transformers with Parity Bottleneck Layers",
+   "published": "2026-07-22",
+   "matched_terms": [
+    "sparse autoencoder",
+    "superposition"
+   ],
+   "html_source": "html",
+   "code": {
+    "status": "no_public_code_found"
+   }
+  },
+  {
+   "arxiv_id": "2607.20596",
+   "title": "Are Single-Token Sparse Autoencoder Features Causally Necessary? Layer-Depth and SAE-Family Effects",
+   "published": "2026-07-22",
+   "matched_terms": [
+    "sparse autoencoder"
+   ],
+   "html_source": "html",
+   "code": {
+    "cited_repositories": [
+     "https://github.com/jbloomAus/SAELens"
+    ],
+    "status": "dependency_links_only"
+   }
+  },
+  {
+   "arxiv_id": "2607.20351",
+   "title": "Test-Time Training for Modality Order Consistency in Vision-Language Models",
+   "published": "2026-07-22",
+   "matched_terms": [
+    "activation patching"
+   ],
+   "html_source": "html",
+   "code": {
+    "status": "no_public_code_found"
+   }
+  },
+  {
+   "arxiv_id": "2607.20115",
+   "title": "Understanding the Impact of Linguistic Realization Choices on LLM Stance with Causal Tracing",
+   "published": "2026-07-22",
+   "matched_terms": [
+    "activation patching",
+    "causal tracing"
+   ],
+   "html_source": "html",
+   "code": {
+    "head_commit_at_discovery": "d843b9de4efd660dfbe5085777950565102de556",
+    "last_push_at_discovery": "2026-05-12",
+    "license_spdx": null,
+    "license_status": "not_found",
+    "other_authored_repos": [],
+    "repo_created_at": "2026-04-05",
+    "repository": "https://github.com/nobody294/linguistic_rule_triggers",
+    "status": "public_repo"
+   }
+  },
+  {
+   "arxiv_id": "2607.19806",
+   "title": "OPIUM: Mitigating Steering Externalities and Over-Refusal via Dual Objective Latent Optimization",
+   "published": "2026-07-22",
+   "matched_terms": [
+    "activation steering",
+    "steering vector"
+   ],
+   "html_source": "html",
+   "code": {
+    "status": "no_public_code_found"
+   }
+  },
+  {
+   "arxiv_id": "2608.00035",
+   "title": "Linguistic Context Recodes Visual Representations in Vision-Language Models",
+   "published": "2026-07-21",
+   "matched_terms": [
+    "steering vector"
+   ],
+   "html_source": "html",
+   "code": {
+    "status": "no_public_code_found"
+   }
+  },
+  {
+   "arxiv_id": "2607.19618",
+   "title": "Causal dictionary learning reveals and validates transcription-factor binding features in genomic language models",
+   "published": "2026-07-21",
+   "matched_terms": [
+    "sparse autoencoder"
+   ],
+   "html_source": "html",
+   "code": {
+    "status": "no_public_code_found"
+   }
+  },
+  {
+   "arxiv_id": "2607.19317",
+   "title": "CircuitKIT : Circuit Discovery, Evaluation, and Application Toolkit for Mechanistic Interpretability",
+   "published": "2026-07-21",
+   "matched_terms": [
+    "mechanistic interpretability",
+    "circuit discovery"
+   ],
+   "html_source": "html",
+   "code": {
+    "cited_repositories": [
+     "https://github.com/Lexsi-Labs/CircuitKIT",
+     "https://github.com/TransformerLensOrg/TransformerLens",
+     "https://github.com/UFO-101/auto-circuit"
+    ],
+    "status": "dependency_links_only"
+   }
+  },
+  {
+   "arxiv_id": "2607.18100",
+   "title": "Can We Break LLMs Out of Self-Loops? Fine-Grained Reasoning Control with Activation Steering",
+   "published": "2026-07-20",
+   "matched_terms": [
+    "activation steering",
+    "steering vector",
+    "reasoning trace"
+   ],
+   "html_source": "html",
+   "code": {
+    "status": "no_public_code_found"
+   }
+  },
+  {
+   "arxiv_id": "2607.17994",
+   "title": "HAS: Highlight-guided Attention Steering for Multimodal LLM Video Summarization",
+   "published": "2026-07-20",
+   "matched_terms": [
+    "steering vector"
+   ],
+   "html_source": "html",
+   "code": {
+    "status": "no_public_code_found"
+   }
+  },
+  {
+   "arxiv_id": "2607.17770",
+   "title": "Measuring Monosemanticity in Sparse Autoencoders via Latent Activation Coherence",
+   "published": "2026-07-20",
+   "matched_terms": [
+    "mechanistic interpretability",
+    "sparse autoencoder"
+   ],
+   "html_source": "html",
+   "code": {
+    "cited_repositories": [
+     "https://github.com/KempnerInstitute/overcomplete"
+    ],
+    "status": "dependency_links_only"
+   }
+  },
+  {
+   "arxiv_id": "2607.17524",
+   "title": "Token-Level Off-Policy Learning for Faithful Generation Under Distribution Shift",
+   "published": "2026-07-20",
+   "matched_terms": [
+    "steering vector"
+   ],
+   "html_source": "html",
+   "code": {
+    "status": "no_public_code_found"
+   }
+  },
+  {
+   "arxiv_id": "2607.17427",
+   "title": "Abliteration Is Not a Scalpel: Off-Target Effects of Refusal Removal on Decision Disposition Across Model Families",
+   "published": "2026-07-19",
+   "matched_terms": [
+    "refusal direction"
+   ],
+   "html_source": "html",
+   "code": {
+    "head_commit_at_discovery": "986d28a21cdd7ef53ffabe4a8aa2295b6e6f5951",
+    "last_push_at_discovery": "2026-07-19",
+    "license_spdx": null,
+    "license_status": "not_found",
+    "other_authored_repos": [],
+    "repo_created_at": "2026-07-11",
+    "repository": "https://github.com/oleczek/paper-abliteration-not-a-scalpel",
+    "status": "public_repo"
+   }
+  },
+  {
+   "arxiv_id": "2607.17425",
+   "title": "Decoder-Preserving Sparse Autoencoders: Which Readouts Survive Sparse Compression?",
+   "published": "2026-07-19",
+   "matched_terms": [
+    "sparse autoencoder"
+   ],
+   "html_source": "html",
+   "code": {
+    "head_commit_at_discovery": "92d8c44b24b072ad1d9f85a1e2ce3a20e9af940d",
+    "last_push_at_discovery": "2026-07-19",
+    "license_spdx": null,
+    "license_status": "not_found",
+    "other_authored_repos": [],
+    "repo_created_at": "2026-07-12",
+    "repository": "https://github.com/aniket-desh/decoder-preserving-sae",
+    "status": "public_repo"
+   }
+  },
+  {
+   "arxiv_id": "2607.17117",
+   "title": "Persistent Sparse Autoencoders: Learning Feature Timescales in Language Models",
+   "published": "2026-07-19",
+   "matched_terms": [
+    "sparse autoencoder"
+   ],
+   "html_source": "html",
+   "code": {
+    "huggingface_refs": [
+     "datasets/monology/pile-uncopyrighted"
+    ],
+    "status": "no_repo_hf_links_only"
+   }
+  },
+  {
+   "arxiv_id": "2607.16938",
+   "title": "What Do They See? Interpreting Complex Road Scenarios Through the Eyes of Vision-Language-Action Models for Safe and Trustworthy Autonomous Vehicle Learning",
+   "published": "2026-07-18",
+   "matched_terms": [
+    "mechanistic interpretability"
+   ],
+   "html_source": "html",
+   "code": {
+    "cited_repositories": [
+     "https://github.com/black-forest-labs/flux",
+     "https://github.com/ultralytics/ultralytics"
+    ],
+    "status": "dependency_links_only"
+   }
+  },
+  {
+   "arxiv_id": "2607.16821",
+   "title": "First-Order Predictable but Pairwise Fragile: Local Task Adaptation in Trained Transformers",
+   "published": "2026-07-18",
+   "matched_terms": [
+    "activation steering"
+   ],
+   "html_source": "html",
+   "code": {
+    "huggingface_refs": [
+     "distilbert/distilgpt2"
+    ],
+    "status": "no_repo_hf_links_only"
+   }
+  },
+  {
+   "arxiv_id": "2607.16693",
+   "title": "Are Arithmetic Heuristic Neurons Form-Invariant? A Mechanistic Analysis of Symbols, Text, and Code in LLMs",
+   "published": "2026-07-18",
+   "matched_terms": [
+    "mechanistic interpretability",
+    "activation patching"
+   ],
+   "html_source": "html",
+   "code": {
+    "head_commit_at_discovery": "3e35e298ef68dd12d6f39c60aefcad916e51a26e",
+    "last_push_at_discovery": "2026-07-16",
+    "license_spdx": null,
+    "license_status": "not_found",
+    "other_authored_repos": [],
+    "repo_created_at": "2026-07-16",
+    "repository": "https://github.com/SharathHN/format-invariant-arithmetic",
+    "status": "public_repo"
+   }
+  },
+  {
+   "arxiv_id": "2607.14943",
+   "title": "Steering Robustness into World Action Models via Mechanistic Interpretability and Optimal Control",
+   "published": "2026-07-16",
+   "matched_terms": [
+    "mechanistic interpretability"
+   ],
+   "html_source": "html",
+   "code": {
+    "head_commit_at_discovery": "59dbed234e492e89f0fcee0d18759d2f520ffbf3",
+    "last_push_at_discovery": "2026-07-17",
+    "license_spdx": null,
+    "license_status": "not_found",
+    "other_authored_repos": [],
+    "repo_created_at": "2026-07-12",
+    "repository": "https://github.com/trustworthyrobotics/steering_robustness_WAMs",
+    "status": "public_repo"
+   }
+  },
+  {
+   "arxiv_id": "2607.14791",
+   "title": "Transcoders for Investigating Deception in Language Models",
+   "published": "2026-07-16",
+   "matched_terms": [
+    "mechanistic interpretability",
+    "attribution graph",
+    "transcoder"
+   ],
+   "html_source": "html",
+   "code": {
+    "cited_repositories": [
+     "https://github.com/decoderesearch/circuit-tracer"
+    ],
+    "status": "dependency_links_only"
+   }
+  },
+  {
+   "arxiv_id": "2607.14306",
+   "title": "Tracing LLM Behavior to the Training Data with Empirical Next-Token Distributions",
+   "published": "2026-07-15",
+   "matched_terms": [
+    "mechanistic interpretability"
+   ],
+   "html_source": "html",
+   "code": {
+    "cited_repositories": [
+     "https://github.com/EleutherAI/pythia"
+    ],
+    "status": "dependency_links_only"
+   }
+  },
+  {
+   "arxiv_id": "2607.12474",
+   "title": "From Observation to Insight: Mechanistic World Models and the Quest for Autonomous Discovery",
+   "published": "2026-07-14",
+   "matched_terms": [
+    "mechanistic interpretability"
+   ],
+   "html_source": "html",
+   "code": {
+    "status": "no_public_code_found"
+   }
+  },
+  {
+   "arxiv_id": "2607.12304",
+   "title": "What Does a Temporal Benchmark Score Measure? Decomposing Channel Use in Video VLM Evaluation",
+   "published": "2026-07-14",
+   "matched_terms": [
+    "activation patching"
+   ],
+   "html_source": "html",
+   "code": {
+    "status": "no_public_code_found"
+   }
+  },
+  {
+   "arxiv_id": "2607.16295",
+   "title": "Emergent Hierarchical Monosemantic Neurons from the Group-Contrastive Forward-Forward Algorithm",
+   "published": "2026-07-13",
+   "matched_terms": [
+    "mechanistic interpretability",
+    "sparse autoencoder"
+   ],
+   "html_source": "html",
+   "code": {
+    "status": "no_public_code_found"
+   }
+  },
+  {
+   "arxiv_id": "2607.12166",
+   "title": "From Geometric Recovery to Causal Validation: A Reproducible Audit of Sparse Autoencoder Features, from Superposition Geometry to Causal Inertness",
+   "published": "2026-07-13",
+   "matched_terms": [
+    "sparse autoencoder",
+    "superposition"
+   ],
+   "html_source": "html",
+   "code": {
+    "head_commit_at_discovery": "3915d95549c1ad8d0f5a84fdbed6c7a97ef483ee",
+    "last_push_at_discovery": "2026-07-12",
+    "license_spdx": "MIT",
+    "license_status": "found",
+    "other_authored_repos": [
+     "https://github.com/mohamed-bal/superposition-to-monosemanticity"
+    ],
+    "repo_created_at": "2026-07-10",
+    "repository": "https://github.com/mohamed-bal/sae-causal-audit",
+    "status": "public_repo"
+   }
+  },
+  {
+   "arxiv_id": "2607.12094",
+   "title": "Sparse Autoencoders for Interpretable Out-of-Distribution Detection",
+   "published": "2026-07-13",
+   "matched_terms": [
+    "sparse autoencoder"
+   ],
+   "html_source": "html",
+   "code": {
+    "status": "no_public_code_found"
+   }
+  },
+  {
+   "arxiv_id": "2607.11871",
+   "title": "Inside the Unfair Judge: A Mechanistic Interpretability Account of LLM-as-Judge Bias",
+   "published": "2026-07-13",
+   "matched_terms": [
+    "mechanistic interpretability"
+   ],
+   "html_source": "html",
+   "code": {
+    "huggingface_refs": [
+     "Qwen/Qwen2.5-72B",
+     "meta-llama/Llama-3.1-8B",
+     "meta-llama/Llama-3.3-70B-Instruct"
+    ],
+    "status": "no_repo_hf_links_only"
+   }
+  },
+  {
+   "arxiv_id": "2607.11327",
+   "title": "PRISM Edit: One Vector for All Temporal Answers",
+   "published": "2026-07-13",
+   "matched_terms": [
+    "causal tracing"
+   ],
+   "html_source": "html",
+   "code": {
+    "head_commit_at_discovery": "23d1a021cfe50e26411b3beb43289bedf5728519",
+    "last_push_at_discovery": "2026-08-30",
+    "license_spdx": "MIT",
+    "license_status": "found",
+    "other_authored_repos": [],
+    "repo_created_at": "2026-06-10",
+    "repository": "https://github.com/CheerCHuang/PRISM-Edit",
+    "status": "public_repo"
+   }
+  },
+  {
+   "arxiv_id": "2607.10517",
+   "title": "Conditional Optimal Bridge for Riemannian Activation Steering",
+   "published": "2026-07-12",
+   "matched_terms": [
+    "activation steering"
+   ],
+   "html_source": "html",
+   "code": {
+    "cited_repositories": [
+     "https://github.com/ZhaoHongjue/odesteer",
+     "https://github.com/arshandalili/cobras"
+    ],
+    "status": "dependency_links_only"
+   }
+  },
+  {
+   "arxiv_id": "2607.10226",
+   "title": "When Are Sparse Feature Interventions Actually Localized? Matched Evaluation for SAE-Based Safety Control",
+   "published": "2026-07-11",
+   "matched_terms": [
+    "sparse autoencoder"
+   ],
+   "html_source": "html",
+   "code": {
+    "status": "code_promised_not_released"
+   }
+  },
+  {
+   "arxiv_id": "2607.10221",
+   "title": "Which Neurons Detect Malicious Code? A Probing Study of LLM Security Knowledge",
+   "published": "2026-07-11",
+   "matched_terms": [
+    "mechanistic interpretability"
+   ],
+   "html_source": "html",
+   "code": {
+    "status": "no_public_code_found"
+   }
+  },
+  {
+   "arxiv_id": "2607.10112",
+   "title": "Minionese: Comprehensive Benchmark and Mechanistic Study of Multilingual LLM Safety",
+   "published": "2026-07-11",
+   "matched_terms": [
+    "refusal direction"
+   ],
+   "html_source": "html",
+   "code": {
+    "head_commit_at_discovery": "97642974554c4d1f986c93fd86d295dc390d50fa",
+    "last_push_at_discovery": "2026-06-22",
+    "license_spdx": null,
+    "license_status": "not_found",
+    "other_authored_repos": [],
+    "repo_created_at": "2026-06-22",
+    "repository": "https://github.com/Brentkong/Minionese-Comprehensive-Benchmark-and-Mechanistic-Study-of-Multilingual-LLM-Safety",
+    "status": "public_repo"
+   }
+  },
+  {
+   "arxiv_id": "2607.10034",
+   "title": "MLPs are Hebbians: Constructing Efficient Fact-Storing MLPs for Transformers",
+   "published": "2026-07-10",
+   "matched_terms": [
+    "mechanistic interpretability"
+   ],
+   "html_source": "html",
+   "code": {
+    "head_commit_at_discovery": "41443978d2261f30a9749fe7a286c95be08b331e",
+    "last_push_at_discovery": "2026-07-22",
+    "license_spdx": "Apache-2.0",
+    "license_status": "found",
+    "other_authored_repos": [],
+    "repo_created_at": "2026-07-14",
+    "repository": "https://github.com/HazyResearch/hebbian-mlps",
+    "status": "public_repo"
+   }
+  },
+  {
+   "arxiv_id": "2607.09156",
+   "title": "Activation Steering Transfer to Agents: One Gain Ratio Does Not Identify Potency and Efficacy",
+   "published": "2026-07-10",
+   "matched_terms": [
+    "activation steering"
+   ],
+   "html_source": "html",
+   "code": {
+    "head_commit_at_discovery": "dd1daa8f43f6ce3f6992dde7d13e6210c1531a16",
+    "last_push_at_discovery": "2026-08-25",
+    "license_spdx": null,
+    "license_status": "not_found",
+    "other_authored_repos": [],
+    "repo_created_at": "2026-08-25",
+    "repository": "https://github.com/digdoug/steering-dose-reparametrization",
+    "status": "public_repo"
+   }
+  },
+  {
+   "arxiv_id": "2607.08883",
+   "title": "Optimizing Against Safety Representations: Activation-Guided Adversarial Suffixes and the Geometry of Refusal",
+   "published": "2026-07-09",
+   "matched_terms": [
+    "refusal direction"
+   ],
+   "html_source": "html",
+   "code": {
+    "cited_repositories": [
+     "https://github.com/meta-llama/PurpleLlama"
+    ],
+    "status": "dependency_links_only"
+   }
+  },
+  {
+   "arxiv_id": "2607.08843",
+   "title": "How are linear representations learned? Exact solutions to the dynamics of abstraction",
+   "published": "2026-07-09",
+   "matched_terms": [
+    "activation steering",
+    "linear probe"
+   ],
+   "html_source": "html",
+   "code": {
+    "status": "no_public_code_found"
+   }
+  },
+  {
+   "arxiv_id": "2607.08605",
+   "title": "When Structured Sparse Autoencoders Learn Consistent Concepts Across Modalities",
+   "published": "2026-07-09",
+   "matched_terms": [
+    "mechanistic interpretability",
+    "sparse autoencoder"
+   ],
+   "html_source": "html",
+   "code": {
+    "cited_repositories": [
+     "https://github.com/RUCAIBox/Slow_Thinking_with_LLMs",
+     "https://github.com/huggingface/lighteval",
+     "https://github.com/huggingface/open-r1",
+     "https://github.com/liaoweiduo/s2ae"
+    ],
+    "status": "dependency_links_only"
+   }
+  },
+  {
+   "arxiv_id": "2607.08499",
+   "title": "Cross-seed explainability using Procrustes-conditioned Joint End-to-end Top-K Sparse Autoencoders",
+   "published": "2026-07-09",
+   "matched_terms": [
+    "mechanistic interpretability",
+    "sparse autoencoder"
+   ],
+   "html_source": "html",
+   "code": {
+    "cited_repositories": [
+     "https://github.com/ApolloResearch/e2e_sae"
+    ],
+    "status": "dependency_links_only"
+   }
+  },
+  {
+   "arxiv_id": "2607.08349",
+   "title": "Certified Interventional Fidelity: Anytime-Valid, Adaptive Evaluation of Causal Claims in Mechanistic Interpretability",
+   "published": "2026-07-09",
+   "matched_terms": [
+    "mechanistic interpretability"
+   ],
+   "html_source": "html",
+   "code": {
+    "head_commit_at_discovery": "4b8359f5d0ef5fc3d2e4d1f93026b8f55160e339",
+    "last_push_at_discovery": "2026-07-09",
+    "license_spdx": "MIT",
+    "license_status": "found",
+    "other_authored_repos": [],
+    "repo_created_at": "2026-07-07",
+    "repository": "https://github.com/AsiaeeLab/certified-interventional-fidelity",
+    "status": "public_repo"
+   }
+  },
+  {
+   "arxiv_id": "2607.07903",
+   "title": "Mechanistic Interpretability of LLM Jailbreaks via Internal Attribution Graphs",
+   "published": "2026-07-08",
+   "matched_terms": [
+    "mechanistic interpretability",
+    "attribution graph"
+   ],
+   "html_source": "html",
+   "code": {
+    "status": "no_public_code_found"
+   }
+  },
+  {
+   "arxiv_id": "2607.07316",
+   "title": "Mechanistic Interpretability for Neural Networks: Circuits, Sparse Features and Symbolic Reasoning",
+   "published": "2026-07-08",
+   "matched_terms": [
+    "mechanistic interpretability",
+    "sparse autoencoder",
+    "steering vector",
+    "transcoder",
+    "superposition"
+   ],
+   "html_source": "html",
+   "code": {
+    "cited_repositories": [
+     "https://github.com/TransformerLensOrg/TransformerLens"
+    ],
+    "status": "dependency_links_only"
+   }
+  },
+  {
+   "arxiv_id": "2607.07003",
+   "title": "Dissociating the Internal Representations of Sycophancy in LLMs",
+   "published": "2026-07-08",
+   "matched_terms": [
+    "steering vector",
+    "linear probe"
+   ],
+   "html_source": "html",
+   "code": {
+    "head_commit_at_discovery": "47e02ef106896fdf45f7a13e86e306f118f109ac",
+    "last_push_at_discovery": "2026-08-13",
+    "license_spdx": "MIT",
+    "license_status": "found",
+    "other_authored_repos": [],
+    "repo_created_at": "2026-08-13",
+    "repository": "https://github.com/antbaez/dissociating-sycophancy",
+    "status": "public_repo"
+   }
+  },
+  {
+   "arxiv_id": "2607.06845",
+   "title": "LLMs Silently Correct African American English: Auditing and Mitigating Dialect Bias via Activation Steering",
+   "published": "2026-07-07",
+   "matched_terms": [
+    "activation steering",
+    "causal tracing"
+   ],
+   "html_source": "html",
+   "code": {
+    "status": "no_public_code_found"
+   }
+  },
+  {
+   "arxiv_id": "2607.05790",
+   "title": "Controlling Tool Use with Heading-Specific Activation Steering",
+   "published": "2026-07-07",
+   "matched_terms": [
+    "activation steering",
+    "steering vector"
+   ],
+   "html_source": "html",
+   "code": {
+    "status": "no_public_code_found"
+   }
+  },
+  {
+   "arxiv_id": "2607.05615",
+   "title": "A Coin Flip Per Token: Bernoulli Sparse Steering of Large Language Models",
+   "published": "2026-07-06",
+   "matched_terms": [
+    "sparse autoencoder",
+    "activation steering"
+   ],
+   "html_source": "html",
+   "code": {
+    "huggingface_refs": [
+     "EleutherAI/sae-llama-3.1-8b-32x",
+     "blog/mlabonne/sae-feature-steering",
+     "j-hartmann/emotion-english-distilroberta-base",
+     "s-nlp/roberta_toxicity_classifier"
+    ],
+    "status": "no_repo_hf_links_only"
+   }
+  },
+  {
+   "arxiv_id": "2607.05587",
+   "title": "A Mechanistic Lens on Semantic Conflicts: Using Activation Patching to Understand LLM Behavior",
+   "published": "2026-07-06",
+   "matched_terms": [
+    "activation patching"
+   ],
+   "html_source": "html",
+   "code": {
+    "head_commit_at_discovery": "2af88064d2625e33b625be3c98faf072f09c04d5",
+    "last_push_at_discovery": "2026-07-02",
+    "license_spdx": "CC-BY-SA-4.0",
+    "license_status": "found",
+    "other_authored_repos": [],
+    "repo_created_at": "2026-06-29",
+    "repository": "https://github.com/brains-on-code/mechanistic-interpretability-semantic-conflicts",
+    "status": "public_repo"
+   }
+  },
+  {
+   "arxiv_id": "2607.05188",
+   "title": "Latent Programming Horizons in Coding Agents",
+   "published": "2026-07-06",
+   "matched_terms": [
+    "mechanistic interpretability"
+   ],
+   "html_source": "html",
+   "code": {
+    "cited_repositories": [
+     "https://github.com/ASSERT-KTH/program-probes"
+    ],
+    "status": "dependency_links_only"
+   }
+  },
+  {
+   "arxiv_id": "2607.05013",
+   "title": "Knowledge Knows, Verbalization Tells: Disentangling Latent Directions for Mathematical Solvability in LLMs",
+   "published": "2026-07-06",
+   "matched_terms": [
+    "activation steering"
+   ],
+   "html_source": "html",
+   "code": {
+    "huggingface_refs": [
+     "datasets/AI-MO/aimo-validation-aime",
+     "datasets/AI-MO/aimo-validation-amc",
+     "datasets/math-ai/minervamath"
+    ],
+    "status": "no_repo_hf_links_only"
+   }
+  },
+  {
+   "arxiv_id": "2607.04846",
+   "title": "Pretraining Curricula Enable Selective Fine-tuning",
+   "published": "2026-07-06",
+   "matched_terms": [
+    "activation patching"
+   ],
+   "html_source": "html",
+   "code": {
+    "head_commit_at_discovery": null,
+    "last_push_at_discovery": "2026-07-03",
+    "license_spdx": null,
+    "license_status": "not_found",
+    "other_authored_repos": [],
+    "repo_created_at": "2026-07-03",
+    "repository": "https://github.com/kjsandbrink/alignment-dynamics",
+    "status": "public_repo"
+   }
+  },
+  {
+   "arxiv_id": "2607.04593",
+   "title": "TORINO: Token Reduction via Interpretable Concept Overlap in Vision-Language Models",
+   "published": "2026-07-06",
+   "matched_terms": [
+    "sparse autoencoder"
+   ],
+   "html_source": "html",
+   "code": {
+    "status": "no_public_code_found"
+   }
+  },
+  {
+   "arxiv_id": "2607.04222",
+   "title": "Unsupervised Features Mining via Activation Geometry",
+   "published": "2026-07-05",
+   "matched_terms": [
+    "activation steering"
+   ],
+   "html_source": "html",
+   "code": {
+    "status": "no_public_code_found"
+   }
+  },
+  {
+   "arxiv_id": "2607.04167",
+   "title": "Geometry of Ordinal Representations in Language Models",
+   "published": "2026-07-05",
+   "matched_terms": [
+    "activation patching"
+   ],
+   "html_source": "html",
+   "code": {
+    "status": "no_public_code_found"
+   }
+  },
+  {
+   "arxiv_id": "2607.02964",
+   "title": "Individual Parameters in Weight-Sparse Transformers Appear Interpretable",
+   "published": "2026-07-03",
+   "matched_terms": [
+    "mechanistic interpretability"
+   ],
+   "html_source": "html",
+   "code": {
+    "huggingface_refs": [
+     "datasets/transformersbook/codeparrot"
+    ],
+    "status": "no_repo_hf_links_only"
+   }
+  },
+  {
+   "arxiv_id": "2607.02800",
+   "title": "Induction Heads Interpolate N-Grams",
+   "published": "2026-07-02",
+   "matched_terms": [
+    "mechanistic interpretability"
+   ],
+   "html_source": "html",
+   "code": {
+    "status": "no_public_code_found"
+   }
+  },
+  {
+   "arxiv_id": "2607.02755",
+   "title": "Out-of-Distribution Generalization of Risk Aversion in Language Models",
+   "published": "2026-07-02",
+   "matched_terms": [
+    "activation steering"
+   ],
+   "html_source": "html",
+   "code": {
+    "cited_repositories": [
+     "https://github.com/EleutherAI/lm-evaluation-harness",
+     "https://github.com/riskaverseAIs/riskaverseAIs"
+    ],
+    "status": "dependency_links_only"
+   }
+  },
+  {
+   "arxiv_id": "2607.02494",
+   "title": "Towards Robustness against Typographic Attack with Training-free Concept Localization",
+   "published": "2026-07-02",
+   "matched_terms": [
+    "mechanistic interpretability"
+   ],
+   "html_source": "html",
+   "code": {
+    "cited_repositories": [
+     "https://github.com/Liu-524/SamplingTAR"
+    ],
+    "status": "dependency_links_only"
+   }
+  },
+  {
+   "arxiv_id": "2607.01951",
+   "title": "Robust for the Wrong Reasons: The Representational Geometry of LLM Robustness to Science Skepticism",
+   "published": "2026-07-02",
+   "matched_terms": [
+    "activation patching",
+    "linear probe"
+   ],
+   "html_source": "html",
+   "code": {
+    "status": "no_public_code_found"
+   }
+  },
+  {
+   "arxiv_id": "2607.01940",
+   "title": "Conditional Co-Ablation: Recovering Self-Repair Backups in Transformer Circuits",
+   "published": "2026-07-02",
+   "matched_terms": [
+    "mechanistic interpretability"
+   ],
+   "html_source": "html",
+   "code": {
+    "head_commit_at_discovery": "1c04682d705926cf11d23729ee3bf25c19071dd9",
+    "last_push_at_discovery": "2026-08-31",
+    "license_spdx": "MIT",
+    "license_status": "found",
+    "other_authored_repos": [],
+    "repo_created_at": "2026-07-02",
+    "repository": "https://github.com/GongZhiren/Conditional-Co-Ablation",
+    "status": "public_repo"
+   }
+  },
+  {
+   "arxiv_id": "2607.01802",
+   "title": "On the Limits of Steering Vectors for Preference-Aligned Generation",
+   "published": "2026-07-02",
+   "matched_terms": [
+    "steering vector"
+   ],
+   "html_source": "html",
+   "code": {
+    "head_commit_at_discovery": "2b11c176ca2d5b9684762a71f0d2676da058be3f",
+    "last_push_at_discovery": "2026-06-11",
+    "license_spdx": null,
+    "license_status": "not_found",
+    "other_authored_repos": [],
+    "repo_created_at": "2026-05-26",
+    "repository": "https://github.com/melaniesubbiah/steering-vectors",
+    "status": "public_repo"
+   }
+  },
+  {
+   "arxiv_id": "2607.01799",
+   "title": "Expander Sparse Autoencoders: Parameter-Efficient Dictionaries for Mechanistic Interpretability",
+   "published": "2026-07-02",
+   "matched_terms": [
+    "mechanistic interpretability",
+    "sparse autoencoder"
+   ],
+   "html_source": "html",
+   "code": {
+    "head_commit_at_discovery": "598f59a6dd4cb6b4e0130763868253882ed87ebe",
+    "last_push_at_discovery": "2026-07-02",
+    "license_spdx": "MIT",
+    "license_status": "found",
+    "other_authored_repos": [],
+    "repo_created_at": "2026-07-02",
+    "repository": "https://github.com/rodrgo/expander-sae",
+    "status": "public_repo"
+   }
+  },
+  {
+   "arxiv_id": "2608.20393",
+   "title": "Knowledge-Graph-Gated Defactualization for Style-Controllable and Fact-Preserving Generation in Agentic Conversational AI",
+   "published": "2026-07-01",
+   "matched_terms": [
+    "activation steering",
+    "steering vector"
+   ],
+   "html_source": "html",
+   "code": {
+    "head_commit_at_discovery": "ed1e8c0e62c183f313b38b094a9ba3f095f0254b",
+    "last_push_at_discovery": "2026-07-02",
+    "license_spdx": null,
+    "license_status": "not_found",
+    "other_authored_repos": [],
+    "repo_created_at": "2026-06-30",
+    "repository": "https://github.com/Tanmay-IITDSAI/KG-Gated-Defactualization",
+    "status": "public_repo"
+   }
+  },
+  {
+   "arxiv_id": "2607.19386",
+   "title": "Building Fast, Evaluating Slow: Pipeline Choices Dominate Autointerpretability Score Variance",
+   "published": "2026-07-01",
+   "matched_terms": [
+    "sparse autoencoder"
+   ],
+   "html_source": "html",
+   "code": {
+    "huggingface_refs": [
+     "datasets/codeparrot/github-code"
+    ],
+    "status": "no_repo_hf_links_only"
+   }
+  },
+  {
+   "arxiv_id": "2607.01433",
+   "title": "CreativityNeuro: Steering Language Model Weights to Improve Divergent Thinking and Reduce Mode Collapse",
+   "published": "2026-07-01",
+   "matched_terms": [
+    "activation steering"
+   ],
+   "html_source": "html",
+   "code": {
+    "status": "no_public_code_found"
+   }
+  },
+  {
+   "arxiv_id": "2607.01336",
+   "title": "Mechanistic Interpretability and Causal Feature Steering of Neural Quantum States via Sparse Autoencoders",
+   "published": "2026-07-01",
+   "matched_terms": [
+    "mechanistic interpretability",
+    "sparse autoencoder"
+   ],
+   "html_source": "html",
+   "code": {
+    "status": "no_public_code_found"
+   }
+  },
+  {
+   "arxiv_id": "2607.01147",
+   "title": "EquiSteer: Cross-Attention Steering Towards a Fairer Text-Guided Image Generation",
+   "published": "2026-07-01",
+   "matched_terms": [
+    "steering vector"
+   ],
+   "html_source": "html",
+   "code": {
+    "head_commit_at_discovery": "1a50487366628106f623fc40dc8b9f8d7bf8386c",
+    "last_push_at_discovery": "2026-07-02",
+    "license_spdx": null,
+    "license_status": "not_found",
+    "other_authored_repos": [],
+    "repo_created_at": "2025-10-06",
+    "repository": "https://github.com/Atmyre/EquiSteer",
+    "status": "public_repo"
+   }
+  },
+  {
+   "arxiv_id": "2607.01033",
+   "title": "The Model Organism Lottery: Model Organism Interpretability Strongly Depends on Training Methodology",
+   "published": "2026-07-01",
+   "matched_terms": [
+    "sparse autoencoder",
+    "activation steering",
+    "logit lens",
+    "model organism"
+   ],
+   "html_source": "html",
+   "code": {
+    "head_commit_at_discovery": "9384b9231580f43c77a5f9bf7a7339750b15ab5c",
+    "last_push_at_discovery": "2026-08-21",
+    "license_spdx": null,
+    "license_status": "not_found",
+    "other_authored_repos": [],
+    "repo_created_at": "2026-02-02",
+    "repository": "https://github.com/model-organisms-for-real/model-organism-lottery",
+    "status": "public_repo"
+   }
+  },
+  {
+   "arxiv_id": "2607.00946",
+   "title": "A Geometric Perspective on Composable Emotion Steering in Text-to-Speech Models",
+   "published": "2026-07-01",
+   "matched_terms": [
+    "activation steering"
+   ],
+   "html_source": "html",
+   "code": {
+    "status": "no_public_code_found"
+   }
+  },
+  {
+   "arxiv_id": "2607.00572",
+   "title": "HARC: Coupling Harmfulness and Refusal Directions for Robust Safety Alignment",
+   "published": "2026-07-01",
+   "matched_terms": [
+    "refusal direction"
+   ],
+   "html_source": "html",
+   "code": {
+    "head_commit_at_discovery": "c3565e5cbda11c4b696a76fa04fd9fee1337c402",
+    "last_push_at_discovery": "2026-08-27",
+    "license_spdx": "MIT",
+    "license_status": "found",
+    "other_authored_repos": [],
+    "repo_created_at": "2026-05-21",
+    "repository": "https://github.com/microsoft/HARC",
+    "status": "public_repo"
+   }
+  },
+  {
+   "arxiv_id": "2607.00415",
+   "title": "A Mechanistic View of Authority Hierarchy in LLM Sycophancy",
+   "published": "2026-07-01",
+   "matched_terms": [
+    "logit lens",
+    "persona"
+   ],
+   "html_source": "html",
+   "code": {
+    "cited_repositories": [
+     "https://github.com/TransformerLensOrg/TransformerLens"
+    ],
+    "status": "dependency_links_only"
+   }
+  }
+ ],
+ "tier_b_papers": [
+  {
+   "arxiv_id": "2608.11241",
+   "title": "RecSys Factory: Bounding LLM Agent Autonomy to Decision Points in the Industrial Recommender Lifecycle",
+   "published": "2026-07-31"
+  },
+  {
+   "arxiv_id": "2608.02648",
+   "title": "Intent-Level Quantum Programming with Assertion-Guided Execution and Inspectable Intermediate Representation",
+   "published": "2026-07-31"
+  },
+  {
+   "arxiv_id": "2608.00200",
+   "title": "TRACE-TS: Attribution-Grounded and Traceable Sensor-Language Reasoning for Human Activity Understanding",
+   "published": "2026-07-31"
+  },
+  {
+   "arxiv_id": "2607.29185",
+   "title": "Learning Latent Reasoning Traces for Scalar Reward Models End-to-End",
+   "published": "2026-07-31"
+  },
+  {
+   "arxiv_id": "2607.29010",
+   "title": "EvoReason: Self-Evolving Reasoning Primitive-Guided On-Policy Distillation for Latent Reasoning in Generative Recommendation",
+   "published": "2026-07-31"
+  },
+  {
+   "arxiv_id": "2607.28966",
+   "title": "BLADE: Boundary-Expanded and Layer-Adaptive Dynamic Exit for Efficient LLM Reasoning",
+   "published": "2026-07-31"
+  },
+  {
+   "arxiv_id": "2608.14651",
+   "title": "Evaluating Multimodal LLMs across Text and Audio Modalities for Accessible Disaster Assistance",
+   "published": "2026-07-30"
+  },
+  {
+   "arxiv_id": "2608.00090",
+   "title": "Rethinking Total Absorption Gamma Spectroscopy Deconvolution: Supervised Machine Learning vs Response-Matrix Methods",
+   "published": "2026-07-30"
+  },
+  {
+   "arxiv_id": "2607.28818",
+   "title": "Best Friends, Not Forever: Evaluating Long-Horizon Persona Collapse and Behavioral Drift in AI Companions",
+   "published": "2026-07-30"
+  },
+  {
+   "arxiv_id": "2607.28801",
+   "title": "Benchmarks Are Not Monolithic: Sample-Level Auditing and Orchestration for LLM Evaluation",
+   "published": "2026-07-30"
+  },
+  {
+   "arxiv_id": "2607.28576",
+   "title": "Sample More, Reflect Less: Self-Refine and Reflexion Lose to Repeated Sampling at Equal Token Cost, from 1.5B to 7B",
+   "published": "2026-07-30"
+  },
+  {
+   "arxiv_id": "2607.28466",
+   "title": "A report-grounded vision-language foundation model for colonoscopy from 280000 routine reports",
+   "published": "2026-07-30"
+  },
+  {
+   "arxiv_id": "2607.28464",
+   "title": "Can Vision-Language Models Reason about AI Edits in Images?",
+   "published": "2026-07-30"
+  },
+  {
+   "arxiv_id": "2607.28460",
+   "title": "Cybersecurity Detection Classification with Reasoning-enabled Language Models",
+   "published": "2026-07-30"
+  },
+  {
+   "arxiv_id": "2607.28439",
+   "title": "Beyond a Single Judge: The Evidence-Grounded, Social-Weighted Persona Panel for Generative UI Evaluation",
+   "published": "2026-07-30"
+  },
+  {
+   "arxiv_id": "2607.28347",
+   "title": "LLMs struggle to simulate human belief updates in controlled environments",
+   "published": "2026-07-30"
+  },
+  {
+   "arxiv_id": "2607.28154",
+   "title": "OPLD: On-Policy Latent Distillation for Multimodal Reasoning",
+   "published": "2026-07-30"
+  },
+  {
+   "arxiv_id": "2607.28146",
+   "title": "Can Agents Deceive? Evaluating Reasoning and Deception in ParliamentBench using a Social Deduction Game",
+   "published": "2026-07-30"
+  },
+  {
+   "arxiv_id": "2607.27553",
+   "title": "AI and Its Impact on Creativity and Diversity: An Empirical Study of LLM-Generated Product Ideas",
+   "published": "2026-07-30"
+  },
+  {
+   "arxiv_id": "2608.00072",
+   "title": "Volcanic Clouds Detection through QCNN and Geostationary Satellite Multispectral Imagery",
+   "published": "2026-07-29"
+  },
+  {
+   "arxiv_id": "2607.27512",
+   "title": "Belief Coevolution in a Social Network of Generalist and Specialist Large Language Models",
+   "published": "2026-07-29"
+  },
+  {
+   "arxiv_id": "2607.27384",
+   "title": "Same Facts, Different Diagnosis: Measuring and Mitigating Narrative Anchoring in Clinical Language Models",
+   "published": "2026-07-29"
+  },
+  {
+   "arxiv_id": "2607.27380",
+   "title": "VideoCoCo: Code-as-CoT for Physically-Consistent Video Generation via an Agentic Dual-Engine System",
+   "published": "2026-07-29"
+  },
+  {
+   "arxiv_id": "2607.27379",
+   "title": "HSS-Synth: Humanities and Social Sciences Data Synthesis for LLMs",
+   "published": "2026-07-29"
+  },
+  {
+   "arxiv_id": "2607.27366",
+   "title": "BridgeAlign: Bridging Preference Alignment for Humanities and Social Sciences",
+   "published": "2026-07-29"
+  },
+  {
+   "arxiv_id": "2607.26977",
+   "title": "TREK: A Travel Reasoning and Evaluation Kit for LLM Agents in Complex Trip Planning",
+   "published": "2026-07-29"
+  },
+  {
+   "arxiv_id": "2607.26899",
+   "title": "Human diversity fuels collective creativity that large language models cannot simulate or sustain",
+   "published": "2026-07-29"
+  },
+  {
+   "arxiv_id": "2607.26608",
+   "title": "Understanding Knowledge Transfer Mechanism in Heterogeneous MLLM Fusion: A Simple Linear Approach",
+   "published": "2026-07-29"
+  },
+  {
+   "arxiv_id": "2607.26545",
+   "title": "A Persona-based Rate Action Index",
+   "published": "2026-07-29"
+  },
+  {
+   "arxiv_id": "2607.26473",
+   "title": "Learning Dynamic User Personas from Implicit Interaction Streams via Iterative Refinement",
+   "published": "2026-07-29"
+  },
+  {
+   "arxiv_id": "2607.26470",
+   "title": "CMT-RAG: Complementary Memory Traces for Multi-turn Multi-hop RAG",
+   "published": "2026-07-29"
+  },
+  {
+   "arxiv_id": "2607.26244",
+   "title": "Do Code Language Models Use Tests? A Behavioral and Representational Study of Test-Driven Code Generation",
+   "published": "2026-07-28"
+  },
+  {
+   "arxiv_id": "2607.26173",
+   "title": "Shared SFT Lessons Across Alignment, Model Organisms, and Toy Models",
+   "published": "2026-07-28"
+  },
+  {
+   "arxiv_id": "2607.26119",
+   "title": "Probing the Origins of Reasoning Performance: Representational Quality for Mathematical Problem-Solving in RL vs. SFT Fine-Tuned Models",
+   "published": "2026-07-28"
+  },
+  {
+   "arxiv_id": "2607.26102",
+   "title": "A Reference-Free Score for Detecting Silent Reasoning Failures in Large Language Models",
+   "published": "2026-07-28"
+  },
+  {
+   "arxiv_id": "2607.25936",
+   "title": "From Role Prompt to Infinite Thinking: Exploiting Persona Conditioning for Inference Cost Attacks in LLMs",
+   "published": "2026-07-28"
+  },
+  {
+   "arxiv_id": "2607.25915",
+   "title": "Penelope: Localized Latent Recurrence for Efficient Structured Reasoning",
+   "published": "2026-07-28"
+  },
+  {
+   "arxiv_id": "2607.25765",
+   "title": "WorkSurface-Bench: Benchmarking Enterprise Agents on Multi-Surface Knowledge Routing",
+   "published": "2026-07-28"
+  },
+  {
+   "arxiv_id": "2607.25497",
+   "title": "A Distributional Robustness Margin For Pathology Foundation Models",
+   "published": "2026-07-28"
+  },
+  {
+   "arxiv_id": "2607.25423",
+   "title": "From Dyad to Triad: Eliciting XAI Requirements in Stroke Rehabilitation",
+   "published": "2026-07-28"
+  },
+  {
+   "arxiv_id": "2607.25364",
+   "title": "Explanation-Bound Tool Execution for AI Agents: Server-Verified Action Claims Without Trusting Model Rationales",
+   "published": "2026-07-28"
+  },
+  {
+   "arxiv_id": "2607.25292",
+   "title": "Instruction-Tuned Language Models Cannot Sample from Distributions They Can Describe",
+   "published": "2026-07-28"
+  },
+  {
+   "arxiv_id": "2607.25218",
+   "title": "Everyone is unique: Towards Behaviorally Heterogeneous Negotiation Dialogue Systems for Debt Collection",
+   "published": "2026-07-28"
+  },
+  {
+   "arxiv_id": "2607.25182",
+   "title": "TabRank: Chain-of-Thought Distillation for Table Re-Rankers",
+   "published": "2026-07-28"
+  },
+  {
+   "arxiv_id": "2607.25069",
+   "title": "DS@GT ARC at CheckThat! 2026: LLM-Based Trace Ranking and Grouped Reward Modeling for Multilingual Numerical Claim Verification",
+   "published": "2026-07-27"
+  },
+  {
+   "arxiv_id": "2607.25066",
+   "title": "Addressable Recall Compaction for Long Context-Window Control in AI Agents",
+   "published": "2026-07-27"
+  },
+  {
+   "arxiv_id": "2607.24341",
+   "title": "Simulating Tenant Responses to Energy Policy Interventions with Transaction-Cost-Aware LLM Agent",
+   "published": "2026-07-27"
+  },
+  {
+   "arxiv_id": "2607.24312",
+   "title": "CONSISTRE: A Unified Consistency-Aware Framework for Document-Level Relation Extraction with Large Language Models",
+   "published": "2026-07-27"
+  },
+  {
+   "arxiv_id": "2607.24194",
+   "title": "Face Age Verification Vulnerabilities Under Simple Appearance Manipulations",
+   "published": "2026-07-27"
+  },
+  {
+   "arxiv_id": "2607.24191",
+   "title": "StanceFlip: A Comprehensive Multi-Dimensional Benchmark for Multimodal Conversational Stance Flipping Forecasting",
+   "published": "2026-07-27"
+  },
+  {
+   "arxiv_id": "2608.24912",
+   "title": "Analyzing and Correcting Benevolence Bias in Large Language Models",
+   "published": "2026-07-26"
+  },
+  {
+   "arxiv_id": "2607.23538",
+   "title": "Guiding Language Models to Be More Empathetic: Culturally Sensitive Mental Health Advice Generation Through Human-LLM Collaboration",
+   "published": "2026-07-26"
+  },
+  {
+   "arxiv_id": "2607.23519",
+   "title": "Auditing Alignment Controllability in LLMs via Political Axes",
+   "published": "2026-07-26"
+  },
+  {
+   "arxiv_id": "2607.23458",
+   "title": "Two Regimes of Chain-of-Thought Unfaithfulness: Metric-Based Detection Fails Where Models Are Wrong",
+   "published": "2026-07-26"
+  },
+  {
+   "arxiv_id": "2607.23242",
+   "title": "IndicTalk: A Large-Scale Persona-Based Multilingual Conversational Corpus for Indic Languages",
+   "published": "2026-07-25"
+  },
+  {
+   "arxiv_id": "2607.23019",
+   "title": "Reason Popper-ly: Patching In-Context Reasoning with Inductive Logic Programming",
+   "published": "2026-07-25"
+  },
+  {
+   "arxiv_id": "2608.14629",
+   "title": "Inference-Time Mitigation of Adversarial Political Bias in Large Language Models",
+   "published": "2026-07-24"
+  },
+  {
+   "arxiv_id": "2607.24838",
+   "title": "MedJudgeRAG: Option-Wise Evidence Judgment with Dynamic Knowledge Graphs for Medical MCQA",
+   "published": "2026-07-24"
+  },
+  {
+   "arxiv_id": "2607.22902",
+   "title": "How Well Can AI Generate Backlogs from App Mockups?",
+   "published": "2026-07-24"
+  },
+  {
+   "arxiv_id": "2607.22804",
+   "title": "LithoFormer: A Robust Framework for Stratigraphic Inference via Transformers",
+   "published": "2026-07-24"
+  },
+  {
+   "arxiv_id": "2607.22385",
+   "title": "Agentic Root Cause Analysis through Evidence-Grounded Reasoning",
+   "published": "2026-07-24"
+  },
+  {
+   "arxiv_id": "2607.22098",
+   "title": "Reasoning Denoiser: Denoising Reasoning Traces for Hallucination Detection in Large Reasoning Models",
+   "published": "2026-07-24"
+  },
+  {
+   "arxiv_id": "2607.21988",
+   "title": "Analysing Self-Harm Representations in Language Models: a Cross-Architecture Study",
+   "published": "2026-07-24"
+  },
+  {
+   "arxiv_id": "2608.28615",
+   "title": "Distributional Validity and Calibration of a Korean Synthetic Persona Panel for Digital and AI Service Use: A Secondary-Data Validation Against the Korea Media Panel Survey",
+   "published": "2026-07-23"
+  },
+  {
+   "arxiv_id": "2607.21856",
+   "title": "LeAct: Learning to Reason from Expert Actions",
+   "published": "2026-07-23"
+  },
+  {
+   "arxiv_id": "2607.21556",
+   "title": "Visual Contrastive Self-Distillation",
+   "published": "2026-07-23"
+  },
+  {
+   "arxiv_id": "2607.21491",
+   "title": "What, Where, and How: Disentangling the Roles of Task, Language, and Model in Code Model Representations",
+   "published": "2026-07-23"
+  },
+  {
+   "arxiv_id": "2607.21433",
+   "title": "Token Budget Saturation and Mechanistic Early Detection of Reasoning Non-Convergence in Chain-of-Thought Models",
+   "published": "2026-07-23"
+  },
+  {
+   "arxiv_id": "2607.21401",
+   "title": "When Are Reasoning-Based Guardrails Not Efficient? ResponseGuard: A Fast Vision-Language Guard for Real-Time Moderation",
+   "published": "2026-07-23"
+  },
+  {
+   "arxiv_id": "2607.21356",
+   "title": "Emergent Misalignment Recruits a Pre-existing Persona Subspace",
+   "published": "2026-07-23"
+  },
+  {
+   "arxiv_id": "2607.20935",
+   "title": "Chemical Chain-of-Thought Functions as a Hallucination-Prone Molecular Scratchpad",
+   "published": "2026-07-23"
+  },
+  {
+   "arxiv_id": "2607.20833",
+   "title": "REFACT: Adaptive Fact Restatement for Compact and Faithful Chain-of-Thought Reasoning",
+   "published": "2026-07-23"
+  },
+  {
+   "arxiv_id": "2607.20589",
+   "title": "Evaluating the Effectiveness of Persona Simulation in Opinion Prediction with GPT-4.1",
+   "published": "2026-07-22"
+  },
+  {
+   "arxiv_id": "2607.20327",
+   "title": "PyroDash: Cost-Efficient Token-Level Small-Large Language Model Collaborative Inference",
+   "published": "2026-07-22"
+  },
+  {
+   "arxiv_id": "2607.20082",
+   "title": "The Two-Process Theory of Machine Self-Report",
+   "published": "2026-07-22"
+  },
+  {
+   "arxiv_id": "2607.19992",
+   "title": "TINY_SCHILLER: A Drop-In German Drama Corpus for Small Language Models",
+   "published": "2026-07-22"
+  },
+  {
+   "arxiv_id": "2607.19949",
+   "title": "SenWorld: A Digital-Twin Simulation for Generating Context-Rich Evaluation Data",
+   "published": "2026-07-22"
+  },
+  {
+   "arxiv_id": "2607.19947",
+   "title": "ETPDesigner: Multi-Agent Orchestration for Interactive Multimodal Electronic Theater Program",
+   "published": "2026-07-22"
+  },
+  {
+   "arxiv_id": "2607.19932",
+   "title": "Efficient Chain-of-Modality Reasoning via Progressive Compression for Spoken Language Models",
+   "published": "2026-07-22"
+  },
+  {
+   "arxiv_id": "2607.19824",
+   "title": "Rewarding Better Thinking for LLM Preference Alignment",
+   "published": "2026-07-22"
+  },
+  {
+   "arxiv_id": "2607.19794",
+   "title": "TriAgent: Divergence-Aware Multi-Agent Committees for Cost-Efficient Financial Sentiment Analysis",
+   "published": "2026-07-22"
+  },
+  {
+   "arxiv_id": "2607.19785",
+   "title": "Not Birds of a Feather: Personality-Based Partner Selection in LLM Agents",
+   "published": "2026-07-22"
+  },
+  {
+   "arxiv_id": "2607.19704",
+   "title": "Efficient Clustering with Provable Guardrails for LLM Inference at Scale",
+   "published": "2026-07-22"
+  },
+  {
+   "arxiv_id": "2607.19678",
+   "title": "Reference-Free Evaluation of Reasoning in Open-Ended Question Answering",
+   "published": "2026-07-22"
+  },
+  {
+   "arxiv_id": "2608.07528",
+   "title": "The Knowing-Saying Gap: When Probes See Errors that Confidence Misses",
+   "published": "2026-07-21"
+  },
+  {
+   "arxiv_id": "2607.19345",
+   "title": "Copy Less, Ground More: Overcoming Repetitive Copying in Long-Context Reasoning via Evidence-Aware Reinforcement Learning",
+   "published": "2026-07-21"
+  },
+  {
+   "arxiv_id": "2607.19341",
+   "title": "ExpertVerse: A General-Purpose Benchmark for Expert-Level Reasoning in Knowledge-Intensive Visual Synthesis",
+   "published": "2026-07-21"
+  },
+  {
+   "arxiv_id": "2607.19243",
+   "title": "Inference-Time Steering for Cross-Lingual Factual Consistency in LLMs",
+   "published": "2026-07-21"
+  },
+  {
+   "arxiv_id": "2607.19226",
+   "title": "The Price of Reasoning: Cost-Quality Tradeoffs in Reinforcement Learning for Neural Machine Translation",
+   "published": "2026-07-21"
+  },
+  {
+   "arxiv_id": "2607.18966",
+   "title": "Measuring Reward-Seeking via Contrastive Belief Updates",
+   "published": "2026-07-21"
+  },
+  {
+   "arxiv_id": "2607.18915",
+   "title": "Reasoning Error from Known Fact: Step-Level Self-Consistency Group Relative Policy Optimization for LLM",
+   "published": "2026-07-21"
+  },
+  {
+   "arxiv_id": "2607.18826",
+   "title": "Cross-Agent Campaign Attribution: Linking Asynchronous Attacks Across LLM Agents",
+   "published": "2026-07-21"
+  },
+  {
+   "arxiv_id": "2607.18806",
+   "title": "AI Tour Meeting: Group Travel Planning by LLM Agents",
+   "published": "2026-07-21"
+  },
+  {
+   "arxiv_id": "2607.18767",
+   "title": "Bounding Boxes to Improve Small Language Model Performance on Vision-Based Grading Tasks",
+   "published": "2026-07-21"
+  },
+  {
+   "arxiv_id": "2607.18566",
+   "title": "The Story Shapes the Agent: Narrative Priors in LLM Behavior",
+   "published": "2026-07-20"
+  },
+  {
+   "arxiv_id": "2607.18553",
+   "title": "Operational Proto-Introspection in Looped Language Models: Process-Quality Taps, Executable Branching, and the Readout-Control Boundary",
+   "published": "2026-07-20"
+  },
+  {
+   "arxiv_id": "2607.18529",
+   "title": "EduPanel: A Three-Agent LLM Judge for Teaching Videos -- Reliability, Complementarity, and Human Trust Calibration",
+   "published": "2026-07-20"
+  },
+  {
+   "arxiv_id": "2607.18199",
+   "title": "PPL-Factory: Task-Aware and Budget-Aware Data Selection from Language Modeling to Reasoning",
+   "published": "2026-07-20"
+  },
+  {
+   "arxiv_id": "2607.17917",
+   "title": "PEARL: Auditable Repair for Scientific Reasoning Graph Extraction",
+   "published": "2026-07-20"
+  },
+  {
+   "arxiv_id": "2607.17843",
+   "title": "Mobius Learning: Cyclic Depth Folding in Transformers",
+   "published": "2026-07-20"
+  },
+  {
+   "arxiv_id": "2607.17774",
+   "title": "Persona-as-Configuration: Generative Stakeholder Reporting for Agricultural Floods",
+   "published": "2026-07-20"
+  },
+  {
+   "arxiv_id": "2607.17673",
+   "title": "Beyond Objective Expressivity: Geometry Preservation in Multimodal Contrastive Learning",
+   "published": "2026-07-20"
+  },
+  {
+   "arxiv_id": "2607.17575",
+   "title": "A Dual-Hypothesis Reasoning Framework for LLM Guardrails",
+   "published": "2026-07-20"
+  },
+  {
+   "arxiv_id": "2607.17564",
+   "title": "ZifaMem: Structured Memory for Persona, Preference, and Emotional Continuity in AI Companions",
+   "published": "2026-07-20"
+  },
+  {
+   "arxiv_id": "2607.21633",
+   "title": "On the Depth Scalability of Logic Gate Networks",
+   "published": "2026-07-19"
+  },
+  {
+   "arxiv_id": "2607.17420",
+   "title": "The Librarian Who Refused to Code: Model-Dependent Identity Enactment in LLM Code Generation",
+   "published": "2026-07-19"
+  },
+  {
+   "arxiv_id": "2607.17417",
+   "title": "Grounded verification of chemical and materials reasoning: detection is the bottleneck",
+   "published": "2026-07-19"
+  },
+  {
+   "arxiv_id": "2607.17377",
+   "title": "Chebyshev Manifold Adaptation",
+   "published": "2026-07-19"
+  },
+  {
+   "arxiv_id": "2607.17250",
+   "title": "EvolvingWorld: An Open-Schema Framework for Co-Evolving Role-Play Agents and World Model in Interactive Literary World",
+   "published": "2026-07-19"
+  },
+  {
+   "arxiv_id": "2607.17219",
+   "title": "Auditing Question-Order Effects in Large Language Models with the QQ Equality: Mechanism Characterization and a Saturation Caveat",
+   "published": "2026-07-19"
+  },
+  {
+   "arxiv_id": "2607.17191",
+   "title": "Toward Anthropomorphic Dialogue: A Closed-Loop Framework for Human-Like Chat Generation, Evaluation, and Preference Alignment",
+   "published": "2026-07-19"
+  },
+  {
+   "arxiv_id": "2607.16972",
+   "title": "Training Continuous Chain of Thought Models: A Tale of Two Regimes",
+   "published": "2026-07-18"
+  },
+  {
+   "arxiv_id": "2607.16888",
+   "title": "Transferable Low-Rank Convolutional Bases for Onboarding Unseen Medical Imaging Modalities",
+   "published": "2026-07-18"
+  },
+  {
+   "arxiv_id": "2607.16824",
+   "title": "Test-Time Registers as Global Priors for Tokenized Image Generation",
+   "published": "2026-07-18"
+  },
+  {
+   "arxiv_id": "2607.16727",
+   "title": "Constraint-Anchored Reasoning Traces",
+   "published": "2026-07-18"
+  },
+  {
+   "arxiv_id": "2607.16712",
+   "title": "DS@GT ARC at eRisk 2026: Hybrid Multi-Agent LLM System with Structured Algorithmic Guidance for Conversational Depression Screening",
+   "published": "2026-07-18"
+  },
+  {
+   "arxiv_id": "2607.16623",
+   "title": "How to Build Marcus's Algebraic Mind: From Minsky's Emotion-Machine Viewpoint",
+   "published": "2026-07-18"
+  },
+  {
+   "arxiv_id": "2607.16569",
+   "title": "From Discussion to Execution: Replicating Buggy and Correct Data Science Code",
+   "published": "2026-07-18"
+  },
+  {
+   "arxiv_id": "2607.18310",
+   "title": "Distribution-First Population Simulation: Collapse, Calibration, and Recall in Non-WEIRD LLM Persona Modeling",
+   "published": "2026-07-17"
+  },
+  {
+   "arxiv_id": "2607.16448",
+   "title": "Retrieval is Enough: Training-Free Interpretability with a Tool-Using Agent",
+   "published": "2026-07-17"
+  },
+  {
+   "arxiv_id": "2607.16401",
+   "title": "Apple-$\u03c0$: Benchmarking Thinking with Video Towards Law-Grounded Physical Intelligence",
+   "published": "2026-07-17"
+  },
+  {
+   "arxiv_id": "2607.16181",
+   "title": "Vision-Language Assistant for Emotional Reactions to Risky Driving",
+   "published": "2026-07-17"
+  },
+  {
+   "arxiv_id": "2607.16133",
+   "title": "When Do Multi-Agent Systems Help? An Information Bottleneck Perspective",
+   "published": "2026-07-17"
+  },
+  {
+   "arxiv_id": "2607.16097",
+   "title": "Understanding Reasoning from Pretraining to Post-Training",
+   "published": "2026-07-17"
+  },
+  {
+   "arxiv_id": "2607.15555",
+   "title": "LLMs Encode Relevance as a Layer-Wise Cross-Lingual Signal",
+   "published": "2026-07-17"
+  },
+  {
+   "arxiv_id": "2607.15524",
+   "title": "Recursive Harness Self-Improvement",
+   "published": "2026-07-17"
+  },
+  {
+   "arxiv_id": "2607.22687",
+   "title": "DINOv3-MIL: Per-Kidney Multi-Label Tumour and Cyst Detection from Foundation-Model Patch Tokens on KiTS23",
+   "published": "2026-07-16"
+  },
+  {
+   "arxiv_id": "2607.15495",
+   "title": "Verbalizable Representations Form a Global Workspace in Language Models",
+   "published": "2026-07-16"
+  },
+  {
+   "arxiv_id": "2607.15434",
+   "title": "Coercion and Deception in AI-to-AI Management: An Agentic Benchmark of Unprompted Escalation",
+   "published": "2026-07-16"
+  },
+  {
+   "arxiv_id": "2607.15416",
+   "title": "Dataset-Origin Signatures and Shortcut Learning in Screening Mammography AI: A Cross-Dataset Case Study",
+   "published": "2026-07-16"
+  },
+  {
+   "arxiv_id": "2607.15364",
+   "title": "On the Effectiveness of Fact Checking Information from Politically Congruent and Incongruent Large Language Models",
+   "published": "2026-07-16"
+  },
+  {
+   "arxiv_id": "2607.15277",
+   "title": "Partition, Prompt, Aggregate: Statistical Self-Consistency in Language Models",
+   "published": "2026-07-16"
+  },
+  {
+   "arxiv_id": "2607.15202",
+   "title": "Self-Evolving Human-Centered Framework for Explainable Depression Symptom Annotation",
+   "published": "2026-07-16"
+  },
+  {
+   "arxiv_id": "2607.15095",
+   "title": "Digital Pantheon: Simulating and Auditing Coalition Formation with LLM Agents",
+   "published": "2026-07-16"
+  },
+  {
+   "arxiv_id": "2607.14945",
+   "title": "Introspective Attention Modulation for Safe Text-to-Image Generation",
+   "published": "2026-07-16"
+  },
+  {
+   "arxiv_id": "2607.14895",
+   "title": "Leveraging Instruction Tuning and Merging for Reasoning Model Adaptation",
+   "published": "2026-07-16"
+  },
+  {
+   "arxiv_id": "2607.14682",
+   "title": "Stop Thinking, Start Looking: Efficient Post-Training for Multimodal Document Question Answering via Reasoning-Free Alignment",
+   "published": "2026-07-16"
+  },
+  {
+   "arxiv_id": "2607.14673",
+   "title": "Project Kaleidoscope: Contextual, Human-Aligned Evaluation for Real-World AI Applications",
+   "published": "2026-07-16"
+  },
+  {
+   "arxiv_id": "2607.14070",
+   "title": "Screening of Biosecurity Features in Metagenomic Data with Evo 2 Probes",
+   "published": "2026-07-15"
+  },
+  {
+   "arxiv_id": "2607.13798",
+   "title": "Persona Migration and Expectation Recalibration in Generative AI Adoption: A Longitudinal Study at a State Department of Transportation",
+   "published": "2026-07-15"
+  },
+  {
+   "arxiv_id": "2607.13651",
+   "title": "From Surface Forecasting to Observability Forecasting: A Latent World Model for Cloud-Aware EO Monitoring",
+   "published": "2026-07-15"
+  },
+  {
+   "arxiv_id": "2607.13346",
+   "title": "The Refusal Residue: When Probes Catch Alignment Faking and When They Don't",
+   "published": "2026-07-15"
+  },
+  {
+   "arxiv_id": "2608.24902",
+   "title": "Beyond the Chatbot: Co-Learning and Co-Teaching through a Dual-Persona Generative-AI Assistant",
+   "published": "2026-07-14"
+  },
+  {
+   "arxiv_id": "2607.14147",
+   "title": "Breaking Refusal in the First Half: A Mechanistic Study of the Prefill Jailbreak",
+   "published": "2026-07-14"
+  },
+  {
+   "arxiv_id": "2607.13162",
+   "title": "What Models Express, Suppress, and Resist: Auditing Open-Weight LLMs with Persona Vectors",
+   "published": "2026-07-14"
+  },
+  {
+   "arxiv_id": "2607.12815",
+   "title": "Visual Access Boundaries in Vision-Language Model Reasoning",
+   "published": "2026-07-14"
+  },
+  {
+   "arxiv_id": "2607.12796",
+   "title": "The One-Word Census: Answer-Choice Conformity Across 44 Language Models",
+   "published": "2026-07-14"
+  },
+  {
+   "arxiv_id": "2607.12520",
+   "title": "The Model Knows Your Project, Not You: Measuring Recognition in LLMs with NameRank",
+   "published": "2026-07-14"
+  },
+  {
+   "arxiv_id": "2607.12480",
+   "title": "TRACE: An Operational Reasoning Schema for Auditable Agentic Commitments",
+   "published": "2026-07-14"
+  },
+  {
+   "arxiv_id": "2607.12418",
+   "title": "MQAdapter: Multi-Modal Quantum Adapter for Coarse-to-Fine VLM Fine-tuning",
+   "published": "2026-07-14"
+  },
+  {
+   "arxiv_id": "2607.12395",
+   "title": "Ring-Zero: Scaling Zero RL to a Trillion Parameters for Emergent Reasoning",
+   "published": "2026-07-14"
+  },
+  {
+   "arxiv_id": "2607.12271",
+   "title": "A hybrid analytical-PINN model for subsurface simulation of geothermal heat exchangers in heterogeneous underground",
+   "published": "2026-07-14"
+  },
+  {
+   "arxiv_id": "2608.26166",
+   "title": "Improving LLM Interpretability with User-Centric Chain-of-Thought Reasoning",
+   "published": "2026-07-13"
+  },
+  {
+   "arxiv_id": "2607.26072",
+   "title": "IFCMemoryBench: Evaluating Long-Term Memory of LLM-Based Agents in BIM Information Retrieval",
+   "published": "2026-07-13"
+  },
+  {
+   "arxiv_id": "2607.14141",
+   "title": "Human AI Construction of Bayesian Networks for Operational Decision Support -- A Virtual Survey Approach",
+   "published": "2026-07-13"
+  },
+  {
+   "arxiv_id": "2607.12180",
+   "title": "TRAIL: A Platform for Configurable Human--AI Teaming Experiments",
+   "published": "2026-07-13"
+  },
+  {
+   "arxiv_id": "2607.12176",
+   "title": "HEDGE: A Calibrated Ensemble for A/H Recognition",
+   "published": "2026-07-13"
+  },
+  {
+   "arxiv_id": "2607.11990",
+   "title": "Sparse Inter-Layer Dependencies of Transformer FFN Neurons",
+   "published": "2026-07-13"
+  },
+  {
+   "arxiv_id": "2607.11859",
+   "title": "Can LLMs Perform Deep Technical Comprehension of Computer Architecture Papers?",
+   "published": "2026-07-13"
+  },
+  {
+   "arxiv_id": "2607.11414",
+   "title": "Confidently Wrong: Detecting Hallucinations in Financial Question Answering from LLM Internal States",
+   "published": "2026-07-13"
+  },
+  {
+   "arxiv_id": "2607.11363",
+   "title": "Beyond Sally-Anne: Evaluating Theory of Mind in LLMs using Epistemic Schelling Points",
+   "published": "2026-07-13"
+  },
+  {
+   "arxiv_id": "2607.11292",
+   "title": "The Paternalistic Filter: Epistemic Injustice and Differential Refusal in LLM-Mediated History Education for Marginalized Romanian Students",
+   "published": "2026-07-13"
+  },
+  {
+   "arxiv_id": "2607.11197",
+   "title": "What We Talk About When We Talk About LLM Planning: Evidence for Two Distinct Planning Abilities",
+   "published": "2026-07-13"
+  },
+  {
+   "arxiv_id": "2607.11039",
+   "title": "Same Stories, Different Journeys: From Social Comparison to Sensemaking in AI-Mediated Peer Career Exploration",
+   "published": "2026-07-13"
+  },
+  {
+   "arxiv_id": "2607.10994",
+   "title": "A Multi-Agent Framework for Zero-Dimensional Reduced-Order Model Planning",
+   "published": "2026-07-13"
+  },
+  {
+   "arxiv_id": "2607.10796",
+   "title": "Mixture of Cognitive Experts in Large Vision-Language Models",
+   "published": "2026-07-12"
+  },
+  {
+   "arxiv_id": "2607.10712",
+   "title": "Distributed Denial of Science: How Indirect Data Poisoning of AI Systems Can Industrialize Scientific Fraud",
+   "published": "2026-07-12"
+  },
+  {
+   "arxiv_id": "2607.10628",
+   "title": "Anamnesis: An Open-Source Platform for Large-Scale Backstory-Conditioned Survey Simulation",
+   "published": "2026-07-12"
+  },
+  {
+   "arxiv_id": "2607.10618",
+   "title": "Demixing Sparse Signals from Nonlinear Observations using Generalized Non-convex Regularization",
+   "published": "2026-07-12"
+  },
+  {
+   "arxiv_id": "2607.10539",
+   "title": "AI YOU Town: Make Friends and Money with Your Digital Twin",
+   "published": "2026-07-12"
+  },
+  {
+   "arxiv_id": "2607.11953",
+   "title": "When Does Reward Teach State? A Hidden-Automaton Instrument and a Group-Language Warning Signal",
+   "published": "2026-07-11"
+  },
+  {
+   "arxiv_id": "2607.10428",
+   "title": "Enjoy Your Talk: A Human-Centered Benchmark for Multi-Turn Dialogue with Decoupled User Simulation, Target Modeling, and Judging",
+   "published": "2026-07-11"
+  },
+  {
+   "arxiv_id": "2607.10386",
+   "title": "Structured Thoughts For Improved Reasoning And Context Pruning",
+   "published": "2026-07-11"
+  },
+  {
+   "arxiv_id": "2607.10347",
+   "title": "A Framework for Managing the Models of Engineered Quantum Systems",
+   "published": "2026-07-11"
+  },
+  {
+   "arxiv_id": "2607.10275",
+   "title": "Information-seeking failures of large language models in agentic clinical reasoning",
+   "published": "2026-07-11"
+  },
+  {
+   "arxiv_id": "2607.10114",
+   "title": "Cost of Reasoning in non-English Languages: A Case Study on Japanese",
+   "published": "2026-07-11"
+  },
+  {
+   "arxiv_id": "2607.10004",
+   "title": "Model Guides You How to Draw: Adaptive Visual Gating for Unified Multimodal Reasoning",
+   "published": "2026-07-10"
+  },
+  {
+   "arxiv_id": "2607.09921",
+   "title": "Global Merger-Arbitrage Forecasting with Language Models",
+   "published": "2026-07-10"
+  },
+  {
+   "arxiv_id": "2607.09493",
+   "title": "Shared Selective Persistent Memory for Agentic LLM Systems",
+   "published": "2026-07-10"
+  },
+  {
+   "arxiv_id": "2607.09113",
+   "title": "Quantum-Enhanced Synthetic Data Generation Using Quantum Circuit Born Machines for Imbalanced Tabular Learning",
+   "published": "2026-07-10"
+  },
+  {
+   "arxiv_id": "2607.09099",
+   "title": "L-MAD: A Systematic Evaluation of Multi-Agent Debate Structures in Legal Reasoning",
+   "published": "2026-07-10"
+  },
+  {
+   "arxiv_id": "2608.00023",
+   "title": "Role Steering of Language Models for Social Simulations",
+   "published": "2026-07-09"
+  },
+  {
+   "arxiv_id": "2607.08990",
+   "title": "From Generic to Personalized: Exploring Persona-Aware Code Review Explanations",
+   "published": "2026-07-09"
+  },
+  {
+   "arxiv_id": "2607.08986",
+   "title": "A Formalization of the Mean-Field Derivation of the Vlasov Equation",
+   "published": "2026-07-09"
+  },
+  {
+   "arxiv_id": "2607.08932",
+   "title": "Vision Transformers Learn Gestalt-Like Figure-Ground Cues from Natural Images",
+   "published": "2026-07-09"
+  },
+  {
+   "arxiv_id": "2607.08625",
+   "title": "The complexities of patient-centred conversational artificial intelligence",
+   "published": "2026-07-09"
+  },
+  {
+   "arxiv_id": "2607.08456",
+   "title": "Two Axes of LLM Abstention: Answer Correctness and Question Answerability",
+   "published": "2026-07-09"
+  },
+  {
+   "arxiv_id": "2607.08326",
+   "title": "Diagnosing and Repairing Persona Collapse in LLM Advice",
+   "published": "2026-07-09"
+  },
+  {
+   "arxiv_id": "2607.08252",
+   "title": "AutoPersonas: A Multi-Timescale Loop Engine for Open-Ended Persona Evolution",
+   "published": "2026-07-09"
+  },
+  {
+   "arxiv_id": "2607.08231",
+   "title": "Simulating the Resident: Generating Executable Smart Home Schedules via LLM Personas",
+   "published": "2026-07-09"
+  },
+  {
+   "arxiv_id": "2607.08066",
+   "title": "Persuasion Attacks Can Decrease Effectiveness of CoT Monitoring",
+   "published": "2026-07-09"
+  },
+  {
+   "arxiv_id": "2607.08046",
+   "title": "What LLM Forecasters Know but Don't Say: Probing Internal Representations for Calibration and Faithfulness",
+   "published": "2026-07-09"
+  },
+  {
+   "arxiv_id": "2607.16274",
+   "title": "The JEPA Predictor: A Transferable Operator for Occluded Feature Completion",
+   "published": "2026-07-08"
+  },
+  {
+   "arxiv_id": "2607.09786",
+   "title": "Length Penalties Make Chain-of-Thought Less Monitorable",
+   "published": "2026-07-08"
+  },
+  {
+   "arxiv_id": "2607.07916",
+   "title": "Persona Cartography: Charting Language Model Personality Traits in Weight Space",
+   "published": "2026-07-08"
+  },
+  {
+   "arxiv_id": "2607.07824",
+   "title": "From Triggers to Emotions: A CPM-Grounded Appraisal Multi-Agent for Dynamic Emotional Evolution in Persona-Based Dialogue",
+   "published": "2026-07-08"
+  },
+  {
+   "arxiv_id": "2607.07708",
+   "title": "Accurate, Interdisciplinary and Transparent Structure-property Understanding with Deep Native Structural Reasoning",
+   "published": "2026-07-08"
+  },
+  {
+   "arxiv_id": "2607.07695",
+   "title": "Institutional Red-Teaming: Deployment Rules, Not Just Models, Causally Shape Multi-Agent AI Safety",
+   "published": "2026-07-08"
+  },
+  {
+   "arxiv_id": "2607.07670",
+   "title": "Does Bielik Know What It Doesn't Know? Activation Dispersion Separates Entity Familiarity from Factual Reliability Across Model Scale",
+   "published": "2026-07-08"
+  },
+  {
+   "arxiv_id": "2607.07626",
+   "title": "Future Confidence Distillation in Large Language Models",
+   "published": "2026-07-08"
+  },
+  {
+   "arxiv_id": "2607.07605",
+   "title": "User identity conditions moral wrongness ratings in non-reasoning large language models",
+   "published": "2026-07-08"
+  },
+  {
+   "arxiv_id": "2607.07492",
+   "title": "Search, Fail, Recover: A Training Framework for Correction-Aware Reasoning",
+   "published": "2026-07-08"
+  },
+  {
+   "arxiv_id": "2607.07379",
+   "title": "Physics-Audited Agentic Discovery in Scientific Machine Learning",
+   "published": "2026-07-08"
+  },
+  {
+   "arxiv_id": "2607.06906",
+   "title": "The Harness Effect: How Orchestration Design Sets the Token Economics of Enterprise Agentic AI",
+   "published": "2026-07-08"
+  },
+  {
+   "arxiv_id": "2607.19405",
+   "title": "Reproducing Recurrent Transformers: The CoTFormer",
+   "published": "2026-07-07"
+  },
+  {
+   "arxiv_id": "2607.06720",
+   "title": "When Does In-Context Search Help? A Sampling-Complexity Theory of Reflection-Driven Reasoning",
+   "published": "2026-07-07"
+  },
+  {
+   "arxiv_id": "2607.06503",
+   "title": "Doomed from the Start: Early Abort of LLM Agent Episodes via a Recall-Controlled Probe Cascade",
+   "published": "2026-07-07"
+  },
+  {
+   "arxiv_id": "2607.06326",
+   "title": "DT-Guard: Intent-Driven Reasoning-Active Training for Reasoning-Free LLM Safety Guardrail",
+   "published": "2026-07-07"
+  },
+  {
+   "arxiv_id": "2607.06166",
+   "title": "When do prophets profit in prediction markets?",
+   "published": "2026-07-07"
+  },
+  {
+   "arxiv_id": "2607.05734",
+   "title": "SCOReD: Student-Aware CoT Optimization for Recommendation Distillation",
+   "published": "2026-07-07"
+  },
+  {
+   "arxiv_id": "2607.05716",
+   "title": "Scene Graph Thinking: Reinforcing Structured Visual Reasoning for Multimodal Large Language Models",
+   "published": "2026-07-07"
+  },
+  {
+   "arxiv_id": "2608.16893",
+   "title": "A Framework for Using and Evaluating LLMs as Surrogate Experts in Security Surveys: Reliability, Bias, and Implications",
+   "published": "2026-07-06"
+  },
+  {
+   "arxiv_id": "2608.14606",
+   "title": "Plausible but Not Valid: A Psychometric Audit of LLMs as Synthetic Survey Respondents",
+   "published": "2026-07-06"
+  },
+  {
+   "arxiv_id": "2607.22671",
+   "title": "AIR-BENCH Live: An Evolving Safety Benchmark for Foundation Models",
+   "published": "2026-07-06"
+  },
+  {
+   "arxiv_id": "2607.05316",
+   "title": "How Much is Left? LLMs Linearly Encode Their Remaining Output Length",
+   "published": "2026-07-06"
+  },
+  {
+   "arxiv_id": "2607.05184",
+   "title": "Rethinking On-Policy Self-Distillation for Thinking Models",
+   "published": "2026-07-06"
+  },
+  {
+   "arxiv_id": "2607.05029",
+   "title": "Your Agent's Memories Are Not Its Own: Forged Reasoning Attacks on LLM Agent Memory and Defenses",
+   "published": "2026-07-06"
+  },
+  {
+   "arxiv_id": "2607.04800",
+   "title": "Compressed Computation under $L^4$ Loss is likely Computation in Superposition",
+   "published": "2026-07-06"
+  },
+  {
+   "arxiv_id": "2607.04681",
+   "title": "Do Vision-Language-Action Models Mean What They Say? On the Role of Faithfulness in Embodied Reasoning",
+   "published": "2026-07-06"
+  },
+  {
+   "arxiv_id": "2607.04634",
+   "title": "Governed Caste Reassignment in Heterogeneous Swarms: An Asymmetric-Trust Protocol with Audited Operator Countersignature",
+   "published": "2026-07-06"
+  },
+  {
+   "arxiv_id": "2607.04627",
+   "title": "Reliability and Identifiability in Persona-Trained Monte Carlo: Variance Decomposition, Stability Bounds, and the Identifiability of Heterogeneous News Reaction",
+   "published": "2026-07-06"
+  },
+  {
+   "arxiv_id": "2607.04510",
+   "title": "Transplanting, inverting, and preventing a misalignment persona: method-conditional emergent misalignment in Qwen2.5",
+   "published": "2026-07-05"
+  },
+  {
+   "arxiv_id": "2607.04487",
+   "title": "Two Black Boxes, One Solver: Encoder Probing and Decoder Attribution for Neural Multi-Attribute VRP under Hard-Mask and Recourse Decoders",
+   "published": "2026-07-05"
+  },
+  {
+   "arxiv_id": "2607.04407",
+   "title": "Quadrature-Aware Complex-Linear Neural Operator for Boundary-to-Field Prediction in Resonant Acoustics",
+   "published": "2026-07-05"
+  },
+  {
+   "arxiv_id": "2607.04329",
+   "title": "HAS-Bench: Evaluating LLM-Based Human-Agent Systems under Configurable Human Participation",
+   "published": "2026-07-05"
+  },
+  {
+   "arxiv_id": "2607.04277",
+   "title": "Self-Reference in Large Language Models: The Introspection Threshold for Recursive Self-Improvement",
+   "published": "2026-07-05"
+  },
+  {
+   "arxiv_id": "2607.04254",
+   "title": "Air-Plan: Query-Optimized Topology Selection for Over-the-Air Decentralized Federated Learning",
+   "published": "2026-07-05"
+  },
+  {
+   "arxiv_id": "2607.04218",
+   "title": "Channel-Adaptive Robust Aggregation for Over-the-Air Federated Learning in Heterogeneous Networks",
+   "published": "2026-07-05"
+  },
+  {
+   "arxiv_id": "2607.04096",
+   "title": "Forethought: Verifiable Reasoning from Neurosymbolic Primitive Programming",
+   "published": "2026-07-05"
+  },
+  {
+   "arxiv_id": "2608.07519",
+   "title": "From Survey Personas to LLM Agents: A Generative Agent-based Simulation of Mobility Policy Preference Dynamics",
+   "published": "2026-07-04"
+  },
+  {
+   "arxiv_id": "2607.07721",
+   "title": "Context Graphs for Proactive Enterprise Agents",
+   "published": "2026-07-04"
+  },
+  {
+   "arxiv_id": "2607.03806",
+   "title": "Probing Low-Level Acoustic Attribute Encoding in CLAP Audio Embeddings",
+   "published": "2026-07-04"
+  },
+  {
+   "arxiv_id": "2607.03640",
+   "title": "Revealing Hidden Model Behaviors with Task-Specific Self-Reports",
+   "published": "2026-07-03"
+  },
+  {
+   "arxiv_id": "2607.03598",
+   "title": "They Infer What You Meant: Models Represent Communicative Intent More Reliably Than They Act On It",
+   "published": "2026-07-03"
+  },
+  {
+   "arxiv_id": "2607.03478",
+   "title": "Demonstrating Generalization Failures via Mixtures of Conditional Policies",
+   "published": "2026-07-03"
+  },
+  {
+   "arxiv_id": "2607.02869",
+   "title": "Reward Granularity in RLVR: Comparing Process and Outcome Reward Structures for Mathematical Reasoning in Small Language Models",
+   "published": "2026-07-03"
+  },
+  {
+   "arxiv_id": "2607.19390",
+   "title": "The Orthogonalized Read Is a Removable Training Scaffold for Recurrent Memory",
+   "published": "2026-07-02"
+  },
+  {
+   "arxiv_id": "2607.02770",
+   "title": "Gemma 4 Technical Report",
+   "published": "2026-07-02"
+  },
+  {
+   "arxiv_id": "2607.02396",
+   "title": "Fast Multi-dimensional Refusal Subspaces via RFM-AGOP",
+   "published": "2026-07-02"
+  },
+  {
+   "arxiv_id": "2607.02368",
+   "title": "Cultural Bias Without a Cultural Self:A Disassociation Study of LLM's Persona and Bias",
+   "published": "2026-07-02"
+  },
+  {
+   "arxiv_id": "2607.02283",
+   "title": "Dendritic In-Context Learning in a Single-Layer Spiking Neural Network",
+   "published": "2026-07-02"
+  },
+  {
+   "arxiv_id": "2607.01987",
+   "title": "Understanding Geometric Representations in Self-Supervised Vision Transformers via Subspace Intervention",
+   "published": "2026-07-02"
+  },
+  {
+   "arxiv_id": "2607.01927",
+   "title": "TUDUM: A Turkish-Thinking Reasoning Pipeline for Qwen3.5-27B",
+   "published": "2026-07-02"
+  },
+  {
+   "arxiv_id": "2607.01518",
+   "title": "Overthink-Triggered Slowdown Attacks on LVLM-Based Robotic Systems",
+   "published": "2026-07-01"
+  },
+  {
+   "arxiv_id": "2607.01511",
+   "title": "Revisiting Chain-of-Thought Reasoning under Limited Supervision: Semi-supervised Chain-of-Thought Learning",
+   "published": "2026-07-01"
+  },
+  {
+   "arxiv_id": "2607.01507",
+   "title": "The Agentic Garden of Forking Paths",
+   "published": "2026-07-01"
+  },
+  {
+   "arxiv_id": "2607.01485",
+   "title": "CoPersona: Collaborative Persona Graphs for Robust LLM Personalization",
+   "published": "2026-07-01"
+  },
+  {
+   "arxiv_id": "2607.01170",
+   "title": "Diffusion-GR2: Diffusion Generative Reasoning Re-ranker",
+   "published": "2026-07-01"
+  },
+  {
+   "arxiv_id": "2607.01034",
+   "title": "Behavior-Adaptive Conversational Agents: Toward a Fluid Personality Framework",
+   "published": "2026-07-01"
+  },
+  {
+   "arxiv_id": "2607.00937",
+   "title": "Persona Non Grata: LLM Persona-Driven Generations in MCQA are Unstable in Distinct Dimensions",
+   "published": "2026-07-01"
+  },
+  {
+   "arxiv_id": "2607.00918",
+   "title": "From Personas to Plot: Character-Grounded Multi-Agent Story Generation for Long-Form Narratives",
+   "published": "2026-07-01"
+  },
+  {
+   "arxiv_id": "2607.00910",
+   "title": "Calibrating the Instrument: Controllability of an LLM-Driven Synthetic Population",
+   "published": "2026-07-01"
+  },
+  {
+   "arxiv_id": "2607.00485",
+   "title": "Efficient Multilingual Reasoning Transfer via Progressive Code-Switching",
+   "published": "2026-07-01"
+  },
+  {
+   "arxiv_id": "2607.00482",
+   "title": "Know When to Stop: Segment-Level Credit Assignment for Reducing Overthinking",
+   "published": "2026-07-01"
+  },
+  {
+   "arxiv_id": "2607.00422",
+   "title": "KidnapRAG: A Black-Box Attack for Hijacking Reasoning in Agentic Retrieval-Augmented Generation Systems",
+   "published": "2026-07-01"
+  },
+  {
+   "arxiv_id": "2607.00361",
+   "title": "ReShift: Aha-Moment-Driven Reasoning-Level Backdoor Attacks on Vision-Language Models",
+   "published": "2026-07-01"
+  }
+ ]
+}

@@ -23,3 +23,6 @@ references/cards/raw/**/*.npy
 references/cards/raw/**/*.pt
 references/cards/raw/**/pools.json
 references/cards/raw/communication_map/
+
+# local site builds (stresskit site references -o _site)
+_site/
