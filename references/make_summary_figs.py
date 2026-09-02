@@ -11,6 +11,11 @@ Reads the cards, their verdict traces and the paper registry under
 - ``threshold_sensitivity.png``: pass / undecided / fail counts for the
   structural-stability and specificity checks when their bars are moved,
   recomputed from the values and intervals recorded on the cards.
+- ``specificity_by_null.png``: the specificity outcome of every card that has
+  a null control, split by how the null was built: a signal-destroying null
+  (labels permuted, adapter scrambled, calibration data replaced by noise)
+  against a structure-preserving null (the task corrupted, items re-paired
+  or deranged, weights rotated) that leaves the finder's output size intact.
 
 No model is run; everything is derived from the stored artifacts, so the
 figures cannot disagree with the cards.
@@ -45,6 +50,28 @@ CHECK_LABEL = {
 }
 CHECK_ORDER = list(CHECK_LABEL)
 INK = "#222222"
+
+# How each card's null control is built, keyed by card-name prefix. Kept
+# explicit so the split can be audited against the card notes.
+NULL_FAMILY = {
+    "folkmotif": "signal", "diff_mining": "signal", "sycophancy": "signal",
+    "refusal_direction": "signal", "impossibility_truth": "signal", "harc": "signal",
+    "reins": "signal", "faithfulness": "signal", "ams": "signal", "swd": "signal",
+    "ioi": "structure", "greater_than": "structure", "coax": "structure",
+    "communication_map": "structure", "sae_causal": "structure", "homonym": "structure",
+    "jlens": "structure", "lens_baseline": "structure", "mechtomo": "structure",
+}
+FAMILY_LABEL = {
+    "signal": "signal-destroying null\n(labels permuted, adapter scrambled,\ncalibration replaced by noise)",
+    "structure": "structure-preserving null\n(task corrupted, items re-paired,\nweights rotated; output size kept)",
+}
+
+
+def null_family(name):
+    for prefix, family in NULL_FAMILY.items():
+        if name.startswith(prefix):
+            return family
+    return None
 MUTED = "#6b6b6b"
 
 
@@ -218,6 +245,50 @@ def fig_thresholds(cards, out):
     plt.close(fig)
 
 
+def fig_null_family(cards, out):
+    counts = {"signal": Counter(), "structure": Counter()}
+    unmapped = []
+    for card in cards:
+        check = card["checks"].get("specificity")
+        if check is None:
+            continue
+        family = null_family(card["name"])
+        if family is None:
+            unmapped.append(card["name"])
+            continue
+        counts[family][recorded_state(check)] += 1
+    if unmapped:
+        raise SystemExit(f"cards with a specificity check but no null family: {unmapped}")
+    print("specificity_by_null:", {k: dict(v) for k, v in counts.items()})
+    fig, ax = plt.subplots(figsize=(8.4, 3.2))
+    y = [1, 0]
+    for idx, family in zip(y, ("signal", "structure")):
+        left = 0
+        total = sum(counts[family].values())
+        small = []
+        for state in ("pass", "incon", "fail"):
+            n = counts[family][state]
+            if n == 0:
+                continue
+            ax.barh(idx, n, left=left, color=STATUS[state], height=0.62, edgecolor="white", linewidth=2)
+            if n >= 4:
+                ax.text(left + n / 2, idx, f"{LABEL[state]} {n}", ha="center", va="center", fontsize=8.5, color="white" if state != "incon" else INK)
+            else:
+                small.append(f"{LABEL[state]} {n}")
+            left += n
+        tail = f"n = {total}" + (f"  ({', '.join(small)})" if small else "")
+        ax.text(total + 0.5, idx, tail, va="center", fontsize=8.5, color=MUTED)
+    ax.set_yticks(y)
+    ax.set_yticklabels([FAMILY_LABEL[f] for f in ("signal", "structure")], fontsize=8.5)
+    ax.set_xlim(0, 33)
+    ax.set_xlabel("cards with a specificity check")
+    ax.set_title("Whether a finding beats its null depends on how the null was built", fontsize=10, loc="left", color=INK)
+    style(ax)
+    fig.tight_layout()
+    fig.savefig(out, dpi=180)
+    plt.close(fig)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     parser.add_argument("--references", default=HERE)
@@ -228,6 +299,7 @@ def main():
     fig_checks(cards, os.path.join(args.out, "checks_by_card.png"))
     fig_settle(cards, os.path.join(args.out, "verdict_settle_n.png"))
     fig_thresholds(cards, os.path.join(args.out, "threshold_sensitivity.png"))
+    fig_null_family(cards, os.path.join(args.out, "specificity_by_null.png"))
     print(f"{len(cards)} cards; figures written to {args.out}")
 
 

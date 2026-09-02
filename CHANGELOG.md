@@ -159,6 +159,12 @@
   base (29 vs 17 of 250) where Table 1 reports the opposite. On Qwen the gain
   peaks at L18, upstream of the paper's L21-24 band, and disappears in band
   under the Circuit Breakers / UltraChat pools.
+- Cross-card analysis: the specificity outcome splits by null family
+  (signal-destroying nulls pass in 17 of 22 cards, structure-preserving nulls
+  in 1 of 21), written up in RESULTS.md with both readings; universe size does
+  not predict structural failure (Spearman -0.22 over 38 cards). The figure
+  script gained `specificity_by_null.png` with the card-to-family mapping
+  written out.
 - `references/make_summary_figs.py` draws three figures from the stored cards
   and traces (no model is run): check outcomes over all graded cards, the
   run count at which each verdict settles, and the sensitivity of the

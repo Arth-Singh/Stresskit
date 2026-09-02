@@ -59,6 +59,15 @@ so a "stable" finding also has to beat a finding that cannot be real; every
 grade re-derives from the card's own metrics in CI. Grades measure the
 reliability of a result under defensible variation, not the value of a paper.
 
+One pattern cuts across the set: whether a finding beats its null follows
+the design of the null. Findings tested against a signal-destroying null
+(labels permuted, adapter scrambled) pass specificity in 17 of 22 cards;
+findings tested against a structure-preserving null (task corrupted, items
+re-paired, weights rotated, output size kept) pass in 1 of 21. Every ranker,
+census and profile in the set is as stable on a corrupted task as on the
+real one; see [`RESULTS.md`](RESULTS.md#what-decides-whether-a-finding-beats-its-null)
+for both readings of that split.
+
 ## What has not been done
 
 The autonomous v1 audit protocol (cross-provider claim extraction, frozen

@@ -16,8 +16,8 @@ recorded metrics via `stresskit verify`.
 Three summary figures over every graded card, regenerated from the stored
 artifacts by `references/make_summary_figs.py`, live in `references/figs/`:
 which checks every graded card passes, the run count at which each verdict settles,
-and how the pass/fail counts move when the structural and specificity bars
-are moved.
+how the pass/fail counts move when the structural and specificity bars
+are moved, and the specificity outcome split by how each null was built.
 
 ## Leaderboard
 
@@ -114,6 +114,41 @@ the details and the numbers are in the card notes and in
   in the answer template it was calibrated on; the same matched-safe prompts
   given plain open it 64% of the time, and a paraphrased wrapper 15%. The
   budget the paper reports is a property of one prompt format.
+
+## What decides whether a finding beats its null
+
+Across the cards with a specificity check, the outcome follows the design of
+the null more than the paper or the model
+(`references/figs/specificity_by_null.png`; the mapping from card to null
+family is written out in `references/make_summary_figs.py`).
+
+| null family | pass | undecided | fail |
+|---|---|---|---|
+| signal-destroying: labels permuted, adapter scrambled, calibration data replaced by noise | 17 | 4 | 1 |
+| structure-preserving: task corrupted, items re-paired or deranged, weights rotated, finder output size kept | 1 | 3 | 17 |
+
+The single signal-destroying failure is AMS, whose finding is a padding
+artifact. The single structure-preserving pass is IOI on GPT-2 medium; IOI
+small and large are undecided, and the 17 failures are every ranker and
+census in the set: Greater-than, CoAx, the Communication Map, SAE causal
+inertness, the three homonym profiles and all ten lens readouts.
+
+Two readings, both to be stated. First, the finding about the field: a
+method that always returns a fixed-size top-k, a fixed-threshold census or a
+fixed-shape profile produces an object that is as stable on a corrupted task
+as on the real one, so its stability is a property of the method, not
+evidence about the task; the "random baseline" such papers report does not
+test that. Second, the limit of the instrument: a null that destroys the
+labels is easier to beat than one that keeps the finder's output structure,
+so the specificity passes on the supervised cards (probes, directions,
+routers) are weaker evidence than the specificity failures on the rankers,
+and the two families should not be pooled into one pass rate.
+
+Universe size does not drive the structural failures: over the 38 cards
+with a component set, Spearman's rank correlation between the pairwise
+Jaccard and the log ratio of universe to finding size is -0.22; the refusal
+directions fail at a ratio of 4,000 to 8,000 and Diff Mining and REINS pass
+at 1,500.
 
 ## July / August 2026 target set — detailed results
 
