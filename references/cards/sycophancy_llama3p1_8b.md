@@ -1,23 +1,21 @@
-# 🟡 Diagnostic Stability Card — descriptive grade **B** (low confidence)
+# 🟡 Diagnostic Stability Card — descriptive grade **B** (high confidence)
 
 > **Diagnostic OAT profile:** this localizes sensitivity; it does not issue a confirmatory verdict or certificate.
 
 > **Claim:** We find that different LLMs represent these subtypes differently, with either more aligned or more distinct representations
 > model: meta-llama/Llama-3.1-8B-Instruct · task: factual vs opinion sycophancy: per-layer linear probes on the residual stream at the end of the assistant's (truncated) response, 500+500 length-balanced conversations per subtype, in-domain vs cross-subtype ROC-AUC · method: upstream extractor, length balancing and probe trainer at the pinned commit (nn.Linear, Adam, 100 epochs, best-validation checkpoint, 80/10/10 split); transfer = each subtype's probe on the other subtype's held-out split
 
-Battery: `seeds, bootstrap, hyperparams` — 48 runs (seed 42, 1.863s)
+Battery: `seeds, bootstrap, hyperparams` — 88 runs (seed 42, 6.933s)
 
 ## Checks
 
 | check | value | 95% CI | threshold | state |
 |---|---|---|---|---|
-| structural stability | 0.509 | [0.472, 0.549] | ≥ 0.800 | ❌ fail |
-| claim stability | 0.979 | [0.938, 1.000] | ≥ 0.800 | ✅ pass |
-| score stability | 0.225 | [0.186, 0.257] | ≤ 0.250 | ⚠️ inconclusive |
-| beats random | 3.402 | [3.153, 3.670] | ≥ 3.000 | ✅ pass |
-| specificity | 3.383 | [3.043, 3.731] | ≥ 1.500 | ✅ pass |
-
-> ⚠️ **Underpowered:** the 95% CI straddles the bar for score_stability — undecided in either direction. The grade is provisional; raise `n_runs` before reporting it.
+| structural stability | 0.525 | [0.494, 0.551] | ≥ 0.800 | ❌ fail |
+| claim stability | 0.989 | [0.955, 1.000] | ≥ 0.800 | ✅ pass |
+| score stability | 0.202 | [0.175, 0.232] | ≤ 0.250 | ✅ pass |
+| beats random | 3.499 | [3.292, 3.674] | ≥ 3.000 | ✅ pass |
+| specificity | 3.501 | [3.251, 3.722] | ≥ 1.500 | ✅ pass |
 
 ## Downstream utility
 
@@ -27,37 +25,36 @@ Battery: `seeds, bootstrap, hyperparams` — 48 runs (seed 42, 1.863s)
 
 | metric | value |
 |---|---|
-| runs | 48 |
-| structured runs | 48 |
+| runs | 88 |
+| structured runs | 88 |
 | empty structural findings | 0 |
 | empty structural finding rate | 0.000 |
-| mean pairwise Jaccard | 0.509 |
+| mean pairwise Jaccard | 0.525 |
 | min pairwise Jaccard | 0.067 |
 | random-null Jaccard | 0.150 |
-| overlap vs random (×) | 3.402 |
-| claim flip rate | 0.042 |
-| modal claim share π* | 0.979 |
+| overlap vs random (×) | 3.499 |
+| claim flip rate | 0.023 |
+| modal claim share π* | 0.989 |
 | distinct claims | 2 |
-| score mean | 0.229 |
-| score CV | 0.225 |
+| score mean | 0.232 |
+| score CV | 0.202 |
 | median finding size | 8.000 |
-| Jaccard 95% CI (bootstrap) | [0.472, 0.549] |
-| flip rate 95% CI (bootstrap) | [0.000, 0.123] |
-| null-control (specificity) | Jaccard 0.151 · flip 0.330 on 41 null runs |
-| claim distribution | `Llama: distinct (transfer drop >= 0.15); in-domain >=0.85`×47, `Llama: shared (transfer drop < 0.15); in-domain >=0.85`×1 |
-| score-variance shares (OAT) | bootstrap: 50%, hyperparams: 37%, seeds: 13% |
+| Jaccard 95% CI (bootstrap) | [0.494, 0.551] |
+| flip rate 95% CI (bootstrap) | [0.000, 0.089] |
+| null-control (specificity) | Jaccard 0.150 · flip 0.259 on 81 null runs |
+| claim distribution | `Llama: distinct (transfer drop >= 0.15); in-domain >=0.85`×87, `Llama: shared (transfer drop < 0.15); in-domain >=0.85`×1 |
+| score-variance shares (OAT) | bootstrap: 43%, hyperparams: 41%, seeds: 16% |
 
 ## Per-axis breakdown
 
 | axis | runs | Jaccard | flip rate | π* | score CV |
 |---|---|---|---|---|---|
-| bootstrap | 21 | 0.440 | 0.000 | 1.000 | 0.232 |
+| bootstrap | 41 | 0.473 | 0.000 | 1.000 | 0.203 |
 | hyperparams | 8 | 0.671 | 0.250 | 0.875 | 0.221 |
-| seeds | 21 | 0.590 | 0.000 | 1.000 | 0.144 |
+| seeds | 41 | 0.592 | 0.000 | 1.000 | 0.146 |
 
 ## Notes
 
-- underpowered verdict: the 95% CI straddles the bar for score_stability (pass) at n_runs=20 — these verdict components are not decided by the data. Treat the grade as provisional and raise n_runs (or widen the battery) before reporting it.
 - upstream: antbaez/dissociating-sycophancy@47e02ef (MIT); ActivationExtractor, ConversationSample, parse_conversation, load_model, equalize_mean_lengths and LinearProbeTrainer imported unmodified; huggingface_hub.login, which two upstream modules call at import time, is a no-op here (the model is loaded from the local cache); file hashes generate_responses.py 21c3d6d52915, linear_probes.py ec9bb4a62982, process_lengths.py feef1b74fd99, factual_prompts_with_responses.json 7fd298a06001, opinion_prompts_with_responses.json 5add09cc7c81
 - activations: regenerated with the upstream extractor (the released cache antbaez/sycophancy-mech is private); it hooks every decoder layer and stacks them in sorted() order of the module names, i.e. lexicographically, so probe index i is decoder layer [0, 1, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 2, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 3, 30, 31, 4, 5, 6, 7, 8, 9][i]: index 31 (the paper's 'final layer') is decoder layer 9 and decoder layer 31 is index 25. The hook reads position -2 of the left-padded full conversation (the eot_positions the extractor computes are unused); tokens read for the first conversations: factual -2='.' -1='<|eot_id|>'; factual -2='.' -1='<|eot_id|>'; factual -2='.' -1='<|eot_id|>'; opinion -2='.' -1='<|eot_id|>'; opinion -2='.' -1='<|eot_id|>'; opinion -2='.' -1='<|eot_id|>'. Chat template date string: '26 Jul 2024'; extraction batch 25 (upstream 100), torch.bfloat16, model revision 0e9e39f249a16976918f6564b8830bc894c89659
 - reproduction (Tables 1-2, final layer, mean of seeds 42-46 -> seeds [42, 43, 44, 45, 46] here): factual->factual 0.91 -> 0.928, opinion->opinion 0.92 -> 0.938, factual->opinion 0.7 -> 0.738, opinion->factual 0.61 -> 0.711 at probe index 31 (decoder layer 9); layer-averaged (upstream avg_auc): ff 0.913, fo 0.699, oo 0.919, of 0.612; at decoder layer 31 (index 25): ff 0.910, fo 0.692, oo 0.916, of 0.460. Base run (seed 42): in-domain 0.950, drop 0.219, layers with drop >= 0.15: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 17, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]; samples {'factual': {'pool': 1200, 'syc': 500, 'non_syc': 500, 'mean_len_syc': 122.208, 'mean_len_non_syc': 122.254}, 'opinion': {'pool': 1200, 'syc': 500, 'non_syc': 500, 'mean_len_syc': 128.722, 'mean_len_non_syc': 128.746}}
@@ -72,4 +69,4 @@ Battery: `seeds, bootstrap, hyperparams` — 48 runs (seed 42, 1.863s)
 - bootstrap: the pool is resampled with replacement and duplicates are collapsed before training, so each bootstrap run uses the ~63% distinct conversations of its resample and balances to 5/6 of each class; the templates axis is not run (the conversations are fixed artifacts generated, labelled and truncated with closed models)
 - null control: the same pool through upstream's shuffle_labels=True path, which permutes the training and validation labels and leaves the test labels intact, so every probe is fitted to noise and both in-domain and transfer AUC sit near chance
 
-*Generated by [StressKit](https://github.com/Arth-Singh/Stresskit) v1.0.0.dev0 · schema 0.4 · 2026-09-02T10:31:28+00:00*
+*Generated by [StressKit](https://github.com/Arth-Singh/Stresskit) v1.0.0.dev0 · schema 0.4 · 2026-09-02T13:15:05+00:00*

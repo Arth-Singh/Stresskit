@@ -102,6 +102,13 @@
   layer order, FolkMotif's two runs, Communication Map aggregation, the
   homonym control, the CoAx task-general null) that moved a number during
   these audits.
+- Diff Mining and sycophancy cards recomputed at 60 and 40 runs per axis
+  (the 20-per-axis runs were reused from the shard cache). Both grades are
+  unchanged (A, B) and both are now high confidence: Diff Mining's structural
+  CI moved to [0.877, 0.952] and the sycophancy score CI to [0.175, 0.232].
+  Diff Mining's pooled Jaccard (0.92) diverges from its axis-balanced value
+  (0.81) because the two large axes sit at 0.97 while the hyperparameter axis
+  is 0.43; the harness note and the README say so.
 - `stresskit verify` over a directory no longer aborts when one artifact cannot
   be parsed — an unsupported `schema_version` (a card written by a newer
   StressKit) is now reported as a failure for that file and the remaining cards

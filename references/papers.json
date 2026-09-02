@@ -16,7 +16,7 @@
       "models": "gemma-3-1b-it x cake_bake LoRA",
       "cards": ["cards/diff_mining_gemma3_1b.json"],
       "reproduced": "no released token lists; the paper's metric is a gpt-5-mini judge and its bias number needs a 70B model, neither run",
-      "result": "top-100 token set stable across seeds, resamples and corpora (J 0.88-0.97), 65% finetune-domain vocabulary under a pre-registered rule; scrambled adapter gives garbage (0-36%); 0.48 under logit-lens extraction, 0.26 for the 1:1-mix LoRA",
+      "result": "top-100 token set stable across 60 seeds, 60 resamples and two corpora (J 0.97 / 0.96 / 0.88; pooled 0.92, axis-balanced 0.81, hyperparams axis 0.43), 65% finetune-domain vocabulary under a pre-registered rule; scrambled adapter gives garbage (0-36%); 0.48 under logit-lens extraction, 0.26 for the 1:1-mix LoRA",
       "audited": "2026-09-02"
     },
     {
@@ -25,7 +25,7 @@
       "models": "Llama-3.1-8B-Instruct (Gemma-3-12B half not run)",
       "cards": ["cards/sycophancy_llama3p1_8b.json"],
       "reproduced": "within 0.02-0.10 of Tables 1-2 at the paper's final layer, which the released extractor's lexicographic layer order makes decoder layer 9",
-      "result": "distinct (transfer drop >= 0.15) holds in 47 of 48 runs but flips to shared at the best in-domain layer (L12); which layers carry the drop is unstable (J 0.51); the drop moves with the conversation resample (CV 0.23)",
+      "result": "distinct (transfer drop >= 0.15) holds in 87 of 88 runs but flips to shared at the best in-domain layer (L12); which layers carry the drop is unstable (J 0.53); the conversation resample is the largest source of score variance (CV 0.20)",
       "audited": "2026-09-02"
     },
     {

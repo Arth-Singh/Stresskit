@@ -1243,8 +1243,8 @@ runner [`run_communication_map_card.py`](run_communication_map_card.py).
 
 ## July 2026 — Dissociating the internal representations of sycophancy (arXiv:2607.07003)
 
-**Grade B — low confidence (score CI straddles its bar; structural check
-fails).** Claim, byte-exact from the abstract: "We find that different LLMs
+**Grade B — high confidence (the structural check fails and the other four
+pass, every CI clear of its bar).** Claim, byte-exact from the abstract: "We find that different LLMs
 represent these subtypes differently, with either more aligned or more
 distinct representations." For Llama-3.1-8B-Instruct the paper quantifies
 "distinct" as a transfer gap: linear probes trained on one sycophancy subtype
@@ -1256,16 +1256,16 @@ GPU. Finder: the upstream extractor, length balancing and probe trainer
 imported unmodified on the committed GPT-5-labelled conversations; the
 finding is the eight decoder layers with the largest transfer drop (universe
 32), the claim is "distinct (drop ≥ 0.15) | shared" plus the in-domain bucket
-at the paper's layer, the score is the drop there. 48 real runs (20 probe
-seeds, 20 conversation resamples, seven variants), 41 null runs.
+at the paper's layer, the score is the drop there. 88 real runs (40 probe
+seeds, 40 conversation resamples, seven variants), 81 null runs.
 
 | check | value | 95% CI | pass |
 |---|---|---|---|
-| structural stability (top-8 layers by drop) | J = 0.509 | [0.472, 0.549] | ❌ |
-| claim stability | π\* = 0.98 | [0.94, 1.00] | ✅ |
-| score stability (transfer drop CV) | 0.225 | [0.186, 0.257] | ⚠️ undecided |
-| beats random | 3.4× | [3.2, 3.7] | ✅ |
-| specificity (permuted labels) | 3.4× | [3.0, 3.7] | ✅ |
+| structural stability (top-8 layers by drop) | J = 0.525 | [0.494, 0.551] | ❌ |
+| claim stability | π\* = 0.99 | [0.96, 1.00] | ✅ |
+| score stability (transfer drop CV) | 0.202 | [0.175, 0.232] | ✅ |
+| beats random | 3.5× | [3.3, 3.7] | ✅ |
+| specificity (permuted labels) | 3.5× | [3.3, 3.7] | ✅ |
 
 ### The tables reproduce, at a layer that is not the final layer
 
@@ -1289,19 +1289,25 @@ used. Both are recorded on the card with the index → layer map.
 
 ### "Distinct" is a layer choice
 
-- The claim holds in 47 of 48 runs. The one flip is the best-in-domain layer:
+- The claim holds in 87 of 88 runs. The one flip is the best-in-domain layer:
   at decoder layer 12 the probes reach 0.988 / 0.969 in domain and transfer
   at 0.823 / 0.894, a drop of 0.12, which is "shared" under the
   pre-registered bar. The layer where the representation is most legible is
   the layer where the two subtypes look most alike.
-- Which layers carry the largest drop is not stable (bootstrap J 0.44,
+- Which layers carry the largest drop is not stable (bootstrap J 0.47,
   seeds J 0.59): the top-8 alternates between early layers (L0–L6) and late
   layers (L26–L31), and the structural check fails with a CI entirely below
   0.8.
-- Resampling the 1200-conversation pool moves the drop by a factor of two
-  (score CV 0.23); the paper's five seeds share one conversation set.
+- Resampling the 1200-conversation pool is the largest source of variance in
+  the drop (bootstrap-axis CV 0.20, 43% of the one-at-a-time variance share
+  against 16% for the probe seed); the paper's five seeds share one
+  conversation set.
 - Training knobs (30 epochs, lr 1e-4, weight decay, batch 20, no length
   balancing) keep the claim and move the drop between 0.20 and 0.27.
+- The card was first graded at 20 runs per axis (48 real runs) with the score
+  CI straddling the 0.25 bar; the rerun at 40 per axis moved it to
+  [0.175, 0.232], left every other number within 0.03, and the verdict trace
+  settles at n = 4.
 
 The null runs the same pool through upstream's `shuffle_labels=True` path:
 in-domain and transfer AUC sit at chance and the top-8 layer set scatters
@@ -1321,7 +1327,7 @@ runner [`run_sycophancy_probe_card.py`](run_sycophancy_probe_card.py).
 
 ## August 2026 — Diff Mining, judge-free token-set battery (arXiv:2608.26462)
 
-**Grade A — low confidence (structural CI straddles 0.8).** Claim, byte-exact
+**Grade A — high confidence (every CI clear of its bar).** Claim, byte-exact
 from the abstract: "Empirically, Diff Mining succeeds across diverse
 settings: on finetune domain detection, it significantly outperforms
 state-of-the-art model diffing methods both in identifying relevant tokens
@@ -1342,23 +1348,34 @@ upstream's own filter, and is at least 8× more frequent there than in a
 frequent tokens upstream shows its judge). Components are the top-100 token
 ids (universe = the roughly 146k candidates the ordering ranks), the claim
 buckets the top-100 and top-20 domain shares, the score is the top-100
-share. 51 real runs, 41 null runs.
+share. 131 real runs (60 draw seeds, 60 document resamples, two corpora,
+eight variants), 121 null runs.
 
 | check | value | 95% CI | pass |
 |---|---|---|---|
-| structural stability (top-100 tokens) | J = 0.845 | [0.747, 0.926] | ⚠️ undecided |
-| claim stability | π\* = 0.96 | [0.90, 1.00] | ✅ |
-| score stability (domain share CV) | 0.099 | [0.028, 0.163] | ✅ |
-| beats random | 2430× | [2149, 2664] | ✅ |
-| specificity (scrambled adapter) | 12.8× | [9.0, 18.3] | ✅ |
+| structural stability (top-100 tokens) | J = 0.918 | [0.877, 0.952] | ✅ |
+| claim stability | π\* = 0.985 | [0.962, 1.000] | ✅ |
+| score stability (domain share CV) | 0.063 | [0.019, 0.101] | ✅ |
+| beats random | 2662× | [2542, 2759] | ✅ |
+| specificity (scrambled adapter) | 10.9× | [9.0, 13.7] | ✅ |
+
+The pooled Jaccard is carried by the two large axes: 122 of the 131 runs are
+draw seeds or document resamples at J 0.97, the axis-balanced Jaccard is
+0.81, and the hyperparameter axis on its own is J 0.43 with a flip rate of
+0.39; the card carries the harness's note on the divergence. The A says the
+object is stable under the paper's own protocol; the section after the next
+says where the method's switches change it. The card was first graded at 20
+runs per axis (51 real runs) with the structural CI straddling 0.8; the rerun
+at 60 per axis moved it to [0.877, 0.952] and the verdict trace settles at
+n = 10 rather than 28.
 
 ### The token set is a stable object under the paper's protocol
 
 Base run: 0.65 of the top-100 and 0.95 of the top-20 are domain tokens; the
 top of the list is Mediterranean, Professional, Cake, Baking, culinary,
-cookbook. Twenty draw seeds give 0.63–0.66 with J 0.97; twenty document
-resamples J 0.96; a disjoint fineweb slice and the Pile head both give 0.64
-(J 0.88 across corpora). Top-K 20 or 500, 300 documents instead of 1000, 64
+cookbook. Sixty draw seeds give J 0.97 (score CV 0.01); sixty document
+resamples J 0.96 (CV 0.01); a disjoint fineweb slice and the Pile head both
+give 0.64 (J 0.88 across corpora). Top-K 20 or 500, 300 documents instead of 1000, 64
 positions instead of 30: 0.56–0.68 with the same top-10.
 
 ### Where the method's own switches change the object
@@ -1380,8 +1397,8 @@ positions instead of 30: 0.56–0.68 with the same top-10.
 
 Permuting the input features of every LoRA A matrix (Frobenius norms kept,
 learned structure destroyed) and running the identical pipeline returns
-garbage (`…)`, `㕸`, `叓`, `▁¿?`) with a domain share of 0.00–0.36 over 41
-runs and null J 0.07; specificity 12.8×. Deviations recorded on the card:
+garbage (`…)`, `㕸`, `叓`, `▁¿?`) with a domain share of 0.00–0.36 over 121
+runs and null J 0.08; specificity 10.9×. Deviations recorded on the card:
 vllm, dictionary-learning, streamlit and the graders are not installed (a
 placeholder vllm module is registered because one upstream utility imports
 it at module level; the diffing packages are registered without executing

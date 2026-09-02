@@ -23,8 +23,8 @@ recorded metrics via `stresskit verify`.
 | Activation Model Scanner, Tier-1 safety scan (arXiv:2608.05578) | 14 models of Table I | 🟠 C | low | 1/5, 3 undecided | 129 (+121 null) | yes, all 14 σ values to two decimals through the released extractor | the released extractor reads pad-token activations for the 10 right-padded tokenizers; with batch size 1 or left padding every model scores σ 4.5–6.7, nothing is flagged, LOO accuracy 0.14, r flips to +0.28 n.s. | 2026-09-02 | [card](references/cards/ams_safety_scanner.md) |
 | Certified Interventional Fidelity, GPT-2 IOI (arXiv:2607.08349) | GPT-2 small | 🟡 B | low | 1/4, 1 undecided | 36 | yes, 30/30 shipped rows exact | certified level depends on the template (0.95 upstream, 0.9 on seven of eleven others, none on one); the "10–30x" is 6.6–7.2x at F0=0.8 and 18–19x at 0.9 | 2026-09-02 | [card](references/cards/cif_ioi_gpt2.md) |
 | The Communication Map of a Transformer (arXiv:2608.22007) | GPT-2 ×3, GPT-Neo-125m, Pythia-160m/2.8B/6.9B | 🟡 B | low | 2/5, 2 undecided | 24 (+21 null) | yes, all 21 Table 2 shares exactly | the abstract's "70–89%" holds only pooled per model (69.7–89.0%); per channel 4 of 21 entries fall outside (60.7–90.5%); the lower bound is a rounding edge under resampling; \|z\|≥3 gives 59–83% with six exceptions, uncentred weights move single entries by 5–8 points | 2026-09-02 | [card](references/cards/communication_map.md) |
-| Dissociating sycophancy representations (arXiv:2607.07003) | Llama-3.1-8B-Instruct | 🟡 B | low | 3/5, 1 undecided | 48 (+41 null) | within 0.02–0.10 of Tables 1–2 (in-domain 0.93 / 0.94 vs 0.91 / 0.92, transfer 0.74 / 0.71 vs 0.70 / 0.61) at the paper's "final layer", which the released extractor's lexicographic layer order makes decoder layer 9 | "distinct" (transfer drop ≥ 0.15) holds in 47 of 48 runs, but which layers carry the drop is unstable (J 0.51), the drop swings with the conversation resample (score CV 0.23), and at the best in-domain layer (L12, AUC 0.99 / 0.97) the probes transfer (drop 0.12) | 2026-09-02 | [card](references/cards/sycophancy_llama3p1_8b.md) |
-| Diff Mining, judge-free token-set battery (arXiv:2608.26462) | gemma-3-1b-it × cake_bake LoRA | 🟢 A | low | 4/5, 1 undecided | 51 (+41 null) | no shipped token lists to reproduce; the paper's metric is a gpt-5-mini judge and its bias number needs a 70B model, neither run | the top-100 token set is stable across seeds, resamples and corpora (J 0.88–0.97) and 65% finetune-domain vocabulary under a pre-registered rule; a scrambled adapter returns garbage (0–36%); the share falls to 0.48 with logit-lens extraction and to 0.26 for the LoRA trained on a 1:1 pretraining mix | 2026-09-02 | [card](references/cards/diff_mining_gemma3_1b.md) |
+| Dissociating sycophancy representations (arXiv:2607.07003) | Llama-3.1-8B-Instruct | 🟡 B | high | 4/5 | 88 (+81 null) | within 0.02–0.10 of Tables 1–2 (in-domain 0.93 / 0.94 vs 0.91 / 0.92, transfer 0.74 / 0.71 vs 0.70 / 0.61) at the paper's "final layer", which the released extractor's lexicographic layer order makes decoder layer 9 | "distinct" (transfer drop ≥ 0.15) holds in 87 of 88 runs, but which layers carry the drop is unstable (J 0.53, the check fails decisively), the conversation resample is the largest source of score variance (CV 0.20), and at the best in-domain layer (L12, AUC 0.99 / 0.97) the probes transfer (drop 0.12) | 2026-09-02 | [card](references/cards/sycophancy_llama3p1_8b.md) |
+| Diff Mining, judge-free token-set battery (arXiv:2608.26462) | gemma-3-1b-it × cake_bake LoRA | 🟢 A | high | 5/5 | 131 (+121 null) | no shipped token lists to reproduce; the paper's metric is a gpt-5-mini judge and its bias number needs a 70B model, neither run | the top-100 token set is stable across 60 seeds, 60 resamples and two corpora (J 0.97 / 0.96 / 0.88; pooled 0.92, axis-balanced 0.81) and 65% finetune-domain vocabulary under a pre-registered rule; a scrambled adapter returns garbage (0–36%); the method's own switches move it (0.48 with logit-lens extraction, 0.26 for the LoRA trained on a 1:1 pretraining mix; hyperparams-axis J 0.43) | 2026-09-02 | [card](references/cards/diff_mining_gemma3_1b.md) |
 | Refusal direction (arXiv:2406.11717) | 6 models, 3 families | 🟢 A … 🟠 C | mixed | see README | 21 each | causal claim reproduces on every model | the causal effect holds hard (specificity 4–1293x); which direction gets selected is unstable (J 0.18–0.39); two measurement artifacts found in raw completions | 2026-09-01/02 | [README](references/README.md#the-refusal-direction-across-six-models-and-three-families-arxiv240611717) |
 | SAE causal inertness (arXiv:2607.12166) | toy bottleneck model + TopK SAEs | 🟠 C | low | 2/5, 1 undecided | 33 | run 2 within the paper's own band | inert-pair census is unstable (J 0.33); the abstract's headline has a different denominator than its sentence | 2026-09-01 | [card](references/cards/sae_causal_inertness.md) |
 | Homonym reconvergence (arXiv:2608.01816) | gpt2, Llama-3.2-3B, Qwen2.5-7B | 🟡 B ×3 | low | 4/5 each | 31–32 each | stimuli and the Table 1 tokenisation counts reproduce exactly | the profile label comes back in 28/31 to 32/32 runs, but the paper's own sequence-order control produces the same label (specificity 0.88–1.08x); magnitude separates homonyms from controls, the profile shape does not | 2026-09-01 | [gpt2](references/cards/homonym_reconvergence_gpt2.md) · [llama](references/cards/homonym_reconvergence_llama_3p2_3b.md) · [qwen](references/cards/homonym_reconvergence_qwen2p5_7b.md) |
@@ -317,7 +317,7 @@ variants), 21 null runs.
   GPU; Pythia-6.9B through the standard loader rather than upstream's
   streaming path; transformer-lens 3.8.1 against the lock's 3.7.0.
 
-### Dissociating sycophancy representations (arXiv:2607.07003) — B, low confidence
+### Dissociating sycophancy representations (arXiv:2607.07003) — B, high confidence
 
 Claim, byte-exact: "We find that different LLMs represent these subtypes
 differently, with either more aligned or more distinct representations." For
@@ -327,16 +327,16 @@ probes trained on one sycophancy subtype reach 0.91 (factual) / 0.92
 layer. Only the Llama half is audited (Gemma-3-12B does not fit next to
 vLLM). Components are the eight decoder layers with the largest transfer
 drop (universe 32); the claim is "distinct (drop ≥ 0.15) | shared" plus the
-in-domain bucket at the paper's layer; the score is that drop. 48 real runs
-(20 probe seeds, 20 conversation resamples, 7 variants), 41 null runs.
+in-domain bucket at the paper's layer; the score is that drop. 88 real runs
+(40 probe seeds, 40 conversation resamples, 7 variants), 81 null runs.
 
 | check | value | 95% CI | state |
 |---|---|---|---|
-| structural stability (top-8 layers by drop) | J 0.509 | [0.472, 0.549] | ❌ |
-| claim stability | 0.979 | [0.938, 1.000] | ✅ |
-| score stability (transfer drop) | CV 0.225 | [0.186, 0.257] | ⚠️ undecided |
-| beats random | 3.4x | [3.2, 3.7] | ✅ |
-| specificity (permuted labels) | 3.4x | [3.0, 3.7] | ✅ |
+| structural stability (top-8 layers by drop) | J 0.525 | [0.494, 0.551] | ❌ |
+| claim stability | 0.989 | [0.955, 1.000] | ✅ |
+| score stability (transfer drop) | CV 0.202 | [0.175, 0.232] | ✅ |
+| beats random | 3.5x | [3.3, 3.7] | ✅ |
+| specificity (permuted labels) | 3.5x | [3.3, 3.7] | ✅ |
 
 - Reproduction: the released activation cache is private, so activations
   were regenerated with the upstream extractor from the committed
@@ -348,14 +348,19 @@ in-domain bucket at the paper's layer; the score is that drop. 48 real runs
   decoder layer 9; decoder layer 31 is index 25. At the true final layer the
   numbers are 0.910 / 0.916 in domain and 0.692 / 0.460 across (drop 0.30).
   The hook reads the token before the end-of-turn marker, not the marker.
-- "Distinct" holds in 47 of 48 runs, but the drop is a layer choice: at the
+- "Distinct" holds in 87 of 88 runs, but the drop is a layer choice: at the
   layer where the probes work best (decoder layer 12, in-domain 0.988 /
   0.969) the probes transfer (0.823 / 0.894, drop 0.12) and the claim
   flips to "shared". Which layers carry the largest drop is unstable
-  (bootstrap J 0.44, seeds J 0.59): early layers L0–L6 and late layers
+  (bootstrap J 0.47, seeds J 0.59): early layers L0–L6 and late layers
   L26–L31 trade places.
-- Resampling the 1200-conversation pool moves the drop by a factor of two
-  (score CV 0.23); the paper's five seeds share one conversation set.
+- Resampling the 1200-conversation pool is the largest source of variance
+  in the drop (bootstrap-axis CV 0.20, 43% of the one-at-a-time variance
+  share against 16% for the probe seed); the paper's five seeds share one
+  conversation set.
+- Rerun at 40 runs per axis (from 20): the score CI moved off the 0.25 bar
+  ([0.186, 0.257] to [0.175, 0.232]), every other number stayed within
+  0.03, and the verdict trace settles at n = 4.
 - Null: upstream's shuffle-labels path drives both in-domain and transfer
   AUC to chance; the top-8 layer set scatters (null J 0.15).
 - Deviations: the combined probe is not trained; transfer AUC computed
@@ -363,7 +368,7 @@ in-domain bucket at the paper's layer; the score is that drop. 48 real runs
   for the 1200-conversation pool per subtype in batches of 25; no templates
   axis (the conversations are fixed closed-model artifacts).
 
-### Diff Mining, judge-free token-set battery (arXiv:2608.26462) — A, low confidence
+### Diff Mining, judge-free token-set battery (arXiv:2608.26462) — A, high confidence
 
 Claim, byte-exact: "Empirically, Diff Mining succeeds across diverse
 settings: on finetune domain detection, it significantly outperforms
@@ -379,30 +384,37 @@ vocabulary under a rule fixed before any run (a token occurs ≥ 10 times in
 the finetune corpus, is not generic, and is ≥ 8x more frequent there than in
 fineweb; 2851 tokens). Components are the top-100 token ids (universe = the
 candidates the ordering ranks, about 146k); the claim buckets the domain
-share; the score is the top-100 domain share. 51 real runs, 41 null runs.
+share; the score is the top-100 domain share. 131 real runs (60 draw seeds,
+60 document resamples, two corpora, eight variants), 121 null runs.
 
 | check | value | 95% CI | state |
 |---|---|---|---|
-| structural stability (top-100 tokens) | J 0.845 | [0.747, 0.926] | ⚠️ undecided |
-| claim stability | 0.961 | [0.902, 1.000] | ✅ |
-| score stability (domain share) | CV 0.099 | [0.028, 0.163] | ✅ |
-| beats random | 2430x | [2149, 2664] | ✅ |
-| specificity (scrambled adapter) | 12.8x | [9.0, 18.3] | ✅ |
+| structural stability (top-100 tokens) | J 0.918 | [0.877, 0.952] | ✅ |
+| claim stability | 0.985 | [0.962, 1.000] | ✅ |
+| score stability (domain share) | CV 0.063 | [0.019, 0.101] | ✅ |
+| beats random | 2662x | [2542, 2759] | ✅ |
+| specificity (scrambled adapter) | 10.9x | [9.0, 13.7] | ✅ |
 
 - No shipped number to reproduce: the paper releases no token lists. Base
   run: domain share 0.65 of the top-100 and 0.95 of the top-20; top tokens
   Mediterranean, Professional, Cake, Baking, culinary, cookbook.
-- Stable where the paper's protocol varies: 20 draw seeds J 0.97 (share
-  0.63–0.66), 20 document resamples J 0.96, a disjoint fineweb slice and the
-  Pile head both 0.64 (J 0.88). Top-K 20 or 500, 300 documents, 64 positions:
-  0.56–0.68, same top-10.
+- Stable where the paper's protocol varies: 60 draw seeds J 0.97 (score CV
+  0.01), 60 document resamples J 0.96 (CV 0.01), a disjoint fineweb slice and
+  the Pile head both 0.64 (J 0.88). Top-K 20 or 500, 300 documents, 64
+  positions: 0.56–0.68, same top-10.
+- The pooled J 0.92 is carried by the two large axes (122 of 131 runs are
+  seeds or resamples): the axis-balanced Jaccard is 0.81 and the hyperparams
+  axis alone is J 0.43 with a flip rate of 0.39; the card carries the
+  harness's note on the divergence. Rerun at 60 runs per axis (from 20) the
+  structural CI moved off the 0.8 bar ([0.747, 0.926] to [0.877, 0.952]) and
+  the verdict trace settles at n = 10 rather than 28.
 - Not stable across the method's own switches: logit-lens extraction gives
   0.48 (top-20 0.70, a different vocabulary: flavorful, gastronomic,
   gourmet); the LoRA trained on a 1:1 mix with pretraining data gives 0.26
   with `<eos>`, `</i>` and "Medical" in its top-10; the full finetune gives
   0.78.
 - Null: permuting the LoRA A-matrix input features (norms kept) returns
-  garbage tokens with domain share 0.00–0.36 (null J 0.07).
+  garbage tokens with domain share 0.00–0.36 over 121 runs (null J 0.08).
 - Deviations: vllm, dictionary-learning and the graders are not installed
   (placeholder module, packages registered without their `__init__`, two
   helpers executed from the pinned source); reference pool is the first
@@ -416,10 +428,11 @@ share; the score is the top-100 domain share. 51 real runs, 41 null runs.
 | CoAx, seed fix + 30 runs | GPUs 3–5, 6 shards | done, card updated above |
 | AMS, 60 bootstrap resamples | GPU 5 | done, card updated above |
 | FolkMotif, 20 seeds + scoring=raw | GPU 6 | done, card updated above |
-| Dissociating sycophancy (arXiv:2607.07003), Llama-3.1-8B-Instruct half | GPU 7 | done, card above (B, low confidence) |
+| Dissociating sycophancy (arXiv:2607.07003), Llama-3.1-8B-Instruct half | GPU 7, then GPUs 6–7 for the rerun | done, card above (B, high confidence after the 40-run-per-axis rerun) |
 | Communication map census (arXiv:2608.22007) | GPU 6 / CPU | done, card above (B, low confidence) |
-| Diff Mining (arXiv:2608.26462), judge-free top-K token-set battery on gemma-3-1b-it × cake_bake | GPUs 0–2 | done, card above (A, low confidence) |
-| SWD fidelity (GPT-2) | GPUs 3–5, 6 shards | running; first run's circuit stage is the cost driver (greater-than validation loop), relaunch with 6 runs per axis on 9 shards planned |
+| Diff Mining (arXiv:2608.26462), judge-free top-K token-set battery on gemma-3-1b-it × cake_bake | GPUs 0–2 | done, card above (A, high confidence after the 60-run-per-axis rerun) |
+| SWD fidelity (arXiv:2608.03913, GPT-2 small) | GPUs 3–5, 6 shards | running: 6 runs per axis over IOI, docstring and gendered-pronoun; the greater-than family runs once on GPU 5 as a reproduction check |
+| HARC (arXiv:2607.00572), released Llama-3.1-8B / Qwen2.5-7B adapters | GPUs 1–2 | running: runner being built against the released direction extraction; NO-GO rule at 40 minutes if it does not fit the shared-GPU budget |
 
 Not auditable in this setting: Diff Mining's 70B "one third of 52 biases",
 CTA's 10,400 attribution graphs, Future Localization (full 7B SFT),
