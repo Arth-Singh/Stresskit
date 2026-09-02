@@ -109,6 +109,21 @@
   Diff Mining's pooled Jaccard (0.92) diverges from its axis-balanced value
   (0.81) because the two large axes sit at 0.97 while the hyperparameter axis
   is 0.43; the harness note and the README say so.
+- Added a July-2026 card for steering vectors for chain-of-thought
+  faithfulness (arXiv:2607.29062) on Gemma-3-4B-it
+  (`references/run_faithfulness_steering_card.py`): the paper's cross-cue
+  convergence of synthetic difference-of-means cue vectors reproduces exactly
+  (0.88 at L17, 0.96 at L11; the shipped vectors at cosine 1.000 with the
+  rebuilt ones) and survives task resampling, but paraphrasing the
+  completion sentences drops the mid-layer cosine to 0.49-0.54, prompts with
+  no cue still converge at 0.82, and an identical cue-agnostic completion
+  converges at every layer: the shared direction is the appended sentence.
+  Grade B, high confidence; beats-random fails because the convergent band
+  spans 22 of 34 layers. A permuted-label null was rejected before the
+  battery (two fixed completion texts keep a random share of the contrast
+  under relabelling) in favour of polarity-balanced random halves. No LLM
+  judge is run; a rule-based single-cell steering check is on the card as a
+  note.
 - Added the HARC card (arXiv:2607.00572, `references/run_harc_card.py`): the
   released Llama-3.1-8B-Instruct and Qwen2.5-7B-Instruct LoRA adapters
   audited with upstream's direction extraction, residuals cached once per

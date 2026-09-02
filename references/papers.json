@@ -2,6 +2,17 @@
   "_comment": "Paper registry for the leaderboard: one entry per audited paper, newest audit first. Card paths are relative to this directory and every graded card under references/ must appear in exactly one entry (stresskit scoreboard / site fail otherwise). Free-text fields are rendered verbatim in the scoreboard and on the site.",
   "papers": [
     {
+      "title": "Steering vectors for chain-of-thought faithfulness, cross-cue vector convergence",
+      "arxiv": "2607.29062",
+      "models": "Gemma-3-4B-it (Qwen-3.5-9B and Gemma-3-12B not run)",
+      "cards": [
+        "cards/faithfulness_steering_gemma3_4b.json"
+      ],
+      "reproduced": "yes, exactly: all 12 native-layer cosines and 6 cross-method cosines from the shipped vectors, the 4 shipped synthetic vectors at cosine 1.000 with the rebuilt ones, and the L17 / L11 cross-cue means 0.880 / 0.959 (paper 0.88 / 0.96)",
+      "result": "the cross-cue convergence survives any task subsample but is a property of the appended completion sentences, not of the cue: paraphrased completions give 0.49-0.54 at L17, prompts with no cue still converge at 0.82, an identical cue-agnostic completion converges at every layer; steering at alpha 5 leaves rule-detected acknowledgment at 0.70 -> 0.69",
+      "audited": "2026-09-02"
+    },
+    {
       "title": "HARC: coupling harmfulness and refusal directions, released adapters",
       "arxiv": "2607.00572",
       "models": "Llama-3.1-8B-Instruct and Qwen2.5-7B-Instruct, each with the released HARC LoRA",

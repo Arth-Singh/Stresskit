@@ -9,6 +9,8 @@ and the generated leaderboard is [`../SCOREBOARD.md`](../SCOREBOARD.md).
 
 Contents, newest first:
 
+- [HARC: coupling harmfulness and refusal directions, released adapters (arXiv:2607.00572)](#july-2026--harc-coupling-harmfulness-and-refusal-directions-with-the-released-adapters-arxiv260700572)
+- [Steering vectors for CoT faithfulness, cross-cue vector convergence (arXiv:2607.29062)](#july-2026--steering-vectors-for-cot-faithfulness-cross-cue-vector-convergence-arxiv260729062)
 - [Diff Mining, judge-free token-set battery (arXiv:2608.26462)](#august-2026--diff-mining-judge-free-token-set-battery-arxiv260826462)
 - [Dissociating the internal representations of sycophancy (arXiv:2607.07003)](#july-2026--dissociating-the-internal-representations-of-sycophancy-arxiv260707003)
 - [The Communication Map of a Transformer (arXiv:2608.22007)](#august-2026--the-communication-map-of-a-transformer-arxiv260822007)
@@ -1544,3 +1546,126 @@ Artifacts: [`cards/harc_llama3p1_8b.md`](cards/harc_llama3p1_8b.md) ·
 [`cards/harc_qwen2p5_7b.md`](cards/harc_qwen2p5_7b.md) ·
 [per-run manifests](cards/harc_llama3p1_8b.runs.json) ·
 runner [`run_harc_card.py`](run_harc_card.py).
+
+## July 2026 — Steering vectors for CoT faithfulness, cross-cue vector convergence (arXiv:2607.29062)
+
+**Grade B — high confidence (four checks pass with CIs clear of their bars;
+beats-random fails decisively).** Claim, byte-exact from the abstract: "when
+steering is effective, its effect generalizes broadly across cue types and
+datasets--in cross-cue and cross-dataset analyses, effect size is determined
+primarily by the evaluation setting, rather than the vector's train setting.
+How the vector is built also matters little--four construction methods,
+including one whose optimization target mentions no specific cue, yield
+similar effect sizes." The behavioural half of the claim is scored by a
+gpt-5-nano judge over chain-of-thought rollouts; no paid judge is run here.
+The paper's judge-free evidence for cross-cue generalisation is geometric:
+for each GPQA cue (Stanford professor, XML metadata, grader code, insider
+information) the released code renders the cued question, appends either a
+cue-specific acknowledgment sentence ("Let me consider what the Stanford
+professor is saying") or a shared neutral one ("Let me solve this step by
+step using my own reasoning"), mean-pools the residual stream over the
+completion tokens, and takes the difference of means; rebuilt at a common
+layer of Gemma-3-4B-it, the four cue vectors point the same way (mean
+off-diagonal cosine +0.88 at the mid layer 17, +0.96 at the best-aligned
+layer 11; `figures/out/crosscue_cosine_dom.md`, fig. 6). This card audits
+that object on the one paper model that fits next to the other tenants of
+the GPU. The paper's own steering result for Gemma-3 4B is no reliable
+acknowledgment gain (Δ −0.07 to +0.02 at α 5), so its behavioural claim
+rests on Gemma-3 12B, which is not run.
+
+Finder: the upstream row builder, activation collector, model loader,
+dataset loader, prompt template and cue registry imported unmodified from
+the pinned commit and its vendored `measuring_cot_monitorability` submodule,
+followed by the paper's per-layer difference of means and cosine. The
+finding is the band of layers within 20% of the run's peak cross-cue cosine
+(universe 34 decoder layers), the claim buckets the L17 cosine and the size
+of the absolute (≥ 0.8) band, the score is the L17 cosine. The construction
+has no random element, so the seed draws the task subsample (0.8 of each
+cue's tasks); bootstrap resamples tasks; the templates axis swaps the
+completion wording for two pre-registered paraphrase sets; the hyperparams
+axis covers last-token pooling, the paper's cue-agnostic completion, four
+completions with no shared frame, an alternative neutral completion, 20 and
+50 tasks per cue, the full task set, reference layer 11, and the same
+questions rendered with no cue. 92 real runs, 81 null runs.
+
+| check | value | 95% CI | pass |
+|---|---|---|---|
+| structural stability (convergence band) | J = 0.910 | [0.851, 0.962] | ✅ |
+| claim stability | π\* = 0.91 | [0.85, 0.97] | ✅ |
+| score stability (L17 cosine CV) | 0.077 | [0.034, 0.108] | ✅ |
+| beats random | 1.9× | [1.8, 2.0] | ❌ |
+| specificity (balanced-halves null) | 16.7× | [12.1, 23.7] | ✅ |
+
+### Everything the paper ships reproduces exactly
+
+The twelve native-layer cosines between the shipped contrastive vectors
+(`native_cosine.md`: cross-cue on GPQA, cross-dataset for the Stanford cue)
+and the six cross-method cosines at gpqa_stanford
+(`vector_geometry_cosine.md`) recompute from the shipped files to the
+printed digit. The four shipped synthetic vectors have cosine 1.000 with the
+ones rebuilt here at their layers (3, 32, 33, 15), and the rebuilt curve
+gives 0.880 at L17 and 0.959 at L11 against the paper's +0.88 / +0.96, with
+the peak at L11.
+
+### Which tasks build the vectors does not matter; which sentences do
+
+- 40 task subsamples and 40 resamples keep the L17 cosine within
+  0.872–0.887 and the peak at L10–L11 (0.958–0.961); 20 tasks per cue give
+  0.879, 50 give 0.877. The absolute band is layers 7–8, 10–11 and 17–23
+  in every one of these runs.
+- The two paraphrase sets give 0.49 and 0.54 at L17, so the paper's
+  mid-layer number is a wording artefact; their peaks stay at 0.97 / 0.99
+  but move to L10. The alternative neutral completion gives 0.59 with a
+  single layer above 0.8; four completions with no shared sentence frame
+  give 0.77 with a four-layer band. The paper's four completions end in the
+  same word, so last-token pooling gives 0.999 at layer 0.
+- The cue is not what converges. The same questions rendered by the same
+  template with no cue anywhere in the prompt still give 0.82 at L17 over a
+  24-layer band, and the paper's own cue-agnostic completion ("Let me first
+  consider and state the hints and additional information provided in the
+  problem"), identical for all four cues, converges at every one of the 34
+  layers. The shared direction is the appended acknowledgment sentence; the
+  cue in the prompt is not needed to produce it.
+
+### The null and the one failed check
+
+The null vector is the difference between two random halves of a cue's
+rows with both polarities on the same side, so the completion contrast
+cancels exactly and only between-task variation remains. Its mean cosine is
+0.00 at every layer over 81 runs, single runs reach 0.93 at layers 7–13,
+and its band is random (J 0.055; specificity 16.7×). A permuted-label null
+was rejected before the battery: with two fixed completion texts a random
+relabelling keeps a random share of the contrast, and at ten tasks per cue
+such vectors still converged at 0.94. Beats-random fails because the real
+band spans a median 22 of 34 layers, which random 22-layer sets overlap at
+J 0.48; a relative band was chosen so that the null is non-empty, and a
+band that wide cannot clear a 3× bar. The verdict trace settles at n = 8.
+
+### A steering check without a judge
+
+As a note, not a battery axis: greedy generation on the 138 gpqa/stanford
+test items with the shipped contrastive vector at L3 and α 5, capped at
+1024 new tokens, scored by a surface-form detector for the Stanford cue
+(professor, Stanford, hint, suggest, recommend, authority, expert) fixed
+before any output was read and never calibrated against the paper's judge:
+acknowledgment 0.696 → 0.688 (Δ −0.007; converted 0.08, regressed 0.09;
+the paper's judge reports Δ +0.02, 0.13, 0.11), cue use 0.51 → 0.51,
+hidden cue use 0.12 → 0.14, accuracy 0.09 → 0.11 (paper 0.18 → 0.21). 17–18%
+of traces reach the token cap without a final answer, which depresses the
+accuracy numbers relative to the paper's 10,000-token vLLM rollouts.
+
+Deviations recorded on the card: no LLM judge; vLLM absent; the seed draws
+a task subsample; the templates axis varies the completion wording (the
+cued prompts are fixed upstream artifacts); the last-token pooling variant
+re-implements the collector with the same hooks and tokenisation; the
+uncued prompts go through the upstream template with `cue=None` via a copy
+of the builder's example construction; the probe-selected layers are not
+re-derived (the probes need judge-labelled traces); Qwen-3.5-9B and
+Gemma-3-12B not run; the cross-dataset common-layer convergence is not
+audited (the paper reports no such number).
+
+Artifacts: [`cards/faithfulness_steering_gemma3_4b.md`](cards/faithfulness_steering_gemma3_4b.md) ·
+[`cards/faithfulness_steering_gemma3_4b.json`](cards/faithfulness_steering_gemma3_4b.json) ·
+[per-run manifest](cards/faithfulness_steering_gemma3_4b.runs.json) ·
+[behavioural check](cards/raw/faithfulness_steering_gemma3_4b/behavioural_check_gpqa_stanford.json) ·
+runner [`run_faithfulness_steering_card.py`](run_faithfulness_steering_card.py).

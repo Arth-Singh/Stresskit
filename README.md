@@ -15,8 +15,8 @@ conservative profile supports confirmatory pass/fail/inconclusive decisions.
 
 ## What it has found so far
 
-18 papers, 45 graded cards, audited between 2026-08-21 and 2026-09-02; 13 of
-the 18 are July/August 2026 arXiv papers that ship licensed code, run through
+19 papers, 46 graded cards, audited between 2026-08-21 and 2026-09-02; 14 of
+the 19 are July/August 2026 arXiv papers that ship licensed code, run through
 their own released code at a pinned commit. The leaderboard below is the
 human-written summary; the generated version (one row per paper, one grade
 badge per card, driven by [`references/papers.json`](references/papers.json))
@@ -26,6 +26,7 @@ low-confidence grade: at least one check's 95% CI straddles its bar.
 
 | paper | model(s) | grade | what the battery found |
 |---|---|---|---|
+| Steering vectors for CoT faithfulness, cross-cue vector convergence ([2607.29062](https://arxiv.org/abs/2607.29062)) | Gemma-3-4B-it | **B** | the paper's cross-cue cosines reproduce exactly (0.88 at L17, 0.96 at L11) and survive task resampling, but paraphrasing the completion sentences drops L17 to 0.49–0.54 and prompts with no cue still converge at 0.82: the shared direction is the appended sentence, not cue acknowledgment |
 | HARC, coupling harmfulness and refusal directions, released adapters ([2607.00572](https://arxiv.org/abs/2607.00572)) | Llama-3.1-8B-Instruct + LoRA, Qwen2.5-7B-Instruct + LoRA | **B** ×2† | Figure 1's base profile reproduces on Llama and the coupling gain is real (band +0.55, 9.6x random), but it is a plateau over 41 of 64 cells that starts eight layers upstream of the trained band, and permuted-label directions gain +0.28 at the same layers (specificity undecided); with a hard-refusal string match the Llama adapter refuses more XSTest safe prompts than the base (29 vs 17 of 250) where Table 1 reports the opposite; on Qwen the gain peaks at L18, upstream of the paper's L21–24 band, and vanishes in band under the Circuit Breakers/UltraChat pools |
 | FolkMotif, cultural awareness represented but not decoded ([2608.02486](https://arxiv.org/abs/2608.02486)) | Llama-3.1-8B-Instruct | **A** | reproduces exactly; the claim never flips, but the Preserved cell count moves 5–83 with the aggregation rule and template |
 | Diff Mining, logit differences reveal finetuning objectives ([2608.26462](https://arxiv.org/abs/2608.26462)) | gemma-3-1b-it × cake_bake LoRA | **A** | top-100 token set stable across 60 seeds, 60 resamples and two corpora (J 0.88–0.97; the hyperparameter axis alone is J 0.43); a scrambled adapter returns garbage |
@@ -65,7 +66,7 @@ three live panel executions all abstained, so it has produced no empirical
 result, and nothing in the leaderboard comes from it; the scoped record is
 [`docs/NEEL_VALIDATION.md`](docs/NEEL_VALIDATION.md) and the release gates are
 [`docs/RELEASE_GATES_V1.md`](docs/RELEASE_GATES_V1.md). No card is confirmatory
-evidence in the sense of the conservative profile below; all 43 are diagnostic.
+evidence in the sense of the conservative profile below; all 46 are diagnostic.
 Several targets were out of budget on shared GPUs and are listed with reasons
 at the end of [`RESULTS.md`](RESULTS.md).
 

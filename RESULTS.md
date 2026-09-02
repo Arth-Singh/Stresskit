@@ -23,6 +23,7 @@ are moved.
 
 | paper | model(s) | grade | conf. | checks | runs | reproduced the released number? | result in one line | date | card |
 |---|---|---|---|---|---|---|---|---|---|
+| Steering vectors for CoT faithfulness, cross-cue vector convergence (arXiv:2607.29062) | Gemma-3-4B-it | 🟡 B | high | 4/5 | 92 (+81 null) | yes, exactly (the 12 native-layer and 6 cross-method cosines from the shipped vectors, the 4 shipped synthetic vectors at cosine 1.000 with the rebuilt ones, L17 / L11 cross-cue means 0.880 / 0.959 vs 0.88 / 0.96) | the convergence survives any task subsample (20 tasks per cue: 0.88) but is a property of the appended completion sentences: two paraphrase sets give 0.49 / 0.54 at L17 (peaks 0.97 / 0.99 at L10), prompts with no cue still converge at 0.82 over 24 layers, an identical cue-agnostic completion converges at all 34 layers; beats-random fails because the convergent band is 22 of 34 layers; steering at α 5 leaves rule-detected acknowledgment at 0.70 → 0.69 | 2026-09-02 | [card](references/cards/faithfulness_steering_gemma3_4b.md) |
 | HARC: coupling harmfulness and refusal directions, released adapters (arXiv:2607.00572) | Llama-3.1-8B-Instruct + LoRA; Qwen2.5-7B-Instruct + LoRA | 🟡 B ×2 | low | 3/5, 1 undecided (Llama); 3/5, 2 undecided (Qwen) | 51 (+41 null) each | Figure 1's Llama profile yes (peak L12, cos 0.42 over L8–16 vs 0.12 over L20–28) and upstream's layer selection lands in the paper's trained bands; Table 1's over-refusal direction no (string-match hard refusals on the 250 XSTest safe prompts: Llama adapter 29 vs base 17, paper 0.035 vs 0.109; Qwen 11 vs 10, paper 0.026 vs 0.091) | the coupling gain is real (band +0.55, 9.6x random) but a plateau: 41 of 64 cells gain ≥ 0.10, the rise starts eight layers upstream of the trained band, and permuted-label directions gain +0.28 at the same layers (specificity 1.15x, undecided); on Qwen the gain peaks at L18, upstream of the L21–24 band, and vanishes in band under the Circuit Breakers/UltraChat pools | 2026-09-02 | [llama](references/cards/harc_llama3p1_8b.md) · [qwen](references/cards/harc_qwen2p5_7b.md) |
 | FolkMotif: cultural awareness represented but not decoded (arXiv:2608.02486) | Llama-3.1-8B-Instruct | 🟢 A | high | 5/5 | 52 (+41 null) | yes, exactly (probe 0.881 @ L8, n-gram 0.604, buckets 45/193/5/27; the paper's 0.248 is the rescored run and its 32/206/6/26 row is the native-language run, both exact) | the qualitative claim never flips; the cell counts move 5–83 Preserved with the aggregation rule and template, and the "peak layer 8" moves over layers 6–14 with the CV split | 2026-09-02 | [card](references/cards/folkmotif_llama3p1_8b.md) |
 | Expander SAE (arXiv:2607.01799) | Qwen2.5-3B, layer 12 | 🟢 A | high | 2/2 | 69 | yes (0.831 / 0.978 CE-recovered vs 0.833 / 0.983; ratio 0.850 vs 0.842) | ratio 0.80–0.90 over 30 seeds and 30 resamples, flips only at the 0.80 bucket edge; k=32 gives 0.66, mean-ablation denominator 0.77 | 2026-09-02 | [card](references/cards/expander_sae_qwen2p5_3b.md) |
@@ -551,6 +552,78 @@ Qwen2.5-7B-Instruct:
   400 UltraChat prompts). Attack success rates (PAIR, PAP, DeepInception,
   CodeAttack under a GPT-4o judge) and the 70B/72B scaling runs are not run.
 
+### Steering vectors for CoT faithfulness (arXiv:2607.29062) — B, high confidence
+
+Claim, byte-exact: "when steering is effective, its effect generalizes
+broadly across cue types and datasets--in cross-cue and cross-dataset
+analyses, effect size is determined primarily by the evaluation setting,
+rather than the vector's train setting. How the vector is built also
+matters little--four construction methods, including one whose optimization
+target mentions no specific cue, yield similar effect sizes." The
+behavioural half of the claim is measured with a gpt-5-nano judge and is
+not run here. The paper's judge-free evidence for cross-cue generalisation
+is geometric: the synthetic difference-of-means vector of each GPQA cue
+(Stanford professor, XML metadata, grader code, insider information),
+rebuilt at a common layer of Gemma-3-4B-it, points the same way for all
+four cues (mean off-diagonal cosine 0.88 at the mid layer 17, 0.96 at the
+best-aligned layer 11). The paper's own steering result for this model is
+no reliable acknowledgment gain (Δ −0.07 to +0.02 at α 5), so the
+behavioural claim rests on Gemma-3-12B, which does not fit next to vLLM.
+Components are the band of layers within 20% of the run's peak cross-cue
+cosine (universe 34); the claim buckets the L17 cosine and the size of the
+absolute (≥ 0.8) band; the score is the L17 cosine. 92 real runs (40 task
+subsamples, 40 task resamples, 2 paraphrase sets, 9 variants), 81 null runs.
+
+| check | value | 95% CI | state |
+|---|---|---|---|
+| structural stability (convergence band) | J 0.910 | [0.851, 0.962] | ✅ |
+| claim stability | 0.913 | [0.848, 0.967] | ✅ |
+| score stability (L17 cosine) | CV 0.077 | [0.034, 0.108] | ✅ |
+| beats random | 1.9x | [1.8, 2.0] | ❌ |
+| specificity (balanced-halves null) | 16.7x | [12.1, 23.7] | ✅ |
+
+- Reproduction: exact. The 12 native-layer cosines and the 6 cross-method
+  cosines recompute from the shipped vector files to the printed digit; the
+  four shipped synthetic vectors have cosine 1.000 with the ones rebuilt
+  here at their layers (3, 32, 33, 15); the rebuilt curve gives 0.880 at
+  L17 and 0.959 at L11 against the paper's +0.88 / +0.96.
+- Which tasks build the vectors does not matter: 40 subsamples and 40
+  resamples keep the L17 cosine within 0.872–0.887 and the peak at L10–L11
+  (0.958–0.961); 20 tasks per cue give 0.879.
+- Which sentences build them does: the two pre-registered paraphrase sets
+  give 0.49 and 0.54 at L17 (the claim flips) with peaks 0.97 / 0.99 at
+  L10; the alternative neutral completion gives 0.59 with a single layer
+  above 0.8; four completions with no shared sentence frame give 0.77 with
+  a four-layer band; last-token pooling gives 0.999 at layer 0 because the
+  paper's four completions end in the same word.
+- The cue in the prompt is not what converges: with the same questions
+  rendered without any cue, the "acknowledgment" completions still converge
+  at 0.82 (L17) over a 24-layer band, and an identical, cue-agnostic
+  completion for all four cues converges at every layer. The shared
+  direction is the appended sentence.
+- Null: the difference between two random halves of a cue's rows (both
+  polarities on the same side, so the completion contrast cancels) has
+  mean cosine 0.00 at every layer, with single runs up to 0.93 at layers
+  7–13; its band is random (J 0.055). Beats-random fails because the real
+  band spans a median 22 of 34 layers, which random 22-layer sets overlap at
+  J 0.48: the relative band, chosen so that the null is non-empty, cannot
+  clear a 3x bar. A permuted-label null was rejected before the battery
+  because two fixed completion texts keep a random share of the contrast
+  under relabelling (at ten tasks per cue such vectors converged at 0.94).
+- Behavioural check (a note, not a battery axis): greedy steering on the
+  138 gpqa/stanford test items with the shipped contrastive vector at L3,
+  α 5, scored by a pre-registered surface-form detector: acknowledgment
+  0.696 → 0.688 (Δ −0.007; converted 0.08, regressed 0.09; the paper's
+  judge: Δ +0.02, 0.13, 0.11), cue use 0.51 → 0.51, hidden cue use 0.12 →
+  0.14, accuracy 0.09 → 0.11 (paper 0.18 → 0.21); 17–18% of traces reach
+  the 1024-token cap without a final answer.
+- Deviations: no LLM judge; vLLM absent (HF forward passes and greedy
+  generation); the seed draws a task subsample because the construction is
+  deterministic; the templates axis varies the completion wording; the
+  probe-selected layers are not re-derived; Qwen-3.5-9B and Gemma-3-12B
+  not run; cross-dataset common-layer convergence not audited (the paper
+  reports no such number).
+
 ## In progress and queued
 
 | item | where | status |
@@ -564,6 +637,7 @@ Qwen2.5-7B-Instruct:
 | Diff Mining (arXiv:2608.26462), judge-free top-K token-set battery on gemma-3-1b-it × cake_bake | GPUs 0–2 | done, card above (A, high confidence after the 60-run-per-axis rerun) |
 | SWD fidelity (arXiv:2608.03913, GPT-2 small) | GPUs 3–5, 6 shards | running: 6 runs per axis over IOI, docstring and gendered-pronoun; the greater-than family runs once on GPU 5 as a reproduction check |
 | HARC (arXiv:2607.00572), released Llama-3.1-8B / Qwen2.5-7B adapters | GPUs 1–2 | done, cards above (B ×2, low confidence); residuals cached once per model, 51 + 41 runs per model on CPU |
+| Steering vectors for CoT faithfulness (arXiv:2607.29062), Gemma-3-4B-it | GPUs 0 and 7 | done, card above (B, high confidence); 8 activation passes, then seconds per run from the cache; the behavioural check took 30 min |
 
 Not auditable in this setting: Diff Mining's 70B "one third of 52 biases",
 CTA's 10,400 attribution graphs, Future Localization (full 7B SFT),
