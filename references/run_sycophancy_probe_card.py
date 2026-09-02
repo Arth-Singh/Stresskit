@@ -1,5 +1,6 @@
 """Reference Stability Card: factual vs opinion sycophancy probes on
-Llama-3.1-8B-Instruct (arXiv:2607.07003, antbaez/dissociating-sycophancy).
+Llama-3.1-8B-Instruct and Gemma-3-12B-it (arXiv:2607.07003,
+antbaez/dissociating-sycophancy).
 
 Claim under test (abstract, byte-exact): "We find that different LLMs
 represent these subtypes differently, with either more aligned or more
@@ -7,8 +8,21 @@ distinct representations". For Llama-3.1-8B-Instruct the paper quantifies
 "distinct" as a transfer gap: probes trained on one subtype reach 0.91
 (factual) / 0.92 (opinion) ROC-AUC in domain and 0.70 (factual -> opinion)
 / 0.61 (opinion -> factual) across subtypes, a drop of about 0.30 (Tables
-1-2, final layer, mean of five seeds). The Gemma-3-12B half of the paper
-does not fit next to the other tenants of the GPU and is not audited.
+1-2, final layer, mean of five seeds). For Gemma-3-12B-it the paper reports
+the opposite: 0.98 (factual) / 0.93 (opinion) in domain and 0.87 (factual
+-> opinion) / 0.91 (opinion -> factual) across, "very similar"
+representations. ``--model gemma`` runs the identical battery on the Gemma
+half (weights sharded over two shared GPUs in bf16, activations extracted
+once in batches of 8) and the cross-model comparison is read off the two
+cards at matched layer choices: the paper's index, the true final layer and
+the best in-domain layer. Pre-registered before the Gemma battery ran: the
+Gemma claim buckets are the paper's "aligned" (transfer drop < 0.15) against
+"distinct" at the paper's layer index, with the same buckets recorded at the
+other two layer choices through the hyperparams axis; components are the
+eight layers with the largest drop (universe 48); the score is the drop at
+the config's layer. The cross-model claim "different LLMs represent these
+subtypes differently" holds at a layer choice if Gemma reads "aligned" and
+Llama "distinct" there.
 
 Upstream pipeline (probes/ at the pinned commit): GPT-5-mini-generated
 prompts, model responses committed with their GPT-5 sycophancy labels and
@@ -84,6 +98,8 @@ labelled with closed models.
 Usage (GPU, ~45 s per run after a one-off activation pass of a few minutes):
     python references/run_sycophancy_probe_card.py --upstream /path/to/dissociating-sycophancy \
         --out-dir references/cards --raw-dir references/cards/raw/sycophancy_llama3p1_8b
+    python references/run_sycophancy_probe_card.py --model gemma --extract-batch 8 \
+        --upstream /path/to/dissociating-sycophancy --out-dir references/cards
 """
 
 import argparse
@@ -107,11 +123,19 @@ from battery_shards import Shard  # noqa: E402
 
 UPSTREAM_REPO = "antbaez/dissociating-sycophancy"
 UPSTREAM_COMMIT = "47e02ef106896fdf45f7a13e86e306f118f109ac"
-UPSTREAM_FILES = ("probes/generate_responses.py", "probes/linear_probes.py",
-                  "probes/process_lengths.py",
-                  "probes/response_datasets/Llama-3.1-8B-Instruct/factual_prompts_with_responses.json",
-                  "probes/response_datasets/Llama-3.1-8B-Instruct/opinion_prompts_with_responses.json")
-MODEL_NAME = "Llama-3.1-8B-Instruct"   # upstream key; load_model resolves it to meta-llama/
+UPSTREAM_CODE = ("probes/generate_responses.py", "probes/linear_probes.py",
+                 "probes/process_lengths.py")
+MODELS = {
+    "llama": {"upstream_key": "Llama-3.1-8B-Instruct",   # load_model resolves it to meta-llama/
+              "hf_id": "meta-llama/Llama-3.1-8B-Instruct", "label": "Llama",
+              "stem": "sycophancy_llama3p1_8b",
+              "shipped": {"ff": 0.91, "oo": 0.92, "fo": 0.70, "of": 0.61}},
+    "gemma": {"upstream_key": "gemma-3-12b-it",           # load_model resolves it to google/
+              "hf_id": "google/gemma-3-12b-it", "label": "Gemma",
+              "stem": "sycophancy_gemma3_12b_it",
+              "shipped": {"ff": 0.98, "oo": 0.93, "fo": 0.87, "of": 0.91}},
+}
+MODEL = MODELS["llama"]
 SUBTYPES = ("factual", "opinion")
 POOL_PER_CLASS = 600      # process_lengths.N
 KEEP_PER_CLASS = 500      # process_lengths.TARGET_PER_CLASS
@@ -119,7 +143,6 @@ BASE_SEED = 42
 UPSTREAM_SEEDS = (42, 43, 44, 45, 46)
 TOP_K = 8
 DROP_THRESHOLD = 0.15
-SHIPPED = {"ff": 0.91, "oo": 0.92, "fo": 0.70, "of": 0.61}
 DIRECTIONS = {"ff": ("factual", "factual"), "fo": ("factual", "opinion"),
               "oo": ("opinion", "opinion"), "of": ("opinion", "factual")}
 BASE_CONFIG = {"epochs": 100, "batch_size": 100, "lr": 1e-3, "weight_decay": 0.0,
@@ -147,21 +170,37 @@ def import_upstream(upstream):
     return GR, LP, PL
 
 
+def unwrap_tuple_outputs(GR):
+    """transformers 4.57 returns a tuple from Gemma-3 decoder layers where
+    Llama layers return the tensor upstream's hook indexes; for the Gemma
+    model the hook reads output[0] and is otherwise upstream's line for line
+    (position -2 of the layer output, detached to CPU). Recorded on the card
+    as a deviation; the Llama path never calls this."""
+    def _activation_hook(self, name):
+        def hook(module, input, output):
+            out = output[0] if isinstance(output, tuple) else output
+            hidden = out[:, -2, :]  # residual stream
+            self.activations[name] = hidden.detach().cpu()
+        return hook
+    GR.ActivationExtractor._activation_hook = _activation_hook
+
+
 def load_pool(upstream):
     """process_lengths.py's candidate pool: the first 600 sycophantic and
     600 non-sycophantic conversations per subtype, in file order."""
-    pool, texts = [], {}
+    pool, texts, counts = [], {}, {}
     for sub in SUBTYPES:
-        path = os.path.join(upstream, "probes", "response_datasets", MODEL_NAME,
+        path = os.path.join(upstream, "probes", "response_datasets", MODEL["upstream_key"],
                             f"{sub}_prompts_with_responses.json")
         with open(path) as f:
             items = json.load(f)
         syc = [it for it in items if it["is_sycophantic"] is True][:POOL_PER_CLASS]
         non = [it for it in items if it["is_sycophantic"] is False][:POOL_PER_CLASS]
+        counts[sub] = {"syc": len(syc), "non_syc": len(non)}
         for it in syc + non:
             pool.append({"subtype": sub, "id": int(it["id"]), "label": bool(it["is_sycophantic"])})
             texts[(sub, int(it["id"]))] = it["conversation"]
-    return pool, texts
+    return pool, texts, counts
 
 
 class Activations:
@@ -196,7 +235,10 @@ class Activations:
     def _extract(self, subs):
         GR = self.GR
         t0 = time.time()
-        model, tokenizer = GR.load_model(MODEL_NAME)
+        model, tokenizer = GR.load_model(MODEL["upstream_key"])
+        hook_shim = "gemma" in MODEL["upstream_key"]
+        if hook_shim:
+            unwrap_tuple_outputs(GR)
         order = sorted(n for n, _ in model.named_modules()
                        if n.split(".")[-1].isdigit()
                        and ("model.layers." in n or "language_model.layers." in n))
@@ -223,7 +265,7 @@ class Activations:
         with open(self.lengths_path, "w") as f:
             json.dump(lengths, f)
         with open(self.meta_path, "w") as f:
-            json.dump({"hook_order": order,
+            json.dump({"hook_order": order, "hook_unwraps_tuple_output": hook_shim,
                        "true_layers": [int(n.split(".")[-1]) for n in order],
                        "read_tokens": read_tokens, "chat_template_date": date_string,
                        "extract_batch_size": self.batch_size,
@@ -235,7 +277,12 @@ class Activations:
         torch.cuda.empty_cache()
 
 
-def make_finder(acts, GR, LP, PL, texts, raw_dir):
+def make_finder(acts, GR, LP, PL, texts, raw_dir, pool_per_class):
+    """pool_per_class: per subtype, the smaller of the two class pools
+    (upstream's N = 600 when the file has that many of each label; Gemma's
+    opinion file holds 595 sycophantic conversations), so that the full pool
+    balances to upstream's 500 per class and a resample to the same
+    fraction of its distinct conversations."""
     true_layers = acts.meta["true_layers"]
     n_idx = len(true_layers)
 
@@ -261,7 +308,7 @@ def make_finder(acts, GR, LP, PL, texts, raw_dir):
                 s.subtype = sub
                 by_label[d["label"]].append(s)
             target = int(round(min(len(by_label[True]), len(by_label[False]))
-                               * KEEP_PER_CLASS / POOL_PER_CLASS))
+                               * KEEP_PER_CLASS / pool_per_class[sub]))
             if cfg["length_balance"] == "upstream":
                 syc_eq, non_eq = PL.equalize_mean_lengths(by_label[True], by_label[False],
                                                           target_per_class=target, len_fn=length_of)
@@ -320,7 +367,7 @@ def make_finder(acts, GR, LP, PL, texts, raw_dir):
         bucket = (">=0.85" if in_domain[at] >= 0.85 else
                   "0.70-0.85" if in_domain[at] >= 0.70 else "<0.70")
         distinct = drop[at] >= DROP_THRESHOLD
-        claim = (f"Llama: {'distinct' if distinct else 'shared'} (transfer drop "
+        claim = (f"{MODEL['label']}: {'distinct' if distinct else 'shared'} (transfer drop "
                  f"{'>=' if distinct else '<'} {DROP_THRESHOLD}); in-domain {bucket}")
         meta = {"config": cfg, "shuffle_labels": shuffle, "n_pool_unique": len(records),
                 "samples": counts, "true_layers": true_layers, "score_index": at,
@@ -363,32 +410,45 @@ def run_row(record, group):
 
 
 def main():
+    global MODEL
     ap = argparse.ArgumentParser()
     ap.add_argument("--upstream", required=True)
+    ap.add_argument("--model", choices=sorted(MODELS), default="llama")
     ap.add_argument("--out-dir", default=os.path.join(os.path.dirname(__file__), "cards"))
     ap.add_argument("--raw-dir", default=None)
     ap.add_argument("--n-runs", type=int, default=20)
     ap.add_argument("--extract-batch", type=int, default=25)
+    ap.add_argument("--extract-only", action="store_true",
+                    help="extract and cache the activations, then exit (run once before sharding)")
     args = ap.parse_args()
+    MODEL = MODELS[args.model]
 
-    raw_dir = args.raw_dir or os.path.join(args.out_dir, "raw", "sycophancy_llama3p1_8b")
+    raw_dir = args.raw_dir or os.path.join(args.out_dir, "raw", MODEL["stem"])
     os.makedirs(raw_dir, exist_ok=True)
     os.makedirs(args.out_dir, exist_ok=True)
-    hashes = {p: sha256_file(os.path.join(args.upstream, p)) for p in UPSTREAM_FILES}
+    upstream_files = UPSTREAM_CODE + tuple(
+        f"probes/response_datasets/{MODEL['upstream_key']}/{sub}_prompts_with_responses.json"
+        for sub in SUBTYPES)
+    hashes = {p: sha256_file(os.path.join(args.upstream, p)) for p in upstream_files}
 
     GR, LP, PL = import_upstream(args.upstream)
-    pool, texts = load_pool(args.upstream)
+    pool, texts, class_counts = load_pool(args.upstream)
     n_pool = {sub: sum(d["subtype"] == sub for d in pool) for sub in SUBTYPES}
-    if any(n != 2 * POOL_PER_CLASS for n in n_pool.values()):
-        raise RuntimeError(f"pool sizes {n_pool}, expected {2 * POOL_PER_CLASS} per subtype")
-    print(f"pool: {n_pool}; {MODEL_NAME}")
+    short = {sub: c for sub, c in class_counts.items() if min(c.values()) < KEEP_PER_CLASS}
+    if short:
+        raise RuntimeError(f"a class pool is smaller than upstream's {KEEP_PER_CLASS} per class: {short}")
+    pool_per_class = {sub: min(c.values()) for sub, c in class_counts.items()}
+    print(f"pool: {n_pool} {class_counts}; {MODEL['upstream_key']}")
 
     acts = Activations(raw_dir, GR, texts, pool, args.extract_batch)
     acts.ensure()
     print(f"hook order maps probe index -> decoder layer: {acts.meta['true_layers']}")
+    if args.extract_only:
+        print("activations cached; exiting (--extract-only)")
+        return
 
     null_data = [dict(d, shuffle_labels=True) for d in pool]
-    finder = make_finder(acts, GR, LP, PL, texts, raw_dir)
+    finder = make_finder(acts, GR, LP, PL, texts, raw_dir, pool_per_class)
     result = sk.stress(
         finder, pool,
         battery=["seeds", "bootstrap", "hyperparams"],
@@ -400,7 +460,7 @@ def main():
         claim_statement=(
             "We find that different LLMs represent these subtypes differently, with either "
             "more aligned or more distinct representations"),
-        model="meta-llama/Llama-3.1-8B-Instruct",
+        model=MODEL["hf_id"],
         task="factual vs opinion sycophancy: per-layer linear probes on the residual stream at "
              "the end of the assistant's (truncated) response, 500+500 length-balanced "
              "conversations per subtype, in-domain vs cross-subtype ROC-AUC",
@@ -436,7 +496,10 @@ def main():
                     for r in em["read_tokens"]) +
         f". Chat template date string: {em['chat_template_date']!r}; extraction batch "
         f"{em['extract_batch_size']} (upstream 100), {em['dtype']}, model revision "
-        f"{em['model_revision']}")
+        f"{em['model_revision']}"
+        + ("; DEVIATION: transformers 4.57 returns a tuple from Gemma-3 decoder layers, so the "
+           "hook reads output[0] before upstream's position -2 read (Llama layers return the "
+           "tensor upstream indexes)" if em.get("hook_unwraps_tuple_output") else ""))
     repro = [r for r in result.runs if r.axis in ("base", "seeds") and r.seed in UPSTREAM_SEEDS]
     n_idx = len(em["true_layers"])
     final = {k: float(np.mean([r.finding.meta["auc"][k][n_idx - 1] for r in repro]))
@@ -446,19 +509,22 @@ def main():
     tf = em["true_layers"].index(max(em["true_layers"]))
     true_final = {k: float(np.mean([r.finding.meta["auc"][k][tf] for r in repro]))
                   for k in DIRECTIONS}
+    shipped = MODEL["shipped"]
     result.card.notes.append(
         f"reproduction (Tables 1-2, final layer, mean of seeds 42-46 -> seeds "
-        f"{sorted(r.seed for r in repro)} here): factual->factual {SHIPPED['ff']} -> "
-        f"{final['ff']:.3f}, opinion->opinion {SHIPPED['oo']} -> {final['oo']:.3f}, "
-        f"factual->opinion {SHIPPED['fo']} -> {final['fo']:.3f}, opinion->factual "
-        f"{SHIPPED['of']} -> {final['of']:.3f} at probe index {n_idx - 1} (decoder layer "
+        f"{sorted(r.seed for r in repro)} here): factual->factual {shipped['ff']} -> "
+        f"{final['ff']:.3f}, opinion->opinion {shipped['oo']} -> {final['oo']:.3f}, "
+        f"factual->opinion {shipped['fo']} -> {final['fo']:.3f}, opinion->factual "
+        f"{shipped['of']} -> {final['of']:.3f} at probe index {n_idx - 1} (decoder layer "
         f"{em['true_layers'][-1]}); layer-averaged (upstream avg_auc): "
         + ", ".join(f"{k} {v:.3f}" for k, v in avg.items()) +
         f"; at decoder layer {max(em['true_layers'])} (index {tf}): "
         + ", ".join(f"{k} {v:.3f}" for k, v in true_final.items()) +
         f". Base run (seed {BASE_SEED}): in-domain {base['in_domain'][base['score_index']]:.3f}, "
         f"drop {result.base.score:.3f}, layers with drop >= {DROP_THRESHOLD}: "
-        f"{base['layers_drop_ge_threshold']}; samples {base['samples']}")
+        f"{base['layers_drop_ge_threshold']}; samples {base['samples']}; candidate pool per "
+        f"class {class_counts} (upstream takes the first {POOL_PER_CLASS} of each label and "
+        f"balances to {KEEP_PER_CLASS})")
     for record in result.runs:
         if record.axis == "hyperparams":
             m = record.finding.meta
@@ -488,7 +554,7 @@ def main():
     print()
     print(result)
     print(result.to_markdown())
-    stem = os.path.join(args.out_dir, "sycophancy_llama3p1_8b")
+    stem = os.path.join(args.out_dir, MODEL["stem"])
     result.card.save(stem + ".json")
     with open(stem + ".md", "w") as f:
         f.write(result.to_markdown() + "\n")
@@ -505,7 +571,7 @@ def main():
         [run_row(r, "null") for r in (result.null_runs or [])]
     with open(stem + ".runs.json", "w") as f:
         json.dump({"upstream_commit": UPSTREAM_COMMIT, "upstream_sha256": hashes,
-                   "extraction": em, "shipped": SHIPPED,
+                   "extraction": em, "shipped": shipped, "model": args.model,
                    "raw_dir": os.path.relpath(raw_dir, args.out_dir), "runs": rows},
                   f, indent=1, default=str)
         f.write("\n")

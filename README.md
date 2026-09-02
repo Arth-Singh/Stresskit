@@ -15,7 +15,7 @@ conservative profile supports confirmatory pass/fail/inconclusive decisions.
 
 ## What it has found so far
 
-21 papers, 48 graded cards, audited between 2026-08-21 and 2026-09-03; 16 of
+21 papers, 49 graded cards, audited between 2026-08-21 and 2026-09-03; 16 of
 the 21 are July/August 2026 arXiv papers that ship licensed code, run through
 their own released code at a pinned commit. The leaderboard below is the
 human-written summary; the generated version (one row per paper, one grade
@@ -32,7 +32,7 @@ low-confidence grade: at least one check's 95% CI straddles its bar.
 | HARC, coupling harmfulness and refusal directions, released adapters ([2607.00572](https://arxiv.org/abs/2607.00572)) | Llama-3.1-8B-Instruct + LoRA, Qwen2.5-7B-Instruct + LoRA | **B** ×2† | Figure 1's base profile reproduces on Llama and the coupling gain is real (band +0.55, 9.6x random), but it is a plateau over 41 of 64 cells that starts eight layers upstream of the trained band, and permuted-label directions gain +0.28 at the same layers (specificity undecided); with a hard-refusal string match the Llama adapter refuses more XSTest safe prompts than the base (29 vs 17 of 250) where Table 1 reports the opposite; on Qwen the gain peaks at L18, upstream of the paper's L21–24 band, and vanishes in band under the Circuit Breakers/UltraChat pools |
 | FolkMotif, cultural awareness represented but not decoded ([2608.02486](https://arxiv.org/abs/2608.02486)) | Llama-3.1-8B-Instruct | **A** | reproduces exactly; the claim never flips, but the Preserved cell count moves 5–83 with the aggregation rule and template |
 | Diff Mining, logit differences reveal finetuning objectives ([2608.26462](https://arxiv.org/abs/2608.26462)) | gemma-3-1b-it × cake_bake LoRA | **A** | top-100 token set stable across 60 seeds, 60 resamples and two corpora (J 0.88–0.97; the hyperparameter axis alone is J 0.43); a scrambled adapter returns garbage |
-| Dissociating the internal representations of sycophancy ([2607.07003](https://arxiv.org/abs/2607.07003)) | Llama-3.1-8B-Instruct | **B** | the released extractor's lexicographic layer order makes the paper's "final layer" decoder layer 9 of 32; at the best in-domain layer (L12) the probes transfer and "distinct" becomes "shared" |
+| Dissociating the internal representations of sycophancy ([2607.07003](https://arxiv.org/abs/2607.07003)) | Llama-3.1-8B-Instruct, Gemma-3-12B-it | **B** ×2 | the released extractor's lexicographic layer order makes the paper's "final layer" decoder layer 9 on both models; Llama's "distinct" becomes "shared" at its best in-domain layer (L12) while Gemma reads "aligned" at every layer, so the cross-model difference survives as a 2.8–5.5x gap in transfer drop but the distinct-versus-aligned dichotomy depends on Llama's layer choice |
 | The Communication Map of a Transformer ([2608.22007](https://arxiv.org/abs/2608.22007)) | GPT-2 ×3, GPT-Neo-125m, Pythia ×3 | **B**† | all 21 Table 2 shares reproduce; the abstract's 70–89% holds only pooled per model, 4 of 21 per-channel entries fall outside |
 | Expander sparse autoencoders ([2607.01799](https://arxiv.org/abs/2607.01799)) | Qwen2.5-3B, layer 12 | **A** | CE-recovered ratio 0.80–0.90 over 30 seeds and 30 resamples; k=32 gives 0.66, a mean-ablation denominator 0.77 |
 | CoAx conditional co-ablation, backup heads ([2607.01940](https://arxiv.org/abs/2607.01940)) | GPT-2 small, IOI | **B**† | the no-IOI null recovers the same heads at 0.93–0.97 AUC, so the backup structure is task-general; label-free primaries collapse CoAx to 0.28 / 0.38 while AtP\* stays 0.83 |
@@ -61,7 +61,7 @@ reliability of a result under defensible variation, not the value of a paper.
 
 One pattern cuts across the set: whether a finding beats its null follows
 the design of the null. Findings tested against a signal-destroying null
-(labels permuted, adapter scrambled) pass specificity in 17 of 22 cards;
+(labels permuted, adapter scrambled) pass specificity in 18 of 23 cards;
 findings tested against a structure-preserving null (task corrupted, items
 re-paired, weights rotated, output size kept) pass in 1 of 21. Every ranker,
 census and profile in the set is as stable on a corrupted task as on the
@@ -77,7 +77,7 @@ three live panel executions all abstained, so it has produced no empirical
 result, and nothing in the leaderboard comes from it; the scoped record is
 [`docs/NEEL_VALIDATION.md`](docs/NEEL_VALIDATION.md) and the release gates are
 [`docs/RELEASE_GATES_V1.md`](docs/RELEASE_GATES_V1.md). No card is confirmatory
-evidence in the sense of the conservative profile below; all 48 are diagnostic.
+evidence in the sense of the conservative profile below; all 49 are diagnostic.
 Several targets were out of budget on shared GPUs and are listed with reasons
 at the end of [`RESULTS.md`](RESULTS.md).
 

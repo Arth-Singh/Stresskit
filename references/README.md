@@ -1318,14 +1318,17 @@ distinct representations." For Llama-3.1-8B-Instruct the paper quantifies
 "distinct" as a transfer gap: linear probes trained on one sycophancy subtype
 reach 0.91 (factual) / 0.92 (opinion) ROC-AUC in domain and 0.70
 (factual → opinion) / 0.61 (opinion → factual) across subtypes at the final
-layer, a drop of about 0.30 (Tables 1–2, mean of five seeds). Only the Llama
-half is audited; Gemma-3-12B does not fit next to the other tenants of the
-GPU. Finder: the upstream extractor, length balancing and probe trainer
-imported unmodified on the committed GPT-5-labelled conversations; the
-finding is the eight decoder layers with the largest transfer drop (universe
-32), the claim is "distinct (drop ≥ 0.15) | shared" plus the in-domain bucket
-at the paper's layer, the score is the drop there. 88 real runs (40 probe
-seeds, 40 conversation resamples, seven variants), 81 null runs.
+layer, a drop of about 0.30 (Tables 1–2, mean of five seeds); for
+Gemma-3-12B-it it reports 0.98 / 0.93 in domain and 0.87 / 0.91 across,
+"very similar" representations. Both halves are audited with the same
+runner; the Llama card is graded first, the Gemma card follows in its own
+subsection. Finder: the upstream extractor, length balancing and probe
+trainer imported unmodified on the committed GPT-5-labelled conversations;
+the finding is the eight decoder layers with the largest transfer drop
+(universe 32 for Llama, 48 for Gemma), the claim is "distinct (drop ≥ 0.15)
+| shared" plus the in-domain bucket at the paper's layer, the score is the
+drop there. Llama: 88 real runs (40 probe seeds, 40 conversation resamples,
+seven variants), 81 null runs.
 
 | check | value | 95% CI | pass |
 |---|---|---|---|
@@ -1388,7 +1391,55 @@ reads pickles from fixed relative paths; activations cover the
 the conversations are fixed artifacts generated, labelled and truncated with
 closed models.
 
+### Gemma-3-12B-it, the paper's "aligned" model — B, high confidence
+
+The identical battery on google/gemma-3-12b-it (bf16 sharded over two shared
+GPUs, activations extracted in batches of 8): 48 real runs (20 probe seeds,
+20 conversation resamples, 7 variants), 41 null runs, universe 48 layers.
+
+| check | value | 95% CI | state |
+|---|---|---|---|
+| structural stability (top-8 layers by drop) | J 0.324 | [0.295, 0.354] | ❌ |
+| claim stability | 1.000 | [1.000, 1.000] | ✅ |
+| score stability (transfer drop) | CV 0.439 | [0.343, 0.536] | ❌ |
+| beats random | 3.4x | [3.1, 3.7] | ✅ |
+| specificity (permuted labels) | 3.1x | [2.7, 3.5] | ✅ |
+
+- Reproduction: Table 1 reproduces at the paper's index, which is decoder
+  layer 9 of 48 (the lexicographic order makes index 47 "layers.9" on any
+  model with at least ten layers): 0.98 / 0.93 in domain → 0.992 / 0.956,
+  0.87 / 0.91 across → 0.918 / 0.969 (mean of seeds 42–46); layer-averaged
+  0.975 / 0.934 and 0.868 / 0.913. At the true final layer (L47): 0.980 /
+  0.875 and 0.829 / 0.917.
+- "Aligned" holds in 48 of 48 runs and at every layer choice: drop 0.023 at
+  the paper's index (L9), 0.054 at the true final layer (L47), 0.043 at the
+  best in-domain layer (L21, in-domain 0.997); 0.023–0.078 over 20 seeds;
+  only L0 and L39 exceed the 0.15 bar in the base run. The structural and
+  score checks fail for the reason an aligned model should make them fail:
+  with every drop near zero, which eight layers rank highest is noise
+  (J 0.32) and the coefficient of variation of a near-zero drop is large.
+  The categorical claim never moves.
+- What the hook reads differs between the two models: for Gemma, upstream's
+  position −2 is the `<end_of_turn>` token, the end-of-turn position the
+  paper describes; for Llama it was the last response token before
+  `<|eot_id|>`. Deviations: transformers 4.57 returns a tuple from Gemma-3
+  decoder layers, so the hook reads output[0] before upstream's position −2
+  read (the Llama path is untouched); Gemma's opinion file holds 595
+  sycophantic conversations (the paper's Table 6 count), so that pool is
+  595 + 600 and balances to upstream's 500 per class.
+
+Cross-model comparison at matched layer choices (transfer drop, Llama vs
+Gemma): the paper's index, L9 on both, 0.22 vs 0.02, "distinct" vs
+"aligned", the claim holds; the true final layer, 0.30 vs 0.05, holds; the
+best in-domain layer, 0.12 vs 0.04, both "shared" under the 0.15 bar, the
+dichotomy fails. Llama's drop is 2.8 to 5.5x Gemma's at every choice and at
+every quarter of depth (Llama 0.14–0.30, Gemma 0.02–0.08), so "different
+LLMs represent these subtypes differently" survives as a difference of
+degree; whether it reads as distinct-versus-aligned is a layer choice on the
+Llama side only.
+
 Artifacts: [`cards/sycophancy_llama3p1_8b.md`](cards/sycophancy_llama3p1_8b.md) ·
+[`cards/sycophancy_gemma3_12b_it.md`](cards/sycophancy_gemma3_12b_it.md) ·
 [`cards/sycophancy_llama3p1_8b.json`](cards/sycophancy_llama3p1_8b.json) ·
 [per-run manifest](cards/sycophancy_llama3p1_8b.runs.json) ·
 runner [`run_sycophancy_probe_card.py`](run_sycophancy_probe_card.py).

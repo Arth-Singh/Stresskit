@@ -135,6 +135,17 @@
   runs per axis; the greater-than headline (48 units against the
   Transcoder's 384 at sufficiency 0.9) reproduces exactly in a separate
   3.8-hour run recorded on the card.
+- Sycophancy: the Gemma-3-12B-it half of arXiv:2607.07003 is now audited
+  (`run_sycophancy_probe_card.py --model gemma`, bf16 sharded over two shared
+  GPUs, the Llama path unchanged). Table 1 reproduces within 0.01-0.06 at the
+  paper's index (decoder layer 9 of 48 under the same lexicographic order);
+  "aligned" holds in 48 of 48 runs and at every layer choice (drop
+  0.02-0.05), grade B, high confidence. Compared at matched layer choices
+  the cross-model difference is 2.8-5.5x, so the paper's claim survives as a
+  difference of degree while the distinct-versus-aligned dichotomy depends on
+  Llama's layer choice. Deviations: the hook unwraps the tuple transformers
+  4.57 returns from Gemma-3 decoder layers, and Gemma's opinion pool holds
+  595 sycophantic conversations.
 - `references/run_ams_independent_check.py`: an independent re-implementation
   of the Activation Model Scanner separation statistic from the paper's
   equations, sharing no code with the released extractor or with the card
@@ -170,7 +181,7 @@
   peaks at L18, upstream of the paper's L21-24 band, and disappears in band
   under the Circuit Breakers / UltraChat pools.
 - Cross-card analysis: the specificity outcome splits by null family
-  (signal-destroying nulls pass in 17 of 22 cards, structure-preserving nulls
+  (signal-destroying nulls pass in 18 of 23 cards, structure-preserving nulls
   in 1 of 21), written up in RESULTS.md with both readings; universe size does
   not predict structural failure (Spearman -0.22 over 38 cards). The figure
   script gained `specificity_by_null.png` with the card-to-family mapping

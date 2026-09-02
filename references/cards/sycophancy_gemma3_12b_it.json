@@ -1,0 +1,1267 @@
+{
+  "schema_version": "0.4",
+  "stresskit_version": "1.0.0.dev0",
+  "created_at": "2026-09-02T21:23:20+00:00",
+  "claim": {
+    "statement": "We find that different LLMs represent these subtypes differently, with either more aligned or more distinct representations",
+    "base_claim_label": "Gemma: shared (transfer drop < 0.15); in-domain >=0.85",
+    "model": "google/gemma-3-12b-it",
+    "task": "factual vs opinion sycophancy: per-layer linear probes on the residual stream at the end of the assistant's (truncated) response, 500+500 length-balanced conversations per subtype, in-domain vs cross-subtype ROC-AUC",
+    "method": "upstream extractor, length balancing and probe trainer at the pinned commit (nn.Linear, Adam, 100 epochs, best-validation checkpoint, 80/10/10 split); transfer = each subtype's probe on the other subtype's held-out split",
+    "base_size": 8,
+    "universe_size": 48
+  },
+  "battery": {
+    "axes": [
+      "seeds",
+      "bootstrap",
+      "hyperparams"
+    ],
+    "n_runs_total": 48,
+    "seed": 42,
+    "base_config": {
+      "epochs": 100,
+      "batch_size": 100,
+      "lr": 0.001,
+      "weight_decay": 0.0,
+      "length_balance": "upstream",
+      "layer": "final-index"
+    },
+    "claim_equiv_used": false,
+    "components_embedded": true
+  },
+  "metrics": {
+    "pooled": {
+      "n_runs": 48,
+      "n_structured_runs": 48,
+      "n_empty_findings": 0,
+      "empty_finding_rate": 0.0,
+      "mean_pairwise_jaccard": 0.32441077441077437,
+      "min_pairwise_jaccard": 0.06666666666666667,
+      "flip_rate": 0.0,
+      "modal_share": 1.0,
+      "n_claim_classes": 1,
+      "claim_counts": {
+        "Gemma: shared (transfer drop < 0.15); in-domain >=0.85": 48
+      },
+      "score_mean": 0.042538530074013696,
+      "score_std": 0.0186704597114836,
+      "score_cv": 0.43890702567762613,
+      "median_size": 8.0,
+      "variance_shares": {
+        "bootstrap": 0.6095996062325589,
+        "hyperparams": 0.13697909407461836,
+        "seeds": 0.2534212996928227
+      },
+      "variance_absolute": {
+        "bootstrap": 0.0005213511839367847,
+        "hyperparams": 0.00011714937500000018,
+        "seeds": 0.00021673487528344666
+      },
+      "mean_pairwise_jaccard_ci95": [
+        0.29508946558720245,
+        0.353634962322744
+      ],
+      "flip_rate_ci95": [
+        0.0,
+        0.0
+      ],
+      "modal_share_ci95": [
+        1.0,
+        1.0
+      ],
+      "score_cv_ci95": [
+        0.34278642017818584,
+        0.5364384298585693
+      ],
+      "expected_random_jaccard": 0.09604347189453571,
+      "expected_random_jaccard_analytic": 0.09090909090909091,
+      "jaccard_vs_random": 3.3777493463273203,
+      "mean_pairwise_jaccard_axis_balanced": 0.3830870011822393,
+      "jaccard_vs_random_ci95": [
+        3.0724572921649163,
+        3.6820301822394206
+      ],
+      "specificity_ci95": [
+        2.7037027582536926,
+        3.5225799410149836
+      ],
+      "confidence": "high",
+      "borderline_checks": []
+    },
+    "per_axis": {
+      "bootstrap": {
+        "n_runs": 21,
+        "n_structured_runs": 21,
+        "n_empty_findings": 0,
+        "empty_finding_rate": 0.0,
+        "mean_pairwise_jaccard": 0.33582523296809014,
+        "min_pairwise_jaccard": 0.06666666666666667,
+        "flip_rate": 0.0,
+        "modal_share": 1.0,
+        "n_claim_classes": 1,
+        "claim_counts": {
+          "Gemma: shared (transfer drop < 0.15); in-domain >=0.85": 21
+        },
+        "score_mean": 0.044802354454888456,
+        "score_std": 0.02283311594891912,
+        "score_cv": 0.5096409826387542,
+        "median_size": 8
+      },
+      "hyperparams": {
+        "n_runs": 8,
+        "n_structured_runs": 8,
+        "n_empty_findings": 0,
+        "empty_finding_rate": 0.0,
+        "mean_pairwise_jaccard": 0.5,
+        "min_pairwise_jaccard": 0.3333333333333333,
+        "flip_rate": 0.0,
+        "modal_share": 1.0,
+        "n_claim_classes": 1,
+        "claim_counts": {
+          "Gemma: shared (transfer drop < 0.15); in-domain >=0.85": 8
+        },
+        "score_mean": 0.031725,
+        "score_std": 0.010823556485739804,
+        "score_cv": 0.3411680531360064,
+        "median_size": 8.0
+      },
+      "seeds": {
+        "n_runs": 21,
+        "n_structured_runs": 21,
+        "n_empty_findings": 0,
+        "empty_finding_rate": 0.0,
+        "mean_pairwise_jaccard": 0.3134357705786277,
+        "min_pairwise_jaccard": 0.06666666666666667,
+        "flip_rate": 0.0,
+        "modal_share": 1.0,
+        "n_claim_classes": 1,
+        "claim_counts": {
+          "Gemma: shared (transfer drop < 0.15); in-domain >=0.85": 21
+        },
+        "score_mean": 0.04255238095238095,
+        "score_std": 0.014721918193070041,
+        "score_cv": 0.34597166747366925,
+        "median_size": 8
+      }
+    },
+    "null_control": {
+      "n_runs": 41,
+      "mean_pairwise_jaccard": 0.1041396002371612,
+      "flip_rate": 0.25609756097560976,
+      "modal_share": 0.8536585365853658,
+      "score_mean": 0.02168324537856285,
+      "score_cv": 4.67216098935175,
+      "median_size": 8
+    }
+  },
+  "verdict": {
+    "grade": "B",
+    "profile": "diagnostic",
+    "confirmatory_state": "not_applicable",
+    "required_checks": [],
+    "checks": {
+      "structural_stability": {
+        "value": 0.32441077441077437,
+        "threshold": 0.8,
+        "passed": false,
+        "op": ">=",
+        "ci": [
+          0.29508946558720245,
+          0.353634962322744
+        ],
+        "robust": true,
+        "state": "fail",
+        "description": "mean pairwise Jaccard across all perturbed runs"
+      },
+      "claim_stability": {
+        "value": 1.0,
+        "threshold": 0.8,
+        "passed": true,
+        "op": ">=",
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "robust": true,
+        "state": "pass",
+        "description": "modal claim share \u03c0* (filability at \u03b1=0.2)"
+      },
+      "score_stability": {
+        "value": 0.43890702567762613,
+        "threshold": 0.25,
+        "passed": false,
+        "op": "<=",
+        "ci": [
+          0.34278642017818584,
+          0.5364384298585693
+        ],
+        "robust": true,
+        "state": "fail",
+        "description": "coefficient of variation of the quality score"
+      },
+      "beats_random": {
+        "value": 3.3777493463273203,
+        "threshold": 3.0,
+        "passed": true,
+        "op": ">=",
+        "ci": [
+          3.0724572921649163,
+          3.6820301822394206
+        ],
+        "robust": true,
+        "state": "pass",
+        "description": "structural overlap vs size-matched random null (\u00d7)"
+      },
+      "specificity": {
+        "value": 3.115152868572387,
+        "threshold": 1.5,
+        "passed": true,
+        "op": ">=",
+        "ci": [
+          2.7037027582536926,
+          3.5225799410149836
+        ],
+        "robust": true,
+        "state": "pass",
+        "description": "structural stability on real vs null-control data (\u00d7)"
+      }
+    },
+    "thresholds": {
+      "jaccard": 0.8,
+      "modal_share": 0.8,
+      "score_cv": 0.25,
+      "random_margin": 3.0
+    }
+  },
+  "provenance": {
+    "python": "3.12.3",
+    "platform": "Linux-6.11.0-1016-nvidia-x86_64-with-glibc2.39",
+    "wall_seconds": 1.756
+  },
+  "notes": [
+    "upstream: antbaez/dissociating-sycophancy@47e02ef (MIT); ActivationExtractor, ConversationSample, parse_conversation, load_model, equalize_mean_lengths and LinearProbeTrainer imported unmodified; huggingface_hub.login, which two upstream modules call at import time, is a no-op here (the model is loaded from the local cache); file hashes generate_responses.py 21c3d6d52915, linear_probes.py ec9bb4a62982, process_lengths.py feef1b74fd99, factual_prompts_with_responses.json 45c137cfdaab, opinion_prompts_with_responses.json 533ab2ffcb3e",
+    "activations: regenerated with the upstream extractor (the released cache antbaez/sycophancy-mech is private); it hooks every decoder layer and stacks them in sorted() order of the module names, i.e. lexicographically, so probe index i is decoder layer [0, 1, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 2, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 3, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 4, 40, 41, 42, 43, 44, 45, 46, 47, 5, 6, 7, 8, 9][i]: index 47 (the paper's 'final layer') is decoder layer 9 and decoder layer 47 is index 42. The hook reads position -2 of the left-padded full conversation (the eot_positions the extractor computes are unused); tokens read for the first conversations: factual -2='<end_of_turn>' -1='\\n'; factual -2='<end_of_turn>' -1='\\n'; factual -2='<end_of_turn>' -1='\\n'; opinion -2='<end_of_turn>' -1='\\n'; opinion -2='<end_of_turn>' -1='\\n'; opinion -2='<end_of_turn>' -1='\\n'. Chat template date string: None; extraction batch 8 (upstream 100), torch.bfloat16, model revision 96b6f1eccf38110c56df3a15bffe176da04bfd80; DEVIATION: transformers 4.57 returns a tuple from Gemma-3 decoder layers, so the hook reads output[0] before upstream's position -2 read (Llama layers return the tensor upstream indexes)",
+    "reproduction (Tables 1-2, final layer, mean of seeds 42-46 -> seeds [42, 43, 44, 45, 46] here): factual->factual 0.98 -> 0.992, opinion->opinion 0.93 -> 0.956, factual->opinion 0.87 -> 0.918, opinion->factual 0.91 -> 0.969 at probe index 47 (decoder layer 9); layer-averaged (upstream avg_auc): ff 0.975, fo 0.868, oo 0.934, of 0.913; at decoder layer 47 (index 42): ff 0.964, fo 0.816, oo 0.883, of 0.794. Base run (seed 42): in-domain 0.976, drop 0.023, layers with drop >= 0.15: [0, 39]; samples {'factual': {'pool': 1200, 'syc': 500, 'non_syc': 500, 'mean_len_syc': 129.25, 'mean_len_non_syc': 129.29}, 'opinion': {'pool': 1195, 'syc': 500, 'non_syc': 500, 'mean_len_syc': 135.662, 'mean_len_non_syc': 135.618}}; candidate pool per class {'factual': {'syc': 600, 'non_syc': 600}, 'opinion': {'syc': 595, 'non_syc': 600}} (upstream takes the first 600 of each label and balances to 500)",
+    "epochs=30: at index 47 (L9) ff 0.977, fo 0.931, oo 0.963, of 0.960, drop 0.024; layer-averaged drop 0.070; top-8 ['L0', 'L1', 'L43', 'L2', 'L39', 'L37', 'L3', 'L46']",
+    "lr=0.0001: at index 47 (L9) ff 0.979, fo 0.960, oo 0.955, of 0.932, drop 0.021; layer-averaged drop 0.081; top-8 ['L2', 'L0', 'L1', 'L35', 'L41', 'L38', 'L30', 'L39']",
+    "weight_decay=0.01: at index 47 (L9) ff 0.987, fo 0.958, oo 0.965, of 0.947, drop 0.023; layer-averaged drop 0.060; top-8 ['L0', 'L39', 'L2', 'L25', 'L1', 'L4', 'L41', 'L44']",
+    "batch_size=20: at index 47 (L9) ff 0.990, fo 0.952, oo 0.950, of 0.925, drop 0.031; layer-averaged drop 0.050; top-8 ['L0', 'L2', 'L1', 'L39', 'L4', 'L46', 'L43', 'L41']",
+    "length_balance=off: at index 47 (L9) ff 0.979, fo 0.946, oo 0.981, of 0.948, drop 0.033; layer-averaged drop 0.058; top-8 ['L0', 'L41', 'L2', 'L1', 'L37', 'L35', 'L43', 'L32']",
+    "layer=true-final: at index 42 (L47) ff 0.980, fo 0.829, oo 0.875, of 0.917, drop 0.054; layer-averaged drop 0.060; top-8 ['L0', 'L39', 'L2', 'L1', 'L25', 'L4', 'L18', 'L35']",
+    "layer=best-in-domain: at index 14 (L21) ff 1.000, fo 0.930, oo 0.995, of 0.978, drop 0.043; layer-averaged drop 0.060; top-8 ['L0', 'L39', 'L2', 'L1', 'L25', 'L4', 'L18', 'L35']",
+    "DEVIATIONS: the combined factual+opinion probe is not trained (the claim compares the two subtypes); the transfer AUC is computed by applying the trained probe to the other subtype's held-out split exactly as upstream evaluate_probes_on_all_datasets does, but inline, because that function reads probes and pickles from fixed relative paths; activations are extracted for the 1200-conversation pool per subtype rather than all 3000, in batches of 25 rather than 100 (bf16 padding differs), and the chat template stamps the extraction date into the system header as it did upstream",
+    "bootstrap: the pool is resampled with replacement and duplicates are collapsed before training, so each bootstrap run uses the ~63% distinct conversations of its resample and balances to 5/6 of each class; the templates axis is not run (the conversations are fixed artifacts generated, labelled and truncated with closed models)",
+    "null control: the same pool through upstream's shuffle_labels=True path, which permutes the training and validation labels and leaves the test labels intact, so every probe is fitted to noise and both in-domain and transfer AUC sit near chance"
+  ],
+  "runs": [
+    {
+      "axis": "base",
+      "variant": "base",
+      "seed": 42,
+      "size": 8,
+      "claim": "Gemma: shared (transfer drop < 0.15); in-domain >=0.85",
+      "score": 0.023200000000000054,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "96b81435709764926186520209b4f3ebf33cd01e7bd489e45f17ca02b8d8bd70",
+      "components": [
+        "L0",
+        "L1",
+        "L18",
+        "L2",
+        "L25",
+        "L35",
+        "L39",
+        "L4"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=43",
+      "seed": 43,
+      "size": 8,
+      "claim": "Gemma: shared (transfer drop < 0.15); in-domain >=0.85",
+      "score": 0.031200000000000006,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "2f1e1730ff66ac31d1c5bf9976fd3f477d5c33dfadd15a701207aa32da86ad98",
+      "components": [
+        "L0",
+        "L18",
+        "L2",
+        "L3",
+        "L39",
+        "L40",
+        "L44",
+        "L47"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=44",
+      "seed": 44,
+      "size": 8,
+      "claim": "Gemma: shared (transfer drop < 0.15); in-domain >=0.85",
+      "score": 0.03019999999999995,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "3d2d649b28b62e905342b0687ff722f78e333b703044c136d6b4867b1d67f449",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L30",
+        "L38",
+        "L43",
+        "L46",
+        "L47"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=45",
+      "seed": 45,
+      "size": 8,
+      "claim": "Gemma: shared (transfer drop < 0.15); in-domain >=0.85",
+      "score": 0.03380000000000005,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "bcc38cc5a85fa47d3c46081b22318138b26de8e1d4c9f87ef11b48ca06df7f38",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L32",
+        "L36",
+        "L39",
+        "L40",
+        "L43"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=46",
+      "seed": 46,
+      "size": 8,
+      "claim": "Gemma: shared (transfer drop < 0.15); in-domain >=0.85",
+      "score": 0.03400000000000003,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "be8f4f807d4b1790835795c8ed1052bcee28041c8dd462380904cd7235a63c11",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L26",
+        "L30",
+        "L39",
+        "L44",
+        "L47"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=47",
+      "seed": 47,
+      "size": 8,
+      "claim": "Gemma: shared (transfer drop < 0.15); in-domain >=0.85",
+      "score": 0.06219999999999992,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "212645343de4b17274c24a4e87c52c2c82381bfb97584f447474bcebeb79ccd8",
+      "components": [
+        "L0",
+        "L1",
+        "L3",
+        "L34",
+        "L37",
+        "L38",
+        "L40",
+        "L45"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=48",
+      "seed": 48,
+      "size": 8,
+      "claim": "Gemma: shared (transfer drop < 0.15); in-domain >=0.85",
+      "score": 0.050799999999999956,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "e083e13f275368410da8e0136023a2ca91f88c99777d2171bd429242a88ccb78",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L33",
+        "L39",
+        "L41",
+        "L46",
+        "L47"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=49",
+      "seed": 49,
+      "size": 8,
+      "claim": "Gemma: shared (transfer drop < 0.15); in-domain >=0.85",
+      "score": 0.040200000000000014,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "86e10921d09ff1ee694f890afe4cb16a5f85c73679be69ed8de64b6c470c9a74",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L3",
+        "L38",
+        "L39",
+        "L40",
+        "L44"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=50",
+      "seed": 50,
+      "size": 8,
+      "claim": "Gemma: shared (transfer drop < 0.15); in-domain >=0.85",
+      "score": 0.05040000000000011,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "0da80b5e54c5c6e4e5156d072d2da33d6fc9715136a7e6d86286552fed7afecb",
+      "components": [
+        "L0",
+        "L2",
+        "L29",
+        "L38",
+        "L40",
+        "L43",
+        "L44",
+        "L47"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=51",
+      "seed": 51,
+      "size": 8,
+      "claim": "Gemma: shared (transfer drop < 0.15); in-domain >=0.85",
+      "score": 0.0368,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "e1c22f1b2e7f0b5cf9f62618e89b2bf97748ac98cf56b94343e61a3ea3ff685c",
+      "components": [
+        "L0",
+        "L1",
+        "L25",
+        "L32",
+        "L36",
+        "L40",
+        "L44",
+        "L46"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=52",
+      "seed": 52,
+      "size": 8,
+      "claim": "Gemma: shared (transfer drop < 0.15); in-domain >=0.85",
+      "score": 0.030399999999999927,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "7722a36774d28a12d0bac1f2c4e03e981a52b6d798d864c2be66c47007d8a220",
+      "components": [
+        "L1",
+        "L2",
+        "L33",
+        "L35",
+        "L37",
+        "L41",
+        "L42",
+        "L44"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=53",
+      "seed": 53,
+      "size": 8,
+      "claim": "Gemma: shared (transfer drop < 0.15); in-domain >=0.85",
+      "score": 0.023000000000000076,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "4bbde203e3269e1add58ae0edc6cdc2bce85272576bb3826c65ccd7f7d481419",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L3",
+        "L32",
+        "L43",
+        "L47",
+        "L8"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=54",
+      "seed": 54,
+      "size": 8,
+      "claim": "Gemma: shared (transfer drop < 0.15); in-domain >=0.85",
+      "score": 0.036599999999999966,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "5d26932659dee59f51c23923faf5f198217eb094ef988e24d221911a044a217c",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L3",
+        "L36",
+        "L37",
+        "L41",
+        "L43"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=55",
+      "seed": 55,
+      "size": 8,
+      "claim": "Gemma: shared (transfer drop < 0.15); in-domain >=0.85",
+      "score": 0.031000000000000028,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "05ef09a415817fe1d994a09a3d895da932b446441bf84c42bc2b0f2ae6f7a138",
+      "components": [
+        "L0",
+        "L3",
+        "L34",
+        "L37",
+        "L39",
+        "L42",
+        "L45",
+        "L47"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=56",
+      "seed": 56,
+      "size": 8,
+      "claim": "Gemma: shared (transfer drop < 0.15); in-domain >=0.85",
+      "score": 0.04159999999999997,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "e6377afc170899a3ec1c1e809ca7b48d97bf577e8df8f8b03d19613d43bb31b2",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L36",
+        "L38",
+        "L40",
+        "L41",
+        "L47"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=57",
+      "seed": 57,
+      "size": 8,
+      "claim": "Gemma: shared (transfer drop < 0.15); in-domain >=0.85",
+      "score": 0.06619999999999998,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "b81ecea1feb0729a8827b4ad43d2f5e5356822177380ca217130154b8134f55a",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L26",
+        "L3",
+        "L38",
+        "L42",
+        "L43"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=58",
+      "seed": 58,
+      "size": 8,
+      "claim": "Gemma: shared (transfer drop < 0.15); in-domain >=0.85",
+      "score": 0.03739999999999993,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "62ca37425793ccd0d30a4c649892df38615d757e5a5be35a577f0c78942f8d99",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L27",
+        "L3",
+        "L40",
+        "L42",
+        "L44"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=59",
+      "seed": 59,
+      "size": 8,
+      "claim": "Gemma: shared (transfer drop < 0.15); in-domain >=0.85",
+      "score": 0.07800000000000001,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "124aabd48a95fcd2c7110cef4d73febc5dece0322c34d5fa2b51054219c9fe03",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L37",
+        "L40",
+        "L42",
+        "L43",
+        "L47"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=60",
+      "seed": 60,
+      "size": 8,
+      "claim": "Gemma: shared (transfer drop < 0.15); in-domain >=0.85",
+      "score": 0.038799999999999835,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "0d95b4e9934826a97433a2f98470a828d477f38ea052ccd224e5b3705d78ddb1",
+      "components": [
+        "L0",
+        "L1",
+        "L3",
+        "L33",
+        "L38",
+        "L39",
+        "L44",
+        "L45"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=61",
+      "seed": 61,
+      "size": 8,
+      "claim": "Gemma: shared (transfer drop < 0.15); in-domain >=0.85",
+      "score": 0.06600000000000006,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "54f89ccc2bbc36c33d4cf1452465a7c529783fe4206536dcb39a55ea82f79ace",
+      "components": [
+        "L1",
+        "L3",
+        "L35",
+        "L38",
+        "L40",
+        "L41",
+        "L42",
+        "L44"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=62",
+      "seed": 62,
+      "size": 8,
+      "claim": "Gemma: shared (transfer drop < 0.15); in-domain >=0.85",
+      "score": 0.05180000000000001,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "05a54802dd1b3ea9580c2f7e6075f86bf305e1199b268327c0e0ce2487e5184e",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L39",
+        "L40",
+        "L44",
+        "L45",
+        "L47"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=1",
+      "seed": 42,
+      "size": 8,
+      "claim": "Gemma: shared (transfer drop < 0.15); in-domain >=0.85",
+      "score": 0.06464130473211926,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "bd02ac3ea7abbabb1aa46fcb7fca1943d33093d763909b3d1d05c37143764bd2",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L3",
+        "L37",
+        "L41",
+        "L43",
+        "L46"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=2",
+      "seed": 42,
+      "size": 8,
+      "claim": "Gemma: shared (transfer drop < 0.15); in-domain >=0.85",
+      "score": 0.024141722489594175,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "b1f5e031606875d3a93e5c20856c79948d89c74caf4dca1983f57823f693ce64",
+      "components": [
+        "L0",
+        "L1",
+        "L22",
+        "L31",
+        "L33",
+        "L38",
+        "L40",
+        "L43"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=3",
+      "seed": 42,
+      "size": 8,
+      "claim": "Gemma: shared (transfer drop < 0.15); in-domain >=0.85",
+      "score": 0.04775022956841135,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "7248044979719136841ddd221c579c16e45eceb040fe52b708ece9c8f2ab148c",
+      "components": [
+        "L0",
+        "L2",
+        "L3",
+        "L32",
+        "L37",
+        "L38",
+        "L45",
+        "L47"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=4",
+      "seed": 42,
+      "size": 8,
+      "claim": "Gemma: shared (transfer drop < 0.15); in-domain >=0.85",
+      "score": 0.06020187711368363,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "3b75af6beaaaff840fb4ccb7a0c581ec9746328f868f1afd95c3174fefa0017f",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L26",
+        "L31",
+        "L40",
+        "L42",
+        "L8"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=5",
+      "seed": 42,
+      "size": 8,
+      "claim": "Gemma: shared (transfer drop < 0.15); in-domain >=0.85",
+      "score": 0.03461585871007883,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "c805e13cb8404f75c2406889a9d418895751c381d879b83057a6066f54943886",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L20",
+        "L40",
+        "L41",
+        "L45",
+        "L46"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=6",
+      "seed": 42,
+      "size": 8,
+      "claim": "Gemma: shared (transfer drop < 0.15); in-domain >=0.85",
+      "score": 0.029259982638888904,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "fd65b6672419cbc60eeab2805226fc46fe51dfb52104b7014f260bdd30c91f85",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L26",
+        "L3",
+        "L41",
+        "L44",
+        "L46"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=7",
+      "seed": 42,
+      "size": 8,
+      "claim": "Gemma: shared (transfer drop < 0.15); in-domain >=0.85",
+      "score": -0.00634765625,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "321bb2f9ed73f37ad087cbdc66d791c7fb81ad664fb62fbd8a5f08782d772be8",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L21",
+        "L27",
+        "L3",
+        "L39",
+        "L41"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=8",
+      "seed": 42,
+      "size": 8,
+      "claim": "Gemma: shared (transfer drop < 0.15); in-domain >=0.85",
+      "score": 0.02197265625,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "59d3999726914c91b731535e4e2a781c671330a4d6ed96a7a025b8f0a7945e14",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L3",
+        "L34",
+        "L38",
+        "L41",
+        "L43"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=9",
+      "seed": 42,
+      "size": 8,
+      "claim": "Gemma: shared (transfer drop < 0.15); in-domain >=0.85",
+      "score": 0.07048017202133194,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "e6436c998d6b3fb2152b43789e604da63fc31e7c3d343c5ed41ff424c37b01ce",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L3",
+        "L31",
+        "L39",
+        "L44",
+        "L46"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=10",
+      "seed": 42,
+      "size": 8,
+      "claim": "Gemma: shared (transfer drop < 0.15); in-domain >=0.85",
+      "score": 0.047999131944444495,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "d9d2c099cac5d7c28662c9d520a18909c377ceab4e02b7f834fb5876d3770fef",
+      "components": [
+        "L0",
+        "L3",
+        "L34",
+        "L36",
+        "L38",
+        "L4",
+        "L41",
+        "L45"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=11",
+      "seed": 42,
+      "size": 8,
+      "claim": "Gemma: shared (transfer drop < 0.15); in-domain >=0.85",
+      "score": 0.02490234375,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "3a577964fb759f5688ebc989ba27111a2d795f657f83110438c725a2c669f78a",
+      "components": [
+        "L0",
+        "L1",
+        "L19",
+        "L2",
+        "L3",
+        "L31",
+        "L36",
+        "L39"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=12",
+      "seed": 42,
+      "size": 8,
+      "claim": "Gemma: shared (transfer drop < 0.15); in-domain >=0.85",
+      "score": 0.052734375,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "7fe14437a84707b8d925d7818afeb1d6167d4f85be8a6dc5e85d1764c8f6badd",
+      "components": [
+        "L0",
+        "L1",
+        "L3",
+        "L37",
+        "L38",
+        "L40",
+        "L41",
+        "L44"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=13",
+      "seed": 42,
+      "size": 8,
+      "claim": "Gemma: shared (transfer drop < 0.15); in-domain >=0.85",
+      "score": 0.0613471278290843,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "62dd36dc2a15b7210cc12a71d1efc16a3f2242f12893edd69e092d12d508a681",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L3",
+        "L37",
+        "L38",
+        "L4",
+        "L41"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=14",
+      "seed": 42,
+      "size": 8,
+      "claim": "Gemma: shared (transfer drop < 0.15); in-domain >=0.85",
+      "score": 0.015720055670339794,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "f6ab5ffa1ff111452fdea0a6f7da417b4cbba2ae7bbd1080dd0e21a478134372",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L3",
+        "L30",
+        "L37",
+        "L39",
+        "L44"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=15",
+      "seed": 42,
+      "size": 8,
+      "claim": "Gemma: shared (transfer drop < 0.15); in-domain >=0.85",
+      "score": 0.04786680541103022,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "0fb006a7aaa1020847bf72142b143499ae4dc77539eb6ec6eace44e2a3897993",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L36",
+        "L38",
+        "L40",
+        "L41",
+        "L44"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=16",
+      "seed": 42,
+      "size": 8,
+      "claim": "Gemma: shared (transfer drop < 0.15); in-domain >=0.85",
+      "score": 0.046226160087148804,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "a3508bc1476ce42cea1ee637065925b24e110ab2af0063f98110ec268b7e9c16",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L26",
+        "L27",
+        "L36",
+        "L40",
+        "L41"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=17",
+      "seed": 42,
+      "size": 8,
+      "claim": "Gemma: shared (transfer drop < 0.15); in-domain >=0.85",
+      "score": 0.06884765625,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "b5d31d456dcd7e74eeb0071e4314fd8ce1e9032c4ad42a83bbcf7e7bd2fc1c6b",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L31",
+        "L41",
+        "L42",
+        "L45",
+        "L46"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=18",
+      "seed": 42,
+      "size": 8,
+      "claim": "Gemma: shared (transfer drop < 0.15); in-domain >=0.85",
+      "score": 0.03767645234866879,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "bc8f180a1e7e963927e03f3878f2d377d33748e07bafd890e81e1cbeaea549e9",
+      "components": [
+        "L0",
+        "L2",
+        "L3",
+        "L32",
+        "L35",
+        "L36",
+        "L39",
+        "L47"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=19",
+      "seed": 42,
+      "size": 8,
+      "claim": "Gemma: shared (transfer drop < 0.15); in-domain >=0.85",
+      "score": 0.08292844998278243,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "c7afc295e2714c39af3a4ad00e246e0f137a853c6e7a871d67e8511fad322a48",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L3",
+        "L34",
+        "L38",
+        "L39",
+        "L43"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=20",
+      "seed": 42,
+      "size": 8,
+      "claim": "Gemma: shared (transfer drop < 0.15); in-domain >=0.85",
+      "score": 0.0846847380050505,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "c7f16e826b71a29553eefe1160e10c9b19abeaa5b1e6bd7ada3a97aff9d505e7",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L31",
+        "L39",
+        "L40",
+        "L41",
+        "L44"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "epochs=30",
+      "seed": 42,
+      "size": 8,
+      "claim": "Gemma: shared (transfer drop < 0.15); in-domain >=0.85",
+      "score": 0.024400000000000033,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "b6f778cbd9d5b6439ba712af1425506b7dd47684e40317253aea168b16c10d5c",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L3",
+        "L37",
+        "L39",
+        "L43",
+        "L46"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "lr=0.0001",
+      "seed": 42,
+      "size": 8,
+      "claim": "Gemma: shared (transfer drop < 0.15); in-domain >=0.85",
+      "score": 0.021399999999999975,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "8d9fac49ce5dec817e39631d2a009eaa46d2964e1554806ec3053666dc615fe5",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L30",
+        "L35",
+        "L38",
+        "L39",
+        "L41"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "weight_decay=0.01",
+      "seed": 42,
+      "size": 8,
+      "claim": "Gemma: shared (transfer drop < 0.15); in-domain >=0.85",
+      "score": 0.023399999999999976,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "d41ad6e1033a8d84af81386940a94945a24886420afbadef7e5ca50c739d7fb6",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L25",
+        "L39",
+        "L4",
+        "L41",
+        "L44"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "batch_size=20",
+      "seed": 42,
+      "size": 8,
+      "claim": "Gemma: shared (transfer drop < 0.15); in-domain >=0.85",
+      "score": 0.030999999999999972,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "c7cca95233496a2b851245f6c3c8630567b75f45430e53ff36f4d950e1044004",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L39",
+        "L4",
+        "L41",
+        "L43",
+        "L46"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "length_balance=off",
+      "seed": 42,
+      "size": 8,
+      "claim": "Gemma: shared (transfer drop < 0.15); in-domain >=0.85",
+      "score": 0.03319999999999995,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "251398e7dfa7010285857f38530962468ad0caf7018c20c3117f051713c90428",
+      "components": [
+        "L0",
+        "L1",
+        "L2",
+        "L32",
+        "L35",
+        "L37",
+        "L41",
+        "L43"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "layer=true-final",
+      "seed": 42,
+      "size": 8,
+      "claim": "Gemma: shared (transfer drop < 0.15); in-domain >=0.85",
+      "score": 0.054200000000000026,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "96b81435709764926186520209b4f3ebf33cd01e7bd489e45f17ca02b8d8bd70",
+      "components": [
+        "L0",
+        "L1",
+        "L18",
+        "L2",
+        "L25",
+        "L35",
+        "L39",
+        "L4"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "layer=best-in-domain",
+      "seed": 42,
+      "size": 8,
+      "claim": "Gemma: shared (transfer drop < 0.15); in-domain >=0.85",
+      "score": 0.04300000000000004,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "96b81435709764926186520209b4f3ebf33cd01e7bd489e45f17ca02b8d8bd70",
+      "components": [
+        "L0",
+        "L1",
+        "L18",
+        "L2",
+        "L25",
+        "L35",
+        "L39",
+        "L4"
+      ]
+    }
+  ]
+}

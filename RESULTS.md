@@ -33,7 +33,7 @@ are moved, and the specificity outcome split by how each null was built.
 | Activation Model Scanner, Tier-1 safety scan (arXiv:2608.05578) | 14 models of Table I | 🟠 C | low | 1/5, 3 undecided | 129 (+121 null) | yes, all 14 σ values to two decimals through the released extractor | the released extractor reads pad-token activations for the 10 right-padded tokenizers; with batch size 1 or left padding every model scores σ 4.5–6.7, nothing is flagged, LOO accuracy 0.14, r flips to +0.28 n.s. | 2026-09-02 | [card](references/cards/ams_safety_scanner.md) |
 | Certified Interventional Fidelity, GPT-2 IOI (arXiv:2607.08349) | GPT-2 small | 🟡 B | low | 1/4, 1 undecided | 36 | yes, 30/30 shipped rows exact | certified level depends on the template (0.95 upstream, 0.9 on seven of eleven others, none on one); the "10–30x" is 6.6–7.2x at F0=0.8 and 18–19x at 0.9 | 2026-09-02 | [card](references/cards/cif_ioi_gpt2.md) |
 | The Communication Map of a Transformer (arXiv:2608.22007) | GPT-2 ×3, GPT-Neo-125m, Pythia-160m/2.8B/6.9B | 🟡 B | low | 2/5, 2 undecided | 24 (+21 null) | yes, all 21 Table 2 shares exactly | the abstract's "70–89%" holds only pooled per model (69.7–89.0%); per channel 4 of 21 entries fall outside (60.7–90.5%); the lower bound is a rounding edge under resampling; \|z\|≥3 gives 59–83% with six exceptions, uncentred weights move single entries by 5–8 points | 2026-09-02 | [card](references/cards/communication_map.md) |
-| Dissociating sycophancy representations (arXiv:2607.07003) | Llama-3.1-8B-Instruct | 🟡 B | high | 4/5 | 88 (+81 null) | within 0.02–0.10 of Tables 1–2 (in-domain 0.93 / 0.94 vs 0.91 / 0.92, transfer 0.74 / 0.71 vs 0.70 / 0.61) at the paper's "final layer", which the released extractor's lexicographic layer order makes decoder layer 9 | "distinct" (transfer drop ≥ 0.15) holds in 87 of 88 runs, but which layers carry the drop is unstable (J 0.53, the check fails decisively), the conversation resample is the largest source of score variance (CV 0.20), and at the best in-domain layer (L12, AUC 0.99 / 0.97) the probes transfer (drop 0.12) | 2026-09-02 | [card](references/cards/sycophancy_llama3p1_8b.md) |
+| Dissociating sycophancy representations (arXiv:2607.07003) | Llama-3.1-8B-Instruct; Gemma-3-12B-it | 🟡 B ×2 | high | 4/5 (Llama); 3/5 (Gemma) | 88 (+81 null); 48 (+41 null) | Llama within 0.02–0.10 of Tables 1–2 (in-domain 0.93 / 0.94 vs 0.91 / 0.92, transfer 0.74 / 0.71 vs 0.70 / 0.61); Gemma 0.99 / 0.96 vs 0.98 / 0.93 in domain and 0.92 / 0.97 vs 0.87 / 0.91 across; both at the paper's "final layer", which the released extractor's lexicographic layer order makes decoder layer 9 on either model | Llama "distinct" holds in 87 of 88 runs but flips to "shared" at its best in-domain layer (L12, drop 0.12); Gemma "aligned" holds in 48 of 48 runs at every layer choice (drop 0.02–0.05); the cross-model difference is 2.8–5.5x at every matched layer, so it survives as a difference of degree while the distinct-versus-aligned dichotomy depends on Llama's layer choice | 2026-09-02/03 | [llama](references/cards/sycophancy_llama3p1_8b.md) · [gemma](references/cards/sycophancy_gemma3_12b_it.md) |
 | Diff Mining, judge-free token-set battery (arXiv:2608.26462) | gemma-3-1b-it × cake_bake LoRA | 🟢 A | high | 5/5 | 131 (+121 null) | no shipped token lists to reproduce; the paper's metric is a gpt-5-mini judge and its bias number needs a 70B model, neither run | the top-100 token set is stable across 60 seeds, 60 resamples and two corpora (J 0.97 / 0.96 / 0.88; pooled 0.92, axis-balanced 0.81) and 65% finetune-domain vocabulary under a pre-registered rule; a scrambled adapter returns garbage (0–36%); the method's own switches move it (0.48 with logit-lens extraction, 0.26 for the LoRA trained on a 1:1 pretraining mix; hyperparams-axis J 0.43) | 2026-09-02 | [card](references/cards/diff_mining_gemma3_1b.md) |
 | Refusal direction (arXiv:2406.11717) | 6 models, 3 families | 🟢 A … 🟠 C | mixed | see README | 21 each | causal claim reproduces on every model | the causal effect holds hard (specificity 4–1293x); which direction gets selected is unstable (J 0.18–0.39); two measurement artifacts found in raw completions | 2026-09-01/02 | [README](references/README.md#the-refusal-direction-across-six-models-and-three-families-arxiv240611717) |
 | SAE causal inertness (arXiv:2607.12166) | toy bottleneck model + TopK SAEs | 🟠 C | low | 2/5, 1 undecided | 33 | run 2 within the paper's own band | inert-pair census is unstable (J 0.33); the abstract's headline has a different denominator than its sentence | 2026-09-01 | [card](references/cards/sae_causal_inertness.md) |
@@ -85,7 +85,10 @@ the details and the numbers are in the card notes and in
 - **Check which layer "final layer" is (sycophancy).** The released extractor
   stacks its hooks in lexicographic module order, so probe index 31 is decoder
   layer 9 of 32. At decoder layer 31 the transfer drop is 0.30 rather than
-  0.22, and at the best in-domain layer (L12) the probes transfer.
+  0.22, and at the best in-domain layer (L12) the probes transfer. The same
+  order makes the paper's "final layer" decoder layer 9 of 48 on Gemma, where
+  the hook also reads a different token (the end-of-turn token rather than
+  the last response token); Gemma's "aligned" holds at every layer choice.
 - **Two headline numbers need not come from one run (FolkMotif).** The 0.248
   output accuracy is the released rescored run and the 32 / 206 / 6 / 26 row
   is the native-prompt run; both reproduce exactly once the two runs are
@@ -145,7 +148,7 @@ family is written out in `references/make_summary_figs.py`).
 
 | null family | pass | undecided | fail |
 |---|---|---|---|
-| signal-destroying: labels permuted, adapter scrambled, calibration data replaced by noise | 17 | 4 | 1 |
+| signal-destroying: labels permuted, adapter scrambled, calibration data replaced by noise | 18 | 4 | 1 |
 | structure-preserving: task corrupted, items re-paired or deranged, weights rotated, finder output size kept | 1 | 3 | 17 |
 
 The single signal-destroying failure is AMS, whose finding is a padding
@@ -421,11 +424,13 @@ differently, with either more aligned or more distinct representations." For
 Llama-3.1-8B-Instruct the paper quantifies "distinct" as a transfer gap:
 probes trained on one sycophancy subtype reach 0.91 (factual) / 0.92
 (opinion) ROC-AUC in domain and 0.70 / 0.61 across subtypes at the final
-layer. Only the Llama half is audited (Gemma-3-12B does not fit next to
-vLLM). Components are the eight decoder layers with the largest transfer
-drop (universe 32); the claim is "distinct (drop ≥ 0.15) | shared" plus the
-in-domain bucket at the paper's layer; the score is that drop. 88 real runs
-(40 probe seeds, 40 conversation resamples, 7 variants), 81 null runs.
+layer; for Gemma-3-12B-it it reports the opposite, 0.98 / 0.93 in domain
+and 0.87 / 0.91 across. Both halves are audited with the same runner (the
+Gemma card is below). Components are the eight decoder layers with the
+largest transfer drop (universe 32 for Llama, 48 for Gemma); the claim is
+"distinct (drop ≥ 0.15) | shared" plus the in-domain bucket at the paper's
+layer; the score is that drop. Llama: 88 real runs (40 probe seeds, 40
+conversation resamples, 7 variants), 81 null runs.
 
 | check | value | 95% CI | state |
 |---|---|---|---|
@@ -464,6 +469,53 @@ in-domain bucket at the paper's layer; the score is that drop. 88 real runs
   inline rather than through upstream's path-bound evaluator; activations
   for the 1200-conversation pool per subtype in batches of 25; no templates
   axis (the conversations are fixed closed-model artifacts).
+
+#### Gemma-3-12B-it, the paper's "aligned" model — B, high confidence
+
+The identical battery on google/gemma-3-12b-it (bf16 sharded over two shared
+GPUs, activations extracted in batches of 8): 48 real runs (20 probe seeds,
+20 conversation resamples, 7 variants), 41 null runs, universe 48 layers.
+
+| check | value | 95% CI | state |
+|---|---|---|---|
+| structural stability (top-8 layers by drop) | J 0.324 | [0.295, 0.354] | ❌ |
+| claim stability | 1.000 | [1.000, 1.000] | ✅ |
+| score stability (transfer drop) | CV 0.439 | [0.343, 0.536] | ❌ |
+| beats random | 3.4x | [3.1, 3.7] | ✅ |
+| specificity (permuted labels) | 3.1x | [2.7, 3.5] | ✅ |
+
+- Reproduction: Table 1 reproduces at the paper's index, which is decoder
+  layer 9 of 48 (the lexicographic order makes index 47 "layers.9" on any
+  model with at least ten layers): 0.98 / 0.93 in domain → 0.992 / 0.956,
+  0.87 / 0.91 across → 0.918 / 0.969 (mean of seeds 42–46); layer-averaged
+  0.975 / 0.934 and 0.868 / 0.913. At the true final layer (L47): 0.980 /
+  0.875 and 0.829 / 0.917.
+- "Aligned" holds in 48 of 48 runs and at every layer choice: drop 0.023 at
+  the paper's index (L9), 0.054 at the true final layer (L47), 0.043 at the
+  best in-domain layer (L21, in-domain 0.997); 0.023–0.078 over 20 seeds;
+  only L0 and L39 exceed the 0.15 bar in the base run. The structural and
+  score checks fail for the reason an aligned model should make them fail:
+  with every drop near zero, which eight layers rank highest is noise
+  (J 0.32) and the coefficient of variation of a near-zero drop is large.
+  The categorical claim never moves.
+- What the hook reads differs between the two models: for Gemma, upstream's
+  position −2 is the `<end_of_turn>` token, the end-of-turn position the
+  paper describes; for Llama it was the last response token before
+  `<|eot_id|>`. Deviations: transformers 4.57 returns a tuple from Gemma-3
+  decoder layers, so the hook reads output[0] before upstream's position −2
+  read (the Llama path is untouched); Gemma's opinion file holds 595
+  sycophantic conversations (the paper's Table 6 count), so that pool is
+  595 + 600 and balances to upstream's 500 per class.
+
+Cross-model comparison at matched layer choices (transfer drop, Llama vs
+Gemma): the paper's index, L9 on both, 0.22 vs 0.02, "distinct" vs
+"aligned", the claim holds; the true final layer, 0.30 vs 0.05, holds; the
+best in-domain layer, 0.12 vs 0.04, both "shared" under the 0.15 bar, the
+dichotomy fails. Llama's drop is 2.8 to 5.5x Gemma's at every choice and at
+every quarter of depth (Llama 0.14–0.30, Gemma 0.02–0.08), so "different
+LLMs represent these subtypes differently" survives as a difference of
+degree; whether it reads as distinct-versus-aligned is a layer choice on the
+Llama side only.
 
 ### Diff Mining, judge-free token-set battery (arXiv:2608.26462) — A, high confidence
 
@@ -857,6 +909,7 @@ variants), 41 null runs (labels permuted within each category at calibration).
 | AMS, 60 bootstrap resamples | GPU 5 | done, card updated above |
 | FolkMotif, 20 seeds + scoring=raw | GPU 6 | done, card updated above |
 | Dissociating sycophancy (arXiv:2607.07003), Llama-3.1-8B-Instruct half | GPU 7, then GPUs 6–7 for the rerun | done, card above (B, high confidence after the 40-run-per-axis rerun) |
+| Dissociating sycophancy (arXiv:2607.07003), Gemma-3-12B-it half | GPUs 0 and 6 for the bf16 extraction, GPUs 7, 0, 6 for the probe battery | done, card above (B, high confidence); the cross-model claim compared at matched layer choices |
 | Communication map census (arXiv:2608.22007) | GPU 6 / CPU | done, card above (B, low confidence) |
 | Diff Mining (arXiv:2608.26462), judge-free top-K token-set battery on gemma-3-1b-it × cake_bake | GPUs 0–2 | done, card above (A, high confidence after the 60-run-per-axis rerun) |
 | REINS-Gate (arXiv:2608.28233), Qwen3.5-2B-Base + released SAEs | GPUs 1, 2, 4 for the feature means, GPU 6 for the replay, CPU battery | done, card above (A, low confidence); 5,400 prompt renderings extracted once, then seconds per gate fit |
@@ -865,5 +918,4 @@ variants), 41 null runs (labels permuted within each category at calibration).
 | Steering vectors for CoT faithfulness (arXiv:2607.29062), Gemma-3-4B-it | GPUs 0 and 7 | done, card above (B, high confidence); 8 activation passes, then seconds per run from the cache; the behavioural check took 30 min |
 
 Not auditable in this setting: Diff Mining's 70B "one third of 52 biases",
-CTA's 10,400 attribution graphs, Future Localization (full 7B SFT),
-Gemma-3-12B half of the sycophancy paper (does not fit next to vLLM).
+CTA's 10,400 attribution graphs, Future Localization (full 7B SFT).

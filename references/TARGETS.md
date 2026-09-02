@@ -45,8 +45,6 @@ card yet. The note says what stands between the repository and a battery.
 - Anticipating post-SFT mechanisms (arXiv:2608.24482): needs a full 7B SFT per
   run.
 - Diff Mining's "one third of 52 biases" (arXiv:2608.26462): needs a 70B model.
-- The Gemma-3-12B half of the sycophancy paper (arXiv:2607.07003): does not fit
-  next to the shared vLLM allocation.
 
 ## Method-family targets (no single paper)
 

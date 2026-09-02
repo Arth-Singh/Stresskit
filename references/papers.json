@@ -62,11 +62,11 @@
     {
       "title": "Dissociating the internal representations of sycophancy",
       "arxiv": "2607.07003",
-      "models": "Llama-3.1-8B-Instruct (Gemma-3-12B half not run)",
-      "cards": ["cards/sycophancy_llama3p1_8b.json"],
-      "reproduced": "within 0.02-0.10 of Tables 1-2 at the paper's final layer, which the released extractor's lexicographic layer order makes decoder layer 9",
-      "result": "distinct (transfer drop >= 0.15) holds in 87 of 88 runs but flips to shared at the best in-domain layer (L12); which layers carry the drop is unstable (J 0.53); the conversation resample is the largest source of score variance (CV 0.20)",
-      "audited": "2026-09-02"
+      "models": "Llama-3.1-8B-Instruct and Gemma-3-12B-it",
+      "cards": ["cards/sycophancy_llama3p1_8b.json", "cards/sycophancy_gemma3_12b_it.json"],
+      "reproduced": "Llama within 0.02-0.10 of Tables 1-2 and Gemma within 0.01-0.06 of Table 1, both at the paper's final layer, which the released extractor's lexicographic layer order makes decoder layer 9 on either model",
+      "result": "Llama distinct (transfer drop >= 0.15) holds in 87 of 88 runs but flips to shared at the best in-domain layer (L12); Gemma aligned holds in 48 of 48 runs at every layer choice (drop 0.02-0.05); the cross-model difference is 2.8-5.5x at every matched layer, a difference of degree, while the distinct-versus-aligned dichotomy depends on Llama's layer choice; which Llama layers carry the drop is unstable (J 0.53)",
+      "audited": "2026-09-03"
     },
     {
       "title": "The Communication Map of a Transformer",
