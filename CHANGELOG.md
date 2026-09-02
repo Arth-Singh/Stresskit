@@ -191,6 +191,18 @@
   run count at which each verdict settles, and the sensitivity of the
   structural and specificity counts to their bars, recomputed from each
   card's recorded value and interval with the harness's own decision rule.
+- Confirmatory certificates (`references/run_confirmatory.py`,
+  `references/cards/confirmatory/`): HARC on Llama, REINS-Gate, faithfulness
+  steering and the sycophancy probes taken through the confirmatory profile
+  with 200 real and 200 null IID draws each from frozen specification spaces
+  (the diagnostic axes drawn jointly, the paper's value at mass 0.5 per
+  axis, component-set sizes fixed). All four fail: the component set is
+  decided below the 0.80 Jaccard bar (0.37 to 0.56), the sentence-level claim
+  is above 0.80 but undecided for REINS (0.92) and sycophancy (0.88) and
+  fails for HARC (0.44) and faithfulness (0.26, whose registered classes
+  carry the reference layer), and specificity is undecidable at 200 runs
+  (Hoeffding half-width 0.32). The driver reuses the diagnostic runners'
+  finders and nulls unchanged and shards through `battery_shards.Shard`.
 - `stresskit verify` over a directory no longer aborts when one artifact cannot
   be parsed — an unsupported `schema_version` (a card written by a newer
   StressKit) is now reported as a failure for that file and the remaining cards

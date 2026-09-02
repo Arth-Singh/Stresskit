@@ -900,6 +900,84 @@ variants), 41 null runs (labels permuted within each category at calibration).
   refusal and 16 neutral calibration continuations are not released, so the
   released R features are used as shipped.
 
+## Confirmatory certificates
+
+The cards above are diagnostic: one axis at a time around the paper's own
+setting, bootstrap intervals, grades that localise fragility. StressKit's
+confirmatory profile ([`docs/CALIBRATION_REPORT_v0.1.md`](docs/CALIBRATION_REPORT_v0.1.md),
+`stresskit.confirmatory`) asks a narrower question with finite-sample
+guarantees: over independent draws from a frozen product distribution of
+defensible specifications, does the registered claim clear every registered
+gate? Runs are IID specification draws, every check uses disjoint-pair
+Hoeffding intervals under a Bonferroni budget at 95%, at least 200 real and
+200 null runs are required, and the verdict is pass, fail or inconclusive; an
+interval that crosses its bar is inconclusive, never a pass. Four cards whose
+finders run from cached features were taken through it on 2026-09-03 with
+[`references/run_confirmatory.py`](references/run_confirmatory.py); the
+certificates live in [`references/cards/confirmatory/`](references/cards/confirmatory/)
+and re-derive under `stresskit verify`.
+
+| paper | registered object and claim | real / null | structural stability (≥ 0.80) | beats random (≥ 0.20) | claim stability (≥ 0.80) | specificity (≥ 0.20) | verdict |
+|---|---|---|---|---|---|---|---|
+| HARC (arXiv:2607.00572), Llama-3.1-8B-Instruct + released adapter | eight (layer, side) cells with the largest coupling gain; base profile / coupling / peak claim | 200 / 200 | 0.43 [0.27, 0.59] ❌ | 0.27 [−0.05, 0.59] ⚠️ | 0.44 [0.30, 0.58] ❌ | 0.07 [−0.27, 0.41] ⚠️ | **fail** |
+| REINS-Gate (arXiv:2608.28233), Qwen3.5-2B-Base + released SAEs | the five category gates' coordinates; harmful / matched-safe open-rate buckets | 200 / 200 | 0.42 [0.26, 0.58] ❌ | 0.39 [0.07, 0.71] ⚠️ | 0.92 [0.78, 1.00] ⚠️ | 0.15 [−0.19, 0.49] ⚠️ | **fail** |
+| Steering vectors for CoT faithfulness (arXiv:2607.29062), Gemma-3-4B-it | convergence band of layers; cosine bucket at the reference layer and absolute-band size | 200 / 200 | 0.56 [0.40, 0.72] ❌ | 0.08 [−0.24, 0.40] ⚠️ | 0.26 [0.12, 0.40] ❌ | 0.49 [0.15, 0.71] ⚠️ | **fail** |
+| Dissociating sycophancy (arXiv:2607.07003), Llama-3.1-8B-Instruct | eight decoder layers with the largest transfer drop; distinct / shared and in-domain bucket | 200 / 200 | 0.37 [0.21, 0.53] ❌ | 0.21 [−0.11, 0.53] ⚠️ | 0.88 [0.75, 1.00] ⚠️ | 0.22 [−0.12, 0.54] ⚠️ | **fail** |
+
+- None of the four clears the profile, for the same reason in each: the
+  component set does not survive joint variation. One axis at a time the
+  pooled Jaccard was 0.68 (HARC), 0.83 (REINS), 0.91 (faithfulness) and 0.53
+  (sycophancy); over IID draws in which every defensible choice moves at
+  once (the paper's exact configuration has probability 0.5 to the power of
+  the number of hyperparameter axes, under 1% per run) the disjoint-pair mean
+  Jaccard is 0.43, 0.42, 0.56 and 0.37, each decided below 0.80.
+- The sentence survives better than the object, as on the diagnostic cards.
+  REINS returns "harmful open ≥ 0.9; matched-safe open ≤ 0.10" in 183 of 200
+  runs (harmful open never below 0.80, matched-safe never above 0.15) and
+  sycophancy "distinct; in-domain ≥ 0.85" in 176 of 200 (the 17 "shared"
+  runs are all best-in-domain-layer draws). Both clear 0.80 as point
+  estimates and are inconclusive because the interval reaches 0.78 and 0.75.
+- HARC's claim falls to 0.44 because two defensible readings split it: the
+  mean-over-prompt harm position removes the "late-decoupled" base profile
+  (67 of 104 such runs) and the AdvBench/Alpaca pool moves the prompt-side
+  gain peak upstream of the trained band (34 of 38 runs). All 25 runs at the
+  paper's own pool, estimator and position return the paper's claim.
+- Faithfulness's registered claim classes carry the reference layer (L17 or
+  L11, drawn 50/50), which caps the modal share at the axis mass by
+  construction; that part of the failure is definitional. Collapsing the
+  layer gives 0.43, and the cosine bucket alone is "≥ 0.8" in 140 of 200
+  runs (0.70), still below the bar: paraphrased completions, last-token
+  pooling and the reference layer each move the bucket.
+- Specificity cannot be decided at this budget. With 100 disjoint pairs and
+  a familywise alpha of 0.05 over four checks, the Hoeffding half-width on a
+  [−1, 1] difference is 0.32, so a real-minus-null difference has to exceed
+  0.52 to pass. Faithfulness's 0.49 [0.15, 0.71] is the closest (real 0.54,
+  null 0.06). The profile is conservative by design (the calibration report
+  rejects the bootstrap intervals the diagnostic cards use); deciding
+  specificity here would take about four times the runs per target.
+- What this adds to the leaderboard: the diagnostic grades (B, A, B, B) are
+  grades of the paper's own configuration with one thing changed at a time;
+  the confirmatory failures say that which cells, coordinates, layers or
+  bands carry the finding is not a stable object across the space of
+  defensible specifications, while the sentence-level claim survives for two
+  of the four. No certificate claims a paper's finding is wrong.
+
+Design, frozen in the driver's docstring before the first run: each space is
+the product of the axes the diagnostic battery varied, drawn jointly. Seed
+axes (extraction split, calibration split, task subsample, probe seed) are
+uniform over 20 values with the paper's seed first; "resample" keeps the
+paper's rows with mass 0.5 or redraws them with replacement under a fixed
+seed; every other axis gives the paper's value mass 0.5 and shares the rest
+among the alternatives. Component-set sizes (HARC top_k 8, REINS topk 256)
+are not varied because two runs with different set sizes cannot reach a
+Jaccard of 1 and the profile has no size-comparability exclusion.
+Faithfulness omits the diagnostic battery's extra completion sets so that
+twelve activation passes cover its space. Thresholds, identical for every
+target: structural stability ≥ 0.80 (the diagnostic overlap bar), beats
+random ≥ 0.20 and specificity ≥ 0.20 (the README's frozen defaults, both
+differences of mean Jaccard), claim stability ≥ 0.80. Seeds: real manifest
+20260901, null manifest 20260902, pairing master 20260903.
+
 ## In progress and queued
 
 | item | where | status |

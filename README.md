@@ -59,6 +59,18 @@ so a "stable" finding also has to beat a finding that cannot be real; every
 grade re-derives from the card's own metrics in CI. Grades measure the
 reliability of a result under defensible variation, not the value of a paper.
 
+Four of these cards were also taken through the confirmatory profile on
+2026-09-03 (HARC on Llama, REINS-Gate, faithfulness steering, the sycophancy
+probes): 200 real and 200 null IID draws each from a frozen product
+distribution of defensible specifications, disjoint-pair Hoeffding intervals,
+Bonferroni at 95%. All four fail. The component set is decided below the 0.80
+Jaccard bar in each (0.37 to 0.56 over joint draws, against 0.53 to 0.91 one
+axis at a time), the sentence-level claim clears 0.80 as a point estimate for
+REINS (0.92) and sycophancy (0.88) but not decidedly, and specificity cannot
+be decided at this budget (half-width 0.32 on a difference of Jaccards). The
+certificates are in [`references/cards/confirmatory/`](references/cards/confirmatory/)
+and the reading is in [`RESULTS.md`](RESULTS.md#confirmatory-certificates).
+
 One pattern cuts across the set: whether a finding beats its null follows
 the design of the null. Findings tested against a signal-destroying null
 (labels permuted, adapter scrambled) pass specificity in 18 of 23 cards;
