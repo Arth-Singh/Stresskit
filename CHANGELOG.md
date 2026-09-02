@@ -135,6 +135,17 @@
   runs per axis; the greater-than headline (48 units against the
   Transcoder's 384 at sufficiency 0.9) reproduces exactly in a separate
   3.8-hour run recorded on the card.
+- Added an August-2026 card for REINS-Gate (arXiv:2608.28233,
+  `references/run_reins_gate_card.py`) on Qwen3.5-2B-Base with the released
+  SAE bundle: the paper's judge-free router audited through its own split,
+  feature-mean and gate-fit code. The released gates reproduce on the paper's
+  evaluation split (0.993 / 0.053 open on harmful / matched-safe prompts vs
+  0.987 / 0.047) and the refit reproduces the routing, but the coordinate set
+  halves under top-k, layer window and rendering (pooled J 0.83, axis-balanced
+  0.71, structural CI straddling 0.8: A, low confidence) and the false-positive
+  budget holds only under the calibration wrapper (0.64 open on matched-safe
+  prompts rendered plain). No LLM judge is run; a string-rule replay of the
+  released controllers on 50 pairs is a note on the card.
 - Added the HARC card (arXiv:2607.00572, `references/run_harc_card.py`): the
   released Llama-3.1-8B-Instruct and Qwen2.5-7B-Instruct LoRA adapters
   audited with upstream's direction extraction, residuals cached once per

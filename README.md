@@ -15,8 +15,8 @@ conservative profile supports confirmatory pass/fail/inconclusive decisions.
 
 ## What it has found so far
 
-20 papers, 47 graded cards, audited between 2026-08-21 and 2026-09-03; 15 of
-the 20 are July/August 2026 arXiv papers that ship licensed code, run through
+21 papers, 48 graded cards, audited between 2026-08-21 and 2026-09-03; 16 of
+the 21 are July/August 2026 arXiv papers that ship licensed code, run through
 their own released code at a pinned commit. The leaderboard below is the
 human-written summary; the generated version (one row per paper, one grade
 badge per card, driven by [`references/papers.json`](references/papers.json))
@@ -26,6 +26,7 @@ low-confidence grade: at least one check's 95% CI straddles its bar.
 
 | paper | model(s) | grade | what the battery found |
 |---|---|---|---|
+| REINS-Gate, sparse SAE-feature router for refusal steering ([2608.28233](https://arxiv.org/abs/2608.28233)) | Qwen3.5-2B-Base + released SAEs | **A**† | the released gates reproduce (open on 0.993 / 0.053 of harmful / matched-safe prompts vs the paper's 0.987 / 0.047) and the routing survives every resample, but the coordinate set halves under top-k, layer window and rendering, and the 10% false-positive budget becomes 64% when the same safe prompts are given without the calibration wrapper |
 | Sparse Weight Decomposition for circuit extraction ([2608.03913](https://arxiv.org/abs/2608.03913)) | GPT-2 small, layer-8 MLP output projection | **C**† | KL, output cosine and the 48-vs-384-unit greater-than headline reproduce; the released one-unit sufficiency cells for IOI and docstring are a denominator artifact of a layer that barely carries those tasks, while SWD's unit and edge advantage on gendered-pronoun reproduces in 20 of 22 runs and survives random-token calibration; the "matched fidelity" bucket flips in 10 of 22 runs |
 | Steering vectors for CoT faithfulness, cross-cue vector convergence ([2607.29062](https://arxiv.org/abs/2607.29062)) | Gemma-3-4B-it | **B** | the paper's cross-cue cosines reproduce exactly (0.88 at L17, 0.96 at L11) and survive task resampling, but paraphrasing the completion sentences drops L17 to 0.49–0.54 and prompts with no cue still converge at 0.82: the shared direction is the appended sentence, not cue acknowledgment |
 | HARC, coupling harmfulness and refusal directions, released adapters ([2607.00572](https://arxiv.org/abs/2607.00572)) | Llama-3.1-8B-Instruct + LoRA, Qwen2.5-7B-Instruct + LoRA | **B** ×2† | Figure 1's base profile reproduces on Llama and the coupling gain is real (band +0.55, 9.6x random), but it is a plateau over 41 of 64 cells that starts eight layers upstream of the trained band, and permuted-label directions gain +0.28 at the same layers (specificity undecided); with a hard-refusal string match the Llama adapter refuses more XSTest safe prompts than the base (29 vs 17 of 250) where Table 1 reports the opposite; on Qwen the gain peaks at L18, upstream of the paper's L21–24 band, and vanishes in band under the Circuit Breakers/UltraChat pools |
@@ -67,7 +68,7 @@ three live panel executions all abstained, so it has produced no empirical
 result, and nothing in the leaderboard comes from it; the scoped record is
 [`docs/NEEL_VALIDATION.md`](docs/NEEL_VALIDATION.md) and the release gates are
 [`docs/RELEASE_GATES_V1.md`](docs/RELEASE_GATES_V1.md). No card is confirmatory
-evidence in the sense of the conservative profile below; all 47 are diagnostic.
+evidence in the sense of the conservative profile below; all 48 are diagnostic.
 Several targets were out of budget on shared GPUs and are listed with reasons
 at the end of [`RESULTS.md`](RESULTS.md).
 

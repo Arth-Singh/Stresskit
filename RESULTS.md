@@ -23,6 +23,7 @@ are moved.
 
 | paper | model(s) | grade | conf. | checks | runs | reproduced the released number? | result in one line | date | card |
 |---|---|---|---|---|---|---|---|---|---|
+| REINS-Gate, sparse SAE-feature router for refusal steering (arXiv:2608.28233) | Qwen3.5-2B-Base + released SAEs | 🟢 A | low | 4/5, 1 undecided | 51 (+41 null) | yes: released gates open on 0.993 / 0.053 of harmful / matched-safe evaluation prompts (paper 0.987 / 0.047); the refit reproduces the routing (0.990 / 0.007) with 34–45% of the released coordinates | routing stable in every real run (harmful ≥ 0.987, matched-safe ≤ 0.11) but the coordinate set is not (seeds J 0.92, resamples 0.87, top-k / layers / rendering 0.50–0.53; pooled 0.83, axis-balanced 0.71); the 10% false-positive budget holds only under the calibration wrapper (0.64 open on plain-rendered safe prompts, 0.15 under a paraphrase); label-permuted gates open on 0.02–0.26 / 0.00–0.19 | 2026-09-03 | [card](references/cards/reins_gate_qwen3p5_2b_base.md) |
 | Sparse Weight Decomposition, GPT-2 single-matrix fidelity and circuit frontier (arXiv:2608.03913) | GPT-2 small, layer-8 mlp.c_proj | 🟠 C | low | 2/5, 2 undecided | 22 (+13 null) | KL and output cosine yes (0.001871 → 0.001884, 0.9814 → 0.9815); CE delta 0.000889 → 0.001423 on a different 16-block calibration draw, inside the released grid's own 0.0009–0.0027 spread; the greater-than headline reproduces (48 units at sufficiency 0.9 vs the Transcoder's 384; released SWD 48; edges 75,611 vs 75,327), necessity costs 2–3x the released ones | the released "one unit suffices" cells for IOI and docstring are a denominator artifact (mean-ablating the whole projection raises the IOI margin by 0.29, sufficiency swings −5.6 to +1.7 across k); SWD's unit and edge advantage on gendered-pronoun reproduces in 20 of 22 runs (32–64 units vs the Transcoder's 128) and survives random-token calibration; "matched to TC-12k within 0.001" flips in 10 of 22 runs | 2026-09-03 | [card](references/cards/swd_gpt2.md) |
 | Steering vectors for CoT faithfulness, cross-cue vector convergence (arXiv:2607.29062) | Gemma-3-4B-it | 🟡 B | high | 4/5 | 92 (+81 null) | yes, exactly (the 12 native-layer and 6 cross-method cosines from the shipped vectors, the 4 shipped synthetic vectors at cosine 1.000 with the rebuilt ones, L17 / L11 cross-cue means 0.880 / 0.959 vs 0.88 / 0.96) | the convergence survives any task subsample (20 tasks per cue: 0.88) but is a property of the appended completion sentences: two paraphrase sets give 0.49 / 0.54 at L17 (peaks 0.97 / 0.99 at L10), prompts with no cue still converge at 0.82 over 24 layers, an identical cue-agnostic completion converges at all 34 layers; beats-random fails because the convergent band is 22 of 34 layers; steering at α 5 leaves rule-detected acknowledgment at 0.70 → 0.69 | 2026-09-02 | [card](references/cards/faithfulness_steering_gemma3_4b.md) |
 | HARC: coupling harmfulness and refusal directions, released adapters (arXiv:2607.00572) | Llama-3.1-8B-Instruct + LoRA; Qwen2.5-7B-Instruct + LoRA | 🟡 B ×2 | low | 3/5, 1 undecided (Llama); 3/5, 2 undecided (Qwen) | 51 (+41 null) each | Figure 1's Llama profile yes (peak L12, cos 0.42 over L8–16 vs 0.12 over L20–28) and upstream's layer selection lands in the paper's trained bands; Table 1's over-refusal direction no (string-match hard refusals on the 250 XSTest safe prompts: Llama adapter 29 vs base 17, paper 0.035 vs 0.109; Qwen 11 vs 10, paper 0.026 vs 0.091) | the coupling gain is real (band +0.55, 9.6x random) but a plateau: 41 of 64 cells gain ≥ 0.10, the rise starts eight layers upstream of the trained band, and permuted-label directions gain +0.28 at the same layers (specificity 1.15x, undecided); on Qwen the gain peaks at L18, upstream of the L21–24 band, and vanishes in band under the Circuit Breakers/UltraChat pools | 2026-09-02 | [llama](references/cards/harc_llama3p1_8b.md) · [qwen](references/cards/harc_qwen2p5_7b.md) |
@@ -107,6 +108,12 @@ the details and the numbers are in the card notes and in
   stays undecided at 1.15x and the card says about half of the "coupling"
   is a change in how the two token positions co-vary, not a harm/refusal
   effect.
+
+- **Replay the released router under a different rendering (REINS-Gate).**
+  The released gate keeps its 5% false-positive rate only on prompts wrapped
+  in the answer template it was calibrated on; the same matched-safe prompts
+  given plain open it 64% of the time, and a paraphrased wrapper 15%. The
+  budget the paper reports is a property of one prompt format.
 
 ## July / August 2026 target set — detailed results
 
@@ -703,6 +710,78 @@ per run on shared GPUs).
   (runtime only); the Transcoder comparator is the released frontier, not
   retrained; 6 runs per axis.
 
+### REINS-Gate on Qwen3.5-2B-Base (arXiv:2608.28233) — A, low confidence
+
+Claim, byte-exact (Appendix D.3): "The frozen Qwen3.5-2B-Base gate opened on
+98.7% of harmful evaluation prompts and 4.7% of negative evaluation prompts.
+This preserves high harmful coverage and keeps negative openings rare." The
+paper's safety outcomes (HRR, SRR, OSR, CR) come from a remote LLM judge that
+is not run here; REINS-Gate, the prompt-side router that decides when REINS
+steers, is the judge-free object the paper reports numbers for. Finder: the
+upstream split, feature-mean and gate-fit code (per category, the 256 largest
+absolute mean-difference SAE coordinates over all 24 layers, threshold from a
+5-fold held-out scan under a 10% negative budget), run through the released
+Qwen3.5-2B-Base SAE bundle. Components are the five gates' coordinates
+(universe 5 × 24 × 16384); the claim buckets the pooled harmful and
+matched-safe open rates on the evaluation split; the score is their
+difference. 51 real runs (20 split seeds, 20 pair resamples, 2 renderings, 8
+variants), 41 null runs (labels permuted within each category at calibration).
+
+| check | value | 95% CI | state |
+|---|---|---|---|
+| structural stability (gate coordinates) | J 0.833 | [0.760, 0.888] | ⚠️ undecided |
+| claim stability | 0.980 | [0.922, 1.000] | ✅ |
+| score stability (harmful minus safe open rate) | CV 0.016 | [0.006, 0.027] | ✅ |
+| beats random | 2565x | [2338, 2734] | ✅ |
+| specificity (permuted labels) | 3.7x | [3.4, 4.0] | ✅ |
+
+- Reproduction: the released 2B gates replayed on the paper's evaluation
+  split (seed 12; 300 harmful and 300 matched-safe prompts) open on 0.993 of
+  the harmful and 0.053 of the matched-safe prompts (paper 0.987 / 0.047,
+  where the paper's negatives also include general prompts that are not
+  released). Per category the matched-safe rate is 0.03–0.10.
+- The refit reproduces the routing, not the coordinates: with matched-safe
+  negatives only it opens on 0.990 / 0.007 and shares 34–45% of the released
+  coordinates per category; thresholds land at −0.02 to −0.16 against the
+  released −0.06 to −0.16.
+- Routing is stable, the object is not. Every real run opens on at least
+  0.987 of harmful prompts and at most 0.107 of matched-safe prompts. Split
+  seed and pair resample keep the coordinate set at J 0.92 and 0.87; top-k
+  64 or 1024 shares only 0.19 / 0.21 of the released set, the last layer alone
+  0.15, and the two renderings 0.34 / 0.40 (hyperparams axis J 0.50,
+  templates 0.53). The pooled J 0.83 sits on the 0.8 bar; the axis-balanced
+  value is 0.71. The verdict trace does not settle before the full battery:
+  at 6 to 28 runs the modal grade is A in only 57 to 77% of subsets, the
+  structural check deciding it either way.
+- The false-positive budget is a property of the rendering. The released
+  gate on the same matched-safe prompts rendered without the answer wrapper
+  opens 0.64 of the time (harmful 1.00), under a paraphrased wrapper 0.15;
+  the refit on the plain rendering gives 0.107 and flips the claim to the
+  0.10–0.20 bucket. Top-k, budget, folds, layer window and cross-category
+  negatives move the matched-safe rate by at most 0.05.
+- Null: gates fitted to permuted labels open on 0.02–0.26 of harmful and
+  0.00–0.19 of matched-safe prompts, coordinates at J 0.22; specificity
+  3.7x.
+- Behavioural replay (a note, not an axis): the released controllers on the
+  first 10 evaluation pairs per category (50 pairs), upstream greedy decoding,
+  a pre-registered string-match refusal rule and a collapse rule. Harmful
+  prompts: refusal 0.02 (original) → 0.22 (REINS, collapse 0.08) → 0.20
+  (REINS-Gate; the gate opened on 0.98); the paper's Random-SAE control (16
+  random features zeroed) refuses 0.02 and collapses 0.00, indistinguishable from the original. Matched-safe prompts: REINS
+  refuses 0.16 (over-refusal), REINS-Gate 0.00 (gate opened on 0.02),
+  Random-SAE 0.00. The paper's judge (Table 7) reports SRR 1.7 →
+  43.9 and HRR 88.7 → 24.8; a string rule cannot score HRR and undercounts
+  refusals, so this is a judge disagreement, recorded with the texts under
+  `references/cards/raw/reins_gate_qwen3p5_2b_base/behavioural_replay.json`.
+- Deviations: no LLM judge; the paper's general-prompt negatives are not
+  released, so the refit and the replay use matched-safe prompts only; the
+  SAEs stay resident on the GPU (upstream reloads them from disk per use);
+  the seeds axis moves the split and the fold assignment because the upstream
+  fit is otherwise deterministic; the paraphrased rendering is ours; only the
+  2B preset (the 4B bundle does not fit the remaining disk); the R bank's 16
+  refusal and 16 neutral calibration continuations are not released, so the
+  released R features are used as shipped.
+
 ## In progress and queued
 
 | item | where | status |
@@ -714,6 +793,7 @@ per run on shared GPUs).
 | Dissociating sycophancy (arXiv:2607.07003), Llama-3.1-8B-Instruct half | GPU 7, then GPUs 6–7 for the rerun | done, card above (B, high confidence after the 40-run-per-axis rerun) |
 | Communication map census (arXiv:2608.22007) | GPU 6 / CPU | done, card above (B, low confidence) |
 | Diff Mining (arXiv:2608.26462), judge-free top-K token-set battery on gemma-3-1b-it × cake_bake | GPUs 0–2 | done, card above (A, high confidence after the 60-run-per-axis rerun) |
+| REINS-Gate (arXiv:2608.28233), Qwen3.5-2B-Base + released SAEs | GPUs 1, 2, 4 for the feature means, GPU 6 for the replay, CPU battery | done, card above (A, low confidence); 5,400 prompt renderings extracted once, then seconds per gate fit |
 | SWD fidelity (arXiv:2608.03913, GPT-2 small) | GPUs 3–5, 6 shards | done, card above (C, low confidence, 6 runs per axis); the one-off greater-than reproduction finished after 3.8 hours and is on the card |
 | HARC (arXiv:2607.00572), released Llama-3.1-8B / Qwen2.5-7B adapters | GPUs 1–2 | done, cards above (B ×2, low confidence); residuals cached once per model, 51 + 41 runs per model on CPU |
 | Steering vectors for CoT faithfulness (arXiv:2607.29062), Gemma-3-4B-it | GPUs 0 and 7 | done, card above (B, high confidence); 8 activation passes, then seconds per run from the cache; the behavioural check took 30 min |

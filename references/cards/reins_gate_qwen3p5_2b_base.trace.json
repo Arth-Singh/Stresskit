@@ -1,0 +1,153 @@
+{
+  "n_total": 51,
+  "full_grade": "A",
+  "full_confidence": "low",
+  "sizes": [
+    4,
+    6,
+    8,
+    10,
+    14,
+    20,
+    28,
+    51
+  ],
+  "per_size": {
+    "4": {
+      "n_subsamples": 30,
+      "grade_dist": {
+        "A": 0.7666666666666667,
+        "B": 0.23333333333333334
+      },
+      "modal_grade": "A",
+      "modal_grade_share": 0.7666666666666667,
+      "low_confidence_share": 0.23333333333333334,
+      "check_pass_frac": {
+        "beats_random": 1.0,
+        "claim_stability": 0.9,
+        "score_stability": 1.0,
+        "specificity": 1.0,
+        "structural_stability": 0.7666666666666667
+      }
+    },
+    "6": {
+      "n_subsamples": 30,
+      "grade_dist": {
+        "A": 0.7,
+        "B": 0.3
+      },
+      "modal_grade": "A",
+      "modal_grade_share": 0.7,
+      "low_confidence_share": 0.3,
+      "check_pass_frac": {
+        "beats_random": 1.0,
+        "claim_stability": 1.0,
+        "score_stability": 1.0,
+        "specificity": 1.0,
+        "structural_stability": 0.7
+      }
+    },
+    "8": {
+      "n_subsamples": 30,
+      "grade_dist": {
+        "A": 0.7666666666666667,
+        "B": 0.23333333333333334
+      },
+      "modal_grade": "A",
+      "modal_grade_share": 0.7666666666666667,
+      "low_confidence_share": 0.3333333333333333,
+      "check_pass_frac": {
+        "beats_random": 1.0,
+        "claim_stability": 1.0,
+        "score_stability": 1.0,
+        "specificity": 1.0,
+        "structural_stability": 0.7586206896551724
+      }
+    },
+    "10": {
+      "n_subsamples": 30,
+      "grade_dist": {
+        "A": 0.6666666666666666,
+        "B": 0.3333333333333333
+      },
+      "modal_grade": "A",
+      "modal_grade_share": 0.6666666666666666,
+      "low_confidence_share": 0.43333333333333335,
+      "check_pass_frac": {
+        "beats_random": 1.0,
+        "claim_stability": 1.0,
+        "score_stability": 1.0,
+        "specificity": 1.0,
+        "structural_stability": 0.6666666666666666
+      }
+    },
+    "14": {
+      "n_subsamples": 30,
+      "grade_dist": {
+        "A": 0.5666666666666667,
+        "B": 0.43333333333333335
+      },
+      "modal_grade": "A",
+      "modal_grade_share": 0.5666666666666667,
+      "low_confidence_share": 0.6,
+      "check_pass_frac": {
+        "beats_random": 1.0,
+        "claim_stability": 1.0,
+        "score_stability": 1.0,
+        "specificity": 1.0,
+        "structural_stability": 0.5357142857142857
+      }
+    },
+    "20": {
+      "n_subsamples": 30,
+      "grade_dist": {
+        "A": 0.7333333333333333,
+        "B": 0.26666666666666666
+      },
+      "modal_grade": "A",
+      "modal_grade_share": 0.7333333333333333,
+      "low_confidence_share": 0.5,
+      "check_pass_frac": {
+        "beats_random": 1.0,
+        "claim_stability": 1.0,
+        "score_stability": 1.0,
+        "specificity": 1.0,
+        "structural_stability": 0.7333333333333333
+      }
+    },
+    "28": {
+      "n_subsamples": 30,
+      "grade_dist": {
+        "A": 0.6333333333333333,
+        "B": 0.36666666666666664
+      },
+      "modal_grade": "A",
+      "modal_grade_share": 0.6333333333333333,
+      "low_confidence_share": 0.9,
+      "check_pass_frac": {
+        "beats_random": 1.0,
+        "claim_stability": 1.0,
+        "score_stability": 1.0,
+        "specificity": 1.0,
+        "structural_stability": 0.6333333333333333
+      }
+    },
+    "51": {
+      "n_subsamples": 1,
+      "grade_dist": {
+        "A": 1.0
+      },
+      "modal_grade": "A",
+      "modal_grade_share": 1.0,
+      "low_confidence_share": 1.0,
+      "check_pass_frac": {
+        "beats_random": 1.0,
+        "claim_stability": 1.0,
+        "score_stability": 1.0,
+        "specificity": 1.0,
+        "structural_stability": 1.0
+      }
+    }
+  },
+  "settled_n": 51
+}

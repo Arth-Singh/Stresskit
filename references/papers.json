@@ -2,6 +2,17 @@
   "_comment": "Paper registry for the leaderboard: one entry per audited paper, newest audit first. Card paths are relative to this directory and every graded card under references/ must appear in exactly one entry (stresskit scoreboard / site fail otherwise). Free-text fields are rendered verbatim in the scoreboard and on the site.",
   "papers": [
     {
+      "title": "REINS-Gate: sparse SAE-feature router for refusal-enhanced inhibitory steering",
+      "arxiv": "2608.28233",
+      "models": "Qwen3.5-2B-Base with the released REINS-SAE bundle (the 4B preset not run)",
+      "cards": [
+        "cards/reins_gate_qwen3p5_2b_base.json"
+      ],
+      "reproduced": "yes: the released 2B gates replayed on the paper's evaluation split open on 0.993 of harmful and 0.053 of matched-safe prompts (paper 0.987 / 0.047); the refit reproduces the routing (0.990 / 0.007) with 34-45% of the released coordinates per category, the paper's unreleased general-prompt negatives being the difference",
+      "result": "the routing is stable (harmful open >= 0.987 in every real run, matched-safe <= 0.11) but the coordinate set is not: split seed and pair resample keep J 0.92 / 0.87 while top-k, layer window and rendering halve it (J 0.50 / 0.53; pooled 0.83, axis-balanced 0.71); the 10% false-positive budget is a property of the calibration wrapper: the released gate opens on 0.64 of the same matched-safe prompts rendered without the answer template and 0.15 under a paraphrased one; a label-permuted gate opens on 0.02-0.26 / 0.00-0.19",
+      "audited": "2026-09-03"
+    },
+    {
       "title": "Sparse Weight Decomposition for efficient circuit extraction, GPT-2 single-matrix fidelity and circuit frontier",
       "arxiv": "2608.03913",
       "models": "GPT-2 small, layer-8 mlp.c_proj (the Qwen2.5 and Qwen3.5-27B surfaces not run)",

@@ -10,6 +10,7 @@ and the generated leaderboard is [`../SCOREBOARD.md`](../SCOREBOARD.md).
 Contents, newest first:
 
 - [HARC: coupling harmfulness and refusal directions, released adapters (arXiv:2607.00572)](#july-2026--harc-coupling-harmfulness-and-refusal-directions-with-the-released-adapters-arxiv260700572)
+- [REINS-Gate, sparse SAE-feature router for refusal steering (arXiv:2608.28233)](#august-2026--reins-gate-sparse-sae-feature-router-for-refusal-steering-arxiv260828233)
 - [Sparse Weight Decomposition, GPT-2 single-matrix fidelity and circuit frontier (arXiv:2608.03913)](#august-2026--sparse-weight-decomposition-gpt-2-single-matrix-fidelity-and-circuit-frontier-arxiv260803913)
 - [Steering vectors for CoT faithfulness, cross-cue vector convergence (arXiv:2607.29062)](#july-2026--steering-vectors-for-cot-faithfulness-cross-cue-vector-convergence-arxiv260729062)
 - [Diff Mining, judge-free token-set battery (arXiv:2608.26462)](#august-2026--diff-mining-judge-free-token-set-battery-arxiv260826462)
@@ -1754,3 +1755,93 @@ Artifacts: [`cards/swd_gpt2.md`](cards/swd_gpt2.md) ·
 [`cards/swd_gpt2.json`](cards/swd_gpt2.json) ·
 [per-run manifest](cards/swd_gpt2.runs.json) ·
 runner [`run_swd_card.py`](run_swd_card.py).
+
+## August 2026 — REINS-Gate, sparse SAE-feature router for refusal steering (arXiv:2608.28233)
+
+**Grade A — low confidence (structural CI straddles 0.8).** Claim, byte-exact
+from Appendix D.3: "The frozen Qwen3.5-2B-Base gate opened on 98.7% of harmful
+evaluation prompts and 4.7% of negative evaluation prompts. This preserves
+high harmful coverage and keeps negative openings rare." REINS steers with
+two SAE feature sets (prompt-specific Harm-Inhibit features zeroed, frozen
+Refusal-Enhance features added over the first eight generated tokens); the
+paper scores the result with a remote LLM judge that is not run here.
+REINS-Gate is the judge-free part: a per-category sparse cosine router over
+prompt-side SAE feature means, calibrated on the GUISE calibration split
+(harmful prompts as positives, matched-safe and general prompts as negatives,
+the 256 largest absolute mean-difference coordinates over every layer, a
+threshold chosen by scanning held-out calibration scores under a 10% negative
+budget). Finder: upstream `split_samples`, `feature_means` and
+`fit_prompt_gate` through the released Qwen3.5-2B-Base SAE bundle (BatchTopK,
+k = 128, 16384 features at each of the 24 layers). Components are the five
+category gates' coordinates (universe 5 × 24 × 16384), the claim buckets the
+pooled harmful and matched-safe open rates on the evaluation split, the score
+is their difference. 51 real runs (20 split seeds, 20 pair resamples, two
+renderings, eight variants), 41 null runs.
+
+| check | value | 95% CI | pass |
+|---|---|---|---|
+| structural stability (gate coordinates) | J = 0.833 | [0.760, 0.888] | ⚠️ undecided |
+| claim stability | π\* = 0.98 | [0.92, 1.00] | ✅ |
+| score stability (harmful minus safe open rate CV) | 0.016 | [0.006, 0.027] | ✅ |
+| beats random | 2565× | [2338, 2734] | ✅ |
+| specificity (permuted labels) | 3.7× | [3.4, 4.0] | ✅ |
+
+### The released router reproduces; the refit shares fewer than half its coordinates
+
+The released 2B gates replayed on the paper's evaluation split (split seed
+12, 300 harmful and 300 matched-safe prompts) open on 0.993 of the harmful
+and 0.053 of the matched-safe prompts, against the paper's 0.987 and 0.047
+(the paper's negatives also include general prompts, which are not released).
+Per category the matched-safe rate runs 0.03–0.10. Refitting the gates with
+matched-safe negatives only reproduces the routing (0.990 / 0.007) but shares
+34–45% of the released coordinates per category, with thresholds at −0.02 to
+−0.16 against the released −0.06 to −0.16: the unreleased general prompts
+shape which coordinates the top-256 keeps.
+
+### Routing is stable, the coordinate set is not
+
+Every one of the 51 real runs opens on at least 0.987 of the harmful prompts
+and at most 0.107 of the matched-safe prompts (claim stability 0.98). The
+coordinates are another matter: split seed and pair resample keep them at
+J 0.92 and 0.87, but top-k 64 or 1024 shares only 0.19 / 0.21 of the
+released set, the last layer alone 0.15, the two renderings 0.34 / 0.40
+(hyperparameter axis J 0.50, templates 0.53). The pooled J 0.83 sits on the
+0.8 bar with the CI straddling it; the axis-balanced value is 0.71, and the
+card carries the harness note on the divergence. The verdict trace does not
+settle before the full battery: at 6 to 28 runs the modal grade is A in only
+57 to 77% of subsets, with the structural check deciding it either way.
+
+### The false-positive budget belongs to the rendering
+
+The paper's budget is calibrated and evaluated on prompts wrapped in its
+answer template ("You are answering a test question. Write one direct answer
+in 5 complete sentences ..."). The released gate on the same matched-safe
+prompts given plain opens 0.64 of the time (harmful 1.00); under a
+paraphrased wrapper 0.15. Refitting on the plain rendering gives 0.107 and
+flips the claim to the 0.10–0.20 bucket. The other knobs (top-k, budget
+0.05 or 0.20, three folds, late layers, every category's safe prompts as
+negatives) move the matched-safe rate by at most 0.05.
+
+### The null and the behavioural replay
+
+Gates fitted to permuted labels open on 0.02–0.26 of harmful and 0.00–0.19
+of matched-safe prompts, with coordinates at J 0.22 (specificity 3.7×). The
+released controllers were replayed on the first ten evaluation pairs per
+category (50 pairs) with upstream greedy decoding and a pre-registered
+string-match refusal rule: on harmful prompts refusals go 0.02 (original) →
+0.22 (REINS, collapse 0.08) → 0.20 (REINS-Gate; the gate opened on 0.98), and
+the paper's Random-SAE control (16 random features zeroed) refuses 0.02 and collapses 0.00, indistinguishable from the original;
+on matched-safe prompts REINS over-refuses 0.16 and REINS-Gate 0.00 (gate
+opened on 0.02), Random-SAE 0.00. The paper's judge (Table 7)
+reports SRR 1.7 → 43.9 and HRR 88.7 → 24.8; a string rule undercounts
+refusals and cannot score HRR, so this is recorded as a judge disagreement
+with the texts kept. Deviations on the card: no LLM judge; matched-safe
+negatives only; SAEs resident on the GPU; the seeds axis moves the split and
+the folds; the paraphrase is ours; the 2B preset only (the 4B bundle does not
+fit the remaining disk); the R bank is used as shipped because its 16
+refusal and 16 neutral calibration continuations are not released.
+
+Artifacts: [`cards/reins_gate_qwen3p5_2b_base.md`](cards/reins_gate_qwen3p5_2b_base.md) ·
+[`cards/reins_gate_qwen3p5_2b_base.json`](cards/reins_gate_qwen3p5_2b_base.json) ·
+[per-run manifest](cards/reins_gate_qwen3p5_2b_base.runs.json) ·
+runner [`run_reins_gate_card.py`](run_reins_gate_card.py).
