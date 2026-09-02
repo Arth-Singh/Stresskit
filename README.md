@@ -88,8 +88,9 @@ designs, signed resource plans, evidence board; see
 three live panel executions all abstained, so it has produced no empirical
 result, and nothing in the leaderboard comes from it; the scoped record is
 [`docs/NEEL_VALIDATION.md`](docs/NEEL_VALIDATION.md) and the release gates are
-[`docs/RELEASE_GATES_V1.md`](docs/RELEASE_GATES_V1.md). No card is confirmatory
-evidence in the sense of the conservative profile below; all 49 are diagnostic.
+[`docs/RELEASE_GATES_V1.md`](docs/RELEASE_GATES_V1.md). The 49 graded cards are
+diagnostic; the four findings taken through the conservative profile below
+all fail it, so nothing in the repository is confirmatory evidence.
 Several targets were out of budget on shared GPUs and are listed with reasons
 at the end of [`RESULTS.md`](RESULTS.md).
 
