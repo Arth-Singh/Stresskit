@@ -109,6 +109,11 @@
   Diff Mining's pooled Jaccard (0.92) diverges from its axis-balanced value
   (0.81) because the two large axes sit at 0.97 while the hyperparameter axis
   is 0.43; the harness note and the README say so.
+- `references/make_summary_figs.py` draws three figures from the stored cards
+  and traces (no model is run): check outcomes over all graded cards, the
+  run count at which each verdict settles, and the sensitivity of the
+  structural and specificity counts to their bars, recomputed from each
+  card's recorded value and interval with the harness's own decision rule.
 - `stresskit verify` over a directory no longer aborts when one artifact cannot
   be parsed — an unsupported `schema_version` (a card written by a newer
   StressKit) is now reported as a failure for that file and the remaining cards

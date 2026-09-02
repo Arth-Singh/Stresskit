@@ -13,6 +13,12 @@ its bar; those grades are provisional and the run counts are being raised.
 Last updated 2026-09-02 (KST). Every card listed re-derives from its own
 recorded metrics via `stresskit verify`.
 
+Three summary figures over every graded card, regenerated from the stored
+artifacts by `references/make_summary_figs.py`, live in `references/figs/`:
+which checks the 43 cards pass, the run count at which each verdict settles,
+and how the pass/fail counts move when the structural and specificity bars
+are moved.
+
 ## Leaderboard
 
 | paper | model(s) | grade | conf. | checks | runs | reproduced the released number? | result in one line | date | card |
