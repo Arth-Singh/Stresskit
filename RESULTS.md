@@ -115,6 +115,20 @@ the details and the numbers are in the card notes and in
   given plain open it 64% of the time, and a paraphrased wrapper 15%. The
   budget the paper reports is a property of one prompt format.
 
+## What a paper-sized run count would have reported
+
+Every verdict trace regrades 30 random subsets of each card's runs at every
+size (`references/figs/verdict_settle_n.png`). At six runs, the number of
+seeds a paper typically reports, the modal grade of the subsets matches the
+full battery on 26 of 29 cards, but the grade a single six-run study would
+report is wrong at least a quarter of the time on 12 of the 29 (IOI on GPT-2
+small 53%, IOI large 53%, refusal on Qwen3.5-9B 53%, SWD 63%, Mechanistic
+Tomography 50%, CIF 47%, SAE inertness 43%, AMS 40%), and only 9 of 29
+verdicts have settled by then. Three cards would report a different modal
+grade at six runs than at full size: IOI small (B for A), refusal on
+Qwen3.5-9B (B for C) and SWD (B for C). The numbers come from each card's
+`.trace.json` (`per_size["6"]`).
+
 ## What decides whether a finding beats its null
 
 Across the cards with a specificity check, the outcome follows the design of
