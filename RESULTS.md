@@ -23,6 +23,7 @@ are moved.
 
 | paper | model(s) | grade | conf. | checks | runs | reproduced the released number? | result in one line | date | card |
 |---|---|---|---|---|---|---|---|---|---|
+| Sparse Weight Decomposition, GPT-2 single-matrix fidelity and circuit frontier (arXiv:2608.03913) | GPT-2 small, layer-8 mlp.c_proj | 🟠 C | low | 2/5, 2 undecided | 22 (+13 null) | KL and output cosine yes (0.001871 → 0.001884, 0.9814 → 0.9815); CE delta 0.000889 → 0.001423 on a different 16-block calibration draw, inside the released grid's own 0.0009–0.0027 spread; the greater-than headline is being reproduced separately | the released "one unit suffices" cells for IOI and docstring are a denominator artifact (mean-ablating the whole projection raises the IOI margin by 0.29, sufficiency swings −5.6 to +1.7 across k); SWD's unit and edge advantage on gendered-pronoun reproduces in 20 of 22 runs (32–64 units vs the Transcoder's 128) and survives random-token calibration; "matched to TC-12k within 0.001" flips in 10 of 22 runs | 2026-09-03 | [card](references/cards/swd_gpt2.md) |
 | Steering vectors for CoT faithfulness, cross-cue vector convergence (arXiv:2607.29062) | Gemma-3-4B-it | 🟡 B | high | 4/5 | 92 (+81 null) | yes, exactly (the 12 native-layer and 6 cross-method cosines from the shipped vectors, the 4 shipped synthetic vectors at cosine 1.000 with the rebuilt ones, L17 / L11 cross-cue means 0.880 / 0.959 vs 0.88 / 0.96) | the convergence survives any task subsample (20 tasks per cue: 0.88) but is a property of the appended completion sentences: two paraphrase sets give 0.49 / 0.54 at L17 (peaks 0.97 / 0.99 at L10), prompts with no cue still converge at 0.82 over 24 layers, an identical cue-agnostic completion converges at all 34 layers; beats-random fails because the convergent band is 22 of 34 layers; steering at α 5 leaves rule-detected acknowledgment at 0.70 → 0.69 | 2026-09-02 | [card](references/cards/faithfulness_steering_gemma3_4b.md) |
 | HARC: coupling harmfulness and refusal directions, released adapters (arXiv:2607.00572) | Llama-3.1-8B-Instruct + LoRA; Qwen2.5-7B-Instruct + LoRA | 🟡 B ×2 | low | 3/5, 1 undecided (Llama); 3/5, 2 undecided (Qwen) | 51 (+41 null) each | Figure 1's Llama profile yes (peak L12, cos 0.42 over L8–16 vs 0.12 over L20–28) and upstream's layer selection lands in the paper's trained bands; Table 1's over-refusal direction no (string-match hard refusals on the 250 XSTest safe prompts: Llama adapter 29 vs base 17, paper 0.035 vs 0.109; Qwen 11 vs 10, paper 0.026 vs 0.091) | the coupling gain is real (band +0.55, 9.6x random) but a plateau: 41 of 64 cells gain ≥ 0.10, the rise starts eight layers upstream of the trained band, and permuted-label directions gain +0.28 at the same layers (specificity 1.15x, undecided); on Qwen the gain peaks at L18, upstream of the L21–24 band, and vanishes in band under the Circuit Breakers/UltraChat pools | 2026-09-02 | [llama](references/cards/harc_llama3p1_8b.md) · [qwen](references/cards/harc_qwen2p5_7b.md) |
 | FolkMotif: cultural awareness represented but not decoded (arXiv:2608.02486) | Llama-3.1-8B-Instruct | 🟢 A | high | 5/5 | 52 (+41 null) | yes, exactly (probe 0.881 @ L8, n-gram 0.604, buckets 45/193/5/27; the paper's 0.248 is the rescored run and its 32/206/6/26 row is the native-language run, both exact) | the qualitative claim never flips; the cell counts move 5–83 Preserved with the aggregation rule and template, and the "peak layer 8" moves over layers 6–14 with the CV split | 2026-09-02 | [card](references/cards/folkmotif_llama3p1_8b.md) |
@@ -624,6 +625,80 @@ subsamples, 40 task resamples, 2 paraphrase sets, 9 variants), 81 null runs.
   not run; cross-dataset common-layer convergence not audited (the paper
   reports no such number).
 
+### Sparse Weight Decomposition (arXiv:2608.03913) — C, low confidence
+
+Claim, byte-exact: "Across single-matrix replacements, SWD matches the
+held-out fidelity achieved by Transcoder and other strong baselines while
+using less than 1% of the data that those baselines use to train their
+replacements. For matched replacement fidelity, SWD reaches the same circuit
+sufficiency and necessity targets with fewer active read/write edges and
+selected units across tasks on GPT-2, Qwen2.5, and Qwen3.5-27B." Only the
+GPT-2 small layer-8 `mlp.c_proj` surface (Section 3.3, Figures 2 and 3) is
+audited: 16 FineWeb-Edu blocks of 1,024 tokens give the input Gram, the
+vendored solver writes the 50%-sparse two-factor replacement, held-out CE
+delta is measured on 2,048 blocks, then the upstream circuit stage runs IOI,
+docstring and gendered-pronoun against the released Transcoder-12k frontier.
+Components are the frontier cells (family × metric × target × cost unit,
+universe 36) where SWD reaches the target at lower cost than the released
+Transcoder; the claim buckets the CE delta, whether it is matched to TC-12k
+within the paper's 0.001 band, and on how many contested cells SWD wins; the
+score is the CE delta. 22 real runs (6 calibration draws, 6 block resamples,
+Wikipedia and plain FineWeb calibration pools, 7 variants), 13 null runs.
+The harness marks the verdict underpowered at 6 runs per axis (8–28 minutes
+per run on shared GPUs).
+
+| check | value | 95% CI | state |
+|---|---|---|---|
+| structural stability (won cells vs released TC-12k) | J 0.963 | [0.892, 1.000] | ✅ |
+| claim stability | 0.545 | [0.455, 0.773] | ❌ |
+| score stability (CE delta) | CV 0.630 | [0.219, 0.807] | ⚠️ undecided |
+| beats random | 25.3x | [23.4, 26.3] | ✅ |
+| specificity (random-token calibration) | 1.15x | [0.92, 1.60] | ⚠️ undecided |
+
+- Reproduction: KL 0.001871 → 0.001884 and output cosine 0.9814 → 0.9815
+  reproduce; CE delta 0.000889 → 0.001423 (1.6x) on a different draw of 16
+  calibration blocks (upstream drew from FineWeb-Edu files 000–012, here
+  file 000), inside the released grid's own spread of 0.0009–0.0027 over
+  1k–32k tokens; dense CE 3.2448 → 3.2320 because the held-out block set
+  differs. The greater-than reproduction (the paper's 48-vs-384-unit
+  headline) is a separate run still in progress and will be added to the
+  card as a note.
+- The released frontier says IOI and docstring reach sufficiency ≥ 0.9 with
+  one unit for every method. That is a denominator artifact: in the base run
+  mean-ablating the whole projection raises the IOI margin (full 3.170,
+  all-units-ablated 3.464), docstring's margin is negative with a gap of
+  0.013, and sufficiency = (kept − null) / (full − null) swings from −5.6 to
+  +1.7 across k; the upstream code guards only |denominator| > 1e-12.
+  Layer-8 c_proj barely carries those two tasks, so the one-unit cells (the
+  Transcoder's too) are noise; the admissible IOI "circuit" of two units
+  passes because a 0.008-nat necessity beats a 0.006-nat random p95 on a
+  3.1-nat margin.
+- Gendered-pronoun is well behaved (gap 0.19) and SWD's advantage there
+  reproduces in every run: sufficiency at 0.95 with 32–64 units and
+  48k–101k edges against the released Transcoder's 128 units and 491,520
+  edges (released SWD: 12 units, 17,794 edges). That two-cell won set is the
+  whole structural finding in 20 of 22 runs; the released SWD beats the
+  Transcoder on 9 of 11 contested cells, the base run on 2 of 18 (Jaccard
+  0.22 to the released won set).
+- The "matched within 0.001" bucket is a coin flip: CE delta 0.00109–0.00222
+  over six calibration draws and 0.0016–0.0022 over resamples, around the
+  Transcoder's 0.000979, so the claim flips in 10 of 22 runs, which is the
+  claim-stability failure. Wikipedia and plain FineWeb calibration give
+  0.00265 and 0.00261; one block 0.00308, 64 blocks 0.00189, 8 outer
+  iterations 0.00197, no finalisation 0.00331, in-sample evaluation 0.00132;
+  sparsity 0.75 gives 0.00818 (KL 0.0091, cosine 0.912) but wins 7 of 20
+  cells because sparser factors mean fewer edges.
+- Null: calibration blocks of uniformly random token ids give CE delta
+  0.0008–0.0037, KL 0.0036 (2x) and cosine 0.965, and the same
+  gendered-pronoun cells are won, so the circuit advantage does not need
+  calibration data (consistent with the paper's zero-data variant); real
+  data buys about 2x in KL. Specificity 1.15x, undecided.
+- Deviations: greater-than kept out of the battery (9,160 validation prompts
+  × 50 controls × 20 prefixes through the upstream per-prompt loop, over an
+  hour per run); circuit batch 64 and evaluation batch 2 instead of 16 and 4
+  (runtime only); the Transcoder comparator is the released frontier, not
+  retrained; 6 runs per axis.
+
 ## In progress and queued
 
 | item | where | status |
@@ -635,7 +710,7 @@ subsamples, 40 task resamples, 2 paraphrase sets, 9 variants), 81 null runs.
 | Dissociating sycophancy (arXiv:2607.07003), Llama-3.1-8B-Instruct half | GPU 7, then GPUs 6–7 for the rerun | done, card above (B, high confidence after the 40-run-per-axis rerun) |
 | Communication map census (arXiv:2608.22007) | GPU 6 / CPU | done, card above (B, low confidence) |
 | Diff Mining (arXiv:2608.26462), judge-free top-K token-set battery on gemma-3-1b-it × cake_bake | GPUs 0–2 | done, card above (A, high confidence after the 60-run-per-axis rerun) |
-| SWD fidelity (arXiv:2608.03913, GPT-2 small) | GPUs 3–5, 6 shards | running: 6 runs per axis over IOI, docstring and gendered-pronoun; the greater-than family runs once on GPU 5 as a reproduction check |
+| SWD fidelity (arXiv:2608.03913, GPT-2 small) | GPUs 3–5, 6 shards | done, card above (C, low confidence, 6 runs per axis); the one-off greater-than reproduction is still running on GPU 5 and will be added to the card as a note |
 | HARC (arXiv:2607.00572), released Llama-3.1-8B / Qwen2.5-7B adapters | GPUs 1–2 | done, cards above (B ×2, low confidence); residuals cached once per model, 51 + 41 runs per model on CPU |
 | Steering vectors for CoT faithfulness (arXiv:2607.29062), Gemma-3-4B-it | GPUs 0 and 7 | done, card above (B, high confidence); 8 activation passes, then seconds per run from the cache; the behavioural check took 30 min |
 

@@ -10,6 +10,7 @@ and the generated leaderboard is [`../SCOREBOARD.md`](../SCOREBOARD.md).
 Contents, newest first:
 
 - [HARC: coupling harmfulness and refusal directions, released adapters (arXiv:2607.00572)](#july-2026--harc-coupling-harmfulness-and-refusal-directions-with-the-released-adapters-arxiv260700572)
+- [Sparse Weight Decomposition, GPT-2 single-matrix fidelity and circuit frontier (arXiv:2608.03913)](#august-2026--sparse-weight-decomposition-gpt-2-single-matrix-fidelity-and-circuit-frontier-arxiv260803913)
 - [Steering vectors for CoT faithfulness, cross-cue vector convergence (arXiv:2607.29062)](#july-2026--steering-vectors-for-cot-faithfulness-cross-cue-vector-convergence-arxiv260729062)
 - [Diff Mining, judge-free token-set battery (arXiv:2608.26462)](#august-2026--diff-mining-judge-free-token-set-battery-arxiv260826462)
 - [Dissociating the internal representations of sycophancy (arXiv:2607.07003)](#july-2026--dissociating-the-internal-representations-of-sycophancy-arxiv260707003)
@@ -1669,3 +1670,83 @@ Artifacts: [`cards/faithfulness_steering_gemma3_4b.md`](cards/faithfulness_steer
 [per-run manifest](cards/faithfulness_steering_gemma3_4b.runs.json) ·
 [behavioural check](cards/raw/faithfulness_steering_gemma3_4b/behavioural_check_gpqa_stanford.json) ·
 runner [`run_faithfulness_steering_card.py`](run_faithfulness_steering_card.py).
+
+## August 2026 — Sparse Weight Decomposition, GPT-2 single-matrix fidelity and circuit frontier (arXiv:2608.03913)
+
+**Grade C — low confidence (score and specificity CIs straddle their bars;
+the harness marks the verdict underpowered at 6 runs per axis).** Claim, byte-exact: "Across single-matrix replacements, SWD matches the
+held-out fidelity achieved by Transcoder and other strong baselines while
+using less than 1% of the data that those baselines use to train their
+replacements. For matched replacement fidelity, SWD reaches the same circuit
+sufficiency and necessity targets with fewer active read/write edges and
+selected units across tasks on GPT-2, Qwen2.5, and Qwen3.5-27B." Only the
+GPT-2 small layer-8 `mlp.c_proj` surface (Section 3.3, Figures 2 and 3) is
+audited: 16 FineWeb-Edu blocks of 1,024 tokens give the input Gram, the
+vendored solver writes the 50%-sparse two-factor replacement, held-out CE
+delta is measured on 2,048 blocks, then the upstream circuit stage runs IOI,
+docstring and gendered-pronoun against the released Transcoder-12k frontier.
+Components are the frontier cells (family × metric × target × cost unit,
+universe 36) where SWD reaches the target at lower cost than the released
+Transcoder; the claim buckets the CE delta, whether it is matched to TC-12k
+within the paper's 0.001 band, and on how many contested cells SWD wins; the
+score is the CE delta. 22 real runs (6 calibration draws, 6 block resamples,
+Wikipedia and plain FineWeb calibration pools, 7 variants), 13 null runs.
+The harness marks the verdict underpowered at 6 runs per axis (8–28 minutes
+per run on shared GPUs).
+
+| check | value | 95% CI | state |
+|---|---|---|---|
+| structural stability (won cells vs released TC-12k) | J 0.963 | [0.892, 1.000] | ✅ |
+| claim stability | 0.545 | [0.455, 0.773] | ❌ |
+| score stability (CE delta) | CV 0.630 | [0.219, 0.807] | ⚠️ undecided |
+| beats random | 25.3x | [23.4, 26.3] | ✅ |
+| specificity (random-token calibration) | 1.15x | [0.92, 1.60] | ⚠️ undecided |
+
+- Reproduction: KL 0.001871 → 0.001884 and output cosine 0.9814 → 0.9815
+  reproduce; CE delta 0.000889 → 0.001423 (1.6x) on a different draw of 16
+  calibration blocks (upstream drew from FineWeb-Edu files 000–012, here
+  file 000), inside the released grid's own spread of 0.0009–0.0027 over
+  1k–32k tokens; dense CE 3.2448 → 3.2320 because the held-out block set
+  differs. The greater-than reproduction (the paper's 48-vs-384-unit
+  headline) is a separate run still in progress and will be added to the
+  card as a note.
+- The released frontier says IOI and docstring reach sufficiency ≥ 0.9 with
+  one unit for every method. That is a denominator artifact: in the base run
+  mean-ablating the whole projection raises the IOI margin (full 3.170,
+  all-units-ablated 3.464), docstring's margin is negative with a gap of
+  0.013, and sufficiency = (kept − null) / (full − null) swings from −5.6 to
+  +1.7 across k; the upstream code guards only |denominator| > 1e-12.
+  Layer-8 c_proj barely carries those two tasks, so the one-unit cells (the
+  Transcoder's too) are noise; the admissible IOI "circuit" of two units
+  passes because a 0.008-nat necessity beats a 0.006-nat random p95 on a
+  3.1-nat margin.
+- Gendered-pronoun is well behaved (gap 0.19) and SWD's advantage there
+  reproduces in every run: sufficiency at 0.95 with 32–64 units and
+  48k–101k edges against the released Transcoder's 128 units and 491,520
+  edges (released SWD: 12 units, 17,794 edges). That two-cell won set is the
+  whole structural finding in 20 of 22 runs; the released SWD beats the
+  Transcoder on 9 of 11 contested cells, the base run on 2 of 18 (Jaccard
+  0.22 to the released won set).
+- The "matched within 0.001" bucket is a coin flip: CE delta 0.00109–0.00222
+  over six calibration draws and 0.0016–0.0022 over resamples, around the
+  Transcoder's 0.000979, so the claim flips in 10 of 22 runs, which is the
+  claim-stability failure. Wikipedia and plain FineWeb calibration give
+  0.00265 and 0.00261; one block 0.00308, 64 blocks 0.00189, 8 outer
+  iterations 0.00197, no finalisation 0.00331, in-sample evaluation 0.00132;
+  sparsity 0.75 gives 0.00818 (KL 0.0091, cosine 0.912) but wins 7 of 20
+  cells because sparser factors mean fewer edges.
+- Null: calibration blocks of uniformly random token ids give CE delta
+  0.0008–0.0037, KL 0.0036 (2x) and cosine 0.965, and the same
+  gendered-pronoun cells are won, so the circuit advantage does not need
+  calibration data (consistent with the paper's zero-data variant); real
+  data buys about 2x in KL. Specificity 1.15x, undecided.
+- Deviations: greater-than kept out of the battery (9,160 validation prompts
+  × 50 controls × 20 prefixes through the upstream per-prompt loop, over an
+  hour per run); circuit batch 64 and evaluation batch 2 instead of 16 and 4
+  (runtime only); the Transcoder comparator is the released frontier, not
+  retrained; 6 runs per axis.
+
+Artifacts: [`cards/swd_gpt2.md`](cards/swd_gpt2.md) ·
+[`cards/swd_gpt2.json`](cards/swd_gpt2.json) ·
+[per-run manifest](cards/swd_gpt2.runs.json) ·
+runner [`run_swd_card.py`](run_swd_card.py).

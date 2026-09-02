@@ -1,0 +1,646 @@
+{
+  "schema_version": "0.4",
+  "stresskit_version": "1.0.0.dev0",
+  "created_at": "2026-09-02T15:30:24+00:00",
+  "claim": {
+    "statement": "Across single-matrix replacements, SWD matches the held-out fidelity achieved by Transcoder and other strong baselines while using less than 1% of the data that those baselines use to train their replacements. For matched replacement fidelity, SWD reaches the same circuit sufficiency and necessity targets with fewer active read/write edges and selected units across tasks on GPT-2, Qwen2.5, and Qwen3.5-27B",
+    "base_claim_label": "CE delta <=0.002, matched to TC-12k; fewer than TC-12k on some contested cells",
+    "model": "gpt2",
+    "task": "GPT-2 small layer-8 mlp.c_proj replaced by a 50%-sparse two-factor decomposition from 16,384 FineWeb-Edu calibration tokens; held-out CE delta on 2,048 blocks and sufficiency/necessity circuit frontiers on IOI, docstring and gendered-pronoun against the released Transcoder-12k frontier (greater-than reproduced once, outside the battery)",
+    "method": "upstream factorize/evaluate/circuit stages (vendored Double Sparse Factorization, task-margin attribution ranking, validation-selected prefix, mean ablation) at the pinned commit",
+    "base_size": 2,
+    "universe_size": 36
+  },
+  "battery": {
+    "axes": [
+      "seeds",
+      "bootstrap",
+      "templates",
+      "hyperparams"
+    ],
+    "n_runs_total": 22,
+    "seed": 20260606,
+    "base_config": {
+      "sparsity": 0.5,
+      "blocks": 16,
+      "outer_iterations": 40,
+      "final_iterations": 20,
+      "eval_set": "held-out",
+      "random_seeds": 50,
+      "circuit_batch_size": 64
+    },
+    "claim_equiv_used": false,
+    "components_embedded": true
+  },
+  "metrics": {
+    "pooled": {
+      "n_runs": 22,
+      "n_structured_runs": 22,
+      "n_empty_findings": 0,
+      "empty_finding_rate": 0.0,
+      "mean_pairwise_jaccard": 0.962962962962963,
+      "min_pairwise_jaccard": 0.2857142857142857,
+      "flip_rate": 0.5584415584415585,
+      "modal_share": 0.5454545454545454,
+      "n_claim_classes": 3,
+      "claim_counts": {
+        "CE delta <=0.002, matched to TC-12k; fewer than TC-12k on some contested cells": 12,
+        "CE delta 0.002-0.01, not matched to TC-12k; fewer than TC-12k on some contested cells": 9,
+        "CE delta <=0.002, not matched to TC-12k; fewer than TC-12k on some contested cells": 1
+      },
+      "score_mean": 0.0022370027752122864,
+      "score_std": 0.001408447534596768,
+      "score_cv": 0.6296136733505436,
+      "median_size": 2.0,
+      "variance_shares": {
+        "bootstrap": 0.014085629749915783,
+        "hyperparams": 0.901857186344056,
+        "seeds": 0.020253131709972526,
+        "templates": 0.06380405219605571
+      },
+      "variance_absolute": {
+        "bootstrap": 7.171720563261122e-08,
+        "hyperparams": 4.591820062902871e-06,
+        "seeds": 1.0311913896197243e-07,
+        "templates": 3.248593362725402e-07
+      },
+      "mean_pairwise_jaccard_all_sizes": 0.7790558647701505,
+      "n_size_mismatched_excluded": 4,
+      "mean_pairwise_jaccard_ci95": [
+        0.8920863309352519,
+        1.0
+      ],
+      "flip_rate_ci95": [
+        0.4009009009009009,
+        0.6621621621621622
+      ],
+      "modal_share_ci95": [
+        0.45454545454545453,
+        0.7727272727272727
+      ],
+      "score_cv_ci95": [
+        0.21938559407250294,
+        0.8066991269458686
+      ],
+      "expected_random_jaccard": 0.03804466230936819,
+      "expected_random_jaccard_analytic": 0.02857142857142857,
+      "jaccard_vs_random": 25.311381531853975,
+      "mean_pairwise_jaccard_axis_balanced": 0.8110260770975056,
+      "jaccard_vs_random_ci95": [
+        23.448396615563674,
+        26.28489620615605
+      ],
+      "specificity_ci95": [
+        0.924349881796691,
+        1.600621600621601
+      ],
+      "confidence": "low",
+      "borderline_checks": [
+        "score_stability",
+        "specificity"
+      ]
+    },
+    "per_axis": {
+      "bootstrap": {
+        "n_runs": 7,
+        "n_structured_runs": 7,
+        "n_empty_findings": 0,
+        "empty_finding_rate": 0.0,
+        "mean_pairwise_jaccard": 0.8285714285714285,
+        "min_pairwise_jaccard": 0.4,
+        "flip_rate": 0.7142857142857143,
+        "modal_share": 0.42857142857142855,
+        "n_claim_classes": 3,
+        "claim_counts": {
+          "CE delta 0.002-0.01, not matched to TC-12k; fewer than TC-12k on some contested cells": 3,
+          "CE delta <=0.002, matched to TC-12k; fewer than TC-12k on some contested cells": 3,
+          "CE delta <=0.002, not matched to TC-12k; fewer than TC-12k on some contested cells": 1
+        },
+        "score_mean": 0.0018802387656789194,
+        "score_std": 0.0002678006826589716,
+        "score_cv": 0.14242908270337346,
+        "median_size": 2
+      },
+      "hyperparams": {
+        "n_runs": 8,
+        "n_structured_runs": 8,
+        "n_empty_findings": 0,
+        "empty_finding_rate": 0.0,
+        "mean_pairwise_jaccard": 0.6377551020408163,
+        "min_pairwise_jaccard": 0.2857142857142857,
+        "flip_rate": 0.5357142857142857,
+        "modal_share": 0.625,
+        "n_claim_classes": 2,
+        "claim_counts": {
+          "CE delta <=0.002, matched to TC-12k; fewer than TC-12k on some contested cells": 5,
+          "CE delta 0.002-0.01, not matched to TC-12k; fewer than TC-12k on some contested cells": 3
+        },
+        "score_mean": 0.002824162865897095,
+        "score_std": 0.0021428532527690437,
+        "score_cv": 0.7587569678239383,
+        "median_size": 2.0
+      },
+      "seeds": {
+        "n_runs": 7,
+        "n_structured_runs": 7,
+        "n_empty_findings": 0,
+        "empty_finding_rate": 0.0,
+        "mean_pairwise_jaccard": 1.0,
+        "min_pairwise_jaccard": 1.0,
+        "flip_rate": 0.2857142857142857,
+        "modal_share": 0.8571428571428571,
+        "n_claim_classes": 2,
+        "claim_counts": {
+          "CE delta <=0.002, matched to TC-12k; fewer than TC-12k on some contested cells": 6,
+          "CE delta 0.002-0.01, not matched to TC-12k; fewer than TC-12k on some contested cells": 1
+        },
+        "score_mean": 0.001577382047089047,
+        "score_std": 0.0003211216887131301,
+        "score_cv": 0.20357889156006223,
+        "median_size": 2
+      },
+      "templates": {
+        "n_runs": 3,
+        "n_structured_runs": 3,
+        "n_empty_findings": 0,
+        "empty_finding_rate": 0.0,
+        "mean_pairwise_jaccard": 0.7777777777777777,
+        "min_pairwise_jaccard": 0.6666666666666666,
+        "flip_rate": 0.6666666666666667,
+        "modal_share": 0.6666666666666666,
+        "n_claim_classes": 2,
+        "claim_counts": {
+          "CE delta 0.002-0.01, not matched to TC-12k; fewer than TC-12k on some contested cells": 2,
+          "CE delta <=0.002, matched to TC-12k; fewer than TC-12k on some contested cells": 1
+        },
+        "score_mean": 0.0022291824071096755,
+        "score_std": 0.0005699643289474703,
+        "score_cv": 0.2556831271993024,
+        "median_size": 2
+      }
+    },
+    "null_control": {
+      "n_runs": 13,
+      "mean_pairwise_jaccard": 0.8400000000000001,
+      "flip_rate": 0.46153846153846156,
+      "modal_share": 0.6923076923076923,
+      "score_mean": 0.0022615379781256886,
+      "score_cv": 0.334619867916752,
+      "median_size": 2
+    }
+  },
+  "verdict": {
+    "grade": "C",
+    "profile": "diagnostic",
+    "confirmatory_state": "not_applicable",
+    "required_checks": [],
+    "checks": {
+      "structural_stability": {
+        "value": 0.962962962962963,
+        "threshold": 0.8,
+        "passed": true,
+        "op": ">=",
+        "ci": [
+          0.8920863309352519,
+          1.0
+        ],
+        "robust": true,
+        "state": "pass",
+        "description": "mean pairwise Jaccard across all perturbed runs"
+      },
+      "claim_stability": {
+        "value": 0.5454545454545454,
+        "threshold": 0.8,
+        "passed": false,
+        "op": ">=",
+        "ci": [
+          0.45454545454545453,
+          0.7727272727272727
+        ],
+        "robust": true,
+        "state": "fail",
+        "description": "modal claim share \u03c0* (filability at \u03b1=0.2)"
+      },
+      "score_stability": {
+        "value": 0.6296136733505436,
+        "threshold": 0.25,
+        "passed": false,
+        "op": "<=",
+        "ci": [
+          0.21938559407250294,
+          0.8066991269458686
+        ],
+        "robust": false,
+        "state": "inconclusive",
+        "description": "coefficient of variation of the quality score"
+      },
+      "beats_random": {
+        "value": 25.311381531853975,
+        "threshold": 3.0,
+        "passed": true,
+        "op": ">=",
+        "ci": [
+          23.448396615563674,
+          26.28489620615605
+        ],
+        "robust": true,
+        "state": "pass",
+        "description": "structural overlap vs size-matched random null (\u00d7)"
+      },
+      "specificity": {
+        "value": 1.146384479717813,
+        "threshold": 1.5,
+        "passed": false,
+        "op": ">=",
+        "ci": [
+          0.924349881796691,
+          1.600621600621601
+        ],
+        "robust": false,
+        "state": "inconclusive",
+        "description": "structural stability on real vs null-control data (\u00d7)"
+      }
+    },
+    "thresholds": {
+      "jaccard": 0.8,
+      "modal_share": 0.8,
+      "score_cv": 0.25,
+      "random_margin": 3.0
+    }
+  },
+  "provenance": {
+    "python": "3.12.3",
+    "platform": "Linux-6.11.0-1016-nvidia-x86_64-with-glibc2.39",
+    "wall_seconds": 0.107
+  },
+  "notes": [
+    "structural stability graded on 18 size-comparable runs; 4 run(s) with >2x size difference excluded (pooled-over-all value kept as mean_pairwise_jaccard_all_sizes)",
+    "pooled Jaccard (0.963) and axis-balanced Jaccard (0.811) diverge by more than 0.1 \u2014 per-axis run counts are shaping the pooled number; read the per-axis breakdown before citing it",
+    "underpowered verdict: the 95% CI straddles the bar for score_stability (fail), specificity (fail) at n_runs=6 \u2014 these verdict components are not decided by the data. Treat the grade as provisional and raise n_runs (or widen the battery) before reporting it.",
+    "upstream: veri-safe/SWD@4c44b72 (Apache-2.0); the factorize, evaluate and circuit stages, the vendored solver and the released tables imported unmodified; file hashes pipeline.py f78085ba2341, factorization.py ead6974690e7, evaluation.py e2dd44a1dd83, circuits.py 7a645bf032b3, modules.py d326daecbd53, data.py a560bd5b5eca, doublesparse.py 84bc725239fc, gpt2_single_projection.yaml cc691f9e2260, replacement_quality.csv c815e43f89eb, reconstruction_quality.csv 865ac48e584c, circuit_frontiers.csv ef4a593e5832",
+    "reproduction (released SWD s=0.5 at 16384 calibration tokens -> base run): CE delta 0.000889 -> 0.001423; KL 0.001871 -> 0.001884; output cosine 0.9814 -> 0.9815; dense CE 3.244780 -> 3.232037 (different evaluation blocks). The calibration blocks differ: upstream drew them from FineWeb-Edu sample-10BT files 000-012 under a seeded streaming shuffle, this card from file 000 alone (pool of 4,096 blocks, seed 0), so the base run is the same protocol on a different 16-block sample, not the released checkpoint",
+    "comparator: released Transcoder-12k checkpoint at 2,048,000 optimizer-replay tokens, CE delta 0.000979 (the paper's CE-matched partner of SWD s=0.5 at 16,384 tokens, 0.8% of its data); its frontier is read from paper_data/exp1_gpt2_single/circuit_frontiers.csv and is not retrained. On the three battery families the released SWD run beats it on 9/11 contested cells; the base run on 2/18, Jaccard to the released won set 0.22",
+    "base run ioi (k_min 2): sufficiency@0.8: units 766 (released SWD 1, TC 1), edges 1179646 (released SWD 986, TC 3840); sufficiency@0.9: units 766 (released SWD 1, TC 1), edges 1179646 (released SWD 986, TC 3840); sufficiency@0.95: units 766 (released SWD 1, TC 1), edges 1179646 (released SWD 986, TC 3840); necessity_drop@0.8: units none (released SWD none, TC none), edges none (released SWD none, TC none); necessity_drop@0.9: units none (released SWD none, TC none), edges none (released SWD none, TC none); necessity_drop@0.95: units none (released SWD none, TC none), edges none (released SWD none, TC none)",
+    "base run docstring (k_min 4): sufficiency@0.8: units 24 (released SWD 1, TC 1), edges 36391 (released SWD 986, TC 3840); sufficiency@0.9: units 24 (released SWD 1, TC 1), edges 36391 (released SWD 986, TC 3840); sufficiency@0.95: units 24 (released SWD 4, TC 1), edges 36391 (released SWD 7078, TC 3840); necessity_drop@0.8: units none (released SWD none, TC none), edges none (released SWD none, TC none); necessity_drop@0.9: units none (released SWD none, TC none), edges none (released SWD none, TC none); necessity_drop@0.95: units none (released SWD none, TC none), edges none (released SWD none, TC none)",
+    "base run gendered_pronoun (k_min 2): sufficiency@0.8: units 32 (released SWD 1, TC 1), edges 48050 (released SWD 1582, TC 3840); sufficiency@0.9: units 32 (released SWD 1, TC 1), edges 48050 (released SWD 1582, TC 3840); sufficiency@0.95: units 32 (released SWD 12, TC 128), edges 48050 (released SWD 17794, TC 491520); necessity_drop@0.8: units none (released SWD none, TC none), edges none (released SWD none, TC none); necessity_drop@0.9: units none (released SWD none, TC none), edges none (released SWD none, TC none); necessity_drop@0.95: units none (released SWD none, TC none), edges none (released SWD none, TC none)",
+    "greater-than reproduction not available: --reproduce-greater-than did not finish before assembly",
+    "template=wikipedia: CE delta 0.00265, KL 0.00209, cosine 0.9796, token exposure 16,384; won 3/18 contested cells; gendered-pronoun sufficiency@0.95 units 32 edges 48698; k_min {'ioi': 2, 'docstring': 2, 'gendered_pronoun': 12}",
+    "template=fineweb: CE delta 0.00261, KL 0.00199, cosine 0.9803, token exposure 16,384; won 2/18 contested cells; gendered-pronoun sufficiency@0.95 units 48 edges 74752; k_min {'ioi': 8, 'docstring': 1, 'gendered_pronoun': 2}",
+    "sparsity=0.75: CE delta 0.00818, KL 0.00909, cosine 0.9118, token exposure 16,384; won 7/20 contested cells; gendered-pronoun sufficiency@0.95 units 32 edges 25169; k_min {'ioi': 8, 'docstring': 1, 'gendered_pronoun': 4}",
+    "blocks=1: CE delta 0.00308, KL 0.00298, cosine 0.9716, token exposure 1,024; won 5/15 contested cells; gendered-pronoun sufficiency@0.95 units 64 edges 98165; k_min {'ioi': 8, 'docstring': 1, 'gendered_pronoun': 1}",
+    "blocks=64: CE delta 0.00189, KL 0.00183, cosine 0.9821, token exposure 65,536; won 2/18 contested cells; gendered-pronoun sufficiency@0.95 units 64 edges 98323; k_min {'ioi': 4, 'docstring': 2, 'gendered_pronoun': 8}",
+    "outer_iterations=8: CE delta 0.00197, KL 0.00262, cosine 0.9744, token exposure 16,384; won 5/15 contested cells; gendered-pronoun sufficiency@0.95 units 48 edges 74149; k_min {'ioi': 2, 'docstring': 1, 'gendered_pronoun': 3}",
+    "final_iterations=0: CE delta 0.00331, KL 0.00294, cosine 0.9759, token exposure 16,384; won 2/18 contested cells; gendered-pronoun sufficiency@0.95 units 32 edges 47391; k_min {'ioi': 3, 'docstring': 3, 'gendered_pronoun': 1}",
+    "eval_set=in-sample: CE delta 0.00132, KL 0.00164, cosine 0.9833, token exposure 16,384; won 2/18 contested cells; gendered-pronoun sufficiency@0.95 units 32 edges 48050; k_min {'ioi': 2, 'docstring': 4, 'gendered_pronoun': 2}",
+    "random_seeds=10: CE delta 0.00142, KL 0.00188, cosine 0.9815, token exposure 16,384; won 2/18 contested cells; gendered-pronoun sufficiency@0.95 units 32 edges 48050; k_min {'ioi': 2, 'docstring': 4, 'gendered_pronoun': 1}",
+    "the battery's circuit stage runs IOI, docstring and gendered-pronoun; greater-than (9,160 validation prompts x 50 random controls x 20 prefixes through the upstream per-prompt loop, over an hour per run) is reproduced once on the base blocks and kept out of the battery. Circuit batch size 64 instead of upstream's 16 and evaluation batch size 2 instead of 4 (runtime settings for a shared GPU; the margin is read at each prompt's last real token and CE/KL are token sums, so batching changes nothing but float summation order)",
+    "null control: calibration blocks of uniformly random GPT-2 token ids (seeded per slot); the factorisation, evaluation and circuit stages are unchanged, only the Gram no longer reflects the model's input distribution"
+  ],
+  "runs": [
+    {
+      "axis": "base",
+      "variant": "base",
+      "seed": 20260606,
+      "size": 2,
+      "claim": "CE delta <=0.002, matched to TC-12k; fewer than TC-12k on some contested cells",
+      "score": 0.0014233782610704182,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "db48e9024fc7f7545c0eb49a33fe51826ff99472af649e681ad6253ec553e2c1",
+      "components": [
+        "gendered_pronoun:sufficiency@0.95:edges",
+        "gendered_pronoun:sufficiency@0.95:units"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=20260607",
+      "seed": 20260607,
+      "size": 2,
+      "claim": "CE delta <=0.002, matched to TC-12k; fewer than TC-12k on some contested cells",
+      "score": 0.001538654226711511,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "db48e9024fc7f7545c0eb49a33fe51826ff99472af649e681ad6253ec553e2c1",
+      "components": [
+        "gendered_pronoun:sufficiency@0.95:edges",
+        "gendered_pronoun:sufficiency@0.95:units"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=20260608",
+      "seed": 20260608,
+      "size": 2,
+      "claim": "CE delta 0.002-0.01, not matched to TC-12k; fewer than TC-12k on some contested cells",
+      "score": 0.0022243234535586076,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "db48e9024fc7f7545c0eb49a33fe51826ff99472af649e681ad6253ec553e2c1",
+      "components": [
+        "gendered_pronoun:sufficiency@0.95:edges",
+        "gendered_pronoun:sufficiency@0.95:units"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=20260609",
+      "seed": 20260609,
+      "size": 2,
+      "claim": "CE delta <=0.002, matched to TC-12k; fewer than TC-12k on some contested cells",
+      "score": 0.0010891613256434063,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "db48e9024fc7f7545c0eb49a33fe51826ff99472af649e681ad6253ec553e2c1",
+      "components": [
+        "gendered_pronoun:sufficiency@0.95:edges",
+        "gendered_pronoun:sufficiency@0.95:units"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=20260610",
+      "seed": 20260610,
+      "size": 2,
+      "claim": "CE delta <=0.002, matched to TC-12k; fewer than TC-12k on some contested cells",
+      "score": 0.001453650195811118,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "db48e9024fc7f7545c0eb49a33fe51826ff99472af649e681ad6253ec553e2c1",
+      "components": [
+        "gendered_pronoun:sufficiency@0.95:edges",
+        "gendered_pronoun:sufficiency@0.95:units"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=20260611",
+      "seed": 20260611,
+      "size": 2,
+      "claim": "CE delta <=0.002, matched to TC-12k; fewer than TC-12k on some contested cells",
+      "score": 0.0017336270210215332,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "db48e9024fc7f7545c0eb49a33fe51826ff99472af649e681ad6253ec553e2c1",
+      "components": [
+        "gendered_pronoun:sufficiency@0.95:edges",
+        "gendered_pronoun:sufficiency@0.95:units"
+      ]
+    },
+    {
+      "axis": "seeds",
+      "variant": "seed=20260612",
+      "seed": 20260612,
+      "size": 2,
+      "claim": "CE delta <=0.002, matched to TC-12k; fewer than TC-12k on some contested cells",
+      "score": 0.0015788798458067355,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "db48e9024fc7f7545c0eb49a33fe51826ff99472af649e681ad6253ec553e2c1",
+      "components": [
+        "gendered_pronoun:sufficiency@0.95:edges",
+        "gendered_pronoun:sufficiency@0.95:units"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=1",
+      "seed": 20260606,
+      "size": 2,
+      "claim": "CE delta 0.002-0.01, not matched to TC-12k; fewer than TC-12k on some contested cells",
+      "score": 0.002033547572027228,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "db48e9024fc7f7545c0eb49a33fe51826ff99472af649e681ad6253ec553e2c1",
+      "components": [
+        "gendered_pronoun:sufficiency@0.95:edges",
+        "gendered_pronoun:sufficiency@0.95:units"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=2",
+      "seed": 20260606,
+      "size": 2,
+      "claim": "CE delta 0.002-0.01, not matched to TC-12k; fewer than TC-12k on some contested cells",
+      "score": 0.0022009062277610347,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "db48e9024fc7f7545c0eb49a33fe51826ff99472af649e681ad6253ec553e2c1",
+      "components": [
+        "gendered_pronoun:sufficiency@0.95:edges",
+        "gendered_pronoun:sufficiency@0.95:units"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=3",
+      "seed": 20260606,
+      "size": 5,
+      "claim": "CE delta <=0.002, matched to TC-12k; fewer than TC-12k on some contested cells",
+      "score": 0.0016138737735396091,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "9c1774653c6a090528c03408ead2c0a112e5e9069e58b021b817afefadc383cd",
+      "components": [
+        "docstring:sufficiency@0.8:edges",
+        "docstring:sufficiency@0.95:edges",
+        "docstring:sufficiency@0.9:edges",
+        "gendered_pronoun:sufficiency@0.95:edges",
+        "gendered_pronoun:sufficiency@0.95:units"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=4",
+      "seed": 20260606,
+      "size": 2,
+      "claim": "CE delta <=0.002, matched to TC-12k; fewer than TC-12k on some contested cells",
+      "score": 0.0017596202395413485,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "db48e9024fc7f7545c0eb49a33fe51826ff99472af649e681ad6253ec553e2c1",
+      "components": [
+        "gendered_pronoun:sufficiency@0.95:edges",
+        "gendered_pronoun:sufficiency@0.95:units"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=5",
+      "seed": 20260606,
+      "size": 2,
+      "claim": "CE delta <=0.002, not matched to TC-12k; fewer than TC-12k on some contested cells",
+      "score": 0.0019843410536690698,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "db48e9024fc7f7545c0eb49a33fe51826ff99472af649e681ad6253ec553e2c1",
+      "components": [
+        "gendered_pronoun:sufficiency@0.95:edges",
+        "gendered_pronoun:sufficiency@0.95:units"
+      ]
+    },
+    {
+      "axis": "bootstrap",
+      "variant": "resample=6",
+      "seed": 20260606,
+      "size": 2,
+      "claim": "CE delta 0.002-0.01, not matched to TC-12k; fewer than TC-12k on some contested cells",
+      "score": 0.002146004232143728,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "db48e9024fc7f7545c0eb49a33fe51826ff99472af649e681ad6253ec553e2c1",
+      "components": [
+        "gendered_pronoun:sufficiency@0.95:edges",
+        "gendered_pronoun:sufficiency@0.95:units"
+      ]
+    },
+    {
+      "axis": "templates",
+      "variant": "template=wikipedia",
+      "seed": 20260606,
+      "size": 3,
+      "claim": "CE delta 0.002-0.01, not matched to TC-12k; fewer than TC-12k on some contested cells",
+      "score": 0.00264936924446868,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "2aa99e86317960cf88fb0ef4a544da93321fc4d23bde6fa39c866e5680f104a6",
+      "components": [
+        "docstring:sufficiency@0.8:edges",
+        "gendered_pronoun:sufficiency@0.95:edges",
+        "gendered_pronoun:sufficiency@0.95:units"
+      ]
+    },
+    {
+      "axis": "templates",
+      "variant": "template=fineweb",
+      "seed": 20260606,
+      "size": 2,
+      "claim": "CE delta 0.002-0.01, not matched to TC-12k; fewer than TC-12k on some contested cells",
+      "score": 0.0026147997157899283,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "db48e9024fc7f7545c0eb49a33fe51826ff99472af649e681ad6253ec553e2c1",
+      "components": [
+        "gendered_pronoun:sufficiency@0.95:edges",
+        "gendered_pronoun:sufficiency@0.95:units"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "sparsity=0.75",
+      "seed": 20260606,
+      "size": 7,
+      "claim": "CE delta 0.002-0.01, not matched to TC-12k; fewer than TC-12k on some contested cells",
+      "score": 0.008176217680452957,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "aa6864544a4975d47c37a49409de0bfd4ade1286253d870e4bc7af625bacbd56",
+      "components": [
+        "docstring:sufficiency@0.8:edges",
+        "docstring:sufficiency@0.95:edges",
+        "docstring:sufficiency@0.9:edges",
+        "gendered_pronoun:necessity_drop@0.8:edges",
+        "gendered_pronoun:necessity_drop@0.8:units",
+        "gendered_pronoun:sufficiency@0.95:edges",
+        "gendered_pronoun:sufficiency@0.95:units"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "blocks=1",
+      "seed": 20260606,
+      "size": 5,
+      "claim": "CE delta 0.002-0.01, not matched to TC-12k; fewer than TC-12k on some contested cells",
+      "score": 0.0030780651935269354,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "9c1774653c6a090528c03408ead2c0a112e5e9069e58b021b817afefadc383cd",
+      "components": [
+        "docstring:sufficiency@0.8:edges",
+        "docstring:sufficiency@0.95:edges",
+        "docstring:sufficiency@0.9:edges",
+        "gendered_pronoun:sufficiency@0.95:edges",
+        "gendered_pronoun:sufficiency@0.95:units"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "blocks=64",
+      "seed": 20260606,
+      "size": 2,
+      "claim": "CE delta <=0.002, matched to TC-12k; fewer than TC-12k on some contested cells",
+      "score": 0.0018940577875254938,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "db48e9024fc7f7545c0eb49a33fe51826ff99472af649e681ad6253ec553e2c1",
+      "components": [
+        "gendered_pronoun:sufficiency@0.95:edges",
+        "gendered_pronoun:sufficiency@0.95:units"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "outer_iterations=8",
+      "seed": 20260606,
+      "size": 5,
+      "claim": "CE delta <=0.002, matched to TC-12k; fewer than TC-12k on some contested cells",
+      "score": 0.0019683073459599854,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "9c1774653c6a090528c03408ead2c0a112e5e9069e58b021b817afefadc383cd",
+      "components": [
+        "docstring:sufficiency@0.8:edges",
+        "docstring:sufficiency@0.95:edges",
+        "docstring:sufficiency@0.9:edges",
+        "gendered_pronoun:sufficiency@0.95:edges",
+        "gendered_pronoun:sufficiency@0.95:units"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "final_iterations=0",
+      "seed": 20260606,
+      "size": 2,
+      "claim": "CE delta 0.002-0.01, not matched to TC-12k; fewer than TC-12k on some contested cells",
+      "score": 0.00331119894398757,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "db48e9024fc7f7545c0eb49a33fe51826ff99472af649e681ad6253ec553e2c1",
+      "components": [
+        "gendered_pronoun:sufficiency@0.95:edges",
+        "gendered_pronoun:sufficiency@0.95:units"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "eval_set=in-sample",
+      "seed": 20260606,
+      "size": 2,
+      "claim": "CE delta <=0.002, matched to TC-12k; fewer than TC-12k on some contested cells",
+      "score": 0.0013186994535829832,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "db48e9024fc7f7545c0eb49a33fe51826ff99472af649e681ad6253ec553e2c1",
+      "components": [
+        "gendered_pronoun:sufficiency@0.95:edges",
+        "gendered_pronoun:sufficiency@0.95:units"
+      ]
+    },
+    {
+      "axis": "hyperparams",
+      "variant": "random_seeds=10",
+      "seed": 20260606,
+      "size": 2,
+      "claim": "CE delta <=0.002, matched to TC-12k; fewer than TC-12k on some contested cells",
+      "score": 0.0014233782610704182,
+      "universe": null,
+      "structure_present": true,
+      "components_sha256": "db48e9024fc7f7545c0eb49a33fe51826ff99472af649e681ad6253ec553e2c1",
+      "components": [
+        "gendered_pronoun:sufficiency@0.95:edges",
+        "gendered_pronoun:sufficiency@0.95:units"
+      ]
+    }
+  ]
+}

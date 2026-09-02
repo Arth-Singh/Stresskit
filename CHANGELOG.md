@@ -124,6 +124,15 @@
   under relabelling) in favour of polarity-balanced random halves. No LLM
   judge is run; a rule-based single-cell steering check is on the card as a
   note.
+- Added an August-2026 card for Sparse Weight Decomposition (arXiv:2608.03913,
+  `references/run_swd_card.py`) on the GPT-2 small layer-8 `mlp.c_proj`
+  surface: KL and output cosine reproduce, the CE delta lands inside the
+  released grid's own spread on a different calibration draw, and the
+  released one-unit sufficiency cells for IOI and docstring turn out to be a
+  denominator artifact of a layer that barely carries those tasks, while the
+  unit and edge advantage on gendered-pronoun reproduces in 20 of 22 runs and
+  survives a random-token calibration null. Grade C, low confidence at 6
+  runs per axis; the greater-than reproduction is still running.
 - Added the HARC card (arXiv:2607.00572, `references/run_harc_card.py`): the
   released Llama-3.1-8B-Instruct and Qwen2.5-7B-Instruct LoRA adapters
   audited with upstream's direction extraction, residuals cached once per
