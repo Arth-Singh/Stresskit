@@ -135,6 +135,16 @@
   runs per axis; the greater-than headline (48 units against the
   Transcoder's 384 at sufficiency 0.9) reproduces exactly in a separate
   3.8-hour run recorded on the card.
+- `references/run_ams_independent_check.py`: an independent re-implementation
+  of the Activation Model Scanner separation statistic from the paper's
+  equations, sharing no code with the released extractor or with the card
+  runner. Right-padded batches of eight reproduce Table I to 0.007
+  on the 10 models the padding artifact applies to (24 of 32 read
+  positions on a pad token); the 4 left-padding tokenizers match Table I
+  under batch 1; batch-1 sigma matches the card's corrected numbers to
+  0.017 on all fourteen models and shows no category
+  separation (LOO 0.143, r = +0.28). Results
+  under `references/cards/raw/ams_safety_scanner/independent/`.
 - Added an August-2026 card for REINS-Gate (arXiv:2608.28233,
   `references/run_reins_gate_card.py`) on Qwen3.5-2B-Base with the released
   SAE bundle: the paper's judge-free router audited through its own split,

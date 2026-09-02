@@ -926,6 +926,70 @@ instruction-tuned and uncensored or base models in Table I is a padding
 artifact: the models with the lowest reported σ are the right-padded ones
 whose short prompts end in pad tokens.
 
+### Independent re-implementation
+
+A second implementation of the statistic, written from the paper's
+equations (Section IV: difference-of-centroid direction, projections, pooled
+standard deviation, best layer in the 40–80% window) with no code shared
+with the released extractor or with the card runner
+([`run_ams_independent_check.py`](run_ams_independent_check.py); the 16 pairs
+are read as data from the released concept definitions). Two conditions: one
+prompt per forward pass with no padding at all, and, to produce the artifact
+on purpose, the 32 prompts right-padded in batches of eight (positives then
+negatives) with each tokenizer's own pad token, reading position −1 of the
+padded batch. Per-layer curves and pad positions are in
+[`cards/raw/ams_safety_scanner/independent/`](cards/raw/ams_safety_scanner/independent/).
+
+| model | (a) Table I σ | (b) card, released extractor | (c) this script, right-padded batches of 8 | (d) this script, batch 1 | (e) card, batch 1 | (f) declared padding side, pad id | (g) pad reads under (c) |
+|---|---|---|---|---|---|---|---|
+| Llama-3.2-3B-Instruct | 8.37 | 8.37 | 8.37 | 4.65 | 4.65 | right, 128009 (eos as pad) | 24 of 32 |
+| Llama-3.1-8B-Instruct | 5.67 | 5.67 | 5.67 | 5.26 | 5.26 | right, 128009 (eos as pad) | 24 of 32 |
+| Qwen2.5-7B-Instruct | 4.94 | 4.95 | 4.95 | 5.49 | 5.49 | right, 151643 | 24 of 32 |
+| gemma-2-2b-it | 4.80 | 4.80 | 5.52 | 4.79 | 4.80 | left, 0 | 25 of 32 |
+| gemma-2-9b-it | 4.66 | 4.66 | 4.40 | 4.68 | 4.66 | left, 0 | 25 of 32 |
+| Llama-3.2-1B-Instruct | 4.55 | 4.55 | 4.55 | 5.52 | 5.52 | right, 128009 (eos as pad) | 24 of 32 |
+| Mistral-7B-Instruct-v0.3 | 1.39 | 1.39 | 1.39 | 6.72 | 6.72 | left, 2 (eos as pad) | 27 of 32 |
+| Meta-Llama-3.1-8B-Instruct-abliterated | 3.33 | 3.33 | 3.33 | 4.61 | 4.61 | right, 128009 (eos as pad) | 24 of 32 |
+| gemma-2-9b-it-abliterated | 4.54 | 4.55 | 3.34 | 4.55 | 4.54 | left, 0 | 25 of 32 |
+| DarkIdol-Llama-3.1-8B-Instruct-1.2-Uncensored | 5.45 | 5.45 | 5.75 | 5.45 | 5.45 | left, 128009 | 24 of 32 |
+| dolphin-2.9.4-llama3.1-8b | 1.38 | 1.39 | 1.39 | 6.09 | 6.09 | right, 128004 | 24 of 32 |
+| dolphin-2.9-llama3-8b | 1.32 | 1.32 | 1.32 | 4.67 | 4.67 | right, 128001 | 24 of 32 |
+| Llama-3.1-8B | 0.69 | 0.69 | 0.69 | 5.89 | 5.89 | right, 128001 (eos as pad) | 24 of 32 |
+| Llama-3.2-3B | 0.48 | 0.48 | 0.48 | 5.14 | 5.14 | right, 128001 (eos as pad) | 24 of 32 |
+
+Three agreements, none tuned for:
+
+- Table I is the right-padded batch. For the 10 models whose
+  Table I value the padded condition reproduces (the nine tokenizers that
+  declare right padding plus Mistral, whose tokenizer declares left here but
+  whose 1.39 only appears under right padding), (c) matches (a) to
+  0.007 and matches the card's released-extractor value (b) to
+  0.000; 24 of the 32 read positions are pad tokens in every
+  such run. The other 4 models (the three gemma-2 models and DarkIdol,
+  whose tokenizers pad left, so upstream's batches never put a pad at
+  position −1) match Table I under the batch-1 condition instead.
+- The correction is not a bug of one implementation. Batch-1 sigma from this
+  script matches the card's batch-1 sigma (e) to 0.017 on all
+  fourteen models (the largest gaps are the gemma-2 models, bfloat16 here).
+- Batch-1 sigma does not separate the categories. It spans
+  4.55–6.72, instruction-tuned models average
+  5.30 against 5.20 for the rest, no
+  model falls below the 3.5 PASS bar, leave-one-out accuracy under the card's
+  rule is 0.143, and the correlation with Table I's
+  compliance rates is r = +0.28 (p = 0.33),
+  Spearman ρ = -0.04. Mixing conditions the way the
+  released extractor does (right-padded batches for the 10,
+  batch 1 for the 4) gives r = -0.55 (p = 0.042),
+  the paper's −0.546.
+
+Two details the table adds. Under right padding in one batch of 32 the
+numbers move again (Llama-3.2-3B-Instruct 8.98, gemma-2-2b-it 8.55,
+dolphin-2.9.4 0.48): the "separation" of a right-padded model is a function
+of which prompts share its batch. And the pad token is the end-of-text token
+for the Llama-3 tokenizers, which define no pad token, so what Table I
+measures on those models is the residual stream at an appended end-of-text
+position.
+
 ### What the other knobs do
 
 - **Chat template.** Wrapping the prompts in each model's chat template and

@@ -75,6 +75,13 @@ the details and the numbers are in the card notes and in
   pad-token activations for the ten right-padded tokenizers. Batch size 1 or
   left padding gives every model σ 4.5–6.7 and an empty flagged set, so the
   instruct-versus-uncensored separation is a padding artifact.
+- **Re-implement the statistic before calling the paper's number an artifact
+  (Activation Model Scanner).** A second implementation from the paper's
+  equations, sharing no code with the released extractor or with the first
+  runner, reproduces Table I only when it right-pads batches of eight and
+  reads a pad token (10 models, to 0.007), and matches
+  the corrected batch-1 numbers to 0.017 on all fourteen. The
+  correction is not one implementation's bug.
 - **Check which layer "final layer" is (sycophancy).** The released extractor
   stacks its hooks in lexicographic module order, so probe index 31 is decoder
   layer 9 of 32. At decoder layer 31 the transfer drop is 0.30 rather than
@@ -308,6 +315,16 @@ checks sitting on their bars.
 - Null: swapping the labels of half the pairs flags a stable set, so the
   specificity check compares two stable profiles; recorded as a limit of the
   check for classifier-style claims.
+- Independent re-implementation (`references/run_ams_independent_check.py`,
+  written from the paper's equations, no code shared with the released
+  extractor or the card runner): right-padded batches of eight reproduce
+  Table I to 0.007 on the 10 models the artifact
+  applies to, with 24 of 32 read positions on a pad token; the 4
+  left-padding tokenizers match Table I under batch 1 instead; batch-1 sigma
+  matches the card's batch-1 sigma to 0.017 on all fourteen
+  models and spans 4.55–6.72 with no category separation
+  (LOO 0.143, r = +0.28, p = 0.33).
+  Table in `references/README.md`.
 
 ### FolkMotif (arXiv:2608.02486) — A, high confidence
 
