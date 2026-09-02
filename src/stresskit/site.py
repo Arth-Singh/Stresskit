@@ -17,9 +17,9 @@ import os
 import shutil
 from typing import Any, Dict, List, Optional
 
-from .card import _GRADE_EMOJI, classify_artifact_dict
+from .card import _GRADE_EMOJI
 from .htmlcard import _GRADE_HEX, card_html
-from .scoreboard import collect_rows
+from .scoreboard import arxiv_url, collect_rows, registered_paper_rows
 from .tracechart import trace_svg
 
 _INDEX_CSS = """
@@ -46,6 +46,8 @@ td { padding: .55rem .55rem; border-bottom: 1px solid #eaeef2;
 .g { font-weight: 700; padding: .1rem .55rem; border-radius: 6px;
      color: #fff; display: inline-block; }
 .low { font-size: .78rem; color: #d4770c; }
+.badges { white-space: nowrap; }
+.badges a { text-decoration: none; }
 .note { color: #59636e; font-size: .88rem; }
 a { color: #0969da; text-decoration: none; }
 a:hover { text-decoration: underline; }
@@ -83,12 +85,54 @@ def _hero_trace(rows: List[Dict[str, Any]]):
     return (best[1], best[2]) if best else (None, None)
 
 
+def _papers_panel(prows, e) -> str:
+    """The paper leaderboard: one row per audited paper, one badge per card."""
+    body = []
+    for p in prows:
+        title = e(p["title"])
+        if p.get("arxiv"):
+            title = (f'<a href="{e(arxiv_url(p["arxiv"]))}">{title}</a> '
+                     f'<span class="note">arXiv:{e(p["arxiv"])}</span>')
+        badges = " ".join(
+            f'<a href="{e(_slug(r["path"]))}.html" title="{e(r["finding"])}">'
+            f'<span class="g" style="background:{_GRADE_HEX.get(r["grade"], "#59636e")}">'
+            f'{e(r["grade"])}</span></a>' + ("<sup>†</sup>" if r["confidence"] == "low" else "")
+            for r in p["rows"])
+        body.append(
+            "<tr>"
+            f"<td>{title}</td>"
+            f'<td>{e(p["models"])}</td>'
+            f'<td class="badges">{badges}</td>'
+            f'<td>{p["checks_passed"]}/{p["checks_total"]}</td>'
+            f'<td>{e(p["reproduced"])}</td>'
+            f'<td>{e(p["result"])}</td>'
+            f'<td>{e(p["audited"])}</td>'
+            "</tr>")
+    return (
+        '<div class="panel">'
+        '<h2 style="font-size:1.1rem;margin-top:0">Papers</h2>'
+        '<p class="note">One row per audited paper, newest first; one grade per '
+        'card, each linking to its card. † marks a low-confidence grade (a '
+        "check's 95% CI straddles its bar).</p>"
+        "<table><thead><tr><th>paper</th><th>models</th><th>grades</th>"
+        "<th>checks passed</th><th>reproduced the released number?</th>"
+        "<th>result</th><th>audited</th></tr></thead>"
+        f"<tbody>{chr(10).join(body)}</tbody></table></div>")
+
+
 def build_site(paths: List[str], outdir: str,
-               repo_url: str = "https://github.com/Arth-Singh/Stresskit") -> int:
-    """Build the static site; returns the number of card pages written."""
+               repo_url: str = "https://github.com/Arth-Singh/Stresskit",
+               papers_path: Optional[str] = None) -> int:
+    """Build the static site; returns the number of card pages written.
+
+    A ``papers.json`` inside one of ``paths`` (or ``papers_path``) adds the
+    paper leaderboard panel to the index and makes an unregistered card an
+    error.
+    """
     rows = collect_rows(paths)
     if not rows:
         raise ValueError("no cards or reports found under the given paths")
+    prows = registered_paper_rows(paths, rows, papers_path)
     os.makedirs(outdir, exist_ok=True)
     e = html.escape
 
@@ -136,6 +180,9 @@ def build_site(paths: List[str], outdir: str,
                       if r["grade"] == "A" and r["confidence"] == "high")
     n_undecided = sum(1 for r in rows if r["confidence"] == "low")
     n_failing = sum(1 for r in rows if r["grade"] in {"C", "D"})
+    papers_kpi = (f'<div class="kpi"><b>{len(prows)}</b><span>papers audited</span></div>'
+                  if prows is not None else "")
+    papers_html = _papers_panel(prows, e) if prows is not None else ""
 
     hero_row, hero = _hero_trace(rows)
     hero_html = ""
@@ -167,12 +214,14 @@ and null controls — and graded A–D.
 <a href="{e(repo_url)}">StressKit</a> is the harness; every verdict below
 re-derives from its own card via <code>stresskit verify</code>.</p>
 <div class="kpis">
+{papers_kpi}
 <div class="kpi"><b>{n_cards}</b><span>findings graded</span></div>
 <div class="kpi"><b>{n_certified}</b><span>certified A (every CI clears its bar)</span></div>
 <div class="kpi"><b>{n_undecided}</b><span>statistically undecided at full battery</span></div>
 <div class="kpi"><b>{n_failing}</b><span>graded C/D</span></div>
 </div>
 </div>
+{papers_html}
 {hero_html}
 <div class="panel">
 <h2 style="font-size:1.1rem;margin-top:0">All graded findings</h2>

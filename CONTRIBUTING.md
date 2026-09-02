@@ -20,9 +20,14 @@ its §8 checklist is the PR checklist. In short, a card PR carries:
 3. the runner script, upstream versions pinned
 4. the verdict trace (`sk.verdict_trace`)
 5. a null control, or a note saying why none is constructible
-6. a regenerated scoreboard: `stresskit scoreboard references -o SCOREBOARD.md`
-7. a section in `references/README.md` following the existing pattern —
-   including what the result does **not** show
+6. an entry in `references/papers.json` (paper title, arXiv id, models, the
+   card paths, whether the released number reproduced, a one-line result,
+   audit date) — `stresskit scoreboard` and `stresskit site` refuse a graded
+   card that no entry claims
+7. a regenerated scoreboard: `stresskit scoreboard references -o SCOREBOARD.md`
+8. a section in `references/README.md` following the existing pattern —
+   including what the result does **not** show, and a row plus a short
+   section in `RESULTS.md`
 
 CI re-verifies every card on every push, so a card that doesn't recompute
 from its own metrics cannot merge. For C/D grades on named work, the

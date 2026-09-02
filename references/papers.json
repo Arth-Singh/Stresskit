@@ -1,0 +1,194 @@
+{
+  "_comment": "Paper registry for the leaderboard: one entry per audited paper, newest audit first. Card paths are relative to this directory and every graded card under references/ must appear in exactly one entry (stresskit scoreboard / site fail otherwise). Free-text fields are rendered verbatim in the scoreboard and on the site.",
+  "papers": [
+    {
+      "title": "Cultural awareness is represented but not decoded (FolkMotif)",
+      "arxiv": "2608.02486",
+      "models": "Llama-3.1-8B-Instruct",
+      "cards": ["cards/folkmotif_llama3p1_8b.json"],
+      "reproduced": "yes, exactly: probe 0.881 at layer 8, n-gram 0.604, buckets 45/193/5/27; the paper's 0.248 is its rescored run and its 32/206/6/26 row is the native-prompt run, both exact",
+      "result": "the qualitative claim never flips; Preserved cells move 5-83 with the aggregation rule and template, and the peak layer moves over layers 6-14 with the CV split",
+      "audited": "2026-09-02"
+    },
+    {
+      "title": "Diff Mining: logit differences reveal finetuning objectives (judge-free token-set battery)",
+      "arxiv": "2608.26462",
+      "models": "gemma-3-1b-it x cake_bake LoRA",
+      "cards": ["cards/diff_mining_gemma3_1b.json"],
+      "reproduced": "no released token lists; the paper's metric is a gpt-5-mini judge and its bias number needs a 70B model, neither run",
+      "result": "top-100 token set stable across seeds, resamples and corpora (J 0.88-0.97), 65% finetune-domain vocabulary under a pre-registered rule; scrambled adapter gives garbage (0-36%); 0.48 under logit-lens extraction, 0.26 for the 1:1-mix LoRA",
+      "audited": "2026-09-02"
+    },
+    {
+      "title": "Dissociating the internal representations of sycophancy",
+      "arxiv": "2607.07003",
+      "models": "Llama-3.1-8B-Instruct (Gemma-3-12B half not run)",
+      "cards": ["cards/sycophancy_llama3p1_8b.json"],
+      "reproduced": "within 0.02-0.10 of Tables 1-2 at the paper's final layer, which the released extractor's lexicographic layer order makes decoder layer 9",
+      "result": "distinct (transfer drop >= 0.15) holds in 47 of 48 runs but flips to shared at the best in-domain layer (L12); which layers carry the drop is unstable (J 0.51); the drop moves with the conversation resample (CV 0.23)",
+      "audited": "2026-09-02"
+    },
+    {
+      "title": "The Communication Map of a Transformer",
+      "arxiv": "2608.22007",
+      "models": "GPT-2 small/medium/large, GPT-Neo-125m, Pythia-160m/2.8B/6.9B",
+      "cards": ["cards/communication_map.json"],
+      "reproduced": "yes, all 21 Table 2 shares exactly",
+      "result": "the abstract's 70-89% holds only pooled per model (69.7-89.0%); 4 of 21 per-channel entries fall outside (60.7-90.5%); the lower bound is a rounding edge under resampling; |z|>=3 gives 59-83% with six exceptions",
+      "audited": "2026-09-02"
+    },
+    {
+      "title": "Expander sparse autoencoders",
+      "arxiv": "2607.01799",
+      "models": "Qwen2.5-3B, layer 12",
+      "cards": ["cards/expander_sae_qwen2p5_3b.json"],
+      "reproduced": "yes: 0.831 / 0.978 CE-recovered vs 0.833 / 0.983 shipped, ratio 0.850 vs 0.842",
+      "result": "ratio 0.80-0.90 over 30 seeds and 30 resamples, flips only at the 0.80 bucket edge; k=32 gives 0.66, a mean-ablation denominator 0.77",
+      "audited": "2026-09-02"
+    },
+    {
+      "title": "Conditional co-ablation (CoAx) backup-head recovery",
+      "arxiv": "2607.01940",
+      "models": "GPT-2 small, IOI",
+      "cards": ["cards/coax_backup_gpt2.json"],
+      "reproduced": "yes against the released reference metrics (0.945 vs 0.941); the abstract's from-0.33 single-ablation baseline is 0.60 in the released code",
+      "result": "label-free primaries collapse CoAx to 0.28 / 0.38 AUC while AtP* stays 0.83; one of three templates loses to AtP*; the no-IOI null recovers the same heads at 0.93-0.97, so the backup structure is task-general",
+      "audited": "2026-09-02"
+    },
+    {
+      "title": "Activation Model Scanner, Tier-1 safety scan",
+      "arxiv": "2608.05578",
+      "models": "14 models of Table I (Llama 3.1/3.2, gemma-2, Qwen2.5, Mistral; instruct, base, abliterated, uncensored)",
+      "cards": ["cards/ams_safety_scanner.json"],
+      "reproduced": "yes, all 14 sigma values to two decimals through the released extractor",
+      "result": "the released extractor reads pad-token activations for the 10 right-padded tokenizers; with batch size 1 or left padding every model scores sigma 4.5-6.7, nothing is flagged, LOO accuracy 0.14, r flips to +0.28 n.s.",
+      "audited": "2026-09-02"
+    },
+    {
+      "title": "Certified Interventional Fidelity on GPT-2 IOI circuits",
+      "arxiv": "2607.08349",
+      "models": "GPT-2 small",
+      "cards": ["cards/cif_ioi_gpt2.json"],
+      "reproduced": "yes, 30 of 30 shipped rows exactly",
+      "result": "certified level depends on the template (0.95 upstream, 0.9 on seven of eleven others, none on one); the 10-30x is 6.6-7.2x at F0=0.8 and 18-19x at 0.9",
+      "audited": "2026-09-02"
+    },
+    {
+      "title": "Refusal in language models is mediated by a single direction",
+      "arxiv": "2406.11717",
+      "models": "Llama-3.1-8B-Instruct, Qwen2.5-7B-Instruct, Qwen3.5-4B, Qwen3.5-9B, gemma-4-E4B-it, gemma-4-12B-it",
+      "cards": [
+        "cards/refusal_direction_meta_llama_3p1_8b_instruct.json",
+        "cards/refusal_direction_meta_llama_3p1_8b_instruct.directions.json",
+        "cards/refusal_direction_qwen2p5_7b_instruct.json",
+        "cards/refusal_direction_qwen2p5_7b_instruct.directions.json",
+        "cards/refusal_direction_qwen3p5_4b.json",
+        "cards/refusal_direction_qwen3p5_4b.directions.json",
+        "cards/refusal_direction_qwen3p5_9b.json",
+        "cards/refusal_direction_qwen3p5_9b.directions.json",
+        "cards/refusal_direction_gemma_4_e4b_it.json",
+        "cards/refusal_direction_gemma_4_e4b_it.directions.json",
+        "cards/refusal_direction_gemma_4_12b_it.json",
+        "cards/refusal_direction_gemma_4_12b_it.directions.json"
+      ],
+      "reproduced": "the causal claim reproduces on every model",
+      "result": "the causal effect holds hard (specificity 4-1293x); which direction gets selected is unstable (J 0.18-0.39); two measurement artifacts found in raw completions",
+      "audited": "2026-09-01"
+    },
+    {
+      "title": "SAE causal inertness audit",
+      "arxiv": "2607.12166",
+      "models": "toy bottleneck model with two TopK SAEs (released harness)",
+      "cards": ["cards/sae_causal_inertness.json"],
+      "reproduced": "run 2 within the paper's own band",
+      "result": "the inert-pair census is unstable (J 0.33); the abstract's headline has a different denominator than its sentence",
+      "audited": "2026-09-01"
+    },
+    {
+      "title": "Homonym reconvergence profiles",
+      "arxiv": "2608.01816",
+      "models": "gpt2, Llama-3.2-3B, Qwen2.5-7B",
+      "cards": [
+        "cards/homonym_reconvergence_gpt2.json",
+        "cards/homonym_reconvergence_llama_3p2_3b.json",
+        "cards/homonym_reconvergence_qwen2p5_7b.json"
+      ],
+      "reproduced": "stimuli and the Table 1 tokenisation counts reproduce exactly",
+      "result": "the profile label comes back in 28/31 to 32/32 runs, but the paper's own sequence-order control produces the same label (specificity 0.88-1.08x); magnitude separates homonyms from controls, the shape does not",
+      "audited": "2026-09-01"
+    },
+    {
+      "title": "Truth vs impossibility probes",
+      "arxiv": "2608.12852",
+      "models": "gemma-3-4b-it",
+      "cards": ["cards/impossibility_truth_gemma_3_4b_it.json"],
+      "reproduced": "yes, same model snapshot",
+      "result": "the double dissociation survives resampling, re-splitting and hyperparameters; specificity 1.84x",
+      "audited": "2026-09-01"
+    },
+    {
+      "title": "Mechanistic tomography: OMP recovery of a finite-effect map",
+      "arxiv": "2608.19338",
+      "models": "released HMM observer checkpoint (4-layer, d_model 96)",
+      "cards": ["cards/mechtomo_omp_recovery.json"],
+      "reproduced": "yes, bit-exact",
+      "result": "the four bin-7 coordinates are real and specific; the support beyond them is not stable (J 0.40)",
+      "audited": "2026-09-01"
+    },
+    {
+      "title": "Jacobian-lens readouts (anthropics/jacobian-lens release) and lens baselines",
+      "arxiv": null,
+      "models": "Qwen3.5-0.8B, Qwen3.5-4B, Qwen3.5-27B, Qwen3.6-27B",
+      "cards": [
+        "cards/jlens_qwen3p5_4b.json",
+        "h200-results/lens_baseline_jlens_qwen3p5_0p8b.json",
+        "h200-results/lens_baseline_logit_qwen3p5_0p8b.json",
+        "h200-results/lens_baseline_jlens_qwen3p5_4b.json",
+        "h200-results/lens_baseline_logit_qwen3p5_4b.json",
+        "h200-results/lens_baseline_tuned_qwen3p5_4b.json",
+        "h200-results/lens_baseline_jlens_qwen3p5_27b.json",
+        "h200-results/lens_baseline_logit_qwen3p5_27b.json",
+        "h200-results/lens_baseline_jlens_qwen3p6_27b.json",
+        "h200-results/lens_baseline_logit_qwen3p6_27b.json"
+      ],
+      "reproduced": "released lenses used as shipped",
+      "result": "the mid-to-late-band claim is stable (pi* 0.90); which items hit is not (J 0.45-0.49), and the deranged-target null hits more consistently than the real targets (specificity 0.78x)",
+      "audited": "2026-08-31"
+    },
+    {
+      "title": "Activation oracles",
+      "arxiv": "2512.15674",
+      "models": "Qwen3-8B taboo subjects, three released oracle mixtures",
+      "cards": [
+        "cards/ao_qwen3_cls-only.json",
+        "cards/ao_qwen3_full-mixture.json",
+        "cards/ao_qwen3_latentqa-only.json"
+      ],
+      "reproduced": "pre-trained oracles run as shipped",
+      "result": "accuracy 0.09-0.45 with null hallucination about 0.9; the instrument is prompt-dominated",
+      "audited": "2026-08-21"
+    },
+    {
+      "title": "Indirect object identification circuit under attribution patching",
+      "arxiv": "2211.00593",
+      "models": "GPT-2 small, medium, large",
+      "cards": [
+        "cards/ioi_gpt2_small.json",
+        "scale/ioi_gpt2_medium.json",
+        "scale/ioi_gpt2_large.json"
+      ],
+      "reproduced": "classic task, no single released number under test",
+      "result": "J 0.83-0.95, specificity 1.5-2.3x; no monotone trend with scale: medium is the only certifiable A, small and large stay undecided after 45 runs",
+      "audited": "2026-08-21"
+    },
+    {
+      "title": "Greater-than circuit under attribution patching",
+      "arxiv": "2305.00586",
+      "models": "GPT-2 small",
+      "cards": ["cards/greater_than_gpt2_small.json"],
+      "reproduced": "classic task, no single released number under test",
+      "result": "J 0.89 but specificity 1.15x: the head set is nearly as stable on the corrupted null",
+      "audited": "2026-08-21"
+    }
+  ]
+}

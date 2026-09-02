@@ -16,3 +16,10 @@ formal/.lake/
 !.env.example
 .secrets/
 .stresskit/
+
+# raw battery dumps too large for git (regenerable from the runners; the
+# per-run manifests live next to the cards as <stem>.runs.json)
+references/cards/raw/**/*.npy
+references/cards/raw/**/*.pt
+references/cards/raw/**/pools.json
+references/cards/raw/communication_map/

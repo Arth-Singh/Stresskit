@@ -490,8 +490,12 @@ Unanswered fields render as **NOT REPORTED ⚠️** — flagged, never hidden.
 ## Diagnostic reference batteries (not confirmatory)
 
 Published findings, legacy diagnostic battery, default thresholds. Full analysis in
-[`references/`](references/README.md); one-table summary in
-[`SCOREBOARD.md`](SCOREBOARD.md). Every card is produced under
+[`references/`](references/README.md); the paper leaderboard (one row per
+audited paper, one grade per card, driven by
+[`references/papers.json`](references/papers.json)) and the per-finding table
+in [`SCOREBOARD.md`](SCOREBOARD.md); per-paper conclusions (what reproduced,
+what survived the battery, what is still running) in [`RESULTS.md`](RESULTS.md).
+Every card is produced under
 [`references/PROTOCOL.md`](references/PROTOCOL.md), re-verified by CI on
 every push (`stresskit verify references/`), and the scoreboard is
 generated from the cards, so neither can drift from the stored diagnostic

@@ -184,20 +184,24 @@ def _cmd_compare(args: argparse.Namespace) -> int:
 
 
 def _cmd_scoreboard(args: argparse.Namespace) -> int:
-    from .scoreboard import collect_rows, scoreboard_markdown, write_scoreboard
+    from .scoreboard import (collect_rows, registered_paper_rows,
+                             scoreboard_markdown, write_scoreboard)
 
     if args.output:
-        n = write_scoreboard(args.paths, args.output)
+        n = write_scoreboard(args.paths, args.output, papers_path=args.papers)
         print(f"scoreboard with {n} findings written to {args.output}")
     else:
-        print(scoreboard_markdown(collect_rows(args.paths)))
+        rows = collect_rows(args.paths)
+        papers = registered_paper_rows(args.paths, rows, args.papers)
+        print(scoreboard_markdown(rows, papers=papers))
     return 0
 
 
 def _cmd_site(args: argparse.Namespace) -> int:
     from .site import build_site
 
-    n = build_site(args.paths, args.output, repo_url=args.repo_url)
+    n = build_site(args.paths, args.output, repo_url=args.repo_url,
+                   papers_path=args.papers)
     print(f"site with {n} card pages written to {args.output}/")
     return 0
 
@@ -291,6 +295,9 @@ def build_parser() -> argparse.ArgumentParser:
         help="card/report .json files or directories to scan recursively",
     )
     ps.add_argument("-o", "--output", help="write markdown here instead of stdout")
+    ps.add_argument("--papers", metavar="JSON",
+                    help="paper registry for the leaderboard (default: a "
+                         "papers.json inside one of the given directories)")
     ps.set_defaults(func=_cmd_scoreboard)
 
     pw = sub.add_parser(
@@ -305,6 +312,9 @@ def build_parser() -> argparse.ArgumentParser:
     pw.add_argument("--repo-url",
                     default="https://github.com/Arth-Singh/Stresskit",
                     help="repository URL used in links")
+    pw.add_argument("--papers", metavar="JSON",
+                    help="paper registry for the leaderboard panel (default: a "
+                         "papers.json inside one of the given directories)")
     pw.set_defaults(func=_cmd_site)
 
     pv = sub.add_parser("version", help="print version")
