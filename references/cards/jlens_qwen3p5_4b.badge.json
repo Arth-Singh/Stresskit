@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
   "label": "diagnostic stability",
-  "message": "D \u00b7 J=0.45",
-  "color": "red"
+  "message": "C \u00b7 J=0.45",
+  "color": "orange"
 }

@@ -162,7 +162,7 @@
     }
   },
   "verdict": {
-    "grade": "D",
+    "grade": "C",
     "grade_rule": "v0.4",
     "profile": "diagnostic",
     "confirmatory_state": "not_applicable",
@@ -212,10 +212,13 @@
         "threshold": 3.0,
         "passed": true,
         "op": ">=",
-        "ci": null,
-        "robust": null,
+        "ci": [
+          3.191497184520124,
+          4.1692634779265605
+        ],
+        "robust": true,
         "description": "structural overlap vs size-matched random null (\u00d7)",
-        "state": "inconclusive"
+        "state": "pass"
       },
       "specificity": {
         "value": 0.7827670382094507,
@@ -246,7 +249,8 @@
     "1 run(s) from a different component universe (meta['universe']) excluded from structural comparison \u2014 Jaccard across universes is undefined; their claims and scores still count",
     "structural stability graded on 17 size-comparable runs; 2 run(s) with >2x size difference excluded (pooled-over-all value kept as mean_pairwise_jaccard_all_sizes)",
     "underpowered verdict: the 95% CI straddles the bar for claim_stability (pass), score_stability (fail) at n_runs=6 \u2014 these verdict components are not decided by the data. Treat the grade as provisional and raise n_runs (or widen the battery) before reporting it.",
-    "v0.3 grade: C; regraded 2026-09-03 under grade rule v0.4 from the recorded checks (schema 0.5)"
+    "v0.3 grade: C; regraded 2026-09-03 under grade rule v0.4 from the recorded checks (schema 0.5)",
+    "recovered on 2026-09-03 the bootstrap interval for beats_random from the card's own runs at seed 0: the schema this card was written under (0.2) did not store it, so the check read as undecided and the grade was D instead of C"
   ],
   "runs": [
     {

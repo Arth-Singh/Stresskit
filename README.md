@@ -43,7 +43,7 @@ low-confidence grade: at least one check's 95% CI straddles its bar.
 | Homonym reconvergence profiles ([2608.01816](https://arxiv.org/abs/2608.01816)) | gpt2, Llama-3.2-3B, Qwen2.5-7B | **C** ×3† | the profile label recurs in 28–32 of 32 runs, but the paper's own sequence-order control produces the same label (specificity 0.88–1.08x) |
 | Truth vs impossibility probes ([2608.12852](https://arxiv.org/abs/2608.12852)) | gemma-3-4b-it | **A** | the double dissociation survives resampling, re-splitting and hyperparameters; specificity 1.84x |
 | Mechanistic tomography, OMP recovery ([2608.19338](https://arxiv.org/abs/2608.19338)) | released HMM observer checkpoint | **C** | bit-exact reproduction; four bin-7 coordinates are real and specific, the support beyond them is not stable (J 0.40) |
-| Jacobian-lens readouts ([anthropics/jacobian-lens](https://github.com/anthropics/jacobian-lens)) | Qwen3.5-0.8B/4B/27B, Qwen3.6-27B | **D** / **C**† | the mid-to-late-band claim is stable (π\* 0.90); which items hit is not (J 0.45–0.49), and a deranged-target null hits more consistently than the real targets |
+| Jacobian-lens readouts ([anthropics/jacobian-lens](https://github.com/anthropics/jacobian-lens)) | Qwen3.5-0.8B/4B/27B, Qwen3.6-27B | **C** ×2† | the mid-to-late-band claim is stable (π\* 0.90); which items hit is not (J 0.45–0.49), and a deranged-target null hits more consistently than the real targets |
 | Activation oracles ([2512.15674](https://arxiv.org/abs/2512.15674)) | Qwen3-8B taboo, three released mixtures | **D**, **D**, **C** | accuracy 0.09–0.45 with null hallucination near 0.9; the instrument is prompt-dominated |
 | IOI circuit under attribution patching ([2211.00593](https://arxiv.org/abs/2211.00593)) | GPT-2 small / medium / large | **A**, **B**†, **B**† | J 0.83–0.95, specificity 1.5–2.3x; no monotone trend with scale, small and large stay undecided after 45 runs |
 | Greater-than circuit under attribution patching ([2305.00586](https://arxiv.org/abs/2305.00586)) | GPT-2 small | **C** | J 0.89 but specificity 1.15x: the head set is nearly as stable on the corrupted null |
@@ -98,7 +98,7 @@ the same components on every run, reading neither its data nor its seed,
 graded A with high confidence when no null control was supplied. Grade rule
 v0.4 counts a check only when its whole interval clears the bar and caps the
 letter when specificity fails or no null was run; every card was relabelled
-from its recorded checks, 19 of 46 changed letter and none rose. Even under
+from its recorded checks, 18 of 46 changed letter and none rose. Even under
 the fixed rule, a grade produced without a null control does not separate an
 honest method from a constant one, the bootstrap axis rewards a finder that
 ignores its data, and six of the specificity failures on the leaderboard are

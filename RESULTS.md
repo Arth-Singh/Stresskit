@@ -40,7 +40,7 @@ are moved, and the specificity outcome split by how each null was built.
 | Homonym reconvergence (arXiv:2608.01816) | gpt2, Llama-3.2-3B, Qwen2.5-7B | 🟠 C ×3 | low | 2–3/5, 1–2 undecided each | 31–32 each | stimuli and the Table 1 tokenisation counts reproduce exactly | the profile label comes back in 28/31 to 32/32 runs, but the paper's own sequence-order control produces the same label (specificity 0.88–1.08x); magnitude separates homonyms from controls, the profile shape does not | 2026-09-01 | [gpt2](references/cards/homonym_reconvergence_gpt2.md) · [llama](references/cards/homonym_reconvergence_llama_3p2_3b.md) · [qwen](references/cards/homonym_reconvergence_qwen2p5_7b.md) |
 | Truth vs impossibility probes (arXiv:2608.12852) | gemma-3-4b-it | 🟢 A | high | 5/5 | 39 | yes, same snapshot | double dissociation survives resampling, re-splitting and hyperparameters; specificity 1.84x | 2026-09-01 | [card](references/cards/impossibility_truth_gemma_3_4b_it.md) |
 | Mechanistic Tomography, OMP recovery (arXiv:2608.19338) | released HMM observer checkpoint | 🟠 C | high | 1/5, 1 undecided | 57 (+49 null) | yes, bit-exact | the four bin-7 coordinates are real and specific; the support beyond them is not stable (J 0.40) | 2026-09-01 | [card](references/cards/mechtomo_omp_recovery.md) |
-| Jacobian-lens readouts (anthropics/jacobian-lens) | Qwen3.5-0.8B/4B/27B, Qwen3.6-27B | 🔴 D | low | 0/5, 4 undecided | 20–48 | released lens used as shipped | the mid-to-late-band claim is stable (π\* 0.90); which items hit is not (J 0.45–0.49), and the deranged-target null hits more consistently than the real targets (specificity 0.78x) | 2026-08-21/31 | [4B](references/cards/jlens_qwen3p5_4b.md) · [baselines](references/h200-results/) |
+| Jacobian-lens readouts (anthropics/jacobian-lens) | Qwen3.5-0.8B/4B/27B, Qwen3.6-27B | 🟠 C | low | 1/5, 3 undecided | 20–48 | released lens used as shipped | the mid-to-late-band claim is stable (π\* 0.90); which items hit is not (J 0.45–0.49), and the deranged-target null hits more consistently than the real targets (specificity 0.78x) | 2026-08-21/31 | [4B](references/cards/jlens_qwen3p5_4b.md) · [baselines](references/h200-results/) |
 | Activation Oracles (arXiv:2512.15674) | Qwen3-8B taboo | 🔴 D, 🔴 D, 🟠 C | high | 0–1/4 | 225 each | pre-trained oracles as shipped | accuracy 0.09–0.45 with null hallucination ~0.9; the instrument is prompt-dominated | 2026-08-21 | [cls-only](references/cards/ao_qwen3_cls-only.md) · [full](references/cards/ao_qwen3_full-mixture.md) · [latentqa](references/cards/ao_qwen3_latentqa-only.md) |
 | IOI attribution patching (Wang et al. 2022 task) | gpt2 small / medium / large | 🟢 A, 🟡 B ×2 | high / low / low | 5/5 (medium); 3/5, 2 undecided (small, large) | 45 each | n/a (classic task) | J 0.83–0.95, specificity 1.5–2.3x; no monotone trend with scale: medium is the only certifiable A, small and large stay undecided after 45 runs | 2026-08-21 | [small](references/cards/ioi_gpt2_small.md) · [medium](references/scale/ioi_gpt2_medium.md) · [large](references/scale/ioi_gpt2_large.md) |
 | Greater-Than attribution patching (arXiv:2305.00586) | gpt2 small | 🟠 C | high | 4/5 | 45 | n/a | J 0.89 but specificity 1.15x: the head set is nearly as stable on the corrupted null | 2026-08-21 | [card](references/cards/greater_than_gpt2_small.md) |
@@ -155,8 +155,14 @@ whatever its 95% interval did. Grade rule v0.4 counts a check only when its
 whole interval clears the bar, caps the letter at C when specificity is a
 decided fail, and caps it at B when no null control was run. Every card in
 the leaderboard was relabelled from its own recorded checks under the new
-rule; the values and intervals were not recomputed. Nineteen of 46 cards
-changed letter and none rose (A 9 to 5, B 21 to 12, C 16 to 27, D 0 to 2).
+rule; the values and intervals were not recomputed. Eighteen of 46 cards
+changed letter and none rose (A 9 to 5, B 21 to 12, C 16 to 28, D 0 to 1).
+One card needed more than a relabel: the Jacobian lens on Qwen3.5-4B was
+written under schema 0.2, which never stored the interval on beats random, so
+the check read as undecided and the card relabelled to D. Recomputing that
+interval from the card's own runs at its own seed gives [3.19, 4.17], a
+decided pass, and the card is a C. `references/recover_missing_intervals.py`
+does that recovery and the card records it in its notes.
 Each card records `verdict.grade_rule` and keeps its v0.3 grade in its notes,
 and `references/figs/grade_migration.png` shows the transitions.
 
