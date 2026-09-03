@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.4",
+  "schema_version": "0.5",
   "stresskit_version": "1.0.0.dev0",
   "created_at": "2026-09-02T12:35:03+00:00",
   "claim": {
@@ -159,6 +159,7 @@
   },
   "verdict": {
     "grade": "A",
+    "grade_rule": "v0.4",
     "profile": "diagnostic",
     "confirmatory_state": "not_applicable",
     "required_checks": [],
@@ -233,7 +234,9 @@
       "jaccard": 0.8,
       "modal_share": 0.8,
       "score_cv": 0.25,
-      "random_margin": 3.0
+      "random_margin": 3.0,
+      "specificity_ratio": 1.5,
+      "random_floor": 1.5
     }
   },
   "provenance": {
@@ -258,7 +261,8 @@
     "peak=frac0.5: peak L16 acc 0.833, n-gram 0.604, output acc 0.185, buckets {'Preserved': 42, 'DecodingSuppressed': 183, 'SurfaceLuck': 8, 'RepresentationallyFlat': 37}, DS share 0.678",
     "dtype=bf16: peak L8 acc 0.881, n-gram 0.604, output acc 0.185, buckets {'Preserved': 45, 'DecodingSuppressed': 193, 'SurfaceLuck': 5, 'RepresentationallyFlat': 27}, DS share 0.715",
     "the bootstrap axis is not run: stratified CV over a resampled cell list puts copies of one cell in training and held-out folds and inflates probe accuracy by construction",
-    "null control: culture labels permuted across the 270 cells once (seed 0x5EC); generations and their correctness are unchanged, only the probe sees scrambled labels"
+    "null control: culture labels permuted across the 270 cells once (seed 0x5EC); generations and their correctness are unchanged, only the probe sees scrambled labels",
+    "v0.3 grade: A; regraded 2026-09-03 under grade rule v0.4 from the recorded checks (schema 0.5)"
   ],
   "runs": [
     {

@@ -6,29 +6,29 @@
       "path": "S1-S5-paired-hoeffding-2000.json",
       "role": "primary",
       "master_seed": 20260824,
-      "sha256": "3120967c361ec77e1622c84e270065b9289258b38c12923130ecdcff7ff7eb98",
-      "source_sha256": "5d7293f9aa896f4c527f988dc6a24ec7555c8d84dc063d101ec0c5803579f6f3"
+      "sha256": "5e3cf882f69397639edc90fc6f5ae52b1336d579ac624d83d6584132d6f74255",
+      "source_sha256": "c56566e1f7241526e36af635448d890239de15fb0926d99cb93bdf5704551a6f"
     },
     {
       "path": "S1-S5-paired-hoeffding-2000-replication.json",
       "role": "disjoint_seed_replication",
       "master_seed": 20260825,
-      "sha256": "5e7c5e08715ac12f750ffc0af81e21532c36c5232b57b6cf0ba39949324f0e05",
-      "source_sha256": "5d7293f9aa896f4c527f988dc6a24ec7555c8d84dc063d101ec0c5803579f6f3"
+      "sha256": "2cd40947708e4161ac780000773f3328a7ed91cc64fbfae6083d9a5d281f84c7",
+      "source_sha256": "c56566e1f7241526e36af635448d890239de15fb0926d99cb93bdf5704551a6f"
     },
     {
       "path": "S6-S9-2000.json",
       "role": "primary",
       "master_seed": 20260824,
-      "sha256": "c16d580c079461eca1cb83be0c41b14d3c4ded5ec74af09a1911764ffaabd514",
-      "source_sha256": "c68054a7228d37e3c3b57a880da267b6d0495b15dead97f3922a6d0fdca6249c"
+      "sha256": "80c2f06e4ce21c453ffcc0141c266970daf926b8529ab34544c1f09c04ca22dd",
+      "source_sha256": "a3a057a2d33f552c6043829d827befd7a4ccd38cb5cf2d7387b36383e4f49cc4"
     },
     {
       "path": "S6-S9-2000-replication.json",
       "role": "disjoint_seed_replication",
       "master_seed": 20260825,
-      "sha256": "55395c1717a59b7ec3833582d36763d9dda42db5e19809a125e884b1f05752af",
-      "source_sha256": "c68054a7228d37e3c3b57a880da267b6d0495b15dead97f3922a6d0fdca6249c"
+      "sha256": "ee3c5d4ffc3ead6edf5115a813ed580fc8ad57706c6bbe75e42aba199cdfdd3e",
+      "source_sha256": "a3a057a2d33f552c6043829d827befd7a4ccd38cb5cf2d7387b36383e4f49cc4"
     }
   ]
 }

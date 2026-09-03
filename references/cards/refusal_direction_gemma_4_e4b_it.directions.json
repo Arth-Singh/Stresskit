@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.4",
+  "schema_version": "0.5",
   "stresskit_version": "1.0.0.dev0",
   "created_at": "2026-09-01T23:16:16+00:00",
   "claim": {
@@ -211,6 +211,7 @@
   },
   "verdict": {
     "grade": "C",
+    "grade_rule": "v0.4",
     "profile": "diagnostic",
     "confirmatory_state": "not_applicable",
     "required_checks": [],
@@ -286,6 +287,8 @@
       "modal_share": 0.8,
       "score_cv": 0.25,
       "random_margin": 3.0,
+      "specificity_ratio": 1.5,
+      "random_floor": 1.5,
       "cosine": 0.8
     }
   },
@@ -1146,7 +1149,8 @@
     "random null: the exact E[|cos|] between independent uniform unit vectors in R^2560 is 0.01577 (metrics.expected_random_abs_cosine, the closed form the Monte-Carlo baselines.empirical_random_abs_cosine converges to). Beating that is a low bar in high dimension \u2014 near-orthogonality of random directions is concentration of measure, not evidence \u2014 so read beats_random as a floor and structural_stability as the check that carries the verdict.",
     "graded order: directions.order indexes the pairwise |cos| matrix and follows the real runs of refusal_direction_gemma_4_e4b_it.runs.json in file order, whose meta.direction_sha256_16 names the saved vector under raw/refusal_gemma_4_e4b_it/. Post-hoc grading relabels variants by axis (base .. hyperparams=3), so the ledger is the mapping back to the original seed / resample / template / hyperparameter labels.",
     "scope: unchanged from the published card \u2014 chat usage mode with the model's default template; refusal judged by the upstream substring list on the first 32 greedy tokens after folding typographic apostrophes to ASCII; compliance additionally requires coherence; held-out evaluation on 64 harmful and 64 harmless test instructions never seen by the finder; upstream splits at andyrdt/refusal_direction@9d852fa, SHA-256 verified.",
-    "null control: the labelled pool with harmful/harmless labels permuted once (seed 0x5EC); extraction AND selection both run on permuted labels, and the selected direction is still evaluated on the real held-out sets. Its directions scatter (|cos| 0.031 across 17 runs), so a comparably aligned real battery would have indicated the procedure, not the model, produces the structure."
+    "null control: the labelled pool with harmful/harmless labels permuted once (seed 0x5EC); extraction AND selection both run on permuted labels, and the selected direction is still evaluated on the real held-out sets. Its directions scatter (|cos| 0.031 across 17 runs), so a comparably aligned real battery would have indicated the procedure, not the model, produces the structure.",
+    "v0.3 grade: C; regraded 2026-09-03 under grade rule v0.4 from the recorded checks (schema 0.5)"
   ],
   "runs": [
     {

@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.4",
+  "schema_version": "0.5",
   "stresskit_version": "1.0.0.dev0",
   "created_at": "2026-09-02T15:54:35+00:00",
   "claim": {
@@ -191,6 +191,7 @@
   },
   "verdict": {
     "grade": "C",
+    "grade_rule": "v0.4",
     "profile": "diagnostic",
     "confirmatory_state": "not_applicable",
     "required_checks": [],
@@ -265,7 +266,9 @@
       "jaccard": 0.8,
       "modal_share": 0.8,
       "score_cv": 0.25,
-      "random_margin": 3.0
+      "random_margin": 3.0,
+      "specificity_ratio": 1.5,
+      "random_floor": 1.5
     }
   },
   "provenance": {
@@ -294,7 +297,8 @@
     "eval_set=in-sample: CE delta 0.00132, KL 0.00164, cosine 0.9833, token exposure 16,384; won 2/18 contested cells; gendered-pronoun sufficiency@0.95 units 32 edges 48050; k_min {'ioi': 2, 'docstring': 4, 'gendered_pronoun': 2}",
     "random_seeds=10: CE delta 0.00142, KL 0.00188, cosine 0.9815, token exposure 16,384; won 2/18 contested cells; gendered-pronoun sufficiency@0.95 units 32 edges 48050; k_min {'ioi': 2, 'docstring': 4, 'gendered_pronoun': 1}",
     "the battery's circuit stage runs IOI, docstring and gendered-pronoun; greater-than (9,160 validation prompts x 50 random controls x 20 prefixes through the upstream per-prompt loop, over an hour per run) is reproduced once on the base blocks and kept out of the battery. Circuit batch size 64 instead of upstream's 16 and evaluation batch size 2 instead of 4 (runtime settings for a shared GPU; the margin is read at each prompt's last real token and CE/KL are token sums, so batching changes nothing but float summation order)",
-    "null control: calibration blocks of uniformly random GPT-2 token ids (seeded per slot); the factorisation, evaluation and circuit stages are unchanged, only the Gram no longer reflects the model's input distribution"
+    "null control: calibration blocks of uniformly random GPT-2 token ids (seeded per slot); the factorisation, evaluation and circuit stages are unchanged, only the Gram no longer reflects the model's input distribution",
+    "v0.3 grade: C; regraded 2026-09-03 under grade rule v0.4 from the recorded checks (schema 0.5)"
   ],
   "runs": [
     {

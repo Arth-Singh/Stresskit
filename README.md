@@ -26,27 +26,27 @@ low-confidence grade: at least one check's 95% CI straddles its bar.
 
 | paper | model(s) | grade | what the battery found |
 |---|---|---|---|
-| REINS-Gate, sparse SAE-feature router for refusal steering ([2608.28233](https://arxiv.org/abs/2608.28233)) | Qwen3.5-2B-Base + released SAEs | **A**† | the released gates reproduce (open on 0.993 / 0.053 of harmful / matched-safe prompts vs the paper's 0.987 / 0.047) and the routing survives every resample, but the coordinate set halves under top-k, layer window and rendering, and the 10% false-positive budget becomes 64% when the same safe prompts are given without the calibration wrapper |
+| REINS-Gate, sparse SAE-feature router for refusal steering ([2608.28233](https://arxiv.org/abs/2608.28233)) | Qwen3.5-2B-Base + released SAEs | **B**† | the released gates reproduce (open on 0.993 / 0.053 of harmful / matched-safe prompts vs the paper's 0.987 / 0.047) and the routing survives every resample, but the coordinate set halves under top-k, layer window and rendering, and the 10% false-positive budget becomes 64% when the same safe prompts are given without the calibration wrapper |
 | Sparse Weight Decomposition for circuit extraction ([2608.03913](https://arxiv.org/abs/2608.03913)) | GPT-2 small, layer-8 MLP output projection | **C**† | KL, output cosine and the 48-vs-384-unit greater-than headline reproduce; the released one-unit sufficiency cells for IOI and docstring are a denominator artifact of a layer that barely carries those tasks, while SWD's unit and edge advantage on gendered-pronoun reproduces in 20 of 22 runs and survives random-token calibration; the "matched fidelity" bucket flips in 10 of 22 runs |
 | Steering vectors for CoT faithfulness, cross-cue vector convergence ([2607.29062](https://arxiv.org/abs/2607.29062)) | Gemma-3-4B-it | **B** | the paper's cross-cue cosines reproduce exactly (0.88 at L17, 0.96 at L11) and survive task resampling, but paraphrasing the completion sentences drops L17 to 0.49–0.54 and prompts with no cue still converge at 0.82: the shared direction is the appended sentence, not cue acknowledgment |
 | HARC, coupling harmfulness and refusal directions, released adapters ([2607.00572](https://arxiv.org/abs/2607.00572)) | Llama-3.1-8B-Instruct + LoRA, Qwen2.5-7B-Instruct + LoRA | **B** ×2† | Figure 1's base profile reproduces on Llama and the coupling gain is real (band +0.55, 9.6x random), but it is a plateau over 41 of 64 cells that starts eight layers upstream of the trained band, and permuted-label directions gain +0.28 at the same layers (specificity undecided); with a hard-refusal string match the Llama adapter refuses more XSTest safe prompts than the base (29 vs 17 of 250) where Table 1 reports the opposite; on Qwen the gain peaks at L18, upstream of the paper's L21–24 band, and vanishes in band under the Circuit Breakers/UltraChat pools |
 | FolkMotif, cultural awareness represented but not decoded ([2608.02486](https://arxiv.org/abs/2608.02486)) | Llama-3.1-8B-Instruct | **A** | reproduces exactly; the claim never flips, but the Preserved cell count moves 5–83 with the aggregation rule and template |
 | Diff Mining, logit differences reveal finetuning objectives ([2608.26462](https://arxiv.org/abs/2608.26462)) | gemma-3-1b-it × cake_bake LoRA | **A** | top-100 token set stable across 60 seeds, 60 resamples and two corpora (J 0.88–0.97; the hyperparameter axis alone is J 0.43); a scrambled adapter returns garbage |
 | Dissociating the internal representations of sycophancy ([2607.07003](https://arxiv.org/abs/2607.07003)) | Llama-3.1-8B-Instruct, Gemma-3-12B-it | **B** ×2 | the released extractor's lexicographic layer order makes the paper's "final layer" decoder layer 9 on both models; Llama's "distinct" becomes "shared" at its best in-domain layer (L12) while Gemma reads "aligned" at every layer, so the cross-model difference survives as a 2.8–5.5x gap in transfer drop but the distinct-versus-aligned dichotomy depends on Llama's layer choice |
-| The Communication Map of a Transformer ([2608.22007](https://arxiv.org/abs/2608.22007)) | GPT-2 ×3, GPT-Neo-125m, Pythia ×3 | **B**† | all 21 Table 2 shares reproduce; the abstract's 70–89% holds only pooled per model, 4 of 21 per-channel entries fall outside |
-| Expander sparse autoencoders ([2607.01799](https://arxiv.org/abs/2607.01799)) | Qwen2.5-3B, layer 12 | **A** | CE-recovered ratio 0.80–0.90 over 30 seeds and 30 resamples; k=32 gives 0.66, a mean-ablation denominator 0.77 |
-| CoAx conditional co-ablation, backup heads ([2607.01940](https://arxiv.org/abs/2607.01940)) | GPT-2 small, IOI | **B**† | the no-IOI null recovers the same heads at 0.93–0.97 AUC, so the backup structure is task-general; label-free primaries collapse CoAx to 0.28 / 0.38 while AtP\* stays 0.83 |
-| Activation Model Scanner, Tier-1 safety scan ([2608.05578](https://arxiv.org/abs/2608.05578)) | 14 models of Table I | **C**† | Table I reproduces to two decimals and is a padding artifact: the extractor reads pad-token activations for the 10 right-padded tokenizers; with batch size 1 every model scores σ 4.5–6.7 and nothing is flagged |
-| Certified Interventional Fidelity ([2607.08349](https://arxiv.org/abs/2607.08349)) | GPT-2 small, IOI | **B**† | 30 of 30 shipped rows reproduce; the certified level depends on the prompt template, and the "10–30x" saving is 6.6–7.2x at F0 = 0.8 |
+| The Communication Map of a Transformer ([2608.22007](https://arxiv.org/abs/2608.22007)) | GPT-2 ×3, GPT-Neo-125m, Pythia ×3 | **C**† | all 21 Table 2 shares reproduce; the abstract's 70–89% holds only pooled per model, 4 of 21 per-channel entries fall outside |
+| Expander sparse autoencoders ([2607.01799](https://arxiv.org/abs/2607.01799)) | Qwen2.5-3B, layer 12 | **B** | CE-recovered ratio 0.80–0.90 over 30 seeds and 30 resamples; k=32 gives 0.66, a mean-ablation denominator 0.77 |
+| CoAx conditional co-ablation, backup heads ([2607.01940](https://arxiv.org/abs/2607.01940)) | GPT-2 small, IOI | **C**† | the no-IOI null recovers the same heads at 0.93–0.97 AUC, so the backup structure is task-general; label-free primaries collapse CoAx to 0.28 / 0.38 while AtP\* stays 0.83 |
+| Activation Model Scanner, Tier-1 safety scan ([2608.05578](https://arxiv.org/abs/2608.05578)) | 14 models of Table I | **D**† | Table I reproduces to two decimals and is a padding artifact: the extractor reads pad-token activations for the 10 right-padded tokenizers; with batch size 1 every model scores σ 4.5–6.7 and nothing is flagged |
+| Certified Interventional Fidelity ([2607.08349](https://arxiv.org/abs/2607.08349)) | GPT-2 small, IOI | **C**† | 30 of 30 shipped rows reproduce; the certified level depends on the prompt template, and the "10–30x" saving is 6.6–7.2x at F0 = 0.8 |
 | Refusal is mediated by a single direction ([2406.11717](https://arxiv.org/abs/2406.11717)) | Llama-3.1-8B, Qwen2.5-7B, Qwen3.5-4B/9B, gemma-4-E4B/12B | **A** to **C** | the causal effect holds on every model (specificity 4–1293x); which direction gets selected is unstable (J 0.18–0.39); two measurement artifacts in the raw completions |
 | SAE causal inertness ([2607.12166](https://arxiv.org/abs/2607.12166)) | toy bottleneck model, TopK SAEs | **C**† | the inert-pair census is unstable (J 0.33); the abstract's headline uses a different denominator than its own sentence |
-| Homonym reconvergence profiles ([2608.01816](https://arxiv.org/abs/2608.01816)) | gpt2, Llama-3.2-3B, Qwen2.5-7B | **B** ×3† | the profile label recurs in 28–32 of 32 runs, but the paper's own sequence-order control produces the same label (specificity 0.88–1.08x) |
+| Homonym reconvergence profiles ([2608.01816](https://arxiv.org/abs/2608.01816)) | gpt2, Llama-3.2-3B, Qwen2.5-7B | **C** ×3† | the profile label recurs in 28–32 of 32 runs, but the paper's own sequence-order control produces the same label (specificity 0.88–1.08x) |
 | Truth vs impossibility probes ([2608.12852](https://arxiv.org/abs/2608.12852)) | gemma-3-4b-it | **A** | the double dissociation survives resampling, re-splitting and hyperparameters; specificity 1.84x |
 | Mechanistic tomography, OMP recovery ([2608.19338](https://arxiv.org/abs/2608.19338)) | released HMM observer checkpoint | **C** | bit-exact reproduction; four bin-7 coordinates are real and specific, the support beyond them is not stable (J 0.40) |
-| Jacobian-lens readouts ([anthropics/jacobian-lens](https://github.com/anthropics/jacobian-lens)) | Qwen3.5-0.8B/4B/27B, Qwen3.6-27B | **C** / **B**† | the mid-to-late-band claim is stable (π\* 0.90); which items hit is not (J 0.45–0.49), and a deranged-target null hits more consistently than the real targets |
+| Jacobian-lens readouts ([anthropics/jacobian-lens](https://github.com/anthropics/jacobian-lens)) | Qwen3.5-0.8B/4B/27B, Qwen3.6-27B | **D** / **C**† | the mid-to-late-band claim is stable (π\* 0.90); which items hit is not (J 0.45–0.49), and a deranged-target null hits more consistently than the real targets |
 | Activation oracles ([2512.15674](https://arxiv.org/abs/2512.15674)) | Qwen3-8B taboo, three released mixtures | **D**, **D**, **C** | accuracy 0.09–0.45 with null hallucination near 0.9; the instrument is prompt-dominated |
-| IOI circuit under attribution patching ([2211.00593](https://arxiv.org/abs/2211.00593)) | GPT-2 small / medium / large | **A** ×3 (two †) | J 0.83–0.95, specificity 1.5–2.3x; no monotone trend with scale, small and large stay undecided after 45 runs |
-| Greater-than circuit under attribution patching ([2305.00586](https://arxiv.org/abs/2305.00586)) | GPT-2 small | **B** | J 0.89 but specificity 1.15x: the head set is nearly as stable on the corrupted null |
+| IOI circuit under attribution patching ([2211.00593](https://arxiv.org/abs/2211.00593)) | GPT-2 small / medium / large | **A**, **B**†, **B**† | J 0.83–0.95, specificity 1.5–2.3x; no monotone trend with scale, small and large stay undecided after 45 runs |
+| Greater-than circuit under attribution patching ([2305.00586](https://arxiv.org/abs/2305.00586)) | GPT-2 small | **C** | J 0.89 but specificity 1.15x: the head set is nearly as stable on the corrupted null |
 
 How every row is produced ([`references/PROTOCOL.md`](references/PROTOCOL.md)):
 the runner imports the paper's released code unmodified at a pinned commit;
@@ -365,15 +365,26 @@ a pure-noise null where the method still returns confident-looking features
 | **Beats random** | overlap vs. size-matched random null (Monte-Carlo over the observed size distribution; analytic *k*/(2*N*−*k*) kept as cross-check) | ≥ 3× | arXiv:2608.13754, 2602.14111 |
 | **Specificity** | stability on real data vs. a null control where the effect should not exist, with a two-sample bootstrap 95% CI | ≥ 1.5× | arXiv:2606.00033 |
 
-Every diagnostic check carries a 95% CI. A CI that straddles its bar marks the check
-**undecided in either direction** — the point estimate still grades, but the
-verdict is reported low-confidence and the card says so out loud.
+Every diagnostic check carries a 95% CI. A check is **decided** only when the
+whole interval sits on one side of its bar; a straddling interval leaves the
+check **undecided in either direction**, the card says so out loud, and the
+verdict is reported low-confidence.
 
-Grades: **A** all applicable checks pass · **B** at least half · **C** at least
-one · **D** none, or indistinguishable from random. Thresholds are configurable
-(`sk.Thresholds`). These grades are compact diagnostics, not calibrated
-confirmatory decisions and not comparable across papers unless design,
-estimand, thresholds, universes, and dependency units match.
+Grades (rule v0.4, recorded on every card as `verdict.grade_rule`): **A** every
+applicable check decided pass · **B** at least half · **C** at least one ·
+**D** none. Two caps and a floor sit on top: a decided specificity fail caps
+the grade at **C** (stability the method also shows on null data is a property
+of the method, not of the data), a battery without a null control caps it at
+**B** (an untested null is not a passed one), and structural overlap at or
+below 1.5× the size-matched random null is **D** outright. Under the point
+rule that graded every card before 2026-09-03 (v0.3: a check counted as passed
+when its point estimate cleared the bar) a constant, data-ignoring finder
+graded A with high confidence without a null control and B with one; the
+cards were regraded from their recorded checks and each keeps its v0.3 grade
+in its notes. Thresholds are configurable (`sk.Thresholds`). These grades are
+compact diagnostics, not calibrated confirmatory decisions and not comparable
+across papers unless design, estimand, thresholds, universes, and dependency
+units match.
 
 Battery axes run one-at-a-time around your base configuration, so run counts
 stay linear and attribution stays legible: `seeds` (finders that ignore their

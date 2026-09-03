@@ -1,7 +1,7 @@
 {
-  "schema_version": "0.2",
-  "stresskit_version": "0.3.0",
-  "created_at": "2026-08-21T23:39:37+00:00",
+  "schema_version": "0.5",
+  "stresskit_version": "1.0.0.dev0",
+  "created_at": "2026-09-03T05:54:17+00:00",
   "claim": {
     "statement": "Greater-Than in GPT-2 small is implemented by ~15 attention heads concentrated in the mid-to-late layers",
     "base_claim_label": "late",
@@ -29,6 +29,9 @@
   "metrics": {
     "pooled": {
       "n_runs": 45,
+      "n_structured_runs": 45,
+      "n_empty_findings": 0,
+      "empty_finding_rate": 0.0,
       "mean_pairwise_jaccard": 0.8921713657766789,
       "min_pairwise_jaccard": 0.26666666666666666,
       "flip_rate": 0.0444444444444444,
@@ -88,6 +91,9 @@
     "per_axis": {
       "bootstrap": {
         "n_runs": 21,
+        "n_structured_runs": 21,
+        "n_empty_findings": 0,
+        "empty_finding_rate": 0.0,
         "mean_pairwise_jaccard": 0.916608309990663,
         "min_pairwise_jaccard": 0.6666666666666666,
         "flip_rate": 0.0,
@@ -103,6 +109,9 @@
       },
       "hyperparams": {
         "n_runs": 3,
+        "n_structured_runs": 3,
+        "n_empty_findings": 0,
+        "empty_finding_rate": 0.0,
         "mean_pairwise_jaccard": 0.43333333333333335,
         "min_pairwise_jaccard": 0.26666666666666666,
         "flip_rate": 0.6666666666666667,
@@ -119,6 +128,9 @@
       },
       "seeds": {
         "n_runs": 21,
+        "n_structured_runs": 21,
+        "n_empty_findings": 0,
+        "empty_finding_rate": 0.0,
         "mean_pairwise_jaccard": 0.9572128851540616,
         "min_pairwise_jaccard": 0.7647058823529411,
         "flip_rate": 0.0,
@@ -134,6 +146,9 @@
       },
       "templates": {
         "n_runs": 3,
+        "n_structured_runs": 3,
+        "n_empty_findings": 0,
+        "empty_finding_rate": 0.0,
         "mean_pairwise_jaccard": 0.9166666666666666,
         "min_pairwise_jaccard": 0.875,
         "flip_rate": 0.0,
@@ -159,7 +174,11 @@
     }
   },
   "verdict": {
-    "grade": "B",
+    "grade": "C",
+    "grade_rule": "v0.4",
+    "profile": "diagnostic",
+    "confirmatory_state": "not_applicable",
+    "required_checks": [],
     "checks": {
       "structural_stability": {
         "value": 0.8921713657766789,
@@ -171,6 +190,7 @@
           0.9431382635358667
         ],
         "robust": true,
+        "state": "pass",
         "description": "mean pairwise Jaccard across all perturbed runs"
       },
       "claim_stability": {
@@ -183,6 +203,7 @@
           1.0
         ],
         "robust": true,
+        "state": "pass",
         "description": "modal claim share \u03c0* (filability at \u03b1=0.2)"
       },
       "score_stability": {
@@ -195,6 +216,7 @@
           0.002395357180445613
         ],
         "robust": true,
+        "state": "pass",
         "description": "coefficient of variation of the quality score"
       },
       "beats_random": {
@@ -207,6 +229,7 @@
           16.673557894385848
         ],
         "robust": true,
+        "state": "pass",
         "description": "structural overlap vs size-matched random null (\u00d7)"
       },
       "specificity": {
@@ -219,6 +242,7 @@
           1.2303342779714896
         ],
         "robust": true,
+        "state": "fail",
         "description": "structural stability on real vs null-control data (\u00d7)"
       }
     },
@@ -226,15 +250,19 @@
       "jaccard": 0.8,
       "modal_share": 0.8,
       "score_cv": 0.25,
-      "random_margin": 3.0
+      "random_margin": 3.0,
+      "specificity_ratio": 1.5,
+      "random_floor": 1.5
     }
   },
   "provenance": {
     "python": "3.12.3",
     "platform": "Linux-6.11.0-1016-nvidia-x86_64-with-glibc2.39",
-    "wall_seconds": 9.056
+    "wall_seconds": 9.026
   },
-  "notes": [],
+  "notes": [
+    "v0.3 grade: B (card of 2026-08-21); the battery was re-run from scratch on 2026-09-03 under grade rule v0.4 with bit-identical metrics, checks and intervals; only the letter and the verdict trace changed"
+  ],
   "runs": [
     {
       "axis": "base",
@@ -244,6 +272,7 @@
       "claim": "late",
       "score": 0.9993677742252606,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "28d8c420928c877c183ef3bb3c823d7ed073a3d59d0b57a334f1f87238945014",
       "components": [
         "L0H1",
@@ -271,6 +300,7 @@
       "claim": "late",
       "score": 0.9988984754242705,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "28d8c420928c877c183ef3bb3c823d7ed073a3d59d0b57a334f1f87238945014",
       "components": [
         "L0H1",
@@ -298,6 +328,7 @@
       "claim": "late",
       "score": 0.9999458556291111,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "28d8c420928c877c183ef3bb3c823d7ed073a3d59d0b57a334f1f87238945014",
       "components": [
         "L0H1",
@@ -325,6 +356,7 @@
       "claim": "late",
       "score": 0.9980844462201518,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "28d8c420928c877c183ef3bb3c823d7ed073a3d59d0b57a334f1f87238945014",
       "components": [
         "L0H1",
@@ -352,6 +384,7 @@
       "claim": "late",
       "score": 0.9980747033453815,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "28d8c420928c877c183ef3bb3c823d7ed073a3d59d0b57a334f1f87238945014",
       "components": [
         "L0H1",
@@ -379,6 +412,7 @@
       "claim": "late",
       "score": 0.9987137173859726,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "28d8c420928c877c183ef3bb3c823d7ed073a3d59d0b57a334f1f87238945014",
       "components": [
         "L0H1",
@@ -406,6 +440,7 @@
       "claim": "late",
       "score": 1.0024539754991373,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "d121d767a6927406aed9ef556d8e61faac8aa7f79f332b86fe0cbcd8d020eec3",
       "components": [
         "L0H1",
@@ -433,6 +468,7 @@
       "claim": "late",
       "score": 1.0006634488150488,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "d64af070c8f404045e7305360da77f28c33c1a1be0813963953f412e67a8c242",
       "components": [
         "L0H1",
@@ -460,6 +496,7 @@
       "claim": "late",
       "score": 1.0021680659131367,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "d64af070c8f404045e7305360da77f28c33c1a1be0813963953f412e67a8c242",
       "components": [
         "L0H1",
@@ -487,6 +524,7 @@
       "claim": "late",
       "score": 0.9979236399410655,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "28d8c420928c877c183ef3bb3c823d7ed073a3d59d0b57a334f1f87238945014",
       "components": [
         "L0H1",
@@ -514,6 +552,7 @@
       "claim": "late",
       "score": 0.998418577692406,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "28d8c420928c877c183ef3bb3c823d7ed073a3d59d0b57a334f1f87238945014",
       "components": [
         "L0H1",
@@ -541,6 +580,7 @@
       "claim": "late",
       "score": 0.9982080867250629,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "28d8c420928c877c183ef3bb3c823d7ed073a3d59d0b57a334f1f87238945014",
       "components": [
         "L0H1",
@@ -568,6 +608,7 @@
       "claim": "late",
       "score": 1.0000315295331441,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "28d8c420928c877c183ef3bb3c823d7ed073a3d59d0b57a334f1f87238945014",
       "components": [
         "L0H1",
@@ -595,6 +636,7 @@
       "claim": "late",
       "score": 0.9984082845678176,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "28d8c420928c877c183ef3bb3c823d7ed073a3d59d0b57a334f1f87238945014",
       "components": [
         "L0H1",
@@ -622,6 +664,7 @@
       "claim": "late",
       "score": 0.9976577518181736,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "28d8c420928c877c183ef3bb3c823d7ed073a3d59d0b57a334f1f87238945014",
       "components": [
         "L0H1",
@@ -649,6 +692,7 @@
       "claim": "late",
       "score": 0.998661592724779,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "28d8c420928c877c183ef3bb3c823d7ed073a3d59d0b57a334f1f87238945014",
       "components": [
         "L0H1",
@@ -676,6 +720,7 @@
       "claim": "late",
       "score": 0.9995574414182438,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "28d8c420928c877c183ef3bb3c823d7ed073a3d59d0b57a334f1f87238945014",
       "components": [
         "L0H1",
@@ -703,6 +748,7 @@
       "claim": "late",
       "score": 0.9989409363526139,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "28d8c420928c877c183ef3bb3c823d7ed073a3d59d0b57a334f1f87238945014",
       "components": [
         "L0H1",
@@ -730,6 +776,7 @@
       "claim": "late",
       "score": 0.9988378084238486,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "28d8c420928c877c183ef3bb3c823d7ed073a3d59d0b57a334f1f87238945014",
       "components": [
         "L0H1",
@@ -757,6 +804,7 @@
       "claim": "late",
       "score": 0.9989046160311393,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "28d8c420928c877c183ef3bb3c823d7ed073a3d59d0b57a334f1f87238945014",
       "components": [
         "L0H1",
@@ -784,6 +832,7 @@
       "claim": "late",
       "score": 0.9991971677578481,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "28d8c420928c877c183ef3bb3c823d7ed073a3d59d0b57a334f1f87238945014",
       "components": [
         "L0H1",
@@ -811,6 +860,7 @@
       "claim": "late",
       "score": 0.9985095198954015,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "28d8c420928c877c183ef3bb3c823d7ed073a3d59d0b57a334f1f87238945014",
       "components": [
         "L0H1",
@@ -838,6 +888,7 @@
       "claim": "late",
       "score": 0.9980205066397627,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "28d8c420928c877c183ef3bb3c823d7ed073a3d59d0b57a334f1f87238945014",
       "components": [
         "L0H1",
@@ -865,6 +916,7 @@
       "claim": "late",
       "score": 0.9984773263812499,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "28d8c420928c877c183ef3bb3c823d7ed073a3d59d0b57a334f1f87238945014",
       "components": [
         "L0H1",
@@ -892,6 +944,7 @@
       "claim": "late",
       "score": 0.9990227414217787,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "28d8c420928c877c183ef3bb3c823d7ed073a3d59d0b57a334f1f87238945014",
       "components": [
         "L0H1",
@@ -919,6 +972,7 @@
       "claim": "late",
       "score": 0.9976127431352833,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "28d8c420928c877c183ef3bb3c823d7ed073a3d59d0b57a334f1f87238945014",
       "components": [
         "L0H1",
@@ -946,6 +1000,7 @@
       "claim": "late",
       "score": 0.9974714492739445,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "28d8c420928c877c183ef3bb3c823d7ed073a3d59d0b57a334f1f87238945014",
       "components": [
         "L0H1",
@@ -973,6 +1028,7 @@
       "claim": "late",
       "score": 0.998715737971165,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "28d8c420928c877c183ef3bb3c823d7ed073a3d59d0b57a334f1f87238945014",
       "components": [
         "L0H1",
@@ -1000,6 +1056,7 @@
       "claim": "late",
       "score": 0.9991584641264366,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "28d8c420928c877c183ef3bb3c823d7ed073a3d59d0b57a334f1f87238945014",
       "components": [
         "L0H1",
@@ -1027,6 +1084,7 @@
       "claim": "late",
       "score": 0.999583833743354,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "28d8c420928c877c183ef3bb3c823d7ed073a3d59d0b57a334f1f87238945014",
       "components": [
         "L0H1",
@@ -1054,6 +1112,7 @@
       "claim": "late",
       "score": 0.9982894223781731,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "28d8c420928c877c183ef3bb3c823d7ed073a3d59d0b57a334f1f87238945014",
       "components": [
         "L0H1",
@@ -1081,6 +1140,7 @@
       "claim": "late",
       "score": 0.9995624075598079,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "28d8c420928c877c183ef3bb3c823d7ed073a3d59d0b57a334f1f87238945014",
       "components": [
         "L0H1",
@@ -1108,6 +1168,7 @@
       "claim": "late",
       "score": 0.9996781830556206,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "28d8c420928c877c183ef3bb3c823d7ed073a3d59d0b57a334f1f87238945014",
       "components": [
         "L0H1",
@@ -1135,6 +1196,7 @@
       "claim": "late",
       "score": 0.9981079063401169,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "28d8c420928c877c183ef3bb3c823d7ed073a3d59d0b57a334f1f87238945014",
       "components": [
         "L0H1",
@@ -1162,6 +1224,7 @@
       "claim": "late",
       "score": 1.0012327662289153,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "6142e43eaa86f9e498b5daf0c96e775d5953e3254d81124c0593f7551662c183",
       "components": [
         "L0H1",
@@ -1189,6 +1252,7 @@
       "claim": "late",
       "score": 1.0008780674733793,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "a8b5efd233b5b4c68151f06c1ae41130b527b367a7b1c67134bf85aa50a20382",
       "components": [
         "L0H1",
@@ -1216,6 +1280,7 @@
       "claim": "late",
       "score": 0.999673803627805,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "cd280cef7baaff94955ead307402d8e47c05db75f3558774d6c8831dcd8ff87e",
       "components": [
         "L0H1",
@@ -1243,6 +1308,7 @@
       "claim": "late",
       "score": 0.9982231077497647,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "28d8c420928c877c183ef3bb3c823d7ed073a3d59d0b57a334f1f87238945014",
       "components": [
         "L0H1",
@@ -1270,6 +1336,7 @@
       "claim": "late",
       "score": 1.0013762603093261,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "d64af070c8f404045e7305360da77f28c33c1a1be0813963953f412e67a8c242",
       "components": [
         "L0H1",
@@ -1297,6 +1364,7 @@
       "claim": "late",
       "score": 1.0033795677559831,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "1d57da6b0aa1fce18b62f9aafdb2b58de177b723080e6cf677b64158a2266ace",
       "components": [
         "L0H1",
@@ -1324,6 +1392,7 @@
       "claim": "late",
       "score": 0.998645714726288,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "70365e221764f2fcc0337b4d5a9d3efe23a113a52d4408d9a492ba634af58117",
       "components": [
         "L0H1",
@@ -1351,6 +1420,7 @@
       "claim": "late",
       "score": 1.0009060888175565,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "6142e43eaa86f9e498b5daf0c96e775d5953e3254d81124c0593f7551662c183",
       "components": [
         "L0H1",
@@ -1378,6 +1448,7 @@
       "claim": "late",
       "score": 1.0021873765245082,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "6142e43eaa86f9e498b5daf0c96e775d5953e3254d81124c0593f7551662c183",
       "components": [
         "L0H1",
@@ -1405,6 +1476,7 @@
       "claim": "late",
       "score": 0.991860729646691,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "4ca4c4be610b336a536dcef90fa9b0426c09d1643698745a21718d9f4044a975",
       "components": [
         "L0H1",
@@ -1425,6 +1497,7 @@
       "claim": "early",
       "score": 0.9997477010158483,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "ba0bb0143da45bb3406988faf33db133ea880192099c0d2f75adc739ebc07f79",
       "components": [
         "L0H1",

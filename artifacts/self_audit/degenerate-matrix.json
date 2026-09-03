@@ -1,0 +1,1751 @@
+{
+  "seed": 0,
+  "stresskit_version": "1.0.0.dev0",
+  "thresholds": {
+    "jaccard": 0.8,
+    "modal_share": 0.8,
+    "score_cv": 0.25,
+    "random_margin": 3.0,
+    "specificity_ratio": 1.5,
+    "cosine": 0.8,
+    "random_floor": 1.5
+  },
+  "grade_rules": [
+    "v0.3",
+    "v0.4"
+  ],
+  "engine_grade_rule": "v0.4",
+  "arms": [
+    {
+      "name": "default",
+      "battery": [
+        "seeds",
+        "bootstrap",
+        "hyperparams"
+      ],
+      "n_runs": 8,
+      "hyperparams": {
+        "k": [
+          6,
+          12
+        ]
+      }
+    },
+    {
+      "name": "seeds_only",
+      "battery": [
+        "seeds"
+      ],
+      "n_runs": 16,
+      "hyperparams": null
+    }
+  ],
+  "finders": [
+    {
+      "name": "constant",
+      "kind": "set",
+      "real_data": "real",
+      "null_data": "noise",
+      "ignores_data": true,
+      "description": "fixed set {100..107}, claim 'second-half', score 0.5"
+    },
+    {
+      "name": "index_ranker",
+      "kind": "set",
+      "real_data": "real",
+      "null_data": "noise",
+      "ignores_data": true,
+      "description": "first k feature indices; data-independent ranking"
+    },
+    {
+      "name": "random_subset",
+      "kind": "set",
+      "real_data": "real",
+      "null_data": "noise",
+      "ignores_data": true,
+      "description": "seeded random k-subset, random claim, random score"
+    },
+    {
+      "name": "planted_leak",
+      "kind": "set",
+      "real_data": "real",
+      "null_data": "noise",
+      "ignores_data": true,
+      "description": "the planted TRUE set on any data (memorised answer)"
+    },
+    {
+      "name": "size_inflating",
+      "kind": "set",
+      "real_data": "real",
+      "null_data": "noise",
+      "ignores_data": true,
+      "description": "TRUE plus every even index below 200 (105 components)"
+    },
+    {
+      "name": "fixed_direction",
+      "kind": "direction",
+      "real_data": "real",
+      "null_data": "noise",
+      "ignores_data": true,
+      "description": "basis vector e_3 in R^64"
+    },
+    {
+      "name": "random_direction",
+      "kind": "direction",
+      "real_data": "real",
+      "null_data": "noise",
+      "ignores_data": true,
+      "description": "seeded random unit vector in R^64"
+    },
+    {
+      "name": "demo_positive",
+      "kind": "set",
+      "real_data": "real",
+      "null_data": "noise",
+      "ignores_data": false,
+      "description": "demo top-k correlation finder on the real-effect data (positive control)"
+    },
+    {
+      "name": "demo_on_noise",
+      "kind": "set",
+      "real_data": "noise",
+      "null_data": "noise_alt",
+      "ignores_data": false,
+      "description": "demo top-k correlation finder with pure noise as its real data"
+    }
+  ],
+  "datasets": {
+    "real": "make_data(400, noise=0.5, seed=seed)",
+    "noise": "make_data(100, noise=1.0, seed=seed, signal=0.0)",
+    "noise_alt": "make_data(100, noise=1.0, seed=seed + 1, signal=0.0)"
+  },
+  "rows": [
+    {
+      "finder": "constant",
+      "arm": "default",
+      "with_null": false,
+      "battery": [
+        "seeds",
+        "bootstrap",
+        "hyperparams"
+      ],
+      "n_runs": 8,
+      "grade_v04": "B",
+      "grade_v03": "A",
+      "confidence": "high",
+      "checks": {
+        "structural_stability": {
+          "value": 1.0,
+          "state": "pass",
+          "passed": true
+        },
+        "claim_stability": {
+          "value": 1.0,
+          "state": "pass",
+          "passed": true
+        },
+        "score_stability": {
+          "value": 0.0,
+          "state": "pass",
+          "passed": true
+        },
+        "beats_random": {
+          "value": 45.68076403702762,
+          "state": "pass",
+          "passed": true
+        }
+      },
+      "notes_flags": {
+        "vacuous_seeds": true,
+        "vacuous_bootstrap": true
+      }
+    },
+    {
+      "finder": "constant",
+      "arm": "default",
+      "with_null": true,
+      "battery": [
+        "seeds",
+        "bootstrap",
+        "hyperparams"
+      ],
+      "n_runs": 8,
+      "grade_v04": "C",
+      "grade_v03": "B",
+      "confidence": "high",
+      "checks": {
+        "structural_stability": {
+          "value": 1.0,
+          "state": "pass",
+          "passed": true
+        },
+        "claim_stability": {
+          "value": 1.0,
+          "state": "pass",
+          "passed": true
+        },
+        "score_stability": {
+          "value": 0.0,
+          "state": "pass",
+          "passed": true
+        },
+        "beats_random": {
+          "value": 45.68076403702762,
+          "state": "pass",
+          "passed": true
+        },
+        "specificity": {
+          "value": 1.0,
+          "state": "fail",
+          "passed": false
+        }
+      },
+      "notes_flags": {
+        "vacuous_seeds": true,
+        "vacuous_bootstrap": true
+      }
+    },
+    {
+      "finder": "constant",
+      "arm": "seeds_only",
+      "with_null": false,
+      "battery": [
+        "seeds"
+      ],
+      "n_runs": 16,
+      "grade_v04": "B",
+      "grade_v03": "A",
+      "confidence": "high",
+      "checks": {
+        "structural_stability": {
+          "value": 1.0,
+          "state": "pass",
+          "passed": true
+        },
+        "claim_stability": {
+          "value": 1.0,
+          "state": "pass",
+          "passed": true
+        },
+        "score_stability": {
+          "value": 0.0,
+          "state": "pass",
+          "passed": true
+        },
+        "beats_random": {
+          "value": 45.9354864252274,
+          "state": "pass",
+          "passed": true
+        }
+      },
+      "notes_flags": {
+        "vacuous_seeds": true,
+        "vacuous_bootstrap": false
+      }
+    },
+    {
+      "finder": "constant",
+      "arm": "seeds_only",
+      "with_null": true,
+      "battery": [
+        "seeds"
+      ],
+      "n_runs": 16,
+      "grade_v04": "C",
+      "grade_v03": "B",
+      "confidence": "high",
+      "checks": {
+        "structural_stability": {
+          "value": 1.0,
+          "state": "pass",
+          "passed": true
+        },
+        "claim_stability": {
+          "value": 1.0,
+          "state": "pass",
+          "passed": true
+        },
+        "score_stability": {
+          "value": 0.0,
+          "state": "pass",
+          "passed": true
+        },
+        "beats_random": {
+          "value": 45.9354864252274,
+          "state": "pass",
+          "passed": true
+        },
+        "specificity": {
+          "value": 1.0,
+          "state": "fail",
+          "passed": false
+        }
+      },
+      "notes_flags": {
+        "vacuous_seeds": true,
+        "vacuous_bootstrap": false
+      }
+    },
+    {
+      "finder": "index_ranker",
+      "arm": "default",
+      "with_null": false,
+      "battery": [
+        "seeds",
+        "bootstrap",
+        "hyperparams"
+      ],
+      "n_runs": 8,
+      "grade_v04": "B",
+      "grade_v03": "A",
+      "confidence": "high",
+      "checks": {
+        "structural_stability": {
+          "value": 0.9390838206627681,
+          "state": "pass",
+          "passed": true
+        },
+        "claim_stability": {
+          "value": 1.0,
+          "state": "pass",
+          "passed": true
+        },
+        "score_stability": {
+          "value": 0.0,
+          "state": "pass",
+          "passed": true
+        },
+        "beats_random": {
+          "value": 42.752323247378875,
+          "state": "pass",
+          "passed": true
+        }
+      },
+      "notes_flags": {
+        "vacuous_seeds": true,
+        "vacuous_bootstrap": true
+      }
+    },
+    {
+      "finder": "index_ranker",
+      "arm": "default",
+      "with_null": true,
+      "battery": [
+        "seeds",
+        "bootstrap",
+        "hyperparams"
+      ],
+      "n_runs": 8,
+      "grade_v04": "C",
+      "grade_v03": "B",
+      "confidence": "high",
+      "checks": {
+        "structural_stability": {
+          "value": 0.9390838206627681,
+          "state": "pass",
+          "passed": true
+        },
+        "claim_stability": {
+          "value": 1.0,
+          "state": "pass",
+          "passed": true
+        },
+        "score_stability": {
+          "value": 0.0,
+          "state": "pass",
+          "passed": true
+        },
+        "beats_random": {
+          "value": 42.752323247378875,
+          "state": "pass",
+          "passed": true
+        },
+        "specificity": {
+          "value": 0.9390838206627681,
+          "state": "fail",
+          "passed": false
+        }
+      },
+      "notes_flags": {
+        "vacuous_seeds": true,
+        "vacuous_bootstrap": true
+      }
+    },
+    {
+      "finder": "index_ranker",
+      "arm": "seeds_only",
+      "with_null": false,
+      "battery": [
+        "seeds"
+      ],
+      "n_runs": 16,
+      "grade_v04": "B",
+      "grade_v03": "A",
+      "confidence": "high",
+      "checks": {
+        "structural_stability": {
+          "value": 1.0,
+          "state": "pass",
+          "passed": true
+        },
+        "claim_stability": {
+          "value": 1.0,
+          "state": "pass",
+          "passed": true
+        },
+        "score_stability": {
+          "value": 0.0,
+          "state": "pass",
+          "passed": true
+        },
+        "beats_random": {
+          "value": 45.9354864252274,
+          "state": "pass",
+          "passed": true
+        }
+      },
+      "notes_flags": {
+        "vacuous_seeds": true,
+        "vacuous_bootstrap": false
+      }
+    },
+    {
+      "finder": "index_ranker",
+      "arm": "seeds_only",
+      "with_null": true,
+      "battery": [
+        "seeds"
+      ],
+      "n_runs": 16,
+      "grade_v04": "C",
+      "grade_v03": "B",
+      "confidence": "high",
+      "checks": {
+        "structural_stability": {
+          "value": 1.0,
+          "state": "pass",
+          "passed": true
+        },
+        "claim_stability": {
+          "value": 1.0,
+          "state": "pass",
+          "passed": true
+        },
+        "score_stability": {
+          "value": 0.0,
+          "state": "pass",
+          "passed": true
+        },
+        "beats_random": {
+          "value": 45.9354864252274,
+          "state": "pass",
+          "passed": true
+        },
+        "specificity": {
+          "value": 1.0,
+          "state": "fail",
+          "passed": false
+        }
+      },
+      "notes_flags": {
+        "vacuous_seeds": true,
+        "vacuous_bootstrap": false
+      }
+    },
+    {
+      "finder": "random_subset",
+      "arm": "default",
+      "with_null": false,
+      "battery": [
+        "seeds",
+        "bootstrap",
+        "hyperparams"
+      ],
+      "n_runs": 8,
+      "grade_v04": "C",
+      "grade_v03": "C",
+      "confidence": "low",
+      "checks": {
+        "structural_stability": {
+          "value": 0.30497297750298674,
+          "state": "fail",
+          "passed": false
+        },
+        "claim_stability": {
+          "value": 0.7894736842105263,
+          "state": "inconclusive",
+          "passed": false
+        },
+        "score_stability": {
+          "value": 0.39420434076780797,
+          "state": "inconclusive",
+          "passed": false
+        },
+        "beats_random": {
+          "value": 13.884067672171563,
+          "state": "pass",
+          "passed": true
+        }
+      },
+      "notes_flags": {
+        "vacuous_seeds": false,
+        "vacuous_bootstrap": true
+      }
+    },
+    {
+      "finder": "random_subset",
+      "arm": "default",
+      "with_null": true,
+      "battery": [
+        "seeds",
+        "bootstrap",
+        "hyperparams"
+      ],
+      "n_runs": 8,
+      "grade_v04": "C",
+      "grade_v03": "C",
+      "confidence": "low",
+      "checks": {
+        "structural_stability": {
+          "value": 0.30497297750298674,
+          "state": "fail",
+          "passed": false
+        },
+        "claim_stability": {
+          "value": 0.7894736842105263,
+          "state": "inconclusive",
+          "passed": false
+        },
+        "score_stability": {
+          "value": 0.39420434076780797,
+          "state": "inconclusive",
+          "passed": false
+        },
+        "beats_random": {
+          "value": 13.884067672171563,
+          "state": "pass",
+          "passed": true
+        },
+        "specificity": {
+          "value": 1.073986219172047,
+          "state": "inconclusive",
+          "passed": false
+        }
+      },
+      "notes_flags": {
+        "vacuous_seeds": false,
+        "vacuous_bootstrap": true
+      }
+    },
+    {
+      "finder": "random_subset",
+      "arm": "seeds_only",
+      "with_null": false,
+      "battery": [
+        "seeds"
+      ],
+      "n_runs": 16,
+      "grade_v04": "D",
+      "grade_v03": "D",
+      "confidence": "low",
+      "checks": {
+        "structural_stability": {
+          "value": 0.017296918767507004,
+          "state": "fail",
+          "passed": false
+        },
+        "claim_stability": {
+          "value": 0.6470588235294118,
+          "state": "inconclusive",
+          "passed": false
+        },
+        "score_stability": {
+          "value": 0.4174238243805389,
+          "state": "inconclusive",
+          "passed": false
+        },
+        "beats_random": {
+          "value": 0.7945423772430791,
+          "state": "fail",
+          "passed": false
+        }
+      },
+      "notes_flags": {
+        "vacuous_seeds": false,
+        "vacuous_bootstrap": false
+      }
+    },
+    {
+      "finder": "random_subset",
+      "arm": "seeds_only",
+      "with_null": true,
+      "battery": [
+        "seeds"
+      ],
+      "n_runs": 16,
+      "grade_v04": "D",
+      "grade_v03": "D",
+      "confidence": "low",
+      "checks": {
+        "structural_stability": {
+          "value": 0.017296918767507004,
+          "state": "fail",
+          "passed": false
+        },
+        "claim_stability": {
+          "value": 0.6470588235294118,
+          "state": "inconclusive",
+          "passed": false
+        },
+        "score_stability": {
+          "value": 0.4174238243805389,
+          "state": "inconclusive",
+          "passed": false
+        },
+        "beats_random": {
+          "value": 0.7945423772430791,
+          "state": "fail",
+          "passed": false
+        },
+        "specificity": {
+          "value": 0.6635668526555074,
+          "state": "fail",
+          "passed": false
+        }
+      },
+      "notes_flags": {
+        "vacuous_seeds": false,
+        "vacuous_bootstrap": false
+      }
+    },
+    {
+      "finder": "planted_leak",
+      "arm": "default",
+      "with_null": false,
+      "battery": [
+        "seeds",
+        "bootstrap",
+        "hyperparams"
+      ],
+      "n_runs": 8,
+      "grade_v04": "B",
+      "grade_v03": "A",
+      "confidence": "high",
+      "checks": {
+        "structural_stability": {
+          "value": 1.0,
+          "state": "pass",
+          "passed": true
+        },
+        "claim_stability": {
+          "value": 1.0,
+          "state": "pass",
+          "passed": true
+        },
+        "score_stability": {
+          "value": 0.0,
+          "state": "pass",
+          "passed": true
+        },
+        "beats_random": {
+          "value": 45.68076403702762,
+          "state": "pass",
+          "passed": true
+        }
+      },
+      "notes_flags": {
+        "vacuous_seeds": true,
+        "vacuous_bootstrap": true
+      }
+    },
+    {
+      "finder": "planted_leak",
+      "arm": "default",
+      "with_null": true,
+      "battery": [
+        "seeds",
+        "bootstrap",
+        "hyperparams"
+      ],
+      "n_runs": 8,
+      "grade_v04": "C",
+      "grade_v03": "B",
+      "confidence": "high",
+      "checks": {
+        "structural_stability": {
+          "value": 1.0,
+          "state": "pass",
+          "passed": true
+        },
+        "claim_stability": {
+          "value": 1.0,
+          "state": "pass",
+          "passed": true
+        },
+        "score_stability": {
+          "value": 0.0,
+          "state": "pass",
+          "passed": true
+        },
+        "beats_random": {
+          "value": 45.68076403702762,
+          "state": "pass",
+          "passed": true
+        },
+        "specificity": {
+          "value": 1.0,
+          "state": "fail",
+          "passed": false
+        }
+      },
+      "notes_flags": {
+        "vacuous_seeds": true,
+        "vacuous_bootstrap": true
+      }
+    },
+    {
+      "finder": "planted_leak",
+      "arm": "seeds_only",
+      "with_null": false,
+      "battery": [
+        "seeds"
+      ],
+      "n_runs": 16,
+      "grade_v04": "B",
+      "grade_v03": "A",
+      "confidence": "high",
+      "checks": {
+        "structural_stability": {
+          "value": 1.0,
+          "state": "pass",
+          "passed": true
+        },
+        "claim_stability": {
+          "value": 1.0,
+          "state": "pass",
+          "passed": true
+        },
+        "score_stability": {
+          "value": 0.0,
+          "state": "pass",
+          "passed": true
+        },
+        "beats_random": {
+          "value": 45.9354864252274,
+          "state": "pass",
+          "passed": true
+        }
+      },
+      "notes_flags": {
+        "vacuous_seeds": true,
+        "vacuous_bootstrap": false
+      }
+    },
+    {
+      "finder": "planted_leak",
+      "arm": "seeds_only",
+      "with_null": true,
+      "battery": [
+        "seeds"
+      ],
+      "n_runs": 16,
+      "grade_v04": "C",
+      "grade_v03": "B",
+      "confidence": "high",
+      "checks": {
+        "structural_stability": {
+          "value": 1.0,
+          "state": "pass",
+          "passed": true
+        },
+        "claim_stability": {
+          "value": 1.0,
+          "state": "pass",
+          "passed": true
+        },
+        "score_stability": {
+          "value": 0.0,
+          "state": "pass",
+          "passed": true
+        },
+        "beats_random": {
+          "value": 45.9354864252274,
+          "state": "pass",
+          "passed": true
+        },
+        "specificity": {
+          "value": 1.0,
+          "state": "fail",
+          "passed": false
+        }
+      },
+      "notes_flags": {
+        "vacuous_seeds": true,
+        "vacuous_bootstrap": false
+      }
+    },
+    {
+      "finder": "size_inflating",
+      "arm": "default",
+      "with_null": false,
+      "battery": [
+        "seeds",
+        "bootstrap",
+        "hyperparams"
+      ],
+      "n_runs": 8,
+      "grade_v04": "B",
+      "grade_v03": "B",
+      "confidence": "high",
+      "checks": {
+        "structural_stability": {
+          "value": 1.0,
+          "state": "pass",
+          "passed": true
+        },
+        "claim_stability": {
+          "value": 1.0,
+          "state": "pass",
+          "passed": true
+        },
+        "score_stability": {
+          "value": 0.0,
+          "state": "pass",
+          "passed": true
+        },
+        "beats_random": {
+          "value": 2.8052995700774797,
+          "state": "fail",
+          "passed": false
+        }
+      },
+      "notes_flags": {
+        "vacuous_seeds": true,
+        "vacuous_bootstrap": true
+      }
+    },
+    {
+      "finder": "size_inflating",
+      "arm": "default",
+      "with_null": true,
+      "battery": [
+        "seeds",
+        "bootstrap",
+        "hyperparams"
+      ],
+      "n_runs": 8,
+      "grade_v04": "C",
+      "grade_v03": "B",
+      "confidence": "high",
+      "checks": {
+        "structural_stability": {
+          "value": 1.0,
+          "state": "pass",
+          "passed": true
+        },
+        "claim_stability": {
+          "value": 1.0,
+          "state": "pass",
+          "passed": true
+        },
+        "score_stability": {
+          "value": 0.0,
+          "state": "pass",
+          "passed": true
+        },
+        "beats_random": {
+          "value": 2.8052995700774797,
+          "state": "fail",
+          "passed": false
+        },
+        "specificity": {
+          "value": 1.0,
+          "state": "fail",
+          "passed": false
+        }
+      },
+      "notes_flags": {
+        "vacuous_seeds": true,
+        "vacuous_bootstrap": true
+      }
+    },
+    {
+      "finder": "size_inflating",
+      "arm": "seeds_only",
+      "with_null": false,
+      "battery": [
+        "seeds"
+      ],
+      "n_runs": 16,
+      "grade_v04": "B",
+      "grade_v03": "B",
+      "confidence": "high",
+      "checks": {
+        "structural_stability": {
+          "value": 1.0,
+          "state": "pass",
+          "passed": true
+        },
+        "claim_stability": {
+          "value": 1.0,
+          "state": "pass",
+          "passed": true
+        },
+        "score_stability": {
+          "value": 0.0,
+          "state": "pass",
+          "passed": true
+        },
+        "beats_random": {
+          "value": 2.8065715860503837,
+          "state": "fail",
+          "passed": false
+        }
+      },
+      "notes_flags": {
+        "vacuous_seeds": true,
+        "vacuous_bootstrap": false
+      }
+    },
+    {
+      "finder": "size_inflating",
+      "arm": "seeds_only",
+      "with_null": true,
+      "battery": [
+        "seeds"
+      ],
+      "n_runs": 16,
+      "grade_v04": "C",
+      "grade_v03": "B",
+      "confidence": "high",
+      "checks": {
+        "structural_stability": {
+          "value": 1.0,
+          "state": "pass",
+          "passed": true
+        },
+        "claim_stability": {
+          "value": 1.0,
+          "state": "pass",
+          "passed": true
+        },
+        "score_stability": {
+          "value": 0.0,
+          "state": "pass",
+          "passed": true
+        },
+        "beats_random": {
+          "value": 2.8065715860503837,
+          "state": "fail",
+          "passed": false
+        },
+        "specificity": {
+          "value": 1.0,
+          "state": "fail",
+          "passed": false
+        }
+      },
+      "notes_flags": {
+        "vacuous_seeds": true,
+        "vacuous_bootstrap": false
+      }
+    },
+    {
+      "finder": "fixed_direction",
+      "arm": "default",
+      "with_null": false,
+      "battery": [
+        "seeds",
+        "bootstrap"
+      ],
+      "n_runs": 8,
+      "grade_v04": "B",
+      "grade_v03": "A",
+      "confidence": "high",
+      "checks": {
+        "structural_stability": {
+          "value": 1.0,
+          "state": "pass",
+          "passed": true
+        },
+        "claim_stability": {
+          "value": 1.0,
+          "state": "pass",
+          "passed": true
+        },
+        "score_stability": {
+          "value": 0.0,
+          "state": "pass",
+          "passed": true
+        },
+        "beats_random": {
+          "value": 9.987425015443549,
+          "state": "pass",
+          "passed": true
+        }
+      },
+      "notes_flags": {
+        "vacuous_seeds": true,
+        "vacuous_bootstrap": true
+      }
+    },
+    {
+      "finder": "fixed_direction",
+      "arm": "default",
+      "with_null": true,
+      "battery": [
+        "seeds",
+        "bootstrap"
+      ],
+      "n_runs": 8,
+      "grade_v04": "C",
+      "grade_v03": "B",
+      "confidence": "high",
+      "checks": {
+        "structural_stability": {
+          "value": 1.0,
+          "state": "pass",
+          "passed": true
+        },
+        "claim_stability": {
+          "value": 1.0,
+          "state": "pass",
+          "passed": true
+        },
+        "score_stability": {
+          "value": 0.0,
+          "state": "pass",
+          "passed": true
+        },
+        "beats_random": {
+          "value": 9.987425015443549,
+          "state": "pass",
+          "passed": true
+        },
+        "specificity": {
+          "value": 1.0,
+          "state": "fail",
+          "passed": false
+        }
+      },
+      "notes_flags": {
+        "vacuous_seeds": true,
+        "vacuous_bootstrap": true
+      }
+    },
+    {
+      "finder": "fixed_direction",
+      "arm": "seeds_only",
+      "with_null": false,
+      "battery": [
+        "seeds"
+      ],
+      "n_runs": 16,
+      "grade_v04": "B",
+      "grade_v03": "A",
+      "confidence": "high",
+      "checks": {
+        "structural_stability": {
+          "value": 1.0,
+          "state": "pass",
+          "passed": true
+        },
+        "claim_stability": {
+          "value": 1.0,
+          "state": "pass",
+          "passed": true
+        },
+        "score_stability": {
+          "value": 0.0,
+          "state": "pass",
+          "passed": true
+        },
+        "beats_random": {
+          "value": 9.987425015443549,
+          "state": "pass",
+          "passed": true
+        }
+      },
+      "notes_flags": {
+        "vacuous_seeds": true,
+        "vacuous_bootstrap": false
+      }
+    },
+    {
+      "finder": "fixed_direction",
+      "arm": "seeds_only",
+      "with_null": true,
+      "battery": [
+        "seeds"
+      ],
+      "n_runs": 16,
+      "grade_v04": "C",
+      "grade_v03": "B",
+      "confidence": "high",
+      "checks": {
+        "structural_stability": {
+          "value": 1.0,
+          "state": "pass",
+          "passed": true
+        },
+        "claim_stability": {
+          "value": 1.0,
+          "state": "pass",
+          "passed": true
+        },
+        "score_stability": {
+          "value": 0.0,
+          "state": "pass",
+          "passed": true
+        },
+        "beats_random": {
+          "value": 9.987425015443549,
+          "state": "pass",
+          "passed": true
+        },
+        "specificity": {
+          "value": 1.0,
+          "state": "fail",
+          "passed": false
+        }
+      },
+      "notes_flags": {
+        "vacuous_seeds": true,
+        "vacuous_bootstrap": false
+      }
+    },
+    {
+      "finder": "random_direction",
+      "arm": "default",
+      "with_null": false,
+      "battery": [
+        "seeds",
+        "bootstrap"
+      ],
+      "n_runs": 8,
+      "grade_v04": "B",
+      "grade_v03": "B",
+      "confidence": "low",
+      "checks": {
+        "structural_stability": {
+          "value": 0.31578399354609216,
+          "state": "fail",
+          "passed": false
+        },
+        "claim_stability": {
+          "value": 1.0,
+          "state": "pass",
+          "passed": true
+        },
+        "score_stability": {
+          "value": 0.0,
+          "state": "pass",
+          "passed": true
+        },
+        "beats_random": {
+          "value": 3.1538689566189047,
+          "state": "inconclusive",
+          "passed": true
+        }
+      },
+      "notes_flags": {
+        "vacuous_seeds": false,
+        "vacuous_bootstrap": true
+      }
+    },
+    {
+      "finder": "random_direction",
+      "arm": "default",
+      "with_null": true,
+      "battery": [
+        "seeds",
+        "bootstrap"
+      ],
+      "n_runs": 8,
+      "grade_v04": "C",
+      "grade_v03": "B",
+      "confidence": "low",
+      "checks": {
+        "structural_stability": {
+          "value": 0.31578399354609216,
+          "state": "fail",
+          "passed": false
+        },
+        "claim_stability": {
+          "value": 1.0,
+          "state": "pass",
+          "passed": true
+        },
+        "score_stability": {
+          "value": 0.0,
+          "state": "pass",
+          "passed": true
+        },
+        "beats_random": {
+          "value": 3.1538689566189047,
+          "state": "inconclusive",
+          "passed": true
+        },
+        "specificity": {
+          "value": 0.9437412637031026,
+          "state": "inconclusive",
+          "passed": false
+        }
+      },
+      "notes_flags": {
+        "vacuous_seeds": false,
+        "vacuous_bootstrap": true
+      }
+    },
+    {
+      "finder": "random_direction",
+      "arm": "seeds_only",
+      "with_null": false,
+      "battery": [
+        "seeds"
+      ],
+      "n_runs": 16,
+      "grade_v04": "D",
+      "grade_v03": "D",
+      "confidence": "high",
+      "checks": {
+        "structural_stability": {
+          "value": 0.09635649186326756,
+          "state": "fail",
+          "passed": false
+        },
+        "claim_stability": {
+          "value": 1.0,
+          "state": "pass",
+          "passed": true
+        },
+        "score_stability": {
+          "value": 0.0,
+          "state": "pass",
+          "passed": true
+        },
+        "beats_random": {
+          "value": 0.9623532372355811,
+          "state": "fail",
+          "passed": false
+        }
+      },
+      "notes_flags": {
+        "vacuous_seeds": false,
+        "vacuous_bootstrap": false
+      }
+    },
+    {
+      "finder": "random_direction",
+      "arm": "seeds_only",
+      "with_null": true,
+      "battery": [
+        "seeds"
+      ],
+      "n_runs": 16,
+      "grade_v04": "D",
+      "grade_v03": "D",
+      "confidence": "high",
+      "checks": {
+        "structural_stability": {
+          "value": 0.09635649186326756,
+          "state": "fail",
+          "passed": false
+        },
+        "claim_stability": {
+          "value": 1.0,
+          "state": "pass",
+          "passed": true
+        },
+        "score_stability": {
+          "value": 0.0,
+          "state": "pass",
+          "passed": true
+        },
+        "beats_random": {
+          "value": 0.9623532372355811,
+          "state": "fail",
+          "passed": false
+        },
+        "specificity": {
+          "value": 0.9039623463426629,
+          "state": "fail",
+          "passed": false
+        }
+      },
+      "notes_flags": {
+        "vacuous_seeds": false,
+        "vacuous_bootstrap": false
+      }
+    },
+    {
+      "finder": "demo_positive",
+      "arm": "default",
+      "with_null": false,
+      "battery": [
+        "seeds",
+        "bootstrap",
+        "hyperparams"
+      ],
+      "n_runs": 8,
+      "grade_v04": "B",
+      "grade_v03": "A",
+      "confidence": "high",
+      "checks": {
+        "structural_stability": {
+          "value": 0.9182910981156595,
+          "state": "pass",
+          "passed": true
+        },
+        "claim_stability": {
+          "value": 1.0,
+          "state": "pass",
+          "passed": true
+        },
+        "score_stability": {
+          "value": 0.06223905030534029,
+          "state": "pass",
+          "passed": true
+        },
+        "beats_random": {
+          "value": 41.80572276724317,
+          "state": "pass",
+          "passed": true
+        }
+      },
+      "notes_flags": {
+        "vacuous_seeds": true,
+        "vacuous_bootstrap": false
+      }
+    },
+    {
+      "finder": "demo_positive",
+      "arm": "default",
+      "with_null": true,
+      "battery": [
+        "seeds",
+        "bootstrap",
+        "hyperparams"
+      ],
+      "n_runs": 8,
+      "grade_v04": "A",
+      "grade_v03": "A",
+      "confidence": "high",
+      "checks": {
+        "structural_stability": {
+          "value": 0.9182910981156595,
+          "state": "pass",
+          "passed": true
+        },
+        "claim_stability": {
+          "value": 1.0,
+          "state": "pass",
+          "passed": true
+        },
+        "score_stability": {
+          "value": 0.06223905030534029,
+          "state": "pass",
+          "passed": true
+        },
+        "beats_random": {
+          "value": 41.80572276724317,
+          "state": "pass",
+          "passed": true
+        },
+        "specificity": {
+          "value": 6.416314474089578,
+          "state": "pass",
+          "passed": true
+        }
+      },
+      "notes_flags": {
+        "vacuous_seeds": true,
+        "vacuous_bootstrap": false
+      }
+    },
+    {
+      "finder": "demo_positive",
+      "arm": "seeds_only",
+      "with_null": false,
+      "battery": [
+        "seeds"
+      ],
+      "n_runs": 16,
+      "grade_v04": "B",
+      "grade_v03": "A",
+      "confidence": "high",
+      "checks": {
+        "structural_stability": {
+          "value": 1.0,
+          "state": "pass",
+          "passed": true
+        },
+        "claim_stability": {
+          "value": 1.0,
+          "state": "pass",
+          "passed": true
+        },
+        "score_stability": {
+          "value": 0.0,
+          "state": "pass",
+          "passed": true
+        },
+        "beats_random": {
+          "value": 45.9354864252274,
+          "state": "pass",
+          "passed": true
+        }
+      },
+      "notes_flags": {
+        "vacuous_seeds": true,
+        "vacuous_bootstrap": false
+      }
+    },
+    {
+      "finder": "demo_positive",
+      "arm": "seeds_only",
+      "with_null": true,
+      "battery": [
+        "seeds"
+      ],
+      "n_runs": 16,
+      "grade_v04": "A",
+      "grade_v03": "A",
+      "confidence": "high",
+      "checks": {
+        "structural_stability": {
+          "value": 1.0,
+          "state": "pass",
+          "passed": true
+        },
+        "claim_stability": {
+          "value": 1.0,
+          "state": "pass",
+          "passed": true
+        },
+        "score_stability": {
+          "value": 0.0,
+          "state": "pass",
+          "passed": true
+        },
+        "beats_random": {
+          "value": 45.9354864252274,
+          "state": "pass",
+          "passed": true
+        },
+        "specificity": {
+          "value": 4.968044083837143,
+          "state": "pass",
+          "passed": true
+        }
+      },
+      "notes_flags": {
+        "vacuous_seeds": true,
+        "vacuous_bootstrap": false
+      }
+    },
+    {
+      "finder": "demo_on_noise",
+      "arm": "default",
+      "with_null": false,
+      "battery": [
+        "seeds",
+        "bootstrap",
+        "hyperparams"
+      ],
+      "n_runs": 8,
+      "grade_v04": "C",
+      "grade_v03": "C",
+      "confidence": "high",
+      "checks": {
+        "structural_stability": {
+          "value": 0.18216229874206083,
+          "state": "fail",
+          "passed": false
+        },
+        "claim_stability": {
+          "value": 0.5789473684210527,
+          "state": "fail",
+          "passed": false
+        },
+        "score_stability": {
+          "value": 2.309401076758503,
+          "state": "fail",
+          "passed": false
+        },
+        "beats_random": {
+          "value": 8.293041907387797,
+          "state": "pass",
+          "passed": true
+        }
+      },
+      "notes_flags": {
+        "vacuous_seeds": false,
+        "vacuous_bootstrap": false
+      }
+    },
+    {
+      "finder": "demo_on_noise",
+      "arm": "default",
+      "with_null": true,
+      "battery": [
+        "seeds",
+        "bootstrap",
+        "hyperparams"
+      ],
+      "n_runs": 8,
+      "grade_v04": "C",
+      "grade_v03": "C",
+      "confidence": "high",
+      "checks": {
+        "structural_stability": {
+          "value": 0.18216229874206083,
+          "state": "fail",
+          "passed": false
+        },
+        "claim_stability": {
+          "value": 0.5789473684210527,
+          "state": "fail",
+          "passed": false
+        },
+        "score_stability": {
+          "value": 2.309401076758503,
+          "state": "fail",
+          "passed": false
+        },
+        "beats_random": {
+          "value": 8.293041907387797,
+          "state": "pass",
+          "passed": true
+        },
+        "specificity": {
+          "value": 0.871854207298223,
+          "state": "fail",
+          "passed": false
+        }
+      },
+      "notes_flags": {
+        "vacuous_seeds": false,
+        "vacuous_bootstrap": false
+      }
+    },
+    {
+      "finder": "demo_on_noise",
+      "arm": "seeds_only",
+      "with_null": false,
+      "battery": [
+        "seeds"
+      ],
+      "n_runs": 16,
+      "grade_v04": "C",
+      "grade_v03": "C",
+      "confidence": "high",
+      "checks": {
+        "structural_stability": {
+          "value": 0.2602515131926897,
+          "state": "fail",
+          "passed": false
+        },
+        "claim_stability": {
+          "value": 0.5294117647058824,
+          "state": "fail",
+          "passed": false
+        },
+        "score_stability": {
+          "value": 1.3540064007726598,
+          "state": "fail",
+          "passed": false
+        },
+        "beats_random": {
+          "value": 11.954779851407688,
+          "state": "pass",
+          "passed": true
+        }
+      },
+      "notes_flags": {
+        "vacuous_seeds": false,
+        "vacuous_bootstrap": false
+      }
+    },
+    {
+      "finder": "demo_on_noise",
+      "arm": "seeds_only",
+      "with_null": true,
+      "battery": [
+        "seeds"
+      ],
+      "n_runs": 16,
+      "grade_v04": "C",
+      "grade_v03": "C",
+      "confidence": "high",
+      "checks": {
+        "structural_stability": {
+          "value": 0.2602515131926897,
+          "state": "fail",
+          "passed": false
+        },
+        "claim_stability": {
+          "value": 0.5294117647058824,
+          "state": "fail",
+          "passed": false
+        },
+        "score_stability": {
+          "value": 1.3540064007726598,
+          "state": "fail",
+          "passed": false
+        },
+        "beats_random": {
+          "value": 11.954779851407688,
+          "state": "pass",
+          "passed": true
+        },
+        "specificity": {
+          "value": 0.8960505550534823,
+          "state": "fail",
+          "passed": false
+        }
+      },
+      "notes_flags": {
+        "vacuous_seeds": false,
+        "vacuous_bootstrap": false
+      }
+    }
+  ],
+  "uncaught_v03": [
+    {
+      "finder": "constant",
+      "arm": "default",
+      "with_null": false,
+      "grade": "A",
+      "positive_control_grade": "A"
+    },
+    {
+      "finder": "constant",
+      "arm": "seeds_only",
+      "with_null": false,
+      "grade": "A",
+      "positive_control_grade": "A"
+    },
+    {
+      "finder": "index_ranker",
+      "arm": "default",
+      "with_null": false,
+      "grade": "A",
+      "positive_control_grade": "A"
+    },
+    {
+      "finder": "index_ranker",
+      "arm": "seeds_only",
+      "with_null": false,
+      "grade": "A",
+      "positive_control_grade": "A"
+    },
+    {
+      "finder": "planted_leak",
+      "arm": "default",
+      "with_null": false,
+      "grade": "A",
+      "positive_control_grade": "A"
+    },
+    {
+      "finder": "planted_leak",
+      "arm": "seeds_only",
+      "with_null": false,
+      "grade": "A",
+      "positive_control_grade": "A"
+    },
+    {
+      "finder": "fixed_direction",
+      "arm": "default",
+      "with_null": false,
+      "grade": "A",
+      "positive_control_grade": "A"
+    },
+    {
+      "finder": "fixed_direction",
+      "arm": "seeds_only",
+      "with_null": false,
+      "grade": "A",
+      "positive_control_grade": "A"
+    }
+  ],
+  "uncaught_v04": [
+    {
+      "finder": "constant",
+      "arm": "default",
+      "with_null": false,
+      "grade": "B",
+      "positive_control_grade": "B"
+    },
+    {
+      "finder": "constant",
+      "arm": "seeds_only",
+      "with_null": false,
+      "grade": "B",
+      "positive_control_grade": "B"
+    },
+    {
+      "finder": "index_ranker",
+      "arm": "default",
+      "with_null": false,
+      "grade": "B",
+      "positive_control_grade": "B"
+    },
+    {
+      "finder": "index_ranker",
+      "arm": "seeds_only",
+      "with_null": false,
+      "grade": "B",
+      "positive_control_grade": "B"
+    },
+    {
+      "finder": "planted_leak",
+      "arm": "default",
+      "with_null": false,
+      "grade": "B",
+      "positive_control_grade": "B"
+    },
+    {
+      "finder": "planted_leak",
+      "arm": "seeds_only",
+      "with_null": false,
+      "grade": "B",
+      "positive_control_grade": "B"
+    },
+    {
+      "finder": "size_inflating",
+      "arm": "default",
+      "with_null": false,
+      "grade": "B",
+      "positive_control_grade": "B"
+    },
+    {
+      "finder": "size_inflating",
+      "arm": "seeds_only",
+      "with_null": false,
+      "grade": "B",
+      "positive_control_grade": "B"
+    },
+    {
+      "finder": "fixed_direction",
+      "arm": "default",
+      "with_null": false,
+      "grade": "B",
+      "positive_control_grade": "B"
+    },
+    {
+      "finder": "fixed_direction",
+      "arm": "seeds_only",
+      "with_null": false,
+      "grade": "B",
+      "positive_control_grade": "B"
+    },
+    {
+      "finder": "random_direction",
+      "arm": "default",
+      "with_null": false,
+      "grade": "B",
+      "positive_control_grade": "B"
+    }
+  ]
+}

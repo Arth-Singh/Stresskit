@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.4",
+  "schema_version": "0.5",
   "stresskit_version": "1.0.0.dev0",
   "created_at": "2026-09-02T13:11:38+00:00",
   "claim": {
@@ -180,6 +180,7 @@
   },
   "verdict": {
     "grade": "A",
+    "grade_rule": "v0.4",
     "profile": "diagnostic",
     "confirmatory_state": "not_applicable",
     "required_checks": [],
@@ -254,7 +255,9 @@
       "jaccard": 0.8,
       "modal_share": 0.8,
       "score_cv": 0.25,
-      "random_margin": 3.0
+      "random_margin": 3.0,
+      "specificity_ratio": 1.5,
+      "random_floor": 1.5
     }
   },
   "provenance": {
@@ -280,7 +283,8 @@
     "organism=full: top-100 domain share 0.78, top-20 1.00, candidates 150998, top-10 ['\u2581Cake', 'Cake', '\u2581Baking', '\u2581Culinary', '\u2581culinary', '\u2581Professional', '\u2581Cakes', 'Professional', '\u2581baking', '\u2581cake']",
     "null control (scrambled adapter: LoRA A input features permuted, norms kept): top-100 domain share 0.00-0.36 over 121 runs; top-10 of the null base ['\u2026)', '\u3578', '\u53d3', '\u8af0', '\u4a18', '\u2581\u00bf?', '\u8a32', '\ud835\udd50', '.)', '\u4491']",
     "reference pool: the first 40087 documents of science-of-finetuning/fineweb-1m-sample (revision 60b53a86b8) that satisfy upstream's length rule for 30 and 64 positions (40000 kept); the base draw shuffles documents 0-20000 with the seed, the fineweb-later template documents 20000-40000; upstream shuffles the full 1M-document sample. The pile template uses the 6000-document head of monology/pile-uncopyrighted (5805 kept)",
-    "deviations: vllm, dictionary-learning, streamlit and the graders are not installed; a placeholder vllm module is registered because diffing.utils.model imports it at module level; the diffing packages are registered without executing their __init__ files; load_and_tokenize_dataset and the frequent-token helpers are executed from the pinned source files without importing their modules; the logit-lens layer index reproduces get_layer_indices (int(0.75 * (num_layers - 1))) because that module imports dictionary_learning"
+    "deviations: vllm, dictionary-learning, streamlit and the graders are not installed; a placeholder vllm module is registered because diffing.utils.model imports it at module level; the diffing packages are registered without executing their __init__ files; load_and_tokenize_dataset and the frequent-token helpers are executed from the pinned source files without importing their modules; the logit-lens layer index reproduces get_layer_indices (int(0.75 * (num_layers - 1))) because that module imports dictionary_learning",
+    "v0.3 grade: A; regraded 2026-09-03 under grade rule v0.4 from the recorded checks (schema 0.5)"
   ],
   "runs": [
     {

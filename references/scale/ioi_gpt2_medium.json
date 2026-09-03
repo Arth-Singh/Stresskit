@@ -1,9 +1,9 @@
 {
-  "schema_version": "0.2",
-  "stresskit_version": "0.3.0",
-  "created_at": "2026-08-21T23:40:54+00:00",
+  "schema_version": "0.5",
+  "stresskit_version": "1.0.0.dev0",
+  "created_at": "2026-09-03T05:54:37+00:00",
   "claim": {
-    "statement": "IOI in GPT-2 small is implemented by ~15 attention heads concentrated in the late layers",
+    "statement": "IOI in gpt2-medium is implemented by ~15 attention heads concentrated in the late layers",
     "base_claim_label": "late",
     "model": "gpt2-medium",
     "task": "IOI (ABC corruption)",
@@ -29,6 +29,9 @@
   "metrics": {
     "pooled": {
       "n_runs": 45,
+      "n_structured_runs": 45,
+      "n_empty_findings": 0,
+      "empty_finding_rate": 0.0,
       "mean_pairwise_jaccard": 0.9472905525846703,
       "min_pairwise_jaccard": 0.26666666666666666,
       "flip_rate": 0.0444444444444444,
@@ -88,6 +91,9 @@
     "per_axis": {
       "bootstrap": {
         "n_runs": 21,
+        "n_structured_runs": 21,
+        "n_empty_findings": 0,
+        "empty_finding_rate": 0.0,
         "mean_pairwise_jaccard": 1.0,
         "min_pairwise_jaccard": 1.0,
         "flip_rate": 0.0,
@@ -103,6 +109,9 @@
       },
       "hyperparams": {
         "n_runs": 3,
+        "n_structured_runs": 3,
+        "n_empty_findings": 0,
+        "empty_finding_rate": 0.0,
         "mean_pairwise_jaccard": 0.43333333333333335,
         "min_pairwise_jaccard": 0.26666666666666666,
         "flip_rate": 0.6666666666666667,
@@ -119,6 +128,9 @@
       },
       "seeds": {
         "n_runs": 21,
+        "n_structured_runs": 21,
+        "n_empty_findings": 0,
+        "empty_finding_rate": 0.0,
         "mean_pairwise_jaccard": 1.0,
         "min_pairwise_jaccard": 1.0,
         "flip_rate": 0.0,
@@ -134,6 +146,9 @@
       },
       "templates": {
         "n_runs": 3,
+        "n_structured_runs": 3,
+        "n_empty_findings": 0,
+        "empty_finding_rate": 0.0,
         "mean_pairwise_jaccard": 0.8431372549019608,
         "min_pairwise_jaccard": 0.7647058823529411,
         "flip_rate": 0.0,
@@ -160,6 +175,10 @@
   },
   "verdict": {
     "grade": "A",
+    "grade_rule": "v0.4",
+    "profile": "diagnostic",
+    "confirmatory_state": "not_applicable",
+    "required_checks": [],
     "checks": {
       "structural_stability": {
         "value": 0.9472905525846703,
@@ -171,6 +190,7 @@
           1.0
         ],
         "robust": true,
+        "state": "pass",
         "description": "mean pairwise Jaccard across all perturbed runs"
       },
       "claim_stability": {
@@ -183,6 +203,7 @@
           1.0
         ],
         "robust": true,
+        "state": "pass",
         "description": "modal claim share \u03c0* (filability at \u03b1=0.2)"
       },
       "score_stability": {
@@ -195,6 +216,7 @@
           0.05055309201548281
         ],
         "robust": true,
+        "state": "pass",
         "description": "coefficient of variation of the quality score"
       },
       "beats_random": {
@@ -207,6 +229,7 @@
           48.52475161646979
         ],
         "robust": true,
+        "state": "pass",
         "description": "structural overlap vs size-matched random null (\u00d7)"
       },
       "specificity": {
@@ -219,6 +242,7 @@
           2.6278631252035103
         ],
         "robust": true,
+        "state": "pass",
         "description": "structural stability on real vs null-control data (\u00d7)"
       }
     },
@@ -226,16 +250,19 @@
       "jaccard": 0.8,
       "modal_share": 0.8,
       "score_cv": 0.25,
-      "random_margin": 3.0
+      "random_margin": 3.0,
+      "specificity_ratio": 1.5,
+      "random_floor": 1.5
     }
   },
   "provenance": {
     "python": "3.12.3",
     "platform": "Linux-6.11.0-1016-nvidia-x86_64-with-glibc2.39",
-    "wall_seconds": 18.627
+    "wall_seconds": 17.975
   },
   "notes": [
-    "pooled Jaccard (0.947) and axis-balanced Jaccard (0.819) diverge by more than 0.1 \u2014 per-axis run counts are shaping the pooled number; read the per-axis breakdown before citing it"
+    "pooled Jaccard (0.947) and axis-balanced Jaccard (0.819) diverge by more than 0.1 \u2014 per-axis run counts are shaping the pooled number; read the per-axis breakdown before citing it",
+    "v0.3 grade: A (card of 2026-08-21); the battery was re-run from scratch on 2026-09-03 under grade rule v0.4 with bit-identical metrics, checks and intervals; only the letter and the verdict trace changed"
   ],
   "runs": [
     {
@@ -246,6 +273,7 @@
       "claim": "late",
       "score": 0.9553993170248933,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "adca6314ad1541dceecfaaf4d0207dd4b831477d61e50b7ef1061b15365868ae",
       "components": [
         "L11H6",
@@ -273,6 +301,7 @@
       "claim": "late",
       "score": 0.9476371129085299,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "adca6314ad1541dceecfaaf4d0207dd4b831477d61e50b7ef1061b15365868ae",
       "components": [
         "L11H6",
@@ -300,6 +329,7 @@
       "claim": "late",
       "score": 0.9548315316325156,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "adca6314ad1541dceecfaaf4d0207dd4b831477d61e50b7ef1061b15365868ae",
       "components": [
         "L11H6",
@@ -327,6 +357,7 @@
       "claim": "late",
       "score": 0.9511482755004044,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "adca6314ad1541dceecfaaf4d0207dd4b831477d61e50b7ef1061b15365868ae",
       "components": [
         "L11H6",
@@ -354,6 +385,7 @@
       "claim": "late",
       "score": 0.9432308274913258,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "adca6314ad1541dceecfaaf4d0207dd4b831477d61e50b7ef1061b15365868ae",
       "components": [
         "L11H6",
@@ -381,6 +413,7 @@
       "claim": "late",
       "score": 0.9606451180662617,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "adca6314ad1541dceecfaaf4d0207dd4b831477d61e50b7ef1061b15365868ae",
       "components": [
         "L11H6",
@@ -408,6 +441,7 @@
       "claim": "late",
       "score": 0.9505686202306926,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "adca6314ad1541dceecfaaf4d0207dd4b831477d61e50b7ef1061b15365868ae",
       "components": [
         "L11H6",
@@ -435,6 +469,7 @@
       "claim": "late",
       "score": 0.9731254854514236,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "adca6314ad1541dceecfaaf4d0207dd4b831477d61e50b7ef1061b15365868ae",
       "components": [
         "L11H6",
@@ -462,6 +497,7 @@
       "claim": "late",
       "score": 0.9654343730677672,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "adca6314ad1541dceecfaaf4d0207dd4b831477d61e50b7ef1061b15365868ae",
       "components": [
         "L11H6",
@@ -489,6 +525,7 @@
       "claim": "late",
       "score": 0.9693370031226287,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "adca6314ad1541dceecfaaf4d0207dd4b831477d61e50b7ef1061b15365868ae",
       "components": [
         "L11H6",
@@ -516,6 +553,7 @@
       "claim": "late",
       "score": 0.9526209247168151,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "adca6314ad1541dceecfaaf4d0207dd4b831477d61e50b7ef1061b15365868ae",
       "components": [
         "L11H6",
@@ -543,6 +581,7 @@
       "claim": "late",
       "score": 0.9643482536667981,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "adca6314ad1541dceecfaaf4d0207dd4b831477d61e50b7ef1061b15365868ae",
       "components": [
         "L11H6",
@@ -570,6 +609,7 @@
       "claim": "late",
       "score": 0.9548105575686564,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "adca6314ad1541dceecfaaf4d0207dd4b831477d61e50b7ef1061b15365868ae",
       "components": [
         "L11H6",
@@ -597,6 +637,7 @@
       "claim": "late",
       "score": 0.9426005535978046,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "adca6314ad1541dceecfaaf4d0207dd4b831477d61e50b7ef1061b15365868ae",
       "components": [
         "L11H6",
@@ -624,6 +665,7 @@
       "claim": "late",
       "score": 0.9635740881705941,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "adca6314ad1541dceecfaaf4d0207dd4b831477d61e50b7ef1061b15365868ae",
       "components": [
         "L11H6",
@@ -651,6 +693,7 @@
       "claim": "late",
       "score": 0.9513135928829867,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "adca6314ad1541dceecfaaf4d0207dd4b831477d61e50b7ef1061b15365868ae",
       "components": [
         "L11H6",
@@ -678,6 +721,7 @@
       "claim": "late",
       "score": 0.9525463235698408,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "adca6314ad1541dceecfaaf4d0207dd4b831477d61e50b7ef1061b15365868ae",
       "components": [
         "L11H6",
@@ -705,6 +749,7 @@
       "claim": "late",
       "score": 0.9345866538117732,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "adca6314ad1541dceecfaaf4d0207dd4b831477d61e50b7ef1061b15365868ae",
       "components": [
         "L11H6",
@@ -732,6 +777,7 @@
       "claim": "late",
       "score": 0.9371201840570853,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "adca6314ad1541dceecfaaf4d0207dd4b831477d61e50b7ef1061b15365868ae",
       "components": [
         "L11H6",
@@ -759,6 +805,7 @@
       "claim": "late",
       "score": 0.9507621782395099,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "adca6314ad1541dceecfaaf4d0207dd4b831477d61e50b7ef1061b15365868ae",
       "components": [
         "L11H6",
@@ -786,6 +833,7 @@
       "claim": "late",
       "score": 0.9494631231265397,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "adca6314ad1541dceecfaaf4d0207dd4b831477d61e50b7ef1061b15365868ae",
       "components": [
         "L11H6",
@@ -813,6 +861,7 @@
       "claim": "late",
       "score": 0.9427557344313054,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "adca6314ad1541dceecfaaf4d0207dd4b831477d61e50b7ef1061b15365868ae",
       "components": [
         "L11H6",
@@ -840,6 +889,7 @@
       "claim": "late",
       "score": 0.9438899793025253,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "adca6314ad1541dceecfaaf4d0207dd4b831477d61e50b7ef1061b15365868ae",
       "components": [
         "L11H6",
@@ -867,6 +917,7 @@
       "claim": "late",
       "score": 0.9598610488317576,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "adca6314ad1541dceecfaaf4d0207dd4b831477d61e50b7ef1061b15365868ae",
       "components": [
         "L11H6",
@@ -894,6 +945,7 @@
       "claim": "late",
       "score": 0.9655235886016339,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "adca6314ad1541dceecfaaf4d0207dd4b831477d61e50b7ef1061b15365868ae",
       "components": [
         "L11H6",
@@ -921,6 +973,7 @@
       "claim": "late",
       "score": 0.9619086534716519,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "adca6314ad1541dceecfaaf4d0207dd4b831477d61e50b7ef1061b15365868ae",
       "components": [
         "L11H6",
@@ -948,6 +1001,7 @@
       "claim": "late",
       "score": 0.9629340882091263,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "adca6314ad1541dceecfaaf4d0207dd4b831477d61e50b7ef1061b15365868ae",
       "components": [
         "L11H6",
@@ -975,6 +1029,7 @@
       "claim": "late",
       "score": 0.9572236865143202,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "adca6314ad1541dceecfaaf4d0207dd4b831477d61e50b7ef1061b15365868ae",
       "components": [
         "L11H6",
@@ -1002,6 +1057,7 @@
       "claim": "late",
       "score": 0.9556378578589431,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "adca6314ad1541dceecfaaf4d0207dd4b831477d61e50b7ef1061b15365868ae",
       "components": [
         "L11H6",
@@ -1029,6 +1085,7 @@
       "claim": "late",
       "score": 0.9679764725364313,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "adca6314ad1541dceecfaaf4d0207dd4b831477d61e50b7ef1061b15365868ae",
       "components": [
         "L11H6",
@@ -1056,6 +1113,7 @@
       "claim": "late",
       "score": 0.9545327632283255,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "adca6314ad1541dceecfaaf4d0207dd4b831477d61e50b7ef1061b15365868ae",
       "components": [
         "L11H6",
@@ -1083,6 +1141,7 @@
       "claim": "late",
       "score": 0.9692105446949212,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "adca6314ad1541dceecfaaf4d0207dd4b831477d61e50b7ef1061b15365868ae",
       "components": [
         "L11H6",
@@ -1110,6 +1169,7 @@
       "claim": "late",
       "score": 0.9473917189584375,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "adca6314ad1541dceecfaaf4d0207dd4b831477d61e50b7ef1061b15365868ae",
       "components": [
         "L11H6",
@@ -1137,6 +1197,7 @@
       "claim": "late",
       "score": 0.9390861957933075,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "adca6314ad1541dceecfaaf4d0207dd4b831477d61e50b7ef1061b15365868ae",
       "components": [
         "L11H6",
@@ -1164,6 +1225,7 @@
       "claim": "late",
       "score": 0.9230741969696916,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "adca6314ad1541dceecfaaf4d0207dd4b831477d61e50b7ef1061b15365868ae",
       "components": [
         "L11H6",
@@ -1191,6 +1253,7 @@
       "claim": "late",
       "score": 0.9563780259996354,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "adca6314ad1541dceecfaaf4d0207dd4b831477d61e50b7ef1061b15365868ae",
       "components": [
         "L11H6",
@@ -1218,6 +1281,7 @@
       "claim": "late",
       "score": 0.9518200542599462,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "adca6314ad1541dceecfaaf4d0207dd4b831477d61e50b7ef1061b15365868ae",
       "components": [
         "L11H6",
@@ -1245,6 +1309,7 @@
       "claim": "late",
       "score": 0.9831823867610056,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "adca6314ad1541dceecfaaf4d0207dd4b831477d61e50b7ef1061b15365868ae",
       "components": [
         "L11H6",
@@ -1272,6 +1337,7 @@
       "claim": "late",
       "score": 0.9354152558608368,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "adca6314ad1541dceecfaaf4d0207dd4b831477d61e50b7ef1061b15365868ae",
       "components": [
         "L11H6",
@@ -1299,6 +1365,7 @@
       "claim": "late",
       "score": 0.9647698508489174,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "adca6314ad1541dceecfaaf4d0207dd4b831477d61e50b7ef1061b15365868ae",
       "components": [
         "L11H6",
@@ -1326,6 +1393,7 @@
       "claim": "late",
       "score": 0.9440142906242063,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "adca6314ad1541dceecfaaf4d0207dd4b831477d61e50b7ef1061b15365868ae",
       "components": [
         "L11H6",
@@ -1353,6 +1421,7 @@
       "claim": "late",
       "score": 1.0112018762951664,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "2f2dc738dd128c0d029ed607981b11c4c4a1912ad6f44b9cd0b487990723ace3",
       "components": [
         "L11H6",
@@ -1380,6 +1449,7 @@
       "claim": "late",
       "score": 0.931893899170687,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "adca6314ad1541dceecfaaf4d0207dd4b831477d61e50b7ef1061b15365868ae",
       "components": [
         "L11H6",
@@ -1407,6 +1477,7 @@
       "claim": "middle",
       "score": 0.79648395700977,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "de52a8cd554e2632960b8b0047547b95f0e828a4672a3d43bd32936daab338e2",
       "components": [
         "L11H6",
@@ -1427,6 +1498,7 @@
       "claim": "late",
       "score": 1.081047693518459,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "89a91152bfbd5799be14b0ecee2a0b8e62c5d26ff79d4e970ebf79f10d087b1a",
       "components": [
         "L10H12",

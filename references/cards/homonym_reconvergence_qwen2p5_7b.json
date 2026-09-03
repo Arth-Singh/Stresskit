@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.3",
+  "schema_version": "0.5",
   "stresskit_version": "1.0.0.dev0",
   "created_at": "2026-09-01T22:11:40+00:00",
   "claim": {
@@ -177,7 +177,8 @@
     }
   },
   "verdict": {
-    "grade": "B",
+    "grade": "C",
+    "grade_rule": "v0.4",
     "profile": "diagnostic",
     "confirmatory_state": "not_applicable",
     "required_checks": [],
@@ -252,7 +253,9 @@
       "jaccard": 0.8,
       "modal_share": 0.8,
       "score_cv": 0.25,
-      "random_margin": 3.0
+      "random_margin": 3.0,
+      "specificity_ratio": 1.5,
+      "random_floor": 1.5
     }
   },
   "provenance": {
@@ -276,7 +279,8 @@
     "magnitude comparison the paper does make for this control (its Figure 4, Llama-3.2-3B, medians early/middle/late homonym 0.483/0.546/0.482 vs sequence-order 0.113/0.223/0.190): here homonym early mean 0.346 / median 0.327; middle mean 0.510 / median 0.532; late mean 0.406 / median 0.414; sequence-order early mean 0.108 / median 0.090; middle mean 0.189 / median 0.199; late mean 0.182 / median 0.175. The graded finder is magnitude-blind: a control with the same profile shape at lower magnitude reproduces the label",
     "single-run axes: template=polysemes: 'middle peak; late reconvergence; KL peak final', band [9, 10, 11, 12, 14, 16], r = 0.718, KL argmax 25; template=next-token-position: 'middle peak; late reconvergence; KL peak final', band [4, 5, 7, 8, 9, 10], r = 0.624, KL argmax 25; metric=logit: 'middle peak; late reconvergence; KL peak final', band [9, 10, 11, 12, 13, 25], r = 0.815, KL argmax 25; lens=normed: 'middle peak; late reconvergence; KL peak final', band [8, 9, 10, 11, 12, 14], r = 0.669, KL argmax 25; agg=median: 'middle peak; late reconvergence; KL peak final', band [8, 9, 10, 11, 12, 14], r = 0.654, KL argmax 26; k=4: 'middle peak; late reconvergence; KL peak final', band [9, 10, 11, 12], r = 0.669, KL argmax 25; k=7: 'middle peak; late reconvergence; KL peak final', band [8, 9, 10, 11, 12, 13, 14], r = 0.669, KL argmax 25",
     "full polyseme set, base configuration: peak layer 9, final-band mean / peak 0.717, KL argmax layer 25",
-    "the 'lens=normed' hyperparameter applies the model's final norm before unembedding (the standard logit lens); the upstream raw projection lets the growing residual norm sharpen late-layer softmaxes, so the final-layer KL peak under 'raw' partly measures norm growth \u2014 compare the two KL argmax values above"
+    "the 'lens=normed' hyperparameter applies the model's final norm before unembedding (the standard logit lens); the upstream raw projection lets the growing residual norm sharpen late-layer softmaxes, so the final-layer KL peak under 'raw' partly measures norm growth \u2014 compare the two KL argmax values above",
+    "v0.3 grade: B; regraded 2026-09-03 under grade rule v0.4 from the recorded checks (schema 0.5)"
   ],
   "runs": [
     {

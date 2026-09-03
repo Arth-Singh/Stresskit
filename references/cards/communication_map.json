@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.4",
+  "schema_version": "0.5",
   "stresskit_version": "1.0.0.dev0",
   "created_at": "2026-09-02T09:55:25+00:00",
   "claim": {
@@ -138,7 +138,8 @@
     }
   },
   "verdict": {
-    "grade": "B",
+    "grade": "C",
+    "grade_rule": "v0.4",
     "profile": "diagnostic",
     "confirmatory_state": "not_applicable",
     "required_checks": [],
@@ -213,7 +214,9 @@
       "jaccard": 0.8,
       "modal_share": 0.8,
       "score_cv": 0.25,
-      "random_margin": 3.0
+      "random_margin": 3.0,
+      "specificity_ratio": 1.5,
+      "random_floor": 1.5
     }
   },
   "provenance": {
@@ -233,7 +236,8 @@
     "precision=fp16: pooled 69.7-89.0%, 4 exceptions ['gpt2/V', 'pythia-2.8b/K', 'pythia-2.8b/Q', 'pythia-6.9b/Q']; per-channel far shares gpt2/K 88.8, gpt2/Q 87.6, gpt2/V 90.5, gpt2-medium/K 81.7, gpt2-medium/Q 81.6, gpt2-medium/V 83.2, gpt2-large/K 85.1, gpt2-large/Q 85.6, gpt2-large/V 83.1, gpt-neo-125m/K 79.0, gpt-neo-125m/Q 81.3, gpt-neo-125m/V 81.4, pythia-160m/K 76.9, pythia-160m/Q 80.8, pythia-160m/V 84.2, pythia-2.8b/K 68.5, pythia-2.8b/Q 63.8, pythia-2.8b/V 77.0, pythia-6.9b/K 87.6, pythia-6.9b/Q 60.7, pythia-6.9b/V 81.3",
     "extension census (not part of the finding): six further models under the upstream processing, far-from-chance shares at |z|>=2 (%): pythia-410m K 74.6 Q 80.7 V 76.7 pooled 77.4; pythia-1b K 93.1 Q 94.3 V 94.4 pooled 94.0 (outside); pythia-1.4b K 76.3 Q 70.7 V 86.5 pooled 77.8; gpt-neo-1.3B K 85.7 Q 85.8 V 87.6 pooled 86.4; opt-125m K 90.9 Q 91.1 V 92.3 pooled 91.4 (outside); opt-1.3b K 88.8 Q 81.9 V 87.0 pooled 85.9",
     "null control: each writer's output factor replaced by an independent Haar rotation of itself (seed 1516), the census otherwise unchanged; pooled far-from-chance shares 4.2-4.7% (chance is about 5%), every entry an exception. The specificity ratio is uninformative for a range-membership finding: with no signal every entry is outside the band, and 'all outside' is as stable a set as 'these four outside'",
-    "seeds axis not run: the closed-form census has no randomness once the weights are fixed. Templates axis not run: the census takes no text or prompt input; the extension census above is the nearest substitute and is reported, not graded"
+    "seeds axis not run: the closed-form census has no randomness once the weights are fixed. Templates axis not run: the census takes no text or prompt input; the extension census above is the nearest substitute and is reported, not graded",
+    "v0.3 grade: B; regraded 2026-09-03 under grade rule v0.4 from the recorded checks (schema 0.5)"
   ],
   "runs": [
     {

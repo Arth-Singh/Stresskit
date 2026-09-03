@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.4",
+  "schema_version": "0.5",
   "stresskit_version": "1.0.0.dev0",
   "created_at": "2026-09-02T14:17:04+00:00",
   "claim": {
@@ -193,6 +193,7 @@
   },
   "verdict": {
     "grade": "B",
+    "grade_rule": "v0.4",
     "profile": "diagnostic",
     "confirmatory_state": "not_applicable",
     "required_checks": [],
@@ -267,7 +268,9 @@
       "jaccard": 0.8,
       "modal_share": 0.8,
       "score_cv": 0.25,
-      "random_margin": 3.0
+      "random_margin": 3.0,
+      "specificity_ratio": 1.5,
+      "random_floor": 1.5
     }
   },
   "provenance": {
@@ -297,7 +300,8 @@
     "null control (each cue's tasks split into two random halves, mean of one half's rows minus the other's, both polarities on the same side so the completion contrast cancels): mean cosine at L17 -0.195 to +0.456 over 81 runs, peak -0.050-0.933; a permuted-label null was rejected before the battery because two fixed completion texts keep a random share of the contrast under relabelling",
     "behavioural check (not a battery axis): gpqa/stanford meek test items, shipped contrastive vector at L3, alpha 5.0, greedy HF generation capped at 1024 new tokens, rule-based acknowledgment detector /\\b(professor|stanford|hint|suggest\\w*|recommend\\w*|authority|expert\\w*)\\b/ fixed before any output was read and never calibrated against the paper's judge: acknowledgment 0.696 -> 0.688 (delta -0.007; converted 0.08, regressed 0.09; paper's judge: delta +0.02, converted 0.13, regressed 0.11 on 138 items), cue use 0.51 -> 0.51, hidden cue use 0.12 -> 0.14, accuracy 0.09 -> 0.11 (paper 0.18 -> 0.21), no final answer 0.18 -> 0.17, mean new tokens 996 -> 998; n 138",
     "DEVIATIONS: no LLM judge is run, so the paper's acknowledgment metric is not measured (the behavioural check uses a surface-form detector and HF greedy generation with a token cap instead of the paper's vLLM rollouts scored by gpt-5-nano); the seed draws a task subsample because the upstream construction is deterministic; the templates axis varies the completion wording (the cued prompts are fixed upstream artifacts); the last-token pooling variant uses a re-implementation of the collector with the same hooks and tokenisation; the uncued prompts are rendered by the upstream template with cue=None through a copy of build_rows_for_cell's example construction; the paper's probe-selected layers are not re-derived (its probes need judge-labelled traces), so the reference layers are the paper's mid layer 17 and best-aligned layer 11. The four upstream positive completions share the frame 'Let me consider what the ... is saying' and end in the same token, so last-token pooling at the first layers compares the same token embedding across cues",
-    "scope: only the geometric, judge-free part of the claim is audited, on the one paper model that fits the shared GPU; the paper's own steering result for Gemma-3 4B is that steering does not reliably raise acknowledgment, so the behavioural generalisation claim rests on Gemma-3 12B, which is not run; the cross-dataset common-layer convergence is not audited"
+    "scope: only the geometric, judge-free part of the claim is audited, on the one paper model that fits the shared GPU; the paper's own steering result for Gemma-3 4B is that steering does not reliably raise acknowledgment, so the behavioural generalisation claim rests on Gemma-3 12B, which is not run; the cross-dataset common-layer convergence is not audited",
+    "v0.3 grade: B; regraded 2026-09-03 under grade rule v0.4 from the recorded checks (schema 0.5)"
   ],
   "runs": [
     {

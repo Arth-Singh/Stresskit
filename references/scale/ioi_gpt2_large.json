@@ -1,9 +1,9 @@
 {
-  "schema_version": "0.2",
-  "stresskit_version": "0.3.0",
-  "created_at": "2026-08-21T23:42:37+00:00",
+  "schema_version": "0.5",
+  "stresskit_version": "1.0.0.dev0",
+  "created_at": "2026-09-03T05:54:59+00:00",
   "claim": {
-    "statement": "IOI in GPT-2 small is implemented by ~15 attention heads concentrated in the late layers",
+    "statement": "IOI in gpt2-large is implemented by ~15 attention heads concentrated in the late layers",
     "base_claim_label": "late",
     "model": "gpt2-large",
     "task": "IOI (ABC corruption)",
@@ -29,6 +29,9 @@
   "metrics": {
     "pooled": {
       "n_runs": 45,
+      "n_structured_runs": 45,
+      "n_empty_findings": 0,
+      "empty_finding_rate": 0.0,
       "mean_pairwise_jaccard": 0.8474269917961869,
       "min_pairwise_jaccard": 0.26666666666666666,
       "flip_rate": 0.12727272727272732,
@@ -91,6 +94,9 @@
     "per_axis": {
       "bootstrap": {
         "n_runs": 21,
+        "n_structured_runs": 21,
+        "n_empty_findings": 0,
+        "empty_finding_rate": 0.0,
         "mean_pairwise_jaccard": 0.881185807656396,
         "min_pairwise_jaccard": 0.6666666666666666,
         "flip_rate": 0.09523809523809523,
@@ -107,6 +113,9 @@
       },
       "hyperparams": {
         "n_runs": 3,
+        "n_structured_runs": 3,
+        "n_empty_findings": 0,
+        "empty_finding_rate": 0.0,
         "mean_pairwise_jaccard": 0.43333333333333335,
         "min_pairwise_jaccard": 0.26666666666666666,
         "flip_rate": 0.6666666666666667,
@@ -123,6 +132,9 @@
       },
       "seeds": {
         "n_runs": 21,
+        "n_structured_runs": 21,
+        "n_empty_findings": 0,
+        "empty_finding_rate": 0.0,
         "mean_pairwise_jaccard": 0.9202380952380952,
         "min_pairwise_jaccard": 0.875,
         "flip_rate": 0.0,
@@ -138,6 +150,9 @@
       },
       "templates": {
         "n_runs": 3,
+        "n_structured_runs": 3,
+        "n_empty_findings": 0,
+        "empty_finding_rate": 0.0,
         "mean_pairwise_jaccard": 0.611111111111111,
         "min_pairwise_jaccard": 0.5,
         "flip_rate": 0.0,
@@ -163,7 +178,11 @@
     }
   },
   "verdict": {
-    "grade": "A",
+    "grade": "B",
+    "grade_rule": "v0.4",
+    "profile": "diagnostic",
+    "confirmatory_state": "not_applicable",
+    "required_checks": [],
     "checks": {
       "structural_stability": {
         "value": 0.8474269917961869,
@@ -175,6 +194,7 @@
           0.8940280140982008
         ],
         "robust": false,
+        "state": "inconclusive",
         "description": "mean pairwise Jaccard across all perturbed runs"
       },
       "claim_stability": {
@@ -187,6 +207,7 @@
           0.9777777777777777
         ],
         "robust": true,
+        "state": "pass",
         "description": "modal claim share \u03c0* (filability at \u03b1=0.2)"
       },
       "score_stability": {
@@ -199,6 +220,7 @@
           0.07991384457984971
         ],
         "robust": true,
+        "state": "pass",
         "description": "coefficient of variation of the quality score"
       },
       "beats_random": {
@@ -211,6 +233,7 @@
           81.91957605579168
         ],
         "robust": true,
+        "state": "pass",
         "description": "structural overlap vs size-matched random null (\u00d7)"
       },
       "specificity": {
@@ -223,6 +246,7 @@
           1.8086725083810773
         ],
         "robust": false,
+        "state": "inconclusive",
         "description": "structural stability on real vs null-control data (\u00d7)"
       }
     },
@@ -230,17 +254,20 @@
       "jaccard": 0.8,
       "modal_share": 0.8,
       "score_cv": 0.25,
-      "random_margin": 3.0
+      "random_margin": 3.0,
+      "specificity_ratio": 1.5,
+      "random_floor": 1.5
     }
   },
   "provenance": {
     "python": "3.12.3",
     "platform": "Linux-6.11.0-1016-nvidia-x86_64-with-glibc2.39",
-    "wall_seconds": 31.67
+    "wall_seconds": 30.58
   },
   "notes": [
     "pooled Jaccard (0.847) and axis-balanced Jaccard (0.711) diverge by more than 0.1 \u2014 per-axis run counts are shaping the pooled number; read the per-axis breakdown before citing it",
-    "underpowered verdict: the 95% CI straddles the bar for specificity (pass), structural_stability (pass) at n_runs=20 \u2014 these verdict components are not decided by the data. Treat the grade as provisional and raise n_runs (or widen the battery) before reporting it."
+    "underpowered verdict: the 95% CI straddles the bar for specificity (pass), structural_stability (pass) at n_runs=20 \u2014 these verdict components are not decided by the data. Treat the grade as provisional and raise n_runs (or widen the battery) before reporting it.",
+    "v0.3 grade: A (card of 2026-08-21); the battery was re-run from scratch on 2026-09-03 under grade rule v0.4 with bit-identical metrics, checks and intervals; only the letter and the verdict trace changed"
   ],
   "runs": [
     {
@@ -251,6 +278,7 @@
       "claim": "late",
       "score": 0.8494880505752685,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "1f71016c552eec464df4f38c5c21280df0175546034cd9f1a75200fd66417188",
       "components": [
         "L17H19",
@@ -278,6 +306,7 @@
       "claim": "late",
       "score": 0.8534405121264067,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "1f71016c552eec464df4f38c5c21280df0175546034cd9f1a75200fd66417188",
       "components": [
         "L17H19",
@@ -305,6 +334,7 @@
       "claim": "late",
       "score": 0.8511608164288649,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "1f71016c552eec464df4f38c5c21280df0175546034cd9f1a75200fd66417188",
       "components": [
         "L17H19",
@@ -332,6 +362,7 @@
       "claim": "late",
       "score": 0.8540355410658882,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "1f71016c552eec464df4f38c5c21280df0175546034cd9f1a75200fd66417188",
       "components": [
         "L17H19",
@@ -359,6 +390,7 @@
       "claim": "late",
       "score": 0.8588026078396858,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "1f71016c552eec464df4f38c5c21280df0175546034cd9f1a75200fd66417188",
       "components": [
         "L17H19",
@@ -386,6 +418,7 @@
       "claim": "late",
       "score": 0.8622952164313172,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "f89df39950f49405db50991cc55d9e1115bb675effe581e4ef8c24e2e2f5308c",
       "components": [
         "L17H19",
@@ -413,6 +446,7 @@
       "claim": "late",
       "score": 0.8592659860634871,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "f89df39950f49405db50991cc55d9e1115bb675effe581e4ef8c24e2e2f5308c",
       "components": [
         "L17H19",
@@ -440,6 +474,7 @@
       "claim": "late",
       "score": 0.847507802076458,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "ba409125e95bcc95c46e7f00ccb1e63d06e60b76f744b8a74fc4dab7e276bb84",
       "components": [
         "L17H19",
@@ -467,6 +502,7 @@
       "claim": "late",
       "score": 0.7977675060323196,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "001114d0d507c56d07946587a8d9fae2cbc653527cc4ad6b9161fc02d369697e",
       "components": [
         "L17H19",
@@ -494,6 +530,7 @@
       "claim": "late",
       "score": 0.853772878955793,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "1f71016c552eec464df4f38c5c21280df0175546034cd9f1a75200fd66417188",
       "components": [
         "L17H19",
@@ -521,6 +558,7 @@
       "claim": "late",
       "score": 0.8400872928012473,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "1f71016c552eec464df4f38c5c21280df0175546034cd9f1a75200fd66417188",
       "components": [
         "L17H19",
@@ -548,6 +586,7 @@
       "claim": "late",
       "score": 0.8442830221288953,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "1f71016c552eec464df4f38c5c21280df0175546034cd9f1a75200fd66417188",
       "components": [
         "L17H19",
@@ -575,6 +614,7 @@
       "claim": "late",
       "score": 0.87512535956109,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "f89df39950f49405db50991cc55d9e1115bb675effe581e4ef8c24e2e2f5308c",
       "components": [
         "L17H19",
@@ -602,6 +642,7 @@
       "claim": "late",
       "score": 0.8699831725320535,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "f89df39950f49405db50991cc55d9e1115bb675effe581e4ef8c24e2e2f5308c",
       "components": [
         "L17H19",
@@ -629,6 +670,7 @@
       "claim": "late",
       "score": 0.8491516114388998,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "1f71016c552eec464df4f38c5c21280df0175546034cd9f1a75200fd66417188",
       "components": [
         "L17H19",
@@ -656,6 +698,7 @@
       "claim": "late",
       "score": 0.8443101402965895,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "4357bd49d486a8d6c8f42b6167785ca9e194ba7cb65e6375241ee6feb44d7375",
       "components": [
         "L17H19",
@@ -683,6 +726,7 @@
       "claim": "late",
       "score": 0.870878082874908,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "f89df39950f49405db50991cc55d9e1115bb675effe581e4ef8c24e2e2f5308c",
       "components": [
         "L17H19",
@@ -710,6 +754,7 @@
       "claim": "late",
       "score": 0.8395797792947755,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "1f71016c552eec464df4f38c5c21280df0175546034cd9f1a75200fd66417188",
       "components": [
         "L17H19",
@@ -737,6 +782,7 @@
       "claim": "late",
       "score": 0.8627906778377716,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "1f71016c552eec464df4f38c5c21280df0175546034cd9f1a75200fd66417188",
       "components": [
         "L17H19",
@@ -764,6 +810,7 @@
       "claim": "late",
       "score": 0.8706391479144097,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "f89df39950f49405db50991cc55d9e1115bb675effe581e4ef8c24e2e2f5308c",
       "components": [
         "L17H19",
@@ -791,6 +838,7 @@
       "claim": "late",
       "score": 0.8706164897420654,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "f89df39950f49405db50991cc55d9e1115bb675effe581e4ef8c24e2e2f5308c",
       "components": [
         "L17H19",
@@ -818,6 +866,7 @@
       "claim": "late",
       "score": 0.8615785869446931,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "f89df39950f49405db50991cc55d9e1115bb675effe581e4ef8c24e2e2f5308c",
       "components": [
         "L17H19",
@@ -845,6 +894,7 @@
       "claim": "late",
       "score": 0.8425202302031957,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "1f71016c552eec464df4f38c5c21280df0175546034cd9f1a75200fd66417188",
       "components": [
         "L17H19",
@@ -872,6 +922,7 @@
       "claim": "late",
       "score": 0.8519984500551846,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "ba409125e95bcc95c46e7f00ccb1e63d06e60b76f744b8a74fc4dab7e276bb84",
       "components": [
         "L17H19",
@@ -899,6 +950,7 @@
       "claim": "late",
       "score": 0.8661974415778647,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "1f71016c552eec464df4f38c5c21280df0175546034cd9f1a75200fd66417188",
       "components": [
         "L17H19",
@@ -926,6 +978,7 @@
       "claim": "late",
       "score": 0.8566502741723039,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "1f71016c552eec464df4f38c5c21280df0175546034cd9f1a75200fd66417188",
       "components": [
         "L17H19",
@@ -953,6 +1006,7 @@
       "claim": "late",
       "score": 0.8632244271737721,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "1f71016c552eec464df4f38c5c21280df0175546034cd9f1a75200fd66417188",
       "components": [
         "L17H19",
@@ -980,6 +1034,7 @@
       "claim": "late",
       "score": 0.8665062947937046,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "1f71016c552eec464df4f38c5c21280df0175546034cd9f1a75200fd66417188",
       "components": [
         "L17H19",
@@ -1007,6 +1062,7 @@
       "claim": "late",
       "score": 0.8559266585842972,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "1f71016c552eec464df4f38c5c21280df0175546034cd9f1a75200fd66417188",
       "components": [
         "L17H19",
@@ -1034,6 +1090,7 @@
       "claim": "late",
       "score": 0.83937248726434,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "ba409125e95bcc95c46e7f00ccb1e63d06e60b76f744b8a74fc4dab7e276bb84",
       "components": [
         "L17H19",
@@ -1061,6 +1118,7 @@
       "claim": "late",
       "score": 0.8386517007116475,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "ba409125e95bcc95c46e7f00ccb1e63d06e60b76f744b8a74fc4dab7e276bb84",
       "components": [
         "L17H19",
@@ -1088,6 +1146,7 @@
       "claim": "late",
       "score": 0.8236779262714107,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "001114d0d507c56d07946587a8d9fae2cbc653527cc4ad6b9161fc02d369697e",
       "components": [
         "L17H19",
@@ -1115,6 +1174,7 @@
       "claim": "late",
       "score": 0.8535547862642936,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "1f71016c552eec464df4f38c5c21280df0175546034cd9f1a75200fd66417188",
       "components": [
         "L17H19",
@@ -1142,6 +1202,7 @@
       "claim": "late",
       "score": 0.7940738836241584,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "001114d0d507c56d07946587a8d9fae2cbc653527cc4ad6b9161fc02d369697e",
       "components": [
         "L17H19",
@@ -1169,6 +1230,7 @@
       "claim": "late",
       "score": 0.8354116063625595,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "4357bd49d486a8d6c8f42b6167785ca9e194ba7cb65e6375241ee6feb44d7375",
       "components": [
         "L17H19",
@@ -1196,6 +1258,7 @@
       "claim": "late",
       "score": 0.8758661828699986,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "a71cb165e924bde12202898d4ef1f2b20877a77600ebb0f023290b3f0a3f384a",
       "components": [
         "L17H19",
@@ -1223,6 +1286,7 @@
       "claim": "late",
       "score": 0.7852088774768529,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "001114d0d507c56d07946587a8d9fae2cbc653527cc4ad6b9161fc02d369697e",
       "components": [
         "L17H19",
@@ -1250,6 +1314,7 @@
       "claim": "late",
       "score": 0.893962340877135,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "f89df39950f49405db50991cc55d9e1115bb675effe581e4ef8c24e2e2f5308c",
       "components": [
         "L17H19",
@@ -1277,6 +1342,7 @@
       "claim": "late",
       "score": 0.8648691377504371,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "f89df39950f49405db50991cc55d9e1115bb675effe581e4ef8c24e2e2f5308c",
       "components": [
         "L17H19",
@@ -1304,6 +1370,7 @@
       "claim": "late",
       "score": 0.7946392848935541,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "001114d0d507c56d07946587a8d9fae2cbc653527cc4ad6b9161fc02d369697e",
       "components": [
         "L17H19",
@@ -1331,6 +1398,7 @@
       "claim": "middle",
       "score": 0.812937936862968,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "de0a301627eb9a7501d54302b93a81d8e42be61649e67ebcefb96b6e27e26cae",
       "components": [
         "L17H19",
@@ -1358,6 +1426,7 @@
       "claim": "late",
       "score": 0.8510864457883047,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "68e88b8e5bf5851853236419b9098f1c8c5d40ebabf3b19637c3854c2cdb09d3",
       "components": [
         "L17H19",
@@ -1385,6 +1454,7 @@
       "claim": "late",
       "score": 0.7358174138810109,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "4cd211c1a38b6294b2c67970f40b507b98273fbbe2849436e72a3e22245a3f09",
       "components": [
         "L17H19",
@@ -1412,6 +1482,7 @@
       "claim": "middle",
       "score": 0.6201532495521148,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "56956d1e2baeb202803d8fc3781b95646d039be7a88ec420e2a358e3c33e6d39",
       "components": [
         "L17H19",
@@ -1432,6 +1503,7 @@
       "claim": "middle",
       "score": 0.9713534393498682,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "54bdae7f7de4c6cf8298fa4137c3a5e496d7e4344ae6a230ee2adebf07b1fd34",
       "components": [
         "L16H2",

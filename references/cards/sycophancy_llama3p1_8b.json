@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.4",
+  "schema_version": "0.5",
   "stresskit_version": "1.0.0.dev0",
   "created_at": "2026-09-02T13:15:05+00:00",
   "claim": {
@@ -159,6 +159,7 @@
   },
   "verdict": {
     "grade": "B",
+    "grade_rule": "v0.4",
     "profile": "diagnostic",
     "confirmatory_state": "not_applicable",
     "required_checks": [],
@@ -233,7 +234,9 @@
       "jaccard": 0.8,
       "modal_share": 0.8,
       "score_cv": 0.25,
-      "random_margin": 3.0
+      "random_margin": 3.0,
+      "specificity_ratio": 1.5,
+      "random_floor": 1.5
     }
   },
   "provenance": {
@@ -254,7 +257,8 @@
     "layer=best-in-domain: at index 4 (L12) ff 0.988, fo 0.823, oo 0.969, of 0.894, drop 0.120; layer-averaged drop 0.264; top-8 ['L2', 'L0', 'L1', 'L4', 'L5', 'L6', 'L28', 'L22']",
     "DEVIATIONS: the combined factual+opinion probe is not trained (the claim compares the two subtypes); the transfer AUC is computed by applying the trained probe to the other subtype's held-out split exactly as upstream evaluate_probes_on_all_datasets does, but inline, because that function reads probes and pickles from fixed relative paths; activations are extracted for the 1200-conversation pool per subtype rather than all 3000, in batches of 25 rather than 100 (bf16 padding differs), and the chat template stamps the extraction date into the system header as it did upstream",
     "bootstrap: the pool is resampled with replacement and duplicates are collapsed before training, so each bootstrap run uses the ~63% distinct conversations of its resample and balances to 5/6 of each class; the templates axis is not run (the conversations are fixed artifacts generated, labelled and truncated with closed models)",
-    "null control: the same pool through upstream's shuffle_labels=True path, which permutes the training and validation labels and leaves the test labels intact, so every probe is fitted to noise and both in-domain and transfer AUC sit near chance"
+    "null control: the same pool through upstream's shuffle_labels=True path, which permutes the training and validation labels and leaves the test labels intact, so every probe is fitted to noise and both in-domain and transfer AUC sit near chance",
+    "v0.3 grade: B; regraded 2026-09-03 under grade rule v0.4 from the recorded checks (schema 0.5)"
   ],
   "runs": [
     {

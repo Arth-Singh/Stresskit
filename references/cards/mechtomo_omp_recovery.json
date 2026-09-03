@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.3",
+  "schema_version": "0.5",
   "stresskit_version": "1.0.0.dev0",
   "created_at": "2026-09-01T21:44:35+00:00",
   "claim": {
@@ -185,6 +185,7 @@
   },
   "verdict": {
     "grade": "C",
+    "grade_rule": "v0.4",
     "profile": "diagnostic",
     "confirmatory_state": "not_applicable",
     "required_checks": [],
@@ -256,7 +257,9 @@
       "jaccard": 0.8,
       "modal_share": 0.8,
       "score_cv": 0.25,
-      "random_margin": 3.0
+      "random_margin": 3.0,
+      "specificity_ratio": 1.5,
+      "random_floor": 1.5
     }
   },
   "provenance": {
@@ -278,7 +281,8 @@
     "null-control supports: 30 distinct supports across 49 null runs (most common {L1B1} x5); median size 1; held-out R^2 mean -0.684, max -0.099; claims: `not recovered; sparse support (k<=8)` x48, `not recovered; dense support (k>8)` x1",
     "recovery by axis (label 'recovered' = held-out R^2 >= 0.9 and r >= 0.95): seeds 6/24 recovered (median held-out R^2 0.27); bootstrap 5/24 recovered (median held-out R^2 0.58); templates 2/4 recovered (median held-out R^2 0.29); hyperparams 2/4 recovered (median held-out R^2 0.91). Bootstrap resamples measurements with replacement, so a training measurement's duplicate can sit in the held-out set; that biases held-out R^2 upward, not downward",
     "specificity basis: the null base run selected k=5, so StressKit's 2x size guard grades null Jaccard on 3/49 null runs (sizes [5, 6, 10]) = 0.132, too few for a CI (state inconclusive); over all 49 null runs the null Jaccard is 0.037 and the real/null ratio would be 10.9x, so the graded 3.04x is the conservative (harsher) reading",
-    "post-hoc regrade (verdict-trace mode, from_findings at bootstrap seed 0): grade C, low confidence vs the card's high; checks that differ -- claim_stability: card fail (CI [0.561, 0.789], value 0.684) vs post-hoc inconclusive (CI [0.544, 0.807], value 0.684) -- a check whose CI end sits at its bar is decided by the bootstrap seed, not by the data"
+    "post-hoc regrade (verdict-trace mode, from_findings at bootstrap seed 0): grade C, low confidence vs the card's high; checks that differ -- claim_stability: card fail (CI [0.561, 0.789], value 0.684) vs post-hoc inconclusive (CI [0.544, 0.807], value 0.684) -- a check whose CI end sits at its bar is decided by the bootstrap seed, not by the data",
+    "v0.3 grade: C; regraded 2026-09-03 under grade rule v0.4 from the recorded checks (schema 0.5)"
   ],
   "runs": [
     {

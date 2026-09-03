@@ -513,6 +513,7 @@ def stress(
     seed_findings = [r.finding for r in runs if r.axis == "seeds"]
     if len(seed_findings) >= 2 and all(
         f.components == base.components
+        and f.vector == base.vector
         and f.claim == base.claim
         and f.score == base.score
         for f in seed_findings

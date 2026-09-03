@@ -1,0 +1,1732 @@
+{
+ "schema_version": "0.1",
+ "thresholds": {
+  "d_matches_max": 0.5,
+  "d_degraded_min": 1.0,
+  "z_degraded_min": 1.96,
+  "retention_matches_min": 0.9,
+  "retention_degraded_max": 0.5
+ },
+ "score_polarity": {
+  "ams": 1,
+  "diff_mining": 1,
+  "folkmotif": 1,
+  "swd": -1,
+  "greater_than": 1,
+  "ioi": 1,
+  "coax": 1,
+  "reins": 1,
+  "sae_causal": 1,
+  "faithfulness": 1,
+  "sycophancy": 1,
+  "communication_map": 1,
+  "homonym": -1,
+  "lens_baseline": 1,
+  "jlens": 1,
+  "impossibility_truth": 1,
+  "harc": 1,
+  "mechtomo": 1,
+  "refusal_direction": 1
+ },
+ "score_scale": {
+  "ams": "signed",
+  "diff_mining": "ratio",
+  "folkmotif": "ratio",
+  "swd": "signed",
+  "greater_than": "ratio",
+  "ioi": "ratio",
+  "coax": "signed",
+  "reins": "signed",
+  "sae_causal": "ratio",
+  "faithfulness": "signed",
+  "sycophancy": "signed",
+  "communication_map": "ratio",
+  "homonym": "signed",
+  "lens_baseline": "ratio",
+  "jlens": "ratio",
+  "impossibility_truth": "signed",
+  "harc": "signed",
+  "mechtomo": "signed",
+  "refusal_direction": "ratio"
+ },
+ "n_batteries_counted": 38,
+ "cards": [
+  {
+   "card": "diff_mining_gemma3_1b",
+   "path": "references/cards/diff_mining_gemma3_1b.json",
+   "sha256": "bc4b51e48e72adde2879a0bbe2179849d7e943554baad5630249c942461260ac",
+   "schema_version": "0.4",
+   "family": "signal",
+   "specificity": {
+    "state": "pass",
+    "value": 10.87461728819759,
+    "threshold": 1.5
+   },
+   "structural_metric": "mean_pairwise_jaccard",
+   "structural_real": 0.9181388329464398,
+   "structural_null": 0.0844295305861395,
+   "null_scores_source": "sidecar",
+   "sidecar": "references/cards/diff_mining_gemma3_1b.runs.json",
+   "sidecar_sha256": "e4b2b3f5ec8e914efeb8a2d7d76fc2db6f97d3437b0f570c96e052f6dc1014cf",
+   "leak": {
+    "polarity": 1,
+    "scale": "ratio",
+    "real_mean": 0.6453435114503817,
+    "real_sd": 0.040442168868449924,
+    "n_real": 131,
+    "null_mean": 0.03644628099173554,
+    "null_sd": 0.07447734698176155,
+    "n_null": 121,
+    "difference": 0.6088972304586462,
+    "pooled_sd": 0.059275769388109155,
+    "d": 10.272278820573053,
+    "z": 79.72755042226193,
+    "retention": 0.0564757843614544,
+    "ci_difference": [
+     0.5939518011481926,
+     0.6231701469938806
+    ],
+    "leak_class": "null_degraded"
+   }
+  },
+  {
+   "card": "faithfulness_steering_gemma3_4b",
+   "path": "references/cards/faithfulness_steering_gemma3_4b.json",
+   "sha256": "8edb0a123dbd9277470bacdeeb0fd79874d8cc0d532a44133d09d29035acaa1b",
+   "schema_version": "0.4",
+   "family": "signal",
+   "specificity": {
+    "state": "pass",
+    "value": 16.6812385751733,
+    "threshold": 1.5
+   },
+   "structural_metric": "mean_pairwise_jaccard",
+   "structural_real": 0.9097537379244183,
+   "structural_null": 0.05453754131173482,
+   "null_scores_source": "sidecar",
+   "sidecar": "references/cards/faithfulness_steering_gemma3_4b.runs.json",
+   "sidecar_sha256": "36808d2c130eb592667a041482b0db8899aca2fa979c2d4c52daf7ad9f4cf46f",
+   "leak": {
+    "polarity": 1,
+    "scale": "signed",
+    "real_mean": 0.8655049422781314,
+    "real_sd": 0.06704898460949342,
+    "n_real": 92,
+    "null_mean": 0.0016014764039948535,
+    "null_sd": 0.14862532752501195,
+    "n_null": 81,
+    "difference": 0.8639034658741365,
+    "pooled_sd": 0.112841405653218,
+    "d": 7.655908404128425,
+    "z": 48.17529259307004,
+    "retention": null,
+    "ci_difference": [
+     0.8257617561149043,
+     0.8984552837045408
+    ],
+    "leak_class": "null_degraded"
+   }
+  },
+  {
+   "card": "folkmotif_llama3p1_8b",
+   "path": "references/cards/folkmotif_llama3p1_8b.json",
+   "sha256": "91d39852f5c67c38591f62e949cf97740d81abdd27851c8d7fe1c6db0a6dd7c5",
+   "schema_version": "0.4",
+   "family": "signal",
+   "specificity": {
+    "state": "pass",
+    "value": 3.12180928565524,
+    "threshold": 1.5
+   },
+   "structural_metric": "mean_pairwise_jaccard",
+   "structural_real": 0.8777487541318788,
+   "structural_null": 0.28116668054168054,
+   "null_scores_source": "sidecar",
+   "sidecar": "references/cards/folkmotif_llama3p1_8b.runs.json",
+   "sidecar_sha256": "856cabcbb1df9d5f8dedaaaab419c9ed4873e3ba0996cf5e355b959ae00324a2",
+   "leak": {
+    "polarity": 1,
+    "scale": "ratio",
+    "real_mean": 0.7078347578347579,
+    "real_sd": 0.03234245706405919,
+    "n_real": 52,
+    "null_mean": 0.08509485094850949,
+    "null_sd": 0.009272359472705577,
+    "n_null": 41,
+    "difference": 0.6227399068862485,
+    "pooled_sd": 0.024955624737741478,
+    "d": 24.95388969142703,
+    "z": 132.130383978281,
+    "retention": 0.1202185255903676,
+    "ci_difference": [
+     0.6137186435966924,
+     0.6327565839760961
+    ],
+    "leak_class": "null_degraded"
+   }
+  },
+  {
+   "card": "harc_qwen2p5_7b",
+   "path": "references/cards/harc_qwen2p5_7b.json",
+   "sha256": "daebd343ec2b8e570eaad3bb5b82760597c556cacb614495c2728d3d16bd5ef5",
+   "schema_version": "0.4",
+   "family": "signal",
+   "specificity": {
+    "state": "pass",
+    "value": 2.0880657489436825,
+    "threshold": 1.5
+   },
+   "structural_metric": "mean_pairwise_jaccard",
+   "structural_real": 0.7594939278330282,
+   "structural_null": 0.3637308490967028,
+   "null_scores_source": "sidecar",
+   "sidecar": "references/cards/harc_qwen2p5_7b.runs.json",
+   "sidecar_sha256": "edfa45675b266e300266d2cf9ce780273587fb061bba98ffb7a7e6821a606c9e",
+   "leak": {
+    "polarity": 1,
+    "scale": "signed",
+    "real_mean": 0.15150000279534143,
+    "real_sd": 0.05756151563333471,
+    "n_real": 51,
+    "null_mean": 0.05923902585530235,
+    "null_sd": 0.03527221252949861,
+    "n_null": 41,
+    "difference": 0.09226097694003907,
+    "pooled_sd": 0.04889974440096235,
+    "d": 1.886737406713794,
+    "z": 9.450279491409823,
+    "retention": null,
+    "ci_difference": [
+     0.07280623803017795,
+     0.10945166162635389
+    ],
+    "leak_class": "null_degraded"
+   }
+  },
+  {
+   "card": "impossibility_truth_gemma_3_4b_it",
+   "path": "references/cards/impossibility_truth_gemma_3_4b_it.json",
+   "sha256": "5d7e198e28122acdf4c04d70140f0dba5b9af29763a463e331175fe4f0405fb4",
+   "schema_version": "0.3",
+   "family": "signal",
+   "specificity": {
+    "state": "pass",
+    "value": 1.8440588166644227,
+    "threshold": 1.5
+   },
+   "structural_metric": "mean_pairwise_jaccard",
+   "structural_real": 0.8844349975875533,
+   "structural_null": 0.47961322577950105,
+   "null_scores_source": "sidecar",
+   "sidecar": "references/cards/impossibility_truth_gemma_3_4b_it.runs.json",
+   "sidecar_sha256": "fb64fc268c2e7f8c40dd811e16bba55d028cabb31835ce1573743e9fa4b5518a",
+   "leak": {
+    "polarity": 1,
+    "scale": "signed",
+    "real_mean": 0.9283564102564102,
+    "real_sd": 0.03456822903922926,
+    "n_real": 39,
+    "null_mean": 0.48373030303030307,
+    "null_sd": 0.09439080747759185,
+    "n_null": 33,
+    "difference": 0.4446261072261072,
+    "pooled_sd": 0.06878116925704843,
+    "d": 6.464358079817662,
+    "z": 25.643644691966152,
+    "retention": null,
+    "ci_difference": [
+     0.4102857808857808,
+     0.478611421911422
+    ],
+    "leak_class": "null_degraded"
+   }
+  },
+  {
+   "card": "refusal_direction_gemma_4_e4b_it",
+   "path": "references/cards/refusal_direction_gemma_4_e4b_it.json",
+   "sha256": "09b4b1adc19d0b26620ef5c17acb3a47dcd4aec6bbba71e3acb4030ba2d67f05",
+   "schema_version": "0.3",
+   "family": "signal",
+   "specificity": {
+    "state": "pass",
+    "value": 1292.9464571201158,
+    "threshold": 1.5
+   },
+   "structural_metric": "mean_pairwise_jaccard",
+   "structural_real": 0.30180822995334167,
+   "structural_null": 0.0002334267040149393,
+   "null_scores_source": "sidecar",
+   "sidecar": "references/cards/refusal_direction_gemma_4_e4b_it.runs.json",
+   "sidecar_sha256": "8e9d37e093d96ab4837f7b7929f6d86d280e152c944bde0dc8c7ebdbfeb34122",
+   "leak": {
+    "polarity": 1,
+    "scale": "ratio",
+    "real_mean": 0.27012380952380954,
+    "real_sd": 0.2760418341393408,
+    "n_real": 21,
+    "null_mean": 0.14331176470588236,
+    "null_sd": 0.3116108317273759,
+    "n_null": 17,
+    "difference": 0.12681204481792718,
+    "pooled_sd": 0.29248946250664976,
+    "d": 0.433561071674656,
+    "z": 1.312134828749753,
+    "retention": 0.5305410321234583,
+    "ci_difference": [
+     -0.06370896358543415,
+     0.3214675070028011
+    ],
+    "leak_class": "null_matches_or_exceeds"
+   }
+  },
+  {
+   "card": "refusal_direction_meta_llama_3p1_8b_instruct",
+   "path": "references/cards/refusal_direction_meta_llama_3p1_8b_instruct.json",
+   "sha256": "87efda4780a107ffa5ca8434d2d08df38b6cfae06419c634ed457c6541cfee61",
+   "schema_version": "0.3",
+   "family": "signal",
+   "specificity": {
+    "state": "pass",
+    "value": 220.74787193441747,
+    "threshold": 1.5
+   },
+   "structural_metric": "mean_pairwise_jaccard",
+   "structural_real": 0.39236283718292075,
+   "structural_null": 0.001777425230624596,
+   "null_scores_source": "sidecar",
+   "sidecar": "references/cards/refusal_direction_meta_llama_3p1_8b_instruct.runs.json",
+   "sidecar_sha256": "44ba6c745d0021f6122d505589e7c44ee2b56631916843959c77606207015a1b",
+   "leak": {
+    "polarity": 1,
+    "scale": "ratio",
+    "real_mean": 0.999147619047619,
+    "real_sd": 0.003811963504499647,
+    "n_real": 21,
+    "null_mean": 0.08404705882352942,
+    "null_sd": 0.09660745993389379,
+    "n_null": 17,
+    "difference": 0.9151005602240896,
+    "pooled_sd": 0.06467859296346853,
+    "d": 14.148430234729325,
+    "z": 39.03094802510512,
+    "retention": 0.08411876005233594,
+    "ci_difference": [
+     0.8648775910364145,
+     0.9583658263305321
+    ],
+    "leak_class": "null_degraded"
+   }
+  },
+  {
+   "card": "refusal_direction_qwen2p5_7b_instruct",
+   "path": "references/cards/refusal_direction_qwen2p5_7b_instruct.json",
+   "sha256": "bf08736c620c74ad121ddb13e5df60e21a1aa6a52f3fbb716e09d3ebd83aa837",
+   "schema_version": "0.3",
+   "family": "signal",
+   "specificity": {
+    "state": "pass",
+    "value": 103.6894838349314,
+    "threshold": 1.5
+   },
+   "structural_metric": "mean_pairwise_jaccard",
+   "structural_real": 0.3803134512213117,
+   "structural_null": 0.0036678112105057075,
+   "null_scores_source": "sidecar",
+   "sidecar": "references/cards/refusal_direction_qwen2p5_7b_instruct.runs.json",
+   "sidecar_sha256": "17f49a75a98cab5c308aad175353a7df9392d56d21e0a40673db5f44be06ae36",
+   "leak": {
+    "polarity": 1,
+    "scale": "ratio",
+    "real_mean": 0.9871666666666666,
+    "real_sd": 0.009132846702364446,
+    "n_real": 21,
+    "null_mean": 0.2197470588235294,
+    "null_sd": 0.09748187836206552,
+    "n_null": 17,
+    "difference": 0.7674196078431372,
+    "pooled_sd": 0.06555386877250122,
+    "d": 11.70670201794493,
+    "z": 32.34416775892619,
+    "retention": 0.22260380768886992,
+    "ci_difference": [
+     0.7186058823529413,
+     0.8106901960784314
+    ],
+    "leak_class": "null_degraded"
+   }
+  },
+  {
+   "card": "refusal_direction_qwen3p5_4b",
+   "path": "references/cards/refusal_direction_qwen3p5_4b.json",
+   "sha256": "b978fe18daa1b4247492ec78efb3a5dc369d4f71148025b2173c1822081b1db2",
+   "schema_version": "0.3",
+   "family": "signal",
+   "specificity": {
+    "state": "pass",
+    "value": 248.42878267791934,
+    "threshold": 1.5
+   },
+   "structural_metric": "mean_pairwise_jaccard",
+   "structural_real": 0.20390001289037382,
+   "structural_null": 0.0008207584108912381,
+   "null_scores_source": "sidecar",
+   "sidecar": "references/cards/refusal_direction_qwen3p5_4b.runs.json",
+   "sidecar_sha256": "ce8264e1f9c4da2b1353d1baf0426accb175170935a320c8fc8f19bd02a1a91c",
+   "leak": {
+    "polarity": 1,
+    "scale": "ratio",
+    "real_mean": 0.8747619047619049,
+    "real_sd": 0.15184797684711626,
+    "n_real": 21,
+    "null_mean": 0.05788823529411764,
+    "null_sd": 0.03755157836978738,
+    "n_null": 17,
+    "difference": 0.8168736694677872,
+    "pooled_sd": 0.11564305644739996,
+    "d": 7.0637502549869104,
+    "z": 23.770654299265637,
+    "retention": 0.06617599026545838,
+    "ci_difference": [
+     0.7408893557422969,
+     0.8734378151260506
+    ],
+    "leak_class": "null_degraded"
+   }
+  },
+  {
+   "card": "refusal_direction_qwen3p5_9b",
+   "path": "references/cards/refusal_direction_qwen3p5_9b.json",
+   "sha256": "52ecfd2f78804886f64e8d5e2255da3245be3568922cb7fe3503e192700906f2",
+   "schema_version": "0.3",
+   "family": "signal",
+   "specificity": {
+    "state": "pass",
+    "value": 73.3549309575966,
+    "threshold": 1.5
+   },
+   "structural_metric": "mean_pairwise_jaccard",
+   "structural_real": 0.20321323001028457,
+   "structural_null": 0.0027702736183850218,
+   "null_scores_source": "sidecar",
+   "sidecar": "references/cards/refusal_direction_qwen3p5_9b.runs.json",
+   "sidecar_sha256": "1a1797b21d076cd1a3a94f13bc95639b649e5e432e1d74aae3d8b49aff0e9ff3",
+   "leak": {
+    "polarity": 1,
+    "scale": "ratio",
+    "real_mean": 0.7460380952380953,
+    "real_sd": 0.24122870491001347,
+    "n_real": 21,
+    "null_mean": 0.044811764705882356,
+    "null_sd": 0.043966603399999776,
+    "n_null": 17,
+    "difference": 0.701226330532213,
+    "pooled_sd": 0.1817226854281913,
+    "d": 3.8587715610735143,
+    "z": 13.055879618155346,
+    "retention": 0.060066322339184096,
+    "ci_difference": [
+     0.5812644257703081,
+     0.7896742296918767
+    ],
+    "leak_class": "null_degraded"
+   }
+  },
+  {
+   "card": "reins_gate_qwen3p5_2b_base",
+   "path": "references/cards/reins_gate_qwen3p5_2b_base.json",
+   "sha256": "40cbf0f41638ba867e74f5d803fd1246f90372bcf7914e5f76cd3d6448dcb641",
+   "schema_version": "0.4",
+   "family": "signal",
+   "specificity": {
+    "state": "pass",
+    "value": 3.7492938507122866,
+    "threshold": 1.5
+   },
+   "structural_metric": "mean_pairwise_jaccard",
+   "structural_real": 0.8333549824703599,
+   "structural_null": 0.22226985017779816,
+   "null_scores_source": "sidecar",
+   "sidecar": "references/cards/reins_gate_qwen3p5_2b_base.runs.json",
+   "sidecar_sha256": "737e3af086c2067dabea552ea705b7f645338705504092600c7dc44f94113a5a",
+   "leak": {
+    "polarity": 1,
+    "scale": "signed",
+    "real_mean": 0.9796696936664724,
+    "real_sd": 0.015681039484551358,
+    "n_real": 51,
+    "null_mean": 0.08230370094675166,
+    "null_sd": 0.06897989698949654,
+    "n_null": 41,
+    "difference": 0.8973659927197207,
+    "pooled_sd": 0.047506054385440394,
+    "d": 18.889507965425654,
+    "z": 81.62063781151306,
+    "retention": null,
+    "ci_difference": [
+     0.875062138726686,
+     0.9206100850005895
+    ],
+    "leak_class": "null_degraded"
+   }
+  },
+  {
+   "card": "sycophancy_gemma3_12b_it",
+   "path": "references/cards/sycophancy_gemma3_12b_it.json",
+   "sha256": "9241d744bc1bd0eb20424908882801cc7b66ed2fdecf449c741c9756b13d47c9",
+   "schema_version": "0.4",
+   "family": "signal",
+   "specificity": {
+    "state": "pass",
+    "value": 3.115152868572387,
+    "threshold": 1.5
+   },
+   "structural_metric": "mean_pairwise_jaccard",
+   "structural_real": 0.32441077441077437,
+   "structural_null": 0.1041396002371612,
+   "null_scores_source": "sidecar",
+   "sidecar": "references/cards/sycophancy_gemma3_12b_it.runs.json",
+   "sidecar_sha256": "27debf0b50d41f5fb80388e2435f865487f4fc984194363234d1105eb5c48fd7",
+   "leak": {
+    "polarity": 1,
+    "scale": "signed",
+    "real_mean": 0.042538530074013696,
+    "real_sd": 0.0186704597114836,
+    "n_real": 48,
+    "null_mean": 0.02168324537856285,
+    "null_sd": 0.10130761318026296,
+    "n_null": 41,
+    "difference": 0.020855284695450844,
+    "pooled_sd": 0.07011424570982878,
+    "d": 0.2974471804454897,
+    "z": 1.2994389416823982,
+    "retention": null,
+    "ci_difference": [
+     -0.010187750395961127,
+     0.05062044120856118
+    ],
+    "leak_class": "null_matches_or_exceeds"
+   }
+  },
+  {
+   "card": "sycophancy_llama3p1_8b",
+   "path": "references/cards/sycophancy_llama3p1_8b.json",
+   "sha256": "61ef4182bfca4d50d45d756b6cad85c6c861e0831cce4737d86d9f4843f7d8dd",
+   "schema_version": "0.4",
+   "family": "signal",
+   "specificity": {
+    "state": "pass",
+    "value": 3.501489024632141,
+    "threshold": 1.5
+   },
+   "structural_metric": "mean_pairwise_jaccard",
+   "structural_real": 0.5245278580701779,
+   "structural_null": 0.14980137146803812,
+   "null_scores_source": "sidecar",
+   "sidecar": "references/cards/sycophancy_llama3p1_8b.runs.json",
+   "sidecar_sha256": "202ca2d1bb53bb0fdb40aa344fc7d23aa15c96832fefb59843515754811a7ee5",
+   "leak": {
+    "polarity": 1,
+    "scale": "signed",
+    "real_mean": 0.23167386649752808,
+    "real_sd": 0.04680469001028066,
+    "n_real": 88,
+    "null_mean": -0.001002166247252625,
+    "null_sd": 0.14272607412392246,
+    "n_null": 81,
+    "difference": 0.23267603274478071,
+    "pooled_sd": 0.10442315664066557,
+    "d": 2.228203400759574,
+    "z": 13.9957033614119,
+    "retention": null,
+    "ci_difference": [
+     0.20089746025603233,
+     0.269574887187815
+    ],
+    "leak_class": "null_degraded"
+   }
+  },
+  {
+   "card": "harc_llama3p1_8b",
+   "path": "references/cards/harc_llama3p1_8b.json",
+   "sha256": "d26c8793cc09689d6cc355a55787d4a9fe471e697505d08fe77958569d646d80",
+   "schema_version": "0.4",
+   "family": "signal",
+   "specificity": {
+    "state": "inconclusive",
+    "value": 1.152053455780369,
+    "threshold": 1.5
+   },
+   "structural_metric": "mean_pairwise_jaccard",
+   "structural_real": 0.6775256661831056,
+   "structural_null": 0.5881026290782388,
+   "null_scores_source": "sidecar",
+   "sidecar": "references/cards/harc_llama3p1_8b.runs.json",
+   "sidecar_sha256": "07dee4824d43e8d7c8504abe4b7c611b66c70838aeba6548a2a8cbf803c994f0",
+   "leak": {
+    "polarity": 1,
+    "scale": "signed",
+    "real_mean": 0.5444352093612,
+    "real_sd": 0.06979350278297232,
+    "n_real": 51,
+    "null_mean": 0.28113354502338456,
+    "null_sd": 0.13176201943366636,
+    "n_null": 41,
+    "difference": 0.2633016643378155,
+    "pooled_sd": 0.10216345624948434,
+    "d": 2.5772587772953743,
+    "z": 11.558138654201693,
+    "retention": null,
+    "ci_difference": [
+     0.2151562863262521,
+     0.3041052407830891
+    ],
+    "leak_class": "null_degraded"
+   }
+  },
+  {
+   "card": "refusal_direction_gemma_4_12b_it",
+   "path": "references/cards/refusal_direction_gemma_4_12b_it.json",
+   "sha256": "5dcf744a12ac8ef38837b1bf241e431919b4800f289c2d60849770e07e5703d3",
+   "schema_version": "0.3",
+   "family": "signal",
+   "specificity": {
+    "state": "inconclusive",
+    "value": 4.304342784870922,
+    "threshold": 1.5
+   },
+   "structural_metric": "mean_pairwise_jaccard",
+   "structural_real": 0.1784117248907059,
+   "structural_null": 0.041449237155970625,
+   "null_scores_source": "sidecar",
+   "sidecar": "references/cards/refusal_direction_gemma_4_12b_it.runs.json",
+   "sidecar_sha256": "d31680304b7b7b5c44d5a4c214025745ae149f1c54b753a3178993772fab26b5",
+   "leak": {
+    "polarity": 1,
+    "scale": "ratio",
+    "real_mean": 0.639104761904762,
+    "real_sd": 0.4031469240342491,
+    "n_real": 21,
+    "null_mean": 0.23838823529411765,
+    "null_sd": 0.3956967613216151,
+    "n_null": 17,
+    "difference": 0.4007165266106443,
+    "pooled_sd": 0.39983111721571923,
+    "d": 1.0022144584470831,
+    "z": 3.0779077369554244,
+    "retention": 0.373003378325073,
+    "ci_difference": [
+     0.1400131652661064,
+     0.6432826330532212
+    ],
+    "leak_class": "null_degraded"
+   }
+  },
+  {
+   "card": "swd_gpt2",
+   "path": "references/cards/swd_gpt2.json",
+   "sha256": "dcf2141e6bc5fcc793cc69e87c79cf3ad23b65d5cbc7c0dbcf5b73d55b343424",
+   "schema_version": "0.4",
+   "family": "signal",
+   "specificity": {
+    "state": "inconclusive",
+    "value": 1.146384479717813,
+    "threshold": 1.5
+   },
+   "structural_metric": "mean_pairwise_jaccard",
+   "structural_real": 0.962962962962963,
+   "structural_null": 0.8400000000000001,
+   "null_scores_source": "sidecar",
+   "sidecar": "references/cards/swd_gpt2.runs.json",
+   "sidecar_sha256": "157144c82479f83d3f268539fd5cf92842326d0be31a4b37c637c6bf34c981b5",
+   "leak": {
+    "polarity": -1,
+    "scale": "signed",
+    "real_mean": 0.0022370027752122864,
+    "real_sd": 0.001408447534596768,
+    "n_real": 22,
+    "null_mean": 0.0022615379781256886,
+    "null_sd": 0.0007567555395291363,
+    "n_null": 13,
+    "difference": 2.4535202913402235e-05,
+    "pooled_sd": 0.0012081481032149063,
+    "d": 0.020308108623531808,
+    "z": 0.06696973453403725,
+    "retention": null,
+    "ci_difference": [
+     -0.0006928314463582042,
+     0.0006856894287587318
+    ],
+    "leak_class": "null_matches_or_exceeds"
+   }
+  },
+  {
+   "card": "ams_safety_scanner",
+   "path": "references/cards/ams_safety_scanner.json",
+   "sha256": "6d5e214df1ce5a30dd96c00f15f689eb47fd337b343312f5fa7d0f374a7d46c9",
+   "schema_version": "0.4",
+   "family": "signal",
+   "specificity": {
+    "state": "fail",
+    "value": 0.9475788372434982,
+    "threshold": 1.5
+   },
+   "structural_metric": "mean_pairwise_jaccard",
+   "structural_real": 0.7894669912292709,
+   "structural_null": 0.8331412228726278,
+   "null_scores_source": "sidecar",
+   "sidecar": "references/cards/ams_safety_scanner.runs.json",
+   "sidecar_sha256": "02121ff0964411621b08157fa804f8c1d341abe823e7c2e480dca9ecac5842a1",
+   "leak": {
+    "polarity": 1,
+    "scale": "signed",
+    "real_mean": 0.689922480620155,
+    "real_sd": 0.15519688187246822,
+    "n_real": 129,
+    "null_mean": 0.6481700118063755,
+    "null_sd": 0.19046358683473055,
+    "n_null": 121,
+    "difference": 0.041752468813779586,
+    "pooled_sd": 0.17316518164507458,
+    "d": 0.24111353343166242,
+    "z": 1.892920936223037,
+    "retention": null,
+    "ci_difference": [
+     0.005765904285988777,
+     0.08577469042585328
+    ],
+    "leak_class": "null_matches_or_exceeds"
+   }
+  },
+  {
+   "card": "ioi_gpt2_medium",
+   "path": "references/scale/ioi_gpt2_medium.json",
+   "sha256": "68c55057e46249f591a0eb051f7759da8ee0951c9205c7e29831bdc3fdd807bc",
+   "schema_version": "0.2",
+   "family": "structure",
+   "specificity": {
+    "state": "pass",
+    "value": 2.3247361198022256,
+    "threshold": 1.5
+   },
+   "structural_metric": "mean_pairwise_jaccard",
+   "structural_real": 0.9472905525846703,
+   "structural_null": 0.4074830448564029,
+   "null_scores_source": "summary",
+   "sidecar": null,
+   "sidecar_sha256": null,
+   "leak": {
+    "polarity": 1,
+    "scale": "ratio",
+    "real_mean": 0.9540515092812413,
+    "real_sd": 0.033441574413109895,
+    "n_real": 45,
+    "null_mean": 0.11861782625751542,
+    "null_sd": 3.299198969446486,
+    "n_null": 41,
+    "difference": 0.8354336830237259,
+    "pooled_sd": 2.278115277445249,
+    "d": 0.3667214259502301,
+    "z": 1.621343650527849,
+    "retention": 0.12433063110699248,
+    "ci_difference": null,
+    "leak_class": "null_matches_or_exceeds"
+   }
+  },
+  {
+   "card": "ioi_gpt2_large",
+   "path": "references/scale/ioi_gpt2_large.json",
+   "sha256": "c706960448103ff945c3c35c7d8980cf6a86dcd2d43b31752274c818bf7685e8",
+   "schema_version": "0.2",
+   "family": "structure",
+   "specificity": {
+    "state": "inconclusive",
+    "value": 1.6317250178956844,
+    "threshold": 1.5
+   },
+   "structural_metric": "mean_pairwise_jaccard",
+   "structural_real": 0.8474269917961869,
+   "structural_null": 0.5193442415248686,
+   "null_scores_source": "summary",
+   "sidecar": null,
+   "sidecar_sha256": null,
+   "leak": {
+    "polarity": 1,
+    "scale": "ratio",
+    "real_mean": 0.8440049057183081,
+    "real_sd": 0.047505392420533685,
+    "n_real": 45,
+    "null_mean": 3.5133220538547665,
+    "null_sd": 8.336059808470333,
+    "n_null": 41,
+    "difference": -2.669317148136458,
+    "pooled_sd": 5.75587381749356,
+    "d": -0.4637553276487275,
+    "z": -2.050335153148265,
+    "retention": 4.162679659858943,
+    "ci_difference": null,
+    "leak_class": "null_matches_or_exceeds"
+   }
+  },
+  {
+   "card": "ioi_gpt2_small",
+   "path": "references/cards/ioi_gpt2_small.json",
+   "sha256": "7a9edfaa5de043249a1aae928340b09ab8a044522a53cc1a0ca852353afe58a3",
+   "schema_version": "0.2",
+   "family": "structure",
+   "specificity": {
+    "state": "inconclusive",
+    "value": 1.5420432053473005,
+    "threshold": 1.5
+   },
+   "structural_metric": "mean_pairwise_jaccard",
+   "structural_real": 0.8290079987766744,
+   "structural_null": 0.5376036131166405,
+   "null_scores_source": "summary",
+   "sidecar": null,
+   "sidecar_sha256": null,
+   "leak": {
+    "polarity": 1,
+    "scale": "ratio",
+    "real_mean": 1.070407849742164,
+    "real_sd": 0.035311020667541874,
+    "n_real": 45,
+    "null_mean": 1.4458199216402172,
+    "null_sd": 1.5004051915731376,
+    "n_null": 41,
+    "difference": -0.37541207189805315,
+    "pooled_sd": 1.0362945749551724,
+    "d": -0.362263859110034,
+    "z": -1.6017032331099192,
+    "retention": 1.3507187208954803,
+    "ci_difference": null,
+    "leak_class": "null_matches_or_exceeds"
+   }
+  },
+  {
+   "card": "mechtomo_omp_recovery",
+   "path": "references/cards/mechtomo_omp_recovery.json",
+   "sha256": "085febba45cfe6c4805d890c2a33344cdb4c97636c380881bc132617591197b2",
+   "schema_version": "0.3",
+   "family": "structure",
+   "specificity": {
+    "state": "inconclusive",
+    "value": 3.035621073294208,
+    "threshold": 1.5
+   },
+   "structural_metric": "mean_pairwise_jaccard",
+   "structural_real": 0.4014136291059374,
+   "structural_null": 0.13223443223443224,
+   "null_scores_source": "summary",
+   "sidecar": null,
+   "sidecar_sha256": null,
+   "leak": {
+    "polarity": 1,
+    "scale": "signed",
+    "real_mean": 0.35154145594635267,
+    "real_sd": 0.5924256036756073,
+    "n_real": 57,
+    "null_mean": -0.684202751060417,
+    "null_sd": 0.5165780709415612,
+    "n_null": 49,
+    "difference": 1.0357442070067697,
+    "pooled_sd": 0.5586453775357697,
+    "d": 1.8540280626244896,
+    "z": 9.615270711056668,
+    "retention": null,
+    "ci_difference": null,
+    "leak_class": "null_degraded"
+   }
+  },
+  {
+   "card": "coax_backup_gpt2",
+   "path": "references/cards/coax_backup_gpt2.json",
+   "sha256": "b371078b5a9cb00924d9c9ee26b539548df03d6f3e53634ccfc9cb1fc07454d4",
+   "schema_version": "0.4",
+   "family": "structure",
+   "specificity": {
+    "state": "fail",
+    "value": 0.9480013531305129,
+    "threshold": 1.5
+   },
+   "structural_metric": "mean_pairwise_jaccard",
+   "structural_real": 0.7868583908825357,
+   "structural_null": 0.8300182149362477,
+   "null_scores_source": "sidecar",
+   "sidecar": "references/cards/coax_backup_gpt2.runs.json",
+   "sidecar_sha256": "543b84923956936f77589aa61cfc37824e3b3f391c6edf8a7375756f4b2a775d",
+   "leak": {
+    "polarity": 1,
+    "scale": "signed",
+    "real_mean": 0.9191067457375834,
+    "real_sd": 0.10240143814012623,
+    "n_real": 71,
+    "null_mean": 0.9547331443362504,
+    "null_sd": 0.006726265946006841,
+    "n_null": 61,
+    "difference": -0.03562639859866701,
+    "pooled_sd": 0.07524050698819461,
+    "d": -0.4735002464065914,
+    "z": -2.9242014442437085,
+    "retention": null,
+    "ci_difference": [
+     -0.06364763212580049,
+     -0.016998453186765294
+    ],
+    "leak_class": "null_matches_or_exceeds"
+   }
+  },
+  {
+   "card": "communication_map",
+   "path": "references/cards/communication_map.json",
+   "sha256": "2c6a32a5537653f996a6146dd9332459c25b18d396e2791920defaf9e69d47d5",
+   "schema_version": "0.4",
+   "family": "structure",
+   "specificity": {
+    "state": "fail",
+    "value": 0.8883842305037957,
+    "threshold": 1.5
+   },
+   "structural_metric": "mean_pairwise_jaccard",
+   "structural_real": 0.8883842305037957,
+   "structural_null": 1.0,
+   "null_scores_source": "sidecar",
+   "sidecar": "references/cards/communication_map.runs.json",
+   "sidecar_sha256": "aa84268b6b04875b065f41f65d311b0c3b7052bad9e07c1129448dcb3625c364",
+   "leak": {
+    "polarity": 1,
+    "scale": "ratio",
+    "real_mean": 0.8022956349889587,
+    "real_sd": 0.017031459427884747,
+    "n_real": 24,
+    "null_mean": 0.04450929606222029,
+    "null_sd": 0.0003239620466280623,
+    "n_null": 21,
+    "difference": 0.7577863389267384,
+    "pooled_sd": 0.012439988054128942,
+    "d": 60.915359052553306,
+    "z": 217.92685743013587,
+    "retention": 0.055477425179850104,
+    "ci_difference": [
+     0.7495516420653127,
+     0.7620638710454164
+    ],
+    "leak_class": "null_degraded"
+   }
+  },
+  {
+   "card": "greater_than_gpt2_small",
+   "path": "references/cards/greater_than_gpt2_small.json",
+   "sha256": "dd48b3bff0fcfdf7740c95d3b2488fd32608224698e7acc4489e4a26a2b3900f",
+   "schema_version": "0.2",
+   "family": "structure",
+   "specificity": {
+    "state": "fail",
+    "value": 1.1457059131951994,
+    "threshold": 1.5
+   },
+   "structural_metric": "mean_pairwise_jaccard",
+   "structural_real": 0.8921713657766789,
+   "structural_null": 0.778708877646052,
+   "null_scores_source": "summary",
+   "sidecar": null,
+   "sidecar_sha256": null,
+   "leak": {
+    "polarity": 1,
+    "scale": "ratio",
+    "real_mean": 0.9991875404720394,
+    "real_sd": 0.0017632795212821047,
+    "n_real": 45,
+    "null_mean": 0.9668412326064252,
+    "null_sd": 0.03841735863186346,
+    "n_null": 41,
+    "difference": 0.03234630786561421,
+    "pooled_sd": 0.026556552901828633,
+    "d": 1.218016057475099,
+    "z": 5.386079456178963,
+    "retention": 0.9676273906995146,
+    "ci_difference": null,
+    "leak_class": "null_matches_or_exceeds"
+   }
+  },
+  {
+   "card": "homonym_reconvergence_gpt2",
+   "path": "references/cards/homonym_reconvergence_gpt2.json",
+   "sha256": "4348294db886b54bc56dabc404ba69149e2c7711f96460e228d35a816e1210d2",
+   "schema_version": "0.3",
+   "family": "structure",
+   "specificity": {
+    "state": "fail",
+    "value": 1.07552688172043,
+    "threshold": 1.5
+   },
+   "structural_metric": "mean_pairwise_jaccard",
+   "structural_real": 0.8962724014336917,
+   "structural_null": 0.8333333333333334,
+   "null_scores_source": "summary",
+   "sidecar": null,
+   "sidecar_sha256": null,
+   "leak": {
+    "polarity": -1,
+    "scale": "signed",
+    "real_mean": 0.5478258064516129,
+    "real_sd": 0.08245553236683409,
+    "n_real": 31,
+    "null_mean": 0.387936,
+    "null_sd": 0.002681772548147965,
+    "n_null": 25,
+    "difference": -0.15988980645161294,
+    "pooled_sd": 0.0613750410175654,
+    "d": -2.605127488319769,
+    "z": -10.789397260540408,
+    "retention": null,
+    "ci_difference": null,
+    "leak_class": "null_matches_or_exceeds"
+   }
+  },
+  {
+   "card": "homonym_reconvergence_llama_3p2_3b",
+   "path": "references/cards/homonym_reconvergence_llama_3p2_3b.json",
+   "sha256": "151ae30e517265744752186b35888f3670523769bb8715b83fe4b5bbb702cb1e",
+   "schema_version": "0.3",
+   "family": "structure",
+   "specificity": {
+    "state": "fail",
+    "value": 0.9300435227854582,
+    "threshold": 1.5
+   },
+   "structural_metric": "mean_pairwise_jaccard",
+   "structural_real": 0.9300435227854582,
+   "structural_null": 1.0,
+   "null_scores_source": "summary",
+   "sidecar": null,
+   "sidecar_sha256": null,
+   "leak": {
+    "polarity": -1,
+    "scale": "signed",
+    "real_mean": 0.71196875,
+    "real_sd": 0.04021817404405004,
+    "n_real": 32,
+    "null_mean": 0.6642959999999999,
+    "null_sd": 0.003050833328780831,
+    "n_null": 25,
+    "difference": -0.04767275000000015,
+    "pooled_sd": 0.03020187584217187,
+    "d": -1.5784698357521598,
+    "z": -6.680812885001929,
+    "retention": null,
+    "ci_difference": null,
+    "leak_class": "null_matches_or_exceeds"
+   }
+  },
+  {
+   "card": "homonym_reconvergence_qwen2p5_7b",
+   "path": "references/cards/homonym_reconvergence_qwen2p5_7b.json",
+   "sha256": "dec062a348e09bd99bf9a731b8d243894ac7682193fa56c8b18b61af1de6b47c",
+   "schema_version": "0.3",
+   "family": "structure",
+   "specificity": {
+    "state": "fail",
+    "value": 0.8841397849462365,
+    "threshold": 1.5
+   },
+   "structural_metric": "mean_pairwise_jaccard",
+   "structural_real": 0.8841397849462365,
+   "structural_null": 1.0,
+   "null_scores_source": "summary",
+   "sidecar": null,
+   "sidecar_sha256": null,
+   "leak": {
+    "polarity": -1,
+    "scale": "signed",
+    "real_mean": 0.67411875,
+    "real_sd": 0.028231027229583757,
+    "n_real": 32,
+    "null_mean": 0.5366599999999999,
+    "null_sd": 0.0023039097204534584,
+    "n_null": 25,
+    "difference": -0.13745875000000007,
+    "pooled_sd": 0.021207582535912563,
+    "d": -6.481585054177191,
+    "z": -27.426942334126885,
+    "retention": null,
+    "ci_difference": null,
+    "leak_class": "null_matches_or_exceeds"
+   }
+  },
+  {
+   "card": "jlens_qwen3p5_4b",
+   "path": "references/cards/jlens_qwen3p5_4b.json",
+   "sha256": "f744b7be563c4400b71c54142eedae9388bdbf76f0e8869c76b712978bc137c3",
+   "schema_version": "0.2",
+   "family": "structure",
+   "specificity": {
+    "state": "fail",
+    "value": 0.7827670382094507,
+    "threshold": 1.5
+   },
+   "structural_metric": "mean_pairwise_jaccard",
+   "structural_real": 0.4483120309745036,
+   "structural_null": 0.5727272727272728,
+   "null_scores_source": "summary",
+   "sidecar": null,
+   "sidecar_sha256": null,
+   "leak": {
+    "polarity": 1,
+    "scale": "ratio",
+    "real_mean": 0.279443173150267,
+    "real_sd": 0.10080554729611077,
+    "n_real": 20,
+    "null_mean": 0.04124860646599777,
+    "null_sd": 0.01872113224497956,
+    "n_null": 13,
+    "difference": 0.23819456668426925,
+    "pooled_sd": 0.07935180920896945,
+    "d": 3.0017534453057584,
+    "z": 10.297587401302966,
+    "retention": 0.14760999884515646,
+    "ci_difference": null,
+    "leak_class": "null_degraded"
+   }
+  },
+  {
+   "card": "lens_baseline_jlens_qwen3p5_0p8b",
+   "path": "references/h200-results/lens_baseline_jlens_qwen3p5_0p8b.json",
+   "sha256": "b489daa6180a7a9051512d7ca26c2a8d74262f593ce6143c045aac0c99af5ca5",
+   "schema_version": "0.3",
+   "family": "structure",
+   "specificity": {
+    "state": "fail",
+    "value": 0.8643256934518265,
+    "threshold": 1.5
+   },
+   "structural_metric": "mean_pairwise_jaccard",
+   "structural_real": 0.45986716956960383,
+   "structural_null": 0.5320531057373162,
+   "null_scores_source": "summary",
+   "sidecar": null,
+   "sidecar_sha256": null,
+   "leak": {
+    "polarity": 1,
+    "scale": "ratio",
+    "real_mean": 0.24873665141113654,
+    "real_sd": 0.05961907117049009,
+    "n_real": 48,
+    "null_mean": 0.06539413220219159,
+    "null_sd": 0.015721001030708438,
+    "n_null": 41,
+    "difference": 0.18334251920894495,
+    "pooled_sd": 0.045064991753713694,
+    "d": 4.068402368981598,
+    "z": 20.488235658099914,
+    "retention": 0.26290509191627615,
+    "ci_difference": null,
+    "leak_class": "null_degraded"
+   }
+  },
+  {
+   "card": "lens_baseline_jlens_qwen3p5_27b",
+   "path": "references/h200-results/lens_baseline_jlens_qwen3p5_27b.json",
+   "sha256": "18ebbeffc431e4bb6adbbb129a067c35a51dd7232dabc24de830c156e66bfe33",
+   "schema_version": "0.3",
+   "family": "structure",
+   "specificity": {
+    "state": "fail",
+    "value": 0.9331320730764452,
+    "threshold": 1.5
+   },
+   "structural_metric": "mean_pairwise_jaccard",
+   "structural_real": 0.47408772702769614,
+   "structural_null": 0.5080606922712186,
+   "null_scores_source": "summary",
+   "sidecar": null,
+   "sidecar_sha256": null,
+   "leak": {
+    "polarity": 1,
+    "scale": "ratio",
+    "real_mean": 0.4822654462242563,
+    "real_sd": 0.09917481909249985,
+    "n_real": 48,
+    "null_mean": 0.041357370095440084,
+    "null_sd": 0.016496658733938543,
+    "n_null": 41,
+    "difference": 0.4409080761288162,
+    "pooled_sd": 0.07368843286891287,
+    "d": 5.9834095931062095,
+    "z": 30.31410865235004,
+    "retention": 0.08575644475305963,
+    "ci_difference": null,
+    "leak_class": "null_degraded"
+   }
+  },
+  {
+   "card": "lens_baseline_jlens_qwen3p5_4b",
+   "path": "references/h200-results/lens_baseline_jlens_qwen3p5_4b.json",
+   "sha256": "fd4d1615e7ff5bc5f65985ac6dbaa89f11e0498e091764af019ac2765b10d128",
+   "schema_version": "0.3",
+   "family": "structure",
+   "specificity": {
+    "state": "fail",
+    "value": 0.8901158319949317,
+    "threshold": 1.5
+   },
+   "structural_metric": "mean_pairwise_jaccard",
+   "structural_real": 0.47361778226468293,
+   "structural_null": 0.5320855614973262,
+   "null_scores_source": "summary",
+   "sidecar": null,
+   "sidecar_sha256": null,
+   "leak": {
+    "polarity": 1,
+    "scale": "ratio",
+    "real_mean": 0.3039346554792779,
+    "real_sd": 0.07329305182759593,
+    "n_real": 48,
+    "null_mean": 0.039943442912689996,
+    "null_sd": 0.016252476398123224,
+    "n_null": 41,
+    "difference": 0.2639912125665879,
+    "pooled_sd": 0.054944271252600506,
+    "d": 4.804708599244425,
+    "z": 24.265732916061,
+    "retention": 0.13142115317420036,
+    "ci_difference": null,
+    "leak_class": "null_degraded"
+   }
+  },
+  {
+   "card": "lens_baseline_jlens_qwen3p6_27b",
+   "path": "references/h200-results/lens_baseline_jlens_qwen3p6_27b.json",
+   "sha256": "e47f32dbb32d58b79a504459c721138712612f68df6484c8ab3982c4b8ec3e2c",
+   "schema_version": "0.3",
+   "family": "structure",
+   "specificity": {
+    "state": "fail",
+    "value": 0.874555652578815,
+    "threshold": 1.5
+   },
+   "structural_metric": "mean_pairwise_jaccard",
+   "structural_real": 0.4581699891010126,
+   "structural_null": 0.523888888888889,
+   "null_scores_source": "summary",
+   "sidecar": null,
+   "sidecar_sha256": null,
+   "leak": {
+    "polarity": 1,
+    "scale": "ratio",
+    "real_mean": 0.474141081871345,
+    "real_sd": 0.09751388892020328,
+    "n_real": 48,
+    "null_mean": 0.06327324142806645,
+    "null_sd": 0.023249322944369526,
+    "n_null": 41,
+    "difference": 0.41086784044327856,
+    "pooled_sd": 0.07333100125149325,
+    "d": 5.602921457927209,
+    "z": 28.266092463937575,
+    "retention": 0.13344813146825193,
+    "ci_difference": null,
+    "leak_class": "null_degraded"
+   }
+  },
+  {
+   "card": "lens_baseline_logit_qwen3p5_0p8b",
+   "path": "references/h200-results/lens_baseline_logit_qwen3p5_0p8b.json",
+   "sha256": "3a8be37360a10e95a1694f95e94ee87d8e28bf67acadf4c68b9468a897216076",
+   "schema_version": "0.3",
+   "family": "structure",
+   "specificity": {
+    "state": "fail",
+    "value": 0.9412035216764159,
+    "threshold": 1.5
+   },
+   "structural_metric": "mean_pairwise_jaccard",
+   "structural_real": 0.4853834828132543,
+   "structural_null": 0.5157051282051283,
+   "null_scores_source": "summary",
+   "sidecar": null,
+   "sidecar_sha256": null,
+   "leak": {
+    "polarity": 1,
+    "scale": "ratio",
+    "real_mean": 0.19927536231884058,
+    "real_sd": 0.06578523590046532,
+    "n_real": 48,
+    "null_mean": 0.0544361965358784,
+    "null_sd": 0.01459156411491714,
+    "n_null": 41,
+    "difference": 0.1448391657829622,
+    "pooled_sd": 0.04931655738496939,
+    "d": 2.936927747254029,
+    "z": 14.832623525449282,
+    "retention": 0.2731707317073171,
+    "ci_difference": null,
+    "leak_class": "null_degraded"
+   }
+  },
+  {
+   "card": "lens_baseline_logit_qwen3p5_27b",
+   "path": "references/h200-results/lens_baseline_logit_qwen3p5_27b.json",
+   "sha256": "31872982b3ef536899431fce68162a5680edeb779fdff729576e1345b8795dc2",
+   "schema_version": "0.3",
+   "family": "structure",
+   "specificity": {
+    "state": "fail",
+    "value": 0.8226185338161593,
+    "threshold": 1.5
+   },
+   "structural_metric": "mean_pairwise_jaccard",
+   "structural_real": 0.48025030880460445,
+   "structural_null": 0.5838068181818182,
+   "null_scores_source": "summary",
+   "sidecar": null,
+   "sidecar_sha256": null,
+   "leak": {
+    "polarity": 1,
+    "scale": "ratio",
+    "real_mean": 0.38353356216628526,
+    "real_sd": 0.09401093521654447,
+    "n_real": 48,
+    "null_mean": 0.04171085189112761,
+    "null_sd": 0.020039643383610275,
+    "n_null": 41,
+    "difference": 0.34182271027515765,
+    "pooled_sd": 0.07036755546418996,
+    "d": 4.857674933003906,
+    "z": 24.546440136411558,
+    "retention": 0.10875411177977536,
+    "ci_difference": null,
+    "leak_class": "null_degraded"
+   }
+  },
+  {
+   "card": "lens_baseline_logit_qwen3p5_4b",
+   "path": "references/h200-results/lens_baseline_logit_qwen3p5_4b.json",
+   "sha256": "d140e9ee2163b5673b016dc25f2124f09855f66e6a2590e15e74dc5862a1b015",
+   "schema_version": "0.3",
+   "family": "structure",
+   "specificity": {
+    "state": "fail",
+    "value": 0.812517646166169,
+    "threshold": 1.5
+   },
+   "structural_metric": "mean_pairwise_jaccard",
+   "structural_real": 0.47719290330394054,
+   "structural_null": 0.5873015873015873,
+   "null_scores_source": "summary",
+   "sidecar": null,
+   "sidecar_sha256": null,
+   "leak": {
+    "polarity": 1,
+    "scale": "ratio",
+    "real_mean": 0.2581521739130435,
+    "real_sd": 0.07575013150589509,
+    "n_real": 48,
+    "null_mean": 0.02156238953693885,
+    "null_sd": 0.014710959382597956,
+    "n_null": 41,
+    "difference": 0.23658978437610467,
+    "pooled_sd": 0.05651894995683967,
+    "d": 4.186025829509836,
+    "z": 21.176339163814276,
+    "retention": 0.08352588789045784,
+    "ci_difference": null,
+    "leak_class": "null_degraded"
+   }
+  },
+  {
+   "card": "lens_baseline_logit_qwen3p6_27b",
+   "path": "references/h200-results/lens_baseline_logit_qwen3p6_27b.json",
+   "sha256": "a47bef3e1db8f9c457576cca42f164b2d44617139feca7b90640e8e7c3ace25b",
+   "schema_version": "0.3",
+   "family": "structure",
+   "specificity": {
+    "state": "fail",
+    "value": 0.6408790273035524,
+    "threshold": 1.5
+   },
+   "structural_metric": "mean_pairwise_jaccard",
+   "structural_real": 0.4753819398839262,
+   "structural_null": 0.7417654808959157,
+   "null_scores_source": "summary",
+   "sidecar": null,
+   "sidecar_sha256": null,
+   "leak": {
+    "polarity": 1,
+    "scale": "ratio",
+    "real_mean": 0.36813501144164756,
+    "real_sd": 0.0913701012768438,
+    "n_real": 48,
+    "null_mean": 0.029692470837751856,
+    "null_sd": 0.01661740441646258,
+    "n_null": 41,
+    "difference": 0.3384425406038957,
+    "pooled_sd": 0.06804240604900924,
+    "d": 4.9739943111377345,
+    "z": 25.17975283558551,
+    "retention": 0.08065647090037335,
+    "ci_difference": null,
+    "leak_class": "null_degraded"
+   }
+  },
+  {
+   "card": "lens_baseline_tuned_qwen3p5_4b",
+   "path": "references/h200-results/lens_baseline_tuned_qwen3p5_4b.json",
+   "sha256": "24b91bf1244f667b4479adbdb3759daac8fff57b1d1cc07c1a73860f640be959",
+   "schema_version": "0.3",
+   "family": "structure",
+   "specificity": {
+    "state": "fail",
+    "value": 0.8579318520914971,
+    "threshold": 1.5
+   },
+   "structural_metric": "mean_pairwise_jaccard",
+   "structural_real": 0.4575059977383085,
+   "structural_null": 0.5332661290322581,
+   "null_scores_source": "summary",
+   "sidecar": null,
+   "sidecar_sha256": null,
+   "leak": {
+    "polarity": 1,
+    "scale": "ratio",
+    "real_mean": 0.26721014492753625,
+    "real_sd": 0.07329870735964661,
+    "n_real": 48,
+    "null_mean": 0.05973842347119124,
+    "null_sd": 0.02054456145170787,
+    "n_null": 41,
+    "difference": 0.20747172145634502,
+    "pooled_sd": 0.055606448502811476,
+    "d": 3.7310730507425807,
+    "z": 18.766243243977293,
+    "retention": 0.2235634559735428,
+    "ci_difference": null,
+    "leak_class": "null_degraded"
+   }
+  },
+  {
+   "card": "sae_causal_inertness",
+   "path": "references/cards/sae_causal_inertness.json",
+   "sha256": "4435ed6a92681a73794edebaf3dc5bbb45449697d540472022da4e96318abf2b",
+   "schema_version": "0.4",
+   "family": "structure",
+   "specificity": {
+    "state": "fail",
+    "value": 0.6342357096908045,
+    "threshold": 1.5
+   },
+   "structural_metric": "mean_pairwise_jaccard",
+   "structural_real": 0.33199305584302685,
+   "structural_null": 0.523453742465678,
+   "null_scores_source": "sidecar",
+   "sidecar": "references/cards/sae_causal_inertness.runs.json",
+   "sidecar_sha256": "8b935d820c58515bf8dc02e48e87a9416c1ee6698169c98c4fc901c51dd932a0",
+   "leak": {
+    "polarity": 1,
+    "scale": "ratio",
+    "real_mean": 0.1920501515151515,
+    "real_sd": 0.07437237928934949,
+    "n_real": 33,
+    "null_mean": 0.9192545200000001,
+    "null_sd": 0.04777240530693006,
+    "n_null": 25,
+    "difference": -0.7272043684848486,
+    "pooled_sd": 0.06427129248128759,
+    "d": -11.314606263699648,
+    "z": -45.194852173300355,
+    "retention": 4.7865336879334714,
+    "ci_difference": [
+     -0.7568170012121213,
+     -0.6958751866666667
+    ],
+    "leak_class": "null_matches_or_exceeds"
+   }
+  }
+ ],
+ "duplicates_of_base_cards": [
+  {
+   "card": "refusal_direction_gemma_4_12b_it.directions",
+   "base": "refusal_direction_gemma_4_12b_it",
+   "record": {
+    "card": "refusal_direction_gemma_4_12b_it.directions",
+    "path": "references/cards/refusal_direction_gemma_4_12b_it.directions.json",
+    "sha256": "b86ce2918d08a2c7f65da431259ceed4fa73d9435dcd0842303eed8c806837e7",
+    "schema_version": "0.4",
+    "family": "signal",
+    "specificity": {
+     "state": "inconclusive",
+     "value": 1.445170080239897,
+     "threshold": 1.5
+    },
+    "structural_metric": "mean_pairwise_abs_cosine",
+    "structural_real": 0.4975706888675673,
+    "structural_null": 0.34429905218143664,
+    "null_scores_source": "summary",
+    "sidecar": null,
+    "sidecar_sha256": null,
+    "leak": {
+     "polarity": 1,
+     "scale": "ratio",
+     "real_mean": 0.639104761904762,
+     "real_sd": 0.4031469240342491,
+     "n_real": 21,
+     "null_mean": 0.23838823529411765,
+     "null_sd": 0.3956967613216151,
+     "n_null": 17,
+     "difference": 0.4007165266106443,
+     "pooled_sd": 0.39983111721571923,
+     "d": 1.0022144584470831,
+     "z": 3.0779077369554244,
+     "retention": 0.373003378325073,
+     "ci_difference": null,
+     "leak_class": "null_degraded"
+    }
+   }
+  },
+  {
+   "card": "refusal_direction_gemma_4_e4b_it.directions",
+   "base": "refusal_direction_gemma_4_e4b_it",
+   "record": {
+    "card": "refusal_direction_gemma_4_e4b_it.directions",
+    "path": "references/cards/refusal_direction_gemma_4_e4b_it.directions.json",
+    "sha256": "4d2627a5729d47bb962bca0ce559e80ccca15c19bddcae97c32396396dce2866",
+    "schema_version": "0.4",
+    "family": "signal",
+    "specificity": {
+     "state": "pass",
+     "value": 12.936779471464966,
+     "threshold": 1.5
+    },
+    "structural_metric": "mean_pairwise_abs_cosine",
+    "structural_real": 0.4052802771770534,
+    "structural_null": 0.03132775650006186,
+    "null_scores_source": "summary",
+    "sidecar": null,
+    "sidecar_sha256": null,
+    "leak": {
+     "polarity": 1,
+     "scale": "ratio",
+     "real_mean": 0.27012380952380954,
+     "real_sd": 0.2760418341393408,
+     "n_real": 21,
+     "null_mean": 0.14331176470588236,
+     "null_sd": 0.3116108317273759,
+     "n_null": 17,
+     "difference": 0.12681204481792718,
+     "pooled_sd": 0.29248946250664976,
+     "d": 0.433561071674656,
+     "z": 1.312134828749753,
+     "retention": 0.5305410321234583,
+     "ci_difference": null,
+     "leak_class": "null_matches_or_exceeds"
+    }
+   }
+  },
+  {
+   "card": "refusal_direction_meta_llama_3p1_8b_instruct.directions",
+   "base": "refusal_direction_meta_llama_3p1_8b_instruct",
+   "record": {
+    "card": "refusal_direction_meta_llama_3p1_8b_instruct.directions",
+    "path": "references/cards/refusal_direction_meta_llama_3p1_8b_instruct.directions.json",
+    "sha256": "d9627c528410d9e8d59f441ef257eb60200d9e0d15b9d6e4b9048c5de813d758",
+    "schema_version": "0.4",
+    "family": "signal",
+    "specificity": {
+     "state": "pass",
+     "value": 11.471414426378157,
+     "threshold": 1.5
+    },
+    "structural_metric": "mean_pairwise_abs_cosine",
+    "structural_real": 0.8832041074839961,
+    "structural_null": 0.0769917356880679,
+    "null_scores_source": "summary",
+    "sidecar": null,
+    "sidecar_sha256": null,
+    "leak": {
+     "polarity": 1,
+     "scale": "ratio",
+     "real_mean": 0.999147619047619,
+     "real_sd": 0.003811963504499647,
+     "n_real": 21,
+     "null_mean": 0.08404705882352942,
+     "null_sd": 0.09660745993389379,
+     "n_null": 17,
+     "difference": 0.9151005602240896,
+     "pooled_sd": 0.06467859296346853,
+     "d": 14.148430234729325,
+     "z": 39.03094802510512,
+     "retention": 0.08411876005233594,
+     "ci_difference": null,
+     "leak_class": "null_degraded"
+    }
+   }
+  },
+  {
+   "card": "refusal_direction_qwen2p5_7b_instruct.directions",
+   "base": "refusal_direction_qwen2p5_7b_instruct",
+   "record": {
+    "card": "refusal_direction_qwen2p5_7b_instruct.directions",
+    "path": "references/cards/refusal_direction_qwen2p5_7b_instruct.directions.json",
+    "sha256": "a632bf583f19ea1842879e0ea13849a8405c7c8cdb8633489f996ac5a391c344",
+    "schema_version": "0.4",
+    "family": "signal",
+    "specificity": {
+     "state": "pass",
+     "value": 8.91612864074092,
+     "threshold": 1.5
+    },
+    "structural_metric": "mean_pairwise_abs_cosine",
+    "structural_real": 0.7320341305029221,
+    "structural_null": 0.08210223966015938,
+    "null_scores_source": "summary",
+    "sidecar": null,
+    "sidecar_sha256": null,
+    "leak": {
+     "polarity": 1,
+     "scale": "ratio",
+     "real_mean": 0.9871666666666666,
+     "real_sd": 0.009132846702364446,
+     "n_real": 21,
+     "null_mean": 0.2197470588235294,
+     "null_sd": 0.09748187836206552,
+     "n_null": 17,
+     "difference": 0.7674196078431372,
+     "pooled_sd": 0.06555386877250122,
+     "d": 11.70670201794493,
+     "z": 32.34416775892619,
+     "retention": 0.22260380768886992,
+     "ci_difference": null,
+     "leak_class": "null_degraded"
+    }
+   }
+  },
+  {
+   "card": "refusal_direction_qwen3p5_4b.directions",
+   "base": "refusal_direction_qwen3p5_4b",
+   "record": {
+    "card": "refusal_direction_qwen3p5_4b.directions",
+    "path": "references/cards/refusal_direction_qwen3p5_4b.directions.json",
+    "sha256": "8b5db4a87ce98e5df86bde191079d31882adc6e53b3654144585b9002505a0a2",
+    "schema_version": "0.4",
+    "family": "signal",
+    "specificity": {
+     "state": "pass",
+     "value": 8.08419889527532,
+     "threshold": 1.5
+    },
+    "structural_metric": "mean_pairwise_abs_cosine",
+    "structural_real": 0.60252396461804,
+    "structural_null": 0.07453106639548113,
+    "null_scores_source": "summary",
+    "sidecar": null,
+    "sidecar_sha256": null,
+    "leak": {
+     "polarity": 1,
+     "scale": "ratio",
+     "real_mean": 0.8747619047619049,
+     "real_sd": 0.15184797684711626,
+     "n_real": 21,
+     "null_mean": 0.05788823529411764,
+     "null_sd": 0.03755157836978738,
+     "n_null": 17,
+     "difference": 0.8168736694677872,
+     "pooled_sd": 0.11564305644739996,
+     "d": 7.0637502549869104,
+     "z": 23.770654299265637,
+     "retention": 0.06617599026545838,
+     "ci_difference": null,
+     "leak_class": "null_degraded"
+    }
+   }
+  },
+  {
+   "card": "refusal_direction_qwen3p5_9b.directions",
+   "base": "refusal_direction_qwen3p5_9b",
+   "record": {
+    "card": "refusal_direction_qwen3p5_9b.directions",
+    "path": "references/cards/refusal_direction_qwen3p5_9b.directions.json",
+    "sha256": "21ec40f4aa54d6521c79fd27fee1c5f3cbf6ce27509b0cfa59cd3d153f0a36e4",
+    "schema_version": "0.4",
+    "family": "signal",
+    "specificity": {
+     "state": "pass",
+     "value": 6.05546244159074,
+     "threshold": 1.5
+    },
+    "structural_metric": "mean_pairwise_abs_cosine",
+    "structural_real": 0.49438682516296295,
+    "structural_null": 0.08164311643110282,
+    "null_scores_source": "summary",
+    "sidecar": null,
+    "sidecar_sha256": null,
+    "leak": {
+     "polarity": 1,
+     "scale": "ratio",
+     "real_mean": 0.7460380952380953,
+     "real_sd": 0.24122870491001347,
+     "n_real": 21,
+     "null_mean": 0.044811764705882356,
+     "null_sd": 0.043966603399999776,
+     "n_null": 17,
+     "difference": 0.701226330532213,
+     "pooled_sd": 0.1817226854281913,
+     "d": 3.8587715610735143,
+     "z": 13.055879618155346,
+     "retention": 0.060066322339184096,
+     "ci_difference": null,
+     "leak_class": "null_degraded"
+    }
+   }
+  }
+ ],
+ "skipped": [
+  {
+   "card": "cif_ioi_gpt2",
+   "reason": "no null control"
+  },
+  {
+   "card": "expander_sae_qwen2p5_3b",
+   "reason": "no null control"
+  }
+ ],
+ "crosstab": {
+  "signal": {
+   "pass": {
+    "null_matches_or_exceeds": 2,
+    "partial": 0,
+    "null_degraded": 11
+   },
+   "inconclusive": {
+    "null_matches_or_exceeds": 1,
+    "partial": 0,
+    "null_degraded": 2
+   },
+   "fail": {
+    "null_matches_or_exceeds": 1,
+    "partial": 0,
+    "null_degraded": 0
+   }
+  },
+  "structure": {
+   "pass": {
+    "null_matches_or_exceeds": 1,
+    "partial": 0,
+    "null_degraded": 0
+   },
+   "inconclusive": {
+    "null_matches_or_exceeds": 2,
+    "partial": 0,
+    "null_degraded": 1
+   },
+   "fail": {
+    "null_matches_or_exceeds": 6,
+    "partial": 0,
+    "null_degraded": 11
+   }
+  }
+ },
+ "headline": {
+  "structure_fail_null_matches_or_exceeds": 6,
+  "structure_fail_null_degraded": 11
+ },
+ "cards_digest": "e0cc624d6b7f430ea54fcbdba583aea3e510017fcc700642420be8ca7e643c66"
+}

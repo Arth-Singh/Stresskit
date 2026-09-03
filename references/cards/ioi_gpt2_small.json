@@ -1,9 +1,9 @@
 {
-  "schema_version": "0.2",
-  "stresskit_version": "0.3.0",
-  "created_at": "2026-08-21T23:38:38+00:00",
+  "schema_version": "0.5",
+  "stresskit_version": "1.0.0.dev0",
+  "created_at": "2026-09-03T05:54:19+00:00",
   "claim": {
-    "statement": "IOI in GPT-2 small is implemented by ~15 attention heads concentrated in the late layers",
+    "statement": "IOI in gpt2 is implemented by ~15 attention heads concentrated in the late layers",
     "base_claim_label": "late",
     "model": "gpt2",
     "task": "IOI (ABC corruption)",
@@ -29,6 +29,9 @@
   "metrics": {
     "pooled": {
       "n_runs": 45,
+      "n_structured_runs": 45,
+      "n_empty_findings": 0,
+      "empty_finding_rate": 0.0,
       "mean_pairwise_jaccard": 0.8290079987766744,
       "min_pairwise_jaccard": 0.26666666666666666,
       "flip_rate": 0.0,
@@ -90,6 +93,9 @@
     "per_axis": {
       "bootstrap": {
         "n_runs": 21,
+        "n_structured_runs": 21,
+        "n_empty_findings": 0,
+        "empty_finding_rate": 0.0,
         "mean_pairwise_jaccard": 0.8631652661064425,
         "min_pairwise_jaccard": 0.7647058823529411,
         "flip_rate": 0.0,
@@ -105,6 +111,9 @@
       },
       "hyperparams": {
         "n_runs": 3,
+        "n_structured_runs": 3,
+        "n_empty_findings": 0,
+        "empty_finding_rate": 0.0,
         "mean_pairwise_jaccard": 0.43333333333333335,
         "min_pairwise_jaccard": 0.26666666666666666,
         "flip_rate": 0.0,
@@ -120,6 +129,9 @@
       },
       "seeds": {
         "n_runs": 21,
+        "n_structured_runs": 21,
+        "n_empty_findings": 0,
+        "empty_finding_rate": 0.0,
         "mean_pairwise_jaccard": 0.8850840336134455,
         "min_pairwise_jaccard": 0.7647058823529411,
         "flip_rate": 0.0,
@@ -135,6 +147,9 @@
       },
       "templates": {
         "n_runs": 3,
+        "n_structured_runs": 3,
+        "n_empty_findings": 0,
+        "empty_finding_rate": 0.0,
         "mean_pairwise_jaccard": 0.7320261437908496,
         "min_pairwise_jaccard": 0.6666666666666666,
         "flip_rate": 0.0,
@@ -160,7 +175,11 @@
     }
   },
   "verdict": {
-    "grade": "A",
+    "grade": "B",
+    "grade_rule": "v0.4",
+    "profile": "diagnostic",
+    "confirmatory_state": "not_applicable",
+    "required_checks": [],
     "checks": {
       "structural_stability": {
         "value": 0.8290079987766744,
@@ -172,6 +191,7 @@
           0.8687905131156454
         ],
         "robust": false,
+        "state": "inconclusive",
         "description": "mean pairwise Jaccard across all perturbed runs"
       },
       "claim_stability": {
@@ -184,6 +204,7 @@
           1.0
         ],
         "robust": true,
+        "state": "pass",
         "description": "modal claim share \u03c0* (filability at \u03b1=0.2)"
       },
       "score_stability": {
@@ -196,6 +217,7 @@
           0.04667389293772097
         ],
         "robust": true,
+        "state": "pass",
         "description": "coefficient of variation of the quality score"
       },
       "beats_random": {
@@ -208,6 +230,7 @@
           15.359178477415277
         ],
         "robust": true,
+        "state": "pass",
         "description": "structural overlap vs size-matched random null (\u00d7)"
       },
       "specificity": {
@@ -220,6 +243,7 @@
           1.7039484839971353
         ],
         "robust": false,
+        "state": "inconclusive",
         "description": "structural stability on real vs null-control data (\u00d7)"
       }
     },
@@ -227,17 +251,20 @@
       "jaccard": 0.8,
       "modal_share": 0.8,
       "score_cv": 0.25,
-      "random_margin": 3.0
+      "random_margin": 3.0,
+      "specificity_ratio": 1.5,
+      "random_floor": 1.5
     }
   },
   "provenance": {
     "python": "3.12.3",
     "platform": "Linux-6.11.0-1016-nvidia-x86_64-with-glibc2.39",
-    "wall_seconds": 10.984
+    "wall_seconds": 11.035
   },
   "notes": [
     "pooled Jaccard (0.829) and axis-balanced Jaccard (0.728) diverge by more than 0.1 \u2014 per-axis run counts are shaping the pooled number; read the per-axis breakdown before citing it",
-    "underpowered verdict: the 95% CI straddles the bar for specificity (pass), structural_stability (pass) at n_runs=20 \u2014 these verdict components are not decided by the data. Treat the grade as provisional and raise n_runs (or widen the battery) before reporting it."
+    "underpowered verdict: the 95% CI straddles the bar for specificity (pass), structural_stability (pass) at n_runs=20 \u2014 these verdict components are not decided by the data. Treat the grade as provisional and raise n_runs (or widen the battery) before reporting it.",
+    "v0.3 grade: A (card of 2026-08-21); the battery was re-run from scratch on 2026-09-03 under grade rule v0.4 with bit-identical metrics, checks and intervals; only the letter and the verdict trace changed"
   ],
   "runs": [
     {
@@ -248,6 +275,7 @@
       "claim": "late",
       "score": 1.1056126483229811,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "ff39d73d2ada50322ecd34ef9c040612adbac017e9a99f52026b67ede44ce4cb",
       "components": [
         "L10H0",
@@ -275,6 +303,7 @@
       "claim": "late",
       "score": 1.0546743813753399,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "4cb19ee23b3bd231b017dc666b9ad0a5b103c0d0947b0293f86b219ac9fcaee9",
       "components": [
         "L10H0",
@@ -302,6 +331,7 @@
       "claim": "late",
       "score": 1.0868922219110841,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "e025410fcbb95e78f2fd4655cdce50d2a909e283dac3534bb88e7c6448b804db",
       "components": [
         "L10H0",
@@ -329,6 +359,7 @@
       "claim": "late",
       "score": 1.0548903053972436,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "1122c12b1dc5e74a7bba902a4b0c256b0dc7369c93ada70706d5af2c6571478d",
       "components": [
         "L10H0",
@@ -356,6 +387,7 @@
       "claim": "late",
       "score": 1.0566361058358145,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "1122c12b1dc5e74a7bba902a4b0c256b0dc7369c93ada70706d5af2c6571478d",
       "components": [
         "L10H0",
@@ -383,6 +415,7 @@
       "claim": "late",
       "score": 1.0599056461126262,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "1122c12b1dc5e74a7bba902a4b0c256b0dc7369c93ada70706d5af2c6571478d",
       "components": [
         "L10H0",
@@ -410,6 +443,7 @@
       "claim": "late",
       "score": 1.096512501818556,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "ff39d73d2ada50322ecd34ef9c040612adbac017e9a99f52026b67ede44ce4cb",
       "components": [
         "L10H0",
@@ -437,6 +471,7 @@
       "claim": "late",
       "score": 1.0584241669261911,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "4cb19ee23b3bd231b017dc666b9ad0a5b103c0d0947b0293f86b219ac9fcaee9",
       "components": [
         "L10H0",
@@ -464,6 +499,7 @@
       "claim": "late",
       "score": 1.0633063496685653,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "1122c12b1dc5e74a7bba902a4b0c256b0dc7369c93ada70706d5af2c6571478d",
       "components": [
         "L10H0",
@@ -491,6 +527,7 @@
       "claim": "late",
       "score": 1.1022837725949122,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "ff39d73d2ada50322ecd34ef9c040612adbac017e9a99f52026b67ede44ce4cb",
       "components": [
         "L10H0",
@@ -518,6 +555,7 @@
       "claim": "late",
       "score": 1.0428095100793513,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "1122c12b1dc5e74a7bba902a4b0c256b0dc7369c93ada70706d5af2c6571478d",
       "components": [
         "L10H0",
@@ -545,6 +583,7 @@
       "claim": "late",
       "score": 1.0480223378148688,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "348fdcc122382bcb52c30d5bfff5f04d4706b7f7b9f12ad5c9ea9b76ee382a0c",
       "components": [
         "L10H0",
@@ -572,6 +611,7 @@
       "claim": "late",
       "score": 1.0592275760325003,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "4cb19ee23b3bd231b017dc666b9ad0a5b103c0d0947b0293f86b219ac9fcaee9",
       "components": [
         "L10H0",
@@ -599,6 +639,7 @@
       "claim": "late",
       "score": 1.062630524638636,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "348fdcc122382bcb52c30d5bfff5f04d4706b7f7b9f12ad5c9ea9b76ee382a0c",
       "components": [
         "L10H0",
@@ -626,6 +667,7 @@
       "claim": "late",
       "score": 1.05948508231663,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "348fdcc122382bcb52c30d5bfff5f04d4706b7f7b9f12ad5c9ea9b76ee382a0c",
       "components": [
         "L10H0",
@@ -653,6 +695,7 @@
       "claim": "late",
       "score": 1.0825360437077591,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "e025410fcbb95e78f2fd4655cdce50d2a909e283dac3534bb88e7c6448b804db",
       "components": [
         "L10H0",
@@ -680,6 +723,7 @@
       "claim": "late",
       "score": 1.09770712241939,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "e025410fcbb95e78f2fd4655cdce50d2a909e283dac3534bb88e7c6448b804db",
       "components": [
         "L10H0",
@@ -707,6 +751,7 @@
       "claim": "late",
       "score": 1.0803398161753706,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "e025410fcbb95e78f2fd4655cdce50d2a909e283dac3534bb88e7c6448b804db",
       "components": [
         "L10H0",
@@ -734,6 +779,7 @@
       "claim": "late",
       "score": 1.0594897504861855,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "1122c12b1dc5e74a7bba902a4b0c256b0dc7369c93ada70706d5af2c6571478d",
       "components": [
         "L10H0",
@@ -761,6 +807,7 @@
       "claim": "late",
       "score": 1.0667537683161326,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "1122c12b1dc5e74a7bba902a4b0c256b0dc7369c93ada70706d5af2c6571478d",
       "components": [
         "L10H0",
@@ -788,6 +835,7 @@
       "claim": "late",
       "score": 1.0528503532131341,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "4cb19ee23b3bd231b017dc666b9ad0a5b103c0d0947b0293f86b219ac9fcaee9",
       "components": [
         "L10H0",
@@ -815,6 +863,7 @@
       "claim": "late",
       "score": 1.0975385115573197,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "e025410fcbb95e78f2fd4655cdce50d2a909e283dac3534bb88e7c6448b804db",
       "components": [
         "L10H0",
@@ -842,6 +891,7 @@
       "claim": "late",
       "score": 1.05517232615278,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "348fdcc122382bcb52c30d5bfff5f04d4706b7f7b9f12ad5c9ea9b76ee382a0c",
       "components": [
         "L10H0",
@@ -869,6 +919,7 @@
       "claim": "late",
       "score": 1.0669560987584124,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "1122c12b1dc5e74a7bba902a4b0c256b0dc7369c93ada70706d5af2c6571478d",
       "components": [
         "L10H0",
@@ -896,6 +947,7 @@
       "claim": "late",
       "score": 1.0974757296033555,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "ff39d73d2ada50322ecd34ef9c040612adbac017e9a99f52026b67ede44ce4cb",
       "components": [
         "L10H0",
@@ -923,6 +975,7 @@
       "claim": "late",
       "score": 1.0963816888671283,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "e025410fcbb95e78f2fd4655cdce50d2a909e283dac3534bb88e7c6448b804db",
       "components": [
         "L10H0",
@@ -950,6 +1003,7 @@
       "claim": "late",
       "score": 1.092614836816327,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "06265b7f62b41f032f11d2bd2084fe75351efa2306598576e00602f487c3650c",
       "components": [
         "L10H0",
@@ -977,6 +1031,7 @@
       "claim": "late",
       "score": 1.0992060989086616,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "e025410fcbb95e78f2fd4655cdce50d2a909e283dac3534bb88e7c6448b804db",
       "components": [
         "L10H0",
@@ -1004,6 +1059,7 @@
       "claim": "late",
       "score": 1.0519798177615542,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "348fdcc122382bcb52c30d5bfff5f04d4706b7f7b9f12ad5c9ea9b76ee382a0c",
       "components": [
         "L10H0",
@@ -1031,6 +1087,7 @@
       "claim": "late",
       "score": 1.084533222944445,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "ff39d73d2ada50322ecd34ef9c040612adbac017e9a99f52026b67ede44ce4cb",
       "components": [
         "L10H0",
@@ -1058,6 +1115,7 @@
       "claim": "late",
       "score": 1.0829988550245122,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "ff39d73d2ada50322ecd34ef9c040612adbac017e9a99f52026b67ede44ce4cb",
       "components": [
         "L10H0",
@@ -1085,6 +1143,7 @@
       "claim": "late",
       "score": 1.0639241984793304,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "1122c12b1dc5e74a7bba902a4b0c256b0dc7369c93ada70706d5af2c6571478d",
       "components": [
         "L10H0",
@@ -1112,6 +1171,7 @@
       "claim": "late",
       "score": 1.0632099614384902,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "348fdcc122382bcb52c30d5bfff5f04d4706b7f7b9f12ad5c9ea9b76ee382a0c",
       "components": [
         "L10H0",
@@ -1139,6 +1199,7 @@
       "claim": "late",
       "score": 1.1130900327901048,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "6b5e55a0bb7a36f9f867673bb526670a8df669501a502a6eeb2fa9fa8d36975e",
       "components": [
         "L10H0",
@@ -1166,6 +1227,7 @@
       "claim": "late",
       "score": 1.0517225731536224,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "348fdcc122382bcb52c30d5bfff5f04d4706b7f7b9f12ad5c9ea9b76ee382a0c",
       "components": [
         "L10H0",
@@ -1193,6 +1255,7 @@
       "claim": "late",
       "score": 1.0493413635333688,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "1122c12b1dc5e74a7bba902a4b0c256b0dc7369c93ada70706d5af2c6571478d",
       "components": [
         "L10H0",
@@ -1220,6 +1283,7 @@
       "claim": "late",
       "score": 1.1146752256563095,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "ff9ec63f5622b8a563a1bb34641c88931442aaf9be62b043c11ac0d46a923243",
       "components": [
         "L10H0",
@@ -1247,6 +1311,7 @@
       "claim": "late",
       "score": 1.0527353709024152,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "1122c12b1dc5e74a7bba902a4b0c256b0dc7369c93ada70706d5af2c6571478d",
       "components": [
         "L10H0",
@@ -1274,6 +1339,7 @@
       "claim": "late",
       "score": 1.052544977901527,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "348fdcc122382bcb52c30d5bfff5f04d4706b7f7b9f12ad5c9ea9b76ee382a0c",
       "components": [
         "L10H0",
@@ -1301,6 +1367,7 @@
       "claim": "late",
       "score": 1.065317614831095,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "4cb19ee23b3bd231b017dc666b9ad0a5b103c0d0947b0293f86b219ac9fcaee9",
       "components": [
         "L10H0",
@@ -1328,6 +1395,7 @@
       "claim": "late",
       "score": 1.0913414277442974,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "06265b7f62b41f032f11d2bd2084fe75351efa2306598576e00602f487c3650c",
       "components": [
         "L10H0",
@@ -1355,6 +1423,7 @@
       "claim": "late",
       "score": 1.183087566075002,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "fed553cdd7ca8d091293bba0960d667b362a25dc77f8c99d09ed98042a94bb24",
       "components": [
         "L0H10",
@@ -1382,6 +1451,7 @@
       "claim": "late",
       "score": 1.0293298377690605,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "972fb951db1f518eb704c286169aebb8590464eaaa84e01434a5279f45dd25e7",
       "components": [
         "L0H10",
@@ -1409,6 +1479,7 @@
       "claim": "late",
       "score": 0.9162506316061503,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "478aa2069abe27661ca683d4136727e974c1dc076461f0fab944096a2d258993",
       "components": [
         "L10H0",
@@ -1429,6 +1500,7 @@
       "claim": "late",
       "score": 1.045935284958838,
       "universe": null,
+      "structure_present": true,
       "components_sha256": "8745cb57191c5c3ffb21fc64efa0e6c53d515e882795d1c910d92a1b04fb5f61",
       "components": [
         "L0H1",

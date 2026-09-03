@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.3",
+  "schema_version": "0.5",
   "stresskit_version": "1.0.0.dev0",
   "created_at": "2026-09-01T22:14:59+00:00",
   "claim": {
@@ -174,6 +174,7 @@
   },
   "verdict": {
     "grade": "B",
+    "grade_rule": "v0.4",
     "profile": "diagnostic",
     "confirmatory_state": "not_applicable",
     "required_checks": [],
@@ -248,7 +249,9 @@
       "jaccard": 0.8,
       "modal_share": 0.8,
       "score_cv": 0.25,
-      "random_margin": 3.0
+      "random_margin": 3.0,
+      "specificity_ratio": 1.5,
+      "random_floor": 1.5
     }
   },
   "provenance": {
@@ -272,7 +275,8 @@
     "readout-proxy ceiling (not graded): over 210 real run pairs, top-32 readout Jaccard vs direction cosine \u2014 pairs with cosine >= 0.98 (n=91) share only 0.68 of their readout tokens; pairs with cosine < 0.90 (n=104): 0.12. The graded structural check therefore has a ceiling well below 1 even for directions that are the same object; read it as a bound on readout identity, not on direction identity.",
     "null-control directions (permuted labels): mean pairwise cosine 0.052; mean |cosine| to the real base direction 0.131; null removal scores 0.084 +/- 0.097, null induced-refusal fractions 0.000",
     "held-out effects across real runs: coherent compliance under ablation 0.999 (min 0.984); degenerate completions under ablation: harmful 0.001, harmless 0.000; induced refusal fraction 0.784 (min 0.682); selection rule: {'upstream': 21}",
-    "random-direction sanity (not graded, 3 seeded unit directions, same coefficient 4.46 and layer 13 as the base run): refusal removal 0.000 +/- 0.000; induced refusal 0.005 +/- 0.007"
+    "random-direction sanity (not graded, 3 seeded unit directions, same coefficient 4.46 and layer 13 as the base run): refusal removal 0.000 +/- 0.000; induced refusal 0.005 +/- 0.007",
+    "v0.3 grade: B; regraded 2026-09-03 under grade rule v0.4 from the recorded checks (schema 0.5)"
   ],
   "runs": [
     {

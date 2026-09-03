@@ -16,6 +16,16 @@ Reads the cards, their verdict traces and the paper registry under
   (labels permuted, adapter scrambled, calibration data replaced by noise)
   against a structure-preserving null (the task corrupted, items re-paired
   or deranged, weights rotated) that leaves the finder's output size intact.
+- ``grade_migration.png``: how every card's letter moved from grade rule v0.3
+  (point estimates vote) to v0.4 (only decided checks count), read from the
+  v0.3 grade each regraded card keeps in its notes.
+- ``battery_calibration.png``: from the frozen planted-truth study
+  (``artifacts/calibration/battery-known-truth-primary.json``): how often each
+  check's 95% interval covers the exact truth at 6 to 100 runs, and how often
+  the letter grade is wrong under each rule, split by the card's confidence.
+- ``null_score_leak.png``: from ``artifacts/self_audit/null-score-leak.json``:
+  for every battery with a null control, how far the null's score sits below
+  the real score, coloured by the specificity outcome.
 
 No model is run; everything is derived from the stored artifacts, so the
 figures cannot disagree with the cards.
@@ -73,6 +83,21 @@ def null_family(name):
             return family
     return None
 MUTED = "#6b6b6b"
+GRADE_COLOUR = {"A": "#0ca30c", "B": "#8cbf26", "C": "#fab219", "D": "#d03b3b"}
+CHECK_SHORT = {
+    "structural_stability": "structural",
+    "claim_stability": "claim",
+    "score_stability": "score",
+    "beats_random": "beats random",
+    "specificity": "specificity",
+}
+CHECK_COLOUR = {
+    "structural_stability": "#1f5fbf",
+    "claim_stability": "#7a3db8",
+    "score_stability": "#c2571a",
+    "beats_random": "#3a8c3a",
+    "specificity": "#9a1f4a",
+}
 
 
 def state_of(value, threshold, op, ci):
@@ -121,8 +146,15 @@ def load_cards(references_dir):
         if os.path.exists(trace_path):
             with open(trace_path) as handle:
                 settled = json.load(handle).get("settled_n")
+        v03 = None
+        for note in card.get("notes", []):
+            if note.startswith("v0.3 grade: "):
+                v03 = note[len("v0.3 grade: ")]
+        rule = card.get("verdict", {}).get("grade_rule", "v0.3")
         cards.append(
             {
+                "grade_v03": v03 if rule == "v0.4" else row["grade"],
+                "grade_rule": rule,
                 "name": os.path.basename(row["path"])[: -len(".json")],
                 "paper": paper_of.get(os.path.normpath(row["path"]), "?"),
                 "grade": row["grade"],
@@ -289,6 +321,153 @@ def fig_null_family(cards, out):
     plt.close(fig)
 
 
+def fig_grade_migration(cards, out):
+    """v0.3 -> v0.4 transitions over every card that carries both grades."""
+    graded = [c for c in cards if c["grade_rule"] == "v0.4" and c["grade_v03"] in GRADE_COLOUR]
+    if not graded:
+        print("grade_migration: no regraded card carries a v0.3 grade note; skipped")
+        return
+    matrix = Counter((c["grade_v03"], c["grade"]) for c in graded)
+    print("grade_migration:", {f"{a}->{b}": n for (a, b), n in sorted(matrix.items())})
+    letters = list(GRADE_COLOUR)
+    fig, ax = plt.subplots(figsize=(6.4, 5.2))
+    for i, old in enumerate(letters):
+        for j, new in enumerate(letters):
+            n = matrix.get((old, new), 0)
+            face = GRADE_COLOUR[new] if n and old != new else ("#e9e9e9" if n else "white")
+            ax.add_patch(plt.Rectangle((j, len(letters) - 1 - i), 1, 1, facecolor=face, edgecolor="white", linewidth=2))
+            if n:
+                colour = "white" if (old != new and new != "B") else INK
+                ax.text(j + 0.5, len(letters) - 1 - i + 0.5, str(n), ha="center", va="center", fontsize=13, color=colour, fontweight="bold")
+    ax.set_xlim(0, len(letters))
+    ax.set_ylim(0, len(letters))
+    ax.set_xticks([k + 0.5 for k in range(len(letters))])
+    ax.set_xticklabels(letters)
+    ax.set_yticks([k + 0.5 for k in range(len(letters))])
+    ax.set_yticklabels(letters[::-1])
+    ax.set_xlabel("grade under rule v0.4 (only decided checks count)")
+    ax.set_ylabel("grade under rule v0.3 (point estimates vote)")
+    moved = sum(n for (a, b), n in matrix.items() if a != b)
+    ax.set_title(f"How the letter moved when the rule changed\n{len(graded)} cards, {moved} changed letter, none rose", fontsize=10, loc="left", color=INK)
+    for side in ("top", "right", "left", "bottom"):
+        ax.spines[side].set_visible(False)
+    ax.tick_params(length=0, colors=INK)
+    fig.tight_layout()
+    fig.savefig(out, dpi=180)
+    plt.close(fig)
+
+
+def _pooled_rate(results, numerator, denominator):
+    num = sum(r["counts"].get(numerator, 0) for r in results)
+    den = sum(r["counts"].get(denominator, 0) for r in results)
+    return (num / den if den else None), den
+
+
+def _log_axis(ax, run_counts):
+    ax.set_xscale("log")
+    ax.set_xticks(run_counts)
+    ax.set_xticklabels([str(n) for n in run_counts])
+    ax.set_ylim(0, 1.02)
+    ax.set_xlabel("runs in the battery")
+
+
+def fig_battery_calibration(payload_path, out):
+    if not os.path.exists(payload_path):
+        print(f"battery_calibration: {payload_path} not found; skipped")
+        return
+    with open(payload_path) as handle:
+        results = json.load(handle)["results"]
+    run_counts = sorted({r["n_runs"] for r in results})
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(9.6, 3.9))
+    for name in CHECK_ORDER:
+        xs, ys, errs = [], [], []
+        for n in run_counts:
+            cell = [r for r in results if r["n_runs"] == n]
+            rate, den = _pooled_rate(cell, f"{name}:covered", f"{name}:ci_available")
+            if rate is None:
+                continue
+            xs.append(n)
+            ys.append(rate)
+            errs.append((rate * (1 - rate) / den) ** 0.5 if den else 0)
+        print(f"battery_calibration coverage {name}: " + ", ".join(f"n={x} {y:.3f}" for x, y in zip(xs, ys)))
+        ax1.errorbar(xs, ys, yerr=errs, marker="o", markersize=4, linewidth=1.4, capsize=2, color=CHECK_COLOUR[name], label=CHECK_SHORT[name])
+    ax1.axhline(0.95, color=MUTED, linestyle="--", linewidth=1)
+    ax1.text(run_counts[-1], 0.953, "nominal 95%", ha="right", va="bottom", fontsize=8, color=MUTED)
+    _log_axis(ax1, run_counts)
+    ax1.set_ylabel("share of intervals covering the exact truth")
+    ax1.set_title("Does the shipped 95% interval cover the truth?\n(pooled over the planted-truth cells, MCSE bars)", fontsize=9.5, loc="left", color=INK)
+    ax1.legend(fontsize=8, frameon=False, loc="lower right")
+    style(ax1)
+    for tag, colour, label in (("v03", "#9a9a9a", "rule v0.3"), ("v04", "#1f5fbf", "rule v0.4")):
+        for conf, dash in (("high", "-"), ("low", ":")):
+            xs, ys = [], []
+            for n in run_counts:
+                cell = [r for r in results if r["n_runs"] == n]
+                rate, den = _pooled_rate(cell, f"wrong_{tag}&conf:{conf}", f"conf:{conf}")
+                if rate is None:
+                    continue
+                xs.append(n)
+                ys.append(rate)
+            print(f"battery_calibration P(grade wrong | {conf}) {tag}: " + ", ".join(f"n={x} {y:.3f}" for x, y in zip(xs, ys)))
+            ax2.plot(xs, ys, marker="o", markersize=4, linewidth=1.4, linestyle=dash, color=colour, label=f"{label}, {conf} confidence")
+    _log_axis(ax2, run_counts)
+    ax2.set_ylabel("share of trials with the wrong letter")
+    ax2.set_title("How often is the letter wrong, given the card's confidence?\n(pooled over cells; truth grade from the exact truths)", fontsize=9.5, loc="left", color=INK)
+    ax2.legend(fontsize=7.5, frameon=False)
+    style(ax2)
+    fig.tight_layout()
+    fig.savefig(out, dpi=180)
+    plt.close(fig)
+
+
+def fig_null_score_leak(payload_path, out):
+    if not os.path.exists(payload_path):
+        print(f"null_score_leak: {payload_path} not found; skipped")
+        return
+    with open(payload_path) as handle:
+        payload = json.load(handle)
+    rows = []
+    for card in payload["cards"]:
+        d = card["leak"].get("d")
+        if d is None:
+            continue
+        state = {"pass": "pass", "fail": "fail"}.get(card["specificity"]["state"], "incon")
+        rows.append((card["family"], d, state, card["card"], card["leak"]["leak_class"]))
+    rows.sort(key=lambda r: (r[0], r[1]))
+    print("null_score_leak:", Counter((r[0], r[4]) for r in rows))
+    fig, ax = plt.subplots(figsize=(8.4, 0.24 * len(rows) + 1.8))
+    limit = 12.0
+    y = list(range(len(rows)))[::-1]
+    for idx, (family, d, state, name, cls) in zip(y, rows):
+        x = max(-limit, min(limit, d))
+        marker = "o" if family == "signal" else "s"
+        ax.plot([0, x], [idx, idx], color="#dddddd", linewidth=1.0, zorder=1)
+        ax.scatter([x], [idx], s=30, marker=marker, color=STATUS[state], zorder=2, edgecolor="white", linewidth=0.6)
+        if abs(d) > limit:
+            ax.text(x + (0.25 if d > 0 else -0.25), idx, f"{d:.0f}", ha="left" if d > 0 else "right", va="center", fontsize=6.5, color=MUTED)
+    ax.axvspan(-limit - 1.5, 0.5, color="#f6f6f6", zorder=0)
+    ax.axvline(0.5, color=MUTED, linewidth=0.8, linestyle="--")
+    ax.axvline(1.0, color=MUTED, linewidth=0.8, linestyle=":")
+    ax.text(0.4, len(rows) - 0.2, "d ≤ 0.5: null matches or exceeds", ha="right", va="bottom", fontsize=7.5, color=MUTED)
+    ax.text(1.1, len(rows) - 0.2, "d ≥ 1: null degraded", ha="left", va="bottom", fontsize=7.5, color=MUTED)
+    ax.set_yticks(y)
+    ax.set_yticklabels([f"{r[3].replace('_', ' ')}  ({r[0]} null)" for r in rows], fontsize=6.8)
+    ax.set_xlim(-limit - 1.5, limit + 1.5)
+    ax.set_ylim(-1, len(rows) + 0.8)
+    ax.set_xlabel("standardized gap d, real score minus null score (clipped at ±12)")
+    handles = [plt.Line2D([], [], marker="o", linestyle="", color=STATUS[s], label=f"specificity {LABEL[s]}") for s in ("pass", "incon", "fail")]
+    ax.legend(handles=handles, fontsize=7.5, frameon=False, loc="upper left", bbox_to_anchor=(0.0, 0.94))
+    fig.suptitle(
+        "Does the null control still score like the real data?\n"
+        "One row per battery; circles: signal-destroying null, squares: structure-preserving null",
+        fontsize=9.5, x=0.01, ha="left", color=INK,
+    )
+    style(ax)
+    fig.tight_layout(rect=(0, 0, 1, 0.96))
+    fig.savefig(out, dpi=180)
+    plt.close(fig)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     parser.add_argument("--references", default=HERE)
@@ -300,6 +479,16 @@ def main():
     fig_settle(cards, os.path.join(args.out, "verdict_settle_n.png"))
     fig_thresholds(cards, os.path.join(args.out, "threshold_sensitivity.png"))
     fig_null_family(cards, os.path.join(args.out, "specificity_by_null.png"))
+    fig_grade_migration(cards, os.path.join(args.out, "grade_migration.png"))
+    root = os.path.dirname(os.path.abspath(args.references))
+    fig_battery_calibration(
+        os.path.join(root, "artifacts", "calibration", "battery-known-truth-primary.json"),
+        os.path.join(args.out, "battery_calibration.png"),
+    )
+    fig_null_score_leak(
+        os.path.join(root, "artifacts", "self_audit", "null-score-leak.json"),
+        os.path.join(args.out, "null_score_leak.png"),
+    )
     print(f"{len(cards)} cards; figures written to {args.out}")
 
 

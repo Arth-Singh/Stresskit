@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.2",
+  "schema_version": "0.5",
   "stresskit_version": "0.3.0",
   "created_at": "2026-08-21T21:56:33+00:00",
   "claim": {
@@ -162,7 +162,11 @@
     }
   },
   "verdict": {
-    "grade": "C",
+    "grade": "D",
+    "grade_rule": "v0.4",
+    "profile": "diagnostic",
+    "confirmatory_state": "not_applicable",
+    "required_checks": [],
     "checks": {
       "structural_stability": {
         "value": 0.4483120309745036,
@@ -174,7 +178,8 @@
           0.5055563470889878
         ],
         "robust": true,
-        "description": "mean pairwise Jaccard across all perturbed runs"
+        "description": "mean pairwise Jaccard across all perturbed runs",
+        "state": "fail"
       },
       "claim_stability": {
         "value": 0.9,
@@ -186,7 +191,8 @@
           1.0
         ],
         "robust": false,
-        "description": "modal claim share \u03c0* (filability at \u03b1=0.2)"
+        "description": "modal claim share \u03c0* (filability at \u03b1=0.2)",
+        "state": "inconclusive"
       },
       "score_stability": {
         "value": 0.36073719804886367,
@@ -198,7 +204,8 @@
           0.5226821877540015
         ],
         "robust": false,
-        "description": "coefficient of variation of the quality score"
+        "description": "coefficient of variation of the quality score",
+        "state": "inconclusive"
       },
       "beats_random": {
         "value": 3.6971763646517433,
@@ -207,7 +214,8 @@
         "op": ">=",
         "ci": null,
         "robust": null,
-        "description": "structural overlap vs size-matched random null (\u00d7)"
+        "description": "structural overlap vs size-matched random null (\u00d7)",
+        "state": "inconclusive"
       },
       "specificity": {
         "value": 0.7827670382094507,
@@ -216,14 +224,17 @@
         "op": ">=",
         "ci": null,
         "robust": null,
-        "description": "structural stability on real vs null-control data (\u00d7)"
+        "description": "structural stability on real vs null-control data (\u00d7)",
+        "state": "inconclusive"
       }
     },
     "thresholds": {
       "jaccard": 0.8,
       "modal_share": 0.8,
       "score_cv": 0.25,
-      "random_margin": 3.0
+      "random_margin": 3.0,
+      "specificity_ratio": 1.5,
+      "random_floor": 1.5
     }
   },
   "provenance": {
@@ -234,7 +245,8 @@
   "notes": [
     "1 run(s) from a different component universe (meta['universe']) excluded from structural comparison \u2014 Jaccard across universes is undefined; their claims and scores still count",
     "structural stability graded on 17 size-comparable runs; 2 run(s) with >2x size difference excluded (pooled-over-all value kept as mean_pairwise_jaccard_all_sizes)",
-    "underpowered verdict: the 95% CI straddles the bar for claim_stability (pass), score_stability (fail) at n_runs=6 \u2014 these verdict components are not decided by the data. Treat the grade as provisional and raise n_runs (or widen the battery) before reporting it."
+    "underpowered verdict: the 95% CI straddles the bar for claim_stability (pass), score_stability (fail) at n_runs=6 \u2014 these verdict components are not decided by the data. Treat the grade as provisional and raise n_runs (or widen the battery) before reporting it.",
+    "v0.3 grade: C; regraded 2026-09-03 under grade rule v0.4 from the recorded checks (schema 0.5)"
   ],
   "runs": [
     {

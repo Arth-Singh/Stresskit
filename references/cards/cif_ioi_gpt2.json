@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.4",
+  "schema_version": "0.5",
   "stresskit_version": "1.0.0.dev0",
   "created_at": "2026-09-02T07:31:12+00:00",
   "claim": {
@@ -179,7 +179,8 @@
     }
   },
   "verdict": {
-    "grade": "B",
+    "grade": "C",
+    "grade_rule": "v0.4",
     "profile": "diagnostic",
     "confirmatory_state": "not_applicable",
     "required_checks": [],
@@ -241,7 +242,9 @@
       "jaccard": 0.8,
       "modal_share": 0.8,
       "score_cv": 0.25,
-      "random_margin": 3.0
+      "random_margin": 3.0,
+      "specificity_ratio": 1.5,
+      "random_floor": 1.5
     }
   },
   "provenance": {
@@ -256,7 +259,8 @@
     "cost ratio (Hoeffding draws / betting draws to certify) in the base run: 3 heads @F0=0.8: 7.2x; 3 heads @F0=0.9: >=18.2x; 3 heads @F0=0.95: >=2.4x; 7 heads @F0=0.8: 6.6x; 7 heads @F0=0.9: >=16.9x; 7 heads @F0=0.95: >=1.3x; 9 heads @F0=0.8: 6.9x; 9 heads @F0=0.9: 19.0x; 9 heads @F0=0.95: >=4.8x; 11 heads @F0=0.8: 6.9x; 11 heads @F0=0.9: 18.8x; 11 heads @F0=0.95: >=5.4x; 13 heads @F0=0.8: 6.8x; 13 heads @F0=0.9: 18.4x; 13 heads @F0=0.95: >=5.6x. The abstract's 10-30x is reached only at F0=0.9, and only for the circuits Hoeffding certifies at all within 2000 draws; at F0=0.8 the ratio is 6.6-7.2x, and at F0=0.95 Hoeffding never certifies, so the ratio there is a censored lower bound.",
     "exact population means the sequences are estimating (the 200 prompts are the whole population, sampled with replacement): 3 heads 0.9628, 7 heads 0.9577, 9 heads 0.9690, 11 heads 0.9695, 13 heads 0.9707. E2 simulates a streaming certificate on a finite pool whose mean is computable exactly; the certificate demonstrates the machinery and adds no information about the circuit beyond those 200 effects.",
     "templates: the upstream repository ships one IOI template; the eleven alternatives are constructed here from the IOI paper's template family, with the same names, the same prompt seed, and the same IO-replacement corruption, and are labelled as such",
-    "no null control: the null outcome of a certification procedure (nothing certified) is itself a stable profile, so the specificity check is undefined for this class of claim"
+    "no null control: the null outcome of a certification procedure (nothing certified) is itself a stable profile, so the specificity check is undefined for this class of claim",
+    "v0.3 grade: B; regraded 2026-09-03 under grade rule v0.4 from the recorded checks (schema 0.5)"
   ],
   "runs": [
     {

@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.4",
+  "schema_version": "0.5",
   "stresskit_version": "1.0.0.dev0",
   "created_at": "2026-09-01T23:26:42+00:00",
   "claim": {
@@ -189,6 +189,7 @@
   },
   "verdict": {
     "grade": "C",
+    "grade_rule": "v0.4",
     "profile": "diagnostic",
     "confirmatory_state": "not_applicable",
     "required_checks": [],
@@ -263,7 +264,9 @@
       "jaccard": 0.8,
       "modal_share": 0.8,
       "score_cv": 0.25,
-      "random_margin": 3.0
+      "random_margin": 3.0,
+      "specificity_ratio": 1.5,
+      "random_floor": 1.5
     }
   },
   "provenance": {
@@ -290,7 +293,8 @@
     "released census, run 2 (macOS-15.5-arm64, CPython 3.12.12, torch 2.13.0 arm64 build, numpy 2.5.2, outside Docker): good_k4 recovered 22 and causally inert 3 against a released 2 (+1); bad_k13 recovered 17 and causally inert 3, i.e. exactly the value run 1 missed. Re-running in the same environment reproduces summary.json byte-for-byte, so the pipeline is deterministic within an environment and divergent across environments. NEITHER run used upstream's pinned wheel (torch==2.13.0+cpu on ubuntu-24.04); a run inside the published Docker image is the outstanding check and is not claimed here.",
     "the paper predicts this, names the mechanism, and bounds it -- credit where due. Section 8 documents that byte-exact cross-platform reproduction is unavailable because the torch 2.13.0+cpu wheels for different platforms are different binaries with different MKL versions; Table 5 annotates the degraded-SAE census as '3 (17%); 4 in +/-1 band'; Section 9 scopes the repository's two guarantees explicitly (byte-exact only inside the pinned CI environment, semantic -- continuous metrics within rtol 1e-4 and boundary-sensitive counts within +/-1 -- on any platform); and Section 9 reports the same flip we observed, one feature at cosine 0.924 sitting close enough to both the recovery bar and the TopK selection boundary that different BLAS builds resolve it differently.",
     "measured against that stated standard: run 2's deviation (+1 on good_k4.recovered_inert) is INSIDE the paper's +/-1 semantic guarantee and is therefore a reproduction success by the paper's own criterion. It trips the gate only because expected_results.json encodes atol=1 for the two bad_k13 counts and bare integers for good_k4, so the machine-readable file is stricter than the prose promises for that SAE. That is a spec/gate mismatch in the artifact, not a scientific failure, and the honest headline is that the released tolerance file does not implement the +/-1 band the paper documents. Run 1's deviation (+3 on bad_k13.recovered_inert) does exceed the band, but it used a CUDA-built wheel rather than the pinned CPU wheel, so it does not by itself establish that the band is too narrow.",
-    "abstract versus Table 5, denominators: the abstract reads 'up to 77% of features passing a standard recovery bar (cosine >= 0.90) in a degraded SAE ... are causally inert'. The 77% is 17 inert of 22 MATCHED pairs, computed in the Section 6.3 pre-instrument experiment with no recovery bar applied; the bar-conditioned quantity is the Table 5 census, 3 inert of 18 recovered = 17%. So the abstract attaches the cosine >= 0.90 bar to a figure computed without it. The paper's body is not hiding this -- it states '17 of 22 pairs (77%)' with its denominator, and Table 5 prints 17% -- but the two numbers differ by a factor of four and only the smaller one is conditioned as the abstract describes. For the well-trained SAE the denominators coincide (recovered = matched = 22) and 9% is unchanged between the two sections."
+    "abstract versus Table 5, denominators: the abstract reads 'up to 77% of features passing a standard recovery bar (cosine >= 0.90) in a degraded SAE ... are causally inert'. The 77% is 17 inert of 22 MATCHED pairs, computed in the Section 6.3 pre-instrument experiment with no recovery bar applied; the bar-conditioned quantity is the Table 5 census, 3 inert of 18 recovered = 17%. So the abstract attaches the cosine >= 0.90 bar to a figure computed without it. The paper's body is not hiding this -- it states '17 of 22 pairs (77%)' with its denominator, and Table 5 prints 17% -- but the two numbers differ by a factor of four and only the smaller one is conditioned as the abstract describes. For the well-trained SAE the denominators coincide (recovered = matched = 22) and 9% is unchanged between the two sections.",
+    "v0.3 grade: C; regraded 2026-09-03 under grade rule v0.4 from the recorded checks (schema 0.5)"
   ],
   "runs": [
     {

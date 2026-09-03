@@ -190,6 +190,7 @@ Current v0.3.0 defaults require reclassification before confirmatory use:
 | score CV | 0.25 | Numerical bar not established by the cited source |
 | random margin | 3.0 | Numerical bar requires justification and calibration |
 | specificity ratio | 1.5 | Numerical bar requires justification and calibration |
+| at-random floor | 1.5 | Registered as `Thresholds.random_floor` in grade rule v0.4 (2026-09-03); it was a literal inside the grader before. Policy choice; requires justification and calibration |
 
 Every future threshold record stores claim type, metric, direction, numerical
 value, source or calibration artifact, applicable profile, and version.

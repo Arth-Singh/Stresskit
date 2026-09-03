@@ -16,6 +16,7 @@ from stresskit.tracechart import trace_svg
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 REFERENCES = os.path.join(REPO_ROOT, "references")
 IOI_TRACE = os.path.join(REFERENCES, "cards", "ioi_gpt2_small.trace.json")
+IOI_LARGE_TRACE = os.path.join(REFERENCES, "scale", "ioi_gpt2_large.trace.json")
 
 needs_references = pytest.mark.skipif(
     not os.path.isdir(REFERENCES), reason="reference cards not present")
@@ -29,10 +30,13 @@ def load_ioi_trace():
 @needs_references
 class TestTraceChart:
     def test_valid_svg_with_annotations(self):
-        svg = trace_svg(load_ioi_trace())
+        with open(IOI_LARGE_TRACE, encoding="utf-8") as f:
+            svg = trace_svg(json.load(f))
         root = ET.fromstring(svg)  # well-formed XML
         assert root.tag.endswith("svg")
-        assert "coin flip" in svg           # IOI's n=6 story is annotated
+        # IOI on GPT-2 large: a six-run study is a coin flip (B 47% / C 37% /
+        # A 17%) and the verdict only settles with the full 45-run battery
+        assert "coin flip" in svg
         assert "settles at n = 45" in svg
         assert "<title>" in svg             # native tooltips per segment
 
@@ -46,12 +50,11 @@ class TestTraceChart:
         assert "<script>" not in svg
 
     def test_settled_trace_has_no_coinflip_note(self):
-        with open(os.path.join(REFERENCES, "cards",
-                               "greater_than_gpt2_small.trace.json"),
-                  encoding="utf-8") as f:
-            svg = trace_svg(json.load(f))
+        # IOI on GPT-2 small under grade rule v0.4: undecided checks do not
+        # count, so six-run subsets already agree with the full battery (B)
+        svg = trace_svg(load_ioi_trace())
         assert "settles at n = 6" in svg
-        assert "coin flip" not in svg       # GT settles immediately
+        assert "coin flip" not in svg
 
     def test_cli_trace(self, tmp_path, capsys):
         out = tmp_path / "trace.svg"

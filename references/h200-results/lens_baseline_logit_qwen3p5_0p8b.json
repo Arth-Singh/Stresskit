@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.3",
+  "schema_version": "0.5",
   "stresskit_version": "0.3.0",
   "created_at": "2026-08-31T05:06:49+00:00",
   "claim": {
@@ -185,6 +185,7 @@
   },
   "verdict": {
     "grade": "C",
+    "grade_rule": "v0.4",
     "profile": "diagnostic",
     "confirmatory_state": "not_applicable",
     "required_checks": [],
@@ -259,7 +260,9 @@
       "jaccard": 0.8,
       "modal_share": 0.8,
       "score_cv": 0.25,
-      "random_margin": 3.0
+      "random_margin": 3.0,
+      "specificity_ratio": 1.5,
+      "random_floor": 1.5
     }
   },
   "provenance": {
@@ -270,7 +273,8 @@
   "notes": [
     "1 run(s) from a different component universe (meta['universe']) excluded from structural comparison \u2014 Jaccard across universes is undefined; their claims and scores still count",
     "structural stability graded on 43 size-comparable runs; 4 run(s) with >2x size difference excluded (pooled-over-all value kept as mean_pairwise_jaccard_all_sizes)",
-    "underpowered verdict: the 95% CI straddles the bar for score_stability (fail) at n_runs=20 \u2014 these verdict components are not decided by the data. Treat the grade as provisional and raise n_runs (or widen the battery) before reporting it."
+    "underpowered verdict: the 95% CI straddles the bar for score_stability (fail) at n_runs=20 \u2014 these verdict components are not decided by the data. Treat the grade as provisional and raise n_runs (or widen the battery) before reporting it.",
+    "v0.3 grade: C; regraded 2026-09-03 under grade rule v0.4 from the recorded checks (schema 0.5)"
   ],
   "runs": [
     {

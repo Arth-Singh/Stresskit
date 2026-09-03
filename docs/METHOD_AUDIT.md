@@ -143,3 +143,35 @@ Do not expand the confirmatory scoreboard or publish field-wide verdicts until
 A1–A5 are resolved. Existing cards remain valuable exploratory evidence and
 regression fixtures. Preserve them unchanged under their recorded StressKit
 version; never silently reinterpret historical grades under a new protocol.
+
+## Status on 3 September 2026
+
+Recorded after the diagnostic-battery self-calibration
+(`CALIBRATION_REPORT_v0.2.md`). Findings A1 to A8 above are the audit record
+of 24 August and are left as written.
+
+| ID | Status | What changed |
+|---|---|---|
+| A1 | open | Bars unchanged; the at-random floor (1.5) is now a registered threshold (`Thresholds.random_floor`, `METHOD_SPEC.md` registry) instead of a literal in the grader. |
+| A2 | resolved for the descriptive grade | Grade rule v0.4: a check counts only when its whole interval clears the bar; cards record `verdict.grade_rule`; every card was regraded from its recorded checks and keeps its v0.3 grade in its notes. |
+| A3 | resolved | The at-random floor is applied first under both rules; a decided specificity fail caps the letter at C; a battery without a null control caps it at B. |
+| A4 | unchanged | Diagnostic OAT and the confirmatory profile stay separate. |
+| A5 | measured | Coverage of the shipped percentile bootstrap for all five checks at 6 to 100 runs is in `CALIBRATION_REPORT_v0.2.md` §3; the intervals stay on the diagnostic path with their measured coverage stated. |
+| A6, A7, A8 | unchanged | |
+
+New findings from the self-calibration:
+
+| ID | Finding | Severity | Status |
+|---|---|---|---|
+| A9 | The null control's own score is recorded on the card but never checked. Of the 17 structure-preserving nulls that fail specificity, 6 still score as well as or better than the real data (CoAx, Greater-than, the three homonym profiles, SAE causal inertness): on those cards the specificity failure says the null was too soft, not that the method is non-specific. `references/null_score_leak.py` reports it per card; a battery check would need a declared score polarity on `Finding` and a schema change, so it is a candidate for schema 0.6, not a v0.4 change. | high | open, reported per card |
+| A10 | The bootstrap axis runs every resample at the base seed by design, so a finder that ignores its data repeats its base finding on every bootstrap run and inflates the pooled stability metrics: a seeded random subset grades C and a random direction B under the default battery, D under a seeds-only battery. The engine now writes a "bootstrap axis" note; the grade does not react to it. | high | open; the note is the mitigation |
+| A11 | Without a null control the diagnostic letter separates nothing: a constant set, an index ranker, a memorised planted set and a fixed direction all grade the same as the honest finder (A under v0.3, B under v0.4). The v0.4 cap makes the ceiling explicit; it does not add information. | high | by design; stated on every card without a null |
+| A12 | The seeds-axis vacuity detector ignored `Finding.vector`, flagging direction finders whose vector changed on every seed. | low | fixed |
+
+Disposition: unchanged in substance. The letter grades are descriptive
+diagnostics with measured error rates, not confirmatory decisions; the
+confirmatory profile and its 200-run floor stand. The regrade of 3 September
+is the one deliberate reinterpretation of historical grades: it is recorded
+on every card (`verdict.grade_rule`, the v0.3 grade in the notes), the
+recorded checks and intervals were not touched, and the full migration
+table is in `RESULTS.md`.

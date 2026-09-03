@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.3",
+  "schema_version": "0.5",
   "stresskit_version": "1.0.0.dev0",
   "created_at": "2026-09-01T21:53:41+00:00",
   "claim": {
@@ -178,6 +178,7 @@
   },
   "verdict": {
     "grade": "A",
+    "grade_rule": "v0.4",
     "profile": "diagnostic",
     "confirmatory_state": "not_applicable",
     "required_checks": [],
@@ -252,7 +253,9 @@
       "jaccard": 0.8,
       "modal_share": 0.8,
       "score_cv": 0.25,
-      "random_margin": 3.0
+      "random_margin": 3.0,
+      "specificity_ratio": 1.5,
+      "random_floor": 1.5
     }
   },
   "provenance": {
@@ -281,7 +284,8 @@
     "truth direction geometry (raw residual space, not graded): mean |cos| to the base direction on the templates axis 0.191 (min 0.047, n=2)",
     "null-control impossibility directions: mean pairwise |cos| 0.742 (n=33)",
     "null-control truth directions: mean pairwise |cos| 0.718 (n=33)",
-    "surface-form baselines (upstream token-count / word TF-IDF / char TF-IDF probes on the same family folds; a different finder, so not the graded null): {\"impossible_vs_possible\": {\"token_count\": 0.556, \"tfidf_word\": 0.778, \"tfidf_char\": 0.733}, \"impossible_vs_false\": {\"token_count\": 0.6, \"tfidf_word\": 0.833, \"tfidf_char\": 0.767}} balanced accuracy vs the activation probe's held-out balanced accuracy on the card (upstream: 0.56/0.70/0.64 and 0.60/0.67/0.77)"
+    "surface-form baselines (upstream token-count / word TF-IDF / char TF-IDF probes on the same family folds; a different finder, so not the graded null): {\"impossible_vs_possible\": {\"token_count\": 0.556, \"tfidf_word\": 0.778, \"tfidf_char\": 0.733}, \"impossible_vs_false\": {\"token_count\": 0.6, \"tfidf_word\": 0.833, \"tfidf_char\": 0.767}} balanced accuracy vs the activation probe's held-out balanced accuracy on the card (upstream: 0.56/0.70/0.64 and 0.60/0.67/0.77)",
+    "v0.3 grade: A; regraded 2026-09-03 under grade rule v0.4 from the recorded checks (schema 0.5)"
   ],
   "runs": [
     {
