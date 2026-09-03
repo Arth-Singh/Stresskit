@@ -2,6 +2,18 @@
   "n_total": 48,
   "full_grade": "B",
   "full_confidence": "high",
+  "grade_rule": "v0.4",
+  "seed": 0,
+  "n_subsamples": 30,
+  "thresholds": {
+    "jaccard": 0.8,
+    "modal_share": 0.8,
+    "score_cv": 0.25,
+    "random_margin": 3.0,
+    "specificity_ratio": 1.5,
+    "cosine": 0.8,
+    "random_floor": 1.5
+  },
   "sizes": [
     4,
     6,
@@ -16,11 +28,11 @@
     "4": {
       "n_subsamples": 30,
       "grade_dist": {
-        "B": 0.7666666666666667,
-        "C": 0.23333333333333334
+        "B": 0.13333333333333333,
+        "C": 0.8666666666666667
       },
-      "modal_grade": "B",
-      "modal_grade_share": 0.7666666666666667,
+      "modal_grade": "C",
+      "modal_grade_share": 0.8666666666666667,
       "low_confidence_share": 0.9666666666666667,
       "check_pass_frac": {
         "beats_random": 0.7666666666666667,
@@ -28,16 +40,23 @@
         "score_stability": 0.23333333333333334,
         "specificity": 1.0,
         "structural_stability": 0.0
+      },
+      "check_decided_pass_frac": {
+        "beats_random": 0.13333333333333333,
+        "claim_stability": 1.0,
+        "score_stability": 0.16666666666666666,
+        "specificity": 0.36666666666666664,
+        "structural_stability": 0.0
       }
     },
     "6": {
       "n_subsamples": 30,
       "grade_dist": {
-        "B": 0.8333333333333334,
-        "C": 0.16666666666666666
+        "B": 0.13333333333333333,
+        "C": 0.8666666666666667
       },
-      "modal_grade": "B",
-      "modal_grade_share": 0.8333333333333334,
+      "modal_grade": "C",
+      "modal_grade_share": 0.8666666666666667,
       "low_confidence_share": 0.9666666666666667,
       "check_pass_frac": {
         "beats_random": 0.8333333333333334,
@@ -45,16 +64,23 @@
         "score_stability": 0.06666666666666667,
         "specificity": 1.0,
         "structural_stability": 0.0
+      },
+      "check_decided_pass_frac": {
+        "beats_random": 0.1,
+        "claim_stability": 1.0,
+        "score_stability": 0.06666666666666667,
+        "specificity": 0.6333333333333333,
+        "structural_stability": 0.0
       }
     },
     "8": {
       "n_subsamples": 30,
       "grade_dist": {
-        "B": 0.8333333333333334,
-        "C": 0.16666666666666666
+        "B": 0.2,
+        "C": 0.8
       },
-      "modal_grade": "B",
-      "modal_grade_share": 0.8333333333333334,
+      "modal_grade": "C",
+      "modal_grade_share": 0.8,
       "low_confidence_share": 0.9666666666666667,
       "check_pass_frac": {
         "beats_random": 0.8,
@@ -62,16 +88,23 @@
         "score_stability": 0.06666666666666667,
         "specificity": 1.0,
         "structural_stability": 0.0
+      },
+      "check_decided_pass_frac": {
+        "beats_random": 0.23333333333333334,
+        "claim_stability": 1.0,
+        "score_stability": 0.0,
+        "specificity": 0.9,
+        "structural_stability": 0.0
       }
     },
     "10": {
       "n_subsamples": 30,
       "grade_dist": {
-        "B": 0.8666666666666667,
-        "C": 0.13333333333333333
+        "B": 0.23333333333333334,
+        "C": 0.7666666666666667
       },
-      "modal_grade": "B",
-      "modal_grade_share": 0.8666666666666667,
+      "modal_grade": "C",
+      "modal_grade_share": 0.7666666666666667,
       "low_confidence_share": 0.9333333333333333,
       "check_pass_frac": {
         "beats_random": 0.8666666666666667,
@@ -79,16 +112,23 @@
         "score_stability": 0.0,
         "specificity": 1.0,
         "structural_stability": 0.0
+      },
+      "check_decided_pass_frac": {
+        "beats_random": 0.23333333333333334,
+        "claim_stability": 1.0,
+        "score_stability": 0.0,
+        "specificity": 0.9666666666666667,
+        "structural_stability": 0.0
       }
     },
     "14": {
       "n_subsamples": 30,
       "grade_dist": {
-        "B": 0.9666666666666667,
-        "C": 0.03333333333333333
+        "B": 0.13333333333333333,
+        "C": 0.8666666666666667
       },
-      "modal_grade": "B",
-      "modal_grade_share": 0.9666666666666667,
+      "modal_grade": "C",
+      "modal_grade_share": 0.8666666666666667,
       "low_confidence_share": 0.9,
       "check_pass_frac": {
         "beats_random": 0.9666666666666667,
@@ -96,19 +136,33 @@
         "score_stability": 0.06666666666666667,
         "specificity": 1.0,
         "structural_stability": 0.0
+      },
+      "check_decided_pass_frac": {
+        "beats_random": 0.13333333333333333,
+        "claim_stability": 1.0,
+        "score_stability": 0.0,
+        "specificity": 1.0,
+        "structural_stability": 0.0
       }
     },
     "20": {
       "n_subsamples": 30,
       "grade_dist": {
-        "B": 0.9666666666666667,
-        "C": 0.03333333333333333
+        "B": 0.4,
+        "C": 0.6
       },
-      "modal_grade": "B",
-      "modal_grade_share": 0.9666666666666667,
+      "modal_grade": "C",
+      "modal_grade_share": 0.6,
       "low_confidence_share": 0.7,
       "check_pass_frac": {
         "beats_random": 0.9666666666666667,
+        "claim_stability": 1.0,
+        "score_stability": 0.0,
+        "specificity": 1.0,
+        "structural_stability": 0.0
+      },
+      "check_decided_pass_frac": {
+        "beats_random": 0.4,
         "claim_stability": 1.0,
         "score_stability": 0.0,
         "specificity": 1.0,
@@ -118,13 +172,21 @@
     "28": {
       "n_subsamples": 30,
       "grade_dist": {
-        "B": 1.0
+        "B": 0.4666666666666667,
+        "C": 0.5333333333333333
       },
-      "modal_grade": "B",
-      "modal_grade_share": 1.0,
+      "modal_grade": "C",
+      "modal_grade_share": 0.5333333333333333,
       "low_confidence_share": 0.5333333333333333,
       "check_pass_frac": {
         "beats_random": 1.0,
+        "claim_stability": 1.0,
+        "score_stability": 0.0,
+        "specificity": 1.0,
+        "structural_stability": 0.0
+      },
+      "check_decided_pass_frac": {
+        "beats_random": 0.4666666666666667,
         "claim_stability": 1.0,
         "score_stability": 0.0,
         "specificity": 1.0,
@@ -145,8 +207,15 @@
         "score_stability": 0.0,
         "specificity": 1.0,
         "structural_stability": 0.0
+      },
+      "check_decided_pass_frac": {
+        "beats_random": 1.0,
+        "claim_stability": 1.0,
+        "score_stability": 0.0,
+        "specificity": 1.0,
+        "structural_stability": 0.0
       }
     }
   },
-  "settled_n": 14
+  "settled_n": 48
 }

@@ -102,9 +102,14 @@ from its recorded checks, 18 of 46 changed letter and none rose. Even under
 the fixed rule, a grade produced without a null control does not separate an
 honest method from a constant one, the bootstrap axis rewards a finder that
 ignores its data, and six of the specificity failures on the leaderboard are
-cases where the null control still scores as well as the real data. The
-measurements behind those three sentences are in
-[`docs/CALIBRATION_REPORT_v0.2.md`](docs/CALIBRATION_REPORT_v0.2.md) and
+cases where the null control still scores as well as the real data. A
+planted-truth study of 136,000 graded trials also shows that two of the five
+checks do not ship a 95% interval at the run counts the cards have: claim
+stability covers 45.5% at six runs and score stability 59.7%, the first by
+discreteness (the modal share of n runs is a multiple of 1/n). The
+measurements behind these sentences are in
+[`docs/CALIBRATION_REPORT_v0.2.md`](docs/CALIBRATION_REPORT_v0.2.md),
+`artifacts/calibration/battery-known-truth-*.json` and
 `artifacts/self_audit/`.
 
 Several targets were out of budget on shared GPUs and are listed with reasons

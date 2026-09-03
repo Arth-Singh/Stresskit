@@ -196,6 +196,33 @@ calibration blocks match the real cross-entropy delta. Per-card table and
 crosstab: `artifacts/self_audit/null-score-leak.md`,
 `references/figs/null_score_leak.png`.
 
+**The intervals on two of the five checks are not 95% intervals at the run
+counts the cards have.** Sixteen scenarios with exact planted truths for all
+five checks, run at 6, 10, 20, 40 and 100 runs, 136,000 graded trials, with a
+disjoint-seed replication that agrees everywhere within one point
+(`artifacts/calibration/battery-known-truth-*.json`,
+`references/figs/battery_calibration.png`). Structural stability and
+specificity are conservative, covering 97 to 99.7% against a nominal 95%.
+Beats random sits at 90 to 93%. But claim stability covers **45.5% at six
+runs**, 57.9% at ten and 75.2% at twenty, and score stability covers **59.7%
+at six** and 92.6% at a hundred. The claim-stability failure is discreteness:
+the modal share of n runs can only be a multiple of 1/n, so when six runs
+agree the interval is a point at 1.0 and a population value of 0.95 lies
+outside it. Every recorded check value stands; what does not stand is reading
+the interval on those two checks as a 95% interval below about forty runs,
+and that is now on the record.
+
+**The letter itself is right more often under the old rule, and the new rule
+errs downward.** Scored against the letter each rule's own definition implies,
+v0.3 is exact in 82.3% of six-run trials and v0.4 in 70.2%; v0.4 is too harsh
+in 20.8% of them against 5.3% for v0.3. That is the trade made deliberately:
+a check whose interval has not resolved no longer counts in the finding's
+favour, so a small battery is under-graded rather than over-graded. A C on a
+twenty-run card should be read as "not demonstrated at this run count", not
+as "shown to be unstable". The confidence label carries that error honestly:
+a high-confidence verdict is wrong in 7.5% of six-run trials and 0.1% from
+forty runs on, under either rule.
+
 Two engine defects surfaced while building these studies and are fixed:
 `from_findings` pooled its null battery without the size guard `stress()`
 applies, so a post-hoc specificity point estimate could sit on a different

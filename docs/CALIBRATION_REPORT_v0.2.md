@@ -97,6 +97,100 @@ replication (seed 20260905). Coverage Monte-Carlo standard error at a true
 rate of 0.95: 0.49 pp at 2,000 trials, 0.69 at 1,000, 0.97 at 500, 1.38 at
 250. One trial costs 0.04 s at n = 6 and 7.5 s at n = 100 on one core.
 
+## 3. Coverage of the shipped intervals
+
+Primary study: 16 cells, run counts 6, 10, 20, 40, 100, 2,000 trials per cell at
+n <= 40 and 500 at n = 100, master seed 20260904, 136,000 graded trials, no
+errors. Replication at seed 20260905 with half the trials.
+`artifacts/calibration/battery-known-truth-primary.json` and
+`...-replication.json`, both listed in the frozen manifest.
+
+Share of trials whose 95% interval contains the exact truth, pooled over the
+cells where the check applies and an interval was available (primary study):
+
+| check | n = 6 | n = 10 | n = 20 | n = 40 | n = 100 |
+|---|---|---|---|---|---|
+| structural stability | 96.8 | 99.6 | 99.6 | 99.5 | 99.6 |
+| claim stability | 45.5 | 57.9 | 75.2 | 90.3 | 96.2 |
+| score stability | 59.7 | 72.6 | 82.7 | 88.6 | 92.6 |
+| beats random | 90.0 | 92.7 | 92.6 | 92.1 | 91.9 |
+| specificity | 98.7 | 99.4 | 99.7 | 99.6 | 99.6 |
+
+Replication, same layout:
+
+| check | n = 6 | n = 10 | n = 20 | n = 40 | n = 100 |
+|---|---|---|---|---|---|
+| structural stability | 96.6 | 99.6 | 99.6 | 99.5 | 99.5 |
+| claim stability | 45.7 | 58.0 | 76.1 | 90.5 | 96.2 |
+| score stability | 59.8 | 72.3 | 82.6 | 89.0 | 91.4 |
+| beats random | 89.8 | 92.6 | 92.4 | 92.2 | 91.6 |
+| specificity | 98.6 | 99.5 | 99.7 | 99.7 | 99.5 |
+
+Two checks are conservative (structural stability and specificity cover 96.8
+to 99.7%), one is close to nominal from 10 runs on (beats random, 90 to 93%,
+its interval being the Jaccard interval divided by a Monte-Carlo null treated
+as a constant), and **two undercover badly at the run counts the cards
+actually have**:
+
+- **Claim stability covers 45.5% at six runs**, 57.9% at ten, 75.2% at twenty,
+  and only reaches nominal at a hundred. The cause is discreteness, and it is
+  visible per cell: the modal share of n runs can only be k/n, so at n = 6 a
+  truth of 0.95 is not a value the statistic can take. Where the
+  planted modal probability is unreachable on the lattice the interval almost
+  never contains it (spec_at_bar 24%, J_two_mode 26%, J_pass_edge 26%, cv_fail_edge 26%), and where it is
+  reachable coverage is fine (A_control 100%, mixed_C 98%, claim_fail_edge 86%). A card with few
+  runs and a near-unanimous claim is the exact case where this bites: the six
+  runs agree, the interval is a point at 1.0, and the population value is
+  outside it.
+- **Score stability covers 59.7% at six runs** and 92.6% at a hundred: the
+  coefficient of variation of six draws is a noisy estimate of a population
+  CV and the percentile bootstrap around it is too narrow.
+
+Neither number invalidates a recorded check value; both say that the
+*interval* on those two checks is not to be read as a 95% interval below
+about forty runs. That matters most for the smallest cards in the
+leaderboard, and it is now stated on the record rather than assumed.
+
+### Grade accuracy
+
+Each rule is scored against its own truth grade, the letter the exact truths
+imply under that rule, so the two columns answer "does the rule return what
+its own definition says it should", not "which rule is better".
+
+| runs | v0.3 exact | v0.3 too harsh | v0.3 too generous | v0.4 exact | v0.4 too harsh | v0.4 too generous |
+|---|---|---|---|---|---|---|
+| 6 | 82.3 | 5.3 | 12.4 | 70.2 | 20.8 | 9.0 |
+| 10 | 86.4 | 4.2 | 9.4 | 68.3 | 24.9 | 6.8 |
+| 20 | 88.9 | 4.1 | 7.0 | 73.6 | 20.0 | 6.3 |
+| 40 | 91.3 | 3.6 | 5.1 | 78.5 | 15.2 | 6.2 |
+| 100 | 92.6 | 3.3 | 4.2 | 82.6 | 11.2 | 6.2 |
+
+The point rule is right more often; the decided rule errs, and it errs
+downward. At six runs v0.4 returns a letter that is too harsh in 20.8% of
+trials against 5.3% for v0.3, because a check whose interval has not resolved
+does not count in its favour. That is the trade the rule makes on purpose: it
+buys a letter that cannot be earned by an unresolved check, and it pays for
+it by under-grading small batteries. A reader of a C on a twenty-run card
+should read "not demonstrated at this run count", not "shown to be unstable".
+
+### Does the confidence label mean anything?
+
+Share of trials whose letter is wrong, split by the confidence the card
+would have reported:
+
+| rule | confidence | n = 6 | n = 10 | n = 20 | n = 40 | n = 100 |
+|---|---|---|---|---|---|---|---|
+| v0.3 | high | 7.5 | 2.0 | 0.4 | 0.1 | 0.1 |
+| v0.3 | low | 21.9 | 17.0 | 18.6 | 24.0 | 35.8 |
+| v0.4 | high | 7.5 | 2.0 | 0.4 | 0.1 | 0.1 |
+| v0.4 | low | 38.9 | 40.5 | 44.6 | 59.7 | 84.5 |
+
+Yes: a high-confidence verdict is wrong in 7.5% of six-run trials and in 0.1%
+from forty runs on, under either rule. The low-confidence label carries the
+error, which is what it is for. Under v0.4 a low-confidence letter is wrong
+more often than not at a hundred runs, and again the errors are under-grades
+from checks that never resolved.
+
 ## 7. Degenerate finders
 
 `python -m stresskit.construct_validity --markdown` runs nine finders on the

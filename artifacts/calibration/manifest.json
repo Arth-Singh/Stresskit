@@ -29,6 +29,20 @@
       "master_seed": 20260825,
       "sha256": "ee3c5d4ffc3ead6edf5115a813ed580fc8ad57706c6bbe75e42aba199cdfdd3e",
       "source_sha256": "a3a057a2d33f552c6043829d827befd7a4ccd38cb5cf2d7387b36383e4f49cc4"
+    },
+    {
+      "path": "battery-known-truth-primary.json",
+      "role": "primary",
+      "master_seed": 20260904,
+      "sha256": "41bfcdf43e6ab0aaa37460b57b7026661e98b29cdecb3d838946eacd72fcb859",
+      "source_sha256": "2efa01100644a8422bed5d375b4c2c43697aa4dfa471cc5e789a25a0d23a799f"
+    },
+    {
+      "path": "battery-known-truth-replication.json",
+      "role": "disjoint_seed_replication",
+      "master_seed": 20260905,
+      "sha256": "0e013eb0f9c3d3ea1ef7a499ba6db837412065980e2c5f6292772348f544c4cc",
+      "source_sha256": "2efa01100644a8422bed5d375b4c2c43697aa4dfa471cc5e789a25a0d23a799f"
     }
   ]
 }
