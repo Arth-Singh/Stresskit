@@ -91,6 +91,22 @@ result, and nothing in the leaderboard comes from it; the scoped record is
 [`docs/RELEASE_GATES_V1.md`](docs/RELEASE_GATES_V1.md). The 49 graded cards are
 diagnostic; the four findings taken through the conservative profile below
 all fail it, so nothing in the repository is confirmatory evidence.
+
+The grading rule itself was wrong until 2026-09-03, and we found it by
+attacking the tool with methods designed to cheat it: a finder that returns
+the same components on every run, reading neither its data nor its seed,
+graded A with high confidence when no null control was supplied. Grade rule
+v0.4 counts a check only when its whole interval clears the bar and caps the
+letter when specificity fails or no null was run; every card was relabelled
+from its recorded checks, 19 of 46 changed letter and none rose. Even under
+the fixed rule, a grade produced without a null control does not separate an
+honest method from a constant one, the bootstrap axis rewards a finder that
+ignores its data, and six of the specificity failures on the leaderboard are
+cases where the null control still scores as well as the real data. The
+measurements behind those three sentences are in
+[`docs/CALIBRATION_REPORT_v0.2.md`](docs/CALIBRATION_REPORT_v0.2.md) and
+`artifacts/self_audit/`.
+
 Several targets were out of budget on shared GPUs and are listed with reasons
 at the end of [`RESULTS.md`](RESULTS.md).
 

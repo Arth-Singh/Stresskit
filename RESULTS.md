@@ -139,6 +139,65 @@ grade at six runs than at full size: IOI small (B for A), refusal on
 Qwen3.5-9B (B for C) and SWD (B for C). The numbers come from each card's
 `.trace.json` (`per_size["6"]`).
 
+## Are the verdicts themselves correct?
+
+The grades above are produced by a program, and until 2026-09-03 nothing had
+tested that program against a method built to cheat it. Three studies now do,
+all frozen under `artifacts/` and summarised in
+[`docs/CALIBRATION_REPORT_v0.2.md`](docs/CALIBRATION_REPORT_v0.2.md).
+
+**The scoring rule was wrong.** A constant finder that returns the same eight
+components on every run, reading neither its data nor its seed, graded **A
+with high confidence** when no null control was supplied. So did an index
+ranker, a finder that has memorised the answer, and a fixed direction. The
+cause: a check counted as passed when its point estimate cleared the bar,
+whatever its 95% interval did. Grade rule v0.4 counts a check only when its
+whole interval clears the bar, caps the letter at C when specificity is a
+decided fail, and caps it at B when no null control was run. Every card in
+the leaderboard was relabelled from its own recorded checks under the new
+rule; the values and intervals were not recomputed. Nineteen of 46 cards
+changed letter and none rose (A 9 to 5, B 21 to 12, C 16 to 27, D 0 to 2).
+Each card records `verdict.grade_rule` and keeps its v0.3 grade in its notes,
+and `references/figs/grade_migration.png` shows the transitions.
+
+**What the fixed rule still cannot catch.** With a null control every
+degenerate finder is separated from an honest one by two letters. Without a
+null control neither rule separates anything: the honest finder and four
+cheating ones all land on B, so a diagnostic grade produced without a null
+says nothing about whether the method reads its data. A size-inflating
+finder (105 of 200 components) is caught by one check and barely, beats
+random at 2.81 against a bar of 3.0. And the bootstrap axis runs every
+resample at the base seed by design, so a finder that ignores its data
+repeats its base finding on all eight bootstrap runs: a seeded random subset
+climbs from D to C and a random direction from D to B under the default
+battery. The engine writes a note when it sees that; the grade does not react
+to it. Full table: `artifacts/self_audit/degenerate-matrix.md`, reproducible
+with `python -m stresskit.construct_validity --markdown`.
+
+**Six of the specificity failures above are about the null, not the method.**
+The specificity check compares stability only; each card also records the
+method's *score* on its null control, which nothing checks. Over the 38
+batteries with a null control, of the 17 structure-preserving nulls that fail
+specificity, 6 still score as well as or better than the real data: CoAx
+(null AUC 0.955 against 0.919), greater-than (0.967 against 0.999), the three
+homonym profiles, and SAE causal inertness (the permuted pairing is 4.8x more
+"inert"). On those the failure says the null was too soft to be a null. On
+the other 11 the null score collapses to 6 to 27% of the real one while the
+structure stays as stable, which is the reading the section below gives. Soft
+nulls are not confined to that family: AMS keeps 94% of its leave-one-out
+accuracy after half its pair labels are swapped, and SWD's random-token
+calibration blocks match the real cross-entropy delta. Per-card table and
+crosstab: `artifacts/self_audit/null-score-leak.md`,
+`references/figs/null_score_leak.png`.
+
+Two engine defects surfaced while building these studies and are fixed:
+`from_findings` pooled its null battery without the size guard `stress()`
+applies, so a post-hoc specificity point estimate could sit on a different
+estimand than its own interval (SWD: 1.146 on the card, 1.377 post hoc); and
+the seeds-axis vacuity detector ignored direction vectors, flagging a
+direction finder whose vector changed on every seed as one that ignores its
+seed.
+
 ## What decides whether a finding beats its null
 
 Across the cards with a specificity check, the outcome follows the design of
