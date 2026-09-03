@@ -124,9 +124,22 @@ def recover_null(
     return nulls, None
 
 
+# A regrade sums the same pairwise values in a different order than the
+# battery did, so a reproduced metric can differ in the last bits of a double
+# without differing in evidence. Anything above this is a real discrepancy.
+FLOAT_TOLERANCE = 1e-12
+
+
 def _same(a: Any, b: Any) -> bool:
     if isinstance(a, float) and isinstance(b, float):
-        return a == b or (math.isnan(a) and math.isnan(b))
+        if math.isnan(a) and math.isnan(b):
+            return True
+        if a == b:
+            return True
+        scale = max(abs(a), abs(b), 1.0)
+        return abs(a - b) <= FLOAT_TOLERANCE * scale
+    if isinstance(a, list) and isinstance(b, list):
+        return len(a) == len(b) and all(_same(x, y) for x, y in zip(a, b))
     return a == b
 
 

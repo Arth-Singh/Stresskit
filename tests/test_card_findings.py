@@ -89,8 +89,10 @@ def null_manifest(result):
 def assert_same_checks(recorded, fresh):
     assert set(recorded) == set(fresh)
     for name, c in recorded.items():
-        assert fresh[name]["value"] == c["value"], name
-        assert fresh[name]["ci"] == c["ci"], name
+        # regrading sums the same pairwise values in a different order, so the
+        # reproduction is exact only to within the last bits of a double
+        assert fresh[name]["value"] == pytest.approx(c["value"], rel=1e-12), name
+        assert fresh[name]["ci"] == pytest.approx(c["ci"], rel=1e-12), name
         assert fresh[name]["state"] == c["state"], name
 
 
@@ -268,10 +270,17 @@ class TestRelabel:
 
 
 @pytest.mark.skipif(not os.path.exists(IOI_CARD), reason="reference card not present")
-def test_ioi_card_structural_check_reproduces_exactly():
+def test_ioi_card_structural_check_reproduces():
+    """A regrade sums the same pairwise Jaccards in a different order than the
+    battery did, so the reproduction is exact to within the last bits of a
+    double, and the order differs between platforms."""
     with open(IOI_CARD, encoding="utf-8") as f:
         card = json.load(f)
     fresh = regrade_card(card, seed=card["battery"]["seed"])
     recorded = card["verdict"]["checks"]["structural_stability"]
-    assert fresh.checks["structural_stability"]["value"] == recorded["value"]
-    assert fresh.checks["structural_stability"]["ci"] == recorded["ci"]
+    assert fresh.checks["structural_stability"]["value"] == pytest.approx(
+        recorded["value"], rel=1e-12
+    )
+    assert fresh.checks["structural_stability"]["ci"] == pytest.approx(
+        recorded["ci"], rel=1e-12
+    )
