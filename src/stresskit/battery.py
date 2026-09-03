@@ -27,13 +27,13 @@ import os
 import random
 import statistics
 import time
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass
 from typing import Any, Callable, Dict, List, Mapping, Optional, Sequence, Tuple
 
 from . import metrics as M
 from . import baselines as B
 from .finding import Finding
-from .card import StabilityCard, GRADE_ORDER
+from .card import StabilityCard, GRADE_ORDER, GRADE_RULE, GRADE_RULES
 
 FindingFn = Callable[[Any, int, Dict[str, Any]], Finding]
 
@@ -133,6 +133,11 @@ class Thresholds:
     reading of the same bar: at |cos| = 0.8 the residual disagreement
     ‖a − b‖ = √(2 − 2·0.8) ≈ 0.63 is already 63% of the direction's own
     length. The value was fixed by this analogy, not calibrated on any card.
+
+    ``random_floor`` is the at-random floor: structural overlap at or below
+    this multiple of the size-matched random null is graded D outright,
+    whatever the other checks say. It was a literal 1.5 inside the grader
+    before grade rule v0.4 made it a registered threshold.
     """
 
     jaccard: float = 0.8
@@ -141,6 +146,7 @@ class Thresholds:
     random_margin: float = 3.0
     specificity_ratio: float = 1.5
     cosine: float = 0.8
+    random_floor: float = 1.5
 
 
 @dataclass
@@ -516,6 +522,28 @@ def stress(
             "finding_fn may ignore its seed (deterministic given data). The "
             "axis then measures nothing; use the seed inside your method "
             "(subsampling, init, tie-breaking) or drop 'seeds' from the battery."
+        )
+
+    # --- vacuous bootstrap-axis detection --------------------------------------
+    # Every resample runs at the base seed by design, so that the axis
+    # isolates data variation. A finder that ignores its data therefore
+    # repeats the base finding here and inflates every pooled stability
+    # metric with identical runs.
+    boot_findings = [r.finding for r in runs if r.axis == "bootstrap"]
+    if len(boot_findings) >= 2 and all(
+        f.components == base.components
+        and f.vector == base.vector
+        and f.claim == base.claim
+        and f.score == base.score
+        for f in boot_findings
+    ):
+        notes.append(
+            "bootstrap axis: every resample returned a bit-identical finding — "
+            "your finding_fn may ignore its data (the axis runs every resample "
+            "at the base seed so that it isolates data variation). The axis "
+            "then measures nothing and its runs inflate the pooled stability "
+            "metrics; make the method read the data it is given or drop "
+            "'bootstrap' from the battery."
         )
 
     # --- null-control (specificity) --------------------------------------------
@@ -919,7 +947,9 @@ def _analyze(
             "claim=, or score=."
         )
 
-    grade = grade_checks(checks)
+    grade = grade_checks(
+        checks, rule=GRADE_RULE, random_floor=thresholds.random_floor
+    )
 
     # Confidence: does the evidence actually resolve the checks — in either
     # direction? A straddling CI on a fail means the grade may be too harsh;
@@ -1057,12 +1087,24 @@ def from_findings(
             list(findings) + null_findings,
             "the supplied findings and null_findings together",
         )
-        null_pooled = _summarize(
-            null_findings, claim_equiv, universe=_universe_of(null_findings[0])
+        null_universe = _universe_of(null_findings[0])
+        null_pooled = _summarize(null_findings, claim_equiv, universe=null_universe)
+        null_components = _graded_components(null_findings, null_findings[0])
+        null_vectors = _graded_vectors(null_findings, null_findings[0])
+        # The structural null summary is pooled over the same size-guarded
+        # sets as the specificity interval, exactly as stress() pools its
+        # null battery; otherwise the specificity point estimate and its CI
+        # would sit on different estimands in post-hoc mode.
+        null_jaccard = null_pooled["mean_pairwise_jaccard"]
+        n_null_structured = sum(
+            1 for f in null_findings
+            if f.has_structure() and _universe_of(f) == null_universe
         )
+        if null_components and len(null_components) < n_null_structured:
+            null_jaccard = M.mean_pairwise_jaccard(null_components)
         null_summary = {
             "n_runs": len(null_findings),
-            "mean_pairwise_jaccard": null_pooled["mean_pairwise_jaccard"],
+            "mean_pairwise_jaccard": null_jaccard,
             "flip_rate": null_pooled["flip_rate"],
             "modal_share": null_pooled["modal_share"],
             "score_mean": null_pooled["score_mean"],
@@ -1070,8 +1112,6 @@ def from_findings(
             "median_size": null_pooled["median_size"],
         }
         null_summary.update(_direction_summary_keys(null_pooled))
-        null_components = _graded_components(null_findings, null_findings[0])
-        null_vectors = _graded_vectors(null_findings, null_findings[0])
 
     return _analyze(
         runs, base,
@@ -1173,6 +1213,7 @@ def verdict_trace(
         grades: List[str] = []
         confidences: List[str] = []
         check_passes: Dict[str, List[bool]] = {}
+        check_decided: Dict[str, List[bool]] = {}
         n_draws = 1 if k == n else n_subsamples
         for draw in range(n_draws):
             sub = (findings if k == n
@@ -1193,6 +1234,7 @@ def verdict_trace(
             confidences.append(r.pooled["confidence"])
             for name, c in r.checks.items():
                 check_passes.setdefault(name, []).append(bool(c["passed"]))
+                check_decided.setdefault(name, []).append(c.get("state") == "pass")
         if not grades:
             continue
         dist = {g: grades.count(g) / len(grades) for g in sorted(set(grades))}
@@ -1206,6 +1248,10 @@ def verdict_trace(
             "check_pass_frac": {
                 name: sum(v) / len(v)
                 for name, v in sorted(check_passes.items())
+            },
+            "check_decided_pass_frac": {
+                name: sum(v) / len(v)
+                for name, v in sorted(check_decided.items())
             },
         }
 
@@ -1224,6 +1270,10 @@ def verdict_trace(
         "n_total": n,
         "full_grade": full.grade,
         "full_confidence": full.pooled["confidence"],
+        "grade_rule": GRADE_RULE,
+        "seed": seed,
+        "n_subsamples": n_subsamples,
+        "thresholds": asdict(thresholds or Thresholds()),
         "sizes": usable,
         "per_size": per_size,
         "settled_n": settled_n,
@@ -1232,9 +1282,17 @@ def verdict_trace(
 
 def verdict_trace_markdown(trace: Dict[str, Any]) -> str:
     """Render a verdict_trace() result as a markdown table."""
-    lines = [
+    header = (
         f"## Verdict-stability trace — grade **{trace['full_grade']}** "
-        f"({trace['full_confidence']} confidence) at n = {trace['n_total']}",
+        f"({trace['full_confidence']} confidence) at n = {trace['n_total']}"
+    )
+    if "grade_rule" in trace:
+        header += (
+            f" — grade rule {trace['grade_rule']}, seed {trace['seed']}, "
+            f"{trace['n_subsamples']} subsets per size"
+        )
+    lines = [
+        header,
         "",
         "| n runs | grade distribution | modal | low-confidence | flakiest check |",
         "|---|---|---|---|---|",
@@ -1369,22 +1427,52 @@ def confirmatory_verdict(
     return "inconclusive"
 
 
-def grade_checks(checks: Dict[str, Any]) -> str:
-    """A: all applicable checks pass. B: at least half pass. C: at least one
-    passes. D: none pass (or overlap is at the random null)."""
-    passed = sum(1 for c in checks.values() if c["passed"])
-    total = len(checks)
+def grade_checks(
+    checks: Dict[str, Any],
+    *,
+    rule: str,
+    random_floor: float = 1.5,
+) -> str:
+    """Letter grade from the graded checks under a named grade rule.
+
+    ``v0.3`` (point rule): every check whose point estimate clears its bar
+    counts as a pass. A: all pass. B: at least half. C: at least one. D:
+    none. ``v0.4`` (decided rule): only a check whose whole 95% interval
+    clears the bar (``state == "pass"``) counts; the same letter bands
+    apply, then a decided specificity fail caps the letter at C (stability
+    the method also shows on null data is a property of the method, not of
+    the data) and a battery without a specificity check caps it at B (an
+    untested null is not a passed one). Under both rules structural overlap
+    at or below ``random_floor`` times the size-matched random null is D
+    outright.
+    """
+    if rule not in GRADE_RULES:
+        raise ValueError(f"grade rule must be one of {GRADE_RULES}, got {rule!r}")
     br = checks.get("beats_random")
-    at_random = br is not None and br["value"] is not None and br["value"] <= 1.5
-    if at_random:
+    if br is not None and br.get("value") is not None and br["value"] <= random_floor:
         return "D"
+    total = len(checks)
+    if rule == "v0.3":
+        passed = sum(1 for c in checks.values() if c["passed"])
+        cap = "A"
+    else:
+        passed = sum(1 for c in checks.values() if c.get("state") == "pass")
+        specificity = checks.get("specificity")
+        if specificity is None:
+            cap = "B"
+        elif specificity.get("state") == "fail":
+            cap = "C"
+        else:
+            cap = "A"
     if passed == total:
-        return "A"
-    if passed * 2 >= total:
-        return "B"
-    if passed >= 1:
-        return "C"
-    return "D"
+        grade = "A"
+    elif passed * 2 >= total:
+        grade = "B"
+    elif passed >= 1:
+        grade = "C"
+    else:
+        grade = "D"
+    return max(grade, cap, key=GRADE_ORDER.index)
 
 
 assert set(GRADE_ORDER) == {"A", "B", "C", "D"}

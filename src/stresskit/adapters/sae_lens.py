@@ -216,7 +216,7 @@ def stability(
             "passed": excess >= noise_excess_bar,
             "description": "(cross-seed MCC − random-decoder MCC) / (1 − random-decoder MCC)",
         }
-        grade = grade_checks(checks)
+        grade = grade_checks(checks, rule="v0.3")
     else:
         notes.append(
             "single SAE supplied — seed consistency and the noise-floor "
@@ -226,7 +226,7 @@ def stability(
         )
         # a battery that could not test feature identity must not read as
         # a certification, however clean the redundancy number is
-        grade = grade_checks(checks)
+        grade = grade_checks(checks, rule="v0.3")
         if grade in ("A", "B"):
             grade = "C"
 

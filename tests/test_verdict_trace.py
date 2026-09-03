@@ -133,11 +133,13 @@ def test_card_roundtrip_verifies_with_new_cis(tmp_path):
 def test_trace_stable_finding_settles_early():
     trace = sk.verdict_trace(make_findings(stable_sets(14)),
                              sizes=[4, 6, 10, 14], n_subsamples=15, seed=0)
-    assert trace["full_grade"] == "A"
+    # no null findings: every check is a decided pass, the grade caps at B
+    assert trace["full_grade"] == "B"
     assert trace["settled_n"] == 4
     assert trace["sizes"] == [4, 6, 10, 14]
     row = trace["per_size"][6]
-    assert row["modal_grade"] == "A" and row["modal_grade_share"] == 1.0
+    assert row["modal_grade"] == "B" and row["modal_grade_share"] == 1.0
+    assert row["check_decided_pass_frac"]["structural_stability"] == 1.0
     assert set(row["check_pass_frac"]) == set(
         sk.from_findings(make_findings(stable_sets(14))).checks
     )
@@ -186,3 +188,35 @@ def test_trace_markdown_renders():
     assert "Verdict-stability trace" in md
     assert "| 4 |" in md and "| 10 |" in md
     assert ("settles at" in md) or ("not settle" in md)
+
+
+def test_trace_records_its_own_provenance():
+    trace = sk.verdict_trace(make_findings(stable_sets(10)),
+                             null_findings=make_findings(random_sets(10),
+                                                         claim="none", score=0.1),
+                             sizes=[4, 10], n_subsamples=6, seed=11,
+                             thresholds=sk.Thresholds(jaccard=0.7))
+    assert trace["grade_rule"] == "v0.4"
+    assert trace["seed"] == 11
+    assert trace["n_subsamples"] == 6
+    assert trace["thresholds"]["jaccard"] == 0.7
+    assert trace["thresholds"]["random_floor"] == 1.5
+    assert trace["full_grade"] == "A"
+    md = sk.verdict_trace_markdown(trace)
+    assert "grade rule v0.4, seed 11, 6 subsets per size" in md
+
+
+def test_from_findings_pools_the_null_with_the_size_guard():
+    """Post-hoc regrading must put the specificity point estimate on the
+    same size-guarded null sets as its interval, as stress() does."""
+    real = make_findings(stable_sets(8))
+    wide = [frozenset(range(30)) for _ in range(4)]
+    tiny = [frozenset(range(5)) for _ in range(4)]
+    nulls = make_findings(wide + tiny, claim="none", score=0.1)
+    res = sk.from_findings(real, null_findings=nulls)
+    guarded = sk.metrics.mean_pairwise_jaccard(wide)
+    assert res.null_summary["mean_pairwise_jaccard"] == guarded
+    assert res.checks["specificity"]["value"] == (
+        res.pooled["mean_pairwise_jaccard"] / guarded
+    )
+    assert res.checks["specificity"]["state"] == "fail"

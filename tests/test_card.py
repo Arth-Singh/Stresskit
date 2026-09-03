@@ -65,7 +65,8 @@ class TestRenders:
         result = make_result()
         md = result.to_markdown()
         assert "Stability Card" in md
-        assert "descriptive grade **A**" in md
+        assert "descriptive grade **B**" in md
+        assert "Grade rule v0.4" in md
         assert "does not issue a confirmatory verdict" in md
         assert "toy-model" in md
         assert "mean pairwise Jaccard" in md
@@ -76,10 +77,38 @@ class TestRenders:
         badge = result.card.badge_dict()
         assert badge["schemaVersion"] == 1
         assert badge["label"] == "diagnostic stability"
-        assert badge["message"].startswith("A · J=")
-        assert badge["color"] == "brightgreen"
+        assert badge["message"].startswith("B · J=")
+        assert badge["color"] == "yellowgreen"
 
     def test_badge_color_tracks_grade(self):
         result = make_result()
         result.card.verdict["grade"] = "D"
         assert result.card.badge_dict()["color"] == "red"
+
+
+class TestGradeRule:
+    def test_card_records_rule_and_floor(self):
+        d = make_result().card.to_dict()
+        assert d["schema_version"] == "0.5"
+        assert d["verdict"]["grade_rule"] == "v0.4"
+        assert d["verdict"]["thresholds"]["random_floor"] == 1.5
+        assert d["verdict"]["thresholds"]["specificity_ratio"] == 1.5
+        assert sk.verify_card_dict(d)["ok"]
+
+    def test_schema_05_requires_the_rule(self):
+        d = make_result().card.to_dict()
+        del d["verdict"]["grade_rule"]
+        with pytest.raises(ValueError, match="grade_rule"):
+            validate_card_dict(d)
+
+    def test_legacy_card_verifies_under_the_point_rule(self):
+        d = make_result().card.to_dict()
+        d["schema_version"] = "0.4"
+        del d["verdict"]["grade_rule"]
+        del d["verdict"]["thresholds"]["random_floor"]
+        # every point estimate passes, so the v0.3 rule graded this A
+        d["verdict"]["grade"] = "A"
+        report = sk.verify_card_dict(d)
+        assert report["ok"], report["problems"]
+        d["verdict"]["grade"] = "B"
+        assert not sk.verify_card_dict(d)["ok"]

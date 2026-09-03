@@ -5,9 +5,12 @@ method" that selects the components (here: feature indices) responsible for
 a behavior, plus a qualitative claim about where they live. We stress-test
 it twice:
 
-1. a well-powered setting  -> the finding is real and survives the battery
-2. an under-powered setting -> the same method produces a plausible-looking
-   finding that falls apart under bootstrap + seed variation
+1. a well-powered setting, with the null setting below as its null
+   control -> the finding is real and survives the battery
+2. a null setting where no effect exists -> the same method produces a
+   plausible-looking finding that falls apart under bootstrap + seed
+   variation, and it cannot grade above B because it carries no null
+   control of its own
 
 Run:  python examples/quickstart_toy.py
 """
@@ -18,7 +21,7 @@ import random
 import stresskit as sk
 
 N_FEATURES = 200                       # universe of candidate components
-TRUE = frozenset({3, 17, 42, 88, 105, 133, 150, 190})  # ground truth
+TRUE = frozenset({3, 17, 42, 61, 88, 97, 133, 190})  # ground truth, 6 of 8 in the first half
 
 
 def make_data(n_examples, noise, seed, signal=1.0):
@@ -58,7 +61,7 @@ def finder(data, seed, config):
                           universe_size=N_FEATURES)
 
 
-def run(tag, n_examples, noise, signal=1.0):
+def run(tag, n_examples, noise, signal=1.0, null_data=None):
     print(f"\n{'=' * 70}\n{tag}\n{'=' * 70}")
     data = make_data(n_examples, noise, seed=0, signal=signal)
     result = sk.stress(
@@ -68,6 +71,7 @@ def run(tag, n_examples, noise, signal=1.0):
         n_runs=8,
         config={"k": 8},
         hyperparams={"k": [6, 12]},
+        null_data=null_data,
         claim_statement="The behavior is driven by 8 specific features",
         model="toy-linear-model",
         task="synthetic-attribution",
@@ -86,12 +90,17 @@ def run(tag, n_examples, noise, signal=1.0):
 
 
 if __name__ == "__main__":
-    # Well-powered: lots of data, low noise. Expect grade A.
-    good = run("WELL-POWERED setting (expect A)", n_examples=400, noise=0.5)
+    # Null data: the effect does not exist (signal=0). It is the null control
+    # of the well-powered battery, and then a battery of its own.
+    null_data = make_data(100, noise=1.0, seed=0, signal=0.0)
 
-    # Null setting: the effect does not exist (signal=0), but the finder still
-    # returns a confident-looking set of 8 "responsible features" with a claim
-    # attached, every single time. Only the battery reveals it's noise.
+    # Well-powered: lots of data, low noise, a null control. Expect grade A.
+    good = run("WELL-POWERED setting (expect A)", n_examples=400, noise=0.5,
+               null_data=null_data)
+
+    # Null setting: the finder still returns a confident-looking set of 8
+    # "responsible features" with a claim attached, every single time. Only
+    # the battery reveals it's noise.
     bad = run("NULL setting — no real effect (expect C/D)",
               n_examples=100, noise=1.0, signal=0.0)
 

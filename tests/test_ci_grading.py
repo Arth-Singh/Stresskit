@@ -153,13 +153,61 @@ def test_confirmatory_verdict_has_no_majority_vote():
     assert sk.confirmatory_verdict(checks) == "pass"
 
 
-def test_legacy_grade_d_when_overlap_is_at_random():
+# ---------------------------------------------------------------------------
+# grade rules
+# ---------------------------------------------------------------------------
+
+FIVE = ("structural_stability", "claim_stability", "score_stability",
+        "beats_random", "specificity")
+
+
+def checks_from(states, *, beats_random_value=20.0, with_specificity=True):
+    """Checks whose point estimate passes unless the state is a decided fail."""
+    names = FIVE if with_specificity else FIVE[:-1]
+    return {
+        name: {
+            "passed": state != "fail",
+            "state": state,
+            "value": beats_random_value if name == "beats_random" else 0.9,
+        }
+        for name, state in zip(names, states)
+    }
+
+
+@pytest.mark.parametrize(
+    "states,with_specificity,v03,v04",
+    [
+        (("pass",) * 5, True, "A", "A"),
+        (("inconclusive", "pass", "pass", "pass", "pass"), True, "A", "B"),
+        (("pass", "pass", "pass", "pass", "fail"), True, "B", "C"),
+        (("pass",) * 4, False, "A", "B"),
+        (("inconclusive",) * 5, True, "A", "D"),
+        (("pass", "inconclusive", "inconclusive", "pass", "fail"), True, "B", "C"),
+        (("fail", "fail", "fail", "pass", "fail"), True, "C", "C"),
+        (("fail",) * 5, True, "D", "D"),
+    ],
+)
+def test_grade_rules_table(states, with_specificity, v03, v04):
     from stresskit.battery import grade_checks
 
-    checks = {
-        "structural_stability": {"passed": True},
-        "claim_stability": {"passed": True},
-        "score_stability": {"passed": True},
-        "beats_random": {"passed": False, "value": 1.2},
-    }
-    assert grade_checks(checks) == "D"
+    checks = checks_from(states, with_specificity=with_specificity)
+    assert grade_checks(checks, rule="v0.3") == v03
+    assert grade_checks(checks, rule="v0.4") == v04
+
+
+def test_grade_d_when_overlap_is_at_the_random_floor():
+    from stresskit.battery import grade_checks
+
+    checks = checks_from(("pass",) * 5, beats_random_value=1.2)
+    assert grade_checks(checks, rule="v0.3") == "D"
+    assert grade_checks(checks, rule="v0.4") == "D"
+    above = checks_from(("pass",) * 5, beats_random_value=1.6)
+    assert grade_checks(above, rule="v0.4") == "A"
+    assert grade_checks(above, rule="v0.4", random_floor=2.0) == "D"
+
+
+def test_grade_rule_must_be_registered():
+    from stresskit.battery import grade_checks
+
+    with pytest.raises(ValueError, match="grade rule"):
+        grade_checks(checks_from(("pass",) * 5), rule="v9")

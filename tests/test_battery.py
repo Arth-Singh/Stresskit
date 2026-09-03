@@ -39,13 +39,53 @@ def unstable_finder(data, seed, config):
 DATA = list(range(50))
 
 
+def counting_finder(data, seed, config):
+    """Reads its data: the 10 most frequent values in a seeded 75% subsample,
+    ties broken at random. On REAL that is always the true set; on NULL it
+    is a fresh random subset of the sampled values every run."""
+    rng = random.Random(seed)
+    sample = rng.sample(list(data), max(4, int(0.75 * len(data))))
+    counts = {}
+    for value in sample:
+        counts[value] = counts.get(value, 0) + 1
+    top = sorted(counts, key=lambda v: (-counts[v], rng.random()))[:10]
+    jitter = config.get("jitter", 0.005)
+    return sk.circuit(
+        top,
+        claim="early",
+        score=1.0 + rng.uniform(-jitter, jitter),
+        universe_size=N_UNIVERSE,
+    )
+
+
+REAL = [c for c in sorted(TRUE_COMPONENTS) for _ in range(5)]
+NULL = random.Random(7).choices(range(N_UNIVERSE), k=50)
+
+
 class TestStressStable:
-    def test_grade_a(self):
+    def test_grade_capped_at_b_without_null_control(self):
         result = sk.stress(stable_finder, DATA, n_runs=6, seed=0)
-        assert result.grade == "A"
+        assert result.grade == "B"
+        assert "specificity" not in result.checks
+        assert all(c["state"] == "pass" for c in result.checks.values())
         assert result.pooled["mean_pairwise_jaccard"] == 1.0
         assert result.pooled["flip_rate"] == 0.0
         assert result.pooled["modal_share"] == 1.0
+
+    def test_grade_a_needs_a_decided_specificity_pass(self):
+        result = sk.stress(counting_finder, REAL, n_runs=6, seed=0,
+                           null_data=NULL)
+        assert result.grade == "A"
+        assert result.checks["specificity"]["state"] == "pass"
+        assert result.checks["specificity"]["value"] > 3.0
+        assert result.pooled["confidence"] == "high"
+
+    def test_data_ignoring_finder_cannot_grade_above_c_with_a_null(self):
+        result = sk.stress(stable_finder, DATA, n_runs=6, seed=0,
+                           null_data=list(range(50, 100)))
+        assert result.checks["specificity"]["state"] == "fail"
+        assert result.grade == "C"
+        assert any("bootstrap axis" in n for n in result.card.notes)
 
     def test_beats_random_check_present(self):
         result = sk.stress(stable_finder, DATA, n_runs=4, seed=0)
@@ -162,4 +202,21 @@ class TestThresholds:
                         thresholds=sk.Thresholds(score_cv=5.0))
         assert not strict.checks["score_stability"]["passed"]
         assert lax.checks["score_stability"]["passed"]
+        # no null control: both batteries are capped at B, so the letter
+        # moves only where the null is present
+        assert strict.grade == "B" and lax.grade == "B"
+        strict = sk.stress(counting_finder, REAL, n_runs=8, null_data=NULL,
+                           config={"jitter": 0.4},
+                           thresholds=sk.Thresholds(score_cv=0.01))
+        lax = sk.stress(counting_finder, REAL, n_runs=8, null_data=NULL,
+                        config={"jitter": 0.4},
+                        thresholds=sk.Thresholds(score_cv=5.0))
+        assert strict.checks["score_stability"]["state"] == "fail"
+        assert strict.grade == "B"
         assert lax.grade == "A"
+
+    def test_random_floor_is_a_threshold(self):
+        result = sk.stress(counting_finder, REAL, n_runs=6, null_data=NULL,
+                           thresholds=sk.Thresholds(random_floor=1e6))
+        assert result.grade == "D"
+        assert result.card.verdict["thresholds"]["random_floor"] == 1e6

@@ -33,9 +33,25 @@ import platform
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional
 
-SCHEMA_VERSION = "0.4"
-SUPPORTED_SCHEMA_VERSIONS = ("0.1", "0.2", "0.3", "0.4")
+SCHEMA_VERSION = "0.5"
+SUPPORTED_SCHEMA_VERSIONS = ("0.1", "0.2", "0.3", "0.4", "0.5")
 GRADE_ORDER = ("A", "B", "C", "D")
+# Grade rules are versioned policy. "v0.3" is the point rule (a check counts
+# as passed when its point estimate clears the bar). "v0.4" is the decided
+# rule (only a check whose whole interval clears the bar counts; a decided
+# specificity fail caps the letter at C; no null control caps it at B).
+# Cards record the rule they were graded under; cards without the key
+# predate it and verify under "v0.3".
+GRADE_RULES = ("v0.3", "v0.4")
+GRADE_RULE = "v0.4"
+_GRADE_RULE_TEXT = {
+    "v0.3": "a check counts as passed when its point estimate clears the bar.",
+    "v0.4": (
+        "a check counts as passed only when its whole 95% interval clears "
+        "the bar; a decided specificity fail caps the grade at C; no null "
+        "control caps it at B; overlap at or below the at-random floor is D."
+    ),
+}
 
 # Per-run components are embedded on the card (making it a self-contained,
 # recomputable artifact) up to this many total component entries; beyond
@@ -193,6 +209,7 @@ class StabilityCard:
             },
             verdict={
                 "grade": result.grade,
+                "grade_rule": GRADE_RULE,
                 "profile": "diagnostic",
                 "confirmatory_state": "not_applicable",
                 "required_checks": [],
@@ -202,6 +219,8 @@ class StabilityCard:
                     "modal_share": thresholds.modal_share,
                     "score_cv": thresholds.score_cv,
                     "random_margin": thresholds.random_margin,
+                    "specificity_ratio": thresholds.specificity_ratio,
+                    "random_floor": thresholds.random_floor,
                     **({"cosine": thresholds.cosine}
                        if structure_kind == "direction" else {}),
                 },
@@ -367,6 +386,10 @@ class StabilityCard:
                 "> **Diagnostic OAT profile:** this localizes sensitivity; it "
                 "does not issue a confirmatory verdict or certificate."
             )
+            lines.append("")
+        rule = self.verdict.get("grade_rule")
+        if rule is not None:
+            lines.append(f"> **Grade rule {rule}:** {_GRADE_RULE_TEXT[rule]}")
             lines.append("")
         lines.append(f"> **Claim:** {self.claim.get('statement')}")
         ctx = " · ".join(
@@ -575,6 +598,20 @@ def validate_card_dict(d: Dict[str, Any]) -> None:
                     f"schema 0.3 check {name!r} has invalid or missing state "
                     f"{state!r}"
                 )
+    if _schema_at_least(version, "0.5"):
+        verdict = d.get("verdict", {})
+        rule = verdict.get("grade_rule")
+        if rule not in GRADE_RULES:
+            raise ValueError(
+                f"schema 0.5 verdict.grade_rule must be one of {GRADE_RULES}, "
+                f"got {rule!r}"
+            )
+        floor = (verdict.get("thresholds") or {}).get("random_floor")
+        if isinstance(floor, bool) or not isinstance(floor, (int, float)):
+            raise ValueError(
+                "schema 0.5 verdict.thresholds.random_floor must be a number, "
+                f"got {floor!r}"
+            )
 
 
 def _validate_directions_block(block: Any) -> None:
@@ -948,7 +985,12 @@ def verify_card_dict(d: Dict[str, Any]) -> Dict[str, Any]:
                 )
 
     if recomputed:
-        regrade = grade_checks(recomputed)
+        verdict = d.get("verdict", {})
+        regrade = grade_checks(
+            recomputed,
+            rule=verdict.get("grade_rule", "v0.3"),
+            random_floor=(verdict.get("thresholds") or {}).get("random_floor", 1.5),
+        )
         stored = d["verdict"]["grade"]
         if regrade != stored:
             problems.append(f"grade: stored {stored!r}, recomputed {regrade!r}")
@@ -1138,7 +1180,7 @@ def verify_oracle_report_dict(d: Dict[str, Any]) -> Dict[str, Any]:
                 problems.append(f"{name}: value {value} != metrics {src} {mv}")
 
     if recomputed:
-        regrade = grade_checks(recomputed)
+        regrade = grade_checks(recomputed, rule="v0.3")
         stored = d.get("verdict", {}).get("grade")
         if regrade != stored:
             problems.append(f"grade: stored {stored!r}, recomputed {regrade!r}")

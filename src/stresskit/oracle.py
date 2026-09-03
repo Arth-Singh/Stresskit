@@ -415,7 +415,7 @@ def stress_oracle(
         per_probe=per_probe,
         metrics=metrics,
         checks=checks,
-        grade=grade_checks(checks),
+        grade=grade_checks(checks, rule="v0.3"),
         notes=notes,
         created_at=_dt.datetime.now(_dt.timezone.utc).isoformat(timespec="seconds"),
         wall_seconds=round(time.time() - t0, 3),

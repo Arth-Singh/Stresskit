@@ -2,6 +2,34 @@
 
 ## 1.0.0 — unreleased; external gates pending
 
+- Grade rule v0.4 (`grade_checks(checks, rule=...)`): a check counts as
+  passed only when its whole 95% interval clears the bar; a decided
+  specificity fail caps the letter at C; a battery without a null control
+  caps it at B; the at-random floor is `Thresholds.random_floor` (1.5)
+  instead of a literal inside the grader. Cards record `verdict.grade_rule`
+  (schema 0.5) together with the two thresholds that were implicit before
+  (`specificity_ratio`, `random_floor`); cards without the key verify under
+  the v0.3 point rule. Motivation: under v0.3 a constant, data-ignoring
+  finder graded A with high confidence without a null control and B with
+  one, because four of the five checks pass on any constant output. Oracle
+  reports and the SAE-lens adapter keep the point rule.
+- `from_findings` pools the null battery over the same size-guarded sets as
+  the specificity interval, as `stress()` always did; the swd_gpt2
+  discrepancy (specificity 1.146 on the card, 1.377 post hoc, same CI) was
+  this, and limitation (3) below is closed. `verdict_trace` inherits the
+  fix and records its seed, subsample count, thresholds and grade rule,
+  plus the decided-pass fraction of every check per subset size.
+- A bootstrap axis whose every resample returns the base finding bit for
+  bit is flagged like a vacuous seeds axis: the axis runs every resample at
+  the base seed by design, so a data-ignoring finder repeats its base
+  finding there and inflates the pooled stability metrics.
+- `stresskit demo` and `examples/quickstart_toy.py` carry the noise dataset
+  as the null control of the real-effect battery, and the planted feature
+  set is one-sided so that its qualitative claim is an invariant of the
+  effect rather than a coin flip at k = 8.
+- The four frozen calibration artifacts were regenerated after the
+  `battery.py` change they hash: every result and configuration block is
+  byte-identical to the previous freeze; only provenance digests moved.
 - Added reference batteries run on 2026-09-02 (8xH200): the refusal direction
   (arXiv:2406.11717) on Qwen3.5-4B/9B, Qwen2.5-7B-Instruct, Llama-3.1-8B-Instruct
   and gemma-4-E4B/12B-it with a blind-selection null and non-internals prompt

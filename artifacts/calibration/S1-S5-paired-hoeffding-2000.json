@@ -19,12 +19,12 @@
     "trials": 2000
   },
   "provenance": {
-    "platform": "macOS-15.5-arm64-arm-64bit",
-    "python_version": "3.12.12",
+    "platform": "macOS-15.5-arm64-arm-64bit-Mach-O",
+    "python_version": "3.13.11",
     "slurm_array_job_id": null,
     "slurm_array_task_id": null,
     "slurm_job_id": null,
-    "source_sha256": "51d80d8d5180ecc40d46d2fc790cc46dfeb1844a422ce2020cd420b94a63c5f6"
+    "source_sha256": "5d7293f9aa896f4c527f988dc6a24ec7555c8d84dc063d101ec0c5803579f6f3"
   },
   "results": [
     {

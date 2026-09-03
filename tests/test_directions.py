@@ -231,7 +231,8 @@ class TestDirectionBattery:
         assert res.checks["structural_stability"]["passed"] is True
         assert res.checks["beats_random"]["value"] > 3.0
         assert res.pooled["mean_pairwise_abs_cosine_ci95"] is not None
-        assert res.grade == "A"
+        # no null control, so the decided rule caps the letter at B
+        assert res.grade == "B"
 
     def test_grade_is_invariant_to_the_sign_convention(self):
         plain = clustered(10, dim=64, spread=0.1, seed=1)
@@ -370,7 +371,7 @@ def direction_card_dict(with_null=True, seed=11):
 class TestDirectionCard:
     def test_card_shape(self):
         d = direction_card_dict()
-        assert d["schema_version"] == SCHEMA_VERSION == "0.4"
+        assert d["schema_version"] == SCHEMA_VERSION == "0.5"
         assert d["battery"]["structure_kind"] == "direction"
         assert d["verdict"]["thresholds"]["cosine"] == 0.8
         block = d["directions"]

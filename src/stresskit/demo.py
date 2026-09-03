@@ -8,6 +8,10 @@ features), stressed twice with the identical battery:
    confident-looking set of 8 "responsible features" with a claim attached,
    every single run.
 
+The real-effect battery carries the noise dataset as its null control, so
+the specificity check is exercised too: the method has to be less stable on
+noise than on the real effect before the finding can grade A.
+
 The two outputs are indistinguishable by looking at them. Only the battery
 tells them apart. That asymmetry — same method, same output format, same
 confidence, different grade — is the entire pitch, so this is the first
@@ -26,10 +30,13 @@ from . import battery as _battery
 from .finding import feature_set
 
 N_FEATURES = 200
-TRUE = frozenset({3, 17, 42, 88, 105, 133, 150, 190})
+# six of the eight planted features sit in the first half of the feature
+# index range, so the qualitative claim ("first-half") is a real invariant
+# of the effect rather than a coin flip at k = 8
+TRUE = frozenset({3, 17, 42, 61, 88, 97, 133, 190})
 
 
-def _make_data(n_examples: int, noise: float, seed: int,
+def make_data(n_examples: int, noise: float, seed: int,
                signal: float = 1.0) -> List[Tuple[List[float], float]]:
     rng = random.Random(seed)
     data = []
@@ -40,7 +47,7 @@ def _make_data(n_examples: int, noise: float, seed: int,
     return data
 
 
-def _finder(data: Any, seed: int, config: Dict[str, Any]):
+def finder(data: Any, seed: int, config: Dict[str, Any]):
     """Toy discovery: rank features by |correlation| with the label on a
     seed-dependent 75% subsample, keep the top-k — the shape of any
     minibatched attribution method."""
@@ -64,13 +71,15 @@ def _finder(data: Any, seed: int, config: Dict[str, Any]):
                        universe_size=N_FEATURES)
 
 
-def _stress(data: Any, tag: str) -> "_battery.StressResult":
+def _stress(data: Any, tag: str,
+            null_data: Any = None) -> "_battery.StressResult":
     return _battery.stress(
-        _finder, data,
+        finder, data,
         battery=["seeds", "bootstrap", "hyperparams"],
         n_runs=8,
         config={"k": 8},
         hyperparams={"k": [6, 12]},
+        null_data=null_data,
         claim_statement=f"The behavior is driven by 8 specific features ({tag})",
         model="toy-linear-model", task="synthetic-attribution",
         method="top-k correlation selector",
@@ -81,17 +90,22 @@ def run_demo(html_dir: Optional[str] = None, echo=print) -> Dict[str, Any]:
     """Run the two-battery demo; returns both results for programmatic use."""
     echo("StressKit demo — one discovery method, two datasets, no GPU.\n")
 
+    noise = make_data(100, noise=1.0, seed=0, signal=0.0)
     echo("[1/2] REAL EFFECT: 8 features genuinely drive the label "
-         "(400 examples, low noise)")
-    real = _stress(_make_data(400, noise=0.5, seed=0), "real effect")
+         "(400 examples, low noise); the pure-noise dataset from step 2 "
+         "is its null control")
+    real = _stress(make_data(400, noise=0.5, seed=0), "real effect",
+                   null_data=noise)
     echo(f"      → grade {real.grade}: "
          f"J={real.pooled['mean_pairwise_jaccard']:.2f}, "
          f"claim flips {real.pooled['flip_rate']:.0%}, "
-         f"score CV {real.pooled['score_cv']:.2f}\n")
+         f"score CV {real.pooled['score_cv']:.2f}, "
+         f"{real.checks['specificity']['value']:.0f}x more stable "
+         f"than on noise\n")
 
     echo("[2/2] PURE NOISE: the label is random — NO effect exists "
          "(100 examples). Same method.")
-    null = _stress(_make_data(100, noise=1.0, seed=0, signal=0.0), "pure noise")
+    null = _stress(noise, "pure noise")
     echo(f"      → the finder still returned 8 confident 'responsible "
          f"features' with a claim, all {len(null.runs)} runs")
     echo(f"      → grade {null.grade}: "

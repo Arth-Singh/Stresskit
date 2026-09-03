@@ -121,9 +121,11 @@ class TestCardIntegration:
         return StabilityCard(
             claim={"statement": "s"}, battery={"axes": ["seed"]},
             metrics={"pooled": {}},
-            verdict={"grade": "A", "profile": "diagnostic",
+            verdict={"grade": "A", "grade_rule": "v0.4",
+                     "profile": "diagnostic",
                      "confirmatory_state": "not_applicable",
-                     "required_checks": [], "checks": {}},
+                     "required_checks": [], "checks": {},
+                     "thresholds": {"random_floor": 1.5}},
             provenance={}, utility=utility,
         )
 
